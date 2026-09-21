@@ -368,6 +368,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | G | **Contrôle du tour 1**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` : « structurellement réussi », base du site complet après un tour 2 ciblé, sans refonte. Les 8 critères de 08 F sont validés, deux sous condition (niveau de gamme et personnalité : il faut les vraies photos). 10 corrections P0 (police Newsreader, en-tête mobile, 7 étapes, sous-menus, sources, auteur et date, parcours cliquable, titre des pages liées, adresse, réponse directe sur mobile), puis les photos en P1. | D16 à D28 |
 | 21/09/2026 | F | Envoie l'original de sa photo (« Design sans titre.png », 6 048 × 4 024 px) : « cette qualité de photo est meilleure ? » — oui, c'est la résolution native du Nikon D780, avec un vrai détail. | D29 |
 | 21/09/2026 | C | **Tour 2 livré** : les 10 corrections P0 de ChatGPT et le portrait HD, avec le rapport `livrables/golden-master-r2/RAPPORT-tour2.md` et 15 captures ciblées. Contrôles : textes sans écart, HTML conforme, Lighthouse 95–100 / 100 / 100 / 100. En cours de route : « Chirurgien-dentiste » débordait avec Newsreader, d'où une colonne de titre élargie et un retour à la coupure naturelle au trait d'union aux petites largeurs. | Contrôle de ChatGPT |
+| 21/09/2026 | C | Dossier de transmission du tour 2 posé sur le Bureau : `~/Desktop/GEO-golden-master-tour2-pour-ChatGPT/` (message à coller, rapport, 15 captures numérotées comme dans le rapport). | Contrôle de ChatGPT |
 
 ---
 
