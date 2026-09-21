@@ -35,7 +35,7 @@ export const arborescence = [
 ] as const;
 
 // Lots construits à ce jour
-export const builtLots: string[] = ["A", "B", "C"];
+export const builtLots: string[] = ["A", "B", "C", "D"];
 export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
 export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
 
@@ -89,8 +89,10 @@ export interface SectionOverride {
   media?: { label: string; ratio?: string; wide?: boolean };
   entries?: boolean;
   id?: string;
+  links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
 }
 export interface PageLayout {
+  defaults?: SectionOverride; // réglage commun à toutes les sections de la page
   sections?: Record<string, SectionOverride>;
   method?: { before: string }; // MethodSteps (page 02), placé avant cette section
   pathway?: boolean; // ClinicalPathway (sommaire cliquable des sections)
@@ -175,6 +177,17 @@ export const layouts: Record<string, PageLayout> = {
       "l-absence-de-vomissements-n-elimine-pas-le": { layout: "narrow", media: { label: "Infographie sobre des mécanismes : salive / acides / médicaments / contraintes mécaniques — à fournir", ratio: "3 / 1", wide: true } },
     },
   },
+  "19": {
+    sections: {
+      // Le bouton « Prendre rendez-vous » de l'en-tête mène à cette section (le lien de prise de
+      // rendez-vous reste à fournir)
+      "prendre-rendez-vous": { id: "rendez-vous" },
+      // Les 7 motifs, écrits en gras dans le pack, deviennent des liens vers leurs pages (à confirmer)
+      "motifs-de-consultation": { links: true },
+    },
+  },
+  // « Page de lecture simple » : colonne de lecture, fond uni
+  "20": { defaults: { layout: "narrow", tone: "paper" } },
 };
 
 // Données structurées propres à une page. Chaque fait figure en toutes lettres sur la page.

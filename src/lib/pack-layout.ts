@@ -50,10 +50,10 @@ function asideList(s: Section): boolean {
   );
 }
 
-export function planSections(sections: Section[], overrides: Record<string, SectionOverride> = {}): SectionPlan[] {
+export function planSections(sections: Section[], overrides: Record<string, SectionOverride> = {}, defaults: SectionOverride = {}): SectionPlan[] {
   let splits = 0;
   return sections.map((section, i) => {
-    const o = overrides[section.id] ?? {};
+    const o = { ...defaults, ...overrides[section.id] };
     const entries = o.entries ?? isEntries(section);
     let layout = o.layout;
     if (!layout) {

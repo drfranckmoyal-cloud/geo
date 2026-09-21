@@ -161,7 +161,7 @@ export async function verifyPack() {
     const blocks = mainBlocks(root);
     const pageText = blocks.join(" \n ");
     const pageLow = pageText.toLocaleLowerCase("fr");
-    const packText = norm(md);
+    const packText = norm(placeholders(md)); // « [À FOURNIR] » s'affiche « à fournir »
     const packLow = packText.toLocaleLowerCase("fr");
 
     // 1. Rien d'oublié

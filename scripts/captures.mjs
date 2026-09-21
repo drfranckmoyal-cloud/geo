@@ -234,6 +234,27 @@ if (SET === "lotC") {
   process.exit(0);
 }
 
+// Pages suivantes, lot D : les deux pages utilitaires, entières
+// SET=lotD OUT=livrables/pages-suivantes-lot-d/captures
+if (SET === "lotD") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(390, 844);
+  let n = 0;
+  const file = (name) => `${OUT}/${String(++n).padStart(2, "0")}_${name}.png`;
+  for (const [path, name] of [["/contact/", "contact"], ["/mentions-legales/", "mentions-legales"]]) {
+    for (const [c, label] of [[desk, "ordinateur-1440"], [mob, "mobile-390"]]) {
+      const p = await open(c, path);
+      await p.screenshot({ path: file(`page-${name}-${label}`), fullPage: true });
+      await p.close();
+    }
+  }
+  await Promise.all([desk.close(), mob.close()]);
+  await browser.close();
+  console.log(`lot D : ${n} captures dans ${OUT}`);
+  process.exit(0);
+}
+
 // Série courte demandée par ChatGPT après le tour 1 (D28)
 if (SET === "cible") {
   await mkdir(OUT, { recursive: true });

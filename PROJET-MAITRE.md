@@ -21,9 +21,9 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lots A, B et C livrés** (18 pages : esthétique ; usures, érosion, TCA ; autorité et page locale) ; lot D (contact, mentions légales) ensuite. |
-| **Dernière étape faite** | Lot C construit et contrôlé (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
-| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit le lot D. |
+| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Les 20 pages sont construites** (lots A à D, 22/09/2026) : le site compte 23 pages. En attente du contrôle de ChatGPT et d'une version corrigée du pack. |
+| **Dernière étape faite** | Lot D construit et contrôlé (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, avec le bilan des 20 pages) : Contact et Mentions légales, lien du pied de page raccordé, mentions légales hors du plan du site. Lot C (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Franck transmet à ChatGPT les 4 dossiers posés sur le Bureau (lots A à D). ChatGPT valide les compositions et renvoie une version corrigée du pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte, liens) ; Claude l'intègre et relance tous les contrôles. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
 | **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous, l'adresse e-mail professionnelle et l'hébergeur (mentions légales) ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
@@ -267,7 +267,6 @@ décision.
 | # | Constat | D'ici là | Qui tranche |
 |---|---|---|---|
 | 3 | **Destination du bouton « Prendre rendez-vous »** inconnue (Doctolib ? téléphone ? formulaire ?). **Adresse et téléphone du cabinet** absents (pied de page, référencement local, données structurées). | Emplacements signalés. **Mis en attente par Franck le 21/09/2026 (D8).** Adresse fournie depuis (D22) ; téléphone et lien de rendez-vous toujours attendus. | Franck, plus tard. Bloque la mise en ligne, pas le prototype. |
-| 7 | **Liens vers des pages qui n'existent pas encore** : les 3 pages renvoient vers 11 pages futures (dentisterie esthétique, bilan esthétique personnalisé, TCA, érosion, diagnostic, réhabilitation, bruxisme, dents courtes, publications, conférences et formations, activité hospitalière), plus le contact et les mentions légales. | Liens vers les adresses définitives (V4), listés « non finalisés » dans le rapport. | Personne pour la phase 1. |
 | 10 | **Photos** : le portrait est fourni, en haute définition depuis D29. Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
 | 11 | **Preuves d'autorité** (00 §7 : AP-HP / Pitié-Salpêtrière, CMME / Sainte-Anne / GHU Paris, AO News, Blendi, Le Fil Dentaire, Entretiens de Garancière, Alpha Oméga, ARTEMIS, GC / ADF, LinkedIn, Smileclub Formation, DentCA) : aucune adresse web fournie. Le site doit « rassembler et redistribuer cette autorité vers les pages cliniques correspondantes » (00 §7). Pour les profils de Franck lui-même (LinkedIn, par exemple), une propriété technique (`sameAs`) signalera en plus aux moteurs qu'il s'agit de la même personne — suggestion de Claude, absente du pack. | Liens signalés « à fournir ». Candidats retenus par ChatGPT pour `sameAs` : LinkedIn, AP-HP, Le Fil Dentaire (page auteur), Blendi (page formateur) — pas pour chaque article ou événement. | ChatGPT (adresses exactes), Franck (vérification). |
 | 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
@@ -285,6 +284,7 @@ décision.
 
 ### Tranchés
 
+- **Liens vers des pages à venir** (ancien point 7) → plus aucun depuis le lot D : chaque lien interne mène à une page construite ; le lien « Mentions légales » du pied de page aussi.
 - **Arborescence** (ancien point 9) → 20 pages, dont une page locale, l'article Anorexie sans vomissements, Contact et Mentions légales (D38).
 - **Méthode 6 ou 7 étapes** (ancien point 5) → 7 étapes, « Simuler » rétabli (D17).
 - **Répartition des couleurs** (ancien point 6) → celle de 07, validée (D25).
@@ -316,7 +316,7 @@ décision.
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
-| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lots A, B et C livrés |
+| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; **les 20 pages construites le 22/09/2026** ; contrôle de ChatGPT et version corrigée du pack attendus |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -350,8 +350,8 @@ décision.
 | C | 16 | Activité hospitalière | `/activite-hospitaliere/` | ✅ 22/09/2026 | | |
 | C | 17 | Médias et interviews | `/medias-interviews/` | ✅ 22/09/2026 | | |
 | C | 18 | Chirurgien-dentiste Paris 9 | `/chirurgien-dentiste-paris-9/` | ✅ 22/09/2026 | | |
-| D | 19 | Contact et rendez-vous | `/contact/` | | | |
-| D | 20 | Mentions légales | `/mentions-legales/` | | | |
+| D | 19 | Contact et rendez-vous | `/contact/` | ✅ 22/09/2026 | | |
+| D | 20 | Mentions légales | `/mentions-legales/` | ✅ 22/09/2026 | | |
 
 ---
 
@@ -444,6 +444,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 22/09/2026 | C | **Lot B livré** (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`, 9 captures) : les 7 pages usures, érosion, TCA. Textes sans écart, HTML et manifeste réussis. Première mesure de la page TCA : 97, LCP 2,55 s, à cause d'un « ń » qui faisait charger un second fichier de police ; corrigé en ne déclarant que le jeu latin d'Inter (D39) : 99, LCP 1,95 s. | Lot C |
 | 22/09/2026 | C | Dossier de transmission du lot B posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-B-pour-ChatGPT/`. | Contrôle de ChatGPT |
 | 22/09/2026 | C | **Lot C livré** (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`, 11 captures) : Publications, Conférences et formations, Activité hospitalière, Médias et interviews, page locale Paris 9. Textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse 99 / 100 (LCP 1,95 s). Les 5 publications de la page Publications sont décrites dans les données structurées, auteur relié à Franck. Correction typographique : « Paris 9 » ne se coupe plus en fin de ligne. | Lot D |
+| 22/09/2026 | C | Dossier de transmission du lot C posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-C-pour-ChatGPT/`. | Contrôle de ChatGPT |
+| 22/09/2026 | C | **Lot D livré** (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, 4 captures, bilan des 20 pages) : Contact (100 partout sur Lighthouse, LCP 1,80 s) et Mentions légales (`noindex,follow`). Le contrôle HTML a trouvé les mentions légales dans le plan du site : retirées. Le lien « Mentions légales » du pied de page mène à sa page. Les 20 pages sont construites ; plus aucun lien « à venir ». Dossier de transmission posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-D-pour-ChatGPT/`. | Contrôle de ChatGPT, pack V1.1 |
 
 ---
 
@@ -458,7 +460,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
   site dans `dist/` ; `npm run verify` lance le contrôle des textes ; `node scripts/check-html.mjs`
   lance le contrôle du HTML ; `npm run images` prépare le logo et le portrait à partir des
   originaux ; `BASE_URL=http://localhost:4322 npm run captures` refait les captures
-  (`SET=lotA OUT=livrables/pages-suivantes-lot-a/captures` pour celles du lot A). Les lots
+  (`SET=lotA OUT=livrables/pages-suivantes-lot-a/captures` pour celles du lot A ; de même `lotB`, `lotC`, `lotD`). Les lots
   construits se règlent dans `src/content/pages-suivantes.ts` (`builtLots`).
 - **Voir le site en local** : serveurs `geo-dev` (port 4321, mise à jour en direct) et
   `geo-preview` (port 4322, site fabriqué), déclarés dans `~/Desktop/.claude/launch.json`.

@@ -61,5 +61,5 @@ export const footer = {
   contactLabel: "Contact",
   address: "2 rue Hippolyte Lebas, 75009 Paris", // D22
   phone: "Téléphone — à fournir", // emplacement réservé (D8)
-  legal: { label: "Mentions légales", href: "#" }, // page non prévue dans l'arborescence (§6, point 9)
+  legal: { label: "Mentions légales", href: "/mentions-legales/" }, // page du lot D (D38)
 };

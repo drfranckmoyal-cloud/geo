@@ -41,8 +41,14 @@ const resolve = (label: string) => resolveLink(page, label);
 // Passages non affichés (consignes glissées dans le texte, à confirmer par ChatGPT)
 const sections = page.sections
   .filter((s) => !masked.some((h) => h.section === s.title))
-  .map((s) => ({ ...s, blocks: s.blocks.filter((b) => !(b.kind === "p" && masked.some((h) => h.text && b.text.startsWith(h.text)))) }));
-const plans = planSections(sections, cfg.sections);
+  .map((s) => ({ ...s, blocks: s.blocks.filter((b) => !(b.kind === "p" && masked.some((h) => h.text && b.text.startsWith(h.text)))) }))
+  // Liste de noms de pages en gras (page Contact, « Motifs de consultation ») : des liens
+  .map((s) =>
+    cfg.sections?.[s.id]?.links
+      ? { ...s, blocks: s.blocks.flatMap((b) => (b.kind === "ul" ? b.items.map((item) => ({ kind: "evidence" as const, label: item.replace(/^\*\*|\*\*$/g, ""), href: resolve(item.replace(/^\*\*|\*\*$/g, "")) })) : [b])) }
+      : s,
+  );
+const plans = planSections(sections, cfg.sections, cfg.defaults);
 
 const trail = crumbTrail(page);
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
