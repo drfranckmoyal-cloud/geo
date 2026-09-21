@@ -10,8 +10,10 @@ export const site = {
   personId: "https://drfranckmoyal.fr/#franck-moyal",
   websiteId: "https://drfranckmoyal.fr/#website",
   lang: "fr-FR",
-  // Prise de rendez-vous : en attente (D8). Emplacement réservé : ancre vers le bloc final.
-  rdv: { label: "Prendre rendez-vous", shortLabel: "Rendez-vous", href: "#rendez-vous" }, // libellé court : en-tête mobile (D33)
+  // Prise de rendez-vous : lien définitif en attente (D8). D'ici là, tous les boutons et liens
+  // « Prendre rendez-vous » mènent à la section du même nom de la page Contact (règle globale de la
+  // V1.2, D41) ; ils restent marqués comme provisoires. Libellé court : en-tête mobile (D33).
+  rdv: { label: "Prendre rendez-vous", shortLabel: "Rendez-vous", href: "/contact/#prendre-rendez-vous", provisional: true },
   // Adresse du cabinet (D22), reprise dans les données structurées
   address: { street: "2 rue Hippolyte Lebas", postalCode: "75009", city: "Paris", country: "FR" },
 } as const;

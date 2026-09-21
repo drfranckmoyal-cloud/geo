@@ -10,7 +10,8 @@
 //  - les décisions de ChatGPT qui précisent le pack (validation consolidée du 22/09/2026,
 //    docs/echanges/2026-09-22-chatgpt-23-validation-consolidee-lots-a-b-c-d.md).
 
-export const PACK_DIR = "docs/pages-suivantes/v1";
+// Source unique depuis le 22/09/2026 : la V1.2 finale (D41). La V1 reste archivée à côté.
+export const PACK_DIR = "docs/pages-suivantes/v1.2";
 
 // Arborescence définitive (00 — ordre d'intégration A → B → C → D)
 export const arborescence = [
@@ -44,23 +45,15 @@ export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.incl
 // Passages du contenu « mot pour mot » qui ressemblent à des consignes de rédaction glissées
 // dans le texte : non affichés, listés dans le rapport, à confirmer par ChatGPT.
 // « section » : toute la section ; « text » : un paragraphe (début exact).
-export const hidden: Record<string, { section?: string; text?: string; why: string }[]> = {
-  "05": [{ section: "Direction éditoriale validée pour le versant esthétique", why: "note de direction éditoriale, après la FAQ" }],
-  "10": [{ text: "Sur le site patient, le message doit donc rester simple :", why: "phrase adressée au rédacteur ; la phrase en gras qui suit reste affichée" }],
-  "12": [{ text: "Cette présence devra être reliée à une page officielle DentCA indexable", why: "consigne d'intégration (section DentCA)" }],
-  "14": [{ text: "**Note de normalisation bibliographique**", why: "note de vérification bibliographique (La chirurgie orale)" }],
-};
+// V1.2 : les quatre consignes relevées dans la V1 (pages 05, 10, 12, 14) ont été retirées du
+// texte par ChatGPT ; plus rien à masquer.
+export const hidden: Record<string, { section?: string; text?: string; why: string }[]> = {};
 
 // Remplacements décidés par ChatGPT, appliqués au fichier du pack avant sa lecture — par le site
 // comme par les contrôles, qui les listent. Sans effet si le pack contient déjà le nouveau texte.
-export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
-  "20": [
-    // « Mentions légales : date visible harmonisée au 22 septembre 2026 » (validation du 22/09/2026, lot D)
-    { from: "Dernière mise à jour : **21 septembre 2026**.", to: "Dernière mise à jour : **22 septembre 2026**.", ref: "validation 23, lot D" },
-    { from: "- **Date de mise à jour** : 21 septembre 2026", to: "- **Date de mise à jour** : 22 septembre 2026", ref: "validation 23, lot D" },
-    { from: "- **`dateModified`** : `2026-09-21`", to: "- **`dateModified`** : `2026-09-22`", ref: "validation 23, lot D" },
-  ],
-};
+// V1.2 : la date des mentions légales (22 septembre 2026) est désormais dans le pack ; aucun
+// remplacement en cours.
+export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {};
 
 export function applyDecisions(md: string, num: string): { md: string; applied: string[] } {
   const applied: string[] = [];
@@ -86,14 +79,9 @@ export const shownSourceNotes: Record<string, string[]> = {
 
 // Liens « → » dont le libellé n'est pas dans la liste « Liens internes » de la page : adresse
 // déduite (page évidente, libellé validé ailleurs), signalée dans le rapport.
-export const linkOverrides: Record<string, string> = {
-  "Comprendre le bruxisme et son rôle dans l’usure dentaire": "/bruxisme-usure-dentaire/", // libellé validé sur la page Usures (D13)
-  "Érosion dentaire : dépistage et prévention": "/erosion-dentaire/",
-  "Anorexie restrictive : pourquoi peut-on observer des érosions sans vomissements ?": "/anorexie-erosion-dentaire-sans-vomissements/",
-  "Découvrir le composite bonding": "/composite-bonding-paris/",
-  "Usures dentaires : comprendre avant de reconstruire": "/usures-dentaires/", // H1 de la page Usures
-  "Découvrir l’activité hospitalière": "/activite-hospitaliere/",
-};
+// V1.2 : chaque lien du texte figure désormais dans la liste « Liens internes » de sa page ; plus
+// aucune adresse à déduire.
+export const linkOverrides: Record<string, string> = {};
 
 // Libellés des pages du golden master et du menu, pour relier les libellés du pack à leur adresse
 export const knownLabels: Record<string, string> = {
@@ -205,20 +193,16 @@ export const layouts: Record<string, PageLayout> = {
       "l-absence-de-vomissements-n-elimine-pas-le": { layout: "narrow", media: { label: "Infographie sobre des mécanismes : salive / acides / médicaments / contraintes mécaniques — à fournir", ratio: "3 / 1", wide: true } },
     },
   },
-  // Page locale : le bloc final affiche « Prendre rendez-vous » et mène à la section du même
-  // nom de la page Contact (validation 23, lot C)
-  "18": { cta: { label: "Prendre rendez-vous", href: "/contact/#prendre-rendez-vous" } },
   "19": {
-    hideByline: true,
     sections: {
-      // Ancre définitive de la section « Prendre rendez-vous » : #prendre-rendez-vous (validation
-      // 23, lot D) — c'est l'identifiant que lui donne déjà son titre.
+      // Ancre unique de la section « Prendre rendez-vous » : #prendre-rendez-vous (V1.2) — c'est
+      // l'identifiant que lui donne déjà son titre.
       // Les 7 motifs, écrits en gras dans le pack, deviennent des liens vers leurs pages (validés)
       "motifs-de-consultation": { links: true },
     },
   },
-  // « Page de lecture simple » : colonne de lecture, fond uni ; sans ligne auteur (validation 23)
-  "20": { hideByline: true, defaults: { layout: "narrow", tone: "paper" } },
+  // « Page de lecture simple » : colonne de lecture, fond uni
+  "20": { defaults: { layout: "narrow", tone: "paper" } },
 };
 
 // Données structurées propres à une page. Chaque fait figure en toutes lettres sur la page.

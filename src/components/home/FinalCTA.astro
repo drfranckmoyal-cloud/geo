@@ -1,6 +1,7 @@
 ---
 // Appel final (08 C : « CTA final net ») : un titre, une phrase, un bouton. Sert aux trois
-// pages ; il porte l'ancre #rendez-vous (emplacement réservé de la prise de rendez-vous, D8).
+// pages. Le bouton mène à la prise de rendez-vous (provisoirement la section « Prendre rendez-vous »
+// de la page Contact, D41) ; l'ancre #rendez-vous n'est plus utilisée.
 import Section from "../global/Section.astro";
 import EditorialH2 from "../global/EditorialH2.astro";
 import BodyText from "../global/BodyText.astro";
@@ -17,10 +18,10 @@ const { title, text, cta, href = site.rdv.href } = Astro.props;
 const hasText = Array.isArray(text) ? text.length > 0 : Boolean(text);
 ---
 
-<Section tone="ivory" id="rendez-vous" labelledby="rendez-vous-titre">
+<Section tone="ivory" id="appel-final" labelledby="appel-final-titre">
   <div class="container grid-12">
     <div class="final" data-reveal>
-      <EditorialH2 id="rendez-vous-titre" text={title} size="statement" />
+      <EditorialH2 id="appel-final-titre" text={title} size="statement" />
       {hasText && <BodyText paragraphs={text!} class="final__text" />}
       {cta && <PrimaryButton href={href} label={cta} class={hasText ? undefined : "final__cta--seul"} />}
     </div>

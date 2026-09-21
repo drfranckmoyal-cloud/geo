@@ -13,6 +13,7 @@ import { parsePack } from "../src/lib/pack.ts";
 import { applyDecisions, builtNums, PACK_DIR } from "../src/content/pages-suivantes.ts";
 
 const SITE = "https://drfranckmoyal.fr";
+const RDV = "/contact/#prendre-rendez-vous";
 const PERSON = `${SITE}/#franck-moyal`;
 const pages = [
   { file: "dist/index.html", url: `${SITE}/`, types: ["WebSite", "Person"] },
@@ -21,7 +22,7 @@ const pages = [
 ];
 
 // Pages du pack : ce que le fichier impose
-const packFiles = (await readdir(PACK_DIR)).filter((f) => /^\d\d_/.test(f) && !/^(00|21)_/.test(f));
+const packFiles = (await readdir(PACK_DIR)).filter((f) => /^(0[1-9]|1\d|20)_/.test(f)); // pages 01 à 20
 const all = await Promise.all(packFiles.map(async (f) => parsePack(applyDecisions(await readFile(`${PACK_DIR}/${f}`, "utf8"), f.slice(0, 2)).md, f)));
 const parents = { "/usures-dentaires/": "/", "/franck-moyal/": "/" };
 for (const p of all) parents[p.url] = p.parent;
@@ -90,9 +91,17 @@ for (const p of pages) {
   // Ancres internes à la page : chaque « #… » mène à un élément existant
   const ids = new Set(root.querySelectorAll("[id]").map((e) => e.getAttribute("id")));
   const anchors = [...new Set(root.querySelectorAll('a[href^="#"]').map((a) => a.getAttribute("href")))].filter((h) => h !== "#");
-  const broken = anchors.filter((h) => !ids.has(h.slice(1)) && h !== "#rendez-vous");
+  const broken = anchors.filter((h) => !ids.has(h.slice(1)));
   broken.length ? bad(`ancres sans cible : ${broken.join(" ")}`) : ok(`${anchors.length} ancres internes, toutes avec une cible`);
-  if (anchors.includes("#rendez-vous") && !ids.has("rendez-vous")) info("pas de bloc d'appel final : le bouton « Prendre rendez-vous » de l'en-tête (lien encore à fournir) ne mène nulle part sur cette page");
+  // Prise de rendez-vous (règle globale V1.2, D41) : chaque bouton ou lien « Prendre rendez-vous »
+  // mène à /contact/#prendre-rendez-vous ; l'ancre #rendez-vous n'existe plus
+  const rdvLinks = root.querySelectorAll("a").filter((a) => /rendez-vous/i.test(a.text) && !/^Contact et rendez-vous/.test(a.text.trim()));
+  const offTarget = rdvLinks.filter((a) => a.getAttribute("href") !== RDV);
+  offTarget.length ? bad(`liens de rendez-vous ailleurs que ${RDV} : ${offTarget.map((a) => a.getAttribute("href")).join(" ")}`) : ok(`${rdvLinks.length} liens « rendez-vous », tous vers ${RDV}`);
+  if (root.querySelector('[id="rendez-vous"], a[href="#rendez-vous"]')) bad("ancre #rendez-vous encore présente");
+  // Boutons des appels finaux, quel que soit leur libellé (« Réaliser un bilan… ») : même destination
+  const finals = root.querySelectorAll("#appel-final a");
+  if (finals.length) finals.every((a) => a.getAttribute("href") === RDV) ? ok(`bouton de l'appel final vers ${RDV}`) : bad("bouton de l'appel final ailleurs que la prise de rendez-vous");
 
   if (!p.pack) continue;
   // --- Contrôles du manifeste (pages suivantes) ---
@@ -128,6 +137,11 @@ for (const p of pages) {
   const robots = root.querySelector('meta[name="robots"]')?.getAttribute("content");
   (robots ?? "") === (pk.seo.robots ?? "") ? ok(`consigne aux moteurs : ${robots ?? "aucune (page indexable)"}`) : bad(`consigne aux moteurs : ${robots} au lieu de ${pk.seo.robots}`);
 }
+
+// Cible des liens de rendez-vous : une seule section #prendre-rendez-vous, sur la page Contact
+console.log("\n■ Cible des liens de rendez-vous");
+const contact = parse(await readFile("dist/contact/index.html", "utf8"));
+contact.querySelectorAll('[id="prendre-rendez-vous"]').length === 1 ? ok("section #prendre-rendez-vous unique sur /contact/") : bad("section #prendre-rendez-vous absente ou en double sur /contact/");
 
 // 8 et 10. « Dentiste esthétique » (contrôle des textes) ; réglages de design inchangés depuis le gel
 console.log("\n■ Réglages de design (src/styles/tokens.css)");

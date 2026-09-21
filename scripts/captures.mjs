@@ -131,7 +131,7 @@ if (SET === "lotA") {
   // 13. Pages liées puis appel final (ordre du contrat de composants)
   const e = await open(desk, "/dentisterie-esthetique-paris/");
   await noSticky(e);
-  await region(e, "nav.related", "#rendez-vous", "pages-liees-appel-final-ordinateur");
+  await region(e, "nav.related", "#appel-final", "pages-liees-appel-final-ordinateur");
   await e.close();
   // 14. Page sans appel final (Éclaircissement : pas de CTA dans le pack)
   const f = await open(desk, "/eclaircissement-dentaire-paris/");
@@ -173,8 +173,8 @@ if (SET === "lotB") {
   await shot(desk, "/tca-dents/", "#mon-activite-a-la-cmme", "cmme-ordinateur");
   await shot(mob, "/tca-dents/", "#mon-activite-a-la-cmme", "cmme-mobile");
   // 6-7. Appel final réduit au titre et au bouton (pages 07 à 13)
-  await shot(desk, "/tca-dents/", "#rendez-vous", "appel-final-sans-phrase-ordinateur");
-  await shot(mob, "/tca-dents/", "#rendez-vous", "appel-final-sans-phrase-mobile");
+  await shot(desk, "/tca-dents/", "#appel-final", "appel-final-sans-phrase-ordinateur");
+  await shot(mob, "/tca-dents/", "#appel-final", "appel-final-sans-phrase-mobile");
   // 8. Emplacement d'infographie en pleine largeur (page Anorexie)
   await shot(desk, "/anorexie-erosion-dentaire-sans-vomissements/", "#l-absence-de-vomissements-n-elimine-pas-le", "infographie-anorexie-ordinateur");
   // 9. H1 le plus long du pack, sur mobile (V16)
@@ -220,7 +220,7 @@ if (SET === "lotC") {
   // 9. Page locale : trois principes en grille
   await shot(desk, "/chirurgien-dentiste-paris-9/", "#une-approche-fondee-sur-trois-principes", "trois-principes-ordinateur");
   // 10. Page locale : bloc final d'informations pratiques, sans bouton (le pack n'en donne pas)
-  await shot(desk, "/chirurgien-dentiste-paris-9/", "#rendez-vous", "bloc-rendez-vous-sans-bouton-ordinateur");
+  await shot(desk, "/chirurgien-dentiste-paris-9/", "#appel-final", "bloc-rendez-vous-sans-bouton-ordinateur");
   // 11. Publications : « À lire aussi » écrit dans le pack, pas d'appel final
   const e = await open(desk, "/publications/");
   await noSticky(e);

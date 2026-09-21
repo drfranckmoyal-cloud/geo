@@ -3,9 +3,9 @@
 import { parsePack, type PackPage } from "./pack.ts";
 import { applyDecisions, arborescence, builtNums, knownLabels, linkOverrides } from "../content/pages-suivantes.ts";
 
-// Nouvelle version du pack (docs/pages-suivantes/v1.1/…) : changer ce chemin — il doit rester
+// Nouvelle version du pack (docs/pages-suivantes/v1.3/…) : changer ce chemin — il doit rester
 // écrit en toutes lettres — et PACK_DIR dans src/content/pages-suivantes.ts.
-const raw = import.meta.glob("/docs/pages-suivantes/v1/[0-9][0-9]_*.md", {
+const raw = import.meta.glob("/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -13,7 +13,7 @@ const raw = import.meta.glob("/docs/pages-suivantes/v1/[0-9][0-9]_*.md", {
 
 export const packPages: PackPage[] = Object.entries(raw)
   .map(([path, md]) => ({ file: path.split("/").pop()!, md }))
-  .filter(({ file }) => !/^(00|21)_/.test(file))
+  .filter(({ file }) => arborescence.some((a) => file.startsWith(`${a.num}_`))) // pages 01 à 20 seulement
   .map(({ file, md }) => parsePack(applyDecisions(md, file.slice(0, 2)).md, file))
   .sort((a, b) => a.num.localeCompare(b.num));
 

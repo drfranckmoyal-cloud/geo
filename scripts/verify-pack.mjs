@@ -89,22 +89,30 @@ function segments(md, num) {
     }
   }
   const author = spec.get(7) ?? "";
-  // Le nom de l'auteur s'affiche dans la ligne auteur de l'ouverture, retirée sur Contact et
-  // Mentions légales (validation du 22/09/2026), ou dans le bloc auteur
-  if (!layouts[num]?.hideByline || (spec.get(4) ?? "").includes("AuthorBlock")) add(field(author, "Auteur"), "auteur");
-  // La date s'affiche dans le bloc auteur, seulement si le contrat de la page le prévoit ;
-  // sinon elle figure dans les données structurées (dateModified, contrôle HTML).
-  if ((spec.get(4) ?? "").includes("AuthorBlock")) add(field(author, "Date de mise à jour"), "date de mise à jour");
+  const contract = (spec.get(4) ?? "").split("\n").map((l) => l.replace(/^- /, "").replace(/\*\*/g, "").trim());
+  // Le nom de l'auteur s'affiche dans la ligne auteur de l'ouverture, quand le fichier en nomme un
+  // (pas sur Contact ni Mentions légales, V1.2)
+  if (!layouts[num]?.hideByline) add(field(author, "Auteur"), "auteur");
+  // La date s'affiche dans le bloc auteur, quand le contrat le prévoit (« `AuthorBlock` court… » ;
+  // jamais « Pas d'`AuthorBlock` ») ; sinon elle figure dans les données structurées (dateModified)
+  if (contract.some((c) => /^`AuthorBlock`/.test(c))) add(field(author, "Date de mise à jour"), "date de mise à jour");
+  // Titre du bloc MethodSteps donné par le contrat (page 02)
+  const methodTitle = (contract.join("\n").match(/`MethodSteps`[^\n]*titre « (.+?) »/) ?? [])[1];
+  if (methodTitle) add(methodTitle, "titre de la méthode");
   add(field(spec.get(8), "Title"), "title", "title");
   add(field(spec.get(8), "Meta description"), "meta description", "desc");
   const notesShown = shownSourceNotes[num] ?? [];
-  for (const line of (spec.get(10) ?? "").split("\n").map((l) => l.trim()).filter(Boolean)) {
+  const sourceLines = (spec.get(10) ?? "").split("\n").map((l) => l.trim());
+  sourceLines.forEach((line, i) => {
     let m;
     if ((m = line.match(/^\*\*\[\d+\] (.+)$/))) add(m[1], "source");
     else if ((m = line.match(/^DOI: `([^`]+)`/))) add(m[1], "source (DOI)");
     else if ((m = line.match(/^PubMed: (\S+)/))) add(m[1], "source (lien PubMed)", "html");
-    else if (notesShown.some((n) => line.startsWith(n))) add(line, "note sous les sources");
-  }
+    else if (notesShown.some((n) => line.startsWith(n))) {
+      add(line, "note sous les sources");
+      if (/^https?:\/\/\S+$/.test(sourceLines[i + 1] ?? "")) add(sourceLines[i + 1], "note sous les sources (adresse)", "html");
+    }
+  });
   return { segs, skipped };
 }
 
@@ -201,7 +209,7 @@ export async function verifyPack() {
     for (const m of hidden[num] ?? []) out.push(`  • Non affiché (à confirmer par ChatGPT) : « ${norm(m.section ?? m.text)} » — ${m.why}`);
     if (deduced.length) out.push(`  • Liens à l'adresse déduite : ${deduced.join(" ; ")}`);
     for (const a of applied) out.push(`  • Remplacement décidé : ${a}`);
-    if (layouts[num]?.hideByline) out.push("  • Ouverture sans ligne auteur (validation 23)");
+    if (!/\*\*Auteur\*\* : /.test(md)) out.push("  • Ouverture sans ligne auteur (le fichier ne nomme pas d'auteur)");
     if (layouts[num]?.cta) out.push(`  • Bouton de l'appel final décidé hors du pack : « ${layouts[num].cta.label} » → ${layouts[num].cta.href} (validation 23)`);
     if (skipped.length && !(hidden[num] ?? []).length) out.push(`  ✗ Passages sautés sans décision : ${skipped.join(" / ")}`);
   }

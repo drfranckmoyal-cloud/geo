@@ -1,4 +1,4 @@
-// Lecture des fichiers du pack « pages suivantes » (docs/pages-suivantes/v1) : chaque fichier
+// Lecture des fichiers du pack « pages suivantes » (docs/pages-suivantes/…) : chaque fichier
 // devient une page structurée — routage, ouverture, réponse directe, sections, FAQ, appel
 // final, liens, auteur, référencement, images attendues, sources. Les textes ne sont ni
 // recopiés ni retouchés : ils sont lus tels quels dans le fichier du pack au moment de
@@ -59,6 +59,19 @@ export interface PackPage {
   notes: string; // §11, jamais affiché
 }
 
+// Ce que le contrat de composants (§4) demande explicitement : bloc auteur (« `AuthorBlock` court… »,
+// jamais « Pas d'`AuthorBlock` » ni « Aucun `AuthorBlock` »), titre du bloc MethodSteps, pages liées
+// imposées (« `RelatedPages` avec : A, B, C. »).
+export function contractFacts(contract: string[]) {
+  const lines = contract.map((c) => c.replace(/\*\*/g, ""));
+  const related = lines.find((c) => /^`RelatedPages` avec : /.test(c));
+  return {
+    authorBlock: lines.some((c) => /^`AuthorBlock`/.test(c)),
+    methodTitle: (lines.join("\n").match(/`MethodSteps`[^\n]*titre « (.+?) »/) ?? [])[1] as string | undefined,
+    relatedLabels: related ? related.replace(/^`RelatedPages` avec : /, "").replace(/\.$/, "").split(", ") : [],
+  };
+}
+
 // Découpe le fichier en ses rubriques numérotées « ## 1. ROUTING… » à « ## 11. NOTES… »
 function specSections(md: string): Map<number, string> {
   const out = new Map<number, string>();
@@ -84,7 +97,7 @@ const bullets = (text = "") =>
 export function slugify(text: string): string {
   return text
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/œ/g, "oe")
     .replace(/[^a-z0-9]+/g, "-")
@@ -273,7 +286,9 @@ function parseSources(text = ""): { sources: Source[]; notes: string[] } {
       notes.push(lines.join("\n"));
       continue;
     }
+    // « DOI: `…` — PMID: `…` », ou « PMID: `…` » seul quand la référence n'a pas de DOI
     const ids = (lines.find((l) => l.startsWith("DOI:")) ?? "").match(/DOI: `([^`]+)`(?: — PMID: `(\d+)`)?/);
+    const pmidOnly = (lines.find((l) => l.startsWith("PMID:")) ?? "").match(/PMID: `(\d+)`/);
     const pubmed = (lines.find((l) => l.startsWith("PubMed:")) ?? "").replace(/^PubMed:\s*/, "");
     const [, n, authors, title, journal, details] = ref;
     sources.push({
@@ -284,7 +299,7 @@ function parseSources(text = ""): { sources: Source[]; notes: string[] } {
       details,
       year: (details.match(/\d{4}/) ?? [""])[0],
       doi: ids?.[1] ?? "",
-      pmid: ids?.[2] ?? "",
+      pmid: ids?.[2] ?? pmidOnly?.[1] ?? "",
       pubmed,
     });
   }

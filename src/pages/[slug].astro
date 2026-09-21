@@ -26,7 +26,7 @@ import { site } from "../content/site";
 import { hidden, layouts, schemaExtras, shownSourceNotes } from "../content/pages-suivantes";
 import { builtPackPages, crumbTrail, resolveLink } from "../lib/pack-files";
 import { planSections } from "../lib/pack-layout";
-import type { PackPage } from "../lib/pack";
+import { contractFacts, type PackPage } from "../lib/pack";
 import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
 
 export function getStaticPaths() {
@@ -52,25 +52,36 @@ const plans = planSections(sections, cfg.sections, cfg.defaults);
 
 const trail = crumbTrail(page);
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
-const byline = cfg.hideByline ? undefined : { label: page.author.name, href: page.author.href };
-const hasAuthor = page.contract.some((c) => c.includes("AuthorBlock"));
+const facts = contractFacts(page.contract);
+// Ligne auteur de l'ouverture : absente quand le fichier ne nomme pas d'auteur (Contact, Mentions légales)
+const byline = page.author.name && !cfg.hideByline ? { label: page.author.name, href: page.author.href } : undefined;
+const hasAuthor = facts.authorBlock;
 
 // Sources : notes du §10 à afficher ; renvois du texte dont le numéro n'est pas dans la liste
 // (ils mènent au bloc des sources ; l'écart est signalé par le contrôle des textes)
-const notes = page.sourceNotes
-  .flatMap((n) => n.split("\n"))
-  .filter((line) => (shownSourceNotes[page.num] ?? []).some((start) => line.startsWith(start)));
+// Une note s'affiche par sa première ligne, suivie de l'adresse web qui l'accompagne le cas échéant ;
+// les lignes de consigne (« À présenter comme… ») ne le sont jamais.
+const notes = page.sourceNotes.flatMap((para) => {
+  const lines = para.split("\n");
+  if (!(shownSourceNotes[page.num] ?? []).some((start) => lines[0].startsWith(start))) return [];
+  return [/^https?:\/\/\S+$/.test(lines[1] ?? "") ? `${lines[0]}\n${lines[1]}` : lines[0]];
+});
 const allText = [page.lead, page.answer ?? "", ...sections.flatMap((s) => s.blocks.map((b) => JSON.stringify(b))), ...(page.faq?.items.map((i) => i.a) ?? [])].join("\n");
 const listed = new Set(page.sources.map((s) => s.n));
 const firstCited = [...allText.replace(/\*\*/g, "").matchAll(/\s\[(\d+)/g)].map((m) => Number(m[1]));
 const orphans = [...new Set(firstCited)].filter((n) => !listed.has(n));
 
-// Pages liées : la liste « À lire aussi » du fichier, sinon ses liens internes à câbler
-const related = page.related
-  ? { title: page.related.title, items: page.related.labels.map((label) => ({ label, href: resolve(label) })) }
-  : page.links.length
-    ? { title: "À lire aussi", items: page.links.filter((l) => l.href !== page.url) }
-    : undefined;
+// Pages liées : celles que le contrat impose, sinon la liste « À lire aussi » du fichier, sinon ses
+// liens internes à câbler — sans le lien de rendez-vous, une seule fois par page de destination.
+const isRdv = (href: string) => href === site.rdv.href || href.startsWith("/contact/#");
+const once = (items: { label: string; href: string }[]) => items.filter((it, i) => items.findIndex((o) => o.href === it.href) === i);
+const related = facts.relatedLabels.length
+  ? { title: "À lire aussi", items: facts.relatedLabels.map((label) => ({ label, href: resolve(label) })) }
+  : page.related
+    ? { title: page.related.title, items: page.related.labels.map((label) => ({ label, href: resolve(label) })) }
+    : page.links.length
+      ? { title: "À lire aussi", items: once(page.links.filter((l) => l.href !== page.url && !isRdv(l.href))) }
+      : undefined;
 
 // Données structurées : types du §8 de chaque fichier
 const pageTypes = page.seo.schema.filter((t) => /Page$/.test(t) || t === "Article");
@@ -98,7 +109,7 @@ const schema = graph([
             author: s.authors,
             datePublished: s.year,
             isPartOf: { "@type": "Periodical", name: s.journal.replace(/\.$/, "") },
-            sameAs: `https://doi.org/${s.doi}`,
+            ...(s.doi ? { sameAs: `https://doi.org/${s.doi}` } : {}),
             url: s.pubmed,
           })),
         }
@@ -118,7 +129,7 @@ const schema = graph([
   {
     plans.map((p) => (
       <>
-        {cfg.method?.before === p.section.id && <MethodSteps title={home.method.title} steps={home.method.steps} />}
+        {cfg.method?.before === p.section.id && <MethodSteps title={facts.methodTitle ?? home.method.title} steps={home.method.steps} />}
         {p.aside.length > 0 ? (
           <TextImageSection id={p.id} title={p.section.title} layout={p.layout} tone={p.tone}>
             <PackBlocks blocks={p.main} resolve={resolve} />
