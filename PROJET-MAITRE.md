@@ -21,9 +21,9 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | Étape 2 — golden master, tour 2 livré (21/09/2026) : les 10 corrections P0 et le portrait HD. En attente du contrôle de ChatGPT sur la série courte de 15 captures ; si c'est conforme, le golden master est gelé (D28). |
+| **Phase en cours** | Étape 2 — dernier micro-tour « P0.5 » avant le gel (D36) : textes de la méthode, italique supprimé, bouton rendez-vous mobile allégé, rapidité de la page Usures à vérifier (temps d'affichage principal ≤ 2,5 s). |
 | **Dernière étape faite** | Tour 2 : Newsreader, en-tête mobile, 7 étapes, sous-menus, sources et auteur, adresse, portrait HD intégré (`livrables/golden-master-r2/`). Textes sans aucun écart, HTML conforme, Lighthouse 95–100 en rapidité et 100 ailleurs. |
-| **Prochaine action** | Franck transmet à ChatGPT le dossier du tour 2 posé sur le Bureau ; ChatGPT valide (gel) ou demande de derniers ajustements. |
+| **Prochaine action** | Claude applique le P0.5 et remet les captures demandées et les mesures Lighthouse ; si les 4 points passent, le golden master est gelé. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
 | **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous ; plus tard, les vraies photos (piliers, photographie clinique, cas avant / après). |
 
@@ -104,7 +104,8 @@ paragraphe de la section 6. Les 9 autres fichiers sont identiques à la V1.3.
 **Compléments en vigueur**, en attendant leur intégration par ChatGPT dans une prochaine
 version du pack : `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` (menu de
 l'en-tête, intertitres et textes de la section 2 de la page Usures, lien Bruxisme — D10 à D13) et
-`docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` (contrôle du tour 1 — D16 à D28).
+`docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` (contrôle du tour 1 — D16 à D28) et
+`docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` (contrôle du tour 2, décision de gel — D30 à D36).
 
 **Historique :** V1.3 — `GOLDEN_MASTER_FRANCK_MOYAL_V1_3.zip`, reçu le 21/09/2026 (fichiers
 datés du 21/09/2026, 16 h 22), 10 fichiers, archivés **sans aucune modification** dans
@@ -229,6 +230,13 @@ rendu sera jugé :
 | D27 | **Robots et IA, avant la mise en ligne** : OAI-SearchBot (ChatGPT Search), Googlebot et Bingbot autorisés ; GPTBot (entraînement) à décider à part. Ne pas traiter « tous les robots d'IA » comme un seul réglage. | 21/09/2026 |
 | D28 | **Gel du golden master : pas encore.** Après les corrections P0, une série courte de captures : ouvertures des 3 pages (ordinateur et mobile), section Méthode, sources et auteur, en-tête mobile, menu (ordinateur et mobile). Si c'est conforme, le golden master est gelé et sert à décliner toutes les autres pages. | 21/09/2026 |
 | D29 | **Portrait HD intégré** : l'original fourni par Franck (6 048 × 4 024 px, Nikon D780) remplace la version de 480 px. Il est recadré en 4:5, son contraste local est légèrement renforcé, son point noir est calé sur le noir doux (D26). Source : `src/assets/photos/portrait-franck-source.png`. | 21/09/2026 |
+| D30 | **Newsreader validée définitivement** : H1/H2 en 400, H3 et noms d'étapes en 500, ajustement au corps automatique. Ce choix typographique n'est plus à rouvrir. | 21/09/2026 |
+| D31 | **Méthode : textes définitifs des 7 étapes** — Écouter : « attentes, gêne, objectifs. » · Documenter : « photographies, scans 3D, examens nécessaires. » · Analyser : « esthétique, fonction, tissus, causes. » · Planifier : « construire les formes, les proportions et les options thérapeutiques. » · Simuler : « visualiser le projet en 2D, 3D ou en dynamique selon les cas. » · Décider ensemble : « comparer les options, leurs avantages, leurs limites et le niveau d'intervention. » · Traiter : « uniquement lorsque le bénéfice est réel. » Titre de section : « Écouter, analyser, planifier, simuler, décider ensemble ». | 21/09/2026 |
+| D32 | **Plus d'italique** : la phrase clé de la page Usures passe en Newsreader romain 400 (même taille, même filet), la ligne de domaines du bloc auteur en Inter, petit corps, couleur secondaire. Aucun fichier italique n'est plus chargé (−147 Ko sur la page Usures). | 21/09/2026 |
+| D33 | **Bouton rendez-vous de l'en-tête mobile** : hauteur 40 px, sans l'élargir. S'il reste dominant à 390 px, il affiche « Rendez-vous » sur mobile seulement, avec le nom complet « Prendre rendez-vous » pour les lecteurs d'écran. | 21/09/2026 |
+| D34 | **Portrait HD, accueil, page Franck, menus, sources, bloc auteur, parcours clinique, pages liées : validés.** Ne plus toucher au contraste du portrait pour le moment. | 21/09/2026 |
+| D35 | **Condition de gel technique** : temps d'affichage principal (LCP) de la page Usures sur mobile ≤ 2,5 s, médiane de 3 mesures Lighthouse. Au-delà, optimisation technique ciblée sans toucher au design (polices critiques seules préchargées, sous-ensembles de caractères, élément principal inspecté). | 21/09/2026 |
+| D36 | **Gel après le P0.5** : palette, Newsreader + Inter, grille, espacements, en-têtes ordinateur et mobile, boutons, les trois ouvertures, `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages`, pied de page, sous-menus, animations. Ensuite, ces composants ne bougent plus au fil des nouvelles pages, sauf vrai problème. Les visuels, le téléphone, le lien de rendez-vous et les adresses `sameAs` ne bloquent pas le gel. | 21/09/2026 |
 
 ---
 
@@ -252,7 +260,6 @@ décision.
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Les autres interprétations sont listées au §6 du rapport. | Appliqué. | ChatGPT. |
-| 27 | **Texte de l'étape « Simuler »** (D17) : ChatGPT rétablit l'étape sans lui donner de texte, et celui de « Planifier » (« simulation et projet lorsque pertinent. ») parle déjà de simulation. | Description provisoire reprise mot pour mot de 00 §5 : « simulation 2D / 3D / dynamique selon les cas ». « Planifier » inchangé. | ChatGPT : valider ou fournir les deux textes. |
 
 ### Tranchés
 
@@ -264,6 +271,7 @@ décision.
 - **Destinations « Érosion & TCA » et « Publications & enseignement »** (ancien point 23) → sous-menus (D18).
 - **Police des titres** (ancien point 24) → Newsreader (D16).
 - **En-tête** (ancien point 25) → monogramme seul sur ordinateur validé (D25) ; en-tête mobile corrigé (D23).
+- **Textes de « Planifier » et « Simuler »** (ancien point 27) → textes définitifs des 7 étapes fournis par ChatGPT (D31).
 - **Nom de domaine** (ancien point 1) → `drfranckmoyal.fr` réservé par Franck chez OVH le 21/09/2026, jusqu'au 21/09/2029 (D14).
 - **Sources de la page Usures** (ancien point 2) → fournies par Franck le 21/09/2026, dans le fichier 04 corrigé (D7, V22).
 - **Logo** (ancien point 4) → le monogramme « Fm » avec l'arc vert sauge (D4).
@@ -369,6 +377,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | F | Envoie l'original de sa photo (« Design sans titre.png », 6 048 × 4 024 px) : « cette qualité de photo est meilleure ? » — oui, c'est la résolution native du Nikon D780, avec un vrai détail. | D29 |
 | 21/09/2026 | C | **Tour 2 livré** : les 10 corrections P0 de ChatGPT et le portrait HD, avec le rapport `livrables/golden-master-r2/RAPPORT-tour2.md` et 15 captures ciblées. Contrôles : textes sans écart, HTML conforme, Lighthouse 95–100 / 100 / 100 / 100. En cours de route : « Chirurgien-dentiste » débordait avec Newsreader, d'où une colonne de titre élargie et un retour à la coupure naturelle au trait d'union aux petites largeurs. | Contrôle de ChatGPT |
 | 21/09/2026 | C | Dossier de transmission du tour 2 posé sur le Bureau : `~/Desktop/GEO-golden-master-tour2-pour-ChatGPT/` (message à coller, rapport, 15 captures numérotées comme dans le rapport). | Contrôle de ChatGPT |
+| 21/09/2026 | G | **Contrôle du tour 2**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` : « visuellement validé à 95 % », base définitive du site. Newsreader validée définitivement, portrait HD validé. Dernier micro-tour P0.5 : textes de la méthode, italique supprimé, bouton rendez-vous mobile, rapidité de la page Usures. Si les 4 points passent, le golden master est gelé. | D30 à D36 |
 
 ---
 
