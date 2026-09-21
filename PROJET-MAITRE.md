@@ -25,7 +25,7 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 | **Dernière étape faite** | Étape 0 — cadrage ; réponses de Franck du 21/09/2026 intégrées (logo, portrait, sources de la page Usures, règle « dentisterie esthétique »). |
 | **Prochaine action** | Claude termine les 3 pages, puis remet captures et rapport pour le contrôle de ChatGPT. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Confirmer la commande du domaine `drfranckmoyal.fr` sur OVH, que Claude prépare à sa demande : aucun achat sans son « oui » explicite (§6, point 1). |
+| **En attente de Franck** | Rien de bloquant. À fournir quand possible : le portrait en haute définition (§6, point 21). |
 
 ---
 
@@ -212,6 +212,7 @@ rendu sera jugé :
 | D11 | **Intertitres de la page Usures** : chaque section garde son libellé comme petite étiquette au-dessus du grand titre (H2). Section 5 : étiquette « Faut-il toujours traiter une usure dentaire ? », titre « Non : toutes les usures ne nécessitent pas une reconstruction » (au lieu de « Non. » seul). Réponse de ChatGPT au point 18. | 21/09/2026 |
 | D12 | **Section 2 de la page Usures** : les quatre sous-parties reçoivent leur texte (« Attrition et contraintes mécaniques », « Érosion dentaire », « Abrasion », « Usures multifactorielles »), rédigé par ChatGPT (point 19). | 21/09/2026 |
 | D13 | **Lien Bruxisme** : « Comprendre le bruxisme et son rôle dans l'usure dentaire » → `/bruxisme-usure-dentaire/`, dans la section 2 de la page Usures (point 20). | 21/09/2026 |
+| D14 | **Domaine réservé** : `drfranckmoyal.fr`, par Franck, chez OVH (commande n° 259047873), pour 3 ans ; créé le 21/09/2026 à 19 h 10, expire le 21/09/2029 ; serveurs de noms OVH. Titulaire : Franck. DNSSEC et une boîte e-mail inclus, aucun hébergement pris. | 21/09/2026 |
 
 ---
 
@@ -225,7 +226,6 @@ décision.
 
 | # | Constat | D'ici là | Qui tranche |
 |---|---|---|---|
-| 1 | **Le domaine `drfranckmoyal.fr` n'est pas réservé** (registre des .fr : « NOT FOUND » le 21/09/2026). Pas davantage `franckmoyal.fr`, `franck-moyal.fr`, `dr-franck-moyal.fr`, `drfranckmoyal.com`, `franckmoyal.com`. Tout le projet repose sur cette adresse (liens de référence, identifiant `…/#franck-moyal`) et n'importe qui peut la réserver. Aucun site n'existe à ces six adresses, donc aucune redirection à prévoir depuis elles ; les informations sur Franck sont en revanche dispersées sur plusieurs sites tiers (00 §6). | À la demande de Franck, Claude prépare la commande sur son compte OVH (D9) : panier et récapitulatif. L'achat n'est passé qu'après son « oui » explicite. | **Franck** : confirmer la commande (`.fr`, et `.com` en protection s'il le souhaite). |
 | 3 | **Destination du bouton « Prendre rendez-vous »** inconnue (Doctolib ? téléphone ? formulaire ?). **Adresse et téléphone du cabinet** absents (pied de page, référencement local, données structurées). | Emplacements signalés. **Mis en attente par Franck le 21/09/2026 (D8).** | Franck, plus tard. Bloque la mise en ligne, pas le prototype. |
 | 5 | **La méthode compte 7 étapes dans 00 §5** (avec « Simuler ») **et 6 sur la page d'accueil** (02, où la simulation est comprise dans « Planifier »). | Page d'accueil : les 6 étapes de 02, à l'identique. | ChatGPT, pour la cohérence des pages futures. |
 | 6 | **La répartition des couleurs diffère** entre 01 (80 / 15 / 5 %) et 07 (70–80 / 10–15 / 5–10 / 5 % max). Le pack ne dit pas lequel l'emporte. | Application de 07, plus détaillé et qui se déclare « verrouillé » — c'est une lecture de Claude. | ChatGPT, pour confirmer. |
@@ -245,6 +245,7 @@ décision.
 
 ### Tranchés
 
+- **Nom de domaine** (ancien point 1) → `drfranckmoyal.fr` réservé par Franck chez OVH le 21/09/2026, jusqu'au 21/09/2029 (D14).
 - **Sources de la page Usures** (ancien point 2) → fournies par Franck le 21/09/2026, dans le fichier 04 corrigé (D7, V22).
 - **Logo** (ancien point 4) → le monogramme « Fm » avec l'arc vert sauge (D4).
 - **Portrait** (partie du point 10) → la photo en noir et blanc fournie par Franck (D5) ; voir le point 21 pour sa résolution.
@@ -302,9 +303,10 @@ la construction.
   recommandé de 4,5 : 1). Le vert sauge clair (1,7 : 1) et le gris chaud (1,4 : 1) ne
   servent jamais pour du texte, seulement pour des fonds et des filets — ce qui correspond
   à la direction artistique.
-- **iCloud** : les milliers de petits fichiers des outils (`node_modules`) vivront dans
-  `node_modules.nosync`, un dossier que iCloud ignore — la même parade que `.venv.nosync`
-  sur PARCOURS, pour éviter que macOS ne vide les fichiers et bloque la construction.
+- **iCloud** : les milliers de petits fichiers des outils (`node_modules`) sont exclus de la
+  synchronisation par un marqueur que macOS reconnaît (`com.apple.fileprovider.ignore#P`).
+  La parade du lien `.nosync`, qui marche pour Python sur PARCOURS, ne tient pas ici : npm
+  remplace le lien par un vrai dossier (constaté le 21/09/2026).
 
 ---
 
@@ -337,7 +339,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Relecture indépendante du fichier maître contre le pack, par un second agent : 1 erreur (les captures du « hero » traduites par « en-tête »), 10 imprécisions, 5 oublis. Tout est corrigé ; deux verrous ajoutés (V19, V20) et quatre questions (§6, points 17 à 20). | — |
 | 21/09/2026 | F | Réponses : (1) « Je suis connecté à mon compte OVH sur Chrome, prends la main » pour le domaine ; (2) fichier Usures corrigé, avec les sources ; (3) rendez-vous mis en attente ; (4) logo = monogramme « Fm », portrait fourni ; (5) « ne jamais écrire “dentiste esthétique” mais “dentisterie esthétique” ou “exercice exclusif en dentisterie esthétique” ». Accord pour GitHub ; feu vert pour construire les 3 pages. | D4 à D9, V21, V22, pack V1.3.1 |
 | 21/09/2026 | G | Réponse aux points 17 à 20, archivée dans `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` : menu figé ; étiquette + grand titre validés, mais « Non. » seul refusé ; textes des quatre sous-parties ; lien Bruxisme. ChatGPT corrige aussi Claude : aucune règle de Google ne dit que les intertitres en forme de question sont préférés. | D10 à D13, V23 |
-| 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH, en attente du « oui » de Franck. | Étape 1 |
+| 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH jusqu'au récapitulatif (18,70 € TTC pour 3 ans), sans aucun paiement. | Étape 1 |
+| 21/09/2026 | F | « Le domaine est créé » : Franck a validé lui-même la commande OVH. Claude vérifie auprès du registre des .fr : domaine actif, jusqu'au 21/09/2029. | D14 |
 
 ---
 
@@ -348,8 +351,10 @@ remarques détaillées de Franck) sont archivés tels quels dans
   Identité git posée au niveau du dépôt.
 - **Outils présents sur le Mac** (21/09/2026) : Node 24.18, npm 11.16, git 2.50,
   Python 3.13, Google Chrome. Ni `gh` ni Homebrew.
-- **Domaine** (21/09/2026) : `drfranckmoyal.fr` non enregistré (registre AFNIC :
-  « NOT FOUND » ; serveurs de noms publics : domaine inexistant).
+- **Domaine** : `drfranckmoyal.fr`, bureau d'enregistrement OVH, compte OVH de Franck ; créé
+  le 21/09/2026 (17:10 UTC), expire le 21/09/2029 ; serveurs de noms `dns111.ovh.net` et
+  `ns111.ovh.net` (registre AFNIC, vérifié le 21/09/2026). Avant cette date, ni ce domaine ni
+  ses variantes n'étaient enregistrés.
 - **Empreintes SHA-256 du pack** (V1.3, et le seul fichier changé en V1.3.1) :
 
 | Fichier | Empreinte |

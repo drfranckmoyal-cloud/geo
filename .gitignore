@@ -9,7 +9,7 @@ __pycache__/
 .DS_Store
 
 # Outils de fabrication du site (Node) : jamais sur GitHub.
-# Ils vivent dans node_modules.nosync, que iCloud ignore ; node_modules n'est qu'un lien.
+# node_modules porte l'attribut macOS com.apple.fileprovider.ignore#P : iCloud l'ignore.
 node_modules
 node_modules/
 node_modules.nosync/
@@ -25,3 +25,7 @@ patients/
 *.dcm
 *.stl
 *.ply
+
+# Aperçus de contrôle et captures (régénérables)
+scripts/.apercu-*.png
+livrables/**/captures/
