@@ -16,6 +16,7 @@ const PACK = "docs/golden-master/v1.3.1";
 const ECHANGES = [
   "docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md",
   "docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md",
+  "docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md",
 ];
 
 // Remplacements décidés (fichier maître) : texte du pack → texte retenu
@@ -24,8 +25,11 @@ const DECISIONS = [
   { ref: "D11", pack: "Non.", site: usures.treat.title },
   { ref: "D11", pack: "FAUT-IL TOUJOURS TRAITER ?", site: usures.treat.label },
   { ref: "D12", pack: "Attrition / contraintes mécaniques", site: "Attrition et contraintes mécaniques" },
-  // Étape « Simuler » rétablie (D17) : texte provisoire repris de 00 §5, à valider (§6, point 27)
-  { ref: "D17 (provisoire)", pack: "00 §5 : simulation 2D / 3D / dynamique selon les cas ;", site: "simulation 2D / 3D / dynamique selon les cas." },
+  // Méthode : titre et textes définitifs (D31, contrôle du tour 2 par ChatGPT)
+  { ref: "D31", pack: "Écouter, analyser, planifier, décider ensemble", site: "Écouter, analyser, planifier, simuler, décider ensemble" },
+  { ref: "D31", pack: "simulation et projet lorsque pertinent.", site: "construire les formes, les proportions et les options thérapeutiques." },
+  { ref: "D31", pack: "options, avantages, limites, niveau d’intervention.", site: "comparer les options, leurs avantages, leurs limites et le niveau d’intervention." },
+  { ref: "D31", pack: "uniquement si le bénéfice est réel.", site: "uniquement lorsque le bénéfice est réel." },
 ];
 // Passages du pack volontairement non affichés (décisions du fichier maître)
 const HIDDEN = [{ ref: "D19", kind: "source (note)", why: "notes « Soutient : » retirées de l'affichage" }];

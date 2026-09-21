@@ -1,6 +1,6 @@
 // Page d'accueil — textes repris à l'identique de docs/golden-master/v1.3.1/02_HOME.md.
 // Exceptions décidées : le titre Google (D6, verrou V21 — « dentiste esthétique » proscrit) ;
-// l'étape « Simuler » rétablie (D17), avec un texte provisoire repris de 00 §5 (§6, point 27).
+// l'étape « Simuler » rétablie (D17) ; titre et textes définitifs de la méthode (D31, ChatGPT).
 
 export const home = {
   seo: {
@@ -37,17 +37,17 @@ export const home = {
     text: "Ces trois principes guident chaque décision clinique. Le résultat esthétique compte, mais il ne doit pas être obtenu au prix d’un sacrifice inutile de tissus dentaires. La fonction compte, mais elle doit s’intégrer à l’esthétique du sourire. Et la préservation ne signifie pas faire moins : elle signifie choisir le traitement le plus juste pour chaque situation.",
   },
   method: {
-    title: "Écouter, analyser, planifier, décider ensemble",
+    title: "Écouter, analyser, planifier, simuler, décider ensemble",
     intro:
       "Une consultation esthétique ou une consultation d’usure n’aboutit pas automatiquement à un traitement. Elle sert d’abord à comprendre la demande, documenter la situation et poser un diagnostic.",
     steps: [
       { name: "Écouter", text: "attentes, gêne, objectifs." },
       { name: "Documenter", text: "photographies, scans 3D, examens nécessaires." },
       { name: "Analyser", text: "esthétique, fonction, tissus, causes." },
-      { name: "Planifier", text: "simulation et projet lorsque pertinent." },
-      { name: "Simuler", text: "simulation 2D / 3D / dynamique selon les cas." },
-      { name: "Décider ensemble", text: "options, avantages, limites, niveau d’intervention." },
-      { name: "Traiter", text: "uniquement si le bénéfice est réel." },
+      { name: "Planifier", text: "construire les formes, les proportions et les options thérapeutiques." },
+      { name: "Simuler", text: "visualiser le projet en 2D, 3D ou en dynamique selon les cas." },
+      { name: "Décider ensemble", text: "comparer les options, leurs avantages, leurs limites et le niveau d’intervention." },
+      { name: "Traiter", text: "uniquement lorsque le bénéfice est réel." },
     ],
     link: { label: "Découvrir le bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
   },

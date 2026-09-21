@@ -1,18 +1,37 @@
 ---
 // Bouton principal (V9) : fond noir doux, texte blanc cassé, 52 px, coins de 3 px, sans relief.
-// La taille « header » (42 px) sert uniquement dans l'en-tête, qui doit rester fin.
+// La taille « header » (42 px) sert uniquement dans l'en-tête, qui doit rester fin ; sur petit
+// téléphone, elle peut afficher un libellé court, le nom complet restant lu par les lecteurs
+// d'écran (D33).
 import { linkAttrs } from "../../lib/links";
 
 interface Props {
   href: string;
   label: string;
   size?: "default" | "header";
+  shortLabel?: string;
   class?: string;
 }
-const { href, label, size = "default", class: cls } = Astro.props;
+const { href, label, size = "default", shortLabel, class: cls } = Astro.props;
 ---
 
-<a href={href} class:list={["btn", size === "header" && "btn--header", cls]} {...linkAttrs(href)}>{label}</a>
+<a
+  href={href}
+  class:list={["btn", size === "header" && "btn--header", cls]}
+  aria-label={shortLabel ? label : undefined}
+  {...linkAttrs(href)}
+>
+  {
+    shortLabel ? (
+      <>
+        <span class="btn__full">{label}</span>
+        <span class="btn__short" aria-hidden="true">{shortLabel}</span>
+      </>
+    ) : (
+      label
+    )
+  }
+</a>
 
 <style>
   .btn {
@@ -39,5 +58,16 @@ const { href, label, size = "default", class: cls } = Astro.props;
     min-height: var(--btn-h-header);
     padding: 0 1.25rem;
     font-size: var(--fs-meta);
+  }
+  .btn__short {
+    display: none;
+  }
+  @media (max-width: 27.49em) {
+    .btn--header .btn__full {
+      display: none;
+    }
+    .btn--header .btn__short {
+      display: inline;
+    }
   }
 </style>

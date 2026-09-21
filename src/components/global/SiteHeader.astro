@@ -58,7 +58,7 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
       </ul>
     </nav>
 
-    <PrimaryButton class="site-header__cta" size="header" href={site.rdv.href} label={site.rdv.label} />
+    <PrimaryButton class="site-header__cta" size="header" href={site.rdv.href} label={site.rdv.label} shortLabel={site.rdv.shortLabel} />
 
     <details class="mobile-nav">
       <summary><span class="mobile-nav__open">Menu</span><span class="mobile-nav__close">Fermer</span></summary>
@@ -385,7 +385,7 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
     }
     :global(a.site-header__cta.btn--header) {
       min-height: 2.5rem;
-      padding: 0 1rem;
+      padding: 0 0.875rem;
       font-size: var(--fs-meta);
     }
   }

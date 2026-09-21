@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | Étape 2 — dernier micro-tour « P0.5 » avant le gel (D36) : textes de la méthode, italique supprimé, bouton rendez-vous mobile allégé, rapidité de la page Usures à vérifier (temps d'affichage principal ≤ 2,5 s). |
-| **Dernière étape faite** | Tour 2 : Newsreader, en-tête mobile, 7 étapes, sous-menus, sources et auteur, adresse, portrait HD intégré (`livrables/golden-master-r2/`). Textes sans aucun écart, HTML conforme, Lighthouse 95–100 en rapidité et 100 ailleurs. |
-| **Prochaine action** | Claude applique le P0.5 et remet les captures demandées et les mesures Lighthouse ; si les 4 points passent, le golden master est gelé. |
+| **Phase en cours** | Fin de l'étape 2 — micro-tour P0.5 livré (21/09/2026) : les 4 conditions de gel sont remplies (LCP mobile de la page Usures : 1,95 s, médiane de 3 mesures). **Le golden master est prêt à être gelé.** |
+| **Dernière étape faite** | Micro-tour P0.5 (`livrables/golden-master-r3/`) : textes définitifs de la méthode, plus aucune italique, « Rendez-vous » sur l'en-tête mobile, page Usures ramenée de 344 à 200 Ko. Textes sans écart, HTML conforme, Lighthouse 99 / 100 / 100 / 100 sur les 3 pages en mobile. |
+| **Prochaine action** | Franck transmet le dossier du P0.5 à ChatGPT pour un dernier coup d'œil, puis **prononce le gel** (D36). Ensuite, étape 4 : décliner les autres pages sur la base gelée. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous ; plus tard, les vraies photos (piliers, photographie clinique, cas avant / après). |
+| **En attente de Franck** | Le gel du golden master ; le téléphone du cabinet, le lien de prise de rendez-vous ; plus tard, les vraies photos (piliers, photographie clinique, cas avant / après). |
 
 ---
 
@@ -259,7 +259,7 @@ décision.
 | 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
-| 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Les autres interprétations sont listées au §6 du rapport. | Appliqué. | ChatGPT. |
+| 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Depuis D33 : « Rendez-vous » sur l'en-tête mobile. Les autres interprétations sont listées au §6 du rapport du tour 1. | Appliqué. | ChatGPT. |
 
 ### Tranchés
 
@@ -291,8 +291,8 @@ décision.
 |---|---|---|
 | **0** | Cadrage : pack V1.3 reçu, lu en entier et archivé ; projet créé ; fichier maître écrit et relu contre le pack | ✅ fait (21/09/2026) |
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
-| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **en cours** — tour 1 « structurellement réussi » (ChatGPT, 21/09/2026) ; tour 2 livré le même jour (`livrables/golden-master-r2/`), en attente de son contrôle |
-| **3** | Gel des composants : le golden master devient la référence figée | à faire |
+| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **presque fini** — tour 1 « structurellement réussi », tour 2 « validé à 95 % », micro-tour P0.5 livré (21/09/2026) : conditions de gel remplies |
+| **3** | Gel des composants : le golden master devient la référence figée (liste en D36) | à prononcer par Franck |
 | **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | à faire |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
@@ -301,9 +301,9 @@ décision.
 
 | Page | Adresse | Construite | Contrôlée par ChatGPT | Validée par Franck |
 |---|---|---|---|---|
-| Accueil | `/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
-| Dr Franck Moyal | `/franck-moyal/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
-| Usures dentaires | `/usures-dentaires/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
+| Accueil | `/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
+| Dr Franck Moyal | `/franck-moyal/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
+| Usures dentaires | `/usures-dentaires/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
 
 ---
 
@@ -378,6 +378,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | **Tour 2 livré** : les 10 corrections P0 de ChatGPT et le portrait HD, avec le rapport `livrables/golden-master-r2/RAPPORT-tour2.md` et 15 captures ciblées. Contrôles : textes sans écart, HTML conforme, Lighthouse 95–100 / 100 / 100 / 100. En cours de route : « Chirurgien-dentiste » débordait avec Newsreader, d'où une colonne de titre élargie et un retour à la coupure naturelle au trait d'union aux petites largeurs. | Contrôle de ChatGPT |
 | 21/09/2026 | C | Dossier de transmission du tour 2 posé sur le Bureau : `~/Desktop/GEO-golden-master-tour2-pour-ChatGPT/` (message à coller, rapport, 15 captures numérotées comme dans le rapport). | Contrôle de ChatGPT |
 | 21/09/2026 | G | **Contrôle du tour 2**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` : « visuellement validé à 95 % », base définitive du site. Newsreader validée définitivement, portrait HD validé. Dernier micro-tour P0.5 : textes de la méthode, italique supprimé, bouton rendez-vous mobile, rapidité de la page Usures. Si les 4 points passent, le golden master est gelé. | D30 à D36 |
+| 21/09/2026 | C | **Micro-tour P0.5 livré** (`livrables/golden-master-r3/RAPPORT-P0-5.md`, 8 captures) : textes définitifs de la méthode et titre complété, phrase clé et ligne auteur en romain, fichier italique supprimé, « Rendez-vous » sur l'en-tête mobile jusqu'à 440 px. Lighthouse mobile de la page Usures : LCP 1,95 s aux 3 passages (cible 2,5 s), 200 Ko au lieu de 344. Conditions de gel remplies. | Gel à prononcer par Franck |
 
 ---
 

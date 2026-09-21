@@ -9,7 +9,7 @@ export const site = {
   websiteId: "https://drfranckmoyal.fr/#website",
   lang: "fr-FR",
   // Prise de rendez-vous : en attente (D8). Emplacement réservé : ancre vers le bloc final.
-  rdv: { label: "Prendre rendez-vous", href: "#rendez-vous" },
+  rdv: { label: "Prendre rendez-vous", shortLabel: "Rendez-vous", href: "#rendez-vous" }, // libellé court : en-tête mobile (D33)
   // Adresse du cabinet (D22), reprise dans les données structurées
   address: { street: "2 rue Hippolyte Lebas", postalCode: "75009", city: "Paris", country: "FR" },
 } as const;

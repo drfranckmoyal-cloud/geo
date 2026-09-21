@@ -4,6 +4,7 @@
 //   le pied de page.
 // Lancer (site servi en local) : BASE_URL=http://localhost:4322 npm run captures
 // Série courte d'un tour de correction (D28) : SET=cible OUT=livrables/golden-master-r2/captures
+// Micro-tour avant gel (P0.5) : SET=p05 OUT=livrables/golden-master-r3/captures
 import { chromium } from "playwright-core";
 import { mkdir } from "node:fs/promises";
 
@@ -21,8 +22,6 @@ const pages = [
 const widths = ONLY ?? [1440, 1280, 1024, 768, 430, 390];
 const height = (w) => (w >= 1024 ? 900 : 932);
 
-await mkdir(`${OUT}/pages`, { recursive: true });
-await mkdir(`${OUT}/details`, { recursive: true });
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
 
 async function open(ctx, path) {
@@ -41,6 +40,41 @@ async function open(ctx, path) {
   });
   await page.waitForTimeout(250);
   return page;
+}
+
+// Micro-tour P0.5 avant gel (D31 à D35) : méthode, phrase clé, auteur, en-tête mobile
+if (SET === "p05") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(430, 932), small = await ctx(390, 844);
+  const noSticky = (page) => page.addStyleTag({ content: ".site-header { position: static !important; }" });
+  let n = 0;
+  const file = (name) => `${OUT}/${String(++n).padStart(2, "0")}_${name}.png`;
+  const region = async (page, selectors, name, pad = 32) => {
+    const boxes = [];
+    for (const sel of selectors) boxes.push(await page.locator(sel).first().boundingBox());
+    const top = Math.min(...boxes.map((b) => b.y)) - pad, bottom = Math.max(...boxes.map((b) => b.y + b.height)) + pad;
+    const width = page.viewportSize().width;
+    await page.screenshot({ path: file(name), fullPage: true, clip: { x: 0, y: Math.max(0, top), width, height: bottom - Math.max(0, top) } });
+  };
+  for (const [c, label] of [[desk, "ordinateur"], [mob, "mobile"]]) {
+    const p = await open(c, "/"); await noSticky(p);
+    await p.locator("#methode").screenshot({ path: file(`methode-${label}`) });
+    await p.close();
+  }
+  for (const [c, label] of [[desk, "ordinateur"], [mob, "mobile"]]) {
+    const p = await open(c, "/usures-dentaires/"); await noSticky(p);
+    await region(p, [".u-quote", ".u-link"], `phrase-cle-${label}`);
+    await region(p, [".u-author"], `auteur-${label}`);
+    await p.close();
+  }
+  for (const [c, w, label] of [[small, 390, "390"], [mob, 430, "430"]]) {
+    const p = await open(c, "/"); await p.screenshot({ path: file(`en-tete-mobile-${label}`), clip: { x: 0, y: 0, width: w, height: 150 } }); await p.close();
+  }
+  await Promise.all([desk.close(), mob.close(), small.close()]);
+  await browser.close();
+  console.log(`micro-tour P0.5 : ${n} captures dans ${OUT}`);
+  process.exit(0);
 }
 
 // Série courte demandée par ChatGPT après le tour 1 (D28)
@@ -91,6 +125,8 @@ if (SET === "cible") {
 }
 
 // Pages entières
+await mkdir(`${OUT}/pages`, { recursive: true });
+await mkdir(`${OUT}/details`, { recursive: true });
 for (const w of widths) {
   const ctx = await browser.newContext({
     viewport: { width: w, height: height(w) },
