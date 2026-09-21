@@ -187,6 +187,53 @@ if (SET === "lotB") {
   process.exit(0);
 }
 
+// Pages suivantes, lot C : une page d'autorité entière, puis les compositions nouvelles
+// SET=lotC OUT=livrables/pages-suivantes-lot-c/captures
+if (SET === "lotC") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h, scale = 2) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: scale, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(390, 844), deskFull = await ctx(1440, 900, 1);
+  const noSticky = (page) => page.addStyleTag({ content: ".site-header { position: static !important; }" });
+  let n = 0;
+  const file = (name) => `${OUT}/${String(++n).padStart(2, "0")}_${name}.png`;
+  const shot = async (c, path, selector, name) => {
+    const p = await open(c, path);
+    await noSticky(p);
+    await p.locator(selector).first().screenshot({ path: file(name) });
+    await p.close();
+  };
+  // 1. Page Activité hospitalière entière (page d'autorité, sans image)
+  const full = await open(deskFull, "/activite-hospitaliere/");
+  await full.screenshot({ path: file("page-activite-hospitaliere-ordinateur-1440"), fullPage: true });
+  await full.close();
+  // 2-3. Publications : une publication (date, liste, preuve externe, lien interne) ; deux ouvrages en grille
+  await shot(desk, "/publications/", "#dentisterie-esthetique-et-adhesive", "publication-et-preuve-ordinateur");
+  await shot(desk, "/publications/", "#pathologie-et-chirurgie-orale", "ouvrages-en-grille-ordinateur");
+  // 4-5. Conférences : quatre interventions documentées en grille
+  await shot(desk, "/conferences-formations/", "#quelques-interventions-documentees", "interventions-grille-ordinateur");
+  await shot(mob, "/conferences-formations/", "#quelques-interventions-documentees", "interventions-grille-mobile");
+  // 6. Médias : deux preuves externes à la suite
+  await shot(desk, "/medias-interviews/", "#usures-dentaires-blendi", "deux-preuves-externes-ordinateur");
+  // 7-8. Page locale : trois motifs de consultation en grille (listes et liens)
+  await shot(desk, "/chirurgien-dentiste-paris-9/", "#pourquoi-consulter", "motifs-grille-ordinateur");
+  await shot(mob, "/chirurgien-dentiste-paris-9/", "#pourquoi-consulter", "motifs-grille-mobile");
+  // 9. Page locale : trois principes en grille
+  await shot(desk, "/chirurgien-dentiste-paris-9/", "#une-approche-fondee-sur-trois-principes", "trois-principes-ordinateur");
+  // 10. Page locale : bloc final d'informations pratiques, sans bouton (le pack n'en donne pas)
+  await shot(desk, "/chirurgien-dentiste-paris-9/", "#rendez-vous", "bloc-rendez-vous-sans-bouton-ordinateur");
+  // 11. Publications : « À lire aussi » écrit dans le pack, pas d'appel final
+  const e = await open(desk, "/publications/");
+  await noSticky(e);
+  const a = await e.locator("nav.related").boundingBox();
+  const f = await e.locator(".site-footer").boundingBox();
+  await e.screenshot({ path: file("a-lire-aussi-sans-appel-final-ordinateur"), fullPage: true, clip: { x: 0, y: a.y - 24, width: 1440, height: f.y + f.height - a.y + 24 } });
+  await e.close();
+  await Promise.all([desk.close(), mob.close(), deskFull.close()]);
+  await browser.close();
+  console.log(`lot C : ${n} captures dans ${OUT}`);
+  process.exit(0);
+}
+
 // Série courte demandée par ChatGPT après le tour 1 (D28)
 if (SET === "cible") {
   await mkdir(OUT, { recursive: true });

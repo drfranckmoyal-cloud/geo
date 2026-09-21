@@ -23,7 +23,7 @@ import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { usures } from "../content/usures";
 import { site } from "../content/site";
-import { hidden, layouts, shownSourceNotes } from "../content/pages-suivantes";
+import { hidden, layouts, schemaExtras, shownSourceNotes } from "../content/pages-suivantes";
 import { builtPackPages, crumbTrail, resolveLink } from "../lib/pack-files";
 import { planSections } from "../lib/pack-layout";
 import type { PackPage } from "../lib/pack";
@@ -97,6 +97,7 @@ const schema = graph([
           })),
         }
       : {}),
+    ...(schemaExtras[page.num] ?? {}),
   },
   { ...breadcrumbs(trail.map((c) => ({ name: c.label, path: c.href }))), "@id": `${url}#fil` },
   person(abs(og.src), false, page.seo.schema.includes("PostalAddress")),

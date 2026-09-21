@@ -2,7 +2,8 @@
 
 // Typographie française : espace insécable devant « : » et à l'intérieur des guillemets,
 // espace fine insécable devant « ; ? ! », insécable devant le tiret long. Évite qu'un signe
-// se retrouve seul en début de ligne ; « à » ne reste jamais seul en fin de ligne.
+// se retrouve seul en début de ligne ; « à » ne reste jamais seul en fin de ligne ; le numéro
+// d'arrondissement reste avec « Paris ».
 // Caractères invisibles, construits par leur code pour rester lisibles dans le source.
 const NBSP = String.fromCharCode(0x00a0); // espace insécable
 const NNBSP = String.fromCharCode(0x202f); // espace fine insécable
@@ -14,7 +15,8 @@ export function fr(text: string): string {
     .replace(/« /g, "«" + NBSP)
     .replace(/ »/g, NBSP + "»")
     .replace(/ — /g, NBSP + "— ")
-    .replace(/ à /g, " à" + NBSP);
+    .replace(/ à /g, " à" + NBSP)
+    .replace(/Paris (\d)/g, "Paris" + NBSP + "$1"); // « Paris 9 », « Paris 9e » : l'arrondissement ne part pas seul à la ligne
 }
 
 export function escapeHtml(text: string): string {

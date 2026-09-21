@@ -35,7 +35,7 @@ export const arborescence = [
 ] as const;
 
 // Lots construits à ce jour
-export const builtLots: string[] = ["A", "B"];
+export const builtLots: string[] = ["A", "B", "C"];
 export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
 export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
 
@@ -174,5 +174,63 @@ export const layouts: Record<string, PageLayout> = {
     sections: {
       "l-absence-de-vomissements-n-elimine-pas-le": { layout: "narrow", media: { label: "Infographie sobre des mécanismes : salive / acides / médicaments / contraintes mécaniques — à fournir", ratio: "3 / 1", wide: true } },
     },
+  },
+};
+
+// Données structurées propres à une page. Chaque fait figure en toutes lettres sur la page.
+// Page 14 : « Person auteur lorsqu'une publication lui est attribuée » (§8 du fichier) — les
+// articles et ouvrages de la page, reliés à Person#franck-moyal ; pas les travaux encadrés.
+const FRANCK = { "@id": "https://drfranckmoyal.fr/#franck-moyal" };
+const coauthor = (name: string) => ({ "@type": "Person", name });
+export const schemaExtras: Record<string, Record<string, unknown>> = {
+  "14": {
+    hasPart: [
+      {
+        "@type": "ScholarlyArticle",
+        name: "Fermeture de diastème au composite en technique directe : la « Front Wing Technique »",
+        author: FRANCK,
+        datePublished: "2023-10-09",
+        isPartOf: { "@type": "Periodical", name: "Le Fil Dentaire" },
+        url: "https://www.lefildentaire.com/articles/fermeture-de-diasteme-composite-technique-directe-front-wing-technique/",
+      },
+      {
+        "@type": "ScholarlyArticle",
+        name: "Santé et précarité : les permanences d’accès aux soins de santé bucco-dentaire",
+        author: [
+          coauthor("Frédéric Rilliard"),
+          coauthor("Lisa Friedlander"),
+          coauthor("Julien Descorps-Declere"),
+          coauthor("Nadhia Khelifa"),
+          FRANCK,
+          coauthor("Shéhérazade Saadi"),
+          coauthor("Florence Schvallinger"),
+          coauthor("Christelle Naud-Llamas"),
+        ],
+        datePublished: "2012",
+        pagination: "31–33",
+        isPartOf: { "@type": "PublicationIssue", issueNumber: "417", isPartOf: { "@type": "Periodical", name: "La Santé de l’Homme" } },
+        url: "https://www.santepubliquefrance.fr/docs/article/sante-et-precarite-les-permanences-dacces-aux-soins-de-sante-bucco-dentaire",
+      },
+      {
+        "@type": "Book",
+        name: "Cancers de la cavité buccale — du diagnostic aux applications thérapeutiques",
+        author: [coauthor("Hervé Tarragano"), coauthor("Patrick Missika"), coauthor("Lotfi Ben Slama"), coauthor("Benjamin Illouz"), FRANCK],
+        publisher: { "@type": "Organization", name: "Éditions CdP" },
+        datePublished: "2008",
+        isbn: "9782843611292",
+      },
+      {
+        "@type": "Book",
+        name: "La chirurgie orale",
+        author: [coauthor("Hervé Tarragano"), coauthor("Patrick Missika"), coauthor("Benjamin Illouz"), coauthor("Yvon Roche"), FRANCK],
+        url: "https://books.google.com/books/about/La_chirurgie_orale_Editions_CdP.html?id=J9N4BwAAQBAJ",
+      },
+      {
+        "@type": "Article",
+        name: "La première consultation en implantologie",
+        author: FRANCK,
+        url: "https://www.lefildentaire.com/articles/clinique/implantologie/la-premiere-consultation-en-implantologie/",
+      },
+    ],
   },
 };

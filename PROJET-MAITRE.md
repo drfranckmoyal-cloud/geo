@@ -21,9 +21,9 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lots A et B livrés** (13 pages : esthétique ; usures, érosion, TCA) ; lots C et D ensuite. |
-| **Dernière étape faite** | Lot B construit et contrôlé (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
-| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit les lots C et D. |
+| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lots A, B et C livrés** (18 pages : esthétique ; usures, érosion, TCA ; autorité et page locale) ; lot D (contact, mentions légales) ensuite. |
+| **Dernière étape faite** | Lot C construit et contrôlé (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit le lot D. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
 | **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous, l'adresse e-mail professionnelle et l'hébergeur (mentions légales) ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
@@ -316,7 +316,7 @@ décision.
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
-| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lots A et B livrés |
+| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lots A, B et C livrés |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -345,11 +345,11 @@ décision.
 | B | 11 | Dents courtes ou usées | `/dents-courtes-usees/` | ✅ 22/09/2026 | | |
 | B | 12 | TCA et santé bucco-dentaire | `/tca-dents/` | ✅ 22/09/2026 | | |
 | B | 13 | Anorexie restrictive et érosion sans vomissements | `/anorexie-erosion-dentaire-sans-vomissements/` | ✅ 22/09/2026 | | |
-| C | 14 | Publications | `/publications/` | | | |
-| C | 15 | Conférences et formations | `/conferences-formations/` | | | |
-| C | 16 | Activité hospitalière | `/activite-hospitaliere/` | | | |
-| C | 17 | Médias et interviews | `/medias-interviews/` | | | |
-| C | 18 | Chirurgien-dentiste Paris 9 | `/chirurgien-dentiste-paris-9/` | | | |
+| C | 14 | Publications | `/publications/` | ✅ 22/09/2026 | | |
+| C | 15 | Conférences et formations | `/conferences-formations/` | ✅ 22/09/2026 | | |
+| C | 16 | Activité hospitalière | `/activite-hospitaliere/` | ✅ 22/09/2026 | | |
+| C | 17 | Médias et interviews | `/medias-interviews/` | ✅ 22/09/2026 | | |
+| C | 18 | Chirurgien-dentiste Paris 9 | `/chirurgien-dentiste-paris-9/` | ✅ 22/09/2026 | | |
 | D | 19 | Contact et rendez-vous | `/contact/` | | | |
 | D | 20 | Mentions légales | `/mentions-legales/` | | | |
 
@@ -442,6 +442,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | **Lot A livré** (`livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, 14 captures) : les 6 pages esthétiques, fabriquées directement à partir des fichiers du pack, avec les composants gelés. Contrôles : textes sans écart dans les deux sens (essai de sabotage détecté), HTML et 10 contrôles du manifeste réussis, Lighthouse page 01 : mobile 99 / 100 / 100 / 100 (LCP 1,95 s), ordinateur 100 partout. Les 3 pages du golden master sont restées identiques. Écarts du pack consignés (§6, points 28 à 34). | Contrôle de ChatGPT ; lot B |
 | 21/09/2026 | C | Dossier de transmission du lot A posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-A-pour-ChatGPT/` (message à coller, rapport, 14 captures). | Contrôle de ChatGPT |
 | 22/09/2026 | C | **Lot B livré** (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`, 9 captures) : les 7 pages usures, érosion, TCA. Textes sans écart, HTML et manifeste réussis. Première mesure de la page TCA : 97, LCP 2,55 s, à cause d'un « ń » qui faisait charger un second fichier de police ; corrigé en ne déclarant que le jeu latin d'Inter (D39) : 99, LCP 1,95 s. | Lot C |
+| 22/09/2026 | C | Dossier de transmission du lot B posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-B-pour-ChatGPT/`. | Contrôle de ChatGPT |
+| 22/09/2026 | C | **Lot C livré** (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`, 11 captures) : Publications, Conférences et formations, Activité hospitalière, Médias et interviews, page locale Paris 9. Textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse 99 / 100 (LCP 1,95 s). Les 5 publications de la page Publications sont décrites dans les données structurées, auteur relié à Franck. Correction typographique : « Paris 9 » ne se coupe plus en fin de ligne. | Lot D |
 
 ---
 

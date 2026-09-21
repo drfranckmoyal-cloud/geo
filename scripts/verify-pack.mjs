@@ -90,7 +90,9 @@ function segments(md, num) {
   }
   const author = spec.get(7) ?? "";
   add(field(author, "Auteur"), "auteur");
-  add(field(author, "Date de mise à jour"), "date de mise à jour");
+  // La date s'affiche dans le bloc auteur, seulement si le contrat de la page le prévoit ;
+  // sinon elle figure dans les données structurées (dateModified, contrôle HTML).
+  if ((spec.get(4) ?? "").includes("AuthorBlock")) add(field(author, "Date de mise à jour"), "date de mise à jour");
   add(field(spec.get(8), "Title"), "title", "title");
   add(field(spec.get(8), "Meta description"), "meta description", "desc");
   const notesShown = shownSourceNotes[num] ?? [];
