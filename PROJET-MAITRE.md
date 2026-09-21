@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Golden master gelé le 21/09/2026** (D37). Étape suivante : décliner les autres pages à partir des composants gelés (étape 4), en suivant la règle après gel (V24). |
-| **Dernière étape faite** | Gel du golden master (étape 3) : décision archivée, verrou V24, version étiquetée `golden-master-gele` dans GitHub pour pouvoir toujours y revenir. |
-| **Prochaine action** | ChatGPT fournit l'arborescence définitive (§6, point 9) et les textes des pages suivantes, au format des fichiers 02 à 04 (besoins détaillés dans `docs/besoins-pages-suivantes.md`) ; Claude les intègre avec les composants gelés. |
+| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). Lot A (6 pages esthétiques) en construction. |
+| **Dernière étape faite** | Pack « pages suivantes » V1 reçu, lu en entier (22 fichiers) et archivé tel quel dans `docs/pages-suivantes/v1/` ; ses 34 références vérifiées sur PubMed (toutes existent et concordent). |
+| **Prochaine action** | Claude livre le lot A (build, contrôles, Lighthouse, captures, rapport) avec la liste des écarts relevés dans tout le pack, à transmettre à ChatGPT. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Transmettre à ChatGPT la demande de textes des pages suivantes ; le téléphone du cabinet, le lien de prise de rendez-vous ; les vraies photos (piliers, photographie clinique, cas avant / après). |
+| **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous, l'adresse e-mail professionnelle et l'hébergeur (mentions légales) ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
 ---
 
@@ -108,6 +108,17 @@ l'en-tête, intertitres et textes de la section 2 de la page Usures, lien Bruxis
 `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` (contrôle du tour 2 — D30 à D36) et
 `docs/echanges/2026-09-21-decision-gel-golden-master.md` (**gel du golden master** — D37, V24).
 
+**Pack « pages suivantes » V1** (réponse de ChatGPT à `docs/besoins-pages-suivantes.md`) —
+`PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1.zip`, reçu le 21/09/2026 (fichiers datés du 21/09/2026,
+21 h 09), 22 fichiers archivés **sans aucune modification** dans `docs/pages-suivantes/v1/`
+(copies vérifiées identiques au zip et au dossier du Bureau) : `00_ARBORESCENCE_ET_ORDRE.md`
+(20 pages, 4 lots, décisions), un fichier par page (`01` à `20`, au format ROUTING / HERO /
+RÉPONSE DIRECTE / CONTRAT DE COMPOSANTS / CONTENU MOT POUR MOT / LIENS / AUTEUR /
+RÉFÉRENCEMENT / IMAGES / SOURCES / NOTES NON AFFICHÉES) et `21_MANIFESTE_INTEGRATION.md`
+(règles d'intégration, contrôles automatiques à ajouter, livraison par lot). Ses textes sont
+lus directement dans ces fichiers au moment de fabriquer le site (`src/lib/pack.ts`) : rien
+n'est recopié à la main.
+
 **Historique :** V1.3 — `GOLDEN_MASTER_FRANCK_MOYAL_V1_3.zip`, reçu le 21/09/2026 (fichiers
 datés du 21/09/2026, 16 h 22), 10 fichiers, archivés **sans aucune modification** dans
 `docs/golden-master/v1.3/` (copies vérifiées identiques aux originaux).
@@ -144,7 +155,7 @@ Entre parenthèses : le fichier et la section d'origine.
 
 | # | Verrou |
 |---|---|
-| V1 | **Trois pages, pas une de plus, pour la phase 1** : `/`, `/franck-moyal/`, `/usures-dentaires/`. Ni les autres pages, ni le CMS complet (système de gestion de contenu), ni fonction marketing non demandée, ni nouveau gabarit, ni variante esthétique. Rien d'autre avant la validation humaine. (00_README ; 00 §12, §14 ; 06) |
+| V1 | **Trois pages, pas une de plus, pour la phase 1** : `/`, `/franck-moyal/`, `/usures-dentaires/`. Ni les autres pages, ni le CMS complet (système de gestion de contenu), ni fonction marketing non demandée, ni nouveau gabarit, ni variante esthétique. Rien d'autre avant la validation humaine. (00_README ; 00 §12, §14 ; 06) — *Phase 1 close avec le gel (D37) ; les 20 pages suivantes sont commandées par le pack « pages suivantes » (D38).* |
 | V2 | **Les textes ne se touchent pas.** Ni modifiés, ni raccourcis sans validation, ni complétés. Pas de slogan, pas de chiffre marketing, pas de badge « expert », « premium », « leader ». Si une information manque : un emplacement réservé clairement signalé, jamais une invention. (06 ; 08 B) |
 | V3 | **La stratégie, l'arborescence, le positionnement, les titres et l'ordre des sections** restent tels quels. (06) |
 | V4 | **Les adresses des pages** (00 §11). Accueil `/` · entité `/franck-moyal/` · pilier esthétique `/dentisterie-esthetique-paris/`, avec `/bilan-esthetique-personnalise/`, `/composite-bonding-paris/`, `/facettes-dentaires-paris/`, `/eclaircissement-dentaire-paris/`, `/taches-dentaires-dyschromies-icon/` · pilier usures `/usures-dentaires/`, avec `/diagnostic-usures-dentaires/`, `/rehabilitation-dents-usees/`, `/bruxisme-usure-dentaire/`, `/erosion-dentaire/`, `/dents-courtes-usees/`, `/tca-dents/` · autorité `/publications/`, `/conferences-formations/`, `/activite-hospitaliere/`, `/medias-interviews/`. |
@@ -240,6 +251,7 @@ rendu sera jugé :
 | D35 | **Condition de gel technique** : temps d'affichage principal (LCP) de la page Usures sur mobile ≤ 2,5 s, médiane de 3 mesures Lighthouse. Au-delà, optimisation technique ciblée sans toucher au design (polices critiques seules préchargées, sous-ensembles de caractères, élément principal inspecté). | 21/09/2026 |
 | D36 | **Gel après le P0.5** : palette, Newsreader + Inter, grille, espacements, en-têtes ordinateur et mobile, boutons, les trois ouvertures, `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages`, pied de page, sous-menus, animations. Ensuite, ces composants ne bougent plus au fil des nouvelles pages, sauf vrai problème. Les visuels, le téléphone, le lien de rendez-vous et les adresses `sameAs` ne bloquent pas le gel. | 21/09/2026 |
 | D37 | **Golden master gelé** (décision transmise par Franck, archivée dans `docs/echanges/2026-09-21-decision-gel-golden-master.md`). Définitivement validés : palette ; Newsreader + Inter ; grille et espacements ; en-têtes ordinateur et mobile ; boutons ; ouvertures Accueil, Profil et Clinique ; `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages` ; pied de page ; sous-menus ; animations ; logique d'adaptation mobile ; méthode en 7 étapes et son titre ; décisions du P0.5. Version étiquetée `golden-master-gele` dans GitHub. | 21/09/2026 |
+| D38 | **Pack « pages suivantes » V1** (ChatGPT, transmis par Franck), archivé dans `docs/pages-suivantes/v1/` : il reste **exactement 20 pages**, livrées en 4 lots — A : dentisterie esthétique (6 pages), B : usures, érosion, TCA (7), C : autorité, entité, page locale (5), D : contact et mentions légales. Contact est une page (`/contact/`, indexable) ; les mentions légales aussi (`/mentions-legales/`, `noindex,follow`) ; l'article Anorexie sans vomissements est enfant de la page Érosion ; aucun autre contenu (boulimie, reflux…) pour la V1. Textes visibles mot pour mot, sauf `[À FOURNIR]` et notes « NON AFFICHÉES » ; après chaque lot : build, contrôle des textes, contrôle HTML, Lighthouse sur une page, captures des seules compositions nouvelles. | 21/09/2026 |
 
 ---
 
@@ -255,7 +267,6 @@ décision.
 |---|---|---|---|
 | 3 | **Destination du bouton « Prendre rendez-vous »** inconnue (Doctolib ? téléphone ? formulaire ?). **Adresse et téléphone du cabinet** absents (pied de page, référencement local, données structurées). | Emplacements signalés. **Mis en attente par Franck le 21/09/2026 (D8).** Adresse fournie depuis (D22) ; téléphone et lien de rendez-vous toujours attendus. | Franck, plus tard. Bloque la mise en ligne, pas le prototype. |
 | 7 | **Liens vers des pages qui n'existent pas encore** : les 3 pages renvoient vers 11 pages futures (dentisterie esthétique, bilan esthétique personnalisé, TCA, érosion, diagnostic, réhabilitation, bruxisme, dents courtes, publications, conférences et formations, activité hospitalière), plus le contact et les mentions légales. | Liens vers les adresses définitives (V4), listés « non finalisés » dans le rapport. | Personne pour la phase 1. |
-| 9 | **Arborescence** : 00 §14 parle des « 20 autres pages », l'arborescence de 00 §11 en liste 16 ; le contact et les mentions légales, demandés au pied de page, n'y ont pas d'adresse. | Rien pour la phase 1. | ChatGPT, avant la déclinaison (étape 4). |
 | 10 | **Photos** : le portrait est fourni, en haute définition depuis D29. Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
 | 11 | **Preuves d'autorité** (00 §7 : AP-HP / Pitié-Salpêtrière, CMME / Sainte-Anne / GHU Paris, AO News, Blendi, Le Fil Dentaire, Entretiens de Garancière, Alpha Oméga, ARTEMIS, GC / ADF, LinkedIn, Smileclub Formation, DentCA) : aucune adresse web fournie. Le site doit « rassembler et redistribuer cette autorité vers les pages cliniques correspondantes » (00 §7). Pour les profils de Franck lui-même (LinkedIn, par exemple), une propriété technique (`sameAs`) signalera en plus aux moteurs qu'il s'agit de la même personne — suggestion de Claude, absente du pack. | Liens signalés « à fournir ». Candidats retenus par ChatGPT pour `sameAs` : LinkedIn, AP-HP, Le Fil Dentaire (page auteur), Blendi (page formateur) — pas pour chaque article ou événement. | ChatGPT (adresses exactes), Franck (vérification). |
 | 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
@@ -266,6 +277,7 @@ décision.
 
 ### Tranchés
 
+- **Arborescence** (ancien point 9) → 20 pages, dont une page locale, l'article Anorexie sans vomissements, Contact et Mentions légales (D38).
 - **Méthode 6 ou 7 étapes** (ancien point 5) → 7 étapes, « Simuler » rétabli (D17).
 - **Répartition des couleurs** (ancien point 6) → celle de 07, validée (D25).
 - **« Découvrir ma démarche »** (ancien point 8) → section Méthode de l'accueil, validé (D25).
@@ -296,7 +308,7 @@ décision.
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
-| **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | **prochaine étape** — attend l'arborescence définitive et les textes |
+| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lot A en construction |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -385,6 +397,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Dossier de transmission du P0.5 posé sur le Bureau : `~/Desktop/GEO-golden-master-P0-5-pour-ChatGPT/` (message à coller, rapport, 8 captures). | Dernier coup d'œil de ChatGPT, gel |
 | 21/09/2026 | F | **Décision de gel** transmise (`DECISION_GEL_GOLDEN_MASTER_DR_FRANCK_MOYAL.md`) : « GOLDEN MASTER GELÉ », P0.5 validé, règle après gel, étape suivante : industrialiser les pages restantes. Franck n'a pas souhaité garder l'aparté sur la vitesse et le SEO/GEO (simple curiosité). | D37, V24 |
 | 21/09/2026 | C | Décision archivée mot pour mot (fichier déjà retiré du Bureau : recopiée depuis la conversation) ; verrou V24 ; `CLAUDE.md` du dépôt mis à jour ; version étiquetée `golden-master-gele` dans GitHub ; besoins pour les pages suivantes rédigés pour ChatGPT (`docs/besoins-pages-suivantes.md`). | Étape 4 |
+| 21/09/2026 | F | Dépose sur le Bureau le pack `PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1` (dossier et zip) : la réponse de ChatGPT à la demande de textes des pages suivantes. | D38 |
+| 21/09/2026 | C | Lecture intégrale des 22 fichiers ; pack archivé à l'identique. Les 34 références scientifiques sont vérifiées sur PubMed : toutes existent, titres, revues, années et DOI concordent. En revanche, la numérotation des renvois `[n]` ne correspond pas à la liste des sources sur 9 pages, quelques consignes de rédaction se sont glissées dans le texte « mot pour mot », et 9 titres principaux dépassent 5 lignes sur téléphone (V16). Relevé complet dans le rapport du lot A. | Lot A |
 
 ---
 
@@ -409,7 +423,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
   le 21/09/2026 (17:10 UTC), expire le 21/09/2029 ; serveurs de noms `dns111.ovh.net` et
   `ns111.ovh.net` (registre AFNIC, vérifié le 21/09/2026). Avant cette date, ni ce domaine ni
   ses variantes n'étaient enregistrés.
-- **Empreintes SHA-256 du pack** (V1.3, et le seul fichier changé en V1.3.1) :
+- **Empreintes SHA-256 des packs** (V1.3, le seul fichier changé en V1.3.1, et le pack « pages suivantes » V1) :
 
 | Fichier | Empreinte |
 |---|---|
@@ -425,6 +439,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | `07_ART_DIRECTION.md` | `e7bbde1b3f03e40bc1f1e8a03ec1e54d1e0cee86a6120f479be971683c79246a` |
 | `08_VISUAL_QA_CLAUDE.md` | `8c52ec0bad6bb63a71b8724de5716d4cc9aca9dcf0b05dd80d5d716fcbf9a606` |
 | `04_USURES_DENTAIRES.md` **corrigé (V1.3.1)** | `7a2dc986046ca233163ac04c63f6b907fdfe3c16064e81db879e0893d7b27acc` |
+| `PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1.zip` (22 fichiers, identiques à `docs/pages-suivantes/v1/`) | `07616eecc073d4dfa774642637ff716161a4dce42752b460e3ed82989b980757` |
 
 ---
 
