@@ -17,3 +17,8 @@
 6. Aucune photo ni donnée de patient dans ce dossier (synchronisé iCloud) ni dans le dépôt.
 7. Jamais l'expression « dentiste esthétique » (verrou V21) : écrire « dentisterie
    esthétique » ou « exercice exclusif en dentisterie esthétique ».
+8. **Golden master gelé le 21/09/2026 (verrou V24)** : ne plus modifier le design system
+   (composants, réglages de `src/styles/tokens.css`, typographie, espacements). Toute
+   nouvelle page réutilise les composants gelés ; un nouveau composant seulement si aucun
+   existant ne convient ; aucune réinterprétation de la direction artistique sans instruction
+   explicite. Version de référence : étiquette git `golden-master-gele`.

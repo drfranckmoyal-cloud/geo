@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | Fin de l'étape 2 — micro-tour P0.5 livré (21/09/2026) : les 4 conditions de gel sont remplies (LCP mobile de la page Usures : 1,95 s, médiane de 3 mesures). **Le golden master est prêt à être gelé.** |
-| **Dernière étape faite** | Micro-tour P0.5 (`livrables/golden-master-r3/`) : textes définitifs de la méthode, plus aucune italique, « Rendez-vous » sur l'en-tête mobile, page Usures ramenée de 344 à 200 Ko. Textes sans écart, HTML conforme, Lighthouse 99 / 100 / 100 / 100 sur les 3 pages en mobile. |
-| **Prochaine action** | Franck transmet le dossier du P0.5 à ChatGPT pour un dernier coup d'œil, puis **prononce le gel** (D36). Ensuite, étape 4 : décliner les autres pages sur la base gelée. |
+| **Phase en cours** | **Golden master gelé le 21/09/2026** (D37). Étape suivante : décliner les autres pages à partir des composants gelés (étape 4), en suivant la règle après gel (V24). |
+| **Dernière étape faite** | Gel du golden master (étape 3) : décision archivée, verrou V24, version étiquetée `golden-master-gele` dans GitHub pour pouvoir toujours y revenir. |
+| **Prochaine action** | ChatGPT fournit l'arborescence définitive (§6, point 9) et les textes des pages suivantes, au format des fichiers 02 à 04 (besoins détaillés dans `docs/besoins-pages-suivantes.md`) ; Claude les intègre avec les composants gelés. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Le gel du golden master ; le téléphone du cabinet, le lien de prise de rendez-vous ; plus tard, les vraies photos (piliers, photographie clinique, cas avant / après). |
+| **En attente de Franck** | Transmettre à ChatGPT la demande de textes des pages suivantes ; le téléphone du cabinet, le lien de prise de rendez-vous ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
 ---
 
@@ -105,7 +105,8 @@ paragraphe de la section 6. Les 9 autres fichiers sont identiques à la V1.3.
 version du pack : `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` (menu de
 l'en-tête, intertitres et textes de la section 2 de la page Usures, lien Bruxisme — D10 à D13) et
 `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` (contrôle du tour 1 — D16 à D28) et
-`docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` (contrôle du tour 2, décision de gel — D30 à D36).
+`docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` (contrôle du tour 2 — D30 à D36) et
+`docs/echanges/2026-09-21-decision-gel-golden-master.md` (**gel du golden master** — D37, V24).
 
 **Historique :** V1.3 — `GOLDEN_MASTER_FRANCK_MOYAL_V1_3.zip`, reçu le 21/09/2026 (fichiers
 datés du 21/09/2026, 16 h 22), 10 fichiers, archivés **sans aucune modification** dans
@@ -194,6 +195,7 @@ rendu sera jugé :
 | V21 | **Jamais « dentiste esthétique »**, nulle part sur le site ni dans ses informations pour les moteurs. On écrit « dentisterie esthétique », ou « exercice exclusif en dentisterie esthétique ». Règle de Franck, du 21/09/2026 (D6). « Quel dentiste esthétique à Paris ? » reste une question que les patients posent (00 §1), mais le site ne reprend jamais l'expression. |
 | V22 | **Sources scientifiques de la page Usures** : une section « Sources scientifiques » visible en bas de page, avec des liens externes discrets ; les 5 à 7 références principales, repliables ou en fin de page ; pas de paragraphe interrompu par une bibliographie lourde ; les renvois `[1]`, `[2]`… conservés s'ils restent discrets ; liens sortants en `rel="noopener noreferrer"` ; ne jamais présenter la conclusion d'une étude comme plus forte qu'elle ne l'est. (04, V1.3.1) |
 | V23 | **Menu de l'en-tête, figé** : à gauche, le nom et le logo « Dr Franck Moyal », qui mènent à l'accueil (pas de rubrique « Accueil ») ; puis Dentisterie esthétique · Usures dentaires · Érosion & TCA · Dr Franck Moyal · Publications & enseignement ; à droite, le bouton « Prendre rendez-vous ». « Publications & enseignement » pourra ouvrir plus tard sur Publications, Conférences & formations, Activité hospitalière, Médias. Affiché dès le golden master, même si les pages n'existent pas encore. (ChatGPT, 21/09/2026 — D10) |
+| V24 | **Golden master gelé (21/09/2026), règle après gel** : le design system ne se modifie plus au fil des pages. Toute nouvelle page (1) réutilise les composants gelés, (2) respecte les réglages de design gelés (`src/styles/tokens.css`), (3) préserve la hiérarchie typographique et les espacements, (4) n'introduit un nouveau composant que si aucun composant existant ne traite correctement le besoin, (5) n'« améliore » ni ne réinterprète la direction artistique sans instruction explicite. Les visuels, le téléphone, le lien de rendez-vous et les adresses `sameAs` s'insèrent dans les emplacements prévus, sans modifier le système. (D37) |
 
 ---
 
@@ -237,6 +239,7 @@ rendu sera jugé :
 | D34 | **Portrait HD, accueil, page Franck, menus, sources, bloc auteur, parcours clinique, pages liées : validés.** Ne plus toucher au contraste du portrait pour le moment. | 21/09/2026 |
 | D35 | **Condition de gel technique** : temps d'affichage principal (LCP) de la page Usures sur mobile ≤ 2,5 s, médiane de 3 mesures Lighthouse. Au-delà, optimisation technique ciblée sans toucher au design (polices critiques seules préchargées, sous-ensembles de caractères, élément principal inspecté). | 21/09/2026 |
 | D36 | **Gel après le P0.5** : palette, Newsreader + Inter, grille, espacements, en-têtes ordinateur et mobile, boutons, les trois ouvertures, `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages`, pied de page, sous-menus, animations. Ensuite, ces composants ne bougent plus au fil des nouvelles pages, sauf vrai problème. Les visuels, le téléphone, le lien de rendez-vous et les adresses `sameAs` ne bloquent pas le gel. | 21/09/2026 |
+| D37 | **Golden master gelé** (décision transmise par Franck, archivée dans `docs/echanges/2026-09-21-decision-gel-golden-master.md`). Définitivement validés : palette ; Newsreader + Inter ; grille et espacements ; en-têtes ordinateur et mobile ; boutons ; ouvertures Accueil, Profil et Clinique ; `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages` ; pied de page ; sous-menus ; animations ; logique d'adaptation mobile ; méthode en 7 étapes et son titre ; décisions du P0.5. Version étiquetée `golden-master-gele` dans GitHub. | 21/09/2026 |
 
 ---
 
@@ -291,9 +294,9 @@ décision.
 |---|---|---|
 | **0** | Cadrage : pack V1.3 reçu, lu en entier et archivé ; projet créé ; fichier maître écrit et relu contre le pack | ✅ fait (21/09/2026) |
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
-| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **presque fini** — tour 1 « structurellement réussi », tour 2 « validé à 95 % », micro-tour P0.5 livré (21/09/2026) : conditions de gel remplies |
-| **3** | Gel des composants : le golden master devient la référence figée (liste en D36) | à prononcer par Franck |
-| **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | à faire |
+| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
+| **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
+| **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | **prochaine étape** — attend l'arborescence définitive et les textes |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -301,9 +304,9 @@ décision.
 
 | Page | Adresse | Construite | Contrôlée par ChatGPT | Validée par Franck |
 |---|---|---|---|---|
-| Accueil | `/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
-| Dr Franck Moyal | `/franck-moyal/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
-| Usures dentaires | `/usures-dentaires/` | ✅ P0.5 | ✅ tour 2 (validé à 95 %) | — |
+| Accueil | `/` | ✅ P0.5 | ✅ P0.5 | ✅ gel du 21/09/2026 |
+| Dr Franck Moyal | `/franck-moyal/` | ✅ P0.5 | ✅ P0.5 | ✅ gel du 21/09/2026 |
+| Usures dentaires | `/usures-dentaires/` | ✅ P0.5 | ✅ P0.5 | ✅ gel du 21/09/2026 |
 
 ---
 
@@ -380,6 +383,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | G | **Contrôle du tour 2**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` : « visuellement validé à 95 % », base définitive du site. Newsreader validée définitivement, portrait HD validé. Dernier micro-tour P0.5 : textes de la méthode, italique supprimé, bouton rendez-vous mobile, rapidité de la page Usures. Si les 4 points passent, le golden master est gelé. | D30 à D36 |
 | 21/09/2026 | C | **Micro-tour P0.5 livré** (`livrables/golden-master-r3/RAPPORT-P0-5.md`, 8 captures) : textes définitifs de la méthode et titre complété, phrase clé et ligne auteur en romain, fichier italique supprimé, « Rendez-vous » sur l'en-tête mobile jusqu'à 440 px. Lighthouse mobile de la page Usures : LCP 1,95 s aux 3 passages (cible 2,5 s), 200 Ko au lieu de 344. Conditions de gel remplies. | Gel à prononcer par Franck |
 | 21/09/2026 | C | Dossier de transmission du P0.5 posé sur le Bureau : `~/Desktop/GEO-golden-master-P0-5-pour-ChatGPT/` (message à coller, rapport, 8 captures). | Dernier coup d'œil de ChatGPT, gel |
+| 21/09/2026 | F | **Décision de gel** transmise (`DECISION_GEL_GOLDEN_MASTER_DR_FRANCK_MOYAL.md`) : « GOLDEN MASTER GELÉ », P0.5 validé, règle après gel, étape suivante : industrialiser les pages restantes. Franck n'a pas souhaité garder l'aparté sur la vitesse et le SEO/GEO (simple curiosité). | D37, V24 |
+| 21/09/2026 | C | Décision archivée mot pour mot (fichier déjà retiré du Bureau : recopiée depuis la conversation) ; verrou V24 ; `CLAUDE.md` du dépôt mis à jour ; version étiquetée `golden-master-gele` dans GitHub ; besoins pour les pages suivantes rédigés pour ChatGPT (`docs/besoins-pages-suivantes.md`). | Étape 4 |
 
 ---
 
