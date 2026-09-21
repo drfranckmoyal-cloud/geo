@@ -144,6 +144,49 @@ if (SET === "lotA") {
   process.exit(0);
 }
 
+// Pages suivantes, lot B : compositions nouvelles seulement
+// SET=lotB OUT=livrables/pages-suivantes-lot-b/captures
+if (SET === "lotB") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(390, 844);
+  const noSticky = (page) => page.addStyleTag({ content: ".site-header { position: static !important; }" });
+  let n = 0;
+  const file = (name) => `${OUT}/${String(++n).padStart(2, "0")}_${name}.png`;
+  const shot = async (c, path, selector, name) => {
+    const p = await open(c, path);
+    await noSticky(p);
+    await p.locator(selector).first().screenshot({ path: file(name) });
+    await p.close();
+  };
+  // 1. Sommaire cliquable des sections (page Diagnostic), sous la réponse directe
+  const d = await open(desk, "/diagnostic-usures-dentaires/");
+  await noSticky(d);
+  const a = await d.locator(".answer").boundingBox();
+  const b = await d.locator(".pathway").boundingBox();
+  await d.screenshot({ path: file("sommaire-diagnostic-ordinateur"), fullPage: true, clip: { x: 0, y: a.y - 24, width: 1440, height: b.y + b.height - a.y + 48 } });
+  await d.close();
+  // 2-3. Intertitres en grille avec listes (page Érosion)
+  await shot(desk, "/erosion-dentaire/", "#d-ou-viennent-les-acides", "grille-listes-erosion-ordinateur");
+  await shot(mob, "/erosion-dentaire/", "#d-ou-viennent-les-acides", "grille-listes-erosion-mobile");
+  // 4-5. Bloc « domaine spécifique » : l'activité à la CMME (page TCA)
+  await shot(desk, "/tca-dents/", "#mon-activite-a-la-cmme", "cmme-ordinateur");
+  await shot(mob, "/tca-dents/", "#mon-activite-a-la-cmme", "cmme-mobile");
+  // 6-7. Appel final réduit au titre et au bouton (pages 07 à 13)
+  await shot(desk, "/tca-dents/", "#rendez-vous", "appel-final-sans-phrase-ordinateur");
+  await shot(mob, "/tca-dents/", "#rendez-vous", "appel-final-sans-phrase-mobile");
+  // 8. Emplacement d'infographie en pleine largeur (page Anorexie)
+  await shot(desk, "/anorexie-erosion-dentaire-sans-vomissements/", "#l-absence-de-vomissements-n-elimine-pas-le", "infographie-anorexie-ordinateur");
+  // 9. H1 le plus long du pack, sur mobile (V16)
+  const h = await open(mob, "/tca-dents/");
+  await h.screenshot({ path: file("ouverture-h1-tca-mobile-390") });
+  await h.close();
+  await Promise.all([desk.close(), mob.close()]);
+  await browser.close();
+  console.log(`lot B : ${n} captures dans ${OUT}`);
+  process.exit(0);
+}
+
 // Série courte demandée par ChatGPT après le tour 1 (D28)
 if (SET === "cible") {
   await mkdir(OUT, { recursive: true });

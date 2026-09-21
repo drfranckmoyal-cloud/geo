@@ -35,7 +35,7 @@ export const arborescence = [
 ] as const;
 
 // Lots construits à ce jour
-export const builtLots: string[] = ["A"];
+export const builtLots: string[] = ["A", "B"];
 export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
 export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
 
@@ -134,5 +134,45 @@ export const layouts: Record<string, PageLayout> = {
       "qu-est-ce-que-l-erosion-infiltration-de": { media: { label: "2 cas de dyschromie / white spot : avant / après, avec consentement — à fournir", ratio: "4 / 3" } },
     },
   },
-  "07": { pathway: true },
+  "07": {
+    pathway: true,
+    sections: {
+      "quels-signes-font-penser-a-une-usure-dentaire": { media: { label: "Photo clinique d’usure avec légende diagnostique — à fournir", ratio: "4 / 3" } },
+      "pourquoi-photographier-et-scanner": { media: { label: "Comparaison de scans ou capture de monitoring — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "08": {
+    sections: {
+      "rehabiliter-une-dentition-usee-ne-signifie-plus-automatiquement": { media: { label: "Cas complet de réhabilitation : initial → planification → résultat — à fournir", ratio: "4 / 5" } },
+      "qu-est-ce-que-la-dimension-verticale-d": { media: { label: "Schéma ou capture de planification DVO issu d’un vrai cas — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "09": {
+    sections: {
+      // Le schéma attendu est celui de la page Usures (« si déjà produit pour le cluster »)
+      "pourquoi-les-dents-peuvent-elles-s-user-chez": { media: { label: "Schéma — mécanismes d’usure (celui de la page Usures) — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "10": {
+    sections: {
+      "quels-sont-les-premiers-signes": { media: { label: "Macro de lésions érosives réelles — à fournir", ratio: "4 / 5" } },
+      "comment-depiste-t-on-l-erosion": { media: { label: "Série de scans de suivi — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "11": {
+    sections: {
+      "quel-resultat-peut-on-rechercher": { media: { label: "Avant / après centré sur les longueurs incisives — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "12": {
+    sections: {
+      "pourquoi-le-depistage-dentaire-est-il-important": { media: { label: "Schéma clinique, photo institutionnelle autorisée ou visuel de prévention neutre — à fournir", ratio: "4 / 3" } },
+      "mon-activite-a-la-cmme": { layout: "panel" }, // contrat : composition « domaine spécifique » pour la CMME
+    },
+  },
+  "13": {
+    sections: {
+      "l-absence-de-vomissements-n-elimine-pas-le": { layout: "narrow", media: { label: "Infographie sobre des mécanismes : salive / acides / médicaments / contraintes mécaniques — à fournir", ratio: "3 / 1", wide: true } },
+    },
+  },
 };

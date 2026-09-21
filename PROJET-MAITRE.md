@@ -21,9 +21,9 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lot A livré** (6 pages esthétiques) ; lots B, C, D ensuite. |
-| **Dernière étape faite** | Lot A construit et contrôlé : textes sans écart dans les deux sens, HTML et 10 contrôles du manifeste réussis, Lighthouse 99–100 (LCP mobile 1,95 s), golden master intact. Rapport `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
-| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit les lots B, C et D. |
+| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lots A et B livrés** (13 pages : esthétique ; usures, érosion, TCA) ; lots C et D ensuite. |
+| **Dernière étape faite** | Lot B construit et contrôlé (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit les lots C et D. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
 | **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous, l'adresse e-mail professionnelle et l'hébergeur (mentions légales) ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
@@ -252,6 +252,7 @@ rendu sera jugé :
 | D36 | **Gel après le P0.5** : palette, Newsreader + Inter, grille, espacements, en-têtes ordinateur et mobile, boutons, les trois ouvertures, `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages`, pied de page, sous-menus, animations. Ensuite, ces composants ne bougent plus au fil des nouvelles pages, sauf vrai problème. Les visuels, le téléphone, le lien de rendez-vous et les adresses `sameAs` ne bloquent pas le gel. | 21/09/2026 |
 | D37 | **Golden master gelé** (décision transmise par Franck, archivée dans `docs/echanges/2026-09-21-decision-gel-golden-master.md`). Définitivement validés : palette ; Newsreader + Inter ; grille et espacements ; en-têtes ordinateur et mobile ; boutons ; ouvertures Accueil, Profil et Clinique ; `TextImageSection`, `PullStatement`, `DirectAnswer`, FAQ, `SourceList`, `AuthorBlock`, `RelatedPages` ; pied de page ; sous-menus ; animations ; logique d'adaptation mobile ; méthode en 7 étapes et son titre ; décisions du P0.5. Version étiquetée `golden-master-gele` dans GitHub. | 21/09/2026 |
 | D38 | **Pack « pages suivantes » V1** (ChatGPT, transmis par Franck), archivé dans `docs/pages-suivantes/v1/` : il reste **exactement 20 pages**, livrées en 4 lots — A : dentisterie esthétique (6 pages), B : usures, érosion, TCA (7), C : autorité, entité, page locale (5), D : contact et mentions légales. Contact est une page (`/contact/`, indexable) ; les mentions légales aussi (`/mentions-legales/`, `noindex,follow`) ; l'article Anorexie sans vomissements est enfant de la page Érosion ; aucun autre contenu (boulimie, reflux…) pour la V1. Textes visibles mot pour mot, sauf `[À FOURNIR]` et notes « NON AFFICHÉES » ; après chaque lot : build, contrôle des textes, contrôle HTML, Lighthouse sur une page, captures des seules compositions nouvelles. | 21/09/2026 |
+| D39 | **Police Inter : jeu de caractères latin seul** (optimisation technique autorisée par D35, « sous-ensembles de caractères »). Un seul « ń » (nom d'auteur, page TCA) faisait télécharger un second fichier de 83 Ko et portait le LCP mobile à 2,55 s ; il revient à 1,95 s. Les rares caractères hors de ce jeu (ce « ń », la flèche « → ») s'affichent dans la police du système ; aucune page du golden master n'en contient. Déclaration reprise telle quelle du paquet d'origine (`src/styles/inter-latin.css`). | 22/09/2026 |
 
 ---
 
@@ -315,7 +316,7 @@ décision.
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
-| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lot A en construction |
+| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — pack reçu le 21/09/2026 ; lots A et B livrés |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -337,13 +338,13 @@ décision.
 | A | 04 | Facettes dentaires à Paris | `/facettes-dentaires-paris/` | ✅ 21/09/2026 | | |
 | A | 05 | Éclaircissement dentaire à Paris | `/eclaircissement-dentaire-paris/` | ✅ 21/09/2026 | | |
 | A | 06 | Taches blanches, dyschromies et ICON | `/taches-dentaires-dyschromies-icon/` | ✅ 21/09/2026 | | |
-| B | 07 | Diagnostic des usures dentaires | `/diagnostic-usures-dentaires/` | | | |
-| B | 08 | Réhabilitation des dents usées | `/rehabilitation-dents-usees/` | | | |
-| B | 09 | Bruxisme et usure dentaire | `/bruxisme-usure-dentaire/` | | | |
-| B | 10 | Érosion dentaire | `/erosion-dentaire/` | | | |
-| B | 11 | Dents courtes ou usées | `/dents-courtes-usees/` | | | |
-| B | 12 | TCA et santé bucco-dentaire | `/tca-dents/` | | | |
-| B | 13 | Anorexie restrictive et érosion sans vomissements | `/anorexie-erosion-dentaire-sans-vomissements/` | | | |
+| B | 07 | Diagnostic des usures dentaires | `/diagnostic-usures-dentaires/` | ✅ 22/09/2026 | | |
+| B | 08 | Réhabilitation des dents usées | `/rehabilitation-dents-usees/` | ✅ 22/09/2026 | | |
+| B | 09 | Bruxisme et usure dentaire | `/bruxisme-usure-dentaire/` | ✅ 22/09/2026 | | |
+| B | 10 | Érosion dentaire | `/erosion-dentaire/` | ✅ 22/09/2026 | | |
+| B | 11 | Dents courtes ou usées | `/dents-courtes-usees/` | ✅ 22/09/2026 | | |
+| B | 12 | TCA et santé bucco-dentaire | `/tca-dents/` | ✅ 22/09/2026 | | |
+| B | 13 | Anorexie restrictive et érosion sans vomissements | `/anorexie-erosion-dentaire-sans-vomissements/` | ✅ 22/09/2026 | | |
 | C | 14 | Publications | `/publications/` | | | |
 | C | 15 | Conférences et formations | `/conferences-formations/` | | | |
 | C | 16 | Activité hospitalière | `/activite-hospitaliere/` | | | |
@@ -439,6 +440,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | F | Dépose sur le Bureau le pack `PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1` (dossier et zip) : la réponse de ChatGPT à la demande de textes des pages suivantes. | D38 |
 | 21/09/2026 | C | Lecture intégrale des 22 fichiers ; pack archivé à l'identique. Les 34 références scientifiques sont vérifiées sur PubMed : toutes existent, titres, revues, années et DOI concordent. En revanche, la numérotation des renvois `[n]` ne correspond pas à la liste des sources sur 9 pages, quelques consignes de rédaction se sont glissées dans le texte « mot pour mot », et 9 titres principaux dépassent 5 lignes sur téléphone (V16). Relevé complet dans le rapport du lot A. | Lot A |
 | 21/09/2026 | C | **Lot A livré** (`livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, 14 captures) : les 6 pages esthétiques, fabriquées directement à partir des fichiers du pack, avec les composants gelés. Contrôles : textes sans écart dans les deux sens (essai de sabotage détecté), HTML et 10 contrôles du manifeste réussis, Lighthouse page 01 : mobile 99 / 100 / 100 / 100 (LCP 1,95 s), ordinateur 100 partout. Les 3 pages du golden master sont restées identiques. Écarts du pack consignés (§6, points 28 à 34). | Contrôle de ChatGPT ; lot B |
+| 21/09/2026 | C | Dossier de transmission du lot A posé sur le Bureau : `~/Desktop/GEO-pages-suivantes-lot-A-pour-ChatGPT/` (message à coller, rapport, 14 captures). | Contrôle de ChatGPT |
+| 22/09/2026 | C | **Lot B livré** (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`, 9 captures) : les 7 pages usures, érosion, TCA. Textes sans écart, HTML et manifeste réussis. Première mesure de la page TCA : 97, LCP 2,55 s, à cause d'un « ń » qui faisait charger un second fichier de police ; corrigé en ne déclarant que le jeu latin d'Inter (D39) : 99, LCP 1,95 s. | Lot C |
 
 ---
 
