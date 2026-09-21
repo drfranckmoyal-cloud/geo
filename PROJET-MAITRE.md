@@ -348,6 +348,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH jusqu'au récapitulatif (18,70 € TTC pour 3 ans), sans aucun paiement. | Étape 1 |
 | 21/09/2026 | F | « Le domaine est créé » : Franck a validé lui-même la commande OVH. Claude vérifie auprès du registre des .fr : domaine actif, jusqu'au 21/09/2029. | D14 |
 | 21/09/2026 | C | **Golden master, tour 1 livré.** Les 3 pages sont construites (30 composants du pack + 2 techniques), avec 26 captures aux 6 largeurs, le rapport et une comparaison de polices. Contrôle des textes : aucun écart. Contrôle du HTML : réussi. Lighthouse : 100 partout. Défauts corrigés en cours de route : titre sur 6 lignes, accents vérifiés, bords du portrait, espacement de la phrase clé, noms accessibles. | Étape 2, points 24 à 26 |
+| 21/09/2026 | C | À la demande de Franck, dossier de transmission posé sur le Bureau : `~/Desktop/GEO-golden-master-tour1-pour-ChatGPT/` (rapport, comparaison des polices, 14 captures numérotées, message prêt à coller dans ChatGPT). Aucune donnée patient. | Contrôle de ChatGPT |
 
 ---
 
