@@ -1,6 +1,7 @@
 ---
 // Ouverture d'une page clinique (07 §9 : « expertise calme ») : fil d'Ariane, H1 très lisible,
 // chapeau, auteur identifié. Pas d'image : la réponse directe suit immédiatement.
+// La ligne auteur peut être omise (pages Contact et Mentions légales, validation du 22/09/2026).
 import Breadcrumbs from "../global/Breadcrumbs.astro";
 import EditorialH1 from "../global/EditorialH1.astro";
 import LeadText from "../global/LeadText.astro";
@@ -10,7 +11,7 @@ interface Props {
   breadcrumbs: { label: string; href?: string }[];
   h1: string;
   lead: string;
-  byline: { label: string; href: string };
+  byline?: { label: string; href: string };
 }
 const { breadcrumbs, h1, lead, byline } = Astro.props;
 ---
@@ -21,7 +22,7 @@ const { breadcrumbs, h1, lead, byline } = Astro.props;
       <Breadcrumbs items={breadcrumbs} />
       <EditorialH1 id="chero-titre" text={h1} class="chero__title" />
       <LeadText text={lead} class="chero__lead" />
-      <p class="chero__byline"><a href={byline.href} set:html={plain(byline.label)} /></p>
+      {byline && <p class="chero__byline"><a href={byline.href} set:html={plain(byline.label)} /></p>}
     </div>
   </div>
 </section>

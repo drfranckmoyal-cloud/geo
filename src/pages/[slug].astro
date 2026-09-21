@@ -52,7 +52,7 @@ const plans = planSections(sections, cfg.sections, cfg.defaults);
 
 const trail = crumbTrail(page);
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
-const byline = { label: page.author.name, href: page.author.href };
+const byline = cfg.hideByline ? undefined : { label: page.author.name, href: page.author.href };
 const hasAuthor = page.contract.some((c) => c.includes("AuthorBlock"));
 
 // Sources : notes du §10 à afficher ; renvois du texte dont le numéro n'est pas dans la liste
@@ -171,7 +171,7 @@ const schema = graph([
     )
   }
   {related && <RelatedPages label={related.title} items={related.items} />}
-  {page.cta && <FinalCTA title={page.cta.title} text={page.cta.paragraphs} cta={page.cta.label} />}
+  {page.cta && <FinalCTA title={page.cta.title} text={page.cta.paragraphs} cta={page.cta.label ?? cfg.cta?.label} href={cfg.cta?.href} />}
 </BaseLayout>
 
 <style>

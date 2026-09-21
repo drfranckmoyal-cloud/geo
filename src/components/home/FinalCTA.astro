@@ -11,8 +11,9 @@ interface Props {
   title: string;
   text?: string | string[];
   cta?: string;
+  href?: string; // par défaut : l'emplacement réservé de la prise de rendez-vous (D8)
 }
-const { title, text, cta } = Astro.props;
+const { title, text, cta, href = site.rdv.href } = Astro.props;
 const hasText = Array.isArray(text) ? text.length > 0 : Boolean(text);
 ---
 
@@ -21,7 +22,7 @@ const hasText = Array.isArray(text) ? text.length > 0 : Boolean(text);
     <div class="final" data-reveal>
       <EditorialH2 id="rendez-vous-titre" text={title} size="statement" />
       {hasText && <BodyText paragraphs={text!} class="final__text" />}
-      {cta && <PrimaryButton href={site.rdv.href} label={cta} class={hasText ? undefined : "final__cta--seul"} />}
+      {cta && <PrimaryButton href={href} label={cta} class={hasText ? undefined : "final__cta--seul"} />}
     </div>
   </div>
 </Section>

@@ -10,7 +10,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { execSync } from "node:child_process";
 import { parse } from "node-html-parser";
 import { parsePack } from "../src/lib/pack.ts";
-import { builtNums, PACK_DIR } from "../src/content/pages-suivantes.ts";
+import { applyDecisions, builtNums, PACK_DIR } from "../src/content/pages-suivantes.ts";
 
 const SITE = "https://drfranckmoyal.fr";
 const PERSON = `${SITE}/#franck-moyal`;
@@ -22,7 +22,7 @@ const pages = [
 
 // Pages du pack : ce que le fichier impose
 const packFiles = (await readdir(PACK_DIR)).filter((f) => /^\d\d_/.test(f) && !/^(00|21)_/.test(f));
-const all = await Promise.all(packFiles.map(async (f) => parsePack(await readFile(`${PACK_DIR}/${f}`, "utf8"), f)));
+const all = await Promise.all(packFiles.map(async (f) => parsePack(applyDecisions(await readFile(`${PACK_DIR}/${f}`, "utf8"), f.slice(0, 2)).md, f)));
 const parents = { "/usures-dentaires/": "/", "/franck-moyal/": "/" };
 for (const p of all) parents[p.url] = p.parent;
 for (const p of all.filter((p) => builtNums.includes(p.num))) {
@@ -80,7 +80,9 @@ for (const p of pages) {
     bad("données structurées illisibles : " + e.message);
   }
   const future = root.querySelectorAll("[data-a-venir]").map((a) => a.getAttribute("href"));
-  info(`${new Set(future).size} adresses de pages à venir en lien : ${[...new Set(future)].sort().join(" ")}`);
+  // Les 20 pages du pack construites : un lien « à venir » est désormais une erreur
+  if (builtNums.length === 20) future.length ? bad(`liens vers des pages non construites : ${[...new Set(future)].join(" ")}`) : ok("aucun lien vers une page à venir");
+  else info(`${new Set(future).size} adresses de pages à venir en lien : ${[...new Set(future)].sort().join(" ")}`);
   const ext = root.querySelectorAll('a[target="_blank"]');
   const unsafe = ext.filter((a) => !/noopener/.test(a.getAttribute("rel") ?? "") || !/noreferrer/.test(a.getAttribute("rel") ?? ""));
   if (ext.length) unsafe.length ? bad(`${unsafe.length} lien(s) externe(s) sans rel="noopener noreferrer"`) : ok(`${ext.length} liens externes, tous en rel="noopener noreferrer"`);

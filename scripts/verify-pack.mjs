@@ -11,7 +11,7 @@
 import { readFile } from "node:fs/promises";
 import { readdirSync } from "node:fs";
 import { parse } from "node-html-parser";
-import { arborescence, builtNums, hidden, linkOverrides, shownSourceNotes, PACK_DIR } from "../src/content/pages-suivantes.ts";
+import { applyDecisions, arborescence, builtNums, hidden, layouts, linkOverrides, shownSourceNotes, PACK_DIR } from "../src/content/pages-suivantes.ts";
 import { home } from "../src/content/home.ts";
 import { usures } from "../src/content/usures.ts";
 
@@ -89,7 +89,9 @@ function segments(md, num) {
     }
   }
   const author = spec.get(7) ?? "";
-  add(field(author, "Auteur"), "auteur");
+  // Le nom de l'auteur s'affiche dans la ligne auteur de l'ouverture, retirée sur Contact et
+  // Mentions légales (validation du 22/09/2026), ou dans le bloc auteur
+  if (!layouts[num]?.hideByline || (spec.get(4) ?? "").includes("AuthorBlock")) add(field(author, "Auteur"), "auteur");
   // La date s'affiche dans le bloc auteur, seulement si le contrat de la page le prévoit ;
   // sinon elle figure dans les données structurées (dateModified, contrôle HTML).
   if ((spec.get(4) ?? "").includes("AuthorBlock")) add(field(author, "Date de mise à jour"), "date de mise à jour");
@@ -153,7 +155,8 @@ export async function verifyPack() {
   for (const num of builtNums) {
     const entry = arborescence.find((a) => a.num === num);
     const file = readdirSync(PACK_DIR).find((f) => f.startsWith(`${num}_`));
-    const md = await readFile(`${PACK_DIR}/${file}`, "utf8");
+    // Remplacements décidés par ChatGPT (validation du 22/09/2026), listés plus bas
+    const { md, applied } = applyDecisions(await readFile(`${PACK_DIR}/${file}`, "utf8"), num);
     const html = await readFile(`dist${entry.url}index.html`, "utf8");
     const root = parse(html);
     const title = norm(root.querySelector("title")?.text ?? "");
@@ -197,6 +200,9 @@ export async function verifyPack() {
     if (citeIssues.length) out.push(`  ⚠ Écart du pack — ${citeIssues.join(" ; ")}`);
     for (const m of hidden[num] ?? []) out.push(`  • Non affiché (à confirmer par ChatGPT) : « ${norm(m.section ?? m.text)} » — ${m.why}`);
     if (deduced.length) out.push(`  • Liens à l'adresse déduite : ${deduced.join(" ; ")}`);
+    for (const a of applied) out.push(`  • Remplacement décidé : ${a}`);
+    if (layouts[num]?.hideByline) out.push("  • Ouverture sans ligne auteur (validation 23)");
+    if (layouts[num]?.cta) out.push(`  • Bouton de l'appel final décidé hors du pack : « ${layouts[num].cta.label} » → ${layouts[num].cta.href} (validation 23)`);
     if (skipped.length && !(hidden[num] ?? []).length) out.push(`  ✗ Passages sautés sans décision : ${skipped.join(" / ")}`);
   }
   return { out, problems, warnings };

@@ -11,7 +11,8 @@
     "images": "node scripts/prepare-images.mjs",
     "verify": "node scripts/verify-texts.mjs",
     "captures": "node scripts/captures.mjs",
-    "check": "astro build && node scripts/verify-texts.mjs"
+    "check": "astro build && node scripts/verify-texts.mjs",
+    "launch-check": "node scripts/check-launch.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

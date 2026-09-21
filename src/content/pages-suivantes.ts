@@ -6,7 +6,9 @@
 //    la confirmation de ChatGPT ;
 //  - les liens dont le libellé ne figure pas dans la liste « Liens internes » de la page ;
 //  - la mise en page : emplacements d'images (§9 de chaque fichier) et compositions choisies
-//    parmi celles des composants gelés.
+//    parmi celles des composants gelés ;
+//  - les décisions de ChatGPT qui précisent le pack (validation consolidée du 22/09/2026,
+//    docs/echanges/2026-09-22-chatgpt-23-validation-consolidee-lots-a-b-c-d.md).
 
 export const PACK_DIR = "docs/pages-suivantes/v1";
 
@@ -48,6 +50,30 @@ export const hidden: Record<string, { section?: string; text?: string; why: stri
   "12": [{ text: "Cette présence devra être reliée à une page officielle DentCA indexable", why: "consigne d'intégration (section DentCA)" }],
   "14": [{ text: "**Note de normalisation bibliographique**", why: "note de vérification bibliographique (La chirurgie orale)" }],
 };
+
+// Remplacements décidés par ChatGPT, appliqués au fichier du pack avant sa lecture — par le site
+// comme par les contrôles, qui les listent. Sans effet si le pack contient déjà le nouveau texte.
+export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
+  "20": [
+    // « Mentions légales : date visible harmonisée au 22 septembre 2026 » (validation du 22/09/2026, lot D)
+    { from: "Dernière mise à jour : **21 septembre 2026**.", to: "Dernière mise à jour : **22 septembre 2026**.", ref: "validation 23, lot D" },
+    { from: "- **Date de mise à jour** : 21 septembre 2026", to: "- **Date de mise à jour** : 22 septembre 2026", ref: "validation 23, lot D" },
+    { from: "- **`dateModified`** : `2026-09-21`", to: "- **`dateModified`** : `2026-09-22`", ref: "validation 23, lot D" },
+  ],
+};
+
+export function applyDecisions(md: string, num: string): { md: string; applied: string[] } {
+  const applied: string[] = [];
+  for (const d of decisions[num] ?? []) {
+    const n = md.split(d.from).length - 1;
+    if (n === 1) {
+      md = md.replace(d.from, d.to);
+      applied.push(`« ${d.from} » → « ${d.to} » (${d.ref})`);
+    } else if (n === 0 && md.includes(d.to)) applied.push(`« ${d.to} » : déjà dans le pack (${d.ref})`);
+    else throw new Error(`Décision « ${d.from} » (page ${num}) : texte trouvé ${n} fois dans le pack`);
+  }
+  return { md, applied };
+}
 
 // Notes du §10 (sources) affichées sous la liste des références, ligne par ligne (début exact).
 // Les autres lignes du §10 sont des consignes (« À présenter comme… », « À ne pas écrire… »).
@@ -92,6 +118,8 @@ export interface SectionOverride {
   links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
 }
 export interface PageLayout {
+  hideByline?: boolean; // ouverture sans ligne auteur (Contact, Mentions légales : validation 23)
+  cta?: { label: string; href: string }; // bouton de l'appel final décidé hors du pack (page 18 : validation 23)
   defaults?: SectionOverride; // réglage commun à toutes les sections de la page
   sections?: Record<string, SectionOverride>;
   method?: { before: string }; // MethodSteps (page 02), placé avant cette section
@@ -177,29 +205,33 @@ export const layouts: Record<string, PageLayout> = {
       "l-absence-de-vomissements-n-elimine-pas-le": { layout: "narrow", media: { label: "Infographie sobre des mécanismes : salive / acides / médicaments / contraintes mécaniques — à fournir", ratio: "3 / 1", wide: true } },
     },
   },
+  // Page locale : le bloc final affiche « Prendre rendez-vous » et mène à la section du même
+  // nom de la page Contact (validation 23, lot C)
+  "18": { cta: { label: "Prendre rendez-vous", href: "/contact/#prendre-rendez-vous" } },
   "19": {
+    hideByline: true,
     sections: {
-      // Le bouton « Prendre rendez-vous » de l'en-tête mène à cette section (le lien de prise de
-      // rendez-vous reste à fournir)
-      "prendre-rendez-vous": { id: "rendez-vous" },
-      // Les 7 motifs, écrits en gras dans le pack, deviennent des liens vers leurs pages (à confirmer)
+      // Ancre définitive de la section « Prendre rendez-vous » : #prendre-rendez-vous (validation
+      // 23, lot D) — c'est l'identifiant que lui donne déjà son titre.
+      // Les 7 motifs, écrits en gras dans le pack, deviennent des liens vers leurs pages (validés)
       "motifs-de-consultation": { links: true },
     },
   },
-  // « Page de lecture simple » : colonne de lecture, fond uni
-  "20": { defaults: { layout: "narrow", tone: "paper" } },
+  // « Page de lecture simple » : colonne de lecture, fond uni ; sans ligne auteur (validation 23)
+  "20": { hideByline: true, defaults: { layout: "narrow", tone: "paper" } },
 };
 
 // Données structurées propres à une page. Chaque fait figure en toutes lettres sur la page.
 // Page 14 : « Person auteur lorsqu'une publication lui est attribuée » (§8 du fichier) — les
 // articles et ouvrages de la page, reliés à Person#franck-moyal ; pas les travaux encadrés.
+// Types validés le 22/09/2026 : Article ou Book, sans métadonnée absente de la page.
 const FRANCK = { "@id": "https://drfranckmoyal.fr/#franck-moyal" };
 const coauthor = (name: string) => ({ "@type": "Person", name });
 export const schemaExtras: Record<string, Record<string, unknown>> = {
   "14": {
     hasPart: [
       {
-        "@type": "ScholarlyArticle",
+        "@type": "Article",
         name: "Fermeture de diastème au composite en technique directe : la « Front Wing Technique »",
         author: FRANCK,
         datePublished: "2023-10-09",
@@ -207,7 +239,7 @@ export const schemaExtras: Record<string, Record<string, unknown>> = {
         url: "https://www.lefildentaire.com/articles/fermeture-de-diasteme-composite-technique-directe-front-wing-technique/",
       },
       {
-        "@type": "ScholarlyArticle",
+        "@type": "Article",
         name: "Santé et précarité : les permanences d’accès aux soins de santé bucco-dentaire",
         author: [
           coauthor("Frédéric Rilliard"),
