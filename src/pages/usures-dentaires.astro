@@ -19,14 +19,14 @@ import TextLink from "../components/global/TextLink.astro";
 import BodyText from "../components/global/BodyText.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
 import Container from "../components/global/Container.astro";
-import portrait from "../assets/photos/portrait-franck.png";
+import portrait from "../assets/photos/portrait-franck.jpg";
 import { usures as u } from "../content/usures";
 import { franck } from "../content/franck";
 import { site } from "../content/site";
 import { plain } from "../lib/typo";
 import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
 
-const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const og = await getImage({ src: portrait, format: "jpg", width: 800 });
 const sections = [u.recognize, u.causes, u.prevention, u.diagnosis, u.treat, u.rehab, u.smile, u.erosion];
 const crumbs = [
   { label: "Accueil", href: "/" },
@@ -43,6 +43,7 @@ const schema = graph([
     inLanguage: site.lang,
     isPartOf: { "@id": site.websiteId },
     author: { "@id": site.personId },
+    dateModified: u.author.updatedIso,
     breadcrumb: { "@id": abs("/usures-dentaires/#fil") },
     citation: u.sources.items.map((s) => ({
       "@type": "ScholarlyArticle",
@@ -114,23 +115,24 @@ const schema = graph([
 
   <FAQAccordion title={u.faq.title} items={u.faq.items} />
   <FinalCTA title={u.final.title} text={u.final.text} cta={u.final.cta} />
-  <SourceList title={u.sources.title} intro={u.sources.intro} items={u.sources.items} verifiedLabel={u.sources.verifiedLabel} verifiedDate={u.sources.verifiedDate} verifiedIso={u.sources.verifiedIso} />
+  <SourceList title={u.sources.title} intro={u.sources.intro} toggle={u.sources.toggle} items={u.sources.items} verifiedLabel={u.sources.verifiedLabel} verifiedDate={u.sources.verifiedDate} verifiedIso={u.sources.verifiedIso} />
 
   <Container class="grid-12 u-author">
     <div class="u-author__block">
       <AuthorBlock
-        label="Auteur"
-        name={site.name}
-        role={site.role}
-        text={franck.hero.lead}
-        link={{ label: "À propos du Dr Franck Moyal", href: "/franck-moyal/" }}
+        label={u.author.label}
+        name={u.author.name}
+        tagline={u.author.tagline}
+        updated={u.author.updated}
+        updatedIso={u.author.updatedIso}
+        href="/franck-moyal/"
         image={portrait}
       />
     </div>
   </Container>
 
   <RelatedPages
-    label="Usures dentaires"
+    label={u.related.title}
     items={[
       u.diagnosis.link,
       u.rehab.link,

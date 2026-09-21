@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | Étape 2 — golden master, tour 2 : corrections P0 demandées par ChatGPT (21/09/2026), puis captures ciblées. Si elles sont conformes, le golden master est gelé. |
-| **Dernière étape faite** | Étape 1 — les 3 pages construites, avec captures, rapport et contrôles : textes conformes au pack sans aucun écart, Lighthouse à 100 partout (`livrables/golden-master-r1/`). |
-| **Prochaine action** | Claude applique les 10 corrections P0 (D16 à D24) et remet la série courte de captures demandée (D28). |
+| **Phase en cours** | Étape 2 — golden master, tour 2 livré (21/09/2026) : les 10 corrections P0 et le portrait HD. En attente du contrôle de ChatGPT sur la série courte de 15 captures ; si c'est conforme, le golden master est gelé (D28). |
+| **Dernière étape faite** | Tour 2 : Newsreader, en-tête mobile, 7 étapes, sous-menus, sources et auteur, adresse, portrait HD intégré (`livrables/golden-master-r2/`). Textes sans aucun écart, HTML conforme, Lighthouse 95–100 en rapidité et 100 ailleurs. |
+| **Prochaine action** | Franck transmet à ChatGPT le dossier du tour 2 posé sur le Bureau ; ChatGPT valide (gel) ou demande de derniers ajustements. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Le portrait en haute définition, au moins 2 000 px de large (D26) ; le téléphone du cabinet ; plus tard, les vraies photos (piliers, cas cliniques). |
+| **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous ; plus tard, les vraies photos (piliers, photographie clinique, cas avant / après). |
 
 ---
 
@@ -147,7 +147,7 @@ Entre parenthèses : le fichier et la section d'origine.
 | V3 | **La stratégie, l'arborescence, le positionnement, les titres et l'ordre des sections** restent tels quels. (06) |
 | V4 | **Les adresses des pages** (00 §11). Accueil `/` · entité `/franck-moyal/` · pilier esthétique `/dentisterie-esthetique-paris/`, avec `/bilan-esthetique-personnalise/`, `/composite-bonding-paris/`, `/facettes-dentaires-paris/`, `/eclaircissement-dentaire-paris/`, `/taches-dentaires-dyschromies-icon/` · pilier usures `/usures-dentaires/`, avec `/diagnostic-usures-dentaires/`, `/rehabilitation-dents-usees/`, `/bruxisme-usure-dentaire/`, `/erosion-dentaire/`, `/dents-courtes-usees/`, `/tca-dents/` · autorité `/publications/`, `/conferences-formations/`, `/activite-hospitaliere/`, `/medias-interviews/`. |
 | V5 | **Les couleurs** : noir doux `#171715` · blanc cassé `#FAF8F3` · ivoire `#F4F0E8` · gris chaud `#D8D3CA` · vert sauge sombre `#5E685D` (accent) · vert sauge clair `#B9C1B5` (accent secondaire). Répartition : 70–80 % blanc cassé et ivoire, 10–15 % noir doux, 5–10 % gris chaud, 5 % de vert au maximum. Le vert ponctue (petite étiquette, filet, survol, petite zone de fond, détail typographique), il n'est jamais le thème. Interdits : bleu médical, bleu nuit corporate, turquoise, violet cosmétique, or, beige trop jaune, dégradés, vert saturé. (07 §3 ; 01 ; 08 B) |
-| V6 | **Les polices** : titres en serif éditoriale (dans l'esprit de Canela, Editorial New, Tiempos ; Cormorant Garamond si le choix doit être gratuit) ; texte en sans-serif neutre (Inter, Manrope ; Suisse ou Neue Haas si licence). Tailles sur ordinateur : H1 64–76 px, H2 42–52, H3 26–32, chapeau 22–26, texte 17–19, petit texte 14–15. Sur mobile : H1 42–48, H2 32–38, H3 24–28, chapeau 20–22, texte 17–18. Contraste fort entre les niveaux, interlignage confortable. Le contraste serif / sans-serif fait partie de l'identité : la serif pour le désir et la personnalité, la sans-serif pour la précision clinique. (07 §4 ; 01 ; 08 A) |
+| V6 | **Les polices** : titres en serif éditoriale (dans l'esprit de Canela, Editorial New, Tiempos ; Cormorant Garamond si le choix doit être gratuit — **remplacée par Newsreader depuis D16**) ; texte en sans-serif neutre (Inter, Manrope ; Suisse ou Neue Haas si licence). Tailles sur ordinateur : H1 64–76 px, H2 42–52, H3 26–32, chapeau 22–26, texte 17–19, petit texte 14–15. Sur mobile : H1 42–48, H2 32–38, H3 24–28, chapeau 20–22, texte 17–18. Contraste fort entre les niveaux, interlignage confortable. Le contraste serif / sans-serif fait partie de l'identité : la serif pour le désir et la personnalité, la sans-serif pour la précision clinique. (07 §4 ; 01 ; 08 A) |
 | V7 | **La grille et la respiration** : largeur maximale 1180–1240 px ; texte éditorial 720–820 px ; 12 colonnes ; marges sur mobile 20–24 px. Espace entre sections : 112–144 px sur ordinateur, 72–88 px sur mobile ; titre → texte 24–32 px ; texte → bouton 32–40 px. Mieux vaut 4 blocs forts bien espacés que 9 petites sections serrées. (07 §5 ; 01) |
 | V8 | **La composition** : éditoriale, parfois asymétrique (texte décalé, grands vides, image légèrement hors axe, titres très grands, blocs courts sur fond ivoire). Pas de grille de cartes uniforme, pas de centrage partout, pas d'alternance gauche/droite mécanique. La même grammaire sur chaque page, sans jamais de copier-coller. Des cartes seulement là où elles structurent vraiment — cas cliniques, les 2 piliers, 3 preuves ou médias, articles — et jamais chaque section transformée en carte. (07 §6, §14 ; 01) |
 | V9 | **Les boutons** : peu nombreux, clairement hiérarchisés, sobres. Bouton principal fond `#171715`, texte `#FAF8F3`, hauteur 50–54 px, coins arrondis de 2–4 px, sans-serif medium, ni forme de pilule ni effet 3D ; bouton secondaire = texte et flèche fine, souligné au survol ; survols discrets, 150–250 ms. (07 §11 ; 01 ; 08 A) |
@@ -228,6 +228,7 @@ rendu sera jugé :
 | D26 | **Portrait** : mise en page validée, mais le fichier de 480 px ne sert qu'à valider la composition. Il faut un original d'au moins 2 000 px (idéal 2 500–3 000), sans agrandissement artificiel. Garder le traitement noir doux / noir et blanc ; avec la version HD, renforcer légèrement le contraste du visage. | 21/09/2026 |
 | D27 | **Robots et IA, avant la mise en ligne** : OAI-SearchBot (ChatGPT Search), Googlebot et Bingbot autorisés ; GPTBot (entraînement) à décider à part. Ne pas traiter « tous les robots d'IA » comme un seul réglage. | 21/09/2026 |
 | D28 | **Gel du golden master : pas encore.** Après les corrections P0, une série courte de captures : ouvertures des 3 pages (ordinateur et mobile), section Méthode, sources et auteur, en-tête mobile, menu (ordinateur et mobile). Si c'est conforme, le golden master est gelé et sert à décliner toutes les autres pages. | 21/09/2026 |
+| D29 | **Portrait HD intégré** : l'original fourni par Franck (6 048 × 4 024 px, Nikon D780) remplace la version de 480 px. Il est recadré en 4:5, son contraste local est légèrement renforcé, son point noir est calé sur le noir doux (D26). Source : `src/assets/photos/portrait-franck-source.png`. | 21/09/2026 |
 
 ---
 
@@ -244,13 +245,12 @@ décision.
 | 3 | **Destination du bouton « Prendre rendez-vous »** inconnue (Doctolib ? téléphone ? formulaire ?). **Adresse et téléphone du cabinet** absents (pied de page, référencement local, données structurées). | Emplacements signalés. **Mis en attente par Franck le 21/09/2026 (D8).** Adresse fournie depuis (D22) ; téléphone et lien de rendez-vous toujours attendus. | Franck, plus tard. Bloque la mise en ligne, pas le prototype. |
 | 7 | **Liens vers des pages qui n'existent pas encore** : les 3 pages renvoient vers 11 pages futures (dentisterie esthétique, bilan esthétique personnalisé, TCA, érosion, diagnostic, réhabilitation, bruxisme, dents courtes, publications, conférences et formations, activité hospitalière), plus le contact et les mentions légales. | Liens vers les adresses définitives (V4), listés « non finalisés » dans le rapport. | Personne pour la phase 1. |
 | 9 | **Arborescence** : 00 §14 parle des « 20 autres pages », l'arborescence de 00 §11 en liste 16 ; le contact et les mentions légales, demandés au pied de page, n'y ont pas d'adresse. | Rien pour la phase 1. | ChatGPT, avant la déclinaison (étape 4). |
-| 10 | **Photos** : le portrait est fourni (D5). Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
+| 10 | **Photos** : le portrait est fourni, en haute définition depuis D29. Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
 | 11 | **Preuves d'autorité** (00 §7 : AP-HP / Pitié-Salpêtrière, CMME / Sainte-Anne / GHU Paris, AO News, Blendi, Le Fil Dentaire, Entretiens de Garancière, Alpha Oméga, ARTEMIS, GC / ADF, LinkedIn, Smileclub Formation, DentCA) : aucune adresse web fournie. Le site doit « rassembler et redistribuer cette autorité vers les pages cliniques correspondantes » (00 §7). Pour les profils de Franck lui-même (LinkedIn, par exemple), une propriété technique (`sameAs`) signalera en plus aux moteurs qu'il s'agit de la même personne — suggestion de Claude, absente du pack. | Liens signalés « à fournir ». Candidats retenus par ChatGPT pour `sameAs` : LinkedIn, AP-HP, Le Fil Dentaire (page auteur), Blendi (page formateur) — pas pour chaque article ou événement. | ChatGPT (adresses exactes), Franck (vérification). |
 | 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
 | 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
-| 21 | **Résolution du portrait** : 480 × 480 pixels. Affiché en grand (page Franck : « portrait dominant »), il paraîtra flou, surtout sur les écrans haute définition (Mac, téléphones récents), qui demandent 2 à 3 fois plus de pixels. | Photo utilisée à une taille raisonnable et harmonisée avec la palette (noir doux et blanc cassé à la place du noir et du blanc purs). | Franck : fournir l'original en haute définition (idéalement 2 000 pixels ou plus de large). |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Les autres interprétations sont listées au §6 du rapport. | Appliqué. | ChatGPT. |
 | 27 | **Texte de l'étape « Simuler »** (D17) : ChatGPT rétablit l'étape sans lui donner de texte, et celui de « Planifier » (« simulation et projet lorsque pertinent. ») parle déjà de simulation. | Description provisoire reprise mot pour mot de 00 §5 : « simulation 2D / 3D / dynamique selon les cas ». « Planifier » inchangé. | ChatGPT : valider ou fournir les deux textes. |
 
@@ -267,7 +267,8 @@ décision.
 - **Nom de domaine** (ancien point 1) → `drfranckmoyal.fr` réservé par Franck chez OVH le 21/09/2026, jusqu'au 21/09/2029 (D14).
 - **Sources de la page Usures** (ancien point 2) → fournies par Franck le 21/09/2026, dans le fichier 04 corrigé (D7, V22).
 - **Logo** (ancien point 4) → le monogramme « Fm » avec l'arc vert sauge (D4).
-- **Portrait** (partie du point 10) → la photo en noir et blanc fournie par Franck (D5) ; voir le point 21 pour sa résolution.
+- **Portrait** (partie du point 10) → la photo en noir et blanc fournie par Franck (D5).
+- **Résolution du portrait** (ancien point 21) → original de 6 048 × 4 024 px fourni et intégré (D29).
 - **« Dentiste esthétique »** (partie du point 15) → proscrit (D6, V21).
 - **Menu de l'en-tête** (ancien point 17) → figé par ChatGPT (D10, V23).
 - **Intertitres de la page Usures** (ancien point 18) → étiquette + grand titre ; nouveau titre pour la section 5 (D11).
@@ -282,7 +283,7 @@ décision.
 |---|---|---|
 | **0** | Cadrage : pack V1.3 reçu, lu en entier et archivé ; projet créé ; fichier maître écrit et relu contre le pack | ✅ fait (21/09/2026) |
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
-| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **en cours** — tour 1 contrôlé par ChatGPT le 21/09/2026 : « structurellement réussi », tour 2 ciblé demandé (D16 à D28) |
+| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **en cours** — tour 1 « structurellement réussi » (ChatGPT, 21/09/2026) ; tour 2 livré le même jour (`livrables/golden-master-r2/`), en attente de son contrôle |
 | **3** | Gel des composants : le golden master devient la référence figée | à faire |
 | **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | à faire |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
@@ -292,9 +293,9 @@ décision.
 
 | Page | Adresse | Construite | Contrôlée par ChatGPT | Validée par Franck |
 |---|---|---|---|---|
-| Accueil | `/` | ✅ tour 1 | — | — |
-| Dr Franck Moyal | `/franck-moyal/` | ✅ tour 1 | — | — |
-| Usures dentaires | `/usures-dentaires/` | ✅ tour 1 | — | — |
+| Accueil | `/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
+| Dr Franck Moyal | `/franck-moyal/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
+| Usures dentaires | `/usures-dentaires/` | ✅ tour 2 | ✅ tour 1 (corrections demandées) | — |
 
 ---
 
@@ -308,15 +309,15 @@ est dans le rapport (`livrables/golden-master-r1/RAPPORT.md`, §2 et §3).
   construites à partir de composants réutilisables — exactement ce qu'exige le gel des
   composants.
 - **Polices hébergées sur le site lui-même**, pas chez Google : plus rapide, et aucune
-  adresse de visiteur transmise à un tiers (RGPD). Par défaut, Cormorant Garamond pour les
-  titres (la solution gratuite prévue par le pack) et Inter pour le texte. Une police sous
-  licence pourra les remplacer en changeant un seul réglage.
+  adresse de visiteur transmise à un tiers (RGPD). Newsreader pour les titres (D16, à la
+  place de Cormorant Garamond) et Inter pour le texte. Une police sous licence pourra les
+  remplacer en changeant un seul réglage.
 - **Les textes rangés à part de la mise en page**, recopiés du pack, avec un **contrôle
   automatique** : chaque phrase du pack doit se retrouver telle quelle dans les pages
   construites. C'est la garantie mécanique du verrou V2.
-- **Aucun traceur, aucune ressource extérieure** (V19). Résultat Lighthouse (outil de Google) le
-  21/09/2026 : 100/100 en rapidité, accessibilité, bonnes pratiques et référencement, sur les
-  3 pages, en mobile comme sur ordinateur ; pages de 92 à 117 Ko.
+- **Aucun traceur, aucune ressource extérieure** (V19). Résultat Lighthouse (outil de Google) au
+  tour 2 : 100/100 en accessibilité, bonnes pratiques et référencement, 95 à 100 en rapidité
+  (Newsreader et le portrait HD pèsent un peu plus) ; pages de 214 à 344 Ko.
 - **Captures automatiques** avec Google Chrome (déjà installé), aux largeurs du verrou
   V16, et contrôle de rapidité Lighthouse.
 - **Lisibilité des couleurs** (mesurée le 21/09/2026) : le vert sauge sombre est lisible
@@ -363,8 +364,10 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH jusqu'au récapitulatif (18,70 € TTC pour 3 ans), sans aucun paiement. | Étape 1 |
 | 21/09/2026 | F | « Le domaine est créé » : Franck a validé lui-même la commande OVH. Claude vérifie auprès du registre des .fr : domaine actif, jusqu'au 21/09/2029. | D14 |
 | 21/09/2026 | C | **Golden master, tour 1 livré.** Les 3 pages sont construites (30 composants du pack + 2 techniques), avec 26 captures aux 6 largeurs, le rapport et une comparaison de polices. Contrôle des textes : aucun écart. Contrôle du HTML : réussi. Lighthouse : 100 partout. Défauts corrigés en cours de route : titre sur 6 lignes, accents vérifiés, bords du portrait, espacement de la phrase clé, noms accessibles. | Étape 2, points 24 à 26 |
-| 21/09/2026 | G | **Contrôle du tour 1**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` : « structurellement réussi », base du site complet après un tour 2 ciblé, sans refonte. Les 8 critères de 08 F sont validés, deux sous condition (niveau de gamme et personnalité : il faut les vraies photos). 10 corrections P0 (police Newsreader, en-tête mobile, 7 étapes, sous-menus, sources, auteur et date, parcours cliquable, titre des pages liées, adresse, réponse directe sur mobile), puis les photos en P1. | D16 à D28 |
 | 21/09/2026 | C | À la demande de Franck, dossier de transmission posé sur le Bureau : `~/Desktop/GEO-golden-master-tour1-pour-ChatGPT/` (rapport, comparaison des polices, 14 captures numérotées, message prêt à coller dans ChatGPT). Aucune donnée patient. | Contrôle de ChatGPT |
+| 21/09/2026 | G | **Contrôle du tour 1**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md` : « structurellement réussi », base du site complet après un tour 2 ciblé, sans refonte. Les 8 critères de 08 F sont validés, deux sous condition (niveau de gamme et personnalité : il faut les vraies photos). 10 corrections P0 (police Newsreader, en-tête mobile, 7 étapes, sous-menus, sources, auteur et date, parcours cliquable, titre des pages liées, adresse, réponse directe sur mobile), puis les photos en P1. | D16 à D28 |
+| 21/09/2026 | F | Envoie l'original de sa photo (« Design sans titre.png », 6 048 × 4 024 px) : « cette qualité de photo est meilleure ? » — oui, c'est la résolution native du Nikon D780, avec un vrai détail. | D29 |
+| 21/09/2026 | C | **Tour 2 livré** : les 10 corrections P0 de ChatGPT et le portrait HD, avec le rapport `livrables/golden-master-r2/RAPPORT-tour2.md` et 15 captures ciblées. Contrôles : textes sans écart, HTML conforme, Lighthouse 95–100 / 100 / 100 / 100. En cours de route : « Chirurgien-dentiste » débordait avec Newsreader, d'où une colonne de titre élargie et un retour à la coupure naturelle au trait d'union aux petites largeurs. | Contrôle de ChatGPT |
 
 ---
 

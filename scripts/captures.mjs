@@ -3,12 +3,14 @@
 //   Détails pour le contrôle de ChatGPT (08 G) : ouvertures ordinateur et mobile, une section,
 //   le pied de page.
 // Lancer (site servi en local) : BASE_URL=http://localhost:4322 npm run captures
+// Série courte d'un tour de correction (D28) : SET=cible OUT=livrables/golden-master-r2/captures
 import { chromium } from "playwright-core";
 import { mkdir } from "node:fs/promises";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:4322";
 const OUT = process.env.OUT ?? "livrables/golden-master-r1/captures";
 const ONLY = process.env.WIDTHS?.split(",").map(Number);
+const SET = process.env.SET ?? "complet";
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const pages = [
@@ -39,6 +41,53 @@ async function open(ctx, path) {
   });
   await page.waitForTimeout(250);
   return page;
+}
+
+// Série courte demandée par ChatGPT après le tour 1 (D28)
+if (SET === "cible") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(430, 932), small = await ctx(390, 844);
+  let n = 0;
+  const shot = async (page, name, opts = {}) => {
+    n++;
+    await page.screenshot({ path: `${OUT}/${String(n).padStart(2, "0")}_${name}.png`, ...opts });
+  };
+  const noSticky = (page) => page.addStyleTag({ content: ".site-header { position: static !important; }" });
+  for (const [name, path] of pages) {
+    const d = await open(desk, path); await shot(d, `ouverture-ordinateur-${name}`); await d.close();
+    const m = await open(mob, path); await shot(m, `ouverture-mobile-${name}`); await m.close();
+  }
+  // Section Méthode (7 étapes)
+  for (const [c, label] of [[desk, "ordinateur"], [mob, "mobile"]]) {
+    const p = await open(c, "/"); await noSticky(p);
+    await p.locator("#methode").screenshot({ path: `${OUT}/${String(++n).padStart(2, "0")}_methode-${label}.png` });
+    await p.close();
+  }
+  // Sources et auteur (page Usures)
+  for (const [c, label] of [[desk, "ordinateur"], [mob, "mobile"]]) {
+    const p = await open(c, "/usures-dentaires/"); await noSticky(p);
+    const a = await p.locator("#sources").boundingBox();
+    const b = await p.locator(".u-author").boundingBox();
+    await p.screenshot({ path: `${OUT}/${String(++n).padStart(2, "0")}_sources-auteur-${label}.png`, fullPage: true, clip: { x: 0, y: a.y, width: c === desk ? 1440 : 430, height: b.y + b.height - a.y + 24 } });
+    await p.close();
+  }
+  // En-tête mobile (390 et 430 px)
+  for (const [c, w, label] of [[small, 390, "390"], [mob, 430, "430"]]) {
+    const p = await open(c, "/"); await shot(p, `en-tete-mobile-${label}`, { clip: { x: 0, y: 0, width: w, height: 150 } }); await p.close();
+  }
+  // Menu ordinateur, sous-menus ouverts
+  for (const [group, label] of [["Érosion & TCA", "erosion-tca"], ["Publications & enseignement", "publications-enseignement"]]) {
+    const p = await open(desk, "/"); await p.getByRole("button", { name: group }).click(); await p.waitForTimeout(150);
+    await shot(p, `menu-ordinateur-${label}`, { clip: { x: 0, y: 0, width: 1440, height: 420 } }); await p.close();
+  }
+  // Menu mobile ouvert
+  const pm = await open(small, "/"); await pm.locator(".mobile-nav summary").click(); await pm.waitForTimeout(150);
+  await shot(pm, "menu-mobile-ouvert"); await pm.close();
+  await Promise.all([desk.close(), mob.close(), small.close()]);
+  await browser.close();
+  console.log(`série courte : ${n} captures dans ${OUT}`);
+  process.exit(0);
 }
 
 // Pages entières

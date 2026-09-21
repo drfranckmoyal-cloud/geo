@@ -23,7 +23,13 @@ export function person(image?: string, full = false) {
       "Une pratique dédiée à la dentisterie esthétique et adhésive, au diagnostic des usures dentaires et à leur réhabilitation.",
     workLocation: {
       "@type": "Place",
-      address: { "@type": "PostalAddress", addressLocality: "Paris", addressCountry: "FR" },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        postalCode: site.address.postalCode,
+        addressLocality: site.address.city,
+        addressCountry: site.address.country,
+      },
     },
     knowsAbout: [
       "Dentisterie esthétique et adhésive",

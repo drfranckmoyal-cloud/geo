@@ -3,6 +3,8 @@
 // (docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md) : étiquette et titre de la
 // section 5 (D11), textes des quatre mécanismes (D12), lien Bruxisme (D13).
 // Les renvois [1], [1–3]… deviennent des exposants reliés aux sources (verrou V22).
+// Contrôle du tour 1 (D19 à D21) : notes « Soutient » gardées ici pour la traçabilité mais non
+// affichées, bloc auteur court et daté, titre des pages liées.
 
 export const usures = {
   seo: {
@@ -155,6 +157,17 @@ export const usures = {
       },
     ],
   },
+  // Bloc auteur court + date de mise à jour (D20)
+  author: {
+    label: "Auteur",
+    name: "Dr Franck Moyal — Chirurgien-dentiste à Paris",
+    tagline: "Dentisterie esthétique et adhésive, usures dentaires et érosion.",
+    updated: "Mis à jour le 21 septembre 2026",
+    updatedIso: "2026-09-21",
+  },
+  related: {
+    title: "Approfondir les usures dentaires", // D21
+  },
   final: {
     title: "Faire le point sur une usure dentaire",
     text: "Une consultation permet d’identifier le type d’usure, ses causes possibles, son évolution et les différentes options de prévention ou de réhabilitation.",
@@ -163,6 +176,7 @@ export const usures = {
   sources: {
     title: "Sources scientifiques",
     intro: "Les références ci-dessous soutiennent les principaux messages cliniques de cette page.",
+    toggle: "Voir les 7 sources scientifiques", // repli sur mobile (D19)
     verifiedLabel: "Date de vérification bibliographique",
     verifiedDate: "21 septembre 2026",
     verifiedIso: "2026-09-21",

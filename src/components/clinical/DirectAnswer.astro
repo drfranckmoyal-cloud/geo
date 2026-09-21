@@ -18,14 +18,14 @@ const { text } = Astro.props;
 <style>
   .answer {
     grid-column: 1 / span 9;
-    padding: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+    padding: clamp(1.5rem, 1rem + 2.5vw, 3rem); /* 24 → 48 px ; 24–28 px sur mobile (D24) */
     background: var(--c-sage-wash);
     border-left: 2px solid var(--c-sage);
   }
   .answer p {
     max-width: 44rem;
-    font-size: var(--fs-lead);
-    line-height: 1.5;
+    font-size: clamp(1.1875rem, 1.05rem + 0.55vw, 1.5rem); /* 19 → 24 px (D24) */
+    line-height: 1.48;
     letter-spacing: -0.012em;
   }
   @media (max-width: 63.99em) {

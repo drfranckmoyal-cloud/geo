@@ -2,11 +2,10 @@
 
 // Typographie française : espace insécable devant « : » et à l'intérieur des guillemets,
 // espace fine insécable devant « ; ? ! », insécable devant le tiret long. Évite qu'un signe
-// se retrouve seul en début de ligne. « Chirurgien-dentiste » ne se coupe pas au trait d'union.
+// se retrouve seul en début de ligne ; « à » ne reste jamais seul en fin de ligne.
 // Caractères invisibles, construits par leur code pour rester lisibles dans le source.
 const NBSP = String.fromCharCode(0x00a0); // espace insécable
 const NNBSP = String.fromCharCode(0x202f); // espace fine insécable
-const NBHY = String.fromCharCode(0x2011); // trait d'union insécable
 
 export function fr(text: string): string {
   return text
@@ -15,7 +14,7 @@ export function fr(text: string): string {
     .replace(/« /g, "«" + NBSP)
     .replace(/ »/g, NBSP + "»")
     .replace(/ — /g, NBSP + "— ")
-    .replace(/Chirurgien-dentiste/g, "Chirurgien" + NBHY + "dentiste");
+    .replace(/ à /g, " à" + NBSP);
 }
 
 export function escapeHtml(text: string): string {

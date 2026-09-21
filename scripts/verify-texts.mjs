@@ -13,7 +13,10 @@ import { usures } from "../src/content/usures.ts";
 import { nav, footer } from "../src/content/site.ts";
 
 const PACK = "docs/golden-master/v1.3.1";
-const ECHANGE = "docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md";
+const ECHANGES = [
+  "docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md",
+  "docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour1.md",
+];
 
 // Remplacements décidés (fichier maître) : texte du pack → texte retenu
 const DECISIONS = [
@@ -21,7 +24,11 @@ const DECISIONS = [
   { ref: "D11", pack: "Non.", site: usures.treat.title },
   { ref: "D11", pack: "FAUT-IL TOUJOURS TRAITER ?", site: usures.treat.label },
   { ref: "D12", pack: "Attrition / contraintes mécaniques", site: "Attrition et contraintes mécaniques" },
+  // Étape « Simuler » rétablie (D17) : texte provisoire repris de 00 §5, à valider (§6, point 27)
+  { ref: "D17 (provisoire)", pack: "00 §5 : simulation 2D / 3D / dynamique selon les cas ;", site: "simulation 2D / 3D / dynamique selon les cas." },
 ];
+// Passages du pack volontairement non affichés (décisions du fichier maître)
+const HIDDEN = [{ ref: "D19", kind: "source (note)", why: "notes « Soutient : » retirées de l'affichage" }];
 // Libellés de structure du pack (consignes au rédacteur), jamais affichés
 const STRUCTURE = /^(Texte|Lien|Liens|CTA|Intro|Étapes|Sous-blocs|Message clé|Titre|Visuel|Objectif)\s*:?$/i;
 // Sections du pack qui sont des consignes, pas du contenu affichable
@@ -66,7 +73,9 @@ function strings(obj, path = []) {
   if (obj && typeof obj === "object") return Object.entries(obj).flatMap(([k, v]) => strings(v, [...path, k]));
   return [];
 }
-const SKIP_KEYS = /(^|\.)(href|id|media|verifiedIso|year|n)$/;
+const SKIP_KEYS = /(^|\.)(href|id|media|verifiedIso|updatedIso|year|n)$/;
+// Textes gardés dans les données pour la traçabilité, mais non affichés (D19)
+const NOT_SHOWN_KEYS = /(^|\.)supports$/;
 
 // Passages affichables d'un fichier du pack
 function segments(md, { labels = false } = {}) {
@@ -148,7 +157,7 @@ function segments(md, { labels = false } = {}) {
 const packFiles = await Promise.all(
   ["02_HOME.md", "03_FRANCK_MOYAL.md", "04_USURES_DENTAIRES.md", "07_ART_DIRECTION.md"].map((f) => readFile(`${PACK}/${f}`, "utf8")),
 );
-const echange = await readFile(ECHANGE, "utf8");
+const echange = (await Promise.all(ECHANGES.map((f) => readFile(f, "utf8")))).join("\n");
 const allSources = norm(packFiles.join("\n") + "\n" + echange);
 const allSourcesLow = allSources.toLocaleLowerCase("fr");
 
@@ -173,14 +182,15 @@ for (const page of pages) {
     const decision = DECISIONS.find((d) => norm(d.site) === v);
     if (decision) decided.push(`${decision.ref} : « ${decision.pack} » → « ${v} »`);
     else if (!allSources.includes(v) && !allSourcesLow.includes(v.toLocaleLowerCase("fr"))) invented.push(`${path} : « ${v} »`);
-    const inPage = /pubmed$/.test(path) ? html.includes(v) : path === "seo.title" ? title === v : path === "seo.description" ? desc === v : text.includes(v) || low_text.includes(v.toLocaleLowerCase("fr"));
+    const inPage = NOT_SHOWN_KEYS.test(path) ? true : /pubmed$/.test(path) ? html.includes(v) : path === "seo.title" ? title === v : path === "seo.description" ? desc === v : text.includes(v) || low_text.includes(v.toLocaleLowerCase("fr"));
     if (!inPage) lost.push(`${path} : « ${v} »`);
   }
   // 3. Complétude : passages du pack présents dans la page
-  let found = 0, missing = [];
+  let found = 0, missing = [], hidden = 0;
   for (const seg of segments(page.md, { labels: page.labels })) {
     const v = norm(seg.text);
     if (DECISIONS.some((d) => norm(d.pack) === v)) continue;
+    if (HIDDEN.some((h) => h.kind === seg.kind)) { hidden++; continue; }
     const ok = seg.html ? html.includes(v) : seg.kind === "référencement" ? title === v || desc === v : text.includes(v) || (seg.ci && low_text.includes(v.toLocaleLowerCase("fr")));
     if (ok) found++;
     else missing.push(`[${seg.kind}] « ${v} »`);
@@ -191,10 +201,17 @@ for (const page of pages) {
   note(lost.length ? `  ✗ Préparés mais absents de la page :\n    ${lost.join("\n    ")}` : "  ✓ Tous les textes préparés sont dans la page");
   note(missing.length ? `  ✗ Passages du pack absents de la page :\n    ${missing.join("\n    ")}` : "  ✓ Aucun passage du pack oublié");
   if (decided.length) note(`  • Remplacements décidés :\n    ${decided.join("\n    ")}`);
+  if (hidden) note(`  • ${hidden} passage(s) du pack volontairement non affiché(s) : ${HIDDEN.map((h) => `${h.why} (${h.ref})`).join(", ")}`);
 }
 
 // Menu et pied de page : libellés issus de la réponse de ChatGPT (menu) et du pack (pied de page)
-const chrome = [...nav.map((n) => n.label), ...footer.groups.flat().map((l) => l.label), footer.contactLabel, footer.legal.label];
+const chrome = [
+  ...nav.flatMap((n) => [n.label, ...(n.children ?? []).map((c) => c.label)]),
+  ...footer.groups.flat().map((l) => l.label),
+  footer.contactLabel,
+  footer.address,
+  footer.legal.label,
+];
 const unknown = chrome.filter((l) => !allSourcesLow.includes(low(l)));
 problems += unknown.length;
 note(`\n■ Menu et pied de page — ${chrome.length} libellés`);

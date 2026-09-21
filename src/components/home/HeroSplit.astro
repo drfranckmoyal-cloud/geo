@@ -1,7 +1,7 @@
 ---
 // Ouverture de l'accueil (07 §7) : très peu de texte, H1 dominant, grand blanc, portrait réel.
-// Le portrait est posé en bas d'un aplat noir doux qui prolonge son fond : la photo garde sa
-// taille réelle (480 px, point 21) sans bord visible.
+// Le portrait (HD, D26) est posé en bas d'un aplat noir doux qui prolonge son fond : aucun bord
+// visible, la photo remplit la largeur de l'aplat.
 import { Picture } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import SectionEyebrow from "../global/SectionEyebrow.astro";
@@ -41,8 +41,8 @@ const { eyebrow, h1, lead, primary, secondary, image, imageAlt } = Astro.props;
         alt={imageAlt}
         formats={["avif", "webp"]}
         fallbackFormat="jpg"
-        widths={[360, 480]}
-        sizes="(min-width: 64em) 30rem, 100vw"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(min-width: 64em) 38vw, 100vw"
         loading="eager"
         fetchpriority="high"
         class="hero__portrait"
@@ -96,7 +96,7 @@ const { eyebrow, h1, lead, primary, secondary, image, imageAlt } = Astro.props;
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: min(92%, 30rem);
+    width: 100%;
     transform: translateX(-50%);
     /* Les épaules, coupées par les bords de la photo, se fondent dans l'aplat noir doux */
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
@@ -120,11 +120,11 @@ const { eyebrow, h1, lead, primary, secondary, image, imageAlt } = Astro.props;
       top: auto;
       width: 100%;
       min-width: 0;
-      aspect-ratio: 1 / 1.06;
-      max-height: 34rem;
+      aspect-ratio: 4 / 5;
+      max-height: 42rem;
     }
     .hero__panel :global(picture) {
-      width: min(100%, 30rem);
+      width: min(100%, 33.6rem);
     }
   }
 </style>

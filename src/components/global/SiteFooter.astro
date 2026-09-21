@@ -34,7 +34,7 @@ import { linkAttrs } from "../../lib/links";
 
     <div class="site-footer__contact">
       <p class="site-footer__label">{footer.contactLabel}</p>
-      <p class="placeholder-text" data-emplacement="adresse">{footer.address}</p>
+      <address class="site-footer__address">{footer.address}</address>
       <p class="placeholder-text" data-emplacement="téléphone">{footer.phone}</p>
       <a href={site.rdv.href} {...linkAttrs(site.rdv.href)}>{site.rdv.label}</a>
     </div>
@@ -103,6 +103,9 @@ import { linkAttrs } from "../../lib/links";
   }
   .site-footer__contact > a {
     display: inline-block;
+  }
+  .site-footer__address {
+    font-style: normal;
   }
   .site-footer__label {
     font-size: var(--fs-meta);

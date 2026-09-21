@@ -11,13 +11,13 @@ import InlineEvidenceLinks from "../components/editorial/InlineEvidenceLinks.ast
 import FinalCTA from "../components/home/FinalCTA.astro";
 import Section from "../components/global/Section.astro";
 import Container from "../components/global/Container.astro";
-import portrait from "../assets/photos/portrait-franck.png";
+import portrait from "../assets/photos/portrait-franck.jpg";
 import { franck } from "../content/franck";
 import { site } from "../content/site";
 import { plain } from "../lib/typo";
 import { abs, graph, person, website } from "../lib/schema";
 
-const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const og = await getImage({ src: portrait, format: "jpg", width: 800 });
 const schema = graph([
   website(),
   {
@@ -89,8 +89,8 @@ const schema = graph([
     grid-column: 3 / span 9;
     font-family: var(--f-serif);
     font-size: var(--fs-h3);
-    font-weight: 500;
-    line-height: 1.36;
+    font-weight: var(--fw-display);
+    line-height: 1.38;
     letter-spacing: -0.008em;
     text-wrap: pretty;
   }

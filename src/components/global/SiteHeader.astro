@@ -1,13 +1,15 @@
 ---
-// En-tête (V15, menu figé V23) : fin et aéré, monogramme à gauche (mène à l'accueil),
-// menu à droite, bouton rendez-vous discret mais visible. Il se compacte légèrement au
-// défilement. Sur mobile : un simple « Menu », sans panneau animé.
+// En-tête (V15, menu figé V23, sous-menus D18) : fin et aéré, monogramme à gauche (mène à
+// l'accueil), menu à droite, bouton rendez-vous discret mais visible. Deux rubriques groupées
+// ouvrent un petit sous-menu. Il se compacte légèrement au défilement.
+// Sur mobile : un simple « Menu », sans panneau animé ; barre compacte (D23).
 import Logo from "../ui/Logo.astro";
 import PrimaryButton from "./PrimaryButton.astro";
 import { nav, site } from "../../content/site";
 import { linkAttrs } from "../../lib/links";
 
 const current = Astro.url.pathname;
+const isCurrent = (href?: string) => (href && current === href ? "page" : undefined);
 ---
 
 <header class="site-header" data-header>
@@ -18,15 +20,40 @@ const current = Astro.url.pathname;
     </a>
 
     <nav class="primary-nav" aria-label="Navigation principale">
-      <ul>
+      <ul class="primary-nav__list">
         {
-          nav.map((item) => (
-            <li>
-              <a href={item.href} aria-current={current === item.href ? "page" : undefined} {...linkAttrs(item.href)}>
-                {item.label}
-              </a>
-            </li>
-          ))
+          nav.map((item, i) =>
+            item.children ? (
+              <li class="has-sub" data-subnav>
+                <button
+                  type="button"
+                  class:list={["nav-group", item.children.some((c) => c.href === current) && "is-current"]}
+                  aria-expanded="false"
+                  aria-controls={`sous-menu-${i}`}
+                >
+                  <span>{item.label}</span>
+                  <svg class="nav-group__chevron" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+                    <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.1" />
+                  </svg>
+                </button>
+                <ul class="subnav" id={`sous-menu-${i}`} hidden>
+                  {item.children.map((child) => (
+                    <li>
+                      <a href={child.href} aria-current={isCurrent(child.href)} {...linkAttrs(child.href)}>
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a class="nav-link" href={item.href} aria-current={isCurrent(item.href)} {...linkAttrs(item.href!)}>
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
         }
       </ul>
     </nav>
@@ -38,13 +65,28 @@ const current = Astro.url.pathname;
       <nav class="mobile-nav__panel" aria-label="Navigation principale">
         <ul>
           {
-            nav.map((item) => (
-              <li>
-                <a href={item.href} aria-current={current === item.href ? "page" : undefined} {...linkAttrs(item.href)}>
-                  {item.label}
-                </a>
-              </li>
-            ))
+            nav.map((item) =>
+              item.children ? (
+                <li class="mobile-group">
+                  <p class="mobile-group__label">{item.label}</p>
+                  <ul>
+                    {item.children.map((child) => (
+                      <li>
+                        <a href={child.href} aria-current={isCurrent(child.href)} {...linkAttrs(child.href)}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li>
+                  <a class="mobile-nav__link" href={item.href} aria-current={isCurrent(item.href)} {...linkAttrs(item.href!)}>
+                    {item.label}
+                  </a>
+                </li>
+              ),
+            )
           }
         </ul>
       </nav>
@@ -53,12 +95,48 @@ const current = Astro.url.pathname;
 </header>
 
 <script>
+  // En-tête qui se compacte au défilement
   const header = document.querySelector<HTMLElement>("[data-header]");
   if (header) {
     const update = () => header.toggleAttribute("data-scrolled", window.scrollY > 24);
     update();
     window.addEventListener("scroll", update, { passive: true });
   }
+
+  // Sous-menus : ouverture au clic ou au clavier ; fermeture par Échap, clic à côté, ou en
+  // quittant le groupe au clavier. Sans JavaScript, les liens restent dans la page.
+  const groups = [...document.querySelectorAll<HTMLElement>("[data-subnav]")];
+  const parts = (g: HTMLElement) => ({
+    button: g.querySelector<HTMLButtonElement>("button")!,
+    list: g.querySelector<HTMLElement>(".subnav")!,
+  });
+  const close = (g: HTMLElement) => {
+    const { button, list } = parts(g);
+    button.setAttribute("aria-expanded", "false");
+    list.hidden = true;
+  };
+  const open = (g: HTMLElement) => {
+    groups.forEach((other) => other !== g && close(other));
+    const { button, list } = parts(g);
+    button.setAttribute("aria-expanded", "true");
+    list.hidden = false;
+  };
+  groups.forEach((g) => {
+    const { button } = parts(g);
+    button.addEventListener("click", () => (button.getAttribute("aria-expanded") === "true" ? close(g) : open(g)));
+    g.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        close(g);
+        button.focus();
+      }
+    });
+    g.addEventListener("focusout", (e) => {
+      if (!g.contains(e.relatedTarget as Node | null)) close(g);
+    });
+  });
+  document.addEventListener("click", (e) => {
+    groups.forEach((g) => !g.contains(e.target as Node) && close(g));
+  });
 </script>
 
 <style>
@@ -98,29 +176,35 @@ const current = Astro.url.pathname;
   .lockup__name {
     font-family: var(--f-serif);
     font-size: 1.375rem;
-    font-weight: 500;
+    font-weight: var(--fw-display);
     letter-spacing: -0.005em;
     white-space: nowrap;
   }
 
+  /* Menu principal */
   .primary-nav {
     margin-left: auto;
   }
-  .primary-nav ul {
+  .primary-nav__list {
     display: flex;
     align-items: center;
     gap: clamp(1.25rem, 1.9vw, 1.875rem);
   }
-  .primary-nav a,
+  .nav-link,
+  .nav-group,
   .mobile-nav summary {
+    font-family: var(--f-sans);
     font-size: var(--fs-meta);
     font-weight: 500;
     letter-spacing: 0.01em;
     color: var(--c-ink);
     white-space: nowrap;
   }
-  .primary-nav a {
-    display: inline-block;
+  .nav-link,
+  .nav-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     padding-block: 0.5rem;
     text-decoration: underline;
     text-decoration-color: transparent;
@@ -130,18 +214,66 @@ const current = Astro.url.pathname;
       text-decoration-color var(--t-hover) var(--ease),
       color var(--t-hover) var(--ease);
   }
-  .primary-nav a:hover {
+  .nav-group {
+    padding-inline: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .nav-link:hover,
+  .nav-group:hover,
+  .nav-group[aria-expanded="true"] {
     color: var(--c-sage);
     text-decoration-color: var(--c-sage);
   }
-  .primary-nav a[aria-current="page"] {
+  .nav-link[aria-current="page"],
+  .nav-group.is-current {
     text-decoration-color: var(--c-ink);
   }
+  .nav-group__chevron {
+    width: 0.625rem;
+    height: 0.375rem;
+    flex: none;
+  }
+
+  /* Sous-menu : un simple panneau blanc cassé bordé d'un filet, sans ombre (08 B) */
+  .has-sub {
+    position: relative;
+  }
+  .subnav {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: -1.25rem;
+    z-index: 60;
+    min-width: 16rem;
+    padding: 0.625rem 0;
+    background: var(--c-paper);
+    border: 1px solid var(--c-stone);
+  }
+  .subnav[hidden] {
+    display: none;
+  }
+  .subnav a {
+    display: block;
+    padding: 0.6rem 1.25rem;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color var(--t-hover) var(--ease);
+  }
+  .subnav a:hover,
+  .subnav a[aria-current="page"] {
+    color: var(--c-sage);
+  }
+
   :global(.site-header__cta) {
     flex: none;
     margin-left: clamp(1rem, 1.6vw, 1.75rem);
   }
 
+  /* Menu mobile */
   .mobile-nav {
     display: none;
   }
@@ -166,24 +298,46 @@ const current = Astro.url.pathname;
     top: 100%;
     left: 0;
     right: 0;
+    max-height: calc(100svh - var(--header-h));
+    overflow-y: auto;
     padding: 0.5rem var(--gutter) 2rem;
     background: var(--c-paper);
     border-top: 1px solid var(--c-stone);
     border-bottom: 1px solid var(--c-stone);
   }
-  .mobile-nav__panel li {
+  .mobile-nav__panel > ul > li {
     border-bottom: 1px solid var(--c-stone);
   }
-  .mobile-nav__panel a {
+  .mobile-nav__link {
     display: block;
     padding: 1rem 0;
     font-family: var(--f-serif);
     font-size: 1.625rem;
-    font-weight: 500;
+    font-weight: var(--fw-display);
     line-height: 1.2;
     text-decoration: none;
   }
-  .mobile-nav__panel a[aria-current="page"] {
+  .mobile-group {
+    padding-block: 1rem 0.625rem;
+  }
+  .mobile-group__label {
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-sage);
+  }
+  .mobile-group a {
+    display: block;
+    padding: 0.5rem 0;
+    font-family: var(--f-serif);
+    font-size: 1.3125rem;
+    font-weight: var(--fw-display);
+    line-height: 1.25;
+    text-decoration: none;
+  }
+  .mobile-nav__link[aria-current="page"],
+  .mobile-group a[aria-current="page"] {
     color: var(--c-sage);
   }
 
@@ -200,7 +354,8 @@ const current = Astro.url.pathname;
     }
   }
   /* Sur ordinateur, le nom figure déjà dans le menu : le monogramme suffit à gauche.
-     Sur petit téléphone, la place manque : le nom s'efface aussi. */
+     Sur petit téléphone, la place manque : le nom s'efface aussi. Il reste lu par les
+     lecteurs d'écran. */
   @media (min-width: 77.5em), (max-width: 34.99em) {
     .lockup__name {
       position: absolute;
@@ -211,9 +366,27 @@ const current = Astro.url.pathname;
       white-space: nowrap;
     }
   }
+  /* En-tête mobile compact (D23) : une barre de navigation, pas un bandeau de conversion */
+  @media (max-width: 47.99em) {
+    .site-header__inner,
+    .site-header[data-scrolled] .site-header__inner {
+      height: 4rem;
+    }
+    .mobile-nav__panel {
+      max-height: calc(100svh - 4rem);
+    }
+  }
   @media (max-width: 34.99em) {
     .lockup :global(.lockup__mark) {
-      width: 3rem;
+      width: 3.25rem;
+    }
+    .mobile-nav summary {
+      font-size: var(--fs-small);
+    }
+    :global(a.site-header__cta.btn--header) {
+      min-height: 2.5rem;
+      padding: 0 1rem;
+      font-size: var(--fs-meta);
     }
   }
 </style>

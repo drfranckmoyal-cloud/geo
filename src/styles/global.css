@@ -66,10 +66,15 @@ h1,
 h2,
 h3 {
   font-family: var(--f-serif);
-  font-weight: 500;
+  font-weight: var(--fw-display);
+  font-optical-sizing: auto;
   color: inherit;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.006em;
   text-wrap: balance;
+}
+
+h3 {
+  font-weight: var(--fw-heading);
 }
 
 p,

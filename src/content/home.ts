@@ -1,5 +1,6 @@
 // Page d'accueil — textes repris à l'identique de docs/golden-master/v1.3.1/02_HOME.md.
-// Seule exception : le titre Google (D6, verrou V21 — « dentiste esthétique » proscrit).
+// Exceptions décidées : le titre Google (D6, verrou V21 — « dentiste esthétique » proscrit) ;
+// l'étape « Simuler » rétablie (D17), avec un texte provisoire repris de 00 §5 (§6, point 27).
 
 export const home = {
   seo: {
@@ -12,7 +13,7 @@ export const home = {
     h1: "Dentisterie esthétique, adhésive et usures dentaires à Paris",
     lead: "Préserver les tissus dentaires, comprendre avant de traiter et reconstruire lorsque c’est nécessaire.",
     ctaPrimary: "Prendre rendez-vous",
-    ctaSecondary: { label: "Découvrir ma démarche", href: "#methode" }, // destination à confirmer (§6, point 8)
+    ctaSecondary: { label: "Découvrir ma démarche", href: "#methode" }, // validé par ChatGPT (D25)
   },
   pillars: {
     title: "Deux axes de pratique, une même exigence",
@@ -44,6 +45,7 @@ export const home = {
       { name: "Documenter", text: "photographies, scans 3D, examens nécessaires." },
       { name: "Analyser", text: "esthétique, fonction, tissus, causes." },
       { name: "Planifier", text: "simulation et projet lorsque pertinent." },
+      { name: "Simuler", text: "simulation 2D / 3D / dynamique selon les cas." },
       { name: "Décider ensemble", text: "options, avantages, limites, niveau d’intervention." },
       { name: "Traiter", text: "uniquement si le bénéfice est réel." },
     ],

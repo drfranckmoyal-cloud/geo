@@ -54,9 +54,8 @@ const { items } = Astro.props;
   .pathway a::before {
     content: counter(path, decimal-leading-zero);
     font-family: var(--f-serif);
-    font-style: italic;
-    font-size: 1.125rem;
-    font-weight: 500;
+    font-size: 1.0625rem;
+    font-weight: var(--fw-heading);
     color: var(--c-sage);
   }
   .pathway a:hover .pathway__label {

@@ -10,12 +10,12 @@ import MethodSteps from "../components/home/MethodSteps.astro";
 import AuthorityStrip from "../components/home/AuthorityStrip.astro";
 import FinalCTA from "../components/home/FinalCTA.astro";
 import TextImageSection from "../components/editorial/TextImageSection.astro";
-import portrait from "../assets/photos/portrait-franck.png";
+import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { site } from "../content/site";
 import { abs, graph, person, website } from "../lib/schema";
 
-const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const og = await getImage({ src: portrait, format: "jpg", width: 800 });
 const schema = graph([website(), person(abs(og.src))]);
 ---
 

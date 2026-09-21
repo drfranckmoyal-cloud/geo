@@ -1,6 +1,8 @@
 ---
-// Sources scientifiques (verrou V22) : visibles en bas de page, liens externes discrets
-// (rel="noopener noreferrer"), une ancre par référence pour les renvois [1]…[7].
+// Sources scientifiques (verrous V22, D19) : les références restent toutes dans la page (HTML),
+// citation propre, DOI et PubMed discrets (rel="noopener noreferrer"), une ancre par référence
+// pour les renvois [1]…[7]. Les notes de travail « Soutient : » ne sont pas affichées.
+// Sur mobile, la liste se replie derrière « Voir les 7 sources scientifiques ».
 import Section from "../global/Section.astro";
 import EditorialH2 from "../global/EditorialH2.astro";
 import { plain } from "../../lib/typo";
@@ -13,18 +15,18 @@ interface Source {
   details: string;
   doi: string;
   pubmed: string;
-  supports: string;
 }
 interface Props {
   id?: string;
   title: string;
   intro: string;
+  toggle: string;
   items: Source[];
   verifiedLabel: string;
   verifiedDate: string;
   verifiedIso: string;
 }
-const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifiedIso } = Astro.props;
+const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate, verifiedIso } = Astro.props;
 ---
 
 <Section id={id} labelledby={`${id}-titre`} spacing="compact">
@@ -34,35 +36,54 @@ const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifi
       <p class="sources__intro" set:html={plain(intro)} />
     </div>
     <div class="sources__body">
-      <ol class="sources__list">
-        {
-          items.map((s) => (
-            <li id={`source-${s.n}`} class="source">
-              <span class="source__n">[{s.n}]</span>
-              <div>
-                <p class="source__ref">
-                  <strong>{s.authors}</strong> {s.title} <em>{s.journal}</em> {s.details}
-                </p>
-                <p class="source__links">
-                  <a href={`https://doi.org/${s.doi}`} target="_blank" rel="noopener noreferrer">
-                    DOI : {s.doi}
-                  </a>
-                  <a href={s.pubmed} target="_blank" rel="noopener noreferrer">
-                    PubMed
-                  </a>
-                </p>
-                <p class="source__supports" set:html={plain(`Soutient : ${s.supports}`)} />
-              </div>
-            </li>
-          ))
-        }
-      </ol>
+      <details class="sources__details" open data-sources>
+        <summary class="sources__toggle">
+          <span>{toggle}</span>
+          <svg viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+            <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.1" />
+          </svg>
+        </summary>
+        <ol class="sources__list">
+          {
+            items.map((s) => (
+              <li id={`source-${s.n}`} class="source">
+                <span class="source__n">[{s.n}]</span>
+                <div>
+                  <p class="source__ref">
+                    <strong>{s.authors}</strong> {s.title} <em>{s.journal}</em> {s.details}
+                  </p>
+                  <p class="source__links">
+                    <a href={`https://doi.org/${s.doi}`} target="_blank" rel="noopener noreferrer">
+                      DOI : {s.doi}
+                    </a>
+                    <a href={s.pubmed} target="_blank" rel="noopener noreferrer">
+                      PubMed
+                    </a>
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </details>
       <p class="sources__verified">
         {verifiedLabel}&nbsp;: <time datetime={verifiedIso}>{verifiedDate}</time>
       </p>
     </div>
   </div>
 </Section>
+
+<script>
+  // Repli sur mobile ; ouvert partout ailleurs, et partout si JavaScript est absent.
+  const details = document.querySelector<HTMLDetailsElement>("[data-sources]");
+  if (details && window.matchMedia("(max-width: 47.99em)").matches) details.open = false;
+  // Un renvoi [n] cliqué alors que la liste est repliée : on l'ouvre.
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#source-"]').forEach((a) =>
+    a.addEventListener("click", () => {
+      if (details) details.open = true;
+    }),
+  );
+</script>
 
 <style>
   .sources {
@@ -80,6 +101,9 @@ const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifi
   }
   .sources__body {
     grid-column: 6 / span 7;
+  }
+  .sources__toggle {
+    display: none;
   }
   .source {
     display: grid;
@@ -114,16 +138,12 @@ const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifi
   .source__links a:hover {
     text-decoration-color: currentColor;
   }
-  .source__supports {
-    margin-top: 0.35rem;
-    font-size: var(--fs-meta);
-    color: var(--c-ink-soft);
-  }
   .sources__verified {
     margin-top: 1.5rem;
     font-size: var(--fs-meta);
     color: var(--c-ink-soft);
   }
+
   @media (max-width: 63.99em) {
     .sources__head,
     .sources__body {
@@ -131,6 +151,33 @@ const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifi
     }
     .sources__body {
       margin-top: 2rem;
+    }
+  }
+  @media (max-width: 47.99em) {
+    .sources__toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-block: 1rem;
+      border-top: 1px solid var(--c-stone);
+      border-bottom: 1px solid var(--c-stone);
+      font-size: var(--fs-small);
+      font-weight: 500;
+      list-style: none;
+      cursor: pointer;
+    }
+    .sources__toggle::-webkit-details-marker {
+      display: none;
+    }
+    .sources__toggle svg {
+      width: 0.75rem;
+      height: 0.45rem;
+    }
+    .sources__details[open] .sources__toggle svg {
+      transform: scaleY(-1);
+    }
+    .sources__details[open] .sources__list .source:first-child {
+      border-top: 0;
     }
   }
 </style>

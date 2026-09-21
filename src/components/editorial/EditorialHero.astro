@@ -23,8 +23,8 @@ const { h1, lead, image, imageAlt } = Astro.props;
         alt={imageAlt}
         formats={["avif", "webp"]}
         fallbackFormat="jpg"
-        widths={[360, 480]}
-        sizes="(min-width: 64em) 30rem, 100vw"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(min-width: 64em) 36rem, 100vw"
         loading="eager"
         fetchpriority="high"
       />
@@ -48,7 +48,10 @@ const { h1, lead, image, imageAlt } = Astro.props;
     padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
   }
   .ehero__text {
-    grid-column: 7 / span 6;
+    grid-column: 6 / span 7;
+  }
+  .ehero__text :global(.ehero__title) {
+    text-wrap: pretty;
   }
   .ehero__text :global(.ehero__lead) {
     margin-top: var(--gap-title-text);
@@ -60,7 +63,7 @@ const { h1, lead, image, imageAlt } = Astro.props;
     top: clamp(1.5rem, 3vw, 3rem);
     bottom: 0;
     left: 0;
-    width: 46%;
+    width: 40%;
   }
   .ehero__panel {
     position: absolute;
@@ -72,7 +75,7 @@ const { h1, lead, image, imageAlt } = Astro.props;
     position: absolute;
     bottom: 0;
     right: 8%;
-    width: min(84%, 30rem);
+    width: min(84%, 36rem);
     /* Les épaules, coupées par les bords de la photo, se fondent dans l'aplat noir doux */
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
@@ -82,25 +85,17 @@ const { h1, lead, image, imageAlt } = Astro.props;
     height: auto;
   }
 
-  @media (min-width: 64em) and (max-width: 79.99em) {
-    .ehero__text {
-      grid-column: 6 / span 7;
-    }
-    .ehero__media {
-      width: 40%;
-    }
-  }
   @media (max-width: 63.99em) {
     .ehero__media {
       position: relative;
       top: auto;
       width: 100%;
-      aspect-ratio: 1 / 1.06;
-      max-height: 34rem;
+      aspect-ratio: 4 / 5;
+      max-height: 42rem;
     }
     .ehero__panel :global(picture) {
       right: 50%;
-      width: min(100%, 30rem);
+      width: min(100%, 33.6rem);
       transform: translateX(50%);
     }
     .ehero__inner {
