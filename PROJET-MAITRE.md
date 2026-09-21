@@ -101,6 +101,10 @@ sources et une date de vérification bibliographique. Cinq passages sont reformu
 coller aux sources : le bloc de réponse directe, les sections 2, 3 et 5, et le second
 paragraphe de la section 6. Les 9 autres fichiers sont identiques à la V1.3.
 
+**Compléments en vigueur**, en attendant leur intégration par ChatGPT dans une prochaine
+version du pack : `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` (menu de
+l'en-tête, intertitres et textes de la section 2 de la page Usures, lien Bruxisme — D10 à D13).
+
 **Historique :** V1.3 — `GOLDEN_MASTER_FRANCK_MOYAL_V1_3.zip`, reçu le 21/09/2026 (fichiers
 datés du 21/09/2026, 16 h 22), 10 fichiers, archivés **sans aucune modification** dans
 `docs/golden-master/v1.3/` (copies vérifiées identiques aux originaux).
@@ -181,12 +185,13 @@ rendu sera jugé :
   pas d'ambiance trop sombre, aucun visuel de dent générique, FAQ lisible, sources et
   auteur présents.
 
-**Ajoutés le 21/09/2026, après les réponses de Franck :**
+**Ajoutés le 21/09/2026, après les réponses de Franck et de ChatGPT :**
 
 | # | Verrou |
 |---|---|
 | V21 | **Jamais « dentiste esthétique »**, nulle part sur le site ni dans ses informations pour les moteurs. On écrit « dentisterie esthétique », ou « exercice exclusif en dentisterie esthétique ». Règle de Franck, du 21/09/2026 (D6). « Quel dentiste esthétique à Paris ? » reste une question que les patients posent (00 §1), mais le site ne reprend jamais l'expression. |
 | V22 | **Sources scientifiques de la page Usures** : une section « Sources scientifiques » visible en bas de page, avec des liens externes discrets ; les 5 à 7 références principales, repliables ou en fin de page ; pas de paragraphe interrompu par une bibliographie lourde ; les renvois `[1]`, `[2]`… conservés s'ils restent discrets ; liens sortants en `rel="noopener noreferrer"` ; ne jamais présenter la conclusion d'une étude comme plus forte qu'elle ne l'est. (04, V1.3.1) |
+| V23 | **Menu de l'en-tête, figé** : à gauche, le nom et le logo « Dr Franck Moyal », qui mènent à l'accueil (pas de rubrique « Accueil ») ; puis Dentisterie esthétique · Usures dentaires · Érosion & TCA · Dr Franck Moyal · Publications & enseignement ; à droite, le bouton « Prendre rendez-vous ». « Publications & enseignement » pourra ouvrir plus tard sur Publications, Conférences & formations, Activité hospitalière, Médias. Affiché dès le golden master, même si les pages n'existent pas encore. (ChatGPT, 21/09/2026 — D10) |
 
 ---
 
@@ -203,6 +208,10 @@ rendu sera jugé :
 | D7 | **Page Usures : le fichier corrigé par Franck remplace l'original** → pack V1.3.1 (§3), avec ses sources scientifiques (verrou V22). | 21/09/2026 |
 | D8 | **Prise de rendez-vous : en attente.** Le bouton « Prendre rendez-vous » garde un emplacement réservé, de même que l'adresse et le téléphone du cabinet. | 21/09/2026 |
 | D9 | **Domaine** : Franck demande à Claude de préparer la réservation de `drfranckmoyal.fr` sur son compte OVH, déjà ouvert dans Chrome. La commande n'est passée qu'après son « oui » explicite sur le récapitulatif (prix, moyen de paiement). | 21/09/2026 |
+| D10 | **Menu de l'en-tête** : celui décrit au verrou V23 (réponse de ChatGPT au point 17). | 21/09/2026 |
+| D11 | **Intertitres de la page Usures** : chaque section garde son libellé comme petite étiquette au-dessus du grand titre (H2). Section 5 : étiquette « Faut-il toujours traiter une usure dentaire ? », titre « Non : toutes les usures ne nécessitent pas une reconstruction » (au lieu de « Non. » seul). Réponse de ChatGPT au point 18. | 21/09/2026 |
+| D12 | **Section 2 de la page Usures** : les quatre sous-parties reçoivent leur texte (« Attrition et contraintes mécaniques », « Érosion dentaire », « Abrasion », « Usures multifactorielles »), rédigé par ChatGPT (point 19). | 21/09/2026 |
+| D13 | **Lien Bruxisme** : « Comprendre le bruxisme et son rôle dans l'usure dentaire » → `/bruxisme-usure-dentaire/`, dans la section 2 de la page Usures (point 20). | 21/09/2026 |
 
 ---
 
@@ -230,12 +239,9 @@ décision.
 | 14 | **Auteur de la page Usures** : exigé (08 E « sources et auteur présents » ; 04 : auteur `Person#franck-moyal` dans les données structurées), mais sa présentation visible n'est pas précisée. Le composant `AuthorBlock` existe (05, famille Éditorial / Profil). Une date de mise à jour, absente du pack, serait utile aux moteurs. | `AuthorBlock` avec le nom, le titre et le lien repris de la page Franck, sans texte nouveau ; pas de date. | ChatGPT. |
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
-| 17 | **Menu de l'en-tête** : son contenu n'est pas précisé (07 §12 dit seulement « navigation centrale ou droite » ; 07 §13 ne décrit que le pied de page). Choisir les rubriques touche à l'arborescence (V3). | Les deux piliers et la page Franck, avec les libellés du pack, plus le bouton « Prendre rendez-vous ». | ChatGPT. |
-| 18 | **Intertitres de la page Usures** : trois libellés de section de 04 sont des questions (« Comment reconnaître une usure ? », « Pourquoi les dents s'usent-elles ? », « Faut-il toujours traiter ? »), mais les « Titres » correspondants n'en sont pas (« Quand les dents commencent à changer », « Le bruxisme n'explique pas tout », « Non. »). Or 00 §10 veut des H2 formulés comme des questions ou des intentions, et 06 interdit de modifier les titres. | Le « Titre » en intertitre (H2), la question affichée juste au-dessus en petite étiquette (composant `SectionEyebrow`). | ChatGPT. |
-| 19 | **Sous-blocs de la section 2 de la page Usures** (« Attrition / contraintes mécaniques », « Érosion dentaire », « Abrasion », « Usures multifactorielles ») : des intitulés, sans texte. | Les quatre intitulés affichés seuls, signalés « texte à confirmer » dans le rapport. | ChatGPT. |
-| 20 | **Lien vers `/bruxisme-usure-dentaire/`** : il figure dans les « liens internes prioritaires » de la page Usures, mais sans intitulé ni place dans le texte. | Bloc « pages liées » en fin de page (composant `RelatedPages`), avec un emplacement d'intitulé signalé. | ChatGPT (intitulé). |
 | 21 | **Résolution du portrait** : 480 × 480 pixels. Affiché en grand (page Franck : « portrait dominant »), il paraîtra flou, surtout sur les écrans haute définition (Mac, téléphones récents), qui demandent 2 à 3 fois plus de pixels. | Photo utilisée à une taille raisonnable et harmonisée avec la palette (noir doux et blanc cassé à la place du noir et du blanc purs). | Franck : fournir l'original en haute définition (idéalement 2 000 pixels ou plus de large). |
 | 22 | **Notes « Soutient : » des sources** : chaque référence du fichier Usures est suivie d'une note expliquant ce qu'elle soutient. Le fichier ne dit pas si ces notes s'affichent. | Affichées en petit sous chaque référence : elles relient chaque source au texte. | ChatGPT. |
+| 23 | **Destination de « Érosion & TCA » dans le menu** : non précisée. L'arborescence a `/erosion-dentaire/` et `/tca-dents/`. De même, « Publications & enseignement » n'a pas encore de page à lui. | « Érosion & TCA » → `/tca-dents/`, la page de l'expertise spécifique ; « Publications & enseignement » → `/publications/`. | ChatGPT, pour confirmer. |
 
 ### Tranchés
 
@@ -243,6 +249,10 @@ décision.
 - **Logo** (ancien point 4) → le monogramme « Fm » avec l'arc vert sauge (D4).
 - **Portrait** (partie du point 10) → la photo en noir et blanc fournie par Franck (D5) ; voir le point 21 pour sa résolution.
 - **« Dentiste esthétique »** (partie du point 15) → proscrit (D6, V21).
+- **Menu de l'en-tête** (ancien point 17) → figé par ChatGPT (D10, V23).
+- **Intertitres de la page Usures** (ancien point 18) → étiquette + grand titre ; nouveau titre pour la section 5 (D11).
+- **Sous-blocs de la section 2** (ancien point 19) → textes fournis par ChatGPT (D12).
+- **Lien Bruxisme** (ancien point 20) → intitulé fourni par ChatGPT (D13).
 
 ---
 
@@ -326,6 +336,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Lecture intégrale des 10 fichiers. Projet et fichier maître créés ; pack archivé à l'identique (copies vérifiées). Vérifications : le domaine `drfranckmoyal.fr` n'est pas réservé ; deux logos trouvés sur le Bureau ; 16 points relevés (§6). L'enregistrement dans git et l'envoi sur GitHub ont été bloqués par le système de permissions de la session. | Accord de Franck attendu pour GitHub ; feu vert attendu pour l'étape 1 |
 | 21/09/2026 | C | Relecture indépendante du fichier maître contre le pack, par un second agent : 1 erreur (les captures du « hero » traduites par « en-tête »), 10 imprécisions, 5 oublis. Tout est corrigé ; deux verrous ajoutés (V19, V20) et quatre questions (§6, points 17 à 20). | — |
 | 21/09/2026 | F | Réponses : (1) « Je suis connecté à mon compte OVH sur Chrome, prends la main » pour le domaine ; (2) fichier Usures corrigé, avec les sources ; (3) rendez-vous mis en attente ; (4) logo = monogramme « Fm », portrait fourni ; (5) « ne jamais écrire “dentiste esthétique” mais “dentisterie esthétique” ou “exercice exclusif en dentisterie esthétique” ». Accord pour GitHub ; feu vert pour construire les 3 pages. | D4 à D9, V21, V22, pack V1.3.1 |
+| 21/09/2026 | G | Réponse aux points 17 à 20, archivée dans `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` : menu figé ; étiquette + grand titre validés, mais « Non. » seul refusé ; textes des quatre sous-parties ; lien Bruxisme. ChatGPT corrige aussi Claude : aucune règle de Google ne dit que les intertitres en forme de question sont préférés. | D10 à D13, V23 |
 | 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH, en attente du « oui » de Franck. | Étape 1 |
 
 ---
