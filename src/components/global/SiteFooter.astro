@@ -1,0 +1,139 @@
+---
+// Pied de page (V15) : calme, utile aux moteurs — piliers, page Franck, publications,
+// activité hospitalière, contact, mentions légales. Pas de mur de liens.
+import Logo from "../ui/Logo.astro";
+import { footer, site } from "../../content/site";
+import { linkAttrs } from "../../lib/links";
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="site-footer__lockup" href="/">
+        <Logo class="site-footer__mark" />
+        <span>{site.name}</span>
+      </a>
+      <p>{site.role}</p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Pied de page">
+      {
+        footer.groups.map((group) => (
+          <ul>
+            {group.map((link) => (
+              <li>
+                <a href={link.href} {...linkAttrs(link.href)}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </nav>
+
+    <div class="site-footer__contact">
+      <p class="site-footer__label">{footer.contactLabel}</p>
+      <p class="placeholder-text" data-emplacement="adresse">{footer.address}</p>
+      <p class="placeholder-text" data-emplacement="téléphone">{footer.phone}</p>
+      <a href={site.rdv.href} {...linkAttrs(site.rdv.href)}>{site.rdv.label}</a>
+    </div>
+  </div>
+
+  <div class="container site-footer__legal">
+    <p>© 2026 {site.name}</p>
+    <a href={footer.legal.href} {...linkAttrs(footer.legal.href)}>{footer.legal.label}</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(3.5rem, 2.5rem + 3vw, 5rem) 2rem;
+    background: var(--c-paper);
+    border-top: 1px solid var(--c-stone);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .site-footer a {
+    text-decoration: none;
+  }
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 2.5rem;
+  }
+  .site-footer__brand {
+    grid-column: 1 / span 4;
+  }
+  .site-footer__lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    font-family: var(--f-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .site-footer__lockup:hover {
+    text-decoration: none !important;
+  }
+  .site-footer__lockup :global(.site-footer__mark) {
+    width: 3.5rem;
+  }
+  .site-footer__brand p {
+    margin-top: 0.875rem;
+    color: var(--c-ink-soft);
+  }
+  .site-footer__nav {
+    grid-column: 5 / span 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--col-gap);
+  }
+  .site-footer__nav li + li,
+  .site-footer__contact > * + * {
+    margin-top: 0.5rem;
+  }
+  .site-footer__contact {
+    grid-column: 10 / span 3;
+  }
+  .site-footer__contact > a {
+    display: inline-block;
+  }
+  .site-footer__label {
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-sage);
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--c-stone);
+    font-size: var(--fs-meta);
+    color: var(--c-ink-soft);
+  }
+
+  @media (max-width: 63.99em) {
+    .site-footer__brand,
+    .site-footer__nav,
+    .site-footer__contact {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 34.99em) {
+    .site-footer__nav {
+      grid-template-columns: 1fr;
+      row-gap: 0.5rem;
+    }
+  }
+</style>

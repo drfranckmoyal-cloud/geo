@@ -1,0 +1,27 @@
+---
+// Monogramme « Fm » (D4), vectorisé par scripts/prepare-images.mjs.
+// Décoratif quand le nom est écrit à côté ; sinon il porte le nom pour les lecteurs d'écran.
+import raw from "../../assets/brand/logo-fm.svg?raw";
+
+interface Props {
+  class?: string;
+  decorative?: boolean;
+}
+const { class: cls, decorative = true } = Astro.props;
+const svg = decorative
+  ? raw.replace('role="img" aria-label="Dr Franck Moyal"', 'aria-hidden="true" focusable="false"')
+  : raw;
+---
+
+<span class:list={["logo", cls]} set:html={svg} />
+
+<style>
+  .logo {
+    display: inline-block;
+    line-height: 0;
+  }
+  .logo :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+</style>

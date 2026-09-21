@@ -1,0 +1,197 @@
+---
+// Page 3 — Usures dentaires (04_USURES_DENTAIRES.md, V1.3.1 + compléments D11–D13).
+// Ordre du pack (V3) : ouverture, réponse directe, sections 1 à 8, FAQ, appel final, sources.
+// Chaque section garde son libellé du pack en petite étiquette au-dessus du titre (D11).
+import { getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ClinicalHero from "../components/clinical/ClinicalHero.astro";
+import DirectAnswer from "../components/clinical/DirectAnswer.astro";
+import ClinicalPathway from "../components/clinical/ClinicalPathway.astro";
+import SymptomList from "../components/clinical/SymptomList.astro";
+import FAQAccordion from "../components/clinical/FAQAccordion.astro";
+import SourceList from "../components/clinical/SourceList.astro";
+import RelatedPages from "../components/clinical/RelatedPages.astro";
+import TextImageSection from "../components/editorial/TextImageSection.astro";
+import PullStatement from "../components/editorial/PullStatement.astro";
+import AuthorBlock from "../components/editorial/AuthorBlock.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
+import TextLink from "../components/global/TextLink.astro";
+import BodyText from "../components/global/BodyText.astro";
+import MediaFrame from "../components/ui/MediaFrame.astro";
+import Container from "../components/global/Container.astro";
+import portrait from "../assets/photos/portrait-franck.png";
+import { usures as u } from "../content/usures";
+import { franck } from "../content/franck";
+import { site } from "../content/site";
+import { plain } from "../lib/typo";
+import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
+
+const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const sections = [u.recognize, u.causes, u.prevention, u.diagnosis, u.treat, u.rehab, u.smile, u.erosion];
+const crumbs = [
+  { label: "Accueil", href: "/" },
+  { label: "Usures dentaires", href: "/usures-dentaires/" },
+];
+const schema = graph([
+  website(),
+  {
+    "@type": "MedicalWebPage",
+    "@id": abs("/usures-dentaires/#page"),
+    url: abs("/usures-dentaires/"),
+    name: u.seo.title,
+    description: u.seo.description,
+    inLanguage: site.lang,
+    isPartOf: { "@id": site.websiteId },
+    author: { "@id": site.personId },
+    breadcrumb: { "@id": abs("/usures-dentaires/#fil") },
+    citation: u.sources.items.map((s) => ({
+      "@type": "ScholarlyArticle",
+      name: s.title,
+      author: s.authors,
+      datePublished: s.year,
+      isPartOf: { "@type": "Periodical", name: s.journal.replace(/\.$/, "") },
+      sameAs: `https://doi.org/${s.doi}`,
+      url: s.pubmed,
+    })),
+  },
+  {
+    ...breadcrumbs(crumbs.map((c) => ({ name: c.label, path: c.href }))),
+    "@id": abs("/usures-dentaires/#fil"),
+  },
+  person(abs(og.src)),
+]);
+---
+
+<BaseLayout title={u.seo.title} description={u.seo.description} path="/usures-dentaires/" schema={schema} ogImage={og.src}>
+  <ClinicalHero breadcrumbs={crumbs} h1={u.hero.h1} lead={u.hero.lead} byline={{ label: franck.hero.h1, href: "/franck-moyal/" }} />
+  <DirectAnswer text={u.answer} />
+  <ClinicalPathway items={sections.map((s) => ({ label: s.label, href: `#${s.id}` }))} />
+
+  <!-- 1. Comment reconnaître une usure ? -->
+  <TextImageSection id={u.recognize.id} layout="split-right" eyebrow={u.recognize.label} title={u.recognize.title} media={{ label: u.recognize.media, ratio: "4 / 3" }}>
+    <SymptomList label={u.recognize.listLabel} items={u.recognize.list} columns={1} class="u-list" />
+    <BodyText paragraphs={u.recognize.text} class="u-after-list" />
+  </TextImageSection>
+
+  <!-- 2. Pourquoi les dents s'usent-elles ? -->
+  <TextImageSection id={u.causes.id} layout="narrow" tone="ivory" eyebrow={u.causes.label} title={u.causes.title} paragraphs={[u.causes.text]}>
+    <div class="mechanisms">
+      {
+        u.causes.mechanisms.map((m) => (
+          <article class="mechanism">
+            <h3 set:html={plain(m.title)} />
+            <p set:html={plain(m.text)} />
+          </article>
+        ))
+      }
+    </div>
+    <MediaFrame label={u.causes.media} ratio="3 / 1" class="u-schema" />
+    <div class="u-quote"><PullStatement variant="quote" bare text={u.causes.keyMessage} /></div>
+    <div class="u-link"><TextLink href={u.causes.link.href} label={u.causes.link.label} /></div>
+  </TextImageSection>
+
+  <!-- 3. Dépistage et prévention -->
+  <TextImageSection id={u.prevention.id} layout="aside" eyebrow={u.prevention.label} title={u.prevention.title} paragraphs={[u.prevention.text]} links={[u.prevention.link]}>
+    <SymptomList slot="aside" label={u.prevention.listLabel} items={u.prevention.list} columns={1} />
+  </TextImageSection>
+
+  <!-- 4. Diagnostic -->
+  <TextImageSection id={u.diagnosis.id} layout="offset" eyebrow={u.diagnosis.label} title={u.diagnosis.title} paragraphs={[u.diagnosis.text]} links={[u.diagnosis.link]}>
+    <SymptomList label={u.diagnosis.listLabel} items={u.diagnosis.list} columns={2} class="u-list" />
+  </TextImageSection>
+
+  <!-- 5. Faut-il toujours traiter une usure dentaire ? -->
+  <TextImageSection id={u.treat.id} layout="offset" tone="ivory" eyebrow={u.treat.label} title={u.treat.title} titleSize="statement" paragraphs={[u.treat.text]} />
+
+  <!-- 6. Réhabilitation -->
+  <TextImageSection id={u.rehab.id} layout="split-left" eyebrow={u.rehab.label} title={u.rehab.title} paragraphs={u.rehab.paragraphs} links={[u.rehab.link]} media={{ label: u.rehab.media, ratio: "4 / 5" }} />
+
+  <!-- 7. Esthétique du sourire -->
+  <TextImageSection id={u.smile.id} layout="offset" eyebrow={u.smile.label} title={u.smile.title} paragraphs={[u.smile.text]} links={[u.smile.link]} />
+
+  <!-- 8. Érosion & TCA -->
+  <TextImageSection id={u.erosion.id} layout="panel" eyebrow={u.erosion.label} title={u.erosion.title} paragraphs={[u.erosion.text]} links={u.erosion.links} />
+
+  <FAQAccordion title={u.faq.title} items={u.faq.items} />
+  <FinalCTA title={u.final.title} text={u.final.text} cta={u.final.cta} />
+  <SourceList title={u.sources.title} intro={u.sources.intro} items={u.sources.items} verifiedLabel={u.sources.verifiedLabel} verifiedDate={u.sources.verifiedDate} verifiedIso={u.sources.verifiedIso} />
+
+  <Container class="grid-12 u-author">
+    <div class="u-author__block">
+      <AuthorBlock
+        label="Auteur"
+        name={site.name}
+        role={site.role}
+        text={franck.hero.lead}
+        link={{ label: "À propos du Dr Franck Moyal", href: "/franck-moyal/" }}
+        image={portrait}
+      />
+    </div>
+  </Container>
+
+  <RelatedPages
+    label="Usures dentaires"
+    items={[
+      u.diagnosis.link,
+      u.rehab.link,
+      u.causes.link,
+      { label: "Érosion dentaire", href: "/erosion-dentaire/" },
+      u.smile.link,
+      { label: "TCA et santé bucco-dentaire", href: "/tca-dents/" },
+    ]}
+  />
+</BaseLayout>
+
+<style>
+  :global(.u-list) {
+    margin-top: var(--gap-title-text);
+  }
+  :global(.u-after-list) {
+    margin-top: 1.75rem;
+  }
+  .mechanisms {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--col-gap);
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+  .mechanism {
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid var(--c-sage);
+  }
+  .mechanism h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+  }
+  .mechanism p {
+    margin-top: 0.875rem;
+    max-width: 34rem;
+  }
+  :global(.u-schema) {
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+  .u-quote {
+    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+  }
+  .u-link {
+    margin-top: var(--gap-text-cta);
+  }
+  :global(.u-author) {
+    padding-bottom: 1rem;
+  }
+  .u-author__block {
+    grid-column: 6 / span 7;
+  }
+  @media (max-width: 63.99em) {
+    .u-author__block {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 47.99em) {
+    .mechanisms {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

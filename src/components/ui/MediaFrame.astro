@@ -1,0 +1,37 @@
+---
+// Emplacement réservé pour une image manquante (00 §14 : « placeholders visuels explicites »).
+// Même proportion que l'image attendue, légende sobre qui dit ce qui manque.
+interface Props {
+  label: string;
+  ratio?: string;
+  class?: string;
+}
+const { label, ratio = "4 / 5", class: cls } = Astro.props;
+---
+
+<figure class:list={["media-frame", cls]} style={`--ratio: ${ratio}`} data-emplacement="visuel">
+  <div class="media-frame__box" role="img" aria-label={`Emplacement réservé : ${label}`}>
+    <span class="media-frame__label">{label}</span>
+  </div>
+</figure>
+
+<style>
+  .media-frame__box {
+    aspect-ratio: var(--ratio);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem 1.125rem;
+    background: var(--c-ivory);
+    border: 1px solid var(--c-stone);
+  }
+  :global(.tone-ivory) .media-frame__box {
+    background: var(--c-paper);
+  }
+  .media-frame__label {
+    max-width: 28ch;
+    font-size: var(--fs-meta);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--c-ink-soft);
+  }
+</style>

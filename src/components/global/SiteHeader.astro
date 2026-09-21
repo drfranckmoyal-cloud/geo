@@ -1,0 +1,219 @@
+---
+// En-tête (V15, menu figé V23) : fin et aéré, monogramme à gauche (mène à l'accueil),
+// menu à droite, bouton rendez-vous discret mais visible. Il se compacte légèrement au
+// défilement. Sur mobile : un simple « Menu », sans panneau animé.
+import Logo from "../ui/Logo.astro";
+import PrimaryButton from "./PrimaryButton.astro";
+import { nav, site } from "../../content/site";
+import { linkAttrs } from "../../lib/links";
+
+const current = Astro.url.pathname;
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="lockup" href="/">
+      <Logo class="lockup__mark" />
+      <span class="lockup__name">{site.name}</span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Navigation principale">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={current === item.href ? "page" : undefined} {...linkAttrs(item.href)}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <PrimaryButton class="site-header__cta" size="header" href={site.rdv.href} label={site.rdv.label} />
+
+    <details class="mobile-nav">
+      <summary><span class="mobile-nav__open">Menu</span><span class="mobile-nav__close">Fermer</span></summary>
+      <nav class="mobile-nav__panel" aria-label="Navigation principale">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={current === item.href ? "page" : undefined} {...linkAttrs(item.href)}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  if (header) {
+    const update = () => header.toggleAttribute("data-scrolled", window.scrollY > 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--c-paper);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--t-hover) var(--ease);
+  }
+  .site-header[data-scrolled] {
+    border-bottom-color: var(--c-stone);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: var(--header-h);
+    transition: height var(--t-hover) var(--ease);
+  }
+  .site-header[data-scrolled] .site-header__inner {
+    height: var(--header-h-compact);
+  }
+
+  .lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex: none;
+    color: var(--c-ink);
+    text-decoration: none;
+  }
+  .lockup :global(.lockup__mark) {
+    width: 3.375rem;
+  }
+  .lockup__name {
+    font-family: var(--f-serif);
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+  }
+
+  .primary-nav {
+    margin-left: auto;
+  }
+  .primary-nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 1.9vw, 1.875rem);
+  }
+  .primary-nav a,
+  .mobile-nav summary {
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--c-ink);
+    white-space: nowrap;
+  }
+  .primary-nav a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.55em;
+    transition:
+      text-decoration-color var(--t-hover) var(--ease),
+      color var(--t-hover) var(--ease);
+  }
+  .primary-nav a:hover {
+    color: var(--c-sage);
+    text-decoration-color: var(--c-sage);
+  }
+  .primary-nav a[aria-current="page"] {
+    text-decoration-color: var(--c-ink);
+  }
+  :global(.site-header__cta) {
+    flex: none;
+    margin-left: clamp(1rem, 1.6vw, 1.75rem);
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+  .mobile-nav summary {
+    display: block;
+    padding: 0.625rem 0.25rem;
+    list-style: none;
+    cursor: pointer;
+  }
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-nav__close,
+  .mobile-nav[open] .mobile-nav__open {
+    display: none;
+  }
+  .mobile-nav[open] .mobile-nav__close {
+    display: inline;
+  }
+  .mobile-nav__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0.5rem var(--gutter) 2rem;
+    background: var(--c-paper);
+    border-top: 1px solid var(--c-stone);
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .mobile-nav__panel li {
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .mobile-nav__panel a {
+    display: block;
+    padding: 1rem 0;
+    font-family: var(--f-serif);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .mobile-nav__panel a[aria-current="page"] {
+    color: var(--c-sage);
+  }
+
+  /* Le menu complet ne tient qu'à partir de 1240 px ; en dessous, « Menu ». */
+  @media (max-width: 77.49em) {
+    .primary-nav {
+      display: none;
+    }
+    :global(.site-header__cta) {
+      margin-left: auto;
+    }
+    .mobile-nav {
+      display: block;
+    }
+  }
+  /* Sur ordinateur, le nom figure déjà dans le menu : le monogramme suffit à gauche.
+     Sur petit téléphone, la place manque : le nom s'efface aussi. */
+  @media (min-width: 77.5em), (max-width: 34.99em) {
+    .lockup__name {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 34.99em) {
+    .lockup :global(.lockup__mark) {
+      width: 3rem;
+    }
+  }
+</style>

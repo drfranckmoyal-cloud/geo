@@ -1,0 +1,36 @@
+---
+// Réponse directe (00 §10, 08 E : « visible rapidement ») : le passage que les moteurs et les
+// IA peuvent reprendre tel quel. Fond vert sauge très discret, filet vert sauge.
+import { rich } from "../../lib/typo";
+
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<div class="container grid-12">
+  <div class="answer" data-reveal>
+    <p set:html={rich(text)} />
+  </div>
+</div>
+
+<style>
+  .answer {
+    grid-column: 1 / span 9;
+    padding: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+    background: var(--c-sage-wash);
+    border-left: 2px solid var(--c-sage);
+  }
+  .answer p {
+    max-width: 44rem;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+  }
+  @media (max-width: 63.99em) {
+    .answer {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+// Page 2 — Dr Franck Moyal (03_FRANCK_MOYAL.md). Ordre du pack (V3) : ouverture, intro,
+// pratique esthétique, usures, TCA, enseignement, hôpital, approche, appel final.
+// L'esthétique vient avant l'hospitalier, l'hospitalier plus bas (08 D).
+import { getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EditorialHero from "../components/editorial/EditorialHero.astro";
+import TextImageSection from "../components/editorial/TextImageSection.astro";
+import PullStatement from "../components/editorial/PullStatement.astro";
+import InlineEvidenceLinks from "../components/editorial/InlineEvidenceLinks.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
+import Section from "../components/global/Section.astro";
+import Container from "../components/global/Container.astro";
+import portrait from "../assets/photos/portrait-franck.png";
+import { franck } from "../content/franck";
+import { site } from "../content/site";
+import { plain } from "../lib/typo";
+import { abs, graph, person, website } from "../lib/schema";
+
+const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const schema = graph([
+  website(),
+  {
+    "@type": "ProfilePage",
+    "@id": abs("/franck-moyal/#page"),
+    url: abs("/franck-moyal/"),
+    name: franck.seo.title,
+    description: franck.seo.description,
+    inLanguage: site.lang,
+    isPartOf: { "@id": site.websiteId },
+    mainEntity: { "@id": site.personId },
+  },
+  person(abs(og.src), true),
+  {
+    "@type": "EducationalOrganization",
+    name: "Smileclub Formation",
+    founder: { "@id": site.personId },
+  },
+]);
+---
+
+<BaseLayout title={franck.seo.title} description={franck.seo.description} path="/franck-moyal/" schema={schema} ogImage={og.src}>
+  <EditorialHero h1={franck.hero.h1} lead={franck.hero.lead} image={portrait} imageAlt="Portrait du Dr Franck Moyal" />
+
+  <Section spacing="compact">
+    <Container class="grid-12">
+      <p class="intro" data-reveal set:html={plain(franck.intro)} />
+    </Container>
+  </Section>
+
+  <TextImageSection
+    id="pratique"
+    layout="split-right"
+    title={franck.practice.title}
+    paragraphs={franck.practice.paragraphs}
+    links={[franck.practice.link]}
+    media={{ label: franck.practice.media, ratio: "4 / 5" }}
+  />
+  <TextImageSection
+    id="usures"
+    layout="offset"
+    title={franck.wear.title}
+    paragraphs={franck.wear.paragraphs}
+    links={[franck.wear.link]}
+  />
+  <TextImageSection
+    id="tca"
+    layout="panel"
+    title={franck.tca.title}
+    paragraphs={franck.tca.paragraphs}
+    links={[franck.tca.link]}
+  />
+  <TextImageSection id="enseignement" layout="aside" title={franck.teaching.title} paragraphs={franck.teaching.paragraphs}>
+    <InlineEvidenceLinks slot="aside" links={franck.teaching.links} />
+  </TextImageSection>
+  <TextImageSection
+    id="hopital"
+    layout="narrow"
+    title={franck.hospital.title}
+    paragraphs={franck.hospital.paragraphs}
+    links={[franck.hospital.link]}
+  />
+  <PullStatement id="approche" variant="title" title={franck.approach.title} text={franck.approach.text} />
+  <FinalCTA title={franck.final.title} text={franck.final.text} cta={franck.final.cta} />
+</BaseLayout>
+
+<style>
+  .intro {
+    grid-column: 3 / span 9;
+    font-family: var(--f-serif);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    line-height: 1.36;
+    letter-spacing: -0.008em;
+    text-wrap: pretty;
+  }
+  @media (max-width: 63.99em) {
+    .intro {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

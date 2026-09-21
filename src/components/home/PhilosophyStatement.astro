@@ -1,0 +1,59 @@
+---
+// Bloc manifeste (08 C : « visuellement fort ») : les trois mots empilés en très grand,
+// le texte à côté, calé en bas, séparé par un filet vert sauge.
+import Section from "../global/Section.astro";
+import { plain, rich } from "../../lib/typo";
+
+interface Props {
+  title: string;
+  text: string;
+}
+const { title, text } = Astro.props;
+const words = title.split(/(?<=\.)\s+/);
+---
+
+<Section tone="ivory" labelledby="philosophie-titre">
+  <div class="container grid-12 philosophy" data-reveal>
+    <h2 id="philosophie-titre" class="philosophy__title">
+      {words.map((w) => <span set:html={plain(w)} />)}
+    </h2>
+    <p class="philosophy__text" set:html={rich(text)} />
+  </div>
+</Section>
+
+<style>
+  .philosophy {
+    align-items: end;
+  }
+  .philosophy__title {
+    grid-column: 1 / span 6;
+    font-size: var(--fs-h2-statement);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+  }
+  .philosophy__title span {
+    display: block;
+  }
+  .philosophy__title span + span {
+    margin-top: 0.12em;
+  }
+  .philosophy__text {
+    grid-column: 7 / span 6;
+    max-width: 34rem;
+    padding-left: clamp(1.25rem, 2.5vw, 2.5rem);
+    border-left: 1px solid var(--c-sage);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+  }
+
+  @media (max-width: 63.99em) {
+    .philosophy__title,
+    .philosophy__text {
+      grid-column: 1 / -1;
+    }
+    .philosophy__text {
+      margin-top: 2.5rem;
+    }
+  }
+</style>

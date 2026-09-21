@@ -1,0 +1,130 @@
+---
+// Ouverture de l'accueil (07 §7) : très peu de texte, H1 dominant, grand blanc, portrait réel.
+// Le portrait est posé en bas d'un aplat noir doux qui prolonge son fond : la photo garde sa
+// taille réelle (480 px, point 21) sans bord visible.
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import SectionEyebrow from "../global/SectionEyebrow.astro";
+import EditorialH1 from "../global/EditorialH1.astro";
+import LeadText from "../global/LeadText.astro";
+import PrimaryButton from "../global/PrimaryButton.astro";
+import TextLink from "../global/TextLink.astro";
+
+interface Props {
+  eyebrow: string;
+  h1: string;
+  lead: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+  image: ImageMetadata;
+  imageAlt: string;
+}
+const { eyebrow, h1, lead, primary, secondary, image, imageAlt } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-titre">
+  <div class="container grid-12 hero__inner">
+    <div class="hero__text" data-reveal>
+      <SectionEyebrow text={eyebrow} />
+      <EditorialH1 id="hero-titre" text={h1} class="hero__title" />
+      <LeadText text={lead} class="hero__lead" />
+      <div class="hero__actions">
+        <PrimaryButton href={primary.href} label={primary.label} />
+        <TextLink href={secondary.href} label={secondary.label} />
+      </div>
+    </div>
+  </div>
+  <div class="hero__media" data-reveal>
+    <div class="hero__panel">
+      <Picture
+        src={image}
+        alt={imageAlt}
+        formats={["avif", "webp"]}
+        fallbackFormat="jpg"
+        widths={[360, 480]}
+        sizes="(min-width: 64em) 30rem, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="hero__portrait"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+  }
+  .hero__inner {
+    align-items: center;
+    min-height: clamp(36rem, calc(100svh - var(--header-h)), 50rem);
+    padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
+  }
+  .hero__text {
+    grid-column: 1 / span 7;
+    position: relative;
+    z-index: 1;
+  }
+  .hero__text :global(.hero__lead) {
+    max-width: 30rem;
+    margin-top: var(--gap-title-text);
+    color: var(--c-ink-soft);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2.25rem;
+    margin-top: var(--gap-text-cta);
+  }
+
+  .hero__media {
+    position: absolute;
+    top: clamp(2.5rem, 4vw, 4.5rem);
+    right: 0;
+    bottom: 0;
+    width: 38%;
+    min-width: 25rem;
+  }
+  .hero__panel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--c-ink);
+  }
+  .hero__panel :global(picture) {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(92%, 30rem);
+    transform: translateX(-50%);
+    /* Les épaules, coupées par les bords de la photo, se fondent dans l'aplat noir doux */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+  }
+  .hero__panel :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 63.99em) {
+    .hero__inner {
+      min-height: 0;
+      padding-bottom: 3rem;
+    }
+    .hero__text {
+      grid-column: 1 / -1;
+    }
+    .hero__media {
+      position: relative;
+      top: auto;
+      width: 100%;
+      min-width: 0;
+      aspect-ratio: 1 / 1.06;
+      max-height: 34rem;
+    }
+    .hero__panel :global(picture) {
+      width: min(100%, 30rem);
+    }
+  }
+</style>

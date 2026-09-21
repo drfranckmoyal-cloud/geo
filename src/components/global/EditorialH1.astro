@@ -1,0 +1,21 @@
+---
+// Titre principal de la page (un seul par page, V14) : serif éditoriale, 44 → 72 px.
+import { plain } from "../../lib/typo";
+
+interface Props {
+  text: string;
+  id?: string;
+  class?: string;
+}
+const { text, id, class: cls } = Astro.props;
+---
+
+<h1 id={id} class:list={["h1", cls]} set:html={plain(text)} />
+
+<style>
+  .h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-display);
+    letter-spacing: -0.02em;
+  }
+</style>

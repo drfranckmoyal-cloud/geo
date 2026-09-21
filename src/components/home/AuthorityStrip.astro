@@ -1,0 +1,67 @@
+---
+// Bloc autorité (08 C : « discret ») : le texte d'un côté, les liens de preuve de l'autre,
+// en liste sobre — ni logos ni badges (07 §8).
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import BodyText from "../global/BodyText.astro";
+import TextLink from "../global/TextLink.astro";
+
+interface Props {
+  title: string;
+  text: string;
+  links: { label: string; href: string }[];
+}
+const { title, text, links } = Astro.props;
+---
+
+<Section labelledby="autorite-titre">
+  <div class="container grid-12 authority" data-reveal>
+    <div class="authority__text">
+      <EditorialH2 id="autorite-titre" text={title} />
+      <BodyText paragraphs={text} class="authority__body" />
+    </div>
+    <ul class="authority__links">
+      {
+        links.map((link) => (
+          <li>
+            <TextLink href={link.href} label={link.label} class="authority__link" />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .authority {
+    align-items: end;
+  }
+  .authority__text {
+    grid-column: 1 / span 6;
+  }
+  .authority__text :global(.authority__body) {
+    margin-top: var(--gap-title-text);
+  }
+  .authority__links {
+    grid-column: 8 / span 5;
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .authority__links li {
+    border-top: 1px solid var(--c-stone);
+  }
+  .authority__links :global(.authority__link) {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1.1rem;
+  }
+
+  @media (max-width: 63.99em) {
+    .authority__text,
+    .authority__links {
+      grid-column: 1 / -1;
+    }
+    .authority__links {
+      margin-top: 2.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+// La méthode (08 C : « lisible sans ressembler à un onboarding SaaS ») : une liste éditoriale
+// numérotée, séparée par des filets, sans icônes ni pastilles.
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import BodyText from "../global/BodyText.astro";
+import TextLink from "../global/TextLink.astro";
+import { plain } from "../../lib/typo";
+
+interface Props {
+  id?: string;
+  title: string;
+  intro: string;
+  steps: { name: string; text: string }[];
+  link: { label: string; href: string };
+}
+const { id = "methode", title, intro, steps, link } = Astro.props;
+---
+
+<Section id={id} labelledby={`${id}-titre`}>
+  <div class="container grid-12 method">
+    <div class="method__intro" data-reveal>
+      <EditorialH2 id={`${id}-titre`} text={title} />
+      <BodyText paragraphs={intro} class="method__lede" />
+      <TextLink href={link.href} label={link.label} />
+    </div>
+    <ol class="method__steps" data-reveal>
+      {
+        steps.map((step) => (
+          <li class="step">
+            <span class="step__name" set:html={plain(step.name)} />
+            <span class="step__text" set:html={plain(step.text)} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>
+
+<style>
+  .method {
+    align-items: start;
+  }
+  .method__intro {
+    grid-column: 1 / span 5;
+  }
+  .method__intro :global(.method__lede) {
+    margin-block: var(--gap-title-text) var(--gap-text-cta);
+  }
+  .method__steps {
+    grid-column: 7 / span 6;
+    counter-reset: step;
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(9rem, 12rem) 1fr;
+    align-items: baseline;
+    column-gap: 1rem;
+    padding-block: 1.375rem;
+    border-top: 1px solid var(--c-stone);
+  }
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--c-sage);
+  }
+  .step__name {
+    font-family: var(--f-serif);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .step__text {
+    color: var(--c-ink-soft);
+  }
+
+  @media (max-width: 63.99em) {
+    .method__intro,
+    .method__steps {
+      grid-column: 1 / -1;
+    }
+    .method__steps {
+      margin-top: 3.5rem;
+    }
+  }
+  @media (max-width: 34.99em) {
+    .step {
+      grid-template-columns: 2.5rem 1fr;
+      row-gap: 0.35rem;
+    }
+    .step__text {
+      grid-column: 2;
+    }
+  }
+</style>

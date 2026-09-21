@@ -1,0 +1,68 @@
+---
+// Ouverture d'une page clinique (07 §9 : « expertise calme ») : fil d'Ariane, H1 très lisible,
+// chapeau, auteur identifié. Pas d'image : la réponse directe suit immédiatement.
+import Breadcrumbs from "../global/Breadcrumbs.astro";
+import EditorialH1 from "../global/EditorialH1.astro";
+import LeadText from "../global/LeadText.astro";
+import { plain } from "../../lib/typo";
+
+interface Props {
+  breadcrumbs: { label: string; href?: string }[];
+  h1: string;
+  lead: string;
+  byline: { label: string; href: string };
+}
+const { breadcrumbs, h1, lead, byline } = Astro.props;
+---
+
+<section class="chero" aria-labelledby="chero-titre">
+  <div class="container grid-12">
+    <div class="chero__text" data-reveal>
+      <Breadcrumbs items={breadcrumbs} />
+      <EditorialH1 id="chero-titre" text={h1} class="chero__title" />
+      <LeadText text={lead} class="chero__lead" />
+      <p class="chero__byline"><a href={byline.href} set:html={plain(byline.label)} /></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chero {
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  }
+  .chero__text {
+    grid-column: 1 / span 10;
+  }
+  .chero__text :global(.chero__title) {
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+  .chero__text :global(.chero__lead) {
+    max-width: 38rem;
+    margin-top: var(--gap-title-text);
+  }
+  .chero__byline {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 2rem;
+    font-size: var(--fs-meta);
+    color: var(--c-ink-soft);
+  }
+  .chero__byline::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--c-sage);
+  }
+  .chero__byline a {
+    text-decoration: none;
+  }
+  .chero__byline a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 63.99em) {
+    .chero__text {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

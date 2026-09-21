@@ -1,0 +1,27 @@
+---
+// Intertitre de section : serif éditoriale, 34 → 48 px ; « statement » = haut de la
+// fourchette du pack (52 px) pour les phrases manifestes.
+import { plain } from "../../lib/typo";
+
+interface Props {
+  text: string;
+  id?: string;
+  size?: "default" | "statement";
+  class?: string;
+}
+const { text, id, size = "default", class: cls } = Astro.props;
+---
+
+<h2 id={id} class:list={["h2", size === "statement" && "h2--statement", cls]} set:html={plain(text)} />
+
+<style>
+  .h2 {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+    letter-spacing: -0.015em;
+  }
+  .h2--statement {
+    font-size: var(--fs-h2-statement);
+    line-height: 1.06;
+  }
+</style>

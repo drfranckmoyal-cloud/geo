@@ -1,0 +1,53 @@
+/* Réglages de design du golden master (verrous V5 à V10 du fichier maître).
+   Toute valeur de couleur, de taille ou d'espacement du site vient d'ici. */
+:root {
+  /* Couleurs : la palette du pack, rien d'autre (V5) */
+  --c-ink: #171715;        /* noir doux */
+  --c-paper: #faf8f3;      /* blanc cassé — fond principal */
+  --c-ivory: #f4f0e8;      /* ivoire — fonds alternés */
+  --c-stone: #d8d3ca;      /* gris chaud — filets, emplacements réservés */
+  --c-sage: #5e685d;       /* vert sauge sombre — accent (contraste 5,5:1 sur blanc cassé) */
+  --c-sage-light: #b9c1b5; /* vert sauge clair — accent secondaire, jamais pour du texte */
+  /* Les mêmes teintes en transparence (aucune couleur nouvelle) */
+  --c-ink-soft: rgb(23 23 21 / 0.74);    /* texte secondaire (contraste ≈ 7:1) */
+  --c-sage-wash: rgb(185 193 181 / 0.3); /* micro-zones de fond vert sauge « très discrètes » */
+
+  /* Polices (V6) : serif éditoriale pour les titres, sans-serif précise pour le texte */
+  --f-serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --f-sans: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Tailles (V6), fluides de 390 px (mobile) à 1440 px (ordinateur) */
+  --fs-h1: clamp(2.75rem, 1.9rem + 3.6vw, 4.5rem);              /* 44 → 72 px */
+  --fs-h2: clamp(2.125rem, 1.6rem + 1.9vw, 3rem);               /* 34 → 48 px */
+  --fs-h2-statement: clamp(2.25rem, 1.55rem + 2.5vw, 3.25rem);  /* 36 → 52 px */
+  --fs-h3: clamp(1.5rem, 1.25rem + 0.75vw, 2rem);               /* 24 → 32 px */
+  --fs-lead: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);            /* 20 → 24 px */
+  --fs-body: clamp(1.0625rem, 1rem + 0.15vw, 1.125rem);         /* 17 → 18 px */
+  --fs-small: 0.9375rem;                                        /* 15 px */
+  --fs-meta: 0.875rem;                                          /* 14 px */
+
+  --lh-display: 1.04;
+  --lh-heading: 1.1;
+  --lh-h3: 1.2;
+  --lh-lead: 1.45;
+  --lh-body: 1.68;
+
+  /* Grille et respiration (V7) */
+  --container: 77.5rem;                                          /* 1240 px */
+  --measure: 46rem;                                              /* 736 px de texte éditorial */
+  --gutter: clamp(1.25rem, 0.75rem + 2vw, 2.5rem);               /* 20 → 40 px */
+  --col-gap: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  --section-y: clamp(4.5rem, 2.4rem + 6.4vw, 8.5rem);            /* 72 → 136 px */
+  --gap-title-text: clamp(1.5rem, 1.35rem + 0.4vw, 2rem);        /* 24 → 32 px */
+  --gap-text-cta: clamp(2rem, 1.85rem + 0.4vw, 2.5rem);          /* 32 → 40 px */
+
+  /* Boutons, en-tête et mouvement (V9, V10) */
+  --btn-h: 3.25rem;          /* 52 px */
+  --btn-h-header: 2.625rem;  /* 42 px — variante d'en-tête (en-tête « fin »), à valider */
+  --radius: 3px;
+  --header-h: 4.75rem;       /* 76 px */
+  --header-h-compact: 4rem;  /* 64 px après défilement */
+  --t-hover: 200ms;
+  --t-reveal: 420ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

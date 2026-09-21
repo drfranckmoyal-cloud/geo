@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | Étape 1 — golden master (3 pages) : construction lancée le 21/09/2026, sur le feu vert de Franck. |
-| **Dernière étape faite** | Étape 0 — cadrage ; réponses de Franck du 21/09/2026 intégrées (logo, portrait, sources de la page Usures, règle « dentisterie esthétique »). |
-| **Prochaine action** | Claude termine les 3 pages, puis remet captures et rapport pour le contrôle de ChatGPT. |
+| **Phase en cours** | Étape 2 — contrôle du golden master : le tour 1 est livré (21/09/2026) ; ChatGPT le contrôle, Franck valide ou demande des modifications. |
+| **Dernière étape faite** | Étape 1 — les 3 pages construites, avec captures, rapport et contrôles : textes conformes au pack sans aucun écart, Lighthouse à 100 partout (`livrables/golden-master-r1/`). |
+| **Prochaine action** | Franck transmet à ChatGPT le rapport (`livrables/golden-master-r1/RAPPORT.md`), les captures et la comparaison des polices ; Claude corrige selon les retours. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Rien de bloquant. À fournir quand possible : le portrait en haute définition (§6, point 21). |
+| **En attente de Franck** | Deux points bloquent la validation : la police des titres (§6, point 24, comparaison jointe) et le portrait en haute définition (§6, point 21). |
 
 ---
 
@@ -213,6 +213,7 @@ rendu sera jugé :
 | D12 | **Section 2 de la page Usures** : les quatre sous-parties reçoivent leur texte (« Attrition et contraintes mécaniques », « Érosion dentaire », « Abrasion », « Usures multifactorielles »), rédigé par ChatGPT (point 19). | 21/09/2026 |
 | D13 | **Lien Bruxisme** : « Comprendre le bruxisme et son rôle dans l'usure dentaire » → `/bruxisme-usure-dentaire/`, dans la section 2 de la page Usures (point 20). | 21/09/2026 |
 | D14 | **Domaine réservé** : `drfranckmoyal.fr`, par Franck, chez OVH (commande n° 259047873), pour 3 ans ; créé le 21/09/2026 à 19 h 10, expire le 21/09/2029 ; serveurs de noms OVH. Titulaire : Franck. DNSSEC et une boîte e-mail inclus, aucun hébergement pris. | 21/09/2026 |
+| D15 | **Choix techniques appliqués** (rôle de Claude, 00 §13) : Astro 7.3.3, pages HTML statiques ; Cormorant Garamond 500 et Inter hébergées sur le site ; textes rangés à part et contrôlés automatiquement ; aucun traceur ; captures et contrôles reproductibles (§11). | 21/09/2026 |
 
 ---
 
@@ -235,13 +236,16 @@ décision.
 | 10 | **Photos** : le portrait est fourni (D5). Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
 | 11 | **Preuves d'autorité** (00 §7 : AP-HP / Pitié-Salpêtrière, CMME / Sainte-Anne / GHU Paris, AO News, Blendi, Le Fil Dentaire, Entretiens de Garancière, Alpha Oméga, ARTEMIS, GC / ADF, LinkedIn, Smileclub Formation, DentCA) : aucune adresse web fournie. Le site doit « rassembler et redistribuer cette autorité vers les pages cliniques correspondantes » (00 §7). Pour les profils de Franck lui-même (LinkedIn, par exemple), une propriété technique (`sameAs`) signalera en plus aux moteurs qu'il s'agit de la même personne — suggestion de Claude, absente du pack. | Liens signalés « à fournir ». | ChatGPT (liste), Franck (vérification). |
 | 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
-| 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (65) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
+| 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
 | 14 | **Auteur de la page Usures** : exigé (08 E « sources et auteur présents » ; 04 : auteur `Person#franck-moyal` dans les données structurées), mais sa présentation visible n'est pas précisée. Le composant `AuthorBlock` existe (05, famille Éditorial / Profil). Une date de mise à jour, absente du pack, serait utile aux moteurs. | `AuthorBlock` avec le nom, le titre et le lien repris de la page Franck, sans texte nouveau ; pas de date. | ChatGPT. |
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
 | 21 | **Résolution du portrait** : 480 × 480 pixels. Affiché en grand (page Franck : « portrait dominant »), il paraîtra flou, surtout sur les écrans haute définition (Mac, téléphones récents), qui demandent 2 à 3 fois plus de pixels. | Photo utilisée à une taille raisonnable et harmonisée avec la palette (noir doux et blanc cassé à la place du noir et du blanc purs). | Franck : fournir l'original en haute définition (idéalement 2 000 pixels ou plus de large). |
 | 22 | **Notes « Soutient : » des sources** : chaque référence du fichier Usures est suivie d'une note expliquant ce qu'elle soutient. Le fichier ne dit pas si ces notes s'affichent. | Affichées en petit sous chaque référence : elles relient chaque source au texte. | ChatGPT. |
 | 23 | **Destination de « Érosion & TCA » dans le menu** : non précisée. L'arborescence a `/erosion-dentaire/` et `/tca-dents/`. De même, « Publications & enseignement » n'a pas encore de page à lui. | « Érosion & TCA » → `/tca-dents/`, la page de l'expertise spécifique ; « Publications & enseignement » → `/publications/`. | ChatGPT, pour confirmer. |
+| 24 | **Police des titres et accents** : Cormorant Garamond, désignée par le pack, a des accents hauts et étroits (« hôpital », « même »), très visibles dans des titres en français. C'est le dessin de la police, pas un défaut technique. Comparaison avec deux polices gratuites (Newsreader, EB Garamond) : `livrables/golden-master-r1/comparaison-polices-titres.png`. | Cormorant Garamond conservée, comme le veut le pack. Le changement ne touche qu'un réglage. | ChatGPT et Franck — **bloque la validation**. |
+| 25 | **En-tête** : sur ordinateur, monogramme seul à gauche (« Dr Franck Moyal » est déjà dans le menu, et tout ne tient pas sur une ligne sinon) ; bouton rendez-vous de l'en-tête haut de 42 px au lieu de 52, pour garder un en-tête fin. | Appliqué, signalé dans le rapport. | ChatGPT. |
+| 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Les autres interprétations sont listées au §6 du rapport. | Appliqué. | ChatGPT. |
 
 ### Tranchés
 
@@ -262,8 +266,8 @@ décision.
 | Étape | Contenu | Statut |
 |---|---|---|
 | **0** | Cadrage : pack V1.3 reçu, lu en entier et archivé ; projet créé ; fichier maître écrit et relu contre le pack | ✅ fait (21/09/2026) |
-| **1** | Golden master : les 3 pages et les livrables du verrou V17 | **en cours** (lancée le 21/09/2026) |
-| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | à faire |
+| **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
+| **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | **en cours** |
 | **3** | Gel des composants : le golden master devient la référence figée | à faire |
 | **4** | Déclinaison des autres pages (V4) à partir de la base gelée, textes rédigés par ChatGPT | à faire |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
@@ -273,16 +277,16 @@ décision.
 
 | Page | Adresse | Construite | Contrôlée par ChatGPT | Validée par Franck |
 |---|---|---|---|---|
-| Accueil | `/` | — | — | — |
-| Dr Franck Moyal | `/franck-moyal/` | — | — | — |
-| Usures dentaires | `/usures-dentaires/` | — | — | — |
+| Accueil | `/` | ✅ tour 1 | — | — |
+| Dr Franck Moyal | `/franck-moyal/` | ✅ tour 1 | — | — |
+| Usures dentaires | `/usures-dentaires/` | ✅ tour 1 | — | — |
 
 ---
 
-## 8. Choix techniques prévus pour l'étape 1
+## 8. Choix techniques appliqués
 
-Proposés par Claude, dont c'est le rôle (00 §13). Ils deviendront des décisions au fil de
-la construction.
+Retenus par Claude, dont c'est le rôle (00 §13), et appliqués au tour 1 (D15). Le détail
+est dans le rapport (`livrables/golden-master-r1/RAPPORT.md`, §2 et §3).
 
 - **Astro**, l'outil qui fabrique le site : il produit des pages HTML simples, lisibles
   aussitôt par Google et par les IA sans avoir à exécuter de programme, très rapides, et
@@ -295,7 +299,9 @@ la construction.
 - **Les textes rangés à part de la mise en page**, recopiés du pack, avec un **contrôle
   automatique** : chaque phrase du pack doit se retrouver telle quelle dans les pages
   construites. C'est la garantie mécanique du verrou V2.
-- **Aucun traceur, aucune ressource extérieure** (V19).
+- **Aucun traceur, aucune ressource extérieure** (V19). Résultat Lighthouse (outil de Google) le
+  21/09/2026 : 100/100 en rapidité, accessibilité, bonnes pratiques et référencement, sur les
+  3 pages, en mobile comme sur ordinateur ; pages de 92 à 117 Ko.
 - **Captures automatiques** avec Google Chrome (déjà installé), aux largeurs du verrou
   V16, et contrôle de rapidité Lighthouse.
 - **Lisibilité des couleurs** (mesurée le 21/09/2026) : le vert sauge sombre est lisible
@@ -341,6 +347,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | G | Réponse aux points 17 à 20, archivée dans `docs/echanges/2026-09-21-chatgpt-reponses-points-17-20.md` : menu figé ; étiquette + grand titre validés, mais « Non. » seul refusé ; textes des quatre sous-parties ; lien Bruxisme. ChatGPT corrige aussi Claude : aucune règle de Google ne dit que les intertitres en forme de question sont préférés. | D10 à D13, V23 |
 | 21/09/2026 | C | Pack V1.3.1 archivé ; logo et portrait rangés dans le projet ; premier enregistrement et envoi sur GitHub. Construction du golden master lancée ; commande du domaine préparée sur OVH jusqu'au récapitulatif (18,70 € TTC pour 3 ans), sans aucun paiement. | Étape 1 |
 | 21/09/2026 | F | « Le domaine est créé » : Franck a validé lui-même la commande OVH. Claude vérifie auprès du registre des .fr : domaine actif, jusqu'au 21/09/2029. | D14 |
+| 21/09/2026 | C | **Golden master, tour 1 livré.** Les 3 pages sont construites (30 composants du pack + 2 techniques), avec 26 captures aux 6 largeurs, le rapport et une comparaison de polices. Contrôle des textes : aucun écart. Contrôle du HTML : réussi. Lighthouse : 100 partout. Défauts corrigés en cours de route : titre sur 6 lignes, accents vérifiés, bords du portrait, espacement de la phrase clé, noms accessibles. | Étape 2, points 24 à 26 |
 
 ---
 
@@ -351,6 +358,16 @@ remarques détaillées de Franck) sont archivés tels quels dans
   Identité git posée au niveau du dépôt.
 - **Outils présents sur le Mac** (21/09/2026) : Node 24.18, npm 11.16, git 2.50,
   Python 3.13, Google Chrome. Ni `gh` ni Homebrew.
+- **Fabriquer et contrôler le site** (dans le dossier du projet) : `npm run build` fabrique le
+  site dans `dist/` ; `npm run verify` lance le contrôle des textes ; `node scripts/check-html.mjs`
+  lance le contrôle du HTML ; `npm run images` prépare le logo et le portrait à partir des
+  originaux ; `BASE_URL=http://localhost:4322 npm run captures` refait les captures.
+- **Voir le site en local** : serveurs `geo-dev` (port 4321, mise à jour en direct) et
+  `geo-preview` (port 4322, site fabriqué), déclarés dans `~/Desktop/.claude/launch.json`.
+- **Où est quoi** : textes dans `src/content/` ; composants dans `src/components/`
+  (global, home, editorial, clinical, ui) ; réglages de design dans `src/styles/tokens.css` ;
+  pages dans `src/pages/` ; livrables par tour dans `livrables/` (captures non versionnées,
+  régénérables).
 - **Domaine** : `drfranckmoyal.fr`, bureau d'enregistrement OVH, compte OVH de Franck ; créé
   le 21/09/2026 (17:10 UTC), expire le 21/09/2029 ; serveurs de noms `dns111.ovh.net` et
   `ns111.ovh.net` (registre AFNIC, vérifié le 21/09/2026). Avant cette date, ni ce domaine ni

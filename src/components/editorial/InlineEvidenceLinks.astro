@@ -1,0 +1,35 @@
+---
+// Liens de preuve intégrés au texte (07 §8 : « éléments de preuve intégrés naturellement ») :
+// une liste sobre, séparée par des filets.
+import TextLink from "../global/TextLink.astro";
+
+interface Props {
+  links: { label: string; href: string }[];
+  class?: string;
+}
+const { links, class: cls } = Astro.props;
+---
+
+<ul class:list={["evidence", cls]}>
+  {
+    links.map((link) => (
+      <li>
+        <TextLink href={link.href} label={link.label} class="evidence__link" />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .evidence {
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .evidence li {
+    border-top: 1px solid var(--c-stone);
+  }
+  .evidence :global(.evidence__link) {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1.1rem;
+  }
+</style>

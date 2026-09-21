@@ -1,0 +1,21 @@
+---
+// Chapeau : sans-serif, 20 → 24 px.
+import { rich } from "../../lib/typo";
+
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: cls } = Astro.props;
+---
+
+<p class:list={["lead", cls]} set:html={rich(text)} />
+
+<style>
+  .lead {
+    max-width: 36rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: -0.012em;
+  }
+</style>

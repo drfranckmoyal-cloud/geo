@@ -1,0 +1,81 @@
+---
+// Pages liées : le maillage interne du pilier (00 §10, « maillage interne fort »), sous forme
+// de liens sobres séparés par des filets. Libellés repris des liens du pack.
+import SectionEyebrow from "../global/SectionEyebrow.astro";
+import { linkAttrs } from "../../lib/links";
+import { plain } from "../../lib/typo";
+
+interface Props {
+  label: string;
+  items: { label: string; href: string }[];
+}
+const { label, items } = Astro.props;
+---
+
+<nav class="container related" aria-label={label} data-reveal>
+  <SectionEyebrow text={label} />
+  <ul class="related__list">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.href} {...linkAttrs(item.href)}>
+            <span set:html={plain(item.label)} />
+            <svg viewBox="0 0 26 12" aria-hidden="true" focusable="false">
+              <path d="M0 6h24.5M19.5 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.1" />
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .related {
+    padding-block: clamp(3rem, 2rem + 3vw, 5rem);
+  }
+  .related__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+  .related__list li {
+    border-top: 1px solid var(--c-stone);
+  }
+  .related__list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 1.1rem 1.4rem;
+    font-family: var(--f-serif);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+  .related__list svg {
+    flex: none;
+    width: 1.5rem;
+    height: 0.75rem;
+    transition: transform var(--t-hover) var(--ease);
+  }
+  .related__list a:hover span {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .related__list a:hover svg {
+    transform: translateX(4px);
+  }
+  @media (max-width: 63.99em) {
+    .related__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 34.99em) {
+    .related__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

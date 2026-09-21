@@ -1,0 +1,16 @@
+---
+// Conteneur de largeur maximale 1240 px (V7) ; « text » = largeur de lecture éditoriale.
+interface Props {
+  size?: "default" | "text";
+  class?: string;
+}
+const { size = "default", class: cls } = Astro.props;
+---
+
+<div class:list={["container", size === "text" && "container--text", cls]}><slot /></div>
+
+<style>
+  .container--text {
+    width: min(100% - 2 * var(--gutter), var(--measure));
+  }
+</style>

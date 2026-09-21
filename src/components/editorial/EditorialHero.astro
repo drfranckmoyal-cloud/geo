@@ -1,0 +1,113 @@
+---
+// Ouverture de la page Franck (07 §8, 08 D) : portrait dominant, H1 simple, peu d'information
+// secondaire. Composition en miroir de l'accueil : l'aplat du portrait à gauche.
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import EditorialH1 from "../global/EditorialH1.astro";
+import LeadText from "../global/LeadText.astro";
+
+interface Props {
+  h1: string;
+  lead: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+const { h1, lead, image, imageAlt } = Astro.props;
+---
+
+<section class="ehero" aria-labelledby="ehero-titre">
+  <div class="ehero__media" data-reveal>
+    <div class="ehero__panel">
+      <Picture
+        src={image}
+        alt={imageAlt}
+        formats={["avif", "webp"]}
+        fallbackFormat="jpg"
+        widths={[360, 480]}
+        sizes="(min-width: 64em) 30rem, 100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+  <div class="container grid-12 ehero__inner">
+    <div class="ehero__text" data-reveal>
+      <EditorialH1 id="ehero-titre" text={h1} class="ehero__title" />
+      <LeadText text={lead} class="ehero__lead" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ehero {
+    position: relative;
+  }
+  .ehero__inner {
+    align-items: center;
+    min-height: clamp(36rem, calc(100svh - var(--header-h)), 52rem);
+    padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
+  }
+  .ehero__text {
+    grid-column: 7 / span 6;
+  }
+  .ehero__text :global(.ehero__lead) {
+    margin-top: var(--gap-title-text);
+    max-width: 28rem;
+    color: var(--c-ink-soft);
+  }
+  .ehero__media {
+    position: absolute;
+    top: clamp(1.5rem, 3vw, 3rem);
+    bottom: 0;
+    left: 0;
+    width: 46%;
+  }
+  .ehero__panel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--c-ink);
+  }
+  .ehero__panel :global(picture) {
+    position: absolute;
+    bottom: 0;
+    right: 8%;
+    width: min(84%, 30rem);
+    /* Les épaules, coupées par les bords de la photo, se fondent dans l'aplat noir doux */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+  }
+  .ehero__panel :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 64em) and (max-width: 79.99em) {
+    .ehero__text {
+      grid-column: 6 / span 7;
+    }
+    .ehero__media {
+      width: 40%;
+    }
+  }
+  @media (max-width: 63.99em) {
+    .ehero__media {
+      position: relative;
+      top: auto;
+      width: 100%;
+      aspect-ratio: 1 / 1.06;
+      max-height: 34rem;
+    }
+    .ehero__panel :global(picture) {
+      right: 50%;
+      width: min(100%, 30rem);
+      transform: translateX(50%);
+    }
+    .ehero__inner {
+      min-height: 0;
+    }
+    .ehero__text {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

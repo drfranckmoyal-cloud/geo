@@ -1,0 +1,25 @@
+---
+// Texte courant : un ou plusieurs paragraphes, largeur de lecture maîtrisée, renvois
+// bibliographiques discrets.
+import { rich } from "../../lib/typo";
+
+interface Props {
+  paragraphs: string[] | string;
+  class?: string;
+}
+const { paragraphs, class: cls } = Astro.props;
+const list = Array.isArray(paragraphs) ? paragraphs : [paragraphs];
+---
+
+<div class:list={["body-text", cls]}>
+  {list.map((p) => <p set:html={rich(p)} />)}
+</div>
+
+<style>
+  .body-text {
+    max-width: var(--measure);
+  }
+  .body-text p + p {
+    margin-top: 1.1em;
+  }
+</style>

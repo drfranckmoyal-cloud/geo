@@ -1,0 +1,46 @@
+---
+// Fil d'Ariane visible ; sa version pour les moteurs (BreadcrumbList) est dans les données
+// structurées de la page.
+interface Props {
+  items: { label: string; href?: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Fil d’Ariane">
+  <ol>
+    {
+      items.map((item, i) => (
+        <li>
+          {item.href && i < items.length - 1 ? (
+            <a href={item.href}>{item.label}</a>
+          ) : (
+            <span aria-current="page">{item.label}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: var(--fs-meta);
+    line-height: 1.4;
+    color: var(--c-ink-soft);
+  }
+  .breadcrumbs li + li::before {
+    content: "/";
+    margin-right: 0.5rem;
+    color: var(--c-stone);
+  }
+  .breadcrumbs a {
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+</style>

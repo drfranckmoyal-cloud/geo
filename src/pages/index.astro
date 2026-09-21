@@ -1,0 +1,50 @@
+---
+// Page 1 — Accueil (02_HOME.md). Ordre des sections du pack (V3) :
+// ouverture, deux piliers, philosophie, méthode, TCA, autorité, appel final.
+import { getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSplit from "../components/home/HeroSplit.astro";
+import PillarPair from "../components/home/PillarPair.astro";
+import PhilosophyStatement from "../components/home/PhilosophyStatement.astro";
+import MethodSteps from "../components/home/MethodSteps.astro";
+import AuthorityStrip from "../components/home/AuthorityStrip.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
+import TextImageSection from "../components/editorial/TextImageSection.astro";
+import portrait from "../assets/photos/portrait-franck.png";
+import { home } from "../content/home";
+import { site } from "../content/site";
+import { abs, graph, person, website } from "../lib/schema";
+
+const og = await getImage({ src: portrait, format: "jpg", width: 480 });
+const schema = graph([website(), person(abs(og.src))]);
+---
+
+<BaseLayout title={home.seo.title} description={home.seo.description} path="/" schema={schema} ogImage={og.src}>
+  <HeroSplit
+    eyebrow={home.hero.eyebrow}
+    h1={home.hero.h1}
+    lead={home.hero.lead}
+    primary={{ label: home.hero.ctaPrimary, href: site.rdv.href }}
+    secondary={home.hero.ctaSecondary}
+    image={portrait}
+    imageAlt="Portrait du Dr Franck Moyal"
+  />
+  <PillarPair title={home.pillars.title} items={home.pillars.items} />
+  <PhilosophyStatement title={home.philosophy.title} text={home.philosophy.text} />
+  <MethodSteps
+    id="methode"
+    title={home.method.title}
+    intro={home.method.intro}
+    steps={home.method.steps}
+    link={home.method.link}
+  />
+  <TextImageSection
+    id="tca"
+    layout="panel"
+    title={home.tca.title}
+    paragraphs={[home.tca.text]}
+    links={[home.tca.cta]}
+  />
+  <AuthorityStrip title={home.authority.title} text={home.authority.text} links={home.authority.links} />
+  <FinalCTA title={home.final.title} text={home.final.text} cta={home.final.cta} />
+</BaseLayout>

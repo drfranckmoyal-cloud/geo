@@ -1,0 +1,172 @@
+---
+// Section éditoriale texte + image, déclinable sans devenir répétitive (08 F, critère 8) :
+//  split-right / split-left : texte et visuel côte à côte ;
+//  offset : texte seul, décalé vers la droite ;
+//  narrow : texte seul, colonne de lecture ;
+//  aside : texte + colonne latérale (liste, liens) ;
+//  panel : bloc « domaine spécifique » sur fond vert sauge très discret (07 §9).
+import Section from "../global/Section.astro";
+import SectionEyebrow from "../global/SectionEyebrow.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import BodyText from "../global/BodyText.astro";
+import TextLink from "../global/TextLink.astro";
+import MediaFrame from "../ui/MediaFrame.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  eyebrow?: string;
+  paragraphs?: string[];
+  links?: { label: string; href: string }[];
+  media?: { label: string; ratio?: string };
+  layout?: "split-right" | "split-left" | "offset" | "narrow" | "aside" | "panel";
+  tone?: "paper" | "ivory";
+  titleSize?: "default" | "statement";
+}
+const {
+  id,
+  title,
+  eyebrow,
+  paragraphs = [],
+  links = [],
+  media,
+  layout = "narrow",
+  tone = "paper",
+  titleSize = "default",
+} = Astro.props;
+const hasAside = Astro.slots.has("aside");
+---
+
+<Section id={id} tone={tone} labelledby={`${id}-titre`} class={`tis tis--${layout}`}>
+  <div class="container">
+    <div class="grid-12 tis__grid">
+      <div class="tis__text" data-reveal>
+        <div class="tis__head">
+          {eyebrow && <SectionEyebrow text={eyebrow} />}
+          <EditorialH2 id={`${id}-titre`} text={title} size={titleSize} />
+        </div>
+        {paragraphs.length > 0 && <BodyText paragraphs={paragraphs} class="tis__body" />}
+        <slot />
+        {
+          links.length > 0 && (
+            <ul class="tis__links">
+              {links.map((link) => (
+                <li>
+                  <TextLink href={link.href} label={link.label} />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+      {
+        media && (
+          <div class="tis__media" data-reveal>
+            <MediaFrame label={media.label} ratio={media.ratio ?? "4 / 5"} />
+          </div>
+        )
+      }
+      {
+        hasAside && (
+          <div class="tis__aside" data-reveal>
+            <slot name="aside" />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .tis__grid {
+    align-items: center;
+    row-gap: 3rem;
+  }
+  .tis__text :global(.tis__body) {
+    margin-top: var(--gap-title-text);
+  }
+  .tis__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-top: var(--gap-text-cta);
+  }
+
+  /* Côte à côte */
+  :global(.tis--split-right) .tis__text {
+    grid-column: 1 / span 6;
+  }
+  :global(.tis--split-right) .tis__media {
+    grid-column: 8 / span 5;
+  }
+  :global(.tis--split-left) .tis__media {
+    grid-column: 1 / span 5;
+    grid-row: 1;
+  }
+  :global(.tis--split-left) .tis__text {
+    grid-column: 7 / span 6;
+    grid-row: 1;
+  }
+
+  /* Texte seul */
+  :global(.tis--offset) .tis__text {
+    grid-column: 5 / span 7;
+  }
+  :global(.tis--narrow) .tis__text {
+    grid-column: 1 / span 7;
+  }
+
+  /* Texte + colonne latérale */
+  :global(.tis--aside) .tis__grid {
+    align-items: start;
+  }
+  :global(.tis--aside) .tis__text {
+    grid-column: 1 / span 6;
+  }
+  :global(.tis--aside) .tis__aside {
+    grid-column: 8 / span 5;
+    padding-top: 0.5rem;
+  }
+
+  /* Bloc « domaine spécifique » : aplat vert sauge très discret, titre et texte côte à côte */
+  :global(.tis--panel) .tis__grid {
+    padding: clamp(2rem, 1rem + 4vw, 4.5rem);
+    background: var(--c-sage-wash);
+    align-items: start;
+  }
+  :global(.tis--panel) .tis__text {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+  :global(.tis--panel) .tis__text > :global(*) {
+    grid-column: 6 / span 7;
+  }
+  :global(.tis--panel) .tis__head {
+    grid-column: 1 / span 5 !important;
+    grid-row: 1 / span 6;
+  }
+  :global(.tis--panel) .tis__text :global(.tis__body) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 63.99em) {
+    .tis__text,
+    .tis__media,
+    .tis__aside,
+    :global(.tis--split-left) .tis__media,
+    :global(.tis--split-left) .tis__text {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+    :global(.tis--panel) .tis__text > :global(*),
+    :global(.tis--panel) .tis__head {
+      grid-column: 1 / -1 !important;
+      grid-row: auto;
+    }
+    :global(.tis--panel) .tis__text :global(.tis__body) {
+      margin-top: var(--gap-title-text);
+    }
+  }
+</style>

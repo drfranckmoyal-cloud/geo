@@ -1,0 +1,54 @@
+---
+// Lien secondaire (V9) : texte noir et flèche fine ; au survol, soulignement et léger
+// déplacement de la flèche.
+import { linkAttrs } from "../../lib/links";
+import { plain } from "../../lib/typo";
+
+interface Props {
+  href: string;
+  label: string;
+  class?: string;
+}
+const { href, label, class: cls } = Astro.props;
+---
+
+<a href={href} class:list={["text-link", cls]} {...linkAttrs(href)}>
+  <span class="text-link__label" set:html={plain(label)} />
+  <svg class="text-link__arrow" viewBox="0 0 26 12" aria-hidden="true" focusable="false">
+    <path d="M0 6h24.5M19.5 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.1" />
+  </svg>
+</a>
+
+<style>
+  .text-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.005em;
+    color: var(--c-ink);
+    text-decoration: none;
+  }
+  .text-link__label {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color var(--t-hover) var(--ease);
+  }
+  .text-link__arrow {
+    flex: none;
+    width: 1.625rem;
+    height: 0.75rem;
+    align-self: center;
+    transition: transform var(--t-hover) var(--ease);
+  }
+  .text-link:hover .text-link__label {
+    text-decoration-color: currentColor;
+  }
+  .text-link:hover .text-link__arrow {
+    transform: translateX(4px);
+  }
+</style>

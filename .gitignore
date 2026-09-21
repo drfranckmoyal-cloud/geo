@@ -29,3 +29,5 @@ patients/
 # Aperçus de contrôle et captures (régénérables)
 scripts/.apercu-*.png
 livrables/**/captures/
+scripts/.revue/
+scripts/.zoom.mjs

@@ -1,0 +1,83 @@
+---
+// FAQ (08 E : « lisible »). Réponses courtes : affichées ouvertes par défaut, l'accordéon ne
+// servant que si le besoin est réel (07 §17). Les questions sont des intertitres (H3),
+// lisibles telles quelles par les moteurs.
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import { plain } from "../../lib/typo";
+
+interface Props {
+  id?: string;
+  title: string;
+  items: { q: string; a: string }[];
+  collapsible?: boolean;
+}
+const { id = "faq", title, items, collapsible = false } = Astro.props;
+---
+
+<Section id={id} labelledby={`${id}-titre`}>
+  <div class="container grid-12 faq">
+    <EditorialH2 id={`${id}-titre`} text={title} class="faq__title" />
+    <div class="faq__items" data-reveal>
+      {
+        items.map((item) =>
+          collapsible ? (
+            <details class="faq__item">
+              <summary>
+                <h3 set:html={plain(item.q)} />
+              </summary>
+              <p set:html={plain(item.a)} />
+            </details>
+          ) : (
+            <div class="faq__item">
+              <h3 set:html={plain(item.q)} />
+              <p set:html={plain(item.a)} />
+            </div>
+          ),
+        )
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .faq {
+    align-items: start;
+  }
+  .faq :global(.faq__title) {
+    grid-column: 1 / span 4;
+  }
+  .faq__items {
+    grid-column: 6 / span 7;
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .faq__item {
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--c-stone);
+  }
+  .faq__item h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+  }
+  .faq__item p {
+    max-width: 40rem;
+    margin-top: 0.75rem;
+    color: var(--c-ink-soft);
+  }
+  .faq__item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  @media (max-width: 63.99em) {
+    .faq :global(.faq__title),
+    .faq__items {
+      grid-column: 1 / -1;
+    }
+    .faq__items {
+      margin-top: 2.5rem;
+    }
+  }
+</style>

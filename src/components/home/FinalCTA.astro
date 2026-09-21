@@ -1,0 +1,41 @@
+---
+// Appel final (08 C : « CTA final net ») : un titre, une phrase, un bouton. Sert aux trois
+// pages ; il porte l'ancre #rendez-vous (emplacement réservé de la prise de rendez-vous, D8).
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import BodyText from "../global/BodyText.astro";
+import PrimaryButton from "../global/PrimaryButton.astro";
+import { site } from "../../content/site";
+
+interface Props {
+  title: string;
+  text: string;
+  cta: string;
+}
+const { title, text, cta } = Astro.props;
+---
+
+<Section tone="ivory" id="rendez-vous" labelledby="rendez-vous-titre">
+  <div class="container grid-12">
+    <div class="final" data-reveal>
+      <EditorialH2 id="rendez-vous-titre" text={title} size="statement" />
+      <BodyText paragraphs={text} class="final__text" />
+      <PrimaryButton href={site.rdv.href} label={cta} />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .final {
+    grid-column: 3 / span 8;
+  }
+  .final :global(.final__text) {
+    max-width: 36rem;
+    margin-block: var(--gap-title-text) var(--gap-text-cta);
+  }
+  @media (max-width: 63.99em) {
+    .final {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

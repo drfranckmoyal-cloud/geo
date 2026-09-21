@@ -1,0 +1,45 @@
+---
+// Section de page : fond (blanc cassé, ivoire, noir doux) et respiration verticale
+// de 72 à 136 px (V7).
+interface Props {
+  tone?: "paper" | "ivory" | "ink";
+  spacing?: "default" | "compact" | "none";
+  id?: string;
+  labelledby?: string;
+  class?: string;
+}
+const { tone = "paper", spacing = "default", id, labelledby, class: cls } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  class:list={["section", `tone-${tone}`, `space-${spacing}`, cls]}
+>
+  <slot />
+</section>
+
+<style>
+  .section {
+    position: relative;
+  }
+  .space-default {
+    padding-block: var(--section-y);
+  }
+  .space-compact {
+    padding-block: calc(var(--section-y) * 0.62);
+  }
+  .space-none {
+    padding-block: 0;
+  }
+  .tone-paper {
+    background: var(--c-paper);
+  }
+  .tone-ivory {
+    background: var(--c-ivory);
+  }
+  .tone-ink {
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+</style>

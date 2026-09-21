@@ -1,0 +1,136 @@
+---
+// Sources scientifiques (verrou V22) : visibles en bas de page, liens externes discrets
+// (rel="noopener noreferrer"), une ancre par référence pour les renvois [1]…[7].
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import { plain } from "../../lib/typo";
+
+interface Source {
+  n: number;
+  authors: string;
+  title: string;
+  journal: string;
+  details: string;
+  doi: string;
+  pubmed: string;
+  supports: string;
+}
+interface Props {
+  id?: string;
+  title: string;
+  intro: string;
+  items: Source[];
+  verifiedLabel: string;
+  verifiedDate: string;
+  verifiedIso: string;
+}
+const { id = "sources", title, intro, items, verifiedLabel, verifiedDate, verifiedIso } = Astro.props;
+---
+
+<Section id={id} labelledby={`${id}-titre`} spacing="compact">
+  <div class="container grid-12 sources">
+    <div class="sources__head">
+      <EditorialH2 id={`${id}-titre`} text={title} />
+      <p class="sources__intro" set:html={plain(intro)} />
+    </div>
+    <div class="sources__body">
+      <ol class="sources__list">
+        {
+          items.map((s) => (
+            <li id={`source-${s.n}`} class="source">
+              <span class="source__n">[{s.n}]</span>
+              <div>
+                <p class="source__ref">
+                  <strong>{s.authors}</strong> {s.title} <em>{s.journal}</em> {s.details}
+                </p>
+                <p class="source__links">
+                  <a href={`https://doi.org/${s.doi}`} target="_blank" rel="noopener noreferrer">
+                    DOI : {s.doi}
+                  </a>
+                  <a href={s.pubmed} target="_blank" rel="noopener noreferrer">
+                    PubMed
+                  </a>
+                </p>
+                <p class="source__supports" set:html={plain(`Soutient : ${s.supports}`)} />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="sources__verified">
+        {verifiedLabel}&nbsp;: <time datetime={verifiedIso}>{verifiedDate}</time>
+      </p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .sources {
+    align-items: start;
+    padding-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+    border-top: 1px solid var(--c-stone);
+  }
+  .sources__head {
+    grid-column: 1 / span 4;
+  }
+  .sources__intro {
+    margin-top: 1.25rem;
+    font-size: var(--fs-small);
+    color: var(--c-ink-soft);
+  }
+  .sources__body {
+    grid-column: 6 / span 7;
+  }
+  .source {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0.25rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--c-stone);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+  .source:last-child {
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .source__n {
+    color: var(--c-sage);
+    font-weight: 500;
+  }
+  .source__ref strong {
+    font-weight: 600;
+  }
+  .source__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-top: 0.35rem;
+    font-size: var(--fs-meta);
+  }
+  .source__links a {
+    color: var(--c-sage);
+    text-decoration-color: var(--c-sage-light);
+  }
+  .source__links a:hover {
+    text-decoration-color: currentColor;
+  }
+  .source__supports {
+    margin-top: 0.35rem;
+    font-size: var(--fs-meta);
+    color: var(--c-ink-soft);
+  }
+  .sources__verified {
+    margin-top: 1.5rem;
+    font-size: var(--fs-meta);
+    color: var(--c-ink-soft);
+  }
+  @media (max-width: 63.99em) {
+    .sources__head,
+    .sources__body {
+      grid-column: 1 / -1;
+    }
+    .sources__body {
+      margin-top: 2rem;
+    }
+  }
+</style>

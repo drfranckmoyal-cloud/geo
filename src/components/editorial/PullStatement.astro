@@ -1,0 +1,85 @@
+---
+// Phrase forte en grand format (07 §8). Deux usages :
+//  title : un titre-manifeste suivi de son texte (« Traiter juste ») ;
+//  quote : une phrase clé mise en exergue, sans titre (message clé de la page Usures).
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import { plain, rich } from "../../lib/typo";
+
+interface Props {
+  variant?: "title" | "quote";
+  id?: string;
+  title?: string;
+  text: string;
+  tone?: "paper" | "ivory";
+  bare?: boolean; // sans section propre, à l'intérieur d'une autre
+}
+const { variant = "title", id, title, text, tone = "paper", bare = false } = Astro.props;
+---
+
+{
+  variant === "quote" ? (
+    bare ? (
+      <blockquote class="pull-quote" data-reveal>
+        <p set:html={plain(text)} />
+      </blockquote>
+    ) : (
+      <Section tone={tone} spacing="compact">
+        <div class="container grid-12">
+          <blockquote class="pull-quote pull-quote--wide" data-reveal>
+            <p set:html={plain(text)} />
+          </blockquote>
+        </div>
+      </Section>
+    )
+  ) : (
+    <Section id={id} tone={tone} labelledby={id ? `${id}-titre` : undefined}>
+      <div class="container grid-12 pull" data-reveal>
+        <EditorialH2 id={id ? `${id}-titre` : undefined} text={title ?? ""} size="statement" class="pull__title" />
+        <p class="pull__text" set:html={rich(text)} />
+      </div>
+    </Section>
+  )
+}
+
+<style>
+  .pull {
+    row-gap: var(--gap-title-text);
+  }
+  .pull :global(.pull__title) {
+    grid-column: 1 / -1;
+    font-size: var(--fs-h2-statement);
+  }
+  .pull__text {
+    grid-column: 5 / span 7;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+  }
+
+  .pull-quote {
+    margin: 0;
+    padding-left: clamp(1.25rem, 2.5vw, 2.5rem);
+    border-left: 1px solid var(--c-sage);
+  }
+  .pull-quote p {
+    max-width: 30ch;
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: var(--fs-h2);
+    line-height: 1.16;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  .pull-quote--wide {
+    grid-column: 3 / span 9;
+  }
+
+  @media (max-width: 63.99em) {
+    .pull__text,
+    .pull-quote--wide {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

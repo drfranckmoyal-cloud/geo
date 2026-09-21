@@ -1,0 +1,76 @@
+---
+// Le parcours clinique de la page : les huit étapes, de « reconnaître » à « érosion & TCA »,
+// dans l'ordre du pack, chacune menant à sa section. Libellés = libellés de section du pack.
+import { plain } from "../../lib/typo";
+
+interface Props {
+  items: { label: string; href: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="container grid-12">
+  <nav class="pathway" aria-label="Sommaire de la page" data-reveal>
+    <ol>
+      {
+        items.map((item) => (
+          <li>
+            <a href={item.href}>
+              <span class="pathway__label" set:html={plain(item.label)} />
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+</div>
+
+<style>
+  .pathway {
+    grid-column: 1 / span 9;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+  .pathway ol {
+    counter-reset: path;
+    columns: 2;
+    column-gap: var(--col-gap);
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .pathway li {
+    counter-increment: path;
+    break-inside: avoid;
+    border-top: 1px solid var(--c-stone);
+  }
+  .pathway a {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    align-items: baseline;
+    padding-block: 0.85rem;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+  .pathway a::before {
+    content: counter(path, decimal-leading-zero);
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--c-sage);
+  }
+  .pathway a:hover .pathway__label {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+  @media (max-width: 63.99em) {
+    .pathway {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 47.99em) {
+    .pathway ol {
+      columns: 1;
+    }
+  }
+</style>
