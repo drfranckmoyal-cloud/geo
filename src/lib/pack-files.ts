@@ -3,6 +3,8 @@
 import { parsePack, type PackPage } from "./pack.ts";
 import { arborescence, builtNums, knownLabels, linkOverrides } from "../content/pages-suivantes.ts";
 
+// Nouvelle version du pack (docs/pages-suivantes/v1.1/…) : changer ce chemin — il doit rester
+// écrit en toutes lettres — et PACK_DIR dans src/content/pages-suivantes.ts.
 const raw = import.meta.glob("/docs/pages-suivantes/v1/[0-9][0-9]_*.md", {
   query: "?raw",
   import: "default",
