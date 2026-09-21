@@ -1,0 +1,27 @@
+# Secrets et environnements : jamais sur GitHub
+.env
+.env.*
+*.db
+.venv
+.venv/
+.venv.nosync/
+__pycache__/
+.DS_Store
+
+# Outils de fabrication du site (Node) : jamais sur GitHub.
+# Ils vivent dans node_modules.nosync, que iCloud ignore ; node_modules n'est qu'un lien.
+node_modules
+node_modules/
+node_modules.nosync/
+dist/
+.astro/
+
+# Données de santé : aucune photo originale ni dossier patient dans ce dépôt
+patients/
+*.heic
+*.HEIC
+*.nef
+*.NEF
+*.dcm
+*.stl
+*.ply
