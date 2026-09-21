@@ -5,7 +5,9 @@
 2. Puis le pack de référence en vigueur (indiqué au §3 du fichier maître, aujourd'hui
    `docs/golden-master/v1.3.1/`), dans l'ordre de `00_README.md`, en commençant par
    `00_PROJECT_CONTEXT.md`. Avant tout travail d'interface : `07_ART_DIRECTION.md` et
-   `08_VISUAL_QA_CLAUDE.md` en entier.
+   `08_VISUAL_QA_CLAUDE.md` en entier. Pour les 20 pages suivantes : le pack
+   `docs/pages-suivantes/v1/` (`00_ARBORESCENCE_ET_ORDRE.md`, `21_MANIFESTE_INTEGRATION.md`,
+   puis un fichier par page) ; ses textes sont lus directement par `src/lib/pack.ts`.
 3. **Rôle de Claude : développeur exécutant.** Il ne modifie ni la stratégie, ni
    l'arborescence, ni les textes, ni les couleurs, ni les polices, ni l'ordre des sections.
    Une information manque : emplacement réservé clairement signalé, jamais d'invention.

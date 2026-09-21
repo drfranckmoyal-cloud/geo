@@ -1,0 +1,192 @@
+---
+// Les pages du pack « pages suivantes » V1 (docs/pages-suivantes/v1) : un seul gabarit,
+// alimenté par les fichiers du pack — textes lus tels quels (src/lib/pack.ts) — et assemblé
+// avec les composants gelés du golden master (verrou V24), dans l'ordre du contrat de
+// composants de chaque fichier : ouverture clinique, réponse directe, sections, FAQ, sources,
+// auteur, pages liées, appel final.
+import { getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ClinicalHero from "../components/clinical/ClinicalHero.astro";
+import DirectAnswer from "../components/clinical/DirectAnswer.astro";
+import ClinicalPathway from "../components/clinical/ClinicalPathway.astro";
+import FAQAccordion from "../components/clinical/FAQAccordion.astro";
+import SourceList from "../components/clinical/SourceList.astro";
+import RelatedPages from "../components/clinical/RelatedPages.astro";
+import TextImageSection from "../components/editorial/TextImageSection.astro";
+import AuthorBlock from "../components/editorial/AuthorBlock.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
+import MethodSteps from "../components/home/MethodSteps.astro";
+import Container from "../components/global/Container.astro";
+import MediaFrame from "../components/ui/MediaFrame.astro";
+import PackBlocks from "../components/pack/PackBlocks.astro";
+import portrait from "../assets/photos/portrait-franck.jpg";
+import { home } from "../content/home";
+import { usures } from "../content/usures";
+import { site } from "../content/site";
+import { hidden, layouts, shownSourceNotes } from "../content/pages-suivantes";
+import { builtPackPages, crumbTrail, resolveLink } from "../lib/pack-files";
+import { planSections } from "../lib/pack-layout";
+import type { PackPage } from "../lib/pack";
+import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
+
+export function getStaticPaths() {
+  return builtPackPages().map((page) => ({ params: { slug: page.url.replace(/^\/|\/$/g, "") }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: PackPage };
+const cfg = layouts[page.num] ?? {};
+const masked = hidden[page.num] ?? [];
+const resolve = (label: string) => resolveLink(page, label);
+
+// Passages non affichés (consignes glissées dans le texte, à confirmer par ChatGPT)
+const sections = page.sections
+  .filter((s) => !masked.some((h) => h.section === s.title))
+  .map((s) => ({ ...s, blocks: s.blocks.filter((b) => !(b.kind === "p" && masked.some((h) => h.text && b.text.startsWith(h.text)))) }));
+const plans = planSections(sections, cfg.sections);
+
+const trail = crumbTrail(page);
+const og = await getImage({ src: portrait, format: "jpg", width: 800 });
+const byline = { label: page.author.name, href: page.author.href };
+const hasAuthor = page.contract.some((c) => c.includes("AuthorBlock"));
+
+// Sources : notes du §10 à afficher ; renvois du texte dont le numéro n'est pas dans la liste
+// (ils mènent au bloc des sources ; l'écart est signalé par le contrôle des textes)
+const notes = page.sourceNotes
+  .flatMap((n) => n.split("\n"))
+  .filter((line) => (shownSourceNotes[page.num] ?? []).some((start) => line.startsWith(start)));
+const allText = [page.lead, page.answer ?? "", ...sections.flatMap((s) => s.blocks.map((b) => JSON.stringify(b))), ...(page.faq?.items.map((i) => i.a) ?? [])].join("\n");
+const listed = new Set(page.sources.map((s) => s.n));
+const firstCited = [...allText.replace(/\*\*/g, "").matchAll(/\s\[(\d+)/g)].map((m) => Number(m[1]));
+const orphans = [...new Set(firstCited)].filter((n) => !listed.has(n));
+
+// Pages liées : la liste « À lire aussi » du fichier, sinon ses liens internes à câbler
+const related = page.related
+  ? { title: page.related.title, items: page.related.labels.map((label) => ({ label, href: resolve(label) })) }
+  : page.links.length
+    ? { title: "À lire aussi", items: page.links.filter((l) => l.href !== page.url) }
+    : undefined;
+
+// Données structurées : types du §8 de chaque fichier
+const pageTypes = page.seo.schema.filter((t) => /Page$/.test(t) || t === "Article");
+const url = abs(page.url);
+const schema = graph([
+  website(),
+  {
+    "@type": pageTypes.length === 1 ? pageTypes[0] : pageTypes,
+    "@id": `${url}#page`,
+    url,
+    name: page.seo.title,
+    description: page.seo.description,
+    inLanguage: site.lang,
+    isPartOf: { "@id": site.websiteId },
+    ...(pageTypes.includes("Article") ? { headline: page.h1 } : {}),
+    author: { "@id": site.personId },
+    ...(page.parent === "/franck-moyal/" ? { about: { "@id": site.personId } } : {}),
+    dateModified: page.author.iso,
+    breadcrumb: { "@id": `${url}#fil` },
+    ...(page.sources.length
+      ? {
+          citation: page.sources.map((s) => ({
+            "@type": "ScholarlyArticle",
+            name: s.title,
+            author: s.authors,
+            datePublished: s.year,
+            isPartOf: { "@type": "Periodical", name: s.journal.replace(/\.$/, "") },
+            sameAs: `https://doi.org/${s.doi}`,
+            url: s.pubmed,
+          })),
+        }
+      : {}),
+  },
+  { ...breadcrumbs(trail.map((c) => ({ name: c.label, path: c.href }))), "@id": `${url}#fil` },
+  person(abs(og.src), false, page.seo.schema.includes("PostalAddress")),
+]);
+---
+
+<BaseLayout title={page.seo.title} description={page.seo.description} path={page.url} schema={schema} ogImage={og.src} robots={page.seo.robots}>
+  <ClinicalHero breadcrumbs={trail} h1={page.h1} lead={page.lead} byline={byline} />
+  {page.answer && <DirectAnswer text={page.answer} />}
+  {cfg.pathway && <ClinicalPathway items={plans.map((p) => ({ label: p.section.title, href: `#${p.id}` }))} />}
+
+  {
+    plans.map((p) => (
+      <>
+        {cfg.method?.before === p.section.id && <MethodSteps title={home.method.title} steps={home.method.steps} />}
+        {p.aside.length > 0 ? (
+          <TextImageSection id={p.id} title={p.section.title} layout={p.layout} tone={p.tone}>
+            <PackBlocks blocks={p.main} resolve={resolve} />
+            <PackBlocks slot="aside" blocks={p.aside} resolve={resolve} narrow class="pack-aside" />
+          </TextImageSection>
+        ) : (
+          <TextImageSection
+            id={p.id}
+            title={p.section.title}
+            layout={p.layout}
+            tone={p.tone}
+            media={p.media && !p.media.wide ? { label: p.media.label, ratio: p.media.ratio } : undefined}
+          >
+            <PackBlocks blocks={p.main} resolve={resolve} entries={p.entries} narrow={p.layout.startsWith("split")} />
+            {p.media?.wide && <MediaFrame label={p.media.label} ratio={p.media.ratio} class="pack-wide-media" />}
+          </TextImageSection>
+        )}
+      </>
+    ))
+  }
+
+  {page.faq && <FAQAccordion title={page.faq.title} items={page.faq.items} />}
+  {
+    page.sources.length > 0 && (
+      <SourceList
+        title={usures.sources.title}
+        intro={usures.sources.intro}
+        toggle={`Voir les ${page.sources.length} sources scientifiques`}
+        items={page.sources}
+        notes={notes}
+        orphans={orphans}
+      />
+    )
+  }
+  {
+    hasAuthor && (
+      <Container class="grid-12 pack-author">
+        <div class="pack-author__block">
+          <AuthorBlock
+            label={usures.author.label}
+            name={page.author.name}
+            tagline={usures.author.tagline}
+            updated={`Mis à jour le ${page.author.date}`}
+            updatedIso={page.author.iso}
+            href={page.author.href}
+            image={portrait}
+          />
+        </div>
+      </Container>
+    )
+  }
+  {related && <RelatedPages label={related.title} items={related.items} />}
+  {page.cta && <FinalCTA title={page.cta.title} text={page.cta.paragraphs} cta={page.cta.label} />}
+</BaseLayout>
+
+<style>
+  /* Emplacement d'image en pleine largeur sous une grille (schéma de la page Usures) */
+  :global(.pack-wide-media) {
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+  /* Liste en colonne latérale : sans l'écart titre → texte */
+  :global(.pack-aside) {
+    margin-top: 0;
+  }
+  /* Bloc auteur : même place que sur la page Usures */
+  :global(.pack-author) {
+    padding-bottom: 1rem;
+  }
+  .pack-author__block {
+    grid-column: 6 / span 7;
+  }
+  @media (max-width: 63.99em) {
+    .pack-author__block {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

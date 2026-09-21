@@ -5,8 +5,11 @@
 //  3. Rien d'oublié : chaque passage affichable du pack (citations, titres, listes, FAQ,
 //     sources) se retrouve dans la page.
 // Les seules différences admises sont les décisions notées au fichier maître (D6, D11, D12).
+// Pages du pack « pages suivantes » : contrôle dédié (scripts/verify-pack.mjs).
 // Lancer après « npm run build » : npm run verify
 import { readFile } from "node:fs/promises";
+import { verifyPack } from "./verify-pack.mjs";
+import { builtPages } from "../src/content/site.ts";
 import { home } from "../src/content/home.ts";
 import { franck } from "../src/content/franck.ts";
 import { usures } from "../src/content/usures.ts";
@@ -221,8 +224,13 @@ problems += unknown.length;
 note(`\n■ Menu et pied de page — ${chrome.length} libellés`);
 note(unknown.length ? `  ✗ Libellés sans source : ${unknown.join(", ")}` : "  ✓ Tous les libellés viennent du pack ou de la réponse de ChatGPT");
 
-// « Dentiste esthétique » : jamais (verrou V21)
-for (const f of ["dist/index.html", "dist/franck-moyal/index.html", "dist/usures-dentaires/index.html"]) {
+// Pages du pack « pages suivantes »
+const pack = await verifyPack();
+problems += pack.problems;
+report.push(...pack.out);
+
+// « Dentiste esthétique » : jamais (verrou V21), sur toutes les pages construites
+for (const f of builtPages.map((u) => `dist${u}index.html`)) {
   const raw = await readFile(f, "utf8");
   if (/dentiste esth/i.test(raw)) {
     problems++;
@@ -232,5 +240,6 @@ for (const f of ["dist/index.html", "dist/franck-moyal/index.html", "dist/usures
 note("\n■ Verrou V21 — « dentiste esthétique » : " + (problems && report.some((r) => r.includes("dentiste esthétique » trouvé")) ? "présent ✗" : "absent partout ✓"));
 
 console.log(report.join("\n"));
-console.log(problems ? `\n${problems} écart(s) à examiner.` : "\nContrôle réussi : aucun écart.");
+if (pack.warnings) console.log(`\n${pack.warnings} écart(s) du pack signalé(s) (⚠), à corriger par ChatGPT : ils ne bloquent pas la construction.`);
+console.log(problems ? `\n${problems} écart(s) à examiner.` : "\nContrôle réussi : aucun écart de construction.");
 process.exit(problems ? 1 : 0);

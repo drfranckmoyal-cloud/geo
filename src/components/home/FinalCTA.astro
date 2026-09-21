@@ -9,18 +9,19 @@ import { site } from "../../content/site";
 
 interface Props {
   title: string;
-  text: string;
-  cta: string;
+  text?: string | string[];
+  cta?: string;
 }
 const { title, text, cta } = Astro.props;
+const hasText = Array.isArray(text) ? text.length > 0 : Boolean(text);
 ---
 
 <Section tone="ivory" id="rendez-vous" labelledby="rendez-vous-titre">
   <div class="container grid-12">
     <div class="final" data-reveal>
       <EditorialH2 id="rendez-vous-titre" text={title} size="statement" />
-      <BodyText paragraphs={text} class="final__text" />
-      <PrimaryButton href={site.rdv.href} label={cta} />
+      {hasText && <BodyText paragraphs={text!} class="final__text" />}
+      {cta && <PrimaryButton href={site.rdv.href} label={cta} class={hasText ? undefined : "final__cta--seul"} />}
     </div>
   </div>
 </Section>
@@ -32,6 +33,9 @@ const { title, text, cta } = Astro.props;
   .final :global(.final__text) {
     max-width: 36rem;
     margin-block: var(--gap-title-text) var(--gap-text-cta);
+  }
+  .final :global(.final__cta--seul) {
+    margin-top: var(--gap-text-cta);
   }
   @media (max-width: 63.99em) {
     .final {

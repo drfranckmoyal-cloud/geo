@@ -1,0 +1,138 @@
+// Les 20 pages du pack « pages suivantes » V1 (docs/pages-suivantes/v1, reçu le 21/09/2026).
+// Leurs textes ne sont pas recopiés ici : ils sont lus directement dans les fichiers du pack
+// (src/lib/pack.ts). Ce fichier ne garde que ce que le pack laisse à Claude :
+//  - l'ordre de livraison par lots (00_ARBORESCENCE_ET_ORDRE.md) ;
+//  - les passages du pack qui ressemblent à des consignes internes, non affichés en attendant
+//    la confirmation de ChatGPT ;
+//  - les liens dont le libellé ne figure pas dans la liste « Liens internes » de la page ;
+//  - la mise en page : emplacements d'images (§9 de chaque fichier) et compositions choisies
+//    parmi celles des composants gelés.
+
+export const PACK_DIR = "docs/pages-suivantes/v1";
+
+// Arborescence définitive (00 — ordre d'intégration A → B → C → D)
+export const arborescence = [
+  { num: "01", lot: "A", url: "/dentisterie-esthetique-paris/" },
+  { num: "02", lot: "A", url: "/bilan-esthetique-personnalise/" },
+  { num: "03", lot: "A", url: "/composite-bonding-paris/" },
+  { num: "04", lot: "A", url: "/facettes-dentaires-paris/" },
+  { num: "05", lot: "A", url: "/eclaircissement-dentaire-paris/" },
+  { num: "06", lot: "A", url: "/taches-dentaires-dyschromies-icon/" },
+  { num: "07", lot: "B", url: "/diagnostic-usures-dentaires/" },
+  { num: "08", lot: "B", url: "/rehabilitation-dents-usees/" },
+  { num: "09", lot: "B", url: "/bruxisme-usure-dentaire/" },
+  { num: "10", lot: "B", url: "/erosion-dentaire/" },
+  { num: "11", lot: "B", url: "/dents-courtes-usees/" },
+  { num: "12", lot: "B", url: "/tca-dents/" },
+  { num: "13", lot: "B", url: "/anorexie-erosion-dentaire-sans-vomissements/" },
+  { num: "14", lot: "C", url: "/publications/" },
+  { num: "15", lot: "C", url: "/conferences-formations/" },
+  { num: "16", lot: "C", url: "/activite-hospitaliere/" },
+  { num: "17", lot: "C", url: "/medias-interviews/" },
+  { num: "18", lot: "C", url: "/chirurgien-dentiste-paris-9/" },
+  { num: "19", lot: "D", url: "/contact/" },
+  { num: "20", lot: "D", url: "/mentions-legales/" },
+] as const;
+
+// Lots construits à ce jour
+export const builtLots: string[] = ["A"];
+export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
+export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
+
+// Passages du contenu « mot pour mot » qui ressemblent à des consignes de rédaction glissées
+// dans le texte : non affichés, listés dans le rapport, à confirmer par ChatGPT.
+// « section » : toute la section ; « text » : un paragraphe (début exact).
+export const hidden: Record<string, { section?: string; text?: string; why: string }[]> = {
+  "05": [{ section: "Direction éditoriale validée pour le versant esthétique", why: "note de direction éditoriale, après la FAQ" }],
+  "10": [{ text: "Sur le site patient, le message doit donc rester simple :", why: "phrase adressée au rédacteur ; la phrase en gras qui suit reste affichée" }],
+  "12": [{ text: "Cette présence devra être reliée à une page officielle DentCA indexable", why: "consigne d'intégration (section DentCA)" }],
+  "14": [{ text: "**Note de normalisation bibliographique**", why: "note de vérification bibliographique (La chirurgie orale)" }],
+};
+
+// Notes du §10 (sources) affichées sous la liste des références, ligne par ligne (début exact).
+// Les autres lignes du §10 sont des consignes (« À présenter comme… », « À ne pas écrire… »).
+export const shownSourceNotes: Record<string, string[]> = {
+  "01": ["**Source fonctionnelle — SmileCloud**"],
+  "02": ["**Source fonctionnelle — SmileCloud**"],
+  "03": ["**Repère clinique du Dr Franck Moyal**"],
+  "04": ["**Source fonctionnelle — SmileCloud**"],
+};
+
+// Liens « → » dont le libellé n'est pas dans la liste « Liens internes » de la page : adresse
+// déduite (page évidente, libellé validé ailleurs), signalée dans le rapport.
+export const linkOverrides: Record<string, string> = {
+  "Comprendre le bruxisme et son rôle dans l’usure dentaire": "/bruxisme-usure-dentaire/", // libellé validé sur la page Usures (D13)
+  "Érosion dentaire : dépistage et prévention": "/erosion-dentaire/",
+  "Anorexie restrictive : pourquoi peut-on observer des érosions sans vomissements ?": "/anorexie-erosion-dentaire-sans-vomissements/",
+  "Découvrir le composite bonding": "/composite-bonding-paris/",
+  "Usures dentaires : comprendre avant de reconstruire": "/usures-dentaires/", // H1 de la page Usures
+  "Découvrir l’activité hospitalière": "/activite-hospitaliere/",
+};
+
+// Libellés des pages du golden master et du menu, pour relier les libellés du pack à leur adresse
+export const knownLabels: Record<string, string> = {
+  Accueil: "/",
+  "Usures dentaires": "/usures-dentaires/",
+  "Dr Franck Moyal": "/franck-moyal/",
+  "Dentisterie esthétique": "/dentisterie-esthetique-paris/",
+};
+
+// Mise en page, section par section (identifiant = titre de la section sans accents).
+// media : emplacement réservé pour une image attendue (§9 du fichier), légende reprise du §9.
+// Par défaut (src/lib/pack-layout.ts) : texte décalé, liste en colonne latérale quand elle
+// clôt la section, intertitres H3 courts en grille (composition « mécanismes » de la page
+// Usures), un fond ivoire toutes les trois sections.
+export type Layout = "split-right" | "split-left" | "offset" | "narrow" | "aside" | "panel";
+export interface SectionOverride {
+  layout?: Layout;
+  tone?: "paper" | "ivory";
+  media?: { label: string; ratio?: string; wide?: boolean };
+  entries?: boolean;
+  id?: string;
+}
+export interface PageLayout {
+  sections?: Record<string, SectionOverride>;
+  method?: { before: string }; // MethodSteps (page 02), placé avant cette section
+  pathway?: boolean; // ClinicalPathway (sommaire cliquable des sections)
+}
+
+export const layouts: Record<string, PageLayout> = {
+  "01": {
+    sections: {
+      "quelle-place-pour-le-smile-design": { media: { label: "Photographie réelle de planification esthétique — à fournir", ratio: "4 / 5" } },
+      "quels-traitements-peuvent-transformer-un-sourire": { media: { label: "3 à 5 cas cliniques réels — à fournir", ratio: "3 / 1", wide: true } },
+    },
+  },
+  "02": {
+    method: { before: "premiere-etape-ecouter" },
+    sections: {
+      "deuxieme-etape-documenter": { media: { label: "Séquence photo / scan / simulation d’un vrai cas, avec consentement — à fournir", ratio: "4 / 5" } },
+      "qu-apporte-le-smile-design": { media: { label: "Vidéo ou capture réelle de simulation SmileCloud — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "03": {
+    sections: {
+      "qu-est-ce-que-la-stratification-composite": { media: { label: "Macro-photo de texture et de stratification — à fournir", ratio: "4 / 5" } },
+      "ce-que-je-recherche-avec-un-composite-anterieur": { media: { label: "2 cas de composite antérieur stratifié, cadrage constant — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "04": {
+    sections: {
+      "sublimer-un-sourire-plutot-que-remplacer-des-dents": { media: { label: "2 cas de facettes complets : état initial → projet → résultat — à fournir", ratio: "4 / 3" } },
+      "smile-design-et-simulation": { media: { label: "Vidéo / simulation SmileCloud réelle — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "05": {
+    sections: {
+      "la-technique-que-je-privilegie-l-eclaircissement-ambulatoire": { media: { label: "Photo sobre de gouttières personnalisées — à fournir", ratio: "4 / 5" } },
+      "est-ce-que-le-resultat-est-visible": { media: { label: "Cas avant / après éclaircissement, mêmes conditions photographiques — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "06": {
+    sections: {
+      "pourquoi-une-tache-blanche-parait-elle-blanche": { media: { label: "Macro clinique réelle de lésion et résultat — à fournir", ratio: "4 / 5" } },
+      "qu-est-ce-que-l-erosion-infiltration-de": { media: { label: "2 cas de dyschromie / white spot : avant / après, avec consentement — à fournir", ratio: "4 / 3" } },
+    },
+  },
+  "07": { pathway: true },
+};

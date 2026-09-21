@@ -77,6 +77,73 @@ if (SET === "p05") {
   process.exit(0);
 }
 
+// Pages suivantes, lot A (D38) : une page entière représentative, puis uniquement les
+// compositions nouvelles (21_MANIFESTE_INTEGRATION.md, « Livraison par lot »).
+// SET=lotA OUT=livrables/pages-suivantes-lot-a/captures
+if (SET === "lotA") {
+  await mkdir(OUT, { recursive: true });
+  const ctx = (w, h, scale = 2) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: scale, reducedMotion: "reduce", locale: "fr-FR" });
+  const desk = await ctx(1440, 900), mob = await ctx(390, 844), deskFull = await ctx(1440, 900, 1), mobFull = await ctx(390, 844, 1);
+  const noSticky = (page) => page.addStyleTag({ content: ".site-header { position: static !important; }" });
+  let n = 0;
+  const file = (name) => `${OUT}/${String(++n).padStart(2, "0")}_${name}.png`;
+  const region = async (page, from, to, name, pad = 0) => {
+    const a = await page.locator(from).first().boundingBox();
+    const b = await page.locator(to).first().boundingBox();
+    const width = page.viewportSize().width;
+    await page.screenshot({ path: file(name), fullPage: true, clip: { x: 0, y: a.y - pad, width, height: b.y + b.height - a.y + 2 * pad } });
+  };
+  const section = async (c, path, selector, name) => {
+    const p = await open(c, path);
+    await noSticky(p);
+    await p.locator(selector).screenshot({ path: file(name) });
+    await p.close();
+  };
+  // 1-2. Page Dentisterie esthétique entière
+  for (const [c, label] of [[deskFull, "ordinateur-1440"], [mobFull, "mobile-390"]]) {
+    const p = await open(c, "/dentisterie-esthetique-paris/");
+    await p.screenshot({ path: file(`page-dentisterie-esthetique-${label}`), fullPage: true });
+    await p.close();
+  }
+  // 3. Ouverture clinique avec un H1 long, sur mobile (V16)
+  const h = await open(mob, "/taches-dentaires-dyschromies-icon/");
+  await h.screenshot({ path: file("ouverture-h1-long-mobile-390") });
+  await h.close();
+  // 4-5. Intertitres en grille, avec liens et emplacement d'image en pleine largeur
+  await section(desk, "/dentisterie-esthetique-paris/", "#quels-traitements-peuvent-transformer-un-sourire", "grille-traitements-ordinateur");
+  await section(mob, "/dentisterie-esthetique-paris/", "#quels-traitements-peuvent-transformer-un-sourire", "grille-traitements-mobile");
+  // 6. Intertitre H3 sous le titre, liste sur deux colonnes
+  await section(desk, "/dentisterie-esthetique-paris/", "#comment-debute-un-projet-esthetique", "sous-titre-et-liste-ordinateur");
+  // 7. Texte, liste et emplacement d'image côte à côte
+  await section(desk, "/dentisterie-esthetique-paris/", "#quelle-place-pour-le-smile-design", "texte-liste-image-ordinateur");
+  // 8. Méthode en 7 étapes sur la page Bilan esthétique
+  await section(desk, "/bilan-esthetique-personnalise/", "#methode", "methode-page-bilan-ordinateur");
+  // 9. Liste en colonne latérale
+  await section(desk, "/composite-bonding-paris/", "#dans-quelles-situations-utilise-t-on-le-composite", "liste-laterale-ordinateur");
+  // 10-11. Liste numérotée
+  await section(desk, "/facettes-dentaires-paris/", "#a-quoi-ressemble-reellement-le-parcours", "liste-numerotee-ordinateur");
+  await section(mob, "/facettes-dentaires-paris/", "#a-quoi-ressemble-reellement-le-parcours", "liste-numerotee-mobile");
+  // 12. Sources avec note, bloc auteur
+  const s = await open(desk, "/composite-bonding-paris/");
+  await noSticky(s);
+  await region(s, "#sources", ".pack-author", "sources-note-auteur-ordinateur", 8);
+  await s.close();
+  // 13. Pages liées puis appel final (ordre du contrat de composants)
+  const e = await open(desk, "/dentisterie-esthetique-paris/");
+  await noSticky(e);
+  await region(e, "nav.related", "#rendez-vous", "pages-liees-appel-final-ordinateur");
+  await e.close();
+  // 14. Page sans appel final (Éclaircissement : pas de CTA dans le pack)
+  const f = await open(desk, "/eclaircissement-dentaire-paris/");
+  await noSticky(f);
+  await region(f, "#sources", ".site-footer", "fin-de-page-sans-appel-final-ordinateur");
+  await f.close();
+  await Promise.all([desk.close(), mob.close(), deskFull.close(), mobFull.close()]);
+  await browser.close();
+  console.log(`lot A : ${n} captures dans ${OUT}`);
+  process.exit(0);
+}
+
 // Série courte demandée par ChatGPT après le tour 1 (D28)
 if (SET === "cible") {
   await mkdir(OUT, { recursive: true });

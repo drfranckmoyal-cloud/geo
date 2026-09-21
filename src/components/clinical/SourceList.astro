@@ -3,9 +3,12 @@
 // citation propre, DOI et PubMed discrets (rel="noopener noreferrer"), une ancre par référence
 // pour les renvois [1]…[7]. Les notes de travail « Soutient : » ne sont pas affichées.
 // Sur mobile, la liste se replie derrière « Voir les 7 sources scientifiques ».
+// Pages suivantes : notes du pack affichées sous la liste (documentation d'un logiciel, repère
+// clinique) ; date de vérification facultative ; un renvoi du texte sans référence dans la liste
+// mène au bloc des sources (écart signalé par le contrôle des textes).
 import Section from "../global/Section.astro";
 import EditorialH2 from "../global/EditorialH2.astro";
-import { plain } from "../../lib/typo";
+import { plain, rich } from "../../lib/typo";
 
 interface Source {
   n: number;
@@ -22,11 +25,16 @@ interface Props {
   intro: string;
   toggle: string;
   items: Source[];
-  verifiedLabel: string;
-  verifiedDate: string;
-  verifiedIso: string;
+  verifiedLabel?: string;
+  verifiedDate?: string;
+  verifiedIso?: string;
+  notes?: string[];
+  orphans?: number[];
 }
-const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate, verifiedIso } = Astro.props;
+const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate, verifiedIso, notes = [], orphans = [] } = Astro.props;
+// Un numéro présent deux fois dans le pack : seule sa première occurrence porte l'ancre
+const anchored = new Set<number>();
+const anchor = (n: number) => (anchored.has(n) ? undefined : (anchored.add(n), `source-${n}`));
 ---
 
 <Section id={id} labelledby={`${id}-titre`} spacing="compact">
@@ -43,10 +51,11 @@ const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate
             <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.1" />
           </svg>
         </summary>
+        {orphans.map((n) => <span id={`source-${n}`} />)}
         <ol class="sources__list">
           {
             items.map((s) => (
-              <li id={`source-${s.n}`} class="source">
+              <li id={anchor(s.n)} class="source">
                 <span class="source__n">[{s.n}]</span>
                 <div>
                   <p class="source__ref">
@@ -66,9 +75,14 @@ const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate
           }
         </ol>
       </details>
-      <p class="sources__verified">
-        {verifiedLabel}&nbsp;: <time datetime={verifiedIso}>{verifiedDate}</time>
-      </p>
+      {notes.map((note) => <p class="sources__note" set:html={rich(note)} />)}
+      {
+        verifiedLabel && (
+          <p class="sources__verified">
+            {verifiedLabel}&nbsp;: <time datetime={verifiedIso}>{verifiedDate}</time>
+          </p>
+        )
+      }
     </div>
   </div>
 </Section>
@@ -137,6 +151,17 @@ const { id = "sources", title, intro, toggle, items, verifiedLabel, verifiedDate
   }
   .source__links a:hover {
     text-decoration-color: currentColor;
+  }
+  .sources__note {
+    margin-top: 1.25rem;
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .sources__note :global(a) {
+    color: var(--c-sage);
+    text-decoration-color: var(--c-sage-light);
+    overflow-wrap: anywhere;
   }
   .sources__verified {
     margin-top: 1.5rem;

@@ -17,8 +17,9 @@ interface Props {
   path: string;
   schema: unknown;
   ogImage?: string;
+  robots?: string; // ex. « noindex,follow » (mentions légales)
 }
-const { title, description, path, schema, ogImage } = Astro.props;
+const { title, description, path, schema, ogImage, robots } = Astro.props;
 const canonical = new URL(path, site.url).href;
 ---
 
@@ -30,6 +31,7 @@ const canonical = new URL(path, site.url).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {robots && <meta name="robots" content={robots} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content={site.name} />

@@ -21,9 +21,9 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). Lot A (6 pages esthétiques) en construction. |
-| **Dernière étape faite** | Pack « pages suivantes » V1 reçu, lu en entier (22 fichiers) et archivé tel quel dans `docs/pages-suivantes/v1/` ; ses 34 références vérifiées sur PubMed (toutes existent et concordent). |
-| **Prochaine action** | Claude livre le lot A (build, contrôles, Lighthouse, captures, rapport) avec la liste des écarts relevés dans tout le pack, à transmettre à ChatGPT. |
+| **Phase en cours** | **Étape 4 : déclinaison des 20 pages suivantes** (pack « pages suivantes » V1, D38), en 4 lots A → B → C → D, avec les seuls composants gelés (V24). **Lot A livré** (6 pages esthétiques) ; lots B, C, D ensuite. |
+| **Dernière étape faite** | Lot A construit et contrôlé : textes sans écart dans les deux sens, HTML et 10 contrôles du manifeste réussis, Lighthouse 99–100 (LCP mobile 1,95 s), golden master intact. Rapport `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Franck transmet le rapport du lot A à ChatGPT (dossier sur le Bureau), qui corrige le pack (renvois bibliographiques, H1 trop longs, consignes glissées dans le texte…). Pendant ce temps, Claude construit les lots B, C et D. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
 | **En attente de Franck** | Le téléphone du cabinet, le lien de prise de rendez-vous, l'adresse e-mail professionnelle et l'hébergeur (mentions légales) ; les vraies photos (piliers, photographie clinique, cas avant / après). |
 
@@ -273,6 +273,13 @@ décision.
 | 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
 | 15 | **Déontologie — à vérifier par Franck**, qui connaît le code mieux que Claude. « Dentiste esthétique » : tranché, proscrit (D6, V21). Restent : « pratique privée exclusivement orientée » (page Franck ; Franck cite « exercice exclusif en dentisterie esthétique » parmi les formules correctes, mais n'a pas demandé de changer ce texte) ; les règles de communication des chirurgiens-dentistes (information loyale, pas de témoignages, pas de comparaison) ; les photos avant/après ; les mentions obligatoires du site ; la mention des établissements (AP-HP, GHU Paris) et de leurs logos. | Rien de modifié (V2). | Franck. |
 | 16 | **Mesure d'audience** : le pack n'en prévoit pas. | Aucun traceur, donc aucun bandeau cookies nécessaire. | Franck et ChatGPT, avant la mise en ligne. |
+| 28 | **Renvois bibliographiques du pack « pages suivantes »** : sur les pages 03, 04, 05, 06, 09, 10, 11, 12 et 13, les numéros `[n]` du texte ne correspondent pas à la liste des sources (sources manquantes, liste décalée, numéro en double, références jamais citées). Détail : rapport du lot A, §5.1. Les 34 références elles-mêmes sont exactes (vérifiées sur PubMed). | Renvois affichés tels quels ; un renvoi sans référence mène au bloc des sources ; le contrôle des textes les signale. **Bloque la mise en ligne.** | ChatGPT (pack corrigé). |
+| 29 | **H1 trop longs pour le mobile** : 9 pages (01, 02, 03, 06, 08, 09, 10, 12, 13) ont un H1 de 5 à 8 lignes à 390 px, contre la règle « un H1 ne casse jamais en 5 lignes » (V16). La taille du H1 est gelée. | H1 affichés tels quels. | ChatGPT : H1 plus courts (≤ 70 caractères environ) ou décision d'accepter. |
+| 30 | **Consignes de rédaction glissées dans le texte « mot pour mot »** : 05 (« Direction éditoriale validée… »), 10 (« Sur le site patient, le message doit donc rester simple : »), 12 (« Cette présence devra être reliée à une page officielle DentCA… »), 14 (« Note de normalisation bibliographique »). | Non affichées, listées à chaque contrôle (`src/content/pages-suivantes.ts`). | ChatGPT confirme. |
+| 31 | **Manques et reprises** : page 05 sans bloc d'appel final ; page 18 sans libellé de bouton ; page 02 : `MethodSteps` demandé sans texte (les 7 étapes validées au gel sont reprises, D31) ; titres de blocs non fournis, repris du golden master (« FAQ », « Sources scientifiques », bloc auteur, « À lire aussi ») ; pas de date de vérification bibliographique. | Comme décrit, signalé. | ChatGPT. |
+| 32 | **Liens** : 6 libellés de lien absents de la liste « Liens internes » de leur page (adresse déduite) ; « Composite bonding à Paris » (15) et « Usures dentaires » (17) placés nulle part ; « Motifs de consultation » (19) sans lien ; bouton « Prendre rendez-vous » sans cible sur les pages sans bloc final — proposition : `/contact/` dès le lot D. | Adresses déduites signalées ; le reste en attente. | ChatGPT. |
+| 33 | **Choix de mise en page du gabarit des pages suivantes**, à faire valider sur captures : ordre des contrats (pages liées puis appel final, l'inverse de la page Usures) ; texte décalé dominant ; intertitres en grille ; listes sans légende, en colonne latérale ou numérotées ; emplacements d'images d'après le §9 ; gras en graisse standard d'Inter. | Appliqués au lot A. | ChatGPT (contrôle visuel). |
+| 34 | **Écarts mineurs du pack** : H1 de la page 19 (§2 ≠ contenu) ; formulation publique de la page 16 (note ≠ texte) ; page 13 : type `Article` posé sans date de publication. | §2 pour la page 19, §5 pour la page 16. | ChatGPT. |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Depuis D33 : « Rendez-vous » sur l'en-tête mobile. Les autres interprétations sont listées au §6 du rapport du tour 1. | Appliqué. | ChatGPT. |
 
 ### Tranchés
@@ -320,6 +327,31 @@ décision.
 | Dr Franck Moyal | `/franck-moyal/` | ✅ P0.5 | ✅ P0.5 | ✅ gel du 21/09/2026 |
 | Usures dentaires | `/usures-dentaires/` | ✅ P0.5 | ✅ P0.5 | ✅ gel du 21/09/2026 |
 
+### Suivi des 20 pages suivantes (D38)
+
+| Lot | N° | Page | Adresse | Construite | Contrôlée par ChatGPT | Validée par Franck |
+|---|---|---|---|---|---|---|
+| A | 01 | Dentisterie esthétique à Paris | `/dentisterie-esthetique-paris/` | ✅ 21/09/2026 | | |
+| A | 02 | Bilan esthétique personnalisé | `/bilan-esthetique-personnalise/` | ✅ 21/09/2026 | | |
+| A | 03 | Composite bonding à Paris | `/composite-bonding-paris/` | ✅ 21/09/2026 | | |
+| A | 04 | Facettes dentaires à Paris | `/facettes-dentaires-paris/` | ✅ 21/09/2026 | | |
+| A | 05 | Éclaircissement dentaire à Paris | `/eclaircissement-dentaire-paris/` | ✅ 21/09/2026 | | |
+| A | 06 | Taches blanches, dyschromies et ICON | `/taches-dentaires-dyschromies-icon/` | ✅ 21/09/2026 | | |
+| B | 07 | Diagnostic des usures dentaires | `/diagnostic-usures-dentaires/` | | | |
+| B | 08 | Réhabilitation des dents usées | `/rehabilitation-dents-usees/` | | | |
+| B | 09 | Bruxisme et usure dentaire | `/bruxisme-usure-dentaire/` | | | |
+| B | 10 | Érosion dentaire | `/erosion-dentaire/` | | | |
+| B | 11 | Dents courtes ou usées | `/dents-courtes-usees/` | | | |
+| B | 12 | TCA et santé bucco-dentaire | `/tca-dents/` | | | |
+| B | 13 | Anorexie restrictive et érosion sans vomissements | `/anorexie-erosion-dentaire-sans-vomissements/` | | | |
+| C | 14 | Publications | `/publications/` | | | |
+| C | 15 | Conférences et formations | `/conferences-formations/` | | | |
+| C | 16 | Activité hospitalière | `/activite-hospitaliere/` | | | |
+| C | 17 | Médias et interviews | `/medias-interviews/` | | | |
+| C | 18 | Chirurgien-dentiste Paris 9 | `/chirurgien-dentiste-paris-9/` | | | |
+| D | 19 | Contact et rendez-vous | `/contact/` | | | |
+| D | 20 | Mentions légales | `/mentions-legales/` | | | |
+
 ---
 
 ## 8. Choix techniques appliqués
@@ -338,6 +370,13 @@ est dans le rapport (`livrables/golden-master-r1/RAPPORT.md`, §2 et §3).
 - **Les textes rangés à part de la mise en page**, recopiés du pack, avec un **contrôle
   automatique** : chaque phrase du pack doit se retrouver telle quelle dans les pages
   construites. C'est la garantie mécanique du verrou V2.
+- **Pages suivantes lues directement dans le pack** (depuis le lot A) : un programme lit les
+  fichiers de `docs/pages-suivantes/v1/` au moment de fabriquer le site (`src/lib/pack.ts`) et
+  un seul gabarit les assemble avec les composants gelés (`src/pages/[slug].astro`). Un fichier
+  corrigé par ChatGPT remplace l'ancien sans ressaisie. Les choix propres à chaque page
+  (emplacements d'images, passages non affichés, liens déduits, lots construits) sont réunis
+  dans `src/content/pages-suivantes.ts`. Le contrôle des textes relit le pack par ses propres
+  moyens et compare dans les deux sens : rien d'oublié, rien d'ajouté.
 - **Aucun traceur, aucune ressource extérieure** (V19). Résultat Lighthouse (outil de Google) au
   tour 2 : 100/100 en accessibilité, bonnes pratiques et référencement, 95 à 100 en rapidité
   (Newsreader et le portrait HD pèsent un peu plus) ; pages de 214 à 344 Ko.
@@ -399,6 +438,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Décision archivée mot pour mot (fichier déjà retiré du Bureau : recopiée depuis la conversation) ; verrou V24 ; `CLAUDE.md` du dépôt mis à jour ; version étiquetée `golden-master-gele` dans GitHub ; besoins pour les pages suivantes rédigés pour ChatGPT (`docs/besoins-pages-suivantes.md`). | Étape 4 |
 | 21/09/2026 | F | Dépose sur le Bureau le pack `PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1` (dossier et zip) : la réponse de ChatGPT à la demande de textes des pages suivantes. | D38 |
 | 21/09/2026 | C | Lecture intégrale des 22 fichiers ; pack archivé à l'identique. Les 34 références scientifiques sont vérifiées sur PubMed : toutes existent, titres, revues, années et DOI concordent. En revanche, la numérotation des renvois `[n]` ne correspond pas à la liste des sources sur 9 pages, quelques consignes de rédaction se sont glissées dans le texte « mot pour mot », et 9 titres principaux dépassent 5 lignes sur téléphone (V16). Relevé complet dans le rapport du lot A. | Lot A |
+| 21/09/2026 | C | **Lot A livré** (`livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, 14 captures) : les 6 pages esthétiques, fabriquées directement à partir des fichiers du pack, avec les composants gelés. Contrôles : textes sans écart dans les deux sens (essai de sabotage détecté), HTML et 10 contrôles du manifeste réussis, Lighthouse page 01 : mobile 99 / 100 / 100 / 100 (LCP 1,95 s), ordinateur 100 partout. Les 3 pages du golden master sont restées identiques. Écarts du pack consignés (§6, points 28 à 34). | Contrôle de ChatGPT ; lot B |
 
 ---
 
@@ -412,7 +452,9 @@ remarques détaillées de Franck) sont archivés tels quels dans
 - **Fabriquer et contrôler le site** (dans le dossier du projet) : `npm run build` fabrique le
   site dans `dist/` ; `npm run verify` lance le contrôle des textes ; `node scripts/check-html.mjs`
   lance le contrôle du HTML ; `npm run images` prépare le logo et le portrait à partir des
-  originaux ; `BASE_URL=http://localhost:4322 npm run captures` refait les captures.
+  originaux ; `BASE_URL=http://localhost:4322 npm run captures` refait les captures
+  (`SET=lotA OUT=livrables/pages-suivantes-lot-a/captures` pour celles du lot A). Les lots
+  construits se règlent dans `src/content/pages-suivantes.ts` (`builtLots`).
 - **Voir le site en local** : serveurs `geo-dev` (port 4321, mise à jour en direct) et
   `geo-preview` (port 4322, site fabriqué), déclarés dans `~/Desktop/.claude/launch.json`.
 - **Où est quoi** : textes dans `src/content/` ; composants dans `src/components/`

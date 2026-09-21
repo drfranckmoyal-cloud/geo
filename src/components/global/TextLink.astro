@@ -10,9 +10,11 @@ interface Props {
   class?: string;
 }
 const { href, label, class: cls } = Astro.props;
+// Preuve externe (pages d'autorité) : nouvel onglet, sans transmettre la page d'origine
+const external = /^https?:\/\//.test(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 ---
 
-<a href={href} class:list={["text-link", cls]} {...linkAttrs(href)}>
+<a href={href} class:list={["text-link", cls]} {...linkAttrs(href)} {...external}>
   <span class="text-link__label" set:html={plain(label)} />
   <svg class="text-link__arrow" viewBox="0 0 26 12" aria-hidden="true" focusable="false">
     <path d="M0 6h24.5M19.5 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.1" />

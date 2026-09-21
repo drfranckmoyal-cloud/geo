@@ -4,7 +4,7 @@
 // lisibles telles quelles par les moteurs.
 import Section from "../global/Section.astro";
 import EditorialH2 from "../global/EditorialH2.astro";
-import { plain } from "../../lib/typo";
+import { plain, rich } from "../../lib/typo";
 
 interface Props {
   id?: string;
@@ -26,12 +26,12 @@ const { id = "faq", title, items, collapsible = false } = Astro.props;
               <summary>
                 <h3 set:html={plain(item.q)} />
               </summary>
-              <p set:html={plain(item.a)} />
+              <p set:html={rich(item.a)} />
             </details>
           ) : (
             <div class="faq__item">
               <h3 set:html={plain(item.q)} />
-              <p set:html={plain(item.a)} />
+              <p set:html={rich(item.a)} />
             </div>
           ),
         )

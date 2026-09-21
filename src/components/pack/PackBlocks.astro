@@ -1,0 +1,230 @@
+---
+// Contenu d'une section du pack « pages suivantes », assemblé avec les composants gelés :
+// paragraphes (BodyText), listes cliniques (SymptomList), intertitres H3, liens internes
+// (TextLink), preuves externes (InlineEvidenceLinks). Pas de nouveau style : les tailles et les
+// espacements sont ceux du golden master (titre → texte, texte → liste, texte → lien ; H3 des
+// « mécanismes » de la page Usures ; numéros du parcours clinique pour les listes numérotées).
+import BodyText from "../global/BodyText.astro";
+import TextLink from "../global/TextLink.astro";
+import SymptomList from "../clinical/SymptomList.astro";
+import InlineEvidenceLinks from "../editorial/InlineEvidenceLinks.astro";
+import { plain, rich } from "../../lib/typo";
+import type { Block } from "../../lib/pack";
+
+interface Props {
+  blocks: Block[];
+  resolve: (label: string) => string;
+  entries?: boolean; // intertitres H3 en grille
+  narrow?: boolean; // colonne étroite : listes sur une seule colonne
+  class?: string;
+}
+const { blocks, resolve, entries = false, narrow = false, class: cls } = Astro.props;
+
+type Group =
+  | { kind: "text"; paragraphs: string[] }
+  | { kind: "ul" | "ol"; items: string[] }
+  | { kind: "h3"; text: string }
+  | { kind: "links" | "evidence"; links: { label: string; href: string }[] };
+
+function group(list: Block[]): Group[] {
+  const out: Group[] = [];
+  for (const b of list) {
+    const last = out.at(-1);
+    if (b.kind === "p") {
+      if (last?.kind === "text") last.paragraphs.push(b.text);
+      else out.push({ kind: "text", paragraphs: [b.text] });
+    } else if (b.kind === "link") {
+      const link = { label: b.label, href: resolve(b.label) };
+      if (last?.kind === "links") last.links.push(link);
+      else out.push({ kind: "links", links: [link] });
+    } else if (b.kind === "evidence") {
+      const link = { label: b.label, href: b.href };
+      if (last?.kind === "evidence") last.links.push(link);
+      else out.push({ kind: "evidence", links: [link] });
+    } else if (b.kind === "h3") out.push({ kind: "h3", text: b.text });
+    else out.push({ kind: b.kind, items: b.items });
+  }
+  return out;
+}
+
+// Liste longue d'éléments courts : deux colonnes, sauf en colonne étroite
+const columns = (items: string[], tight: boolean): 1 | 2 => {
+  const lengths = items.map((i) => i.length);
+  const average = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+  return !tight && items.length >= 6 && Math.max(...lengths) <= 56 && average <= 34 ? 2 : 1;
+};
+
+const firstH3 = blocks.findIndex((b) => b.kind === "h3");
+const intro = entries ? group(blocks.slice(0, firstH3)) : group(blocks);
+const cards: { title: string; groups: Group[] }[] = [];
+if (entries) {
+  for (const b of blocks.slice(firstH3)) {
+    if (b.kind === "h3") cards.push({ title: b.text, groups: [] });
+    else cards.at(-1)!.groups.push(...group([b]));
+  }
+  // regrouper les paragraphes consécutifs d'une même entrée
+  for (const c of cards) {
+    const merged: Group[] = [];
+    for (const g of c.groups) {
+      const last = merged.at(-1);
+      if (g.kind === "text" && last?.kind === "text") last.paragraphs.push(...g.paragraphs);
+      else if ((g.kind === "links" || g.kind === "evidence") && last?.kind === g.kind) last.links.push(...g.links);
+      else merged.push(g);
+    }
+    c.groups = merged;
+  }
+}
+---
+
+{
+  intro.length > 0 && (
+    <div class:list={["pb", cls]}>
+      {intro.map((g) =>
+        g.kind === "text" ? (
+          <BodyText paragraphs={g.paragraphs} class="pb__text" />
+        ) : g.kind === "ul" ? (
+          <SymptomList items={g.items} columns={columns(g.items, narrow)} class="pb__list" />
+        ) : g.kind === "ol" ? (
+          <ol class="pb__ol">
+            {g.items.map((item) => (
+              <li set:html={rich(item)} />
+            ))}
+          </ol>
+        ) : g.kind === "h3" ? (
+          <h3 class="pb__h3" set:html={plain(g.text)} />
+        ) : g.kind === "links" ? (
+          <ul class="pb__links">
+            {g.links.map((l) => (
+              <li>
+                <TextLink href={l.href} label={l.label} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <InlineEvidenceLinks links={g.links} class="pb__evidence" />
+        ),
+      )}
+    </div>
+  )
+}
+{
+  entries && (
+    <div class:list={["pb-entries", cards.length === 3 && "pb-entries--3"]}>
+      {cards.map((c) => (
+        <article class="pb-entry">
+          <h3 set:html={plain(c.title)} />
+          <div class="pb pb--entry">
+            {c.groups.map((g) =>
+              g.kind === "text" ? (
+                <BodyText paragraphs={g.paragraphs} class="pb__text" />
+              ) : g.kind === "ul" ? (
+                <SymptomList items={g.items} columns={1} class="pb__list" />
+              ) : g.kind === "ol" ? (
+                <ol class="pb__ol">
+                  {g.items.map((item) => (
+                    <li set:html={rich(item)} />
+                  ))}
+                </ol>
+              ) : g.kind === "links" ? (
+                <ul class="pb__links">
+                  {g.links.map((l) => (
+                    <li>
+                      <TextLink href={l.href} label={l.label} />
+                    </li>
+                  ))}
+                </ul>
+              ) : g.kind === "evidence" ? (
+                <InlineEvidenceLinks links={g.links} class="pb__evidence" />
+              ) : null,
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  /* Titre → texte : même écart que les sections du golden master */
+  .pb {
+    margin-top: var(--gap-title-text);
+  }
+  .pb > :global(* + *) {
+    margin-top: 1.75rem;
+  }
+  .pb > :global(.pb__links),
+  .pb > :global(.pb__evidence) {
+    margin-top: var(--gap-text-cta);
+  }
+  .pb__h3,
+  .pb-entry h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+  }
+  .pb > .pb__h3:not(:first-child) {
+    margin-top: clamp(2.25rem, 1.75rem + 1.5vw, 3rem);
+  }
+  .pb > .pb__h3 + :global(*) {
+    margin-top: 0.875rem;
+  }
+
+  /* Liste numérotée : lignes de la liste clinique, numéros du parcours clinique */
+  .pb__ol {
+    counter-reset: pb;
+  }
+  .pb__ol li {
+    counter-increment: pb;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    align-items: baseline;
+    padding-block: 0.8rem;
+    border-top: 1px solid var(--c-stone);
+    line-height: 1.45;
+  }
+  .pb__ol li::before {
+    content: counter(pb, decimal-leading-zero);
+    font-family: var(--f-serif);
+    font-size: 1.0625rem;
+    font-weight: var(--fw-heading);
+    color: var(--c-sage);
+  }
+
+  /* Liens internes : comme ceux des sections du golden master */
+  .pb__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+  }
+
+  /* Intertitres en grille : composition « mécanismes » de la page Usures */
+  .pb-entries {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--col-gap);
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+  .pb-entries--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pb-entry {
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid var(--c-sage);
+  }
+  .pb--entry {
+    margin-top: 0.875rem;
+  }
+  .pb--entry :global(.body-text) {
+    max-width: 34rem;
+  }
+  @media (max-width: 63.99em) {
+    .pb-entries--3 {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 47.99em) {
+    .pb-entries {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

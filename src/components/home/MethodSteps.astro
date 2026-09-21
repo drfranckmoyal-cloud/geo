@@ -10,9 +10,9 @@ import { plain } from "../../lib/typo";
 interface Props {
   id?: string;
   title: string;
-  intro: string;
+  intro?: string;
   steps: { name: string; text: string }[];
-  link: { label: string; href: string };
+  link?: { label: string; href: string };
 }
 const { id = "methode", title, intro, steps, link } = Astro.props;
 ---
@@ -21,8 +21,8 @@ const { id = "methode", title, intro, steps, link } = Astro.props;
   <div class="container grid-12 method">
     <div class="method__intro" data-reveal>
       <EditorialH2 id={`${id}-titre`} text={title} />
-      <BodyText paragraphs={intro} class="method__lede" />
-      <TextLink href={link.href} label={link.label} />
+      {intro && <BodyText paragraphs={intro} class="method__lede" />}
+      {link && <TextLink href={link.href} label={link.label} />}
     </div>
     <ol class="method__steps" data-reveal>
       {

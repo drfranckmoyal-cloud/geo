@@ -6,7 +6,7 @@ import { site } from "../content/site";
 
 const abs = (path: string) => new URL(path, site.url).href;
 
-export function person(image?: string, full = false) {
+export function person(image?: string, full = false, withAddress = false) {
   const base: Record<string, unknown> = {
     "@type": "Person",
     "@id": site.personId,
@@ -16,21 +16,22 @@ export function person(image?: string, full = false) {
     url: abs("/franck-moyal/"),
     ...(image ? { image } : {}),
   };
-  if (!full) return base;
+  const workLocation = {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      postalCode: site.address.postalCode,
+      addressLocality: site.address.city,
+      addressCountry: site.address.country,
+    },
+  };
+  if (!full) return withAddress ? { ...base, workLocation } : base;
   return {
     ...base,
     description:
       "Une pratique dédiée à la dentisterie esthétique et adhésive, au diagnostic des usures dentaires et à leur réhabilitation.",
-    workLocation: {
-      "@type": "Place",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: site.address.street,
-        postalCode: site.address.postalCode,
-        addressLocality: site.address.city,
-        addressCountry: site.address.country,
-      },
-    },
+    workLocation,
     knowsAbout: [
       "Dentisterie esthétique et adhésive",
       "Usures dentaires",

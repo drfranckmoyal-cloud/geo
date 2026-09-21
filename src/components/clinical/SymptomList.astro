@@ -1,10 +1,11 @@
 ---
 // Liste clinique (signes, axes, outils) : une légende discrète, des lignes séparées par des
-// filets, deux colonnes sur grand écran. Aucune icône.
-import { plain } from "../../lib/typo";
+// filets, deux colonnes sur grand écran. Aucune icône. La légende est facultative : les listes
+// du pack « pages suivantes » sont annoncées par la phrase qui les précède.
+import { rich } from "../../lib/typo";
 
 interface Props {
-  label: string;
+  label?: string;
   items: string[];
   columns?: 1 | 2;
   class?: string;
@@ -13,9 +14,9 @@ const { label, items, columns = 2, class: cls } = Astro.props;
 ---
 
 <div class:list={["symptoms", cls]}>
-  <p class="symptoms__label">{label}</p>
+  {label && <p class="symptoms__label">{label}</p>}
   <ul class:list={["symptoms__list", columns === 2 && "symptoms__list--two"]}>
-    {items.map((item) => <li set:html={plain(item)} />)}
+    {items.map((item) => <li set:html={rich(item)} />)}
   </ul>
 </div>
 

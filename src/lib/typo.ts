@@ -27,13 +27,22 @@ export function escapeHtml(text: string): string {
 
 // Texte courant avec renvois bibliographiques : « … fonctionnel. [1–3] » devient un exposant
 // discret relié à la source correspondante (verrou V22). Retourne du HTML sûr.
+// Pour les fichiers du pack « pages suivantes », le texte garde aussi ses marques : **gras**,
+// retours à la ligne, adresses web (liens externes), emplacements « [À FOURNIR] ».
 export function rich(text: string): string {
-  return escapeHtml(fr(text)).replace(/\s\[(\d+(?:[–,]\d+)*)\]/g, (_, refs: string) => {
-    const first = refs.split(/[–,]/)[0];
-    const many = /[–,]/.test(refs);
-    const spoken = refs.replace("–", " à ").replace(/,/g, ", ");
-    return `${NBSP}<sup class="cite"><a href="#source-${first}"><span class="visually-hidden">Source${many ? "s" : ""} ${spoken} </span>[${refs}]</a></sup>`;
-  });
+  return escapeHtml(fr(text))
+    .replace(/\*\*(\[\d+(?:[–,]\d+)*\])\*\*/g, "$1") // renvoi en gras dans le pack : exposant normal
+    .replace(/\*\*([\s\S]+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\s\[(\d+(?:[–,]\d+)*)\]/g, (_, refs: string) => {
+      const first = refs.split(/[–,]/)[0];
+      const many = /[–,]/.test(refs);
+      const spoken = refs.replace("–", " à ").replace(/,/g, ", ");
+      return `${NBSP}<sup class="cite"><a href="#source-${first}"><span class="visually-hidden">Source${many ? "s" : ""} ${spoken} </span>[${refs}]</a></sup>`;
+    })
+    .replace(/\[([^\]]*À FOURNIR[^\]]*)\]/g, (_, s: string) => `<span class="placeholder-text">${s.toLowerCase().replace("url", "URL")}</span>`)
+    .replace(/^((?:lien\s)?à\scompléter)$/gm, '<span class="placeholder-text">$1</span>')
+    .replace(/https?:\/\/[^\s<]+/g, (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`)
+    .replace(/\n/g, "<br>");
 }
 
 // Titres et textes sans renvois : typographie française seule, en HTML sûr.

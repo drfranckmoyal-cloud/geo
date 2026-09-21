@@ -1,6 +1,8 @@
 // Réglages communs à tout le site : identité, menu (verrou V23), pied de page (V15).
 // Les libellés viennent du pack ou de la réponse de ChatGPT du 21/09/2026 (D10).
 
+import { builtPackUrls } from "./pages-suivantes.ts";
+
 export const site = {
   url: "https://drfranckmoyal.fr",
   name: "Dr Franck Moyal",
@@ -14,8 +16,9 @@ export const site = {
   address: { street: "2 rue Hippolyte Lebas", postalCode: "75009", city: "Paris", country: "FR" },
 } as const;
 
-// Pages construites dans le golden master (V1). Tout autre lien interne mène à une page à venir.
-export const builtPages = ["/", "/franck-moyal/", "/usures-dentaires/"];
+// Pages construites : le golden master (V1), puis les lots du pack « pages suivantes » livrés.
+// Tout autre lien interne mène à une page à venir.
+export const builtPages = ["/", "/franck-moyal/", "/usures-dentaires/", ...builtPackUrls];
 
 // Deux rubriques groupées ouvrent un sous-menu (D18, contrôle du tour 1 par ChatGPT).
 export type NavLink = { label: string; href: string };
