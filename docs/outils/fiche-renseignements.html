@@ -1,0 +1,639 @@
+<title>Fiche drfranckmoyal.fr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root {
+    --ground: #faf8f3;
+    --surface: #f4f0e8;
+    --field: #fffdf9;
+    --line: #d8d3ca;
+    --ink: #171715;
+    --ink-soft: #55554f;
+    --accent: #5e685d;
+    --accent-wash: #e8ebe4;
+    --accent-line: #b9c1b5;
+    --warn: #8a5a1f;
+    --warn-wash: #f6ecdc;
+    --ok: #3f6b48;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #151513;
+      --surface: #1e1e1b;
+      --field: #1a1a18;
+      --line: #3a3a35;
+      --ink: #f2efe8;
+      --ink-soft: #b5b1a7;
+      --accent: #a9b5a4;
+      --accent-wash: #232821;
+      --accent-line: #4c5649;
+      --warn: #e2b574;
+      --warn-wash: #2c2419;
+      --ok: #8fc29a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #151513;
+    --surface: #1e1e1b;
+    --field: #1a1a18;
+    --line: #3a3a35;
+    --ink: #f2efe8;
+    --ink-soft: #b5b1a7;
+    --accent: #a9b5a4;
+    --accent-wash: #232821;
+    --accent-line: #4c5649;
+    --warn: #e2b574;
+    --warn-wash: #2c2419;
+    --ok: #8fc29a;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 16px/1.55 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Barre d'état : enregistrement et avancement */
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar__inner {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0.7rem 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    font-size: 0.8125rem;
+  }
+  .bar__progress { display: flex; align-items: center; gap: 0.6rem; font-variant-numeric: tabular-nums; }
+  .meter { width: 7rem; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .meter span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 240ms ease; }
+  .status { color: var(--ink-soft); }
+  .status[data-state="ok"] { color: var(--ok); }
+  .status[data-state="warn"] { color: var(--warn); }
+
+  .wrap { max-width: 46rem; margin: 0 auto; padding-inline: 16px; padding-block: 2.5rem 5rem; }
+
+  h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2rem, 1.6rem + 2vw, 2.75rem); line-height: 1.08; }
+  .lead { margin: 1rem 0 0; max-width: 38rem; color: var(--ink-soft); font-size: 1.0625rem; }
+
+  /* Récapitulatif des informations bloquantes */
+  .summary { margin-top: 2rem; padding: 1.25rem 1.25rem 1.1rem; background: var(--surface); border-left: 2px solid var(--accent); }
+  .summary__title { margin: 0 0 0.75rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.8125rem; background: var(--ground); }
+  .chip::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; border: 1.5px solid var(--ink-soft); }
+  .chip[data-done="true"] { border-color: var(--accent-line); }
+  .chip[data-done="true"]::before { background: var(--accent); border-color: var(--accent); }
+  .summary__note { margin: 0.9rem 0 0; font-size: 0.875rem; color: var(--ink-soft); }
+
+  /* Sections */
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .section { margin-top: 3.25rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .section__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; }
+  legend { padding: 0; float: left; width: 100%; }
+  legend + * { clear: left; }
+  h2 { font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.875rem); line-height: 1.15; }
+  .tag { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 3px; }
+  .tag--block { color: var(--warn); background: var(--warn-wash); }
+  .tag--opt { color: var(--ink-soft); background: var(--surface); }
+  .why { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.9375rem; max-width: 38rem; }
+
+  .fields { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field > label, .question { font-weight: 500; font-size: 0.9375rem; }
+  .help { margin: 0; font-size: 0.8125rem; color: var(--ink-soft); }
+  .from-pack { color: var(--accent); }
+
+  input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea, select {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.65rem 0.75rem;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  input::placeholder, textarea::placeholder { color: var(--ink-soft); opacity: 0.7; }
+  input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+
+  .choices { display: grid; gap: 0.5rem; }
+  .choice { display: grid; grid-template-columns: 1.25rem 1fr; gap: 0.6rem; align-items: start; padding: 0.7rem 0.8rem; border: 1px solid var(--line); border-radius: 4px; background: var(--field); cursor: pointer; }
+  .choice:has(input:checked) { border-color: var(--accent); background: var(--accent-wash); }
+  .choice input { margin: 0.2rem 0 0; accent-color: var(--accent); width: 1rem; height: 1rem; }
+  .choice input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .choice small { display: block; margin-top: 0.15rem; color: var(--ink-soft); font-size: 0.8125rem; }
+  .rec { font-size: 0.75rem; font-weight: 600; color: var(--accent); }
+
+  .notice { padding: 0.9rem 1rem; border-radius: 4px; background: var(--warn-wash); color: var(--ink); font-size: 0.9rem; }
+  .notice strong { color: var(--warn); }
+
+  /* Photos : une ligne par cas attendu */
+  .cases { display: grid; gap: 0; margin-top: 1.25rem; border-bottom: 1px solid var(--line); }
+  .case { display: grid; grid-template-columns: minmax(0, 1fr) 9.5rem 9.5rem; gap: 0.6rem 0.9rem; align-items: center; padding: 0.9rem 0; border-top: 1px solid var(--line); }
+  .case__name { font-weight: 500; font-size: 0.9375rem; }
+  .case__name small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 0.8125rem; }
+  .case select { padding: 0.5rem 0.6rem; font-size: 0.875rem; }
+  .case__note { grid-column: 1 / -1; }
+  .case__note input { padding: 0.5rem 0.65rem; font-size: 0.875rem; }
+  .case--done .case__name::after { content: " — déjà fourni"; color: var(--ok); font-weight: 400; font-size: 0.8125rem; }
+  .cases__head { display: grid; grid-template-columns: minmax(0, 1fr) 9.5rem 9.5rem; gap: 0.9rem; margin-top: 1.25rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .cases__head + .cases { margin-top: 0.5rem; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .checks { display: grid; gap: 0.6rem; }
+  .check { display: grid; grid-template-columns: 1.25rem 1fr; gap: 0.6rem; align-items: start; font-size: 0.9375rem; cursor: pointer; }
+  .check input { margin: 0.2rem 0 0; accent-color: var(--accent); width: 1rem; height: 1rem; }
+
+  .known { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.25rem; margin: 1.25rem 0 0; font-size: 0.9375rem; }
+  .known dt { color: var(--ink-soft); }
+  .known dd { margin: 0; }
+
+  .end { margin-top: 3.5rem; padding: 1.25rem; border: 1px solid var(--accent-line); border-radius: 4px; font-size: 0.9375rem; }
+  .end p { margin: 0; }
+  .end p + p { margin-top: 0.4rem; color: var(--ink-soft); font-size: 0.875rem; }
+
+  @media (max-width: 34rem) {
+    .case, .cases__head { grid-template-columns: 1fr 1fr; }
+    .case__name { grid-column: 1 / -1; }
+    .cases__head span:first-child { display: none; }
+    .known { grid-template-columns: 1fr; gap: 0.15rem; }
+    .known dd { margin-bottom: 0.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .meter span { transition: none; } }
+</style>
+
+<header class="bar">
+  <div class="bar__inner">
+    <div class="bar__progress">
+      <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+      <span id="progress">Informations bloquantes : 0 sur 6</span>
+    </div>
+    <span class="status" id="status" role="status" aria-live="polite">Chargement de vos réponses…</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Ce qu'il me faut pour mettre votre site en ligne</h1>
+  <p class="lead">Remplissez à votre rythme, sur l'ordinateur ou le téléphone&nbsp;: chaque réponse est enregistrée aussitôt, et je la lis directement. Une case vide, c'est « je ne sais pas encore »&nbsp;: aucun problème.</p>
+
+  <section class="summary" aria-labelledby="summary-title">
+    <p class="summary__title" id="summary-title">Bloquant pour la mise en ligne</p>
+    <ul class="chips" id="chips">
+      <li class="chip" data-key="tel">Téléphone</li>
+      <li class="chip" data-key="rdv">Rendez-vous</li>
+      <li class="chip" data-key="email">E-mail</li>
+      <li class="chip" data-key="hebergeur">Hébergeur</li>
+      <li class="chip" data-key="profils">Profils officiels</li>
+      <li class="chip" data-key="robots">Robots d'IA</li>
+    </ul>
+    <p class="summary__note">Les photos des cas cliniques sont un chantier à part&nbsp;: indiquez seulement ce que vous avez (section 4).</p>
+  </section>
+
+  <form id="fiche" novalidate>
+
+    <!-- 1. Cabinet et rendez-vous -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>1. Cabinet et prise de rendez-vous</h2></legend>
+        <span class="tag tag--block">Bloquant</span>
+      </div>
+      <p class="why">Affiché dans le pied de page de toutes les pages, sur les pages Contact et Chirurgien-dentiste Paris&nbsp;9, et dans les mentions légales.</p>
+      <div class="fields">
+        <div class="field">
+          <label for="tel">Téléphone du cabinet</label>
+          <input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="01 00 00 00 00">
+        </div>
+
+        <div class="field" role="radiogroup" aria-labelledby="q-rdv-outil">
+          <span class="question" id="q-rdv-outil">Prise de rendez-vous en ligne</span>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="rdv_outil_doctolib" name="rdv_outil" value="doctolib"><span>Doctolib</span></label>
+            <label class="choice"><input type="radio" id="rdv_outil_autre" name="rdv_outil" value="autre"><span>Un autre service</span></label>
+            <label class="choice"><input type="radio" id="rdv_outil_aucun" name="rdv_outil" value="aucun"><span>Pas de rendez-vous en ligne<small>Les patients appellent le cabinet.</small></span></label>
+          </div>
+        </div>
+
+        <div class="field" id="bloc-rdv-url">
+          <label for="rdv_url">Adresse de votre page de rendez-vous</label>
+          <input type="url" id="rdv_url" name="rdv_url" inputmode="url" placeholder="https://www.doctolib.fr/…">
+          <p class="help">Ouvrez votre page de rendez-vous dans le navigateur, puis copiez l'adresse affichée en haut de l'écran. Tous les boutons « Prendre rendez-vous » y mèneront.</p>
+        </div>
+
+        <div class="field" role="radiogroup" aria-labelledby="q-rdv-mode">
+          <span class="question" id="q-rdv-mode">Sur le site, le bouton doit…</span>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="rdv_mode_lien" name="rdv_mode" value="lien"><span>Ouvrir votre page de rendez-vous <span class="rec">recommandé</span><small>Simple lien&nbsp;: aucun service extérieur sur le site, rien à changer dans les mentions légales.</small></span></label>
+            <label class="choice"><input type="radio" id="rdv_mode_integre" name="rdv_mode" value="integre"><span>Afficher le module de réservation dans le site<small>Intégré&nbsp;: oblige à revoir les mentions « données personnelles » et « cookies ».</small></span></label>
+          </div>
+        </div>
+
+        <div class="field" role="radiogroup" aria-labelledby="q-rdv-attente">
+          <span class="question" id="q-rdv-attente">En attendant ce lien, les boutons « Prendre rendez-vous » mènent…</span>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="rdv_attente_contact" name="rdv_attente" value="contact"><span>À la section « Prendre rendez-vous » de la page Contact <span class="rec">recommandé</span><small>C'est déjà le cas sur la page Paris&nbsp;9, à la demande de ChatGPT.</small></span></label>
+            <label class="choice"><input type="radio" id="rdv_attente_rien" name="rdv_attente" value="rien"><span>Nulle part pour l'instant<small>Comme aujourd'hui, jusqu'à l'arrivée du vrai lien.</small></span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail professionnel</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="contact@drfranckmoyal.fr">
+          <p class="help">Obligatoire dans les mentions légales. Votre nom de domaine chez OVH comprend une boîte e-mail&nbsp;: une adresse du type contact@drfranckmoyal.fr est possible.</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 2. Hébergement -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>2. Hébergement du site</h2></legend>
+        <span class="tag tag--block">Bloquant</span>
+      </div>
+      <p class="why">L'hébergeur est la société dont les ordinateurs diffusent le site. Son nom et ses coordonnées doivent figurer dans les mentions légales.</p>
+      <div class="fields">
+        <div class="field" role="radiogroup" aria-labelledby="q-heb">
+          <span class="question" id="q-heb">Où héberger le site&nbsp;?</span>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="heb_choix_claude" name="hebergeur_choix" value="claude"><span>Je n'ai pas encore d'hébergeur&nbsp;: proposez-moi une solution</span></label>
+            <label class="choice"><input type="radio" id="heb_choix_ovh" name="hebergeur_choix" value="ovh"><span>Chez OVH, où se trouve déjà le nom de domaine<small>Claude reprendra les coordonnées légales officielles d'OVH.</small></span></label>
+            <label class="choice"><input type="radio" id="heb_choix_autre" name="hebergeur_choix" value="autre"><span>Chez un autre hébergeur</span></label>
+          </div>
+        </div>
+        <div class="fields" id="bloc-heb-autre" hidden>
+          <div class="field">
+            <label for="hebergeur_nom">Nom de l'hébergeur</label>
+            <input type="text" id="hebergeur_nom" name="hebergeur_nom">
+          </div>
+          <div class="field">
+            <label for="hebergeur_raison">Raison sociale (nom officiel de la société)</label>
+            <input type="text" id="hebergeur_raison" name="hebergeur_raison">
+          </div>
+          <div class="field">
+            <label for="hebergeur_adresse">Adresse</label>
+            <input type="text" id="hebergeur_adresse" name="hebergeur_adresse">
+          </div>
+          <div class="field">
+            <label for="hebergeur_contact">Téléphone ou contact</label>
+            <input type="text" id="hebergeur_contact" name="hebergeur_contact">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 3. Profils officiels -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>3. Vos profils officiels</h2></legend>
+        <span class="tag tag--block">Bloquant</span>
+      </div>
+      <p class="why">Ces liens indiquent à Google et aux IA que ces pages parlent bien de vous. N'indiquez que des profils à votre nom ou qui vous présentent officiellement.</p>
+      <div class="fields">
+        <div class="field">
+          <label for="linkedin">LinkedIn</label>
+          <input type="url" id="linkedin" name="linkedin" inputmode="url" placeholder="https://www.linkedin.com/in/…">
+        </div>
+        <div class="field">
+          <label for="instagram">Instagram</label>
+          <input type="url" id="instagram" name="instagram" inputmode="url" placeholder="https://www.instagram.com/…">
+        </div>
+        <div class="field">
+          <label for="aphp">Profil AP-HP</label>
+          <input type="url" id="aphp" name="aphp" inputmode="url">
+          <p class="help"><span class="from-pack">Pré-rempli d'après la page Activité hospitalière du pack</span>&nbsp;: corrigez ou videz s'il ne vous représente pas.</p>
+        </div>
+        <div class="field">
+          <label for="blendi">Page formateur Blendi</label>
+          <input type="url" id="blendi" name="blendi" inputmode="url">
+          <p class="help"><span class="from-pack">Pré-rempli d'après la page Conférences et formations du pack</span>&nbsp;: corrigez ou videz s'il ne vous représente pas.</p>
+        </div>
+        <div class="field">
+          <label for="lefildentaire">Page auteur sur Le Fil Dentaire</label>
+          <input type="url" id="lefildentaire" name="lefildentaire" inputmode="url" placeholder="https://www.lefildentaire.com/…">
+        </div>
+        <div class="field">
+          <label for="google_fiche">Fiche Google du cabinet (Google Maps)</label>
+          <input type="url" id="google_fiche" name="google_fiche" inputmode="url" placeholder="https://maps.google.com/…">
+          <p class="help">Si elle existe. Elle compte beaucoup pour les recherches locales («&nbsp;dentiste Paris&nbsp;9&nbsp;»).</p>
+        </div>
+        <div class="field">
+          <label for="dentca">Site officiel de DentCA</label>
+          <input type="url" id="dentca" name="dentca" inputmode="url" placeholder="https://…">
+          <p class="help">Le pack demande de relier la page TCA à la page officielle de DentCA.</p>
+        </div>
+        <div class="field">
+          <label for="smileclub">Site de Smileclub Formation</label>
+          <input type="url" id="smileclub" name="smileclub" inputmode="url" placeholder="https://…">
+        </div>
+        <div class="field">
+          <label for="autres_profils">Autres profils officiels</label>
+          <textarea id="autres_profils" name="autres_profils" placeholder="Un lien par ligne"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 4. Photos -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>4. Photos des cas cliniques</h2></legend>
+        <span class="tag tag--opt">Avant le lancement</span>
+      </div>
+      <p class="why">Ce sont les preuves cliniques des pages. Le site peut être reconstruit sans elles, mais elles sont attendues avant la validation finale.</p>
+      <p class="notice"><strong>Ne déposez aucune photo ici.</strong> Indiquez seulement ce dont vous disposez. Les photos passeront ensuite par un circuit sécurisé, hors iCloud, chacune avec le consentement écrit du patient.</p>
+      <div class="cases__head" aria-hidden="true"><span>Cas attendu</span><span>Disponible&nbsp;?</span><span>Consentement web</span></div>
+      <div class="cases" id="cases"></div>
+    </fieldset>
+
+    <!-- 5. Décisions -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>5. Décisions à prendre</h2></legend>
+        <span class="tag tag--block">Robots&nbsp;: bloquant</span>
+      </div>
+      <div class="fields">
+        <div class="field" role="radiogroup" aria-labelledby="q-robots">
+          <span class="question" id="q-robots">Les IA peuvent-elles utiliser les textes du site pour s'entraîner&nbsp;?</span>
+          <p class="help">Quel que soit votre choix, Google, Bing et la recherche de ChatGPT pourront lire le site et le citer dans leurs réponses&nbsp;: c'est le but du projet. La question porte seulement sur l'entraînement des futurs modèles d'IA.</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="robots_non" name="robots_ia" value="non"><span>Non</span></label>
+            <label class="choice"><input type="radio" id="robots_oui" name="robots_ia" value="oui"><span>Oui</span></label>
+            <label class="choice"><input type="radio" id="robots_reco" name="robots_ia" value="recommandation"><span>Je laisse ChatGPT et Claude recommander</span></label>
+          </div>
+        </div>
+
+        <div class="field" role="radiogroup" aria-labelledby="q-audience">
+          <span class="question" id="q-audience">Mesurer la fréquentation du site&nbsp;?</span>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="audience_non" name="audience" value="non"><span>Non, pas pour l'instant <span class="rec">recommandé au départ</span><small>Aucun bandeau de cookies nécessaire.</small></span></label>
+            <label class="choice"><input type="radio" id="audience_sans" name="audience" value="sans-cookies"><span>Oui, avec un outil sans cookies<small>Chiffres simples (visites, pages lues), sans bandeau de consentement.</small></span></label>
+            <label class="choice"><input type="radio" id="audience_ga" name="audience" value="google-analytics"><span>Oui, avec Google Analytics<small>Bandeau de consentement obligatoire sur le site.</small></span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="domaines">Autres noms de domaine que vous possédez</label>
+          <textarea id="domaines" name="domaines" placeholder="par exemple : franckmoyal.fr"></textarea>
+          <p class="help">Ils seront redirigés vers drfranckmoyal.fr. Laissez vide s'il n'y en a pas.</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 6. Déontologie -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>6. Vérifications de déontologie</h2></legend>
+        <span class="tag tag--opt">À votre appréciation</span>
+      </div>
+      <p class="why">Vous connaissez les règles de communication de la profession mieux que moi&nbsp;: cochez ce qui vous convient, notez ce qui est à revoir.</p>
+      <div class="fields">
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="chk_exclusif" name="chk_exclusif"><span>La formule « pratique privée exclusivement orientée vers la dentisterie esthétique et adhésive » (page Dr Franck Moyal) me convient.</span></label>
+          <label class="check"><input type="checkbox" id="chk_etablissements" name="chk_etablissements"><span>Je peux citer l'AP-HP (Pitié-Salpêtrière), le GHU Paris – Hôpital Sainte-Anne et la CMME comme le fait le site.</span></label>
+          <label class="check"><input type="checkbox" id="chk_photos" name="chk_photos"><span>Les photos avant / après que je fournirai respectent les règles de communication de la profession.</span></label>
+        </div>
+        <div class="field">
+          <label for="deonto_note">À revoir</label>
+          <textarea id="deonto_note" name="deonto_note"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 7. Déjà connu -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>7. Ce que j'ai déjà</h2></legend>
+        <span class="tag tag--opt">À vérifier</span>
+      </div>
+      <dl class="known">
+        <dt>Nom affiché</dt><dd>Dr Franck Moyal — Chirurgien-dentiste à Paris</dd>
+        <dt>Adresse du cabinet</dt><dd>2 rue Hippolyte Lebas, 75009 Paris</dd>
+        <dt>Numéro RPPS</dt><dd>10005198790</dd>
+        <dt>Nom de domaine</dt><dd>drfranckmoyal.fr, chez OVH, jusqu'au 21 septembre 2029</dd>
+        <dt>Portrait</dt><dd>Fourni en haute définition</dd>
+      </dl>
+      <div class="fields">
+        <div class="field">
+          <label for="corrections">Quelque chose à corriger&nbsp;?</label>
+          <textarea id="corrections" name="corrections"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 8. Libre -->
+    <fieldset class="section">
+      <div class="section__head">
+        <legend><h2>8. Autre chose à me dire</h2></legend>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label for="libre" class="sr">Message libre</label>
+          <textarea id="libre" name="libre"></textarea>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="end">
+    <p>Vos réponses sont enregistrées au fur et à mesure.</p>
+    <p>Quand vous avez terminé, même partiellement, dites-moi simplement «&nbsp;c'est rempli&nbsp;».</p>
+  </div>
+</main>
+
+<script>
+  // Cas cliniques attendus (checklist avant mise en ligne de ChatGPT, §B)
+  const CASES = [
+    ["portrait", "Portrait haute définition", "", true],
+    ["composite", "Composite bonding", "2 cas"],
+    ["facettes", "Facettes", "2 cas : état initial → projet → résultat"],
+    ["eclaircissement", "Éclaircissement", "1 cas avant / après"],
+    ["icon", "Taches blanches, dyschromies, ICON", "1 à 2 cas"],
+    ["bilan", "Bilan esthétique", "1 parcours : photos → planification SmileCloud → résultat"],
+    ["usures", "Usures et réhabilitation", "2 cas"],
+    ["erosion", "Érosion", "1 exemple clinique"],
+    ["scans", "Scans de suivi", "si disponibles"],
+    ["formation", "Formations et conférences", "photos utiles"],
+    ["cabinet", "Cabinet", "seulement au niveau esthétique du site"],
+  ];
+  const casesEl = document.getElementById("cases");
+  for (const [key, name, detail, done] of CASES) {
+    const row = document.createElement("div");
+    row.className = "case" + (done ? " case--done" : "");
+    const title = document.createElement("div");
+    title.className = "case__name";
+    title.textContent = name;
+    if (detail) {
+      const small = document.createElement("small");
+      small.textContent = detail;
+      title.appendChild(small);
+    }
+    row.appendChild(title);
+    if (!done) {
+      const dispo = makeSelect(`photo_${key}_dispo`, `${name} : disponible ?`, [["", "—"], ["oui", "Oui"], ["a-preparer", "À préparer"], ["non", "Non"]]);
+      const consent = makeSelect(`photo_${key}_consent`, `${name} : consentement de publication web`, [["", "—"], ["oui", "Signé"], ["non", "Pas encore"], ["sans-objet", "Sans objet"]]);
+      row.append(dispo, consent);
+      const note = document.createElement("div");
+      note.className = "case__note";
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = input.name = `photo_${key}_note`;
+      input.placeholder = "Remarque (facultatif)";
+      input.setAttribute("aria-label", `${name} : remarque`);
+      note.appendChild(input);
+      row.appendChild(note);
+    }
+    casesEl.appendChild(row);
+  }
+  function makeSelect(id, label, options) {
+    const select = document.createElement("select");
+    select.id = select.name = id;
+    select.setAttribute("aria-label", label);
+    for (const [value, text] of options) {
+      const o = document.createElement("option");
+      o.value = value;
+      o.textContent = text;
+      select.appendChild(o);
+    }
+    return select;
+  }
+
+  // Lecture et remplissage du formulaire
+  const form = document.getElementById("fiche");
+  function read() {
+    const data = {};
+    for (const el of form.elements) {
+      if (!el.name) continue;
+      if (el.type === "radio") { if (el.checked) data[el.name] = el.value; else if (!(el.name in data)) data[el.name] = ""; }
+      else if (el.type === "checkbox") data[el.name] = el.checked;
+      else data[el.name] = el.value.trim();
+    }
+    return data;
+  }
+  function fill(data, skip) {
+    for (const el of form.elements) {
+      if (!el.name || !(el.name in data) || el === skip) continue;
+      const v = data[el.name];
+      if (el.type === "radio") el.checked = el.value === v;
+      else if (el.type === "checkbox") el.checked = Boolean(v);
+      else if (typeof v === "string") el.value = v;
+    }
+    refresh();
+  }
+
+  // Avancement : les 6 informations bloquantes
+  function done(d) {
+    const url = (s) => /^https?:\/\/\S+\.\S+/.test(s || "");
+    const hebAutre = ["hebergeur_nom", "hebergeur_raison", "hebergeur_adresse", "hebergeur_contact"].every((k) => d[k]);
+    return {
+      tel: (d.tel || "").replace(/\D/g, "").length >= 9,
+      rdv: d.rdv_outil === "aucun" || url(d.rdv_url),
+      email: /^\S+@\S+\.\S+$/.test(d.email || ""),
+      hebergeur: d.hebergeur_choix === "ovh" || d.hebergeur_choix === "claude" || (d.hebergeur_choix === "autre" && hebAutre),
+      profils: ["linkedin", "instagram", "aphp", "blendi", "lefildentaire", "google_fiche"].some((k) => url(d[k])),
+      robots: Boolean(d.robots_ia),
+    };
+  }
+  function refresh() {
+    const d = read();
+    const state = done(d);
+    let n = 0;
+    for (const chip of document.querySelectorAll(".chip")) {
+      const ok = state[chip.dataset.key];
+      chip.dataset.done = String(ok);
+      if (ok) n++;
+    }
+    document.getElementById("progress").textContent = `Informations bloquantes : ${n} sur 6`;
+    document.getElementById("meter").style.width = `${(n / 6) * 100}%`;
+    document.getElementById("bloc-heb-autre").hidden = d.hebergeur_choix !== "autre";
+    document.getElementById("bloc-rdv-url").hidden = d.rdv_outil === "aucun";
+  }
+
+  // Enregistrement : une écriture à la fois, après une courte pause de saisie
+  const statusEl = document.getElementById("status");
+  const setStatus = (text, state = "") => { statusEl.textContent = text; statusEl.dataset.state = state; };
+  const DOC = "infos/franck";
+  const DRAFT = "fiche-drfranckmoyal-brouillon";
+  let db = null, timer = null, saving = false, pending = false, lastInput = 0, last = "";
+
+  function saveDraft(d) { try { localStorage.setItem(DRAFT, JSON.stringify(d)); } catch {} }
+  function loadDraft() { try { return JSON.parse(localStorage.getItem(DRAFT) || "null"); } catch { return null; } }
+
+  async function save() {
+    const d = read();
+    const body = JSON.stringify(d);
+    if (body === last) return;
+    if (!db) { saveDraft(d); setStatus("Enregistré sur cet écran seulement", "warn"); return; }
+    if (saving) { pending = true; return; }
+    saving = true;
+    setStatus("Enregistrement…");
+    try {
+      await db.doc(DOC).set({ ...d, maj: new Date().toISOString() });
+      last = body;
+      const t = new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      setStatus(`Enregistré à ${t}`, "ok");
+    } catch (e) {
+      saveDraft(d);
+      setStatus(e && e.code === "invalid_argument" ? "Enregistrement refusé : vous n'avez pas le droit de modifier cette fiche" : "Pas d'enregistrement pour l'instant : réessai à la prochaine saisie", "warn");
+    } finally {
+      saving = false;
+      if (pending) { pending = false; save(); }
+    }
+  }
+  form.addEventListener("input", () => {
+    lastInput = Date.now();
+    refresh();
+    clearTimeout(timer);
+    timer = setTimeout(save, 700);
+  });
+  form.addEventListener("change", () => { clearTimeout(timer); timer = setTimeout(save, 150); });
+  form.addEventListener("submit", (e) => e.preventDefault());
+
+  // Démarrage : réponses enregistrées, puis mises à jour venues d'un autre appareil
+  async function start(hot) {
+    refresh();
+    if (hot && hot.form) fill(hot.form);
+    db = await window.claude?.use?.("db") ?? null;
+    if (!db) {
+      const draft = loadDraft();
+      if (draft && !(hot && hot.form)) fill(draft);
+      setStatus("Enregistrement en ligne indisponible sur cet écran", "warn");
+      return;
+    }
+    try {
+      const snap = await db.doc(DOC).get();
+      if (snap.exists && !(hot && hot.form)) { fill(snap.data()); last = JSON.stringify(read()); }
+      setStatus(snap.exists ? "Vos réponses sont chargées" : "Prêt : vos réponses s'enregistrent au fur et à mesure", "ok");
+      if (hot && hot.form) save();
+    } catch {
+      setStatus("Impossible de charger les réponses enregistrées pour l'instant", "warn");
+    }
+    db.doc(DOC).onSnapshot((snap) => {
+      if (!snap.exists || snap.metadata.hasPendingWrites || Date.now() - lastInput < 3000) return;
+      const data = snap.data();
+      fill(data, document.activeElement);
+      last = JSON.stringify(read());
+    }, () => {});
+  }
+  window.claude?.hot?.snapshot?.(() => ({ form: read() }));
+  if (window.claude?.hot?.ready) window.claude.hot.ready(start);
+  else start(window.claude?.hot?.data ?? {});
+</script>
