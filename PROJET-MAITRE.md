@@ -379,6 +379,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 21/09/2026 | C | Dossier de transmission du tour 2 posé sur le Bureau : `~/Desktop/GEO-golden-master-tour2-pour-ChatGPT/` (message à coller, rapport, 15 captures numérotées comme dans le rapport). | Contrôle de ChatGPT |
 | 21/09/2026 | G | **Contrôle du tour 2**, archivé dans `docs/echanges/2026-09-21-chatgpt-retour-golden-master-tour2.md` : « visuellement validé à 95 % », base définitive du site. Newsreader validée définitivement, portrait HD validé. Dernier micro-tour P0.5 : textes de la méthode, italique supprimé, bouton rendez-vous mobile, rapidité de la page Usures. Si les 4 points passent, le golden master est gelé. | D30 à D36 |
 | 21/09/2026 | C | **Micro-tour P0.5 livré** (`livrables/golden-master-r3/RAPPORT-P0-5.md`, 8 captures) : textes définitifs de la méthode et titre complété, phrase clé et ligne auteur en romain, fichier italique supprimé, « Rendez-vous » sur l'en-tête mobile jusqu'à 440 px. Lighthouse mobile de la page Usures : LCP 1,95 s aux 3 passages (cible 2,5 s), 200 Ko au lieu de 344. Conditions de gel remplies. | Gel à prononcer par Franck |
+| 21/09/2026 | C | Dossier de transmission du P0.5 posé sur le Bureau : `~/Desktop/GEO-golden-master-P0-5-pour-ChatGPT/` (message à coller, rapport, 8 captures). | Dernier coup d'œil de ChatGPT, gel |
 
 ---
 
