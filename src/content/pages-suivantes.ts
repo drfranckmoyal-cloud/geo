@@ -51,9 +51,40 @@ export const hidden: Record<string, { section?: string; text?: string; why: stri
 
 // Remplacements décidés par ChatGPT, appliqués au fichier du pack avant sa lecture — par le site
 // comme par les contrôles, qui les listent. Sans effet si le pack contient déjà le nouveau texte.
-// V1.2 : la date des mentions légales (22 septembre 2026) est désormais dans le pack ; aucun
-// remplacement en cours.
-export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {};
+// Informations fournies par Franck dans sa fiche en ligne (22/09/2026), insérées à la place des
+// emplacements « [À FOURNIR] » / « à compléter » du pack. Hébergeur : OVH, choisi par Franck ;
+// coordonnées légales reprises des mentions légales d'OVHcloud (numéro 1007 : usage courant, à
+// confirmer dans l'espace client OVH).
+export const fiche = {
+  telephone: "01 83 75 52 16",
+  email: "drfranckmoyal@gmail.com",
+  hebergeur: {
+    nom: "OVH",
+    raison: "OVH SAS, SAS au capital de 10 069 020 €, RCS Lille Métropole 424 761 419 00045",
+    adresse: "2 rue Kellermann, 59100 Roubaix, France",
+    contact: "1007 (depuis la France), +33 9 72 10 10 07",
+  },
+};
+
+// Remplacements appliqués au pack avant lecture : informations de la fiche, et DOI rétablis sur
+// la page Facettes (omissions de la V1.2 confirmées par ChatGPT, 22/09/2026).
+const FICHE = "fiche de Franck, 22/09/2026";
+export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
+  "04": [
+    { from: "\nPMID: `38604905`", to: "\nDOI: `10.1016/j.prosdent.2024.03.019` — PMID: `38604905`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
+    { from: "\nPMID: `39523553`", to: "\nDOI: `10.1111/jerd.13351` — PMID: `39523553`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
+  ],
+  "18": [{ from: "**Téléphone**  \nà compléter", to: `**Téléphone**  \n${fiche.telephone}`, ref: FICHE }],
+  "19": [{ from: "**Téléphone**  \n[À FOURNIR]", to: `**Téléphone**  \n${fiche.telephone}`, ref: FICHE }],
+  "20": [
+    { from: "**Téléphone** : [À FOURNIR]", to: `**Téléphone** : ${fiche.telephone}`, ref: FICHE },
+    { from: "**Adresse électronique professionnelle** : [À FOURNIR]", to: `**Adresse électronique professionnelle** : ${fiche.email}`, ref: FICHE },
+    { from: "**Hébergeur** : [À FOURNIR AVANT MISE EN LIGNE]", to: `**Hébergeur** : ${fiche.hebergeur.nom}`, ref: FICHE },
+    { from: "**Raison sociale** : [À FOURNIR]", to: `**Raison sociale** : ${fiche.hebergeur.raison}`, ref: FICHE },
+    { from: "**Adresse** : [À FOURNIR]", to: `**Adresse** : ${fiche.hebergeur.adresse}`, ref: FICHE },
+    { from: "**Téléphone / contact** : [À FOURNIR]", to: `**Téléphone / contact** : ${fiche.hebergeur.contact}`, ref: FICHE },
+  ],
+};
 
 export function applyDecisions(md: string, num: string): { md: string; applied: string[] } {
   const applied: string[] = [];

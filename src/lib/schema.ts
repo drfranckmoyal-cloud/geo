@@ -15,6 +15,7 @@ export function person(image?: string, full = false, withAddress = false) {
     jobTitle: "Chirurgien-dentiste",
     url: abs("/franck-moyal/"),
     ...(image ? { image } : {}),
+    ...(site.sameAs.length ? { sameAs: [...site.sameAs] } : {}),
   };
   const workLocation = {
     "@type": "Place",
@@ -51,7 +52,7 @@ export function person(image?: string, full = false, withAddress = false) {
         department: { "@type": "MedicalClinic", name: "Service de Médecine Bucco-dentaire" },
       },
     ],
-    // sameAs : profils externes (LinkedIn…) à ajouter quand les adresses seront fournies (§6, point 11).
+    // sameAs : profils officiels, sur le nœud de base (site.sameAs)
   };
 }
 

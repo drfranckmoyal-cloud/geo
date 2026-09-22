@@ -100,7 +100,7 @@ for (const p of pages) {
   offTarget.length ? bad(`liens de rendez-vous ailleurs que ${RDV} : ${offTarget.map((a) => a.getAttribute("href")).join(" ")}`) : ok(`${rdvLinks.length} liens « rendez-vous », tous vers ${RDV}`);
   if (root.querySelector('[id="rendez-vous"], a[href="#rendez-vous"]')) bad("ancre #rendez-vous encore présente");
   // Boutons des appels finaux, quel que soit leur libellé (« Réaliser un bilan… ») : même destination
-  const finals = root.querySelectorAll("#appel-final a");
+  const finals = root.querySelectorAll("#appel-final a.btn"); // le bouton, pas le téléphone cliquable du texte
   if (finals.length) finals.every((a) => a.getAttribute("href") === RDV) ? ok(`bouton de l'appel final vers ${RDV}`) : bad("bouton de l'appel final ailleurs que la prise de rendez-vous");
 
   if (!p.pack) continue;

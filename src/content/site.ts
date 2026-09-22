@@ -10,10 +10,18 @@ export const site = {
   personId: "https://drfranckmoyal.fr/#franck-moyal",
   websiteId: "https://drfranckmoyal.fr/#website",
   lang: "fr-FR",
-  // Prise de rendez-vous : lien définitif en attente (D8). D'ici là, tous les boutons et liens
-  // « Prendre rendez-vous » mènent à la section du même nom de la page Contact (règle globale de la
-  // V1.2, D41) ; ils restent marqués comme provisoires. Libellé court : en-tête mobile (D33).
-  rdv: { label: "Prendre rendez-vous", shortLabel: "Rendez-vous", href: "/contact/#prendre-rendez-vous", provisional: true },
+  // Prise de rendez-vous : pas de réservation en ligne (fiche de Franck, 22/09/2026) ; tous les
+  // boutons et liens « Prendre rendez-vous » mènent à la section du même nom de la page Contact, qui
+  // donne le téléphone (règle globale de la V1.2, D41). Libellé court : en-tête mobile (D33).
+  rdv: { label: "Prendre rendez-vous", shortLabel: "Rendez-vous", href: "/contact/#prendre-rendez-vous", provisional: false },
+  // Profils officiels du Dr Moyal (fiche du 22/09/2026), déclarés aux moteurs (sameAs) : ceux que
+  // ChatGPT a retenus (LinkedIn, Instagram, AP-HP, Blendi) ; les autres attendent sa revue.
+  sameAs: [
+    "https://www.linkedin.com/in/franck-moyal-7581b6161/",
+    "https://www.instagram.com/drfranckmoyal/",
+    "https://www.aphp.fr/dr-moyal-franck",
+    "https://blendi.fr/formateurs/franck-moyal",
+  ],
   // Adresse du cabinet (D22), reprise dans les données structurées
   address: { street: "2 rue Hippolyte Lebas", postalCode: "75009", city: "Paris", country: "FR" },
 } as const;
@@ -62,6 +70,7 @@ export const footer = {
   ],
   contactLabel: "Contact",
   address: "2 rue Hippolyte Lebas, 75009 Paris", // D22
-  phone: "Téléphone — à fournir", // emplacement réservé (D8)
+  phone: "01 83 75 52 16", // fiche de Franck, 22/09/2026
+  phoneIntl: "+33183755216",
   legal: { label: "Mentions légales", href: "/mentions-legales/" }, // page du lot D (D38)
 };
