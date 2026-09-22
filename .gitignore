@@ -31,3 +31,6 @@ scripts/.apercu-*.png
 livrables/**/captures/
 scripts/.revue/
 scripts/.zoom.mjs
+
+# Archives du site prêtes à déposer chez l'hébergeur (régénérables)
+livrables/deploiement/

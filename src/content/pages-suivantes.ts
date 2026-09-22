@@ -52,17 +52,18 @@ export const hidden: Record<string, { section?: string; text?: string; why: stri
 // Remplacements décidés par ChatGPT, appliqués au fichier du pack avant sa lecture — par le site
 // comme par les contrôles, qui les listent. Sans effet si le pack contient déjà le nouveau texte.
 // Informations fournies par Franck dans sa fiche en ligne (22/09/2026), insérées à la place des
-// emplacements « [À FOURNIR] » / « à compléter » du pack. Hébergeur : OVH, choisi par Franck ;
-// coordonnées légales reprises des mentions légales d'OVHcloud (numéro 1007 : usage courant, à
-// confirmer dans l'espace client OVH).
+// emplacements « [À FOURNIR] » / « à compléter » du pack. Hébergeur : Hostinger, où Franck a son
+// abonnement (22/09/2026 ; le nom de domaine reste chez OVH) ; coordonnées légales reprises des
+// conditions d'utilisation d'Hostinger (société contractante pour les clients européens), qui ne
+// donnent qu'une adresse électronique de contact.
 export const fiche = {
   telephone: "01 83 75 52 16",
   email: "drfranckmoyal@gmail.com",
   hebergeur: {
-    nom: "OVH",
-    raison: "OVH SAS, SAS au capital de 10 069 020 €, RCS Lille Métropole 424 761 419 00045",
-    adresse: "2 rue Kellermann, 59100 Roubaix, France",
-    contact: "1007 (depuis la France), +33 9 72 10 10 07",
+    nom: "Hostinger",
+    raison: "Hostinger International Limited, société de droit chypriote",
+    adresse: "61 Lordou Vironos, 6023 Larnaca, Chypre",
+    contact: "compliance@hostinger.com",
   },
 };
 

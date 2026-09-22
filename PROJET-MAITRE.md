@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 4 terminée côté construction** : les 23 pages sont reconstruites depuis la **V1.2 finale** du pack (D41), compositions validées par ChatGPT (D40). Restent les données et décisions de Franck avant la mise en ligne (checklist 24), collectées par une fiche en ligne (§11). |
-| **Dernière étape faite** | Fiche de Franck intégrée (D42) : téléphone, e-mail, hébergeur OVH, 4 profils officiels, pas de réservation en ligne ; DOI de la page Facettes rétablis. Le contrôle avant mise en ligne ne relève plus que 3 points (`livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`). Avant : reconstruction depuis la V1.2 finale (`livrables/pages-suivantes-v1-2/RAPPORT-RECONSTRUCTION-V1-2.md`) : textes sans écart et plus aucun écart de renvois, HTML et plan du site réussis, les 20 H1 en 4 lignes au plus sur mobile, 37 références vérifiées sur PubMed, Lighthouse 99–100 ; tous les liens de rendez-vous vers `/contact/#prendre-rendez-vous`. Fiche de renseignements en ligne pour Franck. Avant : validation consolidée (D40) ; lot D construit et contrôlé (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, avec le bilan des 20 pages) : Contact et Mentions légales, lien du pied de page raccordé, mentions légales hors du plan du site. Lot C (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
-| **Prochaine action** | ChatGPT tranche avec Franck les derniers points (note `GEO_PRE_LANCEMENT_pour_ChatGPT.md`, posée sur le Bureau) : lignes « Prise de rendez-vous en ligne », profils complémentaires, robots d'IA, texte MIH de la page 06, visuels. En parallèle : consentements des photos et circuit hors iCloud (point 38). |
+| **Phase en cours** | **Étape 5 engagée : mise en ligne.** Les 23 pages sont déposées chez Hostinger (D43) et visibles à une adresse provisoire ; le nom de domaine n'y est pas encore branché. Construction : les 23 pages reconstruites depuis la **V1.2 finale** du pack (D41), compositions validées par ChatGPT (D40). |
+| **Dernière étape faite** | Site créé dans l'espace Hostinger de Franck et fichiers déposés (D43) : à l'adresse provisoire, les 23 pages et tous les fichiers répondent, identiques à la version locale ; hébergeur des mentions légales : Hostinger. Franck confirme les consentements des photos (D44). Avant : fiche de Franck intégrée (D42) : téléphone, e-mail, hébergeur (OVH, remplacé par Hostinger), 4 profils officiels, pas de réservation en ligne ; DOI de la page Facettes rétablis. Le contrôle avant mise en ligne ne relève plus que 3 points (`livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`). Avant : reconstruction depuis la V1.2 finale (`livrables/pages-suivantes-v1-2/RAPPORT-RECONSTRUCTION-V1-2.md`) : textes sans écart et plus aucun écart de renvois, HTML et plan du site réussis, les 20 H1 en 4 lignes au plus sur mobile, 37 références vérifiées sur PubMed, Lighthouse 99–100 ; tous les liens de rendez-vous vers `/contact/#prendre-rendez-vous`. Fiche de renseignements en ligne pour Franck. Avant : validation consolidée (D40) ; lot D construit et contrôlé (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, avec le bilan des 20 pages) : Contact et Mentions légales, lien du pied de page raccordé, mentions légales hors du plan du site. Lot C (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Appliquer le correctif pré-lancement V1.3 de ChatGPT (reçu le 22/09/2026). Puis brancher le domaine sur Hostinger : chez OVH, faire pointer `drfranckmoyal.fr` et `www` vers le serveur Hostinger, avec l'accord de Franck ; activer le certificat https chez Hostinger ; déclarer le site à Google et Bing. |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Le consentement écrit de publication web pour chaque cas photographié (dossier « Icono GEO », 22 photos) et son accord pour sortir ce dossier du Bureau (iCloud) ; la souscription d'un hébergement OVH au moment de la mise en ligne. |
+| **En attente de Franck** | Son accord pour brancher le domaine (enregistrements DNS chez OVH, modifiables par Claude dans Chrome) ; le renouvellement de l'offre Hostinger Premium, qui arrive à échéance le 22/10/2026. |
 
 ---
 
@@ -267,6 +267,8 @@ rendu sera jugé :
 | D40 | **Validation consolidée des lots A à D par ChatGPT** (fichier 23, archivé). Compositions validées : ordre des blocs, texte décalé dominant, H3 et grilles sauge, listes, `MethodSteps` en 7 étapes, emplacements d'images, FAQ / Sources / Auteur / « À lire aussi », gras parcimonieux (A) ; sommaire cliquable, grille des sources acides, bloc CMME, appel final réduit, infographie pleine largeur (B) ; ouverture clinique et preuves externes des pages d'autorité, sans bloc auteur ni appel final sur les pages 14 à 17 (C) ; contact et mentions légales (D). Précisions appliquées : page 18, bouton « Prendre rendez-vous » vers `/contact/#prendre-rendez-vous` ; ancre définitive `#prendre-rendez-vous` sur la page Contact ; 7 motifs de consultation cliquables et H1 « … Paris 9e » validés ; ligne auteur retirée de l'ouverture sur Contact et Mentions légales ; date des mentions légales harmonisée au 22 septembre 2026 (visible et `dateModified`) ; publications décrites en `Article` / `Book`, sans métadonnée inventée. La **V1.2** du pack devient la source éditoriale finale. | 22/09/2026 |
 | D41 | **V1.2 finale du pack, source unique** des 20 pages (reçue le 22/09/2026, archivée dans `docs/pages-suivantes/v1.2/`) : renvois bibliographiques corrigés et complétés, H1 raccourcis (V16 respecté), consignes retirées du texte patient, appel final de la page Éclaircissement, liens explicités, titre « Du projet au traitement : sept étapes » pour la méthode de la page Bilan, pages Contact et Mentions légales sans auteur. **Règle globale des rendez-vous** : tant que le lien de réservation manque, tous les boutons et liens « Prendre rendez-vous » / « Rendez-vous » du site — en-tête, ouverture de l'accueil, appels finaux, pied de page, page Paris 9 — mènent à `/contact/#prendre-rendez-vous` ; ancre unique `#prendre-rendez-vous` sur la page Contact ; `#rendez-vous` abandonnée. | 22/09/2026 |
 | D42 | **Fiche de Franck intégrée** (22/09/2026) : téléphone 01 83 75 52 16 (pied de page, Contact, page Paris 9, mentions légales, cliquable sur mobile) ; pas de réservation en ligne, donc la section Rendez-vous de la page Contact est la destination définitive des boutons ; mentions légales complétées (e-mail `drfranckmoyal@gmail.com`, hébergeur OVH SAS et ses coordonnées légales) ; profils officiels déclarés aux moteurs : LinkedIn, Instagram, AP-HP, Blendi ; aucune mesure d'audience ; aucun autre nom de domaine ; les trois vérifications de déontologie confirmées. DOI des références Alqutaibi et Klein rétablis sur la page Facettes (omissions de la V1.2, confirmées par ChatGPT). | 22/09/2026 |
+| D43 | **Hébergement chez Hostinger**, où Franck a déjà un abonnement (offre Premium Web Hosting, échéance du 22/10/2026) ; il remplace OVH, prévu par D42. Le domaine reste enregistré chez OVH. Le 22/09/2026, Claude crée dans l'espace de Franck, ouvert dans Chrome, le site « drfranckmoyal.fr » (site PHP/HTML, domaine existant) et dépose les fichiers du site dans `public_html`. Adresse provisoire de contrôle : https://mediumaquamarine-louse-843680.hostingersite.com. Mentions légales : hébergeur Hostinger International Limited (coordonnées des conditions d'utilisation d'Hostinger). Le fichier `public/.htaccess` redirige définitivement `http://` et `www.` vers `https://drfranckmoyal.fr/`. | 22/09/2026 |
+| D44 | **Photos cliniques** : Franck confirme que le consentement de publication est recueilli pour tous les cas du dossier « Icono GEO ». Il lève, pour ce dossier, l'interdit de ranger des photos de patients sur le Bureau (iCloud) : « ce n'est pas un problème ». Les photos restent hors du dépôt GitHub. | 22/09/2026 |
 
 ---
 
@@ -285,9 +287,11 @@ décision.
 | 11 | **Profils complémentaires** fournis par Franck : TikTok, fiche Google du cabinet (et son nom chargé de mots-clés), DentCA et Smileclub Formation (organisations : `founder` plutôt que `sameAs` ?). Les 4 profils retenus par ChatGPT sont intégrés (D42). | En attente. | ChatGPT, avec Franck. |
 | 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
 | 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
-| 15 | **Déontologie** : les trois vérifications de la fiche sont confirmées par Franck (D42). Restent, le moment venu, les mentions obligatoires propres à la profession et le consentement de chaque photo. | — | Franck. |
+| 15 | **Déontologie** : les trois vérifications de la fiche sont confirmées par Franck (D42), les consentements des photos aussi (D44). Restent, le moment venu, les mentions obligatoires propres à la profession. | — | Franck. |
 | 36 | **Robots d'IA** (checklist 24 §C, D27) : Franck laisse ChatGPT et Claude recommander ; recommandation de Claude, tout autoriser, entraînement compris (note de pré-lancement §2 c). Tranchés par D42 : aucune mesure d'audience, aucun domaine secondaire, pas d'outil de rendez-vous. | robots.txt ouvert à tous. | ChatGPT, avec Franck. |
-| 38 | **Photos cliniques** : 22 photos triées par Franck dans « Icono GEO », sur le Bureau, donc synchronisées avec iCloud, contre sa règle générale. Leur consentement de publication n'est pas encore indiqué. Décider du circuit : dossier hors iCloud, consentement par cas, recadrage et préparation pour le web, jamais dans le dépôt. Le cas « érosion due à un TCA » demande une décision de ChatGPT (fichier 12 : pas de visuel stigmatisant). | Aucune photo intégrée. | Franck (consentements, déplacement), ChatGPT (répartition, légendes). |
+| 38 | **Photos cliniques** : 22 photos triées par Franck dans « Icono GEO », sur le Bureau ; consentements recueillis et dossier laissé sur le Bureau (D44). Restent la répartition, les légendes, le recadrage et la préparation pour le web, hors du dépôt. Le cas « érosion due à un TCA » demande une décision de ChatGPT (fichier 12 : pas de visuel stigmatisant). | Aucune photo intégrée. | ChatGPT (répartition, légendes), Franck. |
+| 39 | **Page « introuvable » (erreur 404)** : le pack n'en prévoit pas. Une adresse qui n'existe pas affiche la page générique d'Hostinger, en anglais (« This Page Does Not Exist »). | Page d'Hostinger. | ChatGPT (texte d'une page 404). |
+| 40 | **Téléphone de l'hébergeur** : la loi pour la confiance dans l'économie numérique demande, dans les mentions légales, le nom, l'adresse et le téléphone de l'hébergeur. Les conditions d'utilisation d'Hostinger ne donnent qu'une adresse électronique ; d'autres sites indiquent un numéro lituanien, +370 645 03378, sans source officielle. | Adresse électronique seule. | Franck (demander le numéro au support Hostinger). |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Depuis D33 : « Rendez-vous » sur l'en-tête mobile. Les autres interprétations sont listées au §6 du rapport du tour 1. | Appliqué. | ChatGPT. |
 
 ### Tranchés
@@ -329,7 +333,7 @@ décision.
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
 | **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — **20 pages reconstruites depuis la V1.2 finale le 22/09/2026** (D41), compositions validées par ChatGPT (D40) ; restent les données de Franck |
-| **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | hors pack, à cadrer |
+| **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | **en cours** — site déposé chez Hostinger le 22/09/2026, à une adresse provisoire (D43) ; restent le branchement du domaine, le certificat https, la déclaration à Google et Bing |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
 ### Suivi des 3 pages du golden master
@@ -420,14 +424,15 @@ est dans le rapport (`livrables/golden-master-r1/RAPPORT.md`, §2 et §3).
 
 - Dépôt **privé** ; jamais rendu public sans demande explicite de Franck.
 - Aucun mot de passe, aucune clé d'accès, aucun fichier `.env` dans le dépôt.
-- **Aucune photo ni donnée de patient** dans le dossier du projet (synchronisé avec
-  iCloud) ni dans le dépôt. La phase 1 n'utilise que des emplacements neutres. Le circuit
-  des photos cliniques (stockage hors iCloud, consentement, anonymisation, préparation pour
-  le web) sera décidé avant l'étape qui les intègre.
+- **Aucune photo ni donnée de patient dans le dépôt.** Les photos cliniques du site, dont
+  Franck a recueilli les consentements, peuvent rester sur le Bureau, synchronisé avec
+  iCloud : Franck l'accepte pour ce dossier (D44). Leur préparation pour le web est décidée
+  avant l'étape qui les intègre.
 - Jamais d'envoi forcé (`push --force`) sur GitHub sans l'accord de Franck.
 - Claude n'invente aucun texte et n'ajoute ni page ni fonction hors périmètre (V1, V2).
 - Claude n'achète rien et ne crée aucun compte (domaine, hébergement, police) : Franck le
-  fait lui-même.
+  fait lui-même. Dans les espaces OVH et Hostinger de Franck, Claude ne modifie rien de
+  visible du public (enregistrements DNS, mise en ligne) sans son accord explicite.
 
 ---
 
@@ -475,6 +480,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 22/09/2026 | C | **Reconstruction depuis la V1.2** (`livrables/pages-suivantes-v1-2/RAPPORT-RECONSTRUCTION-V1-2.md`) : textes sans écart, plus aucun écart de renvois, HTML et plan du site réussis, H1 en 4 lignes au plus sur mobile, 37 références vérifiées sur PubMed, Lighthouse 99–100 ; liens de rendez-vous centralisés, pages gelées comprises. Le contrôle avant mise en ligne ne relève plus que 5 points, tous du ressort de Franck. | Fiche de Franck |
 | 22/09/2026 | F | Remplit la fiche en ligne ; transmet la demande de ChatGPT de rétablir deux DOI de la page Facettes. Demande aussi d'insister, sur la page Taches, sur les taches de MIH et le traitement des patients jeunes ; photos triées dans « Icono GEO » sur le Bureau. | D42 |
 | 22/09/2026 | C | Fiche intégrée (D42), DOI rétablis ; contrôles réussis ; il ne reste que 3 points avant la mise en ligne. Note des derniers arbitrages pour ChatGPT : `livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`, copiée sur le Bureau. Aucune photo intégrée tant que les consentements et le circuit ne sont pas réglés. | Revue de ChatGPT |
+| 22/09/2026 | F | « Consentement : oui, ils ont tous été recueillis » ; « emplacement du dossier : oublie cet interdit, ce n'est pas un problème » ; « j'ai un abonnement chez Hostinger pour la mise en ligne : il est ouvert sur Chrome, prends la main pour créer le site, je ne sais pas faire ». | D43, D44 |
+| 22/09/2026 | C | Site « drfranckmoyal.fr » créé dans l'espace Hostinger de Franck, fichiers déposés ; à l'adresse provisoire, les 23 pages sont identiques à la version locale. Hébergeur des mentions légales : Hostinger. Branchement du domaine préparé, sans rien changer chez OVH. | Étape 5 |
 
 ---
 
@@ -500,6 +507,18 @@ remarques détaillées de Franck) sont archivés tels quels dans
   régénérables).
 - **Fiche de renseignements de Franck** : https://claude.ai/artifact/1sKz2QAnH3sbxvqixANouD (page
   privée ; réponses dans sa base de données, document `infos/franck`, lisibles par Claude).
+- **Hébergement** : Hostinger, espace de Franck (hPanel, https://hpanel.hostinger.com), offre
+  Premium Web Hosting, échéance du 22/10/2026. Site « drfranckmoyal.fr », dossier `public_html` ;
+  adresse provisoire https://mediumaquamarine-louse-843680.hostingersite.com (l'aperçu y remplace
+  le nom de domaine dans les pages et interdit l'indexation par Google) ; serveur `91.108.101.161`.
+  **Mettre en ligne une nouvelle version** : `npm run build`, puis `npm run paquet` (archive
+  `livrables/deploiement/drfranckmoyal-site.zip`, fichiers cachés compris) ; dans le
+  gestionnaire de fichiers d'Hostinger, déposer l'archive dans `public_html`, puis « Extract »
+  avec `.` pour nom de dossier et « Overwrite existing files » coché.
+- **Enregistrements DNS chez OVH** (22/09/2026, avant branchement) : `drfranckmoyal.fr` et `www`
+  en A vers `213.186.33.5`, la page d'attente d'OVH ; courrier (MX) et SPF d'OVH. Pour brancher
+  Hostinger : A de `drfranckmoyal.fr` et de `www` vers `91.108.101.161` (ou `www` en CNAME
+  vers `drfranckmoyal.fr`), sans toucher au courrier.
 - **Domaine** : `drfranckmoyal.fr`, bureau d'enregistrement OVH, compte OVH de Franck ; créé
   le 21/09/2026 (17:10 UTC), expire le 21/09/2029 ; serveurs de noms `dns111.ovh.net` et
   `ns111.ovh.net` (registre AFNIC, vérifié le 21/09/2026). Avant cette date, ni ce domaine ni

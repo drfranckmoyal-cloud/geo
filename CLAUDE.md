@@ -17,7 +17,8 @@
    des pages (§7), journal (§10), date en bas. Puis commit en français et push.
 5. Les fichiers du pack ne se modifient jamais ; une nouvelle version va dans son propre
    dossier (`docs/golden-master/v1.4/`…).
-6. Aucune photo ni donnée de patient dans ce dossier (synchronisé iCloud) ni dans le dépôt.
+6. Aucune photo ni donnée de patient dans le dépôt. Les photos cliniques du site peuvent rester
+   sur le Bureau (synchronisé iCloud) : Franck l'a accepté le 22/09/2026 (D44).
 7. Jamais l'expression « dentiste esthétique » (verrou V21) : écrire « dentisterie
    esthétique » ou « exercice exclusif en dentisterie esthétique ».
 8. **Golden master gelé le 21/09/2026 (verrou V24)** : ne plus modifier le design system

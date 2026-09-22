@@ -1,0 +1,7 @@
+# drfranckmoyal.fr — hébergement Hostinger.
+# Une seule adresse de référence, celle des balises « canonical » : https://drfranckmoyal.fr/
+# (sans « www »). Les visites en http:// ou sur www. y sont redirigées définitivement.
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://drfranckmoyal.fr%{REQUEST_URI} [L,R=301]
