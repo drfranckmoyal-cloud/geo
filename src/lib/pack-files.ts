@@ -1,19 +1,29 @@
 // Chargement des 20 fichiers du pack « pages suivantes » au moment de fabriquer le site, et
 // résolution des libellés de liens et du fil d'Ariane vers les adresses définitives (V4).
 import { parsePack, type PackPage } from "./pack.ts";
-import { applyDecisions, arborescence, builtNums, knownLabels, linkOverrides } from "../content/pages-suivantes.ts";
+import { applyDecisions, arborescence, builtNums, knownLabels, linkOverrides, packReplacements, PACK_DIR, PATCH_DIR } from "../content/pages-suivantes.ts";
 
-// Nouvelle version du pack (docs/pages-suivantes/v1.3/…) : changer ce chemin — il doit rester
-// écrit en toutes lettres — et PACK_DIR dans src/content/pages-suivantes.ts.
-const raw = import.meta.glob("/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", {
+// Nouvelle version du pack : changer ces chemins — ils doivent rester écrits en toutes lettres —,
+// et PACK_DIR / PATCH_DIR dans src/content/pages-suivantes.ts.
+const raw = import.meta.glob(["/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md"], {
   query: "?raw",
   import: "default",
   eager: true,
 }) as Record<string, string>;
 
-export const packPages: PackPage[] = Object.entries(raw)
-  .map(([path, md]) => ({ file: path.split("/").pop()!, md }))
-  .filter(({ file }) => arborescence.some((a) => file.startsWith(`${a.num}_`))) // pages 01 à 20 seulement
+// Une page par numéro de l'arborescence : son fichier du correctif V1.3 s'il la remplace, sinon
+// celui de la V1.2 (les autres fichiers du correctif sont des fiches de décisions, pas des pages)
+const fileOf = (num: string) => {
+  const path = packReplacements[num]
+    ? `/${PATCH_DIR}/${packReplacements[num]}`
+    : Object.keys(raw).find((p) => p.startsWith(`/${PACK_DIR}/${num}_`));
+  if (!path || !(path in raw)) throw new Error(`Page ${num} : fichier du pack introuvable (${path ?? "aucun"})`);
+  return path;
+};
+
+export const packPages: PackPage[] = arborescence
+  .map((a) => fileOf(a.num))
+  .map((path) => ({ file: path.split("/").pop()!, md: raw[path] }))
   .map(({ file, md }) => parsePack(applyDecisions(md, file.slice(0, 2)).md, file))
   .sort((a, b) => a.num.localeCompare(b.num));
 

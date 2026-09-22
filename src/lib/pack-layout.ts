@@ -6,9 +6,11 @@
 //  - une seule liste, qui clôt la section : liste en colonne latérale (« aside ») ;
 //  - sinon : texte décalé (« offset »), comme la plupart des sections de la page Usures.
 // Un fond ivoire toutes les trois sections donne le rythme ; les réglages de
-// src/content/pages-suivantes.ts priment.
+// src/content/pages-suivantes.ts priment. Une image attendue sans visuel validé ne compte pas :
+// sur le site public, la section se compose sans elle (correctif V1.3, src/lib/emplacements.ts).
 import type { Block, Section } from "./pack.ts";
 import type { Layout, SectionOverride } from "../content/pages-suivantes.ts";
+import { showPlaceholders } from "./emplacements.ts";
 
 export interface SectionPlan {
   section: Section;
@@ -54,6 +56,7 @@ export function planSections(sections: Section[], overrides: Record<string, Sect
   let splits = 0;
   return sections.map((section, i) => {
     const o = { ...defaults, ...overrides[section.id] };
+    if (!showPlaceholders) delete o.media;
     const entries = o.entries ?? isEntries(section);
     let layout = o.layout;
     if (!layout) {

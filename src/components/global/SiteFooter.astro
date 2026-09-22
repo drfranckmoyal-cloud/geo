@@ -42,6 +42,7 @@ import { linkAttrs } from "../../lib/links";
           <p class="placeholder-text" data-emplacement="téléphone">Téléphone — à fournir</p>
         )
       }
+      {footer.email && <p><a href={site.mailto}>{footer.email}</a></p>}
       <a href={site.rdv.href} {...linkAttrs(site.rdv.href)}>{site.rdv.label}</a>
     </div>
   </div>

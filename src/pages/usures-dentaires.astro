@@ -24,7 +24,7 @@ import { usures as u } from "../content/usures";
 import { franck } from "../content/franck";
 import { site } from "../content/site";
 import { plain } from "../lib/typo";
-import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
+import { abs, breadcrumbs, graph, person, practice, website } from "../lib/schema";
 
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
 const sections = [u.recognize, u.causes, u.prevention, u.diagnosis, u.treat, u.rehab, u.smile, u.erosion];
@@ -60,6 +60,7 @@ const schema = graph([
     "@id": abs("/usures-dentaires/#fil"),
   },
   person(abs(og.src)),
+  practice(),
 ]);
 ---
 

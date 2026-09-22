@@ -11,7 +11,7 @@
 import { readFile } from "node:fs/promises";
 import { readdirSync } from "node:fs";
 import { parse } from "node-html-parser";
-import { applyDecisions, arborescence, builtNums, hidden, layouts, linkOverrides, shownSourceNotes, PACK_DIR } from "../src/content/pages-suivantes.ts";
+import { applyDecisions, arborescence, builtNums, hidden, layouts, linkOverrides, packPath, shownSourceNotes, PACK_DIR } from "../src/content/pages-suivantes.ts";
 import { home } from "../src/content/home.ts";
 import { usures } from "../src/content/usures.ts";
 
@@ -162,9 +162,10 @@ export async function verifyPack() {
   let warnings = 0;
   for (const num of builtNums) {
     const entry = arborescence.find((a) => a.num === num);
-    const file = readdirSync(PACK_DIR).find((f) => f.startsWith(`${num}_`));
-    // Remplacements décidés par ChatGPT (validation du 22/09/2026), listés plus bas
-    const { md, applied } = applyDecisions(await readFile(`${PACK_DIR}/${file}`, "utf8"), num);
+    const path = packPath(num, readdirSync(PACK_DIR));
+    const file = path.split("/").pop();
+    // Remplacements décidés par ChatGPT (validation du 22/09/2026, correctif V1.3), listés plus bas
+    const { md, applied } = applyDecisions(await readFile(path, "utf8"), num);
     const html = await readFile(`dist${entry.url}index.html`, "utf8");
     const root = parse(html);
     const title = norm(root.querySelector("title")?.text ?? "");
@@ -184,9 +185,15 @@ export async function verifyPack() {
         seg.where === "html" ? html.includes(seg.text) : seg.where === "title" ? title === v : seg.where === "desc" ? desc === v : pageText.includes(v) || pageLow.includes(v.toLocaleLowerCase("fr"));
       if (!ok) missing.push(`[${seg.kind}] « ${v} »`);
     }
-    // 2. Rien d'inventé
+    // 2. Rien d'inventé (sauf les boutons de section décidés par ChatGPT, listés plus bas)
+    const actions = Object.values(layouts[num]?.sections ?? {}).flatMap((o) => o.actions ?? []);
     const invented = blocks.filter(
-      (b) => !packText.includes(b) && !packLow.includes(b.toLocaleLowerCase("fr")) && !UI_EXACT.includes(b) && !UI_PATTERNS.some((re) => re.test(b)),
+      (b) =>
+        !packText.includes(b) &&
+        !packLow.includes(b.toLocaleLowerCase("fr")) &&
+        !UI_EXACT.includes(b) &&
+        !UI_PATTERNS.some((re) => re.test(b)) &&
+        !actions.some((a) => norm(a.label) === b),
     );
     // 3. Renvois
     const cites = citations(md);
@@ -209,6 +216,7 @@ export async function verifyPack() {
     for (const m of hidden[num] ?? []) out.push(`  • Non affiché (à confirmer par ChatGPT) : « ${norm(m.section ?? m.text)} » — ${m.why}`);
     if (deduced.length) out.push(`  • Liens à l'adresse déduite : ${deduced.join(" ; ")}`);
     for (const a of applied) out.push(`  • Remplacement décidé : ${a}`);
+    for (const a of actions) out.push(`  • Bouton décidé hors du pack : « ${a.label} » → ${a.href} (fiche corrective du contact, correctif V1.3)`);
     if (!/\*\*Auteur\*\* : /.test(md)) out.push("  • Ouverture sans ligne auteur (le fichier ne nomme pas d'auteur)");
     if (layouts[num]?.cta) out.push(`  • Bouton de l'appel final décidé hors du pack : « ${layouts[num].cta.label} » → ${layouts[num].cta.href} (validation 23)`);
     if (skipped.length && !(hidden[num] ?? []).length) out.push(`  ✗ Passages sautés sans décision : ${skipped.join(" / ")}`);

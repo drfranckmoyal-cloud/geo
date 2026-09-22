@@ -7,7 +7,8 @@
    `00_PROJECT_CONTEXT.md`. Avant tout travail d'interface : `07_ART_DIRECTION.md` et
    `08_VISUAL_QA_CLAUDE.md` en entier. Pour les 20 pages suivantes : le pack en vigueur,
    `docs/pages-suivantes/v1.2/` (`00_ARBORESCENCE_ET_ORDRE.md`, `21_MANIFESTE_INTEGRATION.md`,
-   puis un fichier par page, et les fichiers 22 à 25) ; ses textes sont lus directement par
+   puis un fichier par page, et les fichiers 22 à 25), avec le correctif pré-lancement
+   `docs/pages-suivantes/v1.3/` (page 06 et décisions) ; ses textes sont lus directement par
    `src/lib/pack.ts`.
 3. **Rôle de Claude : développeur exécutant.** Il ne modifie ni la stratégie, ni
    l'arborescence, ni les textes, ni les couleurs, ni les polices, ni l'ordre des sections.

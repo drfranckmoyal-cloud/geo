@@ -1,6 +1,8 @@
 ---
 // Emplacement réservé pour une image manquante (00 §14 : « placeholders visuels explicites »).
 // Même proportion que l'image attendue, légende sobre qui dit ce qui manque.
+// Absent du site public tant qu'aucun visuel n'est validé (correctif V1.3, src/lib/emplacements.ts).
+import { showPlaceholders } from "../../lib/emplacements";
 interface Props {
   label: string;
   ratio?: string;
@@ -9,11 +11,15 @@ interface Props {
 const { label, ratio = "4 / 5", class: cls } = Astro.props;
 ---
 
-<figure class:list={["media-frame", cls]} style={`--ratio: ${ratio}`} data-emplacement="visuel">
-  <div class="media-frame__box" role="img" aria-label={`Emplacement réservé : ${label}`}>
-    <span class="media-frame__label">{label}</span>
-  </div>
-</figure>
+{
+  showPlaceholders && (
+    <figure class:list={["media-frame", cls]} style={`--ratio: ${ratio}`} data-emplacement="visuel">
+      <div class="media-frame__box" role="img" aria-label={`Emplacement réservé : ${label}`}>
+        <span class="media-frame__label">{label}</span>
+      </div>
+    </figure>
+  )
+}
 
 <style>
   .media-frame__box {

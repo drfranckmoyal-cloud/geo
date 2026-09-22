@@ -2,6 +2,9 @@
 // Types imposés par le pack : accueil WebSite + renvoi vers Person#franck-moyal ;
 // page Franck ProfilePage + Person ; page Usures MedicalWebPage + BreadcrumbList + auteur.
 // Chaque fait repris ici figure en toutes lettres sur les pages.
+// Correctif V1.3 : le cabinet est une entité locale distincte (#practice, type Dentist), décrite
+// sur chaque page ; il porte l'adresse, le téléphone et l'e-mail, et Franck y exerce
+// (workLocation) — sans répéter ces coordonnées sur Person.
 import { site } from "../content/site";
 
 const abs = (path: string) => new URL(path, site.url).href;
@@ -17,16 +20,7 @@ export function person(image?: string, full = false, withAddress = false) {
     ...(image ? { image } : {}),
     ...(site.sameAs.length ? { sameAs: [...site.sameAs] } : {}),
   };
-  const workLocation = {
-    "@type": "Place",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: site.address.street,
-      postalCode: site.address.postalCode,
-      addressLocality: site.address.city,
-      addressCountry: site.address.country,
-    },
-  };
+  const workLocation = { "@id": site.practiceId };
   if (!full) return withAddress ? { ...base, workLocation } : base;
   return {
     ...base,
@@ -54,6 +48,31 @@ export function person(image?: string, full = false, withAddress = false) {
     ],
     // sameAs : profils officiels, sur le nœud de base (site.sameAs)
   };
+}
+
+// Le cabinet. sameAs : la fiche Google, quand son adresse publique stable sera connue (V1.3 §3).
+export function practice() {
+  return {
+    "@type": "Dentist",
+    "@id": site.practiceId,
+    name: site.name,
+    url: abs("/"),
+    telephone: site.telephoneIntl,
+    email: `mailto:${site.email}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      postalCode: site.address.postalCode,
+      addressLocality: site.address.city,
+      addressCountry: site.address.country,
+    },
+  };
+}
+
+// Une organisation fondée par Franck (DentCA, Smileclub Formation)
+export function organization(key: keyof typeof site.organizations) {
+  const o = site.organizations[key];
+  return { "@type": o.type, "@id": o.id, name: o.name, url: o.url, founder: { "@id": site.personId } };
 }
 
 export function website() {

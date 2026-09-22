@@ -1,4 +1,5 @@
 // Mise en forme du texte, sans jamais en changer les mots.
+import { site } from "../content/site";
 
 // Typographie française : espace insécable devant « : » et à l'intérieur des guillemets,
 // espace fine insécable devant « ; ? ! », insécable devant le tiret long. Évite qu'un signe
@@ -44,9 +45,10 @@ export function rich(text: string): string {
     .replace(/\[([^\]]*À FOURNIR[^\]]*)\]/g, (_, s: string) => `<span class="placeholder-text">${s.toLowerCase().replace("url", "URL")}</span>`)
     .replace(/^((?:lien\s)?à\scompléter)$/gm, '<span class="placeholder-text">$1</span>')
     .replace(/https?:\/\/[^\s<]+/g, (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`)
-    // numéro de téléphone français (01 83 75 52 16) et adresse e-mail : cliquables
+    // numéro de téléphone français (01 83 75 52 16) et adresse e-mail : cliquables ; l'adresse de
+    // contact du cabinet ouvre un message déjà intitulé (correctif V1.3)
     .replace(/\b0([1-9])((?:\s\d\d){4})\b/g, (n, d, rest) => `<a href="tel:+33${d}${rest.replace(/\s/g, "")}">${n}</a>`)
-    .replace(/\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b/g, (mail) => `<a href="mailto:${mail}">${mail}</a>`)
+    .replace(/\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b/g, (mail) => `<a href="${mail === site.email ? site.mailto : `mailto:${mail}`}">${mail}</a>`)
     .replace(/\n/g, "<br>");
 }
 

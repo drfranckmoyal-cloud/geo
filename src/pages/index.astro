@@ -13,10 +13,10 @@ import TextImageSection from "../components/editorial/TextImageSection.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { site } from "../content/site";
-import { abs, graph, person, website } from "../lib/schema";
+import { abs, graph, person, practice, website } from "../lib/schema";
 
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
-const schema = graph([website(), person(abs(og.src))]);
+const schema = graph([website(), person(abs(og.src)), practice()]);
 ---
 
 <BaseLayout title={home.seo.title} description={home.seo.description} path="/" schema={schema} ogImage={og.src}>

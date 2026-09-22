@@ -1,4 +1,5 @@
-// Les 20 pages du pack « pages suivantes » V1 (docs/pages-suivantes/v1, reçu le 21/09/2026).
+// Les 20 pages du pack « pages suivantes » : V1.2 finale (docs/pages-suivantes/v1.2), page 06
+// remplacée par le correctif V1.3 (docs/pages-suivantes/v1.3).
 // Leurs textes ne sont pas recopiés ici : ils sont lus directement dans les fichiers du pack
 // (src/lib/pack.ts). Ce fichier ne garde que ce que le pack laisse à Claude :
 //  - l'ordre de livraison par lots (00_ARBORESCENCE_ET_ORDRE.md) ;
@@ -12,6 +13,18 @@
 
 // Source unique depuis le 22/09/2026 : la V1.2 finale (D41). La V1 reste archivée à côté.
 export const PACK_DIR = "docs/pages-suivantes/v1.2";
+
+// Correctif pré-lancement V1.3 (22/09/2026, archivé tel quel dans docs/pages-suivantes/v1.3/) :
+// il remplace le seul fichier de la page 06, qui met les taches de MIH en avant. Ses fiches de
+// décisions (DECISIONS_PRE_LANCEMENT_V1_3.md, puis la fiche corrective du contact, qui prime pour
+// les coordonnées) sont appliquées plus bas : remplacements, boutons, liens, données structurées.
+export const PATCH_DIR = "docs/pages-suivantes/v1.3";
+export const packReplacements: Record<string, string> = {
+  "06": "06_taches-dentaires-dyschromies-icon_V1_3.md",
+};
+// Chemin du fichier d'une page, parmi les fichiers de la V1.2 (pour les contrôles)
+export const packPath = (num: string, v12Files: string[]): string =>
+  packReplacements[num] ? `${PATCH_DIR}/${packReplacements[num]}` : `${PACK_DIR}/${v12Files.find((f) => f.startsWith(`${num}_`))}`;
 
 // Arborescence définitive (00 — ordre d'intégration A → B → C → D)
 export const arborescence = [
@@ -56,9 +69,14 @@ export const hidden: Record<string, { section?: string; text?: string; why: stri
 // abonnement (22/09/2026 ; le nom de domaine reste chez OVH) ; coordonnées légales reprises des
 // conditions d'utilisation d'Hostinger (société contractante pour les clients européens), qui ne
 // donnent qu'une adresse électronique de contact.
+// Téléphone et e-mail : les deux canaux de contact des patients, au même niveau (fiche corrective
+// du correctif V1.3) ; l'adresse e-mail ouvre un message déjà intitulé.
+const EMAIL = "drfranckmoyal@gmail.com";
 export const fiche = {
   telephone: "01 83 75 52 16",
-  email: "drfranckmoyal@gmail.com",
+  telephoneIntl: "+33183755216",
+  email: EMAIL,
+  mailto: `mailto:${EMAIL}?subject=${encodeURIComponent("Demande de rendez-vous - Dr Franck Moyal")}`,
   hebergeur: {
     nom: "Hostinger",
     raison: "Hostinger International Limited, société de droit chypriote",
@@ -67,16 +85,49 @@ export const fiche = {
   },
 };
 
-// Remplacements appliqués au pack avant lecture : informations de la fiche, et DOI rétablis sur
-// la page Facettes (omissions de la V1.2 confirmées par ChatGPT, 22/09/2026).
+// Remplacements appliqués au pack avant lecture : informations de la fiche, DOI rétablis sur
+// la page Facettes (omissions de la V1.2 confirmées par ChatGPT, 22/09/2026), textes du correctif
+// V1.3 (coordonnées de contact, liens vers DentCA et Smileclub Formation).
 const FICHE = "fiche de Franck, 22/09/2026";
+const CONTACT_V13 = "fiche corrective du contact, correctif V1.3";
+const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
     { from: "\nPMID: `38604905`", to: "\nDOI: `10.1016/j.prosdent.2024.03.019` — PMID: `38604905`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
     { from: "\nPMID: `39523553`", to: "\nDOI: `10.1111/jerd.13351` — PMID: `39523553`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
   ],
-  "18": [{ from: "**Téléphone**  \nà compléter", to: `**Téléphone**  \n${fiche.telephone}`, ref: FICHE }],
-  "19": [{ from: "**Téléphone**  \n[À FOURNIR]", to: `**Téléphone**  \n${fiche.telephone}`, ref: FICHE }],
+  // Lien visible vers DentCA, en fin de la section qui la présente (§4)
+  "12": [
+    {
+      from: "- la prise en charge bucco-dentaire des patients atteints de TCA.\n",
+      to: "- la prise en charge bucco-dentaire des patients atteints de TCA.\n\n**Découvrir DentCA — prévention et santé bucco-dentaire dans les TCA**  \nhttps://dentca-asso.com/\n",
+      ref: PATCH_V13,
+    },
+  ],
+  // Lien visible vers Smileclub Formation, avec le lien Blendi qui clôt la section (§4)
+  "15": [
+    {
+      from: "**Voir mon profil de formateur Blendi**  \nhttps://blendi.fr/formateurs/franck-moyal\n",
+      to: "**Découvrir Smileclub Formation — formations pour chirurgiens-dentistes**  \nhttps://smileclubformations.com/\n\n**Voir mon profil de formateur Blendi**  \nhttps://blendi.fr/formateurs/franck-moyal\n",
+      ref: PATCH_V13,
+    },
+  ],
+  // Bloc final de la page Paris 9, remplacé tel que l'écrit la fiche corrective (§4)
+  "18": [
+    {
+      from: "## Prendre rendez-vous\n\n**Adresse**  \n2 rue Hippolyte Lebas  \n75009 Paris\n\n**Téléphone**  \nà compléter\n\n**Prise de rendez-vous en ligne**  \nlien à compléter\n\n**CTA : Prendre rendez-vous**",
+      to: `## Prendre rendez-vous ou contacter le cabinet\n\n**Par téléphone**  \n${fiche.telephone}\n\n**Par e-mail**  \n${fiche.email}\n\n**CTA : Prendre rendez-vous**`,
+      ref: CONTACT_V13,
+    },
+  ],
+  // Section « Prendre rendez-vous » de la page Contact : les deux canaux, au même niveau (§3)
+  "19": [
+    {
+      from: "## Prendre rendez-vous\n\n**Téléphone**  \n[À FOURNIR]\n\n**Prise de rendez-vous en ligne**  \n[URL À FOURNIR]\n",
+      to: `## Prendre rendez-vous ou nous écrire\n\nVous pouvez contacter le cabinet par téléphone ou par e-mail pour une demande de rendez-vous, une question avant consultation ou pour préciser votre motif de consultation.\n\n**Téléphone**  \n${fiche.telephone}\n\n**E-mail**  \n${fiche.email}\n`,
+      ref: CONTACT_V13,
+    },
+  ],
   "20": [
     { from: "**Téléphone** : [À FOURNIR]", to: `**Téléphone** : ${fiche.telephone}`, ref: FICHE },
     { from: "**Adresse électronique professionnelle** : [À FOURNIR]", to: `**Adresse électronique professionnelle** : ${fiche.email}`, ref: FICHE },
@@ -107,6 +158,7 @@ export const shownSourceNotes: Record<string, string[]> = {
   "02": ["**Source fonctionnelle — SmileCloud**"],
   "03": ["**Repère clinique du Dr Franck Moyal**"],
   "04": ["**Source fonctionnelle — SmileCloud**"],
+  "06": ["**Source réglementaire — Union européenne.**"], // V1.3 : éclaircissement avant 18 ans
 };
 
 // Liens « → » dont le libellé n'est pas dans la liste « Liens internes » de la page : adresse
@@ -125,6 +177,9 @@ export const knownLabels: Record<string, string> = {
 
 // Mise en page, section par section (identifiant = titre de la section sans accents).
 // media : emplacement réservé pour une image attendue (§9 du fichier), légende reprise du §9.
+// Sur le site public, un emplacement sans visuel validé disparaît, et la section se compose
+// comme une section sans image (correctif V1.3 §7) ; EMPLACEMENTS=1 les montre pour les revues.
+// actions : boutons décidés par ChatGPT, sous le texte de la section, d'égale importance.
 // Par défaut (src/lib/pack-layout.ts) : texte décalé, liste en colonne latérale quand elle
 // clôt la section, intertitres H3 courts en grille (composition « mécanismes » de la page
 // Usures), un fond ivoire toutes les trois sections.
@@ -136,6 +191,7 @@ export interface SectionOverride {
   entries?: boolean;
   id?: string;
   links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
+  actions?: { label: string; href: string }[];
 }
 export interface PageLayout {
   hideByline?: boolean; // ouverture sans ligne auteur (Contact, Mentions légales : validation 23)
@@ -179,9 +235,11 @@ export const layouts: Record<string, PageLayout> = {
     },
   },
   "06": {
+    // §9 de la V1.3 : le cas de MIH en priorité, dans la section qui en parle
     sections: {
+      "taches-de-mih-peut-on-les-traiter-chez": { media: { label: "Cas réel de MIH sur une incisive : état initial puis résultat, avec consentement web — à fournir", ratio: "4 / 3" } },
       "pourquoi-une-tache-blanche-parait-elle-blanche": { media: { label: "Macro clinique réelle de lésion et résultat — à fournir", ratio: "4 / 5" } },
-      "qu-est-ce-que-l-erosion-infiltration-de": { media: { label: "2 cas de dyschromie / white spot : avant / après, avec consentement — à fournir", ratio: "4 / 3" } },
+      "qu-est-ce-que-l-erosion-infiltration-de": { media: { label: "1 autre cas de dyschromie / white spot : avant / après, avec consentement — à fournir", ratio: "4 / 3" } },
     },
   },
   "07": {
@@ -227,8 +285,15 @@ export const layouts: Record<string, PageLayout> = {
   },
   "19": {
     sections: {
-      // Ancre unique de la section « Prendre rendez-vous » : #prendre-rendez-vous (V1.2) — c'est
-      // l'identifiant que lui donne déjà son titre.
+      // Ancre unique de la section de prise de rendez-vous : #prendre-rendez-vous (V1.2), gardée
+      // sous le titre de la V1.3. Deux boutons d'égale importance : appeler ou écrire.
+      "prendre-rendez-vous-ou-nous-ecrire": {
+        id: "prendre-rendez-vous",
+        actions: [
+          { label: "Appeler le cabinet", href: `tel:${fiche.telephoneIntl}` },
+          { label: "Écrire au cabinet", href: fiche.mailto },
+        ],
+      },
       // Les 7 motifs, écrits en gras dans le pack, deviennent des liens vers leurs pages (validés)
       "motifs-de-consultation": { links: true },
     },
@@ -294,4 +359,11 @@ export const schemaExtras: Record<string, Record<string, unknown>> = {
       },
     ],
   },
+};
+
+// Organisations fondées par Franck (src/content/site.ts), décrites sur la page qui les présente et
+// mène à leur site (correctif V1.3 §4).
+export const schemaOrganizations: Record<string, ("dentca" | "smileclub")[]> = {
+  "12": ["dentca"],
+  "15": ["smileclub"],
 };

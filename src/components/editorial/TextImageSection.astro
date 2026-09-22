@@ -11,6 +11,7 @@ import EditorialH2 from "../global/EditorialH2.astro";
 import BodyText from "../global/BodyText.astro";
 import TextLink from "../global/TextLink.astro";
 import MediaFrame from "../ui/MediaFrame.astro";
+import { showPlaceholders } from "../../lib/emplacements";
 
 interface Props {
   id: string;
@@ -60,7 +61,7 @@ const hasAside = Astro.slots.has("aside");
         }
       </div>
       {
-        media && (
+        media && showPlaceholders && (
           <div class="tis__media" data-reveal>
             <MediaFrame label={media.label} ratio={media.ratio ?? "4 / 5"} />
           </div>

@@ -21,11 +21,11 @@ questions : ChatGPT, Gemini, Claude, Perplexity, Google AI Overviews / AI Mode, 
 
 | | |
 |---|---|
-| **Phase en cours** | **Étape 5 engagée : mise en ligne.** Les 23 pages sont déposées chez Hostinger (D43) et visibles à une adresse provisoire ; le nom de domaine n'y est pas encore branché. Construction : les 23 pages reconstruites depuis la **V1.2 finale** du pack (D41), compositions validées par ChatGPT (D40). |
-| **Dernière étape faite** | Site créé dans l'espace Hostinger de Franck et fichiers déposés (D43) : à l'adresse provisoire, les 23 pages et tous les fichiers répondent, identiques à la version locale ; hébergeur des mentions légales : Hostinger. Franck confirme les consentements des photos (D44). Avant : fiche de Franck intégrée (D42) : téléphone, e-mail, hébergeur (OVH, remplacé par Hostinger), 4 profils officiels, pas de réservation en ligne ; DOI de la page Facettes rétablis. Le contrôle avant mise en ligne ne relève plus que 3 points (`livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`). Avant : reconstruction depuis la V1.2 finale (`livrables/pages-suivantes-v1-2/RAPPORT-RECONSTRUCTION-V1-2.md`) : textes sans écart et plus aucun écart de renvois, HTML et plan du site réussis, les 20 H1 en 4 lignes au plus sur mobile, 37 références vérifiées sur PubMed, Lighthouse 99–100 ; tous les liens de rendez-vous vers `/contact/#prendre-rendez-vous`. Fiche de renseignements en ligne pour Franck. Avant : validation consolidée (D40) ; lot D construit et contrôlé (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, avec le bilan des 20 pages) : Contact et Mentions légales, lien du pied de page raccordé, mentions légales hors du plan du site. Lot C (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
-| **Prochaine action** | Appliquer le correctif pré-lancement V1.3 de ChatGPT (reçu le 22/09/2026). Puis brancher le domaine sur Hostinger : chez OVH, faire pointer `drfranckmoyal.fr` et `www` vers le serveur Hostinger, avec l'accord de Franck ; activer le certificat https chez Hostinger ; déclarer le site à Google et Bing. |
+| **Phase en cours** | **Étape 5 engagée : mise en ligne.** Correctif pré-lancement V1.3 de ChatGPT appliqué (D45) : le contrôle avant mise en ligne ne relève plus aucun point bloquant. Le site est hébergé chez Hostinger (D43), à une adresse provisoire ; le nom de domaine n'y est pas encore branché. |
+| **Dernière étape faite** | Correctif V1.3 appliqué (D45 ; `livrables/pre-lancement/RAPPORT-CORRECTIF-V1-3.md`, copié sur le Bureau) : page Taches centrée sur la MIH, téléphone et e-mail au même niveau (Contact, Paris 9, pied de page), 6 profils officiels, cabinet décrit aux moteurs (`#practice`, type `Dentist`), DentCA et Smileclub Formation, robots tous autorisés, emplacements d'images vides masqués. Tous les contrôles réussis ; page Taches : Lighthouse 99 / 100 / 100 / 100, H1 en 4 lignes sur mobile, 7 références vérifiées sur PubMed. Avant : site créé dans l'espace Hostinger de Franck et fichiers déposés (D43) : à l'adresse provisoire, les 23 pages et tous les fichiers répondent, identiques à la version locale ; hébergeur des mentions légales : Hostinger. Franck confirme les consentements des photos (D44). Avant : fiche de Franck intégrée (D42) : téléphone, e-mail, hébergeur (OVH, remplacé par Hostinger), 4 profils officiels, pas de réservation en ligne ; DOI de la page Facettes rétablis. Le contrôle avant mise en ligne ne relève plus que 3 points (`livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`). Avant : reconstruction depuis la V1.2 finale (`livrables/pages-suivantes-v1-2/RAPPORT-RECONSTRUCTION-V1-2.md`) : textes sans écart et plus aucun écart de renvois, HTML et plan du site réussis, les 20 H1 en 4 lignes au plus sur mobile, 37 références vérifiées sur PubMed, Lighthouse 99–100 ; tous les liens de rendez-vous vers `/contact/#prendre-rendez-vous`. Fiche de renseignements en ligne pour Franck. Avant : validation consolidée (D40) ; lot D construit et contrôlé (`livrables/pages-suivantes-lot-d/RAPPORT-LOT-D.md`, avec le bilan des 20 pages) : Contact et Mentions légales, lien du pied de page raccordé, mentions légales hors du plan du site. Lot C (`livrables/pages-suivantes-lot-c/RAPPORT-LOT-C.md`) : textes sans écart, HTML et manifeste réussis sur 21 pages, Lighthouse page locale 99 / 100 / 100 / 100. Lot B (`livrables/pages-suivantes-lot-b/RAPPORT-LOT-B.md`) : textes sans écart, HTML et manifeste réussis sur 16 pages, Lighthouse page TCA 99 / 100 / 100 / 100 après une optimisation de police (D39). Lot A : `livrables/pages-suivantes-lot-a/RAPPORT-LOT-A.md`, avec les écarts de tout le pack (§6, points 28 à 34). |
+| **Prochaine action** | Mettre la version V1.3 chez Hostinger, puis brancher le domaine : chez OVH, faire pointer `drfranckmoyal.fr` et `www` vers le serveur Hostinger, avec l'accord de Franck ; activer le certificat https ; déclarer le site à Google et Bing. En parallèle : ChatGPT répartit et légende les photos (rapport V1.3, §4). |
 | **La construction est-elle bloquée ?** | Non. Tout élément manquant est remplacé par un emplacement réservé, clairement signalé (verrou V2). |
-| **En attente de Franck** | Son accord pour brancher le domaine (enregistrements DNS chez OVH, modifiables par Claude dans Chrome) ; le renouvellement de l'offre Hostinger Premium, qui arrive à échéance le 22/10/2026. |
+| **En attente de Franck** | Son accord pour brancher le domaine (enregistrements DNS chez OVH, modifiables par Claude dans Chrome) ; le renouvellement de l'offre Hostinger Premium avant le 22/10/2026 ; pour chaque photo retenue, trois confirmations (rapport V1.3, §4) : consentement couvrant la publication web, cas TCA (information de santé sensible), âge du patient MIH lors de l'éclaircissement ; le nom de sa fiche Google et son adresse publique (point 41). |
 
 ---
 
@@ -113,6 +113,13 @@ archivés tels quels : les 20 pages, l'arborescence, le manifeste, les journaux 
 et 25, la validation 23 et la checklist 24), source unique depuis le 22/09/2026 (D41), avec
 `docs/echanges/2026-09-22-chatgpt-message-reconstruction-v1-2.md`. La V1 reste archivée dans
 `docs/pages-suivantes/v1/`.
+
+**Correctif pré-lancement V1.3** (22/09/2026, D45), dans `docs/pages-suivantes/v1.3/` (4 fichiers
+archivés tels quels) : `06_taches-dentaires-dyschromies-icon_V1_3.md` remplace le seul fichier 06 ;
+`DECISIONS_PRE_LANCEMENT_V1_3.md` (rendez-vous, profils, fiche Google, DentCA et Smileclub
+Formation, robots d'IA, page 06, visuels) et `04_FICHE_CORRECTIVE_CONTACT_EMAIL_V1_3.md`
+(téléphone et e-mail au même niveau ; prime pour les coordonnées), avec
+`MESSAGE_CLAUDE_PATCH_V1_3.md`.
 
 **Pour les pages suivantes** : `docs/echanges/2026-09-22-chatgpt-23-validation-consolidee-lots-a-b-c-d.md`
 (validation des compositions des 4 lots et précisions — D40) et
@@ -269,6 +276,7 @@ rendu sera jugé :
 | D42 | **Fiche de Franck intégrée** (22/09/2026) : téléphone 01 83 75 52 16 (pied de page, Contact, page Paris 9, mentions légales, cliquable sur mobile) ; pas de réservation en ligne, donc la section Rendez-vous de la page Contact est la destination définitive des boutons ; mentions légales complétées (e-mail `drfranckmoyal@gmail.com`, hébergeur OVH SAS et ses coordonnées légales) ; profils officiels déclarés aux moteurs : LinkedIn, Instagram, AP-HP, Blendi ; aucune mesure d'audience ; aucun autre nom de domaine ; les trois vérifications de déontologie confirmées. DOI des références Alqutaibi et Klein rétablis sur la page Facettes (omissions de la V1.2, confirmées par ChatGPT). | 22/09/2026 |
 | D43 | **Hébergement chez Hostinger**, où Franck a déjà un abonnement (offre Premium Web Hosting, échéance du 22/10/2026) ; il remplace OVH, prévu par D42. Le domaine reste enregistré chez OVH. Le 22/09/2026, Claude crée dans l'espace de Franck, ouvert dans Chrome, le site « drfranckmoyal.fr » (site PHP/HTML, domaine existant) et dépose les fichiers du site dans `public_html`. Adresse provisoire de contrôle : https://mediumaquamarine-louse-843680.hostingersite.com. Mentions légales : hébergeur Hostinger International Limited (coordonnées des conditions d'utilisation d'Hostinger). Le fichier `public/.htaccess` redirige définitivement `http://` et `www.` vers `https://drfranckmoyal.fr/`. | 22/09/2026 |
 | D44 | **Photos cliniques** : Franck confirme que le consentement de publication est recueilli pour tous les cas du dossier « Icono GEO ». Il lève, pour ce dossier, l'interdit de ranger des photos de patients sur le Bureau (iCloud) : « ce n'est pas un problème ». Les photos restent hors du dépôt GitHub. | 22/09/2026 |
+| D45 | **Correctif pré-lancement V1.3 de ChatGPT appliqué** (`docs/pages-suivantes/v1.3/`) : page 06 remplacée (taches de MIH, traitement possible chez l'enfant et l'adolescent, pas d'éclaircissement avant 18 ans) ; plus aucune « prise de rendez-vous en ligne » ; **téléphone et e-mail, deux canaux au même niveau** — page Contact (« Prendre rendez-vous ou nous écrire », boutons « Appeler le cabinet » et « Écrire au cabinet »), bloc final de la page Paris 9, pied de page ; l'e-mail ouvre un message intitulé « Demande de rendez-vous - Dr Franck Moyal » ; profils officiels : LinkedIn, Instagram, AP-HP, Blendi, TikTok, Le Fil Dentaire ; le cabinet, entité distincte (`#practice`, type `Dentist`), sans la fiche Google tant que son adresse publique manque ; DentCA et Smileclub Formation, organisations fondées par Franck, avec un lien visible sur les pages TCA et Conférences ; robots.txt ouvert à tous les robots, entraînement compris ; **un emplacement d'image sans visuel validé disparaît du site public** ; aucun cas patient publié sans consentement couvrant la publication web. | 22/09/2026 |
 
 ---
 
@@ -282,20 +290,22 @@ décision.
 
 | # | Constat | D'ici là | Qui tranche |
 |---|---|---|---|
-| 3 | **Lignes « Prise de rendez-vous en ligne »** des pages 18 et 19 (« lien à compléter », « URL à fournir ») alors qu'il n'y aura pas de réservation en ligne (D42). | Affichées comme emplacements. Téléphone fourni ; boutons vers la section Rendez-vous de la page Contact. | ChatGPT (retirer ou remplacer). |
-| 10 | **Photos** : le portrait est fourni, en haute définition depuis D29. Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. | Emplacements neutres aux bonnes proportions, légendés « à fournir ». | Franck (photos), ChatGPT (contenu des schémas). |
-| 11 | **Profils complémentaires** fournis par Franck : TikTok, fiche Google du cabinet (et son nom chargé de mots-clés), DentCA et Smileclub Formation (organisations : `founder` plutôt que `sameAs` ?). Les 4 profils retenus par ChatGPT sont intégrés (D42). | En attente. | ChatGPT, avec Franck. |
-| 12 | **Référencement local** : le pack vise un atout « SEO local », mais les données structurées prévues ne décrivent pas le cabinet (adresse, horaires). Suggestion technique : décrire aussi le cabinet (type `Dentist`) et le relier à Franck. | Rien d'ajouté sans accord (V1). | ChatGPT. |
+| 10 | **Photos** : le portrait est fourni, en haute définition depuis D29. Manquent : les visuels des deux piliers, les images cliniques et les « schémas simples » de la page Usures. Depuis D45, un emplacement sans visuel validé est masqué sur le site public. | Emplacements masqués ; `EMPLACEMENTS=1` les montre pour une revue. | Franck (photos), ChatGPT (contenu des schémas). |
 | 13 | **Longueur des titres et descriptions pour Google** : le titre de la page Usures (73 caractères) et les descriptions de l'accueil (170) et de la page Franck (189) dépassent ce que Google affiche d'ordinaire (environ 60 caractères pour un titre, 155 pour une description) ; le titre de l'accueil (68 depuis D6) est à la limite. Ils seront coupés dans les résultats. | Repris à l'identique (V2). | ChatGPT, s'il souhaite raccourcir. |
 | 15 | **Déontologie** : les trois vérifications de la fiche sont confirmées par Franck (D42), les consentements des photos aussi (D44). Restent, le moment venu, les mentions obligatoires propres à la profession. | — | Franck. |
-| 36 | **Robots d'IA** (checklist 24 §C, D27) : Franck laisse ChatGPT et Claude recommander ; recommandation de Claude, tout autoriser, entraînement compris (note de pré-lancement §2 c). Tranchés par D42 : aucune mesure d'audience, aucun domaine secondaire, pas d'outil de rendez-vous. | robots.txt ouvert à tous. | ChatGPT, avec Franck. |
-| 38 | **Photos cliniques** : 22 photos triées par Franck dans « Icono GEO », sur le Bureau ; consentements recueillis et dossier laissé sur le Bureau (D44). Restent la répartition, les légendes, le recadrage et la préparation pour le web, hors du dépôt. Le cas « érosion due à un TCA » demande une décision de ChatGPT (fichier 12 : pas de visuel stigmatisant). | Aucune photo intégrée. | ChatGPT (répartition, légendes), Franck. |
+| 38 | **Photos cliniques** : 22 photos triées par Franck dans « Icono GEO », sur le Bureau ; consentements recueillis et dossier laissé sur le Bureau (D44). Avant intégration, pour chaque cas retenu (correctif V1.3) : consentement couvrant la publication web ; cas d'érosion liée à un TCA seulement si le consentement couvre une information de santé sensible, sans nommer la boulimie ; étape d'éclaircissement du cas MIH décrite seulement si le patient avait 18 ans ou plus. Puis répartition, légendes, recadrage et préparation pour le web, hors du dépôt. | Aucune photo intégrée. | Franck (trois confirmations), ChatGPT (répartition, légendes). |
 | 39 | **Page « introuvable » (erreur 404)** : le pack n'en prévoit pas. Une adresse qui n'existe pas affiche la page générique d'Hostinger, en anglais (« This Page Does Not Exist »). | Page d'Hostinger. | ChatGPT (texte d'une page 404). |
 | 40 | **Téléphone de l'hébergeur** : la loi pour la confiance dans l'économie numérique demande, dans les mentions légales, le nom, l'adresse et le téléphone de l'hébergeur. Les conditions d'utilisation d'Hostinger ne donnent qu'une adresse électronique ; d'autres sites indiquent un numéro lituanien, +370 645 03378, sans source officielle. | Adresse électronique seule. | Franck (demander le numéro au support Hostinger). |
+| 41 | **Fiche Google du cabinet** (correctif V1.3 §3) : ChatGPT recommande de simplifier son nom en « Dr Franck Moyal ». Son adresse publique stable ira dans le `sameAs` du cabinet (`#practice`). | Hors des données structurées. | Franck (nom de la fiche, dans son compte Google ; adresse de la fiche). |
+| 42 | **Remarques visuelles du correctif V1.3** : sur les 3 pages gelées, les sections prévues avec image gardent leur composition, et l'autre moitié reste vide sur ordinateur tant que la photo manque ; le titre « Prendre rendez-vous ou nous écrire » passe à la ligne au trait d'union de « rendez-vous ». | Laissé tel quel (V24). | ChatGPT. |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Depuis D33 : « Rendez-vous » sur l'en-tête mobile. Les autres interprétations sont listées au §6 du rapport du tour 1. | Appliqué. | ChatGPT. |
 
 ### Tranchés
 
+- **Lignes « Prise de rendez-vous en ligne »** (ancien point 3) → supprimées ; téléphone et e-mail au même niveau (D45).
+- **Profils complémentaires** (ancien point 11) → TikTok et Le Fil Dentaire ajoutés aux profils ; fiche Google réservée au cabinet ; DentCA et Smileclub Formation décrites comme organisations fondées par Franck (D45).
+- **Référencement local** (ancien point 12) → le cabinet est décrit aux moteurs (`#practice`, type `Dentist`) et relié à Franck (D45).
+- **Robots d'IA** (ancien point 36) → tous autorisés, recherche et entraînement (D45).
 - **Liens vers des pages à venir** (ancien point 7) → plus aucun depuis le lot D : chaque lien interne mène à une page construite ; le lien « Mentions légales » du pied de page aussi.
 - **Mesure d'audience** (ancien point 16) → aucune (D42).
 - **DOI de la page Facettes** (ancien point 37) → rétablis (D42).
@@ -332,7 +342,7 @@ décision.
 | **1** | Golden master : les 3 pages et les livrables du verrou V17 | ✅ tour 1 livré (21/09/2026) — `livrables/golden-master-r1/` |
 | **2** | Contrôle par ChatGPT, retours de Franck, corrections, jusqu'au « Oui. C'est exactement l'image… » | ✅ fait (21/09/2026) — tour 1, tour 2, micro-tour P0.5 |
 | **3** | Gel des composants : le golden master devient la référence figée | ✅ **gelé le 21/09/2026** (D37, V24) — étiquette GitHub `golden-master-gele` |
-| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — **20 pages reconstruites depuis la V1.2 finale le 22/09/2026** (D41), compositions validées par ChatGPT (D40) ; restent les données de Franck |
+| **4** | Déclinaison des 20 autres pages (D38) à partir de la base gelée, textes rédigés par ChatGPT | **en cours** — **20 pages reconstruites depuis la V1.2 finale le 22/09/2026** (D41), compositions validées par ChatGPT (D40), correctif pré-lancement V1.3 appliqué (D45) ; restent les photos |
 | **5** | Mise en ligne : domaine, hébergement, mentions légales, déclaration du site à Google (Search Console)… | **en cours** — site déposé chez Hostinger le 22/09/2026, à une adresse provisoire (D43) ; restent le branchement du domaine, le certificat https, la déclaration à Google et Bing |
 | **6** | Suivi : positions dans Google et présence dans les réponses des IA | hors pack, à cadrer |
 
@@ -353,7 +363,7 @@ décision.
 | A | 03 | Composite bonding à Paris | `/composite-bonding-paris/` | ✅ 21/09/2026 | ✅ 22/09/2026 (D40) | |
 | A | 04 | Facettes dentaires à Paris | `/facettes-dentaires-paris/` | ✅ 21/09/2026 | ✅ 22/09/2026 (D40) | |
 | A | 05 | Éclaircissement dentaire à Paris | `/eclaircissement-dentaire-paris/` | ✅ 21/09/2026 | ✅ 22/09/2026 (D40) | |
-| A | 06 | Taches blanches, dyschromies et ICON | `/taches-dentaires-dyschromies-icon/` | ✅ 21/09/2026 | ✅ 22/09/2026 (D40) | |
+| A | 06 | Taches blanches, MIH et dyschromies | `/taches-dentaires-dyschromies-icon/` | ✅ 21/09/2026 ; V1.3 le 22/09/2026 (D45) | ✅ 22/09/2026 (D40) | |
 | B | 07 | Diagnostic des usures dentaires | `/diagnostic-usures-dentaires/` | ✅ 22/09/2026 | ✅ 22/09/2026 (D40) | |
 | B | 08 | Réhabilitation des dents usées | `/rehabilitation-dents-usees/` | ✅ 22/09/2026 | ✅ 22/09/2026 (D40) | |
 | B | 09 | Bruxisme et usure dentaire | `/bruxisme-usure-dentaire/` | ✅ 22/09/2026 | ✅ 22/09/2026 (D40) | |
@@ -406,6 +416,13 @@ est dans le rapport (`livrables/golden-master-r1/RAPPORT.md`, §2 et §3).
 - **Aucun traceur, aucune ressource extérieure** (V19). Résultat Lighthouse (outil de Google) au
   tour 2 : 100/100 en accessibilité, bonnes pratiques et référencement, 95 à 100 en rapidité
   (Newsreader et le portrait HD pèsent un peu plus) ; pages de 214 à 344 Ko.
+- **Emplacements d'images** (D45) : sur le site public, un emplacement sans visuel validé
+  disparaît, et la section se compose comme une section sans image (`src/lib/emplacements.ts`).
+  `EMPLACEMENTS=1 npm run build` les fait réapparaître, à leur place et à leurs proportions,
+  pour une revue de composition.
+- **Correctif V1.3** : le fichier 06 du correctif est lu à la place de celui de la V1.2
+  (`packReplacements` dans `src/content/pages-suivantes.ts`) ; ses décisions sont appliquées
+  comme les autres (remplacements de texte, boutons de section, données structurées).
 - **Captures automatiques** avec Google Chrome (déjà installé), aux largeurs du verrou
   V16, et contrôle de rapidité Lighthouse.
 - **Lisibilité des couleurs** (mesurée le 21/09/2026) : le vert sauge sombre est lisible
@@ -482,6 +499,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 22/09/2026 | C | Fiche intégrée (D42), DOI rétablis ; contrôles réussis ; il ne reste que 3 points avant la mise en ligne. Note des derniers arbitrages pour ChatGPT : `livrables/pre-lancement/POINTS-PRE-LANCEMENT.md`, copiée sur le Bureau. Aucune photo intégrée tant que les consentements et le circuit ne sont pas réglés. | Revue de ChatGPT |
 | 22/09/2026 | F | « Consentement : oui, ils ont tous été recueillis » ; « emplacement du dossier : oublie cet interdit, ce n'est pas un problème » ; « j'ai un abonnement chez Hostinger pour la mise en ligne : il est ouvert sur Chrome, prends la main pour créer le site, je ne sais pas faire ». | D43, D44 |
 | 22/09/2026 | C | Site « drfranckmoyal.fr » créé dans l'espace Hostinger de Franck, fichiers déposés ; à l'adresse provisoire, les 23 pages sont identiques à la version locale. Hébergeur des mentions légales : Hostinger. Branchement du domaine préparé, sans rien changer chez OVH. | Étape 5 |
+| 22/09/2026 | G | **Correctif pré-lancement V1.3**, déposé par Franck sur le Bureau (`PATCH_PRE_LANCEMENT_V1_3_AVEC_CORRECTIF_EMAIL.zip`, 4 fichiers) : page 06 centrée sur la MIH, décisions sur les derniers points, fiche corrective du contact (téléphone et e-mail au même niveau). | D45 |
+| 22/09/2026 | C | Correctif appliqué et contrôlé : textes, HTML et données structurées réussis, plus aucun point bloquant avant mise en ligne. Rapport : `livrables/pre-lancement/RAPPORT-CORRECTIF-V1-3.md`, copié sur le Bureau. | Revue de ChatGPT |
 
 ---
 
@@ -523,7 +542,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
   le 21/09/2026 (17:10 UTC), expire le 21/09/2029 ; serveurs de noms `dns111.ovh.net` et
   `ns111.ovh.net` (registre AFNIC, vérifié le 21/09/2026). Avant cette date, ni ce domaine ni
   ses variantes n'étaient enregistrés.
-- **Empreintes SHA-256 des packs** (V1.3, le seul fichier changé en V1.3.1, et le pack « pages suivantes » V1) :
+- **Empreintes SHA-256 des packs** (V1.3, le seul fichier changé en V1.3.1, le pack « pages suivantes » V1 et le correctif V1.3) :
 
 | Fichier | Empreinte |
 |---|---|
@@ -540,6 +559,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | `08_VISUAL_QA_CLAUDE.md` | `8c52ec0bad6bb63a71b8724de5716d4cc9aca9dcf0b05dd80d5d716fcbf9a606` |
 | `04_USURES_DENTAIRES.md` **corrigé (V1.3.1)** | `7a2dc986046ca233163ac04c63f6b907fdfe3c16064e81db879e0893d7b27acc` |
 | `PACK_PAGES_SUIVANTES_CLAUDE_CODE_V1.zip` (22 fichiers, identiques à `docs/pages-suivantes/v1/`) | `07616eecc073d4dfa774642637ff716161a4dce42752b460e3ed82989b980757` |
+| `PATCH_PRE_LANCEMENT_V1_3_AVEC_CORRECTIF_EMAIL.zip` (4 fichiers, identiques à `docs/pages-suivantes/v1.3/`) | `f177d5419fdd474abd2280ab9fe88e31a6996b21ef7e78d8ee7fa67d002762ae` |
 
 ---
 

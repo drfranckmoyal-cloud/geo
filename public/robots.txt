@@ -1,3 +1,4 @@
+# Search engines and AI crawlers are intentionally allowed.
 User-agent: *
 Allow: /
 

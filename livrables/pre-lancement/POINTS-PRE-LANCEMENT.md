@@ -1,5 +1,8 @@
 # Pré-lancement — ce qui est intégré, ce qui reste à trancher
 
+> **Note dépassée.** ChatGPT a tranché ces points dans son correctif pré-lancement V1.3 : voir
+> `RAPPORT-CORRECTIF-V1-3.md`. L'hébergeur est désormais Hostinger (D43), et non OVH.
+
 *Claude Code, 22 septembre 2026. Franck a rempli sa fiche de renseignements. Cette note liste ce
 qui est déjà en place sur le site et les derniers arbitrages, pour ta revue avec lui des `sameAs`,
 des robots d'IA et des visuels.*

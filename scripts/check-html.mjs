@@ -10,20 +10,38 @@ import { readFile, readdir } from "node:fs/promises";
 import { execSync } from "node:child_process";
 import { parse } from "node-html-parser";
 import { parsePack } from "../src/lib/pack.ts";
-import { applyDecisions, builtNums, PACK_DIR } from "../src/content/pages-suivantes.ts";
+import { applyDecisions, arborescence, builtNums, packPath, PACK_DIR } from "../src/content/pages-suivantes.ts";
 
 const SITE = "https://drfranckmoyal.fr";
 const RDV = "/contact/#prendre-rendez-vous";
 const PERSON = `${SITE}/#franck-moyal`;
+const PRACTICE = `${SITE}/#practice`;
+// Correctif V1.3 : les deux canaux de contact, les profils de Franck, ses organisations
+const TEL = "tel:+33183755216";
+const MAILTO = "mailto:drfranckmoyal@gmail.com?subject=Demande%20de%20rendez-vous%20-%20Dr%20Franck%20Moyal";
+const SAME_AS = [
+  "https://www.linkedin.com/in/franck-moyal-7581b6161/",
+  "https://www.instagram.com/drfranckmoyal/",
+  "https://www.aphp.fr/dr-moyal-franck",
+  "https://blendi.fr/formateurs/franck-moyal",
+  "https://www.tiktok.com/@drfranckmoyal",
+  "https://www.lefildentaire.com/auteur/franck-moyal/",
+];
+const ORGS = {
+  "/tca-dents/": { id: `${SITE}/#dentca`, url: "https://dentca-asso.com/", label: "Découvrir DentCA — prévention et santé bucco-dentaire dans les TCA" },
+  "/conferences-formations/": { id: `${SITE}/#smileclub-formation`, url: "https://smileclubformations.com/", label: "Découvrir Smileclub Formation — formations pour chirurgiens-dentistes" },
+  "/franck-moyal/": { id: `${SITE}/#smileclub-formation`, url: "https://smileclubformations.com/" },
+};
 const pages = [
-  { file: "dist/index.html", url: `${SITE}/`, types: ["WebSite", "Person"] },
-  { file: "dist/franck-moyal/index.html", url: `${SITE}/franck-moyal/`, types: ["ProfilePage", "Person"] },
-  { file: "dist/usures-dentaires/index.html", url: `${SITE}/usures-dentaires/`, types: ["MedicalWebPage", "BreadcrumbList", "Person"] },
+  { file: "dist/index.html", url: `${SITE}/`, types: ["WebSite", "Person", "Dentist"] },
+  { file: "dist/franck-moyal/index.html", url: `${SITE}/franck-moyal/`, types: ["ProfilePage", "Person", "Dentist"] },
+  { file: "dist/usures-dentaires/index.html", url: `${SITE}/usures-dentaires/`, types: ["MedicalWebPage", "BreadcrumbList", "Person", "Dentist"] },
 ];
 
 // Pages du pack : ce que le fichier impose
-const packFiles = (await readdir(PACK_DIR)).filter((f) => /^(0[1-9]|1\d|20)_/.test(f)); // pages 01 à 20
-const all = await Promise.all(packFiles.map(async (f) => parsePack(applyDecisions(await readFile(`${PACK_DIR}/${f}`, "utf8"), f.slice(0, 2)).md, f)));
+const v12 = await readdir(PACK_DIR);
+const packFiles = arborescence.map((a) => packPath(a.num, v12)); // pages 01 à 20 (page 06 : correctif V1.3)
+const all = await Promise.all(packFiles.map(async (path) => parsePack(applyDecisions(await readFile(path, "utf8"), path.split("/").pop().slice(0, 2)).md, path.split("/").pop())));
 const parents = { "/usures-dentaires/": "/", "/franck-moyal/": "/" };
 for (const p of all) parents[p.url] = p.parent;
 for (const p of all.filter((p) => builtNums.includes(p.num))) {
@@ -33,7 +51,7 @@ for (const p of all.filter((p) => builtNums.includes(p.num))) {
   pages.push({
     file: `dist${p.url}index.html`,
     url: SITE + p.url,
-    types: [...p.seo.schema.filter((t) => /Page$/.test(t) || t === "Article"), "BreadcrumbList", "Person"],
+    types: [...p.seo.schema.filter((t) => /Page$/.test(t) || t === "Article"), "BreadcrumbList", "Person", "Dentist"],
     pack: p,
     chain: chain.map((u) => SITE + u),
   });
@@ -77,6 +95,20 @@ for (const p of pages) {
     missing.length ? bad(`données structurées : manque ${missing.join(", ")}`) : ok(`données structurées : ${types.join(", ")}`);
     const person = graph.find((n) => n["@type"] === "Person");
     person?.["@id"] === PERSON ? ok("identifiant de Franck : …/#franck-moyal") : bad("identifiant de Franck absent");
+    // Profils de Franck : la liste du correctif V1.3, ni plus ni moins
+    JSON.stringify(person?.sameAs) === JSON.stringify(SAME_AS) ? ok(`profils de Franck (sameAs) : les ${SAME_AS.length} du correctif V1.3`) : bad(`profils de Franck (sameAs) : ${JSON.stringify(person?.sameAs)}`);
+    // Le cabinet, entité distincte : adresse, téléphone, e-mail ; Franck y exerce
+    const practice = graph.find((n) => n["@id"] === PRACTICE);
+    practice?.["@type"] === "Dentist" && practice.telephone === TEL.slice(4) && practice.email === "mailto:drfranckmoyal@gmail.com" && practice.address?.streetAddress === "2 rue Hippolyte Lebas"
+      ? ok("cabinet …/#practice (Dentist) : adresse, téléphone, e-mail")
+      : bad(`cabinet …/#practice incomplet : ${JSON.stringify(practice)}`);
+    if (person?.workLocation) person.workLocation["@id"] === PRACTICE ? ok("lieu d'exercice de Franck : …/#practice") : bad("lieu d'exercice de Franck : ailleurs que …/#practice");
+    // Organisations fondées par Franck, distinctes de lui
+    const org = ORGS[new URL(p.url).pathname];
+    if (org) {
+      const node = graph.find((n) => n["@id"] === org.id);
+      node && node.url === org.url && node.founder?.["@id"] === PERSON ? ok(`organisation ${node.name} (${node["@type"]}), fondée par Franck`) : bad(`organisation ${org.id} absente ou incomplète`);
+    }
   } catch (e) {
     bad("données structurées illisibles : " + e.message);
   }
@@ -102,6 +134,19 @@ for (const p of pages) {
   // Boutons des appels finaux, quel que soit leur libellé (« Réaliser un bilan… ») : même destination
   const finals = root.querySelectorAll("#appel-final a.btn"); // le bouton, pas le téléphone cliquable du texte
   if (finals.length) finals.every((a) => a.getAttribute("href") === RDV) ? ok(`bouton de l'appel final vers ${RDV}`) : bad("bouton de l'appel final ailleurs que la prise de rendez-vous");
+
+  // Correctif V1.3 : aucune réservation en ligne annoncée ; téléphone et e-mail cliquables dans le
+  // pied de page ; aucun emplacement d'image vide sur le site public
+  /rendez-vous en ligne/i.test(root.querySelector("body").text) ? bad("« prise de rendez-vous en ligne » encore affiché") : ok("aucune mention de rendez-vous en ligne");
+  const foot = root.querySelector(".site-footer");
+  foot.querySelector(`a[href="${TEL}"]`) && foot.querySelector(`a[href="${MAILTO}"]`) ? ok("pied de page : téléphone et e-mail cliquables") : bad("pied de page : téléphone ou e-mail absent, ou non cliquable");
+  const slots = root.querySelectorAll("[data-emplacement='visuel']").length;
+  slots ? bad(`${slots} emplacement(s) d'image vide(s) visible(s)`) : ok("aucun emplacement d'image vide visible");
+  const orgLink = ORGS[new URL(p.url).pathname]?.label;
+  if (orgLink) {
+    const a = root.querySelectorAll("main a").find((a) => a.text.replace(/\s+/g, " ").trim() === orgLink); // espaces insécables de la typographie
+    a?.getAttribute("href") === ORGS[new URL(p.url).pathname].url ? ok(`lien visible « ${orgLink} »`) : bad(`lien « ${orgLink} » absent`);
+  }
 
   if (!p.pack) continue;
   // --- Contrôles du manifeste (pages suivantes) ---
@@ -142,6 +187,18 @@ for (const p of pages) {
 console.log("\n■ Cible des liens de rendez-vous");
 const contact = parse(await readFile("dist/contact/index.html", "utf8"));
 contact.querySelectorAll('[id="prendre-rendez-vous"]').length === 1 ? ok("section #prendre-rendez-vous unique sur /contact/") : bad("section #prendre-rendez-vous absente ou en double sur /contact/");
+// Correctif V1.3 : la section expose aussitôt les deux canaux — téléphone et e-mail cliquables,
+// deux boutons d'égale importance
+const rdvSection = contact.querySelector("#prendre-rendez-vous");
+const buttons = rdvSection?.querySelectorAll("a.btn").map((a) => `${a.text.trim()} → ${a.getAttribute("href")}`) ?? [];
+rdvSection?.querySelector("h2")?.text.trim() === "Prendre rendez-vous ou nous écrire" ? ok("titre : « Prendre rendez-vous ou nous écrire »") : bad(`titre de la section : ${rdvSection?.querySelector("h2")?.text}`);
+rdvSection?.querySelector(`p a[href="${TEL}"]`) && rdvSection?.querySelector(`p a[href="${MAILTO}"]`) ? ok("téléphone et e-mail cliquables dans la section") : bad("téléphone ou e-mail non cliquable dans la section");
+JSON.stringify(buttons) === JSON.stringify([`Appeler le cabinet → ${TEL}`, `Écrire au cabinet → ${MAILTO}`]) ? ok("deux boutons : « Appeler le cabinet », « Écrire au cabinet »") : bad(`boutons de la section : ${buttons.join(" ; ")}`);
+// Page Paris 9 : le bloc final donne les deux canaux, cliquables, et garde son bouton
+const paris9 = parse(await readFile("dist/chirurgien-dentiste-paris-9/index.html", "utf8")).querySelector("#appel-final");
+paris9?.querySelector("h2")?.text.trim() === "Prendre rendez-vous ou contacter le cabinet" && paris9.querySelector(`a[href="${TEL}"]`) && paris9.querySelector(`a[href="${MAILTO}"]`) && paris9.querySelector(`a.btn[href="${RDV}"]`)
+  ? ok("page Paris 9 : bloc final « Prendre rendez-vous ou contacter le cabinet », téléphone et e-mail cliquables, bouton vers la page Contact")
+  : bad("page Paris 9 : bloc final non conforme à la fiche corrective");
 
 // 8 et 10. « Dentiste esthétique » (contrôle des textes) ; réglages de design inchangés depuis le gel
 console.log("\n■ Réglages de design (src/styles/tokens.css)");
@@ -160,9 +217,10 @@ JSON.stringify([...locs].sort()) === JSON.stringify([...expected].sort())
   ? ok(`les ${expected.length} pages indexables construites, et elles seules`)
   : bad(`plan du site : ${locs.join(", ")} ; attendu : ${expected.join(", ")}`);
 const robots = await readFile("dist/robots.txt", "utf8");
-/Sitemap: https:\/\/drfranckmoyal\.fr\/sitemap-index\.xml/.test(robots) && /Allow: \//.test(robots)
-  ? ok("robots.txt : tout est ouvert aux moteurs, plan du site déclaré")
-  : bad("robots.txt incomplet");
+// Correctif V1.3 §5 : politique ouverte — moteurs, robots d'IA de recherche et d'entraînement
+/Sitemap: https:\/\/drfranckmoyal\.fr\/sitemap-index\.xml/.test(robots) && /^User-agent: \*$/m.test(robots) && /^Allow: \/$/m.test(robots) && !/^Disallow:/im.test(robots)
+  ? ok("robots.txt : tout est ouvert aux moteurs et aux robots d'IA, plan du site déclaré")
+  : bad("robots.txt : politique ouverte ou plan du site absents");
 
 console.log(problems ? `\n${problems} problème(s).` : "\nContrôle HTML réussi.");
 process.exit(problems ? 1 : 0);

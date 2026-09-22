@@ -39,7 +39,9 @@ for (const file of await pagesOf()) {
 
 if (count.avenir) block("Liens vers des pages pas encore construites", `${count.avenir} lien(s)`);
 if (count.texte) block("Informations « à fournir » visibles (téléphone, lien de rendez-vous, e-mail, hébergeur…)", `${count.texte} emplacement(s)`);
-if (count.visuels) block("Visuels propriétaires à intégrer (avec consentement pour chaque cas patient)", `${count.visuels} emplacement(s)`);
+// Correctif V1.3 §7 : un emplacement sans visuel validé disparaît du site public ; en voir un ici
+// veut dire que le site a été fabriqué pour une revue (EMPLACEMENTS=1)
+if (count.visuels) block("Emplacements d'images vides visibles (site fabriqué avec EMPLACEMENTS=1 ?)", `${count.visuels} emplacement(s)`);
 if (count.rdv) block("Bouton « Prendre rendez-vous » sans lien définitif", `sur ${count.rdvPages} page(s)`);
 
 // Profils officiels du Dr Moyal pour les moteurs (sameAs)
@@ -48,9 +50,10 @@ const graph = home.querySelectorAll('script[type="application/ld+json"]').flatMa
 const person = graph.find((n) => n["@type"] === "Person");
 if (!person?.sameAs?.length) block("Profils officiels (sameAs : LinkedIn, Instagram…) absents des données structurées", "adresses exactes à fournir");
 
-// robots.txt : décision attendue sur les robots d'IA (D27)
+// robots.txt : politique ouverte décidée par ChatGPT (correctif V1.3 §5) — moteurs, robots d'IA de
+// recherche et d'entraînement, sans exception
 const robots = await readFile("dist/robots.txt", "utf8");
-if (!/OAI-SearchBot|GPTBot|Google-Extended|ClaudeBot|CCBot/i.test(robots)) block("robots.txt : règles des robots d'IA non encore décidées (D27)", "décision à prendre");
+if (!/^User-agent: \*$/m.test(robots) || !/^Allow: \/$/m.test(robots) || /^Disallow:/im.test(robots)) block("robots.txt : la politique ouverte du correctif V1.3 n'est pas appliquée", "robots.txt à corriger");
 
 // Écarts du pack encore ouverts (renvois bibliographiques…)
 const pack = await verifyPack();
@@ -58,6 +61,7 @@ if (pack.problems) block("Contrôle des textes en échec", `${pack.problems} éc
 if (pack.warnings) block("Écarts du pack à corriger par ChatGPT (renvois bibliographiques)", `${pack.warnings} écart(s)`);
 
 console.log("■ Contrôle avant mise en ligne\n");
+console.log("Emplacements d'images sans visuel validé : masqués sur le site public (correctif V1.3) ;\npour les revoir à leur place : EMPLACEMENTS=1 npm run build.\n");
 if (perPage.length) console.log(`Emplacements encore visibles, page par page :\n${perPage.join("\n")}\n`);
 if (blockers.length) {
   console.log("Ce qui empêche encore la mise en ligne :");

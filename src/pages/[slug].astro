@@ -17,17 +17,18 @@ import AuthorBlock from "../components/editorial/AuthorBlock.astro";
 import FinalCTA from "../components/home/FinalCTA.astro";
 import MethodSteps from "../components/home/MethodSteps.astro";
 import Container from "../components/global/Container.astro";
+import PrimaryButton from "../components/global/PrimaryButton.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
 import PackBlocks from "../components/pack/PackBlocks.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { usures } from "../content/usures";
 import { site } from "../content/site";
-import { hidden, layouts, schemaExtras, shownSourceNotes } from "../content/pages-suivantes";
+import { hidden, layouts, schemaExtras, schemaOrganizations, shownSourceNotes } from "../content/pages-suivantes";
 import { builtPackPages, crumbTrail, resolveLink } from "../lib/pack-files";
 import { planSections } from "../lib/pack-layout";
 import { contractFacts, type PackPage } from "../lib/pack";
-import { abs, breadcrumbs, graph, person, website } from "../lib/schema";
+import { abs, breadcrumbs, graph, organization, person, practice, website } from "../lib/schema";
 
 export function getStaticPaths() {
   return builtPackPages().map((page) => ({ params: { slug: page.url.replace(/^\/|\/$/g, "") }, props: { page } }));
@@ -50,6 +51,10 @@ const sections = page.sections
   );
 const plans = planSections(sections, cfg.sections, cfg.defaults);
 
+// Boutons d'une section, décidés par ChatGPT (page Contact : appeler ou écrire, correctif V1.3) :
+// le bouton principal du golden master, côte à côte, d'égale importance
+const actionsOf = (id: string) => cfg.sections?.[id]?.actions ?? [];
+
 const trail = crumbTrail(page);
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
 const facts = contractFacts(page.contract);
@@ -59,12 +64,13 @@ const hasAuthor = facts.authorBlock;
 
 // Sources : notes du §10 à afficher ; renvois du texte dont le numéro n'est pas dans la liste
 // (ils mènent au bloc des sources ; l'écart est signalé par le contrôle des textes)
-// Une note s'affiche par sa première ligne, suivie de l'adresse web qui l'accompagne le cas échéant ;
-// les lignes de consigne (« À présenter comme… ») ne le sont jamais.
+// Une note s'affiche par sa première ligne, suivie de l'adresse web qui l'accompagne le cas échéant
+// (seule, ou précédée de son nom : « EUR-Lex : https://… ») ; les lignes de consigne (« À présenter
+// comme… ») ne le sont jamais.
 const notes = page.sourceNotes.flatMap((para) => {
   const lines = para.split("\n");
   if (!(shownSourceNotes[page.num] ?? []).some((start) => lines[0].startsWith(start))) return [];
-  return [/^https?:\/\/\S+$/.test(lines[1] ?? "") ? `${lines[0]}\n${lines[1]}` : lines[0]];
+  return [/^(?:[^:]+ : )?https?:\/\/\S+$/.test(lines[1] ?? "") ? `${lines[0]}\n${lines[1]}` : lines[0]];
 });
 const allText = [page.lead, page.answer ?? "", ...sections.flatMap((s) => s.blocks.map((b) => JSON.stringify(b))), ...(page.faq?.items.map((i) => i.a) ?? [])].join("\n");
 const listed = new Set(page.sources.map((s) => s.n));
@@ -118,6 +124,8 @@ const schema = graph([
   },
   { ...breadcrumbs(trail.map((c) => ({ name: c.label, path: c.href }))), "@id": `${url}#fil` },
   person(abs(og.src), false, page.seo.schema.includes("PostalAddress")),
+  practice(),
+  ...(schemaOrganizations[page.num] ?? []).map(organization),
 ]);
 ---
 
@@ -133,6 +141,15 @@ const schema = graph([
         {p.aside.length > 0 ? (
           <TextImageSection id={p.id} title={p.section.title} layout={p.layout} tone={p.tone}>
             <PackBlocks blocks={p.main} resolve={resolve} />
+            {
+              actionsOf(p.section.id).length > 0 && (
+                <div class="pack-actions">
+                  {actionsOf(p.section.id).map((a) => (
+                    <PrimaryButton href={a.href} label={a.label} />
+                  ))}
+                </div>
+              )
+            }
             <PackBlocks slot="aside" blocks={p.aside} resolve={resolve} narrow class="pack-aside" />
           </TextImageSection>
         ) : (
@@ -144,6 +161,15 @@ const schema = graph([
             media={p.media && !p.media.wide ? { label: p.media.label, ratio: p.media.ratio } : undefined}
           >
             <PackBlocks blocks={p.main} resolve={resolve} entries={p.entries} narrow={p.layout.startsWith("split")} />
+            {
+              actionsOf(p.section.id).length > 0 && (
+                <div class="pack-actions">
+                  {actionsOf(p.section.id).map((a) => (
+                    <PrimaryButton href={a.href} label={a.label} />
+                  ))}
+                </div>
+              )
+            }
             {p.media?.wide && <MediaFrame label={p.media.label} ratio={p.media.ratio} class="pack-wide-media" />}
           </TextImageSection>
         )}
@@ -190,6 +216,13 @@ const schema = graph([
   :global(.pack-wide-media) {
     margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
     width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+  /* Boutons d'une section : l'écart texte → bouton des appels finaux */
+  .pack-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: var(--gap-text-cta);
   }
   /* Liste en colonne latérale : sans l'écart titre → texte */
   :global(.pack-aside) {
