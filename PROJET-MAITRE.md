@@ -536,8 +536,11 @@ remarques détaillées de Franck) sont archivés tels quels dans
   le nom de domaine dans les pages et interdit l'indexation par Google) ; serveur `91.108.101.161`.
   **Mettre en ligne une nouvelle version** : `npm run build`, puis `npm run paquet` (archive
   `livrables/deploiement/drfranckmoyal-site.zip`, fichiers cachés compris) ; dans le
-  gestionnaire de fichiers d'Hostinger, déposer l'archive dans `public_html`, puis « Extract »
-  avec `.` pour nom de dossier et « Overwrite existing files » coché.
+  gestionnaire de fichiers d'Hostinger (hPanel → Fichiers → « Accéder aux fichiers de
+  drfranckmoyal.fr » ; la session expire au bout de quelques heures), déposer l'archive dans
+  `public_html`, puis « Extract » avec `.` pour nom de dossier et « Overwrite existing files »
+  coché ; enfin, mettre l'archive à la corbeille (décocher « Skip trash bin », coché par défaut),
+  sinon elle reste téléchargeable par tous.
 - **Enregistrements DNS chez OVH** (zone DNS du domaine, dans l'espace OVH de Franck) : depuis le
   22/09/2026 (D46), `drfranckmoyal.fr` et `www` en A vers `91.108.101.161`, le serveur Hostinger
   (avant : `213.186.33.5`, la page d'attente d'OVH) ; `ftp` en CNAME vers `drfranckmoyal.fr` ;
