@@ -64,7 +64,7 @@ const anchor = (n: number) => (anchored.has(n) ? undefined : (anchored.add(n), `
                   <p class="source__links">
                     {s.doi && (
                       <a href={`https://doi.org/${s.doi}`} target="_blank" rel="noopener noreferrer">
-                        DOI : {s.doi}
+                        {`DOI\u00a0:`} {s.doi}
                       </a>
                     )}
                     <a href={s.pubmed} target="_blank" rel="noopener noreferrer">

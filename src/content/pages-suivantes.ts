@@ -96,6 +96,7 @@ export const fiche = {
 const FICHE = "fiche de Franck, 22/09/2026";
 const CONTACT_V13 = "fiche corrective du contact, correctif V1.3";
 const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
+const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
     { from: "\nPMID: `38604905`", to: "\nDOI: `10.1016/j.prosdent.2024.03.019` — PMID: `38604905`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
@@ -116,6 +117,35 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
       to: "**Découvrir Smileclub Formation — formations pour chirurgiens-dentistes**  \nhttps://smileclubformations.com/\n\n**Voir mon profil de formateur Blendi**  \nhttps://blendi.fr/formateurs/franck-moyal\n",
       ref: PATCH_V13,
     },
+  ],
+  // « Erosive tooth wear » dans le texte patient : remplacé par la terminologie française du site,
+  // « usure dentaire érosive » (audit éditorial de ChatGPT, 24/09/2026, §9 et §17). Les titres des
+  // publications scientifiques gardent leur libellé original. Accord au féminin quand la phrase
+  // l'impose (« défini » → « définie »).
+  "07": [
+    {
+      from: "Il est recommandé dans les documents de consensus sur l’erosive tooth wear.",
+      to: "Il est recommandé dans les documents de consensus sur l’usure dentaire érosive.",
+      ref: EDITO,
+    },
+    { from: "peuvent participer à l’erosive tooth wear, parfois", to: "peuvent participer à l’usure dentaire érosive, parfois", ref: EDITO },
+  ],
+  "09": [{ from: "Les consensus sur l’erosive tooth wear décrivent", to: "Les consensus sur l’usure dentaire érosive décrivent", ref: EDITO }],
+  "10": [
+    {
+      from: "L’erosive tooth wear est un processus chimico-mécanique différent de la carie.",
+      to: "L’usure dentaire érosive est un processus chimico-mécanique différent de la carie.",
+      ref: EDITO,
+    },
+    { from: "L’**erosive tooth wear** correspond à une perte progressive", to: "L’**usure dentaire érosive** correspond à une perte progressive", ref: EDITO },
+  ],
+  "13": [
+    {
+      from: "L’erosive tooth wear est aujourd’hui défini comme un processus",
+      to: "L’usure dentaire érosive est aujourd’hui définie comme un processus",
+      ref: EDITO,
+    },
+    { from: "la progression réelle de l’erosive tooth wear restent limitées", to: "la progression réelle de l’usure dentaire érosive restent limitées", ref: EDITO },
   ],
   // Bloc final de la page Paris 9, remplacé tel que l'écrit la fiche corrective (§4)
   "18": [

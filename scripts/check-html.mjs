@@ -140,6 +140,12 @@ for (const p of pages) {
   /rendez-vous en ligne/i.test(root.querySelector("body").text) ? bad("« prise de rendez-vous en ligne » encore affiché") : ok("aucune mention de rendez-vous en ligne");
   const foot = root.querySelector(".site-footer");
   foot.querySelector(`a[href="${TEL}"]`) && foot.querySelector(`a[href="${MAILTO}"]`) ? ok("pied de page : téléphone et e-mail cliquables") : bad("pied de page : téléphone ou e-mail absent, ou non cliquable");
+  // Audit éditorial du 24/09/2026 : l'anglais « erosive tooth wear » ne revient pas dans le texte
+  // patient ; les titres des publications, dans la liste des sources, le gardent
+  const zone = parse(root.querySelector("main").toString());
+  zone.querySelectorAll(".sources").forEach((e) => e.remove());
+  const anglais = (zone.text.match(/erosive tooth wear/gi) ?? []).length;
+  anglais ? bad(`« erosive tooth wear » dans le texte patient : ${anglais} fois`) : ok("aucun « erosive tooth wear » dans le texte patient");
   const slots = root.querySelectorAll("[data-emplacement='visuel']").length;
   slots ? bad(`${slots} emplacement(s) d'image vide(s) visible(s)`) : ok("aucun emplacement d'image vide visible");
   const orgLink = ORGS[new URL(p.url).pathname]?.label;
