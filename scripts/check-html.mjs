@@ -216,6 +216,9 @@ console.log(`\n■ Plan du site : ${locs.length} adresses`);
 JSON.stringify([...locs].sort()) === JSON.stringify([...expected].sort())
   ? ok(`les ${expected.length} pages indexables construites, et elles seules`)
   : bad(`plan du site : ${locs.join(", ")} ; attendu : ${expected.join(", ")}`);
+// Adresse conventionnelle du plan du site : /sitemap.xml, copie du plan produit par Astro
+const conventional = await readFile("dist/sitemap.xml", "utf8").catch(() => "");
+conventional === sitemap ? ok("/sitemap.xml : présent, identique au plan du site") : bad("/sitemap.xml absent ou différent du plan du site");
 const robots = await readFile("dist/robots.txt", "utf8");
 // Correctif V1.3 §5 : politique ouverte — moteurs, robots d'IA de recherche et d'entraînement
 /Sitemap: https:\/\/drfranckmoyal\.fr\/sitemap-index\.xml/.test(robots) && /^User-agent: \*$/m.test(robots) && /^Allow: \/$/m.test(robots) && !/^Disallow:/im.test(robots)
