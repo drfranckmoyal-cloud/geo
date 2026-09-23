@@ -177,7 +177,14 @@ const schema = graph([
     ))
   }
 
-  {page.faq && <FAQAccordion title={page.faq.title} items={page.faq.items} />}
+  {
+    page.faq && (
+      <FAQAccordion
+        title={page.faq.title}
+        items={page.faq.items.map((i) => ({ ...i, links: i.links?.map((label) => ({ label, href: resolve(label) })) }))}
+      />
+    )
+  }
   {
     page.sources.length > 0 && (
       <SourceList

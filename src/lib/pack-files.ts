@@ -5,7 +5,7 @@ import { applyDecisions, arborescence, builtNums, knownLabels, linkOverrides, pa
 
 // Nouvelle version du pack : changer ces chemins — ils doivent rester écrits en toutes lettres —,
 // et PACK_DIR / PATCH_DIR dans src/content/pages-suivantes.ts.
-const raw = import.meta.glob(["/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md"], {
+const raw = import.meta.glob(["/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.4/[0-9][0-9]_*.md"], {
   query: "?raw",
   import: "default",
   eager: true,
@@ -15,7 +15,7 @@ const raw = import.meta.glob(["/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", "/do
 // celui de la V1.2 (les autres fichiers du correctif sont des fiches de décisions, pas des pages)
 const fileOf = (num: string) => {
   const path = packReplacements[num]
-    ? `/${PATCH_DIR}/${packReplacements[num]}`
+    ? `/${packReplacements[num]}`
     : Object.keys(raw).find((p) => p.startsWith(`/${PACK_DIR}/${num}_`));
   if (!path || !(path in raw)) throw new Error(`Page ${num} : fichier du pack introuvable (${path ?? "aucun"})`);
   return path;

@@ -47,7 +47,7 @@ export interface PackPage {
   answer?: string;
   contract: string[];
   sections: Section[];
-  faq?: { title: string; items: { q: string; a: string }[] };
+  faq?: { title: string; items: { q: string; a: string; links?: string[] }[] };
   cta?: { title: string; paragraphs: string[]; label?: string };
   related?: { title: string; labels: string[] };
   links: { label: string; href: string }[];
@@ -241,7 +241,13 @@ function parseContent(md: string, file: string) {
 
     if (mode === "faq") {
       const item = faq!.items.at(-1);
-      if (!item || tok.t !== "p") throw new Error(`${file} : FAQ mal formée près de « ${JSON.stringify(tok).slice(0, 60)} »`);
+      if (!item) throw new Error(`${file} : FAQ mal formée près de « ${JSON.stringify(tok).slice(0, 60)} »`);
+      // « → **Libellé** » sous une réponse : lien contextuel (POINT 1 §13)
+      if (tok.t === "link") {
+        item.links = [...(item.links ?? []), tok.label];
+        continue;
+      }
+      if (tok.t !== "p") throw new Error(`${file} : FAQ mal formée près de « ${JSON.stringify(tok).slice(0, 60)} »`);
       item.a = item.a ? `${item.a}\n${tok.text}` : tok.text;
       continue;
     }

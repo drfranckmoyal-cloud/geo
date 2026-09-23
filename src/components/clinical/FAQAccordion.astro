@@ -4,12 +4,14 @@
 // lisibles telles quelles par les moteurs.
 import Section from "../global/Section.astro";
 import EditorialH2 from "../global/EditorialH2.astro";
+import TextLink from "../global/TextLink.astro";
 import { plain, rich } from "../../lib/typo";
 
 interface Props {
   id?: string;
   title: string;
-  items: { q: string; a: string }[];
+  // links : lien contextuel sous une réponse, comme les liens des sections (POINT 1 §13)
+  items: { q: string; a: string; links?: { label: string; href: string }[] }[];
   collapsible?: boolean;
 }
 const { id = "faq", title, items, collapsible = false } = Astro.props;
@@ -27,11 +29,13 @@ const { id = "faq", title, items, collapsible = false } = Astro.props;
                 <h3 set:html={plain(item.q)} />
               </summary>
               <p set:html={rich(item.a)} />
+              {item.links?.map((l) => <TextLink href={l.href} label={l.label} class="faq__link" />)}
             </details>
           ) : (
             <div class="faq__item">
               <h3 set:html={plain(item.q)} />
               <p set:html={rich(item.a)} />
+              {item.links?.map((l) => <TextLink href={l.href} label={l.label} class="faq__link" />)}
             </div>
           ),
         )
@@ -63,6 +67,10 @@ const { id = "faq", title, items, collapsible = false } = Astro.props;
     max-width: 40rem;
     margin-top: 0.75rem;
     color: var(--c-ink-soft);
+  }
+  /* Lien contextuel sous une réponse : même écart que texte → lien ailleurs sur le site */
+  .faq__item :global(.faq__link) {
+    margin-top: var(--gap-text-cta);
   }
   .faq__item summary {
     list-style: none;

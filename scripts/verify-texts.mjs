@@ -229,15 +229,18 @@ const pack = await verifyPack();
 problems += pack.problems;
 report.push(...pack.out);
 
-// « Dentiste esthétique » : jamais (verrou V21), sur toutes les pages construites
-for (const f of builtPages.map((u) => `dist${u}index.html`)) {
-  const raw = await readFile(f, "utf8");
+// « Dentiste esthétique » : jamais (verrou V21), sauf sur la page pilier, où Franck a levé le
+// verrou le 24/09/2026 — l'expression y reprend la recherche des patients (POINT 1, §6 et §13)
+const V21_EXCEPTION = "/dentisterie-esthetique-paris/";
+for (const u of builtPages.filter((u) => u !== V21_EXCEPTION)) {
+  const raw = await readFile(`dist${u}index.html`, "utf8");
   if (/dentiste esth/i.test(raw)) {
     problems++;
-    note(`  ✗ « dentiste esthétique » trouvé dans ${f}`);
+    note(`  ✗ « dentiste esthétique » trouvé dans dist${u}index.html`);
   }
 }
-note("\n■ Verrou V21 — « dentiste esthétique » : " + (problems && report.some((r) => r.includes("dentiste esthétique » trouvé")) ? "présent ✗" : "absent partout ✓"));
+const pilier = (await readFile(`dist${V21_EXCEPTION}index.html`, "utf8")).match(/dentiste esth[ée]tique/gi) ?? [];
+note("\n■ Verrou V21 — « dentiste esthétique » : " + (problems && report.some((r) => r.includes("dentiste esthétique » trouvé")) ? "présent ✗" : "absent partout ✓") + ` (sauf page pilier, verrou levé le 24/09/2026 : ${pilier.length} occurrence(s))`);
 
 console.log(report.join("\n"));
 if (pack.warnings) console.log(`\n${pack.warnings} écart(s) du pack signalé(s) (⚠), à corriger par ChatGPT : ils ne bloquent pas la construction.`);

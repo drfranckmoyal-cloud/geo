@@ -1,5 +1,6 @@
 // Les 20 pages du pack « pages suivantes » : V1.2 finale (docs/pages-suivantes/v1.2), page 06
-// remplacée par le correctif V1.3 (docs/pages-suivantes/v1.3).
+// remplacée par le correctif V1.3 (docs/pages-suivantes/v1.3) et page 01 par la V1.4, page pilier
+// de la dentisterie esthétique (docs/pages-suivantes/v1.4).
 // Leurs textes ne sont pas recopiés ici : ils sont lus directement dans les fichiers du pack
 // (src/lib/pack.ts). Ce fichier ne garde que ce que le pack laisse à Claude :
 //  - l'ordre de livraison par lots (00_ARBORESCENCE_ET_ORDRE.md) ;
@@ -19,12 +20,16 @@ export const PACK_DIR = "docs/pages-suivantes/v1.2";
 // décisions (DECISIONS_PRE_LANCEMENT_V1_3.md, puis la fiche corrective du contact, qui prime pour
 // les coordonnées) sont appliquées plus bas : remplacements, boutons, liens, données structurées.
 export const PATCH_DIR = "docs/pages-suivantes/v1.3";
+// Fichiers postérieurs à la V1.2 qui remplacent celui d'une page, avec leur chemin complet
 export const packReplacements: Record<string, string> = {
-  "06": "06_taches-dentaires-dyschromies-icon_V1_3.md",
+  // Page pilier « Dentisterie esthétique » (POINT 1 SEO/GEO, 24/09/2026)
+  "01": "docs/pages-suivantes/v1.4/01_dentisterie-esthetique-paris_V1_4.md",
+  // Page Taches, MIH renforcée (correctif pré-lancement V1.3, 22/09/2026)
+  "06": "docs/pages-suivantes/v1.3/06_taches-dentaires-dyschromies-icon_V1_3.md",
 };
 // Chemin du fichier d'une page, parmi les fichiers de la V1.2 (pour les contrôles)
 export const packPath = (num: string, v12Files: string[]): string =>
-  packReplacements[num] ? `${PATCH_DIR}/${packReplacements[num]}` : `${PACK_DIR}/${v12Files.find((f) => f.startsWith(`${num}_`))}`;
+  packReplacements[num] ?? `${PACK_DIR}/${v12Files.find((f) => f.startsWith(`${num}_`))}`;
 
 // Arborescence définitive (00 — ordre d'intégration A → B → C → D)
 export const arborescence = [
@@ -203,10 +208,16 @@ export interface PageLayout {
 }
 
 export const layouts: Record<string, PageLayout> = {
+  // Page pilier (V1.4, POINT 1) : six critères en grille, matrice demande → solutions sous le
+  // texte, quatre solutions en grille, bloc « usures » en panneau vert sauge (composition
+  // « domaine spécifique » des composants gelés)
   "01": {
     sections: {
+      "comment-evaluer-une-prise-en-charge-esthetique": { entries: true },
+      "la-bonne-question-n-est-pas-toujours-quel": { layout: "narrow", tone: "ivory" },
+      "quelles-solutions-en-dentisterie-esthetique": { entries: true, media: { label: "3 à 5 cas cliniques réels — à fournir", ratio: "3 / 1", wide: true } },
+      "et-si-les-dents-sont-usees": { layout: "panel" },
       "quelle-place-pour-le-smile-design": { media: { label: "Photographie réelle de planification esthétique — à fournir", ratio: "4 / 5" } },
-      "quels-traitements-peuvent-transformer-un-sourire": { media: { label: "3 à 5 cas cliniques réels — à fournir", ratio: "3 / 1", wide: true } },
     },
   },
   "02": {
@@ -309,6 +320,10 @@ export const layouts: Record<string, PageLayout> = {
 const FRANCK = { "@id": "https://drfranckmoyal.fr/#franck-moyal" };
 const coauthor = (name: string) => ({ "@type": "Person", name });
 export const schemaExtras: Record<string, Record<string, unknown>> = {
+  // Page pilier : les six sujets réellement traités, tels que les nomme le POINT 1 (§21)
+  "01": {
+    about: ["Dentisterie esthétique", "Dentisterie adhésive", "Composite bonding", "Facettes", "Éclaircissement", "Usures dentaires"].map((name) => ({ "@type": "Thing", name })),
+  },
   "14": {
     hasPart: [
       {
