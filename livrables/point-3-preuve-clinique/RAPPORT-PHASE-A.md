@@ -70,7 +70,7 @@ Rappel des niveaux : **A** = raisonnement complet possible (page dédiée envisa
 |---|---|---|---|---|---|
 | `facettes-planification` | Facettes, planification | 3 (initial, projet, résultat) | Séquence documentée par Franck : initial → projet → final. Ni le nombre de dents, ni le matériau, ni la préparation, ni le rôle de l'orthodontie visible sur l'image « Projet » | **A conditionnel** | C'est la meilleure démonstration du raisonnement du site : le projet précède le traitement. Mais en l'état, je ne pourrais écrire que des légendes — pas une analyse. 4 réponses suffisent à le faire passer en A. |
 | `bilan-esthetique` | Bilan, planification | 3 (initial, projet, résultat) | « Légendes dans le dossier » : initial, projet, final. Aucun traitement documenté | **A conditionnel** | Même valeur démonstrative, sur un cas plus global. Il manque le cœur : ce qui a été réalisé entre le projet et le résultat. |
-| `mih-erosion-infiltration` | Taches, MIH | 2 (avant, après) | **Le mieux documenté** : tache de MIH sur une incisive, prise en charge par éclaircissement **puis** érosion-infiltration ; **patient majeur** (Franck, 24/09/2026) | **A conditionnel — le plus proche du but** | Un enchaînement thérapeutique documenté, une séquence en deux temps, un vrai « pourquoi pas seulement masquer la tache ». La question de l'âge est levée : le traitement est cohérent avec ce qu'écrit la page Taches. Restent la séquence dans le temps et l'étendue du consentement. |
+| `mih-erosion-infiltration` | Taches, MIH | 2 (avant, après) | **Complètes depuis les réponses de Franck du 24/09/2026** : tache de MIH sur une incisive ; patient majeur ; éclaircissement **puis** érosion-infiltration, enchaînés avec un **délai incompressible de 3 semaines** entre la fin de l'éclaircissement et la séance d'infiltration ; **raison du choix documentée** : c'est le traitement le plus conservateur pour le tissu dentaire, les taches de MIH étant très profondes et presque impossibles à masquer avec du composite seul ; consentement sans réserve | **A — atteint** | Seul cas qui permet aujourd'hui d'écrire un raisonnement complet : situation, séquence thérapeutique, délai, et surtout **pourquoi** cette technique plutôt qu'une autre. C'est la première page de preuve clinique à écrire. |
 | `rehabilitation-usure` | Usures, réhabilitation | 2 (avant, après) | Avant / après d'une reconstruction. Ni cause de l'usure, ni matériau, ni étendue, ni fonction | **B, A possible** | L'axe le plus différenciant du site (§19). Mais quatre informations manquent, dont le matériau : sans elles, une page serait une coquille. |
 | `composite-six-dents` | Composite | 1 (montage avant/après) | Composite additif sur six dents antérieures | **B** | Situation, traitement et résultat sont clairs ; la réflexion ne l'est pas. Très bien là où il est. |
 | `composite-quatre-dents` | Composite | 1 (montage) | Composite additif sur quatre dents antérieures | **B** | Idem, et trop proche du précédent pour justifier une seconde page (§14). |
@@ -82,8 +82,8 @@ Rappel des niveaux : **A** = raisonnement complet possible (page dédiée envisa
 | `erosion-exogene` | Érosion | 1 | Érosion d'origine exogène | **C** | Photographie diagnostique, aucun traitement. Ne doit pas devenir un faux avant/après (§18). |
 | `erosion-raccourcissement` | Érosion | 1 | Usure érosive avec raccourcissement. Contexte de TCA **non publiable** (§34) | **C** | Photographie diagnostique. Le contexte documenté ne sera jamais rattaché publiquement à cette image. |
 
-**Bilan : 0 cas de niveau A aujourd'hui. 3 le deviennent avec des réponses courtes de Franck, 1 de
-plus (usures) si les informations existent.**
+**Bilan : 1 cas de niveau A — le cas MIH, complet depuis les réponses de Franck du 24/09/2026.
+2 autres le deviennent avec trois réponses chacun, 1 de plus (usures) si les informations existent.**
 
 ---
 
@@ -116,9 +116,9 @@ Une ligne = une information réellement nécessaire.
 | Bilan esthétique | Étendue | **Oui** | Combien de dents ont été traitées, et sur une seule arcade ou les deux ? |
 | Bilan esthétique | Nature du projet | Oui | Le projet montré est-il une simulation numérique validée avec le patient avant de commencer ? |
 | MIH | Âge au traitement | ~~Oui~~ **répondu** | ~~Quel âge avait le patient lors de l'éclaircissement ?~~ → **Franck, 24/09/2026 : le patient était majeur.** Le cas est donc cohérent avec ce qu'écrit la page Taches (pas d'éclaircissement avant 18 ans). Rien ne sera publié de plus précis que « patient adulte », et seulement si c'est utile au propos. |
-| MIH | Séquence | **Oui** | L'éclaircissement et l'érosion-infiltration faisaient-ils partie du même plan de traitement, et combien de temps les sépare ? |
+| MIH | Séquence | ~~Oui~~ **répondu** | → **Franck, 24/09/2026 : les deux s'enchaînent, avec un délai incompressible de 3 semaines entre la fin de l'éclaircissement et la séance d'érosion-infiltration.** |
 | MIH | Nombre de dents | Non | L'infiltration a-t-elle concerné une seule incisive ? |
-| MIH | Pourquoi ce choix | Non | Pourquoi l'infiltration plutôt qu'un composite ou une facette dans cette situation ? |
+| MIH | Pourquoi ce choix | ~~Non~~ **répondu** | → **Franck, 24/09/2026 : c'est le traitement le plus conservateur pour le tissu dentaire ; les taches de MIH sont très profondes et presque impossibles à masquer avec du composite seul.** |
 | Usures cas 2 | Matériau | **Oui** | Avec quoi les dents ont-elles été reconstruites : composite direct, composite indirect, céramique ? |
 | Usures cas 2 | Étendue | **Oui** | Combien de dents ont été reconstruites, et sur quelle(s) arcade(s) ? |
 | Usures cas 2 | Origine de l'usure | Oui | L'usure était-elle attribuée à une cause identifiée, et laquelle peut être écrite publiquement ? |
@@ -126,20 +126,22 @@ Une ligne = une information réellement nécessaire.
 | Usures cas 1 | Traitement | **Oui** | Ce cas a-t-il été traité, et si oui avec quoi ? Sinon, il reste une illustration. |
 | Composite 1 et 2 | Ce qui différencie les deux cas | Non | Ces deux cas correspondent-ils à des demandes différentes (par exemple usure vs forme) ? Sinon, un seul suffira le jour venu. |
 | Composite 3 | Origine de la dyschromie | Non | La dyschromie de cette dent avait-elle une origine documentée (traumatisme, dent dépulpée, autre) ? |
-| Tous les cas retenus | Consentement du canal | **Oui** | Les consentements recueillis couvrent-ils la publication d'un cas commenté sur le site, et non seulement la photographie ? |
+| Tous les cas retenus | Consentement du canal | ~~Oui~~ **répondu** | → **Franck, 24/09/2026 : aucun problème de consentement.** La publication d'un cas commenté est donc couverte. |
 | Tous les cas retenus | Date | Non | Connais-tu l'année de réalisation de chaque cas ? (sinon aucune date ne sera inventée) |
 
 ---
 
 ## 5. Recommandation d'architecture
 
-1. **Pages de cas à créer aujourd'hui : aucune.** Aucun cas n'atteint le niveau A en l'état. Créer
-   une page maintenant reviendrait à écrire une histoire clinique à partir d'une photographie :
-   c'est précisément ce que le §9 et le §44 interdisent.
-2. **Dès que Franck répond aux questions bloquantes : deux pages, puis une troisième.** Dans cet
-   ordre de valeur — le cas **MIH** (le mieux documenté, pédagogiquement le plus fort), puis
-   **Facettes 1** (la démonstration de la planification), puis **Bilan esthétique**. Le cas
-   **Usures 2** rejoindrait la liste s'il est documenté : c'est l'axe le plus différenciant du site.
+1. **Une page est désormais écrivable : le cas MIH.** Depuis les réponses de Franck du 24/09/2026,
+   ce cas atteint le niveau A — c'est le seul. Sa page n'est pas créée : la phase B attend la
+   validation de ChatGPT (§42, §46). Les douze autres cas restent en dessous du niveau A ; créer
+   leur page aujourd'hui reviendrait à écrire une histoire clinique à partir d'une photographie,
+   ce que le §9 et le §44 interdisent.
+2. **Ordre de valeur pour la suite** : le cas **MIH** d'abord (prêt), puis **Facettes 1** (la
+   démonstration de la planification, 3 réponses manquantes), puis **Bilan esthétique** (3 réponses
+   manquantes). Le cas **Usures 2** rejoindrait la liste s'il est documenté : c'est l'axe le plus
+   différenciant du site.
 3. **Mini-cas : ne rien bouger.** Les huit cas de niveau B restent exactement où ils sont, dans les
    pages thérapeutiques. Ils y jouent déjà leur rôle, et les sortir appauvrirait ces pages.
 4. **Illustrations : ne rien bouger non plus.** Les deux photographies d'érosion restent des
@@ -178,6 +180,21 @@ du consentement, publier un cas commenté n'étant pas publier une photographie.
 | Date | Question | Réponse |
 |---|---|---|
 | 24/09/2026 | Âge du patient du cas MIH lors de l'éclaircissement | Majeur |
+| 24/09/2026 | Consentement pour un cas commenté | Aucun problème de consentement |
+| 24/09/2026 | Séquence éclaircissement → infiltration | Les deux s'enchaînent ; délai incompressible de 3 semaines entre la fin de l'éclaircissement et la séance d'érosion-infiltration |
+| 24/09/2026 | Pourquoi l'infiltration plutôt qu'un composite | C'est le plus conservateur pour le tissu dentaire : les taches de MIH sont très profondes et presque impossibles à masquer avec du composite seul |
+
+**Conséquence : le cas MIH passe au niveau A.** Il ne manque plus rien pour écrire sa page — la
+situation, la séquence, le délai, la raison du choix et le consentement sont documentés. Il reste
+deux informations de confort (le nombre de dents infiltrées, l'année du traitement), qui ne
+bloquent pas.
+
+**Correction apportée au site au passage.** En répondant, Franck a signalé que l'affirmation
+« pas d'éclaircissement avant 18 ans », présente sur la page Taches, est **fausse en pratique**,
+en particulier pour la prise en charge d'une MIH, qui peut commencer plus tôt. La mention a été
+**retirée du site le 24/09/2026** : deux phrases du texte patient et la note réglementaire
+européenne qui l'appuyait ne sont plus affichées. Le reste de la page est inchangé, et le fichier
+du pack conserve le texte d'origine.
 
 ---
 

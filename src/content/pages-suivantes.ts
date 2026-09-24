@@ -102,6 +102,7 @@ const CONTACT_V13 = "fiche corrective du contact, correctif V1.3";
 const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
 const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
 const POINT2 = "maillage entrant du POINT 2, ChatGPT, 24/09/2026";
+const MIH_AGE = "correction clinique de Franck, 24/09/2026 : la mention « pas avant 18 ans » est retirée";
 const PHOTOS = "intégration des photographies, ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
@@ -127,6 +128,22 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
       from: "mais **quel traitement permet d’obtenir le sourire souhaité avec le compromis esthétique, biologique et fonctionnel le plus adapté**.\n",
       to: "mais **quel traitement permet d’obtenir le sourire souhaité avec le compromis esthétique, biologique et fonctionnel le plus adapté**.\n\n→ **Composite ou facettes : comprendre les différences**\n",
       ref: POINT2,
+    },
+  ],
+  // « Pas d'éclaircissement avant 18 ans » : retiré du texte patient sur demande de Franck
+  // (24/09/2026). Il juge l'affirmation fausse en pratique, en particulier pour la prise en charge
+  // d'une MIH, qui peut commencer plus tôt. Deux phrases disparaissent ; la note réglementaire
+  // européenne du §10 n'est plus affichée (voir shownSourceNotes). Aucun autre mot n'est touché.
+  "06": [
+    {
+      from: "Chez un patient mineur, la stratégie doit aussi respecter les règles propres à l’âge. En Europe, les produits d’éclaircissement libérant plus de 0,1 % de peroxyde d’hydrogène ne sont pas utilisés avant 18 ans. Cela n’empêche pas d’envisager d’autres traitements esthétiques adaptés, comme la microabrasion ou l’infiltration de résine, lorsque leur indication est posée.",
+      to: "Chez un patient mineur, la stratégie doit aussi respecter les règles propres à l’âge. Cela n’empêche pas d’envisager des traitements esthétiques adaptés, comme la microabrasion ou l’infiltration de résine, lorsque leur indication est posée.",
+      ref: MIH_AGE,
+    },
+    {
+      from: " Chez les moins de 18 ans, l’éclaircissement au peroxyde réglementé n’est pas utilisé ; d’autres techniques minimalement invasives peuvent en revanche être discutées.",
+      to: "",
+      ref: MIH_AGE,
     },
   ],
   // Lien visible vers DentCA, en fin de la section qui la présente (§4)
@@ -227,7 +244,8 @@ export const shownSourceNotes: Record<string, string[]> = {
   "02": ["**Source fonctionnelle — SmileCloud**"],
   "03": ["**Repère clinique du Dr Franck Moyal**"],
   "04": ["**Source fonctionnelle — SmileCloud**"],
-  "06": ["**Source réglementaire — Union européenne.**"], // V1.3 : éclaircissement avant 18 ans
+  // La note réglementaire européenne (« pas avant 18 ans ») n'est plus affichée : elle n'appuyait
+  // que la phrase retirée le 24/09/2026 à la demande de Franck. Elle reste dans le fichier du pack.
 };
 
 // Liens « → » dont le libellé n'est pas dans la liste « Liens internes » de la page : adresse
