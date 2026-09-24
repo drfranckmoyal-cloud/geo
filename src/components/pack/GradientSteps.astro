@@ -1,0 +1,75 @@
+---
+// Représentation du gradient thérapeutique (POINT 2 §12) : une suite d'étapes, du moins invasif
+// au plus invasif. Représentation conceptuelle, pas un protocole : aucune illustration, aucune
+// icône, aucune animation, aucune flèche démesurée — un numéro discret, un mot, un filet.
+// Côte à côte sur grand écran, empilée sur mobile, jamais de défilement horizontal.
+import { plain } from "../../lib/typo";
+
+interface Props {
+  items: string[];
+  class?: string;
+}
+const { items, class: cls } = Astro.props;
+---
+
+<ol class:list={["grad", cls]}>
+  {
+    items.map((item, i) => (
+      <li class="grad__step">
+        <span class="grad__n">{String(i + 1).padStart(2, "0")}</span>
+        <span class="grad__mot" set:html={plain(item)} />
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .grad {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0 1.25rem;
+    margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+    list-style: none;
+  }
+  .grad__step {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--c-stone);
+  }
+  .grad__n {
+    display: block;
+    font-size: var(--fs-meta);
+    letter-spacing: 0.14em;
+    color: var(--c-sage);
+  }
+  .grad__mot {
+    display: block;
+    margin-top: 0.4rem;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  /* Tablette : deux rangées de trois, plutôt que six colonnes serrées */
+  @media (max-width: 63.99em) {
+    .grad {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 1.5rem;
+    }
+  }
+  /* Mobile : une étape par ligne, numéro et mot côte à côte */
+  @media (max-width: 47.99em) {
+    .grad {
+      grid-template-columns: 1fr;
+      row-gap: 0;
+    }
+    .grad__step {
+      display: flex;
+      gap: 0.9rem;
+      align-items: baseline;
+      padding-block: 0.8rem;
+    }
+    .grad__n,
+    .grad__mot {
+      margin-top: 0;
+    }
+  }
+</style>

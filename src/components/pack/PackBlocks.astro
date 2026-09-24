@@ -8,6 +8,8 @@ import BodyText from "../global/BodyText.astro";
 import TextLink from "../global/TextLink.astro";
 import SymptomList from "../clinical/SymptomList.astro";
 import InlineEvidenceLinks from "../editorial/InlineEvidenceLinks.astro";
+import ComparisonTable from "./ComparisonTable.astro";
+import GradientSteps from "./GradientSteps.astro";
 import { plain, rich } from "../../lib/typo";
 import type { Block } from "../../lib/pack";
 
@@ -15,14 +17,16 @@ interface Props {
   blocks: Block[];
   resolve: (label: string) => string;
   entries?: boolean; // intertitres H3 en grille
+  etapes?: boolean; // liste numérotée rendue en suite d'étapes (gradient thérapeutique, POINT 2 §12)
   narrow?: boolean; // colonne étroite : listes sur une seule colonne
   class?: string;
 }
-const { blocks, resolve, entries = false, narrow = false, class: cls } = Astro.props;
+const { blocks, resolve, entries = false, etapes = false, narrow = false, class: cls } = Astro.props;
 
 type Group =
   | { kind: "text"; paragraphs: string[] }
   | { kind: "ul" | "ol"; items: string[] }
+  | { kind: "table"; head: string[]; rows: string[][] }
   | { kind: "h3"; text: string }
   | { kind: "links" | "evidence"; links: { label: string; href: string }[] };
 
@@ -42,6 +46,7 @@ function group(list: Block[]): Group[] {
       if (last?.kind === "evidence") last.links.push(link);
       else out.push({ kind: "evidence", links: [link] });
     } else if (b.kind === "h3") out.push({ kind: "h3", text: b.text });
+    else if (b.kind === "table") out.push({ kind: "table", head: b.head, rows: b.rows });
     else out.push({ kind: b.kind, items: b.items });
   }
   return out;
@@ -85,11 +90,17 @@ if (entries) {
         ) : g.kind === "ul" ? (
           <SymptomList items={g.items} columns={columns(g.items, narrow)} class="pb__list" />
         ) : g.kind === "ol" ? (
-          <ol class="pb__ol">
-            {g.items.map((item) => (
-              <li set:html={rich(item)} />
-            ))}
-          </ol>
+          etapes ? (
+            <GradientSteps items={g.items} class="pb__etapes" />
+          ) : (
+            <ol class="pb__ol">
+              {g.items.map((item) => (
+                <li set:html={rich(item)} />
+              ))}
+            </ol>
+          )
+        ) : g.kind === "table" ? (
+          <ComparisonTable head={g.head} rows={g.rows} class="pb__table" />
         ) : g.kind === "h3" ? (
           <h3 class="pb__h3" set:html={plain(g.text)} />
         ) : g.kind === "links" ? (
@@ -135,6 +146,8 @@ if (entries) {
                 </ul>
               ) : g.kind === "evidence" ? (
                 <InlineEvidenceLinks links={g.links} class="pb__evidence" />
+              ) : g.kind === "table" ? (
+                <ComparisonTable head={g.head} rows={g.rows} class="pb__table" />
               ) : null,
             )}
           </div>
@@ -166,6 +179,11 @@ if (entries) {
   }
   .pb > .pb__h3 + :global(*) {
     margin-top: 0.875rem;
+  }
+
+  /* Tableau comparatif : même respiration que les listes cliniques */
+  .pb > :global(.pb__table) {
+    margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
   }
 
   /* Liste numérotée : lignes de la liste clinique, numéros du parcours clinique */

@@ -5,11 +5,19 @@ import { applyDecisions, arborescence, builtNums, knownLabels, linkOverrides, pa
 
 // Nouvelle version du pack : changer ces chemins — ils doivent rester écrits en toutes lettres —,
 // et PACK_DIR / PATCH_DIR dans src/content/pages-suivantes.ts.
-const raw = import.meta.glob(["/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md", "/docs/pages-suivantes/v1.4/[0-9][0-9]_*.md"], {
-  query: "?raw",
-  import: "default",
-  eager: true,
-}) as Record<string, string>;
+const raw = import.meta.glob(
+  [
+    "/docs/pages-suivantes/v1.2/[0-9][0-9]_*.md",
+    "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md",
+    "/docs/pages-suivantes/v1.4/[0-9][0-9]_*.md",
+    "/docs/pages-suivantes/v1.5/[0-9][0-9]_*.md",
+  ],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  },
+) as Record<string, string>;
 
 // Une page par numéro de l'arborescence : son fichier du correctif V1.3 s'il la remplace, sinon
 // celui de la V1.2 (les autres fichiers du correctif sont des fiches de décisions, pas des pages)

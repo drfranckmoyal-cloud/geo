@@ -148,7 +148,7 @@ const schema = graph([
         {cfg.method?.before === p.section.id && <MethodSteps title={facts.methodTitle ?? home.method.title} steps={home.method.steps} />}
         {p.aside.length > 0 ? (
           <TextImageSection id={p.id} title={p.section.title} layout={p.layout} tone={p.tone}>
-            <PackBlocks blocks={p.main} resolve={resolve} />
+            <PackBlocks blocks={p.main} resolve={resolve} etapes={p.etapes} />
             {
               actionsOf(p.section.id).length > 0 && (
                 <div class="pack-actions">
@@ -168,7 +168,7 @@ const schema = graph([
             tone={p.tone}
             media={p.media && !p.media.wide ? { label: p.media.label, ratio: p.media.ratio } : undefined}
           >
-            <PackBlocks blocks={p.main} resolve={resolve} entries={p.entries} narrow={p.layout.startsWith("split")} />
+            <PackBlocks blocks={p.main} resolve={resolve} entries={p.entries} etapes={p.etapes} narrow={p.layout.startsWith("split")} />
             {
               actionsOf(p.section.id).length > 0 && (
                 <div class="pack-actions">
@@ -258,6 +258,12 @@ const schema = graph([
       gap: 2.5rem;
     }
   }
+  /* Tableau comparatif (POINT 2) : la section est en colonne de lecture, calée sur le bord
+     gauche ; le tableau, lui, prend toute la largeur du site pour respirer. */
+  :global(.pb__table) {
+    width: min(100vw - 2 * var(--gutter), var(--container));
+  }
+
   /* Emplacement d'image en pleine largeur sous une grille (schéma de la page Usures) */
   :global(.pack-wide-media) {
     margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);

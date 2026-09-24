@@ -26,6 +26,8 @@ export const packReplacements: Record<string, string> = {
   "01": "docs/pages-suivantes/v1.4/01_dentisterie-esthetique-paris_V1_4.md",
   // Page Taches, MIH renforcée (correctif pré-lancement V1.3, 22/09/2026)
   "06": "docs/pages-suivantes/v1.3/06_taches-dentaires-dyschromies-icon_V1_3.md",
+  // Page « Facettes ou composite : comment choisir ? » (POINT 2 SEO/GEO, 24/09/2026)
+  "21": "docs/pages-suivantes/v1.5/21_facettes-ou-composite_V1_5.md",
 };
 // Chemin du fichier d'une page, parmi les fichiers de la V1.2 (pour les contrôles)
 export const packPath = (num: string, v12Files: string[]): string =>
@@ -53,10 +55,12 @@ export const arborescence = [
   { num: "18", lot: "C", url: "/chirurgien-dentiste-paris-9/" },
   { num: "19", lot: "D", url: "/contact/" },
   { num: "20", lot: "D", url: "/mentions-legales/" },
+  // Ajoutée après le pack : page de décision du cluster esthétique (POINT 2, 24/09/2026)
+  { num: "21", lot: "E", url: "/facettes-ou-composite/" },
 ] as const;
 
 // Lots construits à ce jour
-export const builtLots: string[] = ["A", "B", "C", "D"];
+export const builtLots: string[] = ["A", "B", "C", "D", "E"];
 export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
 export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
 
@@ -97,11 +101,33 @@ const FICHE = "fiche de Franck, 22/09/2026";
 const CONTACT_V13 = "fiche corrective du contact, correctif V1.3";
 const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
 const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
+const POINT2 = "maillage entrant du POINT 2, ChatGPT, 24/09/2026";
 const PHOTOS = "intégration des photographies, ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
+    {
+      from: "Le choix dépend donc du **niveau de transformation recherché**, des dents de départ et du gradient thérapeutique approprié.\n",
+      to: "Le choix dépend donc du **niveau de transformation recherché**, des dents de départ et du gradient thérapeutique approprié.\n\n→ **Facettes ou composite : comment choisir ?**\n",
+      ref: POINT2,
+    },
     { from: "\nPMID: `38604905`", to: "\nDOI: `10.1016/j.prosdent.2024.03.019` — PMID: `38604905`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
     { from: "\nPMID: `39523553`", to: "\nDOI: `10.1111/jerd.13351` — PMID: `39523553`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
+  ],
+  // Liens entrants vers la page « Facettes ou composite : comment choisir ? » (POINT 2 §28),
+  // posés dans le contexte éditorial qui pose déjà la question, jamais ajoutés hors sujet.
+  "01": [
+    {
+      from: "Les deux solutions présentent des possibilités et des contraintes différentes qui doivent être évaluées lors du diagnostic.\n",
+      to: "Les deux solutions présentent des possibilités et des contraintes différentes qui doivent être évaluées lors du diagnostic.\n\n→ **Facettes ou composite : comment choisir ?**\n",
+      ref: POINT2,
+    },
+  ],
+  "03": [
+    {
+      from: "mais **quel traitement permet d’obtenir le sourire souhaité avec le compromis esthétique, biologique et fonctionnel le plus adapté**.\n",
+      to: "mais **quel traitement permet d’obtenir le sourire souhaité avec le compromis esthétique, biologique et fonctionnel le plus adapté**.\n\n→ **Composite ou facettes : comprendre les différences**\n",
+      ref: POINT2,
+    },
   ],
   // Lien visible vers DentCA, en fin de la section qui la présente (§4)
   "12": [
@@ -216,6 +242,9 @@ export const knownLabels: Record<string, string> = {
   "Usures dentaires": "/usures-dentaires/",
   "Dr Franck Moyal": "/franck-moyal/",
   "Dentisterie esthétique": "/dentisterie-esthetique-paris/",
+  // Ancres des liens entrants vers la page de décision (POINT 2 §28)
+  "Facettes ou composite : comment choisir ?": "/facettes-ou-composite/",
+  "Composite ou facettes : comprendre les différences": "/facettes-ou-composite/",
 };
 
 // Mise en page, section par section (identifiant = titre de la section sans accents).
@@ -232,6 +261,8 @@ export interface SectionOverride {
   tone?: "paper" | "ivory";
   media?: { label: string; ratio?: string; wide?: boolean };
   entries?: boolean;
+  /** Liste numérotée rendue en suite d'étapes (gradient thérapeutique, POINT 2 §12) */
+  etapes?: boolean;
   id?: string;
   links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
   actions?: { label: string; href: string }[];
@@ -249,6 +280,18 @@ export interface PageLayout {
 }
 
 export const layouts: Record<string, PageLayout> = {
+  // Page de décision du cluster esthétique (V1.5, POINT 2) : deux définitions en grille, la phrase
+  // de synthèse en panneau vert sauge, le gradient thérapeutique en suite d'étapes, le tableau
+  // comparatif et la matrice d'orientation dans une colonne partant du bord gauche.
+  "21": {
+    sections: {
+      "en-bref": { entries: true },
+      "ce-que-chacune-apporte": { layout: "panel" },
+      "composite-ou-facettes-raisonner-en-gradient-therapeutique": { etapes: true, tone: "ivory" },
+      "comparer-les-deux-approches-critere-par-critere": { layout: "narrow", tone: "paper" },
+      "s-orienter-selon-la-situation": { layout: "narrow", tone: "ivory" },
+    },
+  },
   // Page pilier (V1.4, POINT 1) : six critères en grille, matrice demande → solutions sous le
   // texte, quatre solutions en grille, bloc « usures » en panneau vert sauge (composition
   // « domaine spécifique » des composants gelés)

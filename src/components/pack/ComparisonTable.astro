@@ -1,0 +1,123 @@
+---
+// Tableau comparatif d'une page du pack (POINT 2 §13) : un vrai tableau, lu tel quel dans le
+// fichier du pack. Aucune couleur d'opinion, aucun score, aucune colonne « gagnant » : des filets
+// vert de gris, la colonne des critères un peu plus appuyée, le reste en gris de texte.
+// Sur petit écran, chaque ligne devient un bloc : le critère, puis chaque colonne annoncée par son
+// nom — l'information reste entière, sans défilement horizontal.
+import { rich } from "../../lib/typo";
+
+interface Props {
+  head: string[];
+  rows: string[][];
+  class?: string;
+}
+const { head, rows, class: cls } = Astro.props;
+---
+
+<div class:list={["cmp", cls]}>
+  <table>
+    <thead>
+      <tr>{head.map((c) => <th scope="col" set:html={rich(c)} />)}</tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            {row.map((cell, i) =>
+              i === 0 ? (
+                <th scope="row" set:html={rich(cell)} />
+              ) : (
+                <td>
+                  <span class="cmp__col" aria-hidden="true" set:html={rich(head[i] ?? "")} />
+                  <span set:html={rich(cell)} />
+                </td>
+              ),
+            )}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .cmp table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .cmp thead th {
+    padding-block: 0.75rem;
+    border-bottom: 1px solid var(--c-ink);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .cmp tbody th,
+  .cmp tbody td {
+    padding-block: 1.05rem;
+    padding-right: var(--col-gap);
+    border-top: 1px solid var(--c-stone);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .cmp tbody th {
+    width: 22%;
+    font-weight: 500;
+    color: var(--c-ink);
+  }
+  .cmp tbody td {
+    width: 39%;
+    color: var(--c-ink-soft);
+  }
+  .cmp tbody td:last-child {
+    padding-right: 0;
+  }
+  /* Nom de la colonne : utile seulement quand le tableau est empilé */
+  .cmp__col {
+    display: none;
+  }
+
+  @media (max-width: 47.99em) {
+    .cmp thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .cmp table,
+    .cmp tbody,
+    .cmp tr,
+    .cmp tbody th,
+    .cmp tbody td {
+      display: block;
+      width: auto;
+    }
+    .cmp tr {
+      padding-block: 1.25rem;
+      border-top: 1px solid var(--c-stone);
+    }
+    .cmp tbody th {
+      padding: 0 0 0.5rem;
+      border: 0;
+      font-size: var(--fs-meta);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+    }
+    .cmp tbody td {
+      padding: 0.35rem 0 0;
+      border: 0;
+    }
+    .cmp__col {
+      display: block;
+      font-size: var(--fs-meta);
+      letter-spacing: 0.02em;
+      color: var(--c-sage);
+    }
+  }
+</style>

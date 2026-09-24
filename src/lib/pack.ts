@@ -11,6 +11,7 @@ export type Block =
   | { kind: "p"; text: string } // texte courant : **gras**, renvois [n], retours à la ligne « \n »
   | { kind: "ul"; items: string[] }
   | { kind: "ol"; items: string[] }
+  | { kind: "table"; head: string[]; rows: string[][] } // tableau comparatif (POINT 2 §13)
   | { kind: "h3"; text: string }
   | { kind: "link"; label: string } // « → **Libellé** » : lien interne, adresse résolue par la page
   | { kind: "evidence"; label: string; href: string }; // « **Libellé** » puis une adresse web : preuve externe
@@ -114,6 +115,7 @@ type Token =
   | { t: "p"; text: string }
   | { t: "li"; text: string }
   | { t: "oli"; text: string }
+  | { t: "row"; cells: string[] } // ligne « | a | b | c | » d'un tableau
   | { t: "link"; label: string };
 
 function tokenize(md: string): Token[] {
@@ -139,6 +141,14 @@ function tokenize(md: string): Token[] {
     } else if ((m = line.match(/^\d+\. (.+)$/))) {
       flush();
       out.push({ t: "oli", text: m[1] });
+    } else if (/^\|.*\|$/.test(line.trim())) {
+      flush();
+      const cells = line
+        .trim()
+        .slice(1, -1)
+        .split("|")
+        .map((c) => c.trim());
+      if (!cells.every((c) => /^:?-{2,}:?$/.test(c))) out.push({ t: "row", cells }); // la ligne de tirets sépare l'en-tête
     } else if ((m = line.match(/^→ \*\*(.+)\*\*$/))) {
       flush();
       out.push({ t: "link", label: m[1] });
@@ -268,6 +278,12 @@ function parseContent(md: string, file: string) {
       const m = tok.t === "li" ? tok.text.match(/^\*\*(.+)\*\*$/) : null;
       if (!m) throw new Error(`${file} : liste « À lire aussi » mal formée`);
       related!.labels.push(m[1]);
+      continue;
+    }
+    if (tok.t === "row") {
+      const last = section?.blocks.at(-1);
+      if (last?.kind === "table") last.rows.push(tok.cells);
+      else push({ kind: "table", head: tok.cells, rows: [] });
       continue;
     }
     if (tok.t === "p") push(toBlock(tok.text));

@@ -91,6 +91,12 @@ function segments(md, num) {
         continue;
       }
       let m;
+      // Tableau comparatif : chaque cellule est rendue séparément (la ligne de tirets ne l'est pas)
+      if (/^\|.*\|$/.test(line)) {
+        const cells = line.slice(1, -1).split("|").map((c) => c.trim());
+        if (!cells.every((c) => /^:?-{2,}:?$/.test(c))) for (const cell of cells) add(cell, "cellule de tableau");
+        continue;
+      }
       if ((m = line.match(/^- (.+)$/))) add(m[1], "élément de liste");
       else if ((m = line.match(/^\d+\. (.+)$/))) add(m[1], "étape numérotée");
       else if ((m = line.match(/^→ \*\*(.+)\*\*$/))) add(m[1], "lien");
@@ -205,6 +211,8 @@ export async function verifyPack() {
         !UI_EXACT.includes(b) &&
         !UI_PATTERNS.some((re) => re.test(b)) &&
         !CAS_TEXTES.includes(b) &&
+        // Suite d'étapes (gradient thérapeutique) : le composant écrit « 01 » devant le mot du pack
+        !(/^\d{2}\S/.test(b) && packLow.includes(b.replace(/^\d{2}/, "").toLocaleLowerCase("fr"))) &&
         !actions.some((a) => norm(a.label) === b),
     );
     // 3. Renvois
