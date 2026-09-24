@@ -38,7 +38,18 @@ const UI_EXACT = [
   home.method.title,
   ...home.method.steps.flatMap((s) => [s.name, s.text]),
 ].map(norm);
-const UI_PATTERNS = [/^Voir les \d+ sources scientifiques$/, /^\[\d+\]$/, /^DOI : \S+?\s?PubMed$/, /^Mis à jour le \d{1,2} \S+ \d{4}$/];
+const UI_PATTERNS = [/^Voir les \d+ sources scientifiques$/, /^\[\d+\]$/, /^DOI\s?: \S+?\s?PubMed$/, /^Mis à jour le \d{1,2} \S+ \d{4}$/];
+
+// Légendes, étiquettes et attribution des cas cliniques : textes décidés par ChatGPT hors du pack
+// (intégration des photographies du 24/09/2026). Le registre est lu tel quel, sans charger les
+// images, que Node ne sait pas résoudre.
+const registre = await readFile("src/content/cas-cliniques.ts", "utf8");
+const attribution = registre.match(/const ATTRIBUTION = "(.+?)";/)[1];
+const CAS_TEXTES = [
+  ...[...registre.matchAll(/legende: "(.+?)",/g)].flatMap((m) => [m[1], `${m[1]}${attribution}`]),
+  ...[...registre.matchAll(/etiquette: "(.+?)"/g)].map((m) => m[1]),
+  attribution,
+].map(norm);
 
 function specSections(md) {
   const out = new Map();
@@ -193,6 +204,7 @@ export async function verifyPack() {
         !packLow.includes(b.toLocaleLowerCase("fr")) &&
         !UI_EXACT.includes(b) &&
         !UI_PATTERNS.some((re) => re.test(b)) &&
+        !CAS_TEXTES.includes(b) &&
         !actions.some((a) => norm(a.label) === b),
     );
     // 3. Renvois
@@ -217,6 +229,8 @@ export async function verifyPack() {
     if (deduced.length) out.push(`  • Liens à l'adresse déduite : ${deduced.join(" ; ")}`);
     for (const a of applied) out.push(`  • Remplacement décidé : ${a}`);
     for (const a of actions) out.push(`  • Bouton décidé hors du pack : « ${a.label} » → ${a.href} (fiche corrective du contact, correctif V1.3)`);
+    for (const id of Object.values(layouts[num]?.sections ?? {}).flatMap((o) => [o.cas ?? []].flat()))
+      out.push(`  • Cas clinique affiché : « ${id} » — photographie réelle, légende décidée hors du pack (intégration du 24/09/2026)`);
     if (!/\*\*Auteur\*\* : /.test(md)) out.push("  • Ouverture sans ligne auteur (le fichier ne nomme pas d'auteur)");
     if (layouts[num]?.cta) out.push(`  • Bouton de l'appel final décidé hors du pack : « ${layouts[num].cta.label} » → ${layouts[num].cta.href} (validation 23)`);
     if (skipped.length && !(hidden[num] ?? []).length) out.push(`  ✗ Passages sautés sans décision : ${skipped.join(" / ")}`);

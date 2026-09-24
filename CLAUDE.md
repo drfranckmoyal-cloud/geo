@@ -8,8 +8,9 @@
    `08_VISUAL_QA_CLAUDE.md` en entier. Pour les 20 pages suivantes : le pack en vigueur,
    `docs/pages-suivantes/v1.2/` (`00_ARBORESCENCE_ET_ORDRE.md`, `21_MANIFESTE_INTEGRATION.md`,
    puis un fichier par page, et les fichiers 22 à 25), avec le correctif pré-lancement
-   `docs/pages-suivantes/v1.3/` (page 06 et décisions) ; ses textes sont lus directement par
-   `src/lib/pack.ts`.
+   `docs/pages-suivantes/v1.3/` (page 06 et décisions) et la page pilier `docs/pages-suivantes/v1.4/` ;
+   ses textes sont lus directement par `src/lib/pack.ts`. Les consignes de ChatGPT reçues après le
+   gel sont archivées telles quelles dans `docs/echanges/` (une par fichier daté).
 3. **Rôle de Claude : développeur exécutant.** Il ne modifie ni la stratégie, ni
    l'arborescence, ni les textes, ni les couleurs, ni les polices, ni l'ordre des sections.
    Une information manque : emplacement réservé clairement signalé, jamais d'invention.
@@ -18,10 +19,16 @@
    des pages (§7), journal (§10), date en bas. Puis commit en français et push.
 5. Les fichiers du pack ne se modifient jamais ; une nouvelle version va dans son propre
    dossier (`docs/golden-master/v1.4/`…).
-6. Aucune photo ni donnée de patient dans le dépôt. Les photos cliniques du site peuvent rester
-   sur le Bureau (synchronisé iCloud) : Franck l'a accepté le 22/09/2026 (D44).
+6. **Photographies cliniques** : les versions publiées sur le site vivent dans le dépôt
+   (`src/assets/photos/cas/`, fabriquées par `npm run photos`), Franck l'a tranché le 24/09/2026
+   (D52) ; les originaux restent dans son dossier `~/Desktop/icono GEO`, qu'on ne modifie jamais
+   (D44, 22/09/2026). Aucun nom, aucune date, aucune donnée nominative de patient, nulle part —
+   ni dans les légendes, ni dans les noms de fichiers, ni dans les métadonnées. Le registre des
+   cas est `src/content/cas-cliniques.ts`.
 7. Jamais l'expression « dentiste esthétique » (verrou V21) : écrire « dentisterie
-   esthétique » ou « exercice exclusif en dentisterie esthétique ».
+   esthétique » ou « exercice exclusif en dentisterie esthétique ». Seule exception, décidée par
+   Franck le 24/09/2026 (D50) : la page pilier `/dentisterie-esthetique-paris/`, où l'expression
+   reprend la recherche des patients. `npm run verify` contrôle les deux.
 8. **Golden master gelé le 21/09/2026 (verrou V24)** : ne plus modifier le design system
    (composants, réglages de `src/styles/tokens.css`, typographie, espacements). Toute
    nouvelle page réutilise les composants gelés ; un nouveau composant seulement si aucun

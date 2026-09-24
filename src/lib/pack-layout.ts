@@ -56,6 +56,7 @@ export function planSections(sections: Section[], overrides: Record<string, Sect
   let splits = 0;
   return sections.map((section, i) => {
     const o = { ...defaults, ...overrides[section.id] };
+    if (o.cas) delete o.media; // le cas clinique remplace l'emplacement réservé
     if (!showPlaceholders) delete o.media;
     const entries = o.entries ?? isEntries(section);
     let layout = o.layout;

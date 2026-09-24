@@ -97,6 +97,7 @@ const FICHE = "fiche de Franck, 22/09/2026";
 const CONTACT_V13 = "fiche corrective du contact, correctif V1.3";
 const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
 const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
+const PHOTOS = "intégration des photographies, ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
     { from: "\nPMID: `38604905`", to: "\nDOI: `10.1016/j.prosdent.2024.03.019` — PMID: `38604905`", ref: "DOI rétabli (ChatGPT, 22/09/2026)" },
@@ -138,7 +139,13 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
       ref: EDITO,
     },
     { from: "L’**erosive tooth wear** correspond à une perte progressive", to: "L’**usure dentaire érosive** correspond à une perte progressive", ref: EDITO },
+    { from: "Une umbrella review publiée en 2026 conclut", to: "Une revue de synthèse publiée en 2026 conclut", ref: PHOTOS },
+    { from: "L’umbrella review 2026 juge les preuves", to: "La revue de synthèse 2026 juge les preuves", ref: PHOTOS },
   ],
+  // « Umbrella review » et « workflow » dans le texte patient : français demandé par ChatGPT
+  // (intégration des photographies, 24/09/2026, §35 et §36). Les titres des publications ne
+  // changent pas. « L’umbrella review » devient « La revue de synthèse » : accord au féminin.
+  "08": [{ from: "Le workflow peut comprendre :", to: "La démarche peut comprendre :", ref: PHOTOS }],
   "13": [
     {
       from: "L’erosive tooth wear est aujourd’hui défini comme un processus",
@@ -146,6 +153,7 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
       ref: EDITO,
     },
     { from: "la progression réelle de l’erosive tooth wear restent limitées", to: "la progression réelle de l’usure dentaire érosive restent limitées", ref: EDITO },
+    { from: "Une umbrella review 2026 retrouve une protection", to: "Une revue de synthèse 2026 retrouve une protection", ref: PHOTOS },
   ],
   // Bloc final de la page Paris 9, remplacé tel que l'écrit la fiche corrective (§4)
   "18": [
@@ -227,6 +235,9 @@ export interface SectionOverride {
   id?: string;
   links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
   actions?: { label: string; href: string }[];
+  /** Un cas clinique (src/content/cas-cliniques.ts), ou deux présentés côte à côte, affichés sous
+   *  le texte de la section. Ils remplacent l'emplacement d'image prévu par le §9 du fichier. */
+  cas?: string | string[];
 }
 export interface PageLayout {
   hideByline?: boolean; // ouverture sans ligne auteur (Contact, Mentions légales : validation 23)
@@ -254,33 +265,35 @@ export const layouts: Record<string, PageLayout> = {
     method: { before: "premiere-etape-ecouter" },
     sections: {
       "deuxieme-etape-documenter": { media: { label: "Séquence photo / scan / simulation d’un vrai cas, avec consentement — à fournir", ratio: "4 / 5" } },
-      "qu-apporte-le-smile-design": { media: { label: "Vidéo ou capture réelle de simulation SmileCloud — à fournir", ratio: "4 / 3" } },
+      // La séquence initial → projet → résultat montre ce que veut dire planifier avant de traiter
+      "qu-apporte-le-smile-design": { cas: "bilan-esthetique" },
     },
   },
   "03": {
     sections: {
-      "qu-est-ce-que-la-stratification-composite": { media: { label: "Macro-photo de texture et de stratification — à fournir", ratio: "4 / 5" } },
-      "ce-que-je-recherche-avec-un-composite-anterieur": { media: { label: "2 cas de composite antérieur stratifié, cadrage constant — à fournir", ratio: "4 / 3" } },
+      "qu-est-ce-que-la-stratification-composite": { cas: "composite-stratifie" },
+      "ce-que-je-recherche-avec-un-composite-anterieur": { cas: ["composite-six-dents", "composite-quatre-dents"] },
     },
   },
   "04": {
     sections: {
-      "sublimer-un-sourire-plutot-que-remplacer-des-dents": { media: { label: "2 cas de facettes complets : état initial → projet → résultat — à fournir", ratio: "4 / 3" } },
+      "sublimer-un-sourire-plutot-que-remplacer-des-dents": { cas: "facettes-planification" },
       "smile-design-et-simulation": { media: { label: "Vidéo / simulation SmileCloud réelle — à fournir", ratio: "4 / 3" } },
+      "la-ceramique-lumiere-profondeur-et-finesse": { cas: "facettes-ceramique" },
     },
   },
   "05": {
     sections: {
       "la-technique-que-je-privilegie-l-eclaircissement-ambulatoire": { media: { label: "Photo sobre de gouttières personnalisées — à fournir", ratio: "4 / 5" } },
-      "est-ce-que-le-resultat-est-visible": { media: { label: "Cas avant / après éclaircissement, mêmes conditions photographiques — à fournir", ratio: "4 / 3" } },
+      "est-ce-que-le-resultat-est-visible": { cas: "eclaircissement-ambulatoire" },
     },
   },
   "06": {
     // §9 de la V1.3 : le cas de MIH en priorité, dans la section qui en parle
     sections: {
-      "taches-de-mih-peut-on-les-traiter-chez": { media: { label: "Cas réel de MIH sur une incisive : état initial puis résultat, avec consentement web — à fournir", ratio: "4 / 3" } },
+      "taches-de-mih-peut-on-les-traiter-chez": { cas: "mih-erosion-infiltration" },
       "pourquoi-une-tache-blanche-parait-elle-blanche": { media: { label: "Macro clinique réelle de lésion et résultat — à fournir", ratio: "4 / 5" } },
-      "qu-est-ce-que-l-erosion-infiltration-de": { media: { label: "1 autre cas de dyschromie / white spot : avant / après, avec consentement — à fournir", ratio: "4 / 3" } },
+      "qu-est-ce-que-l-erosion-infiltration-de": { cas: "dyschromie-erosion-infiltration" },
     },
   },
   "07": {
@@ -292,7 +305,7 @@ export const layouts: Record<string, PageLayout> = {
   },
   "08": {
     sections: {
-      "rehabiliter-une-dentition-usee-ne-signifie-plus-automatiquement": { media: { label: "Cas complet de réhabilitation : initial → planification → résultat — à fournir", ratio: "4 / 5" } },
+      "rehabiliter-une-dentition-usee-ne-signifie-plus-automatiquement": { cas: "rehabilitation-usure" },
       "qu-est-ce-que-la-dimension-verticale-d": { media: { label: "Schéma ou capture de planification DVO issu d’un vrai cas — à fournir", ratio: "4 / 3" } },
     },
   },
@@ -304,8 +317,11 @@ export const layouts: Record<string, PageLayout> = {
   },
   "10": {
     sections: {
-      "quels-sont-les-premiers-signes": { media: { label: "Macro de lésions érosives réelles — à fournir", ratio: "4 / 5" } },
+      "quels-sont-les-premiers-signes": { cas: "erosion-exogene" },
       "comment-depiste-t-on-l-erosion": { media: { label: "Série de scans de suivi — à fournir", ratio: "4 / 3" } },
+      // Le raccourcissement des dents amène la question de la restauration : la photographie y est
+      // descriptive, sans rattacher publiquement une pathologie au patient (§11 et §23)
+      "quand-faut-il-restaurer": { cas: "erosion-raccourcissement" },
     },
   },
   "11": {

@@ -1,0 +1,21 @@
+---
+// Aiguillage : un identifiant de cas (src/content/cas-cliniques.ts) et le bon composant.
+// Les pages ne connaissent que l'identifiant : un cas peut ainsi être enrichi ou déplacé sans
+// toucher aux pages (préparation du POINT 3).
+import ClinicalImage from "./ClinicalImage.astro";
+import ClinicalBeforeAfter from "./ClinicalBeforeAfter.astro";
+import ClinicalSequence from "./ClinicalSequence.astro";
+import { casCliniques } from "../../content/cas-cliniques";
+
+interface Props {
+  id: string;
+  class?: string;
+}
+const { id, class: cls } = Astro.props;
+const cas = casCliniques[id];
+if (!cas) throw new Error(`Cas clinique inconnu : « ${id} »`);
+---
+
+{cas.type === "image" && <ClinicalImage cas={cas} class={cls} />}
+{cas.type === "avant-apres" && <ClinicalBeforeAfter cas={cas} class={cls} />}
+{cas.type === "sequence" && <ClinicalSequence cas={cas} class={cls} />}

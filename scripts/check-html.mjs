@@ -13,6 +13,9 @@ import { parsePack } from "../src/lib/pack.ts";
 import { applyDecisions, arborescence, builtNums, packPath, PACK_DIR } from "../src/content/pages-suivantes.ts";
 
 const SITE = "https://drfranckmoyal.fr";
+// Photographies autorisées : le portrait, et les cas cliniques déclarés dans le registre
+const registre = await readFile("src/content/cas-cliniques.ts", "utf8");
+const PHOTOS_CAS = [...registre.matchAll(/photos\/cas\/([a-z0-9-]+)\.jpg/g)].map((m) => m[1]);
 const RDV = "/contact/#prendre-rendez-vous";
 const PERSON = `${SITE}/#franck-moyal`;
 const PRACTICE = `${SITE}/#practice`;
@@ -180,10 +183,21 @@ for (const p of pages) {
   const internal = root.querySelectorAll("main a[href^='/']").map((a) => a.text.trim());
   const vague = internal.filter((t) => VAGUE.test(t));
   vague.length ? bad(`liens peu descriptifs : ${vague.join(", ")}`) : ok(`${internal.length} liens internes, tous avec un libellé descriptif`);
-  // 9. Aucune image inventée : seule la photo du Dr Moyal (bloc auteur) est une vraie image
+  // 9. Aucune image inventée : le portrait du Dr Moyal et les photographies des cas cliniques
+  // déclarées dans src/content/cas-cliniques.ts, et elles seules
   const images = root.querySelectorAll("main img").map((i) => i.getAttribute("src"));
-  const foreign = images.filter((src) => !/portrait-franck/.test(src));
-  foreign.length ? bad(`images inattendues : ${foreign.join(" ")}`) : ok(`aucune image inventée (${root.querySelectorAll("main [data-emplacement='visuel']").length} emplacement(s) réservé(s))`);
+  const foreign = images.filter((src) => !/portrait-franck/.test(src) && !PHOTOS_CAS.some((p) => src.includes(p)));
+  const casPage = [...new Set(root.querySelectorAll("main [data-cas]").map((e) => e.getAttribute("data-cas")))];
+  foreign.length
+    ? bad(`images inattendues : ${foreign.join(" ")}`)
+    : ok(`aucune image inventée${casPage.length ? ` (cas cliniques : ${casPage.join(", ")})` : ""}`);
+  // Chaque photographie porte un texte de remplacement utile et une légende visible
+  const sansAlt = root.querySelectorAll("main figure[data-cas] img").filter((i) => (i.getAttribute("alt") ?? "").length < 15);
+  const sansLegende = root.querySelectorAll("main figure[data-cas]").filter((f) => !f.querySelector("figcaption"));
+  if (casPage.length) {
+    sansAlt.length ? bad(`${sansAlt.length} photographie(s) sans texte de remplacement utile`) : ok("photographies : textes de remplacement présents");
+    sansLegende.length ? bad(`${sansLegende.length} cas sans légende`) : ok("photographies : légendes présentes");
+  }
   // Consigne aux moteurs
   const robots = root.querySelector('meta[name="robots"]')?.getAttribute("content");
   (robots ?? "") === (pk.seo.robots ?? "") ? ok(`consigne aux moteurs : ${robots ?? "aucune (page indexable)"}`) : bad(`consigne aux moteurs : ${robots} au lieu de ${pk.seo.robots}`);

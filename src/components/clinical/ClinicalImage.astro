@@ -1,0 +1,54 @@
+---
+// Une photographie clinique et sa légende (intégration des photographies, 24/09/2026).
+// Sobre : pas de cadre, pas d'ombre, légende discrète, attribution du cas en une ligne.
+import { Image } from "astro:assets";
+import { attributionCas, type CasClinique } from "../../content/cas-cliniques";
+
+interface Props {
+  cas: CasClinique;
+  class?: string;
+}
+const { cas, class: cls } = Astro.props;
+const image = cas.images[0];
+---
+
+<figure class:list={["cas", cls]} data-cas={cas.id}>
+  <Image
+    src={image.src}
+    alt={image.alt}
+    widths={[600, 900, 1400]}
+    sizes="(max-width: 63.99em) calc(100vw - 2 * var(--gutter)), 44rem"
+    loading="lazy"
+    decoding="async"
+    class="cas__image"
+  />
+  <figcaption class="cas__legende">
+    {cas.legende}
+    {cas.attribution && <span class="cas__source">{attributionCas}</span>}
+  </figcaption>
+</figure>
+
+<style>
+  .cas {
+    max-width: 44rem;
+  }
+  .cas :global(.cas__image) {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--c-ivory);
+  }
+  .cas__legende {
+    margin-top: 0.875rem;
+    max-width: 38rem;
+    font-size: var(--fs-meta);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--c-ink-soft);
+  }
+  .cas__source {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--c-sage);
+  }
+</style>

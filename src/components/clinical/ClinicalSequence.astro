@@ -1,0 +1,80 @@
+---
+// Séquence clinique en trois temps — situation initiale, projet, résultat. Les trois étapes sont
+// nommées en texte, jamais seulement par leur position (intégration des photographies, 24/09/2026,
+// §16 C et §40). Le projet est un projet : il n'est jamais présenté comme un résultat.
+import { Image } from "astro:assets";
+import { attributionCas, type CasClinique } from "../../content/cas-cliniques";
+
+interface Props {
+  cas: CasClinique;
+  class?: string;
+}
+const { cas, class: cls } = Astro.props;
+---
+
+<figure class:list={["cas-suite", cls]} data-cas={cas.id}>
+  <ol class="cas-suite__grille">
+    {
+      cas.images.map((image) => (
+        <li class="cas-suite__item">
+          {image.etiquette && <p class="cas-suite__etiquette">{image.etiquette}</p>}
+          <Image
+            src={image.src}
+            alt={image.alt}
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 63.99em) calc(100vw - 2 * var(--gutter)), 22rem"
+            loading="lazy"
+            decoding="async"
+            class="cas-suite__image"
+          />
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="cas-suite__legende">
+    {cas.legende}
+    {cas.attribution && <span class="cas-suite__source">{attributionCas}</span>}
+  </figcaption>
+</figure>
+
+<style>
+  .cas-suite__grille {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--col-gap);
+    align-items: start;
+  }
+  .cas-suite__etiquette {
+    margin-bottom: 0.625rem;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-sage);
+  }
+  .cas-suite :global(.cas-suite__image) {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--c-ivory);
+  }
+  .cas-suite__legende {
+    margin-top: 1.125rem;
+    max-width: 44rem;
+    font-size: var(--fs-meta);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--c-ink-soft);
+  }
+  .cas-suite__source {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--c-sage);
+  }
+  @media (max-width: 63.99em) {
+    .cas-suite__grille {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+// Deux photographies cliniques comparées — avant et après — côte à côte sur ordinateur, l'une
+// sous l'autre sur téléphone. Pas de curseur de comparaison : les deux images doivent rester
+// visibles, y compris pour les moteurs (intégration des photographies, 24/09/2026, §16 B).
+import { Image } from "astro:assets";
+import { attributionCas, type CasClinique } from "../../content/cas-cliniques";
+
+interface Props {
+  cas: CasClinique;
+  class?: string;
+}
+const { cas, class: cls } = Astro.props;
+---
+
+<figure class:list={["cas-duo", cls]} data-cas={cas.id}>
+  <div class="cas-duo__grille">
+    {
+      cas.images.map((image) => (
+        <div class="cas-duo__item">
+          {image.etiquette && <p class="cas-duo__etiquette">{image.etiquette}</p>}
+          <Image
+            src={image.src}
+            alt={image.alt}
+            widths={[500, 800, 1200]}
+            sizes="(max-width: 47.99em) calc(100vw - 2 * var(--gutter)), 34rem"
+            loading="lazy"
+            decoding="async"
+            class="cas-duo__image"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <figcaption class="cas-duo__legende">
+    {cas.legende}
+    {cas.attribution && <span class="cas-duo__source">{attributionCas}</span>}
+  </figcaption>
+</figure>
+
+<style>
+  .cas-duo__grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    align-items: start;
+  }
+  .cas-duo__etiquette {
+    margin-bottom: 0.625rem;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-sage);
+  }
+  .cas-duo :global(.cas-duo__image) {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--c-ivory);
+  }
+  .cas-duo__legende {
+    margin-top: 1.125rem;
+    max-width: 44rem;
+    font-size: var(--fs-meta);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--c-ink-soft);
+  }
+  .cas-duo__source {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--c-sage);
+  }
+  @media (max-width: 47.99em) {
+    .cas-duo__grille {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+</style>

@@ -18,6 +18,7 @@ import FinalCTA from "../components/home/FinalCTA.astro";
 import TextLink from "../components/global/TextLink.astro";
 import BodyText from "../components/global/BodyText.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
+import CasClinique from "../components/clinical/CasClinique.astro";
 import Container from "../components/global/Container.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { usures as u } from "../content/usures";
@@ -106,7 +107,9 @@ const schema = graph([
   <TextImageSection id={u.treat.id} layout="offset" tone="ivory" eyebrow={u.treat.label} title={u.treat.title} titleSize="statement" paragraphs={[u.treat.text]} />
 
   <!-- 6. Réhabilitation -->
-  <TextImageSection id={u.rehab.id} layout="split-left" eyebrow={u.rehab.label} title={u.rehab.title} paragraphs={u.rehab.paragraphs} links={[u.rehab.link]} media={{ label: u.rehab.media, ratio: "4 / 5" }} />
+  <TextImageSection id={u.rehab.id} layout="split-left" eyebrow={u.rehab.label} title={u.rehab.title} paragraphs={u.rehab.paragraphs} links={[u.rehab.link]}>
+    <CasClinique id="usure-reconstruction" class="u-cas" />
+  </TextImageSection>
 
   <!-- 7. Esthétique du sourire -->
   <TextImageSection id={u.smile.id} layout="offset" eyebrow={u.smile.label} title={u.smile.title} paragraphs={[u.smile.text]} links={[u.smile.link]} />

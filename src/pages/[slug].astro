@@ -20,6 +20,8 @@ import Container from "../components/global/Container.astro";
 import PrimaryButton from "../components/global/PrimaryButton.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
 import PackBlocks from "../components/pack/PackBlocks.astro";
+import CasClinique from "../components/clinical/CasClinique.astro";
+import { casCliniques } from "../content/cas-cliniques";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { usures } from "../content/usures";
@@ -54,6 +56,12 @@ const plans = planSections(sections, cfg.sections, cfg.defaults);
 // Boutons d'une section, décidés par ChatGPT (page Contact : appeler ou écrire, correctif V1.3) :
 // le bouton principal du golden master, côte à côte, d'égale importance
 const actionsOf = (id: string) => cfg.sections?.[id]?.actions ?? [];
+
+// Cas cliniques d'une section, sous son texte. Une photographie seule reste dans la colonne de
+// lecture ; un avant / après et une séquence prennent la largeur du site, juste après la section.
+const casOf = (id: string) => [cfg.sections?.[id]?.cas ?? []].flat();
+const casDansTexte = (id: string) => (casOf(id).length === 1 && casCliniques[casOf(id)[0]]?.type === "image" ? casOf(id) : []);
+const casPleineLargeur = (id: string) => (casDansTexte(id).length ? [] : casOf(id));
 
 const trail = crumbTrail(page);
 const og = await getImage({ src: portrait, format: "jpg", width: 800 });
@@ -170,8 +178,16 @@ const schema = graph([
                 </div>
               )
             }
+            {casDansTexte(p.section.id).map((id) => <CasClinique id={id} class="pack-cas-seul" />)}
             {p.media?.wide && <MediaFrame label={p.media.label} ratio={p.media.ratio} class="pack-wide-media" />}
           </TextImageSection>
+        )}
+        {casPleineLargeur(p.section.id).length > 0 && (
+          <Container class:list={["pack-cas", casPleineLargeur(p.section.id).length > 1 && "pack-cas--duo"]}>
+            {casPleineLargeur(p.section.id).map((id) => (
+              <CasClinique id={id} />
+            ))}
+          </Container>
         )}
       </>
     ))
@@ -219,6 +235,29 @@ const schema = graph([
 </BaseLayout>
 
 <style>
+  /* Cas clinique sous le texte d'une section : pleine largeur de la colonne de lecture, deux cas
+     côte à côte lorsque la section en présente deux */
+  /* Photographie seule : dans la colonne de lecture, sous le texte de la section */
+  :global(.pack-cas-seul) {
+    margin-top: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  }
+  /* Avant / après et séquences : largeur du site, juste sous la section */
+  :global(.pack-cas) {
+    margin-top: clamp(-1rem, -2rem + 2vw, 0rem);
+    margin-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  }
+  :global(.pack-cas--duo) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    align-items: start;
+  }
+  @media (max-width: 47.99em) {
+    :global(.pack-cas--duo) {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
   /* Emplacement d'image en pleine largeur sous une grille (schéma de la page Usures) */
   :global(.pack-wide-media) {
     margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
