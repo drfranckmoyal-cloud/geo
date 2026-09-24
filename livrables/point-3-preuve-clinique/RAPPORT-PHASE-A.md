@@ -70,7 +70,7 @@ Rappel des niveaux : **A** = raisonnement complet possible (page dédiée envisa
 |---|---|---|---|---|---|
 | `facettes-planification` | Facettes, planification | 3 (initial, projet, résultat) | Séquence documentée par Franck : initial → projet → final. Ni le nombre de dents, ni le matériau, ni la préparation, ni le rôle de l'orthodontie visible sur l'image « Projet » | **A conditionnel** | C'est la meilleure démonstration du raisonnement du site : le projet précède le traitement. Mais en l'état, je ne pourrais écrire que des légendes — pas une analyse. 4 réponses suffisent à le faire passer en A. |
 | `bilan-esthetique` | Bilan, planification | 3 (initial, projet, résultat) | « Légendes dans le dossier » : initial, projet, final. Aucun traitement documenté | **A conditionnel** | Même valeur démonstrative, sur un cas plus global. Il manque le cœur : ce qui a été réalisé entre le projet et le résultat. |
-| `mih-erosion-infiltration` | Taches, MIH | 2 (avant, après) | **Le mieux documenté** : tache de MIH sur une incisive, prise en charge par éclaircissement **puis** érosion-infiltration | **A conditionnel** | Un enchaînement thérapeutique documenté, une séquence en deux temps, un vrai « pourquoi pas seulement masquer la tache ». Il manque l'âge au traitement (le site affirme qu'on n'éclaircit pas avant 18 ans) et le nombre de séances. |
+| `mih-erosion-infiltration` | Taches, MIH | 2 (avant, après) | **Le mieux documenté** : tache de MIH sur une incisive, prise en charge par éclaircissement **puis** érosion-infiltration ; **patient majeur** (Franck, 24/09/2026) | **A conditionnel — le plus proche du but** | Un enchaînement thérapeutique documenté, une séquence en deux temps, un vrai « pourquoi pas seulement masquer la tache ». La question de l'âge est levée : le traitement est cohérent avec ce qu'écrit la page Taches. Restent la séquence dans le temps et l'étendue du consentement. |
 | `rehabilitation-usure` | Usures, réhabilitation | 2 (avant, après) | Avant / après d'une reconstruction. Ni cause de l'usure, ni matériau, ni étendue, ni fonction | **B, A possible** | L'axe le plus différenciant du site (§19). Mais quatre informations manquent, dont le matériau : sans elles, une page serait une coquille. |
 | `composite-six-dents` | Composite | 1 (montage avant/après) | Composite additif sur six dents antérieures | **B** | Situation, traitement et résultat sont clairs ; la réflexion ne l'est pas. Très bien là où il est. |
 | `composite-quatre-dents` | Composite | 1 (montage) | Composite additif sur quatre dents antérieures | **B** | Idem, et trop proche du précédent pour justifier une seconde page (§14). |
@@ -115,7 +115,7 @@ Une ligne = une information réellement nécessaire.
 | Bilan esthétique | Traitement réalisé | **Oui** | Entre le projet et la photographie finale, qu'est-ce qui a été réalisé : éclaircissement, composites, facettes, ou une association ? |
 | Bilan esthétique | Étendue | **Oui** | Combien de dents ont été traitées, et sur une seule arcade ou les deux ? |
 | Bilan esthétique | Nature du projet | Oui | Le projet montré est-il une simulation numérique validée avec le patient avant de commencer ? |
-| MIH | Âge au traitement | **Oui** | Quel âge avait le patient lors de l'éclaircissement ? (le site écrit qu'on n'éclaircit pas avant 18 ans : il faut pouvoir être cohérent) |
+| MIH | Âge au traitement | ~~Oui~~ **répondu** | ~~Quel âge avait le patient lors de l'éclaircissement ?~~ → **Franck, 24/09/2026 : le patient était majeur.** Le cas est donc cohérent avec ce qu'écrit la page Taches (pas d'éclaircissement avant 18 ans). Rien ne sera publié de plus précis que « patient adulte », et seulement si c'est utile au propos. |
 | MIH | Séquence | **Oui** | L'éclaircissement et l'érosion-infiltration faisaient-ils partie du même plan de traitement, et combien de temps les sépare ? |
 | MIH | Nombre de dents | Non | L'infiltration a-t-elle concerné une seule incisive ? |
 | MIH | Pourquoi ce choix | Non | Pourquoi l'infiltration plutôt qu'un composite ou une facette dans cette situation ? |
@@ -168,9 +168,16 @@ pourquoi il a été décidé ainsi. Les **21 questions** du tableau 3 sont l'exa
 faire à Franck : une demi-heure de réponses transforme trois séries de photographies en trois
 vraies preuves cliniques.
 
-Deux d'entre elles ne sont pas des questions de confort : l'âge du patient MIH lors de
-l'éclaircissement (le site affirme qu'on n'éclaircit pas avant 18 ans) et l'étendue du consentement
-(publier un cas commenté n'est pas publier une photographie).
+Deux d'entre elles n'étaient pas des questions de confort. **La première est déjà levée** : Franck
+a répondu le 24/09/2026 que le patient du cas MIH était **majeur** au moment de l'éclaircissement —
+le cas ne contredit donc pas ce qu'écrit la page Taches. Reste la seconde, qui engage : l'étendue
+du consentement, publier un cas commenté n'étant pas publier une photographie.
+
+**Réponses de Franck, au fil de l'eau :**
+
+| Date | Question | Réponse |
+|---|---|---|
+| 24/09/2026 | Âge du patient du cas MIH lors de l'éclaircissement | Majeur |
 
 ---
 

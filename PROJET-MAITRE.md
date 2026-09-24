@@ -539,6 +539,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 24/09/2026 | C | `FAQPage` posé sur les 16 pages à FAQ, contrôlé et mis en ligne. | D55 |
 | 24/09/2026 | G | **POINT 3 — preuve clinique** : cahier des charges (47 points) ; phase A obligatoire, audit et proposition, sans rien publier. | D56 |
 | 24/09/2026 | C | Phase A rendue : inventaire, classement A/B/C, pages proposées, 21 questions à Franck, recommandation d'architecture. Rien créé, rien déployé. | Revue de ChatGPT et réponses de Franck |
+| 24/09/2026 | F | Répond à la première question bloquante du POINT 3 : **le patient du cas MIH était majeur** lors de l'éclaircissement — le cas est cohérent avec la page Taches, qui écrit qu'on n'éclaircit pas avant 18 ans. | D56 |
 
 ---
 
