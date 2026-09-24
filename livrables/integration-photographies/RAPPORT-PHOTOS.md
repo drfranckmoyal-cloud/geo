@@ -253,3 +253,52 @@ Je n'ai touché à rien de tout cela : c'est un chantier à ouvrir séparément.
 ---
 
 *Prochaine étape : ta revue. Conformément au §51, je n'ai commencé ni le POINT 2 ni le POINT 3.*
+
+---
+
+## Ajout du soir — un cas sur les deux pages d'entrée (24/09/2026)
+
+Franck a constaté qu'en arrivant sur le site par une recherche Google, il ne voyait aucune
+photographie : le lien de Google mène à l'accueil, et **ni l'accueil ni la page pilier ne
+montraient de cas** — ce sont pourtant les deux pages sur lesquelles un patient arrive. Il a
+demandé d'en poser un sur chacune. C'est fait, en ligne et contrôlé :
+
+| Page | Cas | Emplacement | Composant |
+|---|---|---|---|
+| `/` | `composite-six-dents` — reconstruction additive de six dents antérieures | sous le bloc « Esthétique. Fonction. Préservation. », aligné sur sa colonne de texte, même fond ivoire | ClinicalImage |
+| `/dentisterie-esthetique-paris/` | `eclaircissement-ambulatoire` — avant / après 4 semaines | après « Qu'est-ce que le gradient thérapeutique ? » | ClinicalBeforeAfter |
+
+Le choix des deux cas suit l'argument de chaque page : sur l'accueil, une transformation obtenue
+**sans retirer de tissu dentaire**, ce que la phrase manifeste affirme ; sur la page pilier, le
+traitement **le moins invasif** produisant un résultat visible, ce que défend le gradient
+thérapeutique. Les cas « projet numérique » (séquences de planification) ont été écartés à ces
+deux endroits : ce sont des captures de logiciel, avec appareil orthodontique visible sur l'une.
+
+**À savoir :** les 13 cas étant déjà tous employés sur les pages de soins, ces deux-là
+réapparaissent (pages Composite bonding et Éclaircissement). Franck l'a accepté en connaissance de
+cause et fournira, si possible, un cas inédit — ainsi que des photographies de cabinet, qui
+manquent toujours (§43).
+
+**Contrôles après ce second déploiement :** les 23 pages en ligne sont identiques à la version
+fabriquée ; les deux nouvelles photographies se chargent à 390 px comme à 1440 px, aucun
+débordement horizontal ; le dossier `_astro` du serveur contient exactement les 106 fichiers de la
+version fabriquée.
+
+**Incident rattrapé au passage :** iCloud avait de nouveau fabriqué des copies dans le dossier de
+travail — cette fois suffixées « 3 » —, et trois d'entre elles sont parties sur le serveur avec le
+paquet (`index 3.html`, `favicon-48 3.png`, une image de portrait). Elles n'étaient appelées par
+aucune page. Elles ont été mises à la corbeille du serveur, et la fabrication du paquet écarte
+désormais **toute** copie de ce type, quel que soit son numéro.
+
+**Rapidité, après cet ajout :** Lighthouse mobile en production, accueil **100 / 100 / 100 / 100**,
+LCP 1,8 s, CLS 0, 263 Ko (contre 213 Ko avant : la photographie de l'accueil est assez haut dans la page pour que
+le navigateur la télécharge dès l'ouverture, alors que toutes les autres attendent le défilement ;
+son attribut reste « chargement différé ») ; page pilier
+**100 / 100 / 100 / 100**, LCP 1,0 s, CLS 0, 198 Ko.
+
+**Emplacements réservés encore vides sur la page pilier :** le pack y prévoit deux visuels —
+« 3 à 5 cas cliniques réels » sous « Quelles solutions en dentisterie esthétique ? » et une
+« photographie réelle de planification esthétique » sous « Quelle place pour le smile design ? ».
+Ils restent masqués, faute d'instruction sur ce qu'il faut y mettre. Dis-le si tu veux les remplir
+avec les cas existants.
+

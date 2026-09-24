@@ -259,6 +259,9 @@ export const layouts: Record<string, PageLayout> = {
       "quelles-solutions-en-dentisterie-esthetique": { entries: true, media: { label: "3 à 5 cas cliniques réels — à fournir", ratio: "3 / 1", wide: true } },
       "et-si-les-dents-sont-usees": { layout: "panel" },
       "quelle-place-pour-le-smile-design": { media: { label: "Photographie réelle de planification esthétique — à fournir", ratio: "4 / 5" } },
+      // Le gradient thérapeutique défend de commencer par le moins invasif : le cas
+      // d'éclaircissement le montre (choix de Franck, 24/09/2026).
+      "qu-est-ce-que-le-gradient-therapeutique": { cas: "eclaircissement-ambulatoire" },
     },
   },
   "02": {

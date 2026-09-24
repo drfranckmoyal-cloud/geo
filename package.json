@@ -13,7 +13,7 @@
     "captures": "node scripts/captures.mjs",
     "check": "astro build && node scripts/verify-texts.mjs",
     "launch-check": "node scripts/check-launch.mjs",
-    "paquet": "find dist -name '* 2.*' -delete; mkdir -p livrables/deploiement && cd dist && zip -qr -X -FS ../livrables/deploiement/drfranckmoyal-site.zip . && ls -l ../livrables/deploiement/drfranckmoyal-site.zip",
+    "paquet": "find dist -name '* [0-9].*' -delete; mkdir -p livrables/deploiement && cd dist && zip -qr -X -FS ../livrables/deploiement/drfranckmoyal-site.zip . && ls -l ../livrables/deploiement/drfranckmoyal-site.zip",
     "photos": "node scripts/prepare-photos.mjs"
   },
   "dependencies": {

@@ -10,6 +10,8 @@ import MethodSteps from "../components/home/MethodSteps.astro";
 import AuthorityStrip from "../components/home/AuthorityStrip.astro";
 import FinalCTA from "../components/home/FinalCTA.astro";
 import TextImageSection from "../components/editorial/TextImageSection.astro";
+import Section from "../components/global/Section.astro";
+import CasClinique from "../components/clinical/CasClinique.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { site } from "../content/site";
@@ -31,6 +33,13 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
   />
   <PillarPair title={home.pillars.title} items={home.pillars.items} />
   <PhilosophyStatement title={home.philosophy.title} text={home.philosophy.text} />
+  {/* Ce que « Esthétique. Fonction. Préservation. » donne en bouche : une reconstruction
+      additive, sans retrait de tissu dentaire (choix de Franck, 24/09/2026). */}
+  <Section tone="ivory" spacing="none" class="accueil-cas-bande">
+    <div class="container grid-12 accueil-cas-grille">
+      <CasClinique id="composite-six-dents" class="accueil-cas" />
+    </div>
+  </Section>
   <MethodSteps
     id="methode"
     title={home.method.title}
@@ -48,3 +57,19 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
   <AuthorityStrip title={home.authority.title} text={home.authority.text} links={home.authority.links} />
   <FinalCTA title={home.final.title} text={home.final.text} cta={home.final.cta} />
 </BaseLayout>
+
+<style>
+  /* Le cas clinique prolonge le bloc manifeste : même fond ivoire, aligné sur la colonne
+     de texte du manifeste, pleine largeur sur mobile. */
+  .accueil-cas-bande {
+    padding-bottom: var(--section-y);
+  }
+  .accueil-cas-grille :global(.accueil-cas) {
+    grid-column: 7 / span 6;
+  }
+  @media (max-width: 63.99em) {
+    .accueil-cas-grille :global(.accueil-cas) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
