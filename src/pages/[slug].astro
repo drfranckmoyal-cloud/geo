@@ -30,7 +30,7 @@ import { hidden, layouts, schemaExtras, schemaOrganizations, shownSourceNotes } 
 import { builtPackPages, crumbTrail, resolveLink } from "../lib/pack-files";
 import { planSections } from "../lib/pack-layout";
 import { contractFacts, type PackPage } from "../lib/pack";
-import { abs, breadcrumbs, graph, organization, person, practice, website } from "../lib/schema";
+import { abs, breadcrumbs, faqPage, graph, organization, person, practice, website } from "../lib/schema";
 
 export function getStaticPaths() {
   return builtPackPages().map((page) => ({ params: { slug: page.url.replace(/^\/|\/$/g, "") }, props: { page } }));
@@ -133,6 +133,7 @@ const schema = graph([
   { ...breadcrumbs(trail.map((c) => ({ name: c.label, path: c.href }))), "@id": `${url}#fil` },
   person(abs(og.src), false, page.seo.schema.includes("PostalAddress")),
   practice(),
+  ...(page.faq ? [faqPage(url, page.faq.items)] : []),
   ...(schemaOrganizations[page.num] ?? []).map(organization),
 ]);
 ---

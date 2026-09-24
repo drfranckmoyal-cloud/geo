@@ -112,12 +112,26 @@ for (const p of pages) {
       const node = graph.find((n) => n["@id"] === org.id);
       node && node.url === org.url && node.founder?.["@id"] === PERSON ? ok(`organisation ${node.name} (${node["@type"]}), fondée par Franck`) : bad(`organisation ${org.id} absente ou incomplète`);
     }
+    // Foire aux questions : les questions et réponses balisées sont celles qui s'affichent
+    // (arbitrage de Franck du 24/09/2026 : `FAQPage` partout où une FAQ est visible)
+    const questions = root.querySelectorAll(".faq__item h3").map((h) => h.structuredText.trim());
+    const reponses = root.querySelectorAll(".faq__item p").map((x) => x.structuredText.trim());
+    const faq = graph.find((n) => n["@type"] === "FAQPage");
+    if (questions.length) {
+      if (!faq) bad(`FAQ de ${questions.length} questions visible, mais aucune FAQPage dans les données structurées`);
+      else {
+        const balQ = faq.mainEntity.map((q) => q.name);
+        const balR = faq.mainEntity.map((q) => q.acceptedAnswer?.text ?? "");
+        const memes = JSON.stringify(balQ) === JSON.stringify(questions) && balR.every((t, i) => (reponses[i] ?? "").startsWith(t.slice(0, 60)));
+        memes ? ok(`FAQPage : ${questions.length} questions, identiques à celles affichées`) : bad("FAQPage : questions ou réponses différentes de celles affichées");
+      }
+    } else if (faq) bad("FAQPage dans les données structurées, mais aucune FAQ visible");
   } catch (e) {
     bad("données structurées illisibles : " + e.message);
   }
   const future = root.querySelectorAll("[data-a-venir]").map((a) => a.getAttribute("href"));
-  // Les 20 pages du pack construites : un lien « à venir » est désormais une erreur
-  if (builtNums.length === 20) future.length ? bad(`liens vers des pages non construites : ${[...new Set(future)].join(" ")}`) : ok("aucun lien vers une page à venir");
+  // Toutes les pages de l'arborescence construites : un lien « à venir » est désormais une erreur
+  if (builtNums.length === arborescence.length) future.length ? bad(`liens vers des pages non construites : ${[...new Set(future)].join(" ")}`) : ok("aucun lien vers une page à venir");
   else info(`${new Set(future).size} adresses de pages à venir en lien : ${[...new Set(future)].sort().join(" ")}`);
   const ext = root.querySelectorAll('a[target="_blank"]');
   const unsafe = ext.filter((a) => !/noopener/.test(a.getAttribute("rel") ?? "") || !/noreferrer/.test(a.getAttribute("rel") ?? ""));

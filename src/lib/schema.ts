@@ -6,6 +6,7 @@
 // sur chaque page ; il porte l'adresse, le téléphone et l'e-mail, et Franck y exerce
 // (workLocation) — sans répéter ces coordonnées sur Person.
 import { site } from "../content/site";
+import { fr } from "./typo.ts";
 
 const abs = (path: string) => new URL(path, site.url).href;
 
@@ -95,6 +96,22 @@ export function breadcrumbs(items: { name: string; path: string }[]) {
       position: i + 1,
       name: item.name,
       item: abs(item.path),
+    })),
+  };
+}
+
+// Foire aux questions d'une page : les mêmes questions et les mêmes réponses que celles affichées,
+// jamais un texte écrit pour les moteurs (POINT 2 §35, arbitrage de Franck du 24/09/2026 : le site
+// pose désormais `FAQPage` partout où une FAQ est visible). Le texte est nettoyé de ses marques de
+// gras : les données structurées ne portent pas de mise en forme.
+export function faqPage(url: string, items: { q: string; a: string }[]) {
+  return {
+    "@type": "FAQPage",
+    "@id": `${url}#faq`,
+    mainEntity: items.map(({ q, a }) => ({
+      "@type": "Question",
+      name: fr(q.replace(/\*\*/g, "")),
+      acceptedAnswer: { "@type": "Answer", text: fr(a.replace(/\*\*/g, "").replace(/\n+/g, " ")) },
     })),
   };
 }
