@@ -20,6 +20,7 @@ export interface SectionPlan {
   media?: { label: string; ratio?: string; wide?: boolean };
   entries: boolean;
   etapes: boolean;
+  annonce?: string;
   main: Block[];
   aside: Block[];
 }
@@ -77,6 +78,7 @@ export function planSections(sections: Section[], overrides: Record<string, Sect
       media: o.media,
       entries,
       etapes: o.etapes ?? false,
+      annonce: o.annonce,
       main: layout === "aside" ? section.blocks.slice(0, -1) : section.blocks,
       aside: inAside,
     };

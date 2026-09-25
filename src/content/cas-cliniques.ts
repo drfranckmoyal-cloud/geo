@@ -41,6 +41,9 @@ export interface CasImage {
   alt: string;
   /** Étiquette affichée au-dessus de l'image : « Avant », « Projet »… */
   etiquette?: string;
+  /** Légende employée lorsque cette photographie est affichée seule, dans sa propre section
+   *  d'une page de cas clinique (POINT 3, phase B) */
+  legende?: string;
 }
 
 export interface CasClinique {
@@ -85,9 +88,24 @@ export const casCliniques: Record<string, CasClinique> = {
     legende: "Exemple de planification d’un traitement par facettes : situation initiale, projet esthétique et résultat clinique.",
     attribution: true,
     images: [
-      { src: facettesInitial, alt: "Situation initiale avant traitement par facettes", etiquette: "Situation initiale" },
-      { src: facettesProjet, alt: "Projet esthétique numérique avant réalisation des facettes", etiquette: "Projet" },
-      { src: facettesResultat, alt: "Résultat clinique après traitement par facettes", etiquette: "Résultat" },
+      {
+        src: facettesInitial,
+        alt: "Situation initiale avant traitement par facettes",
+        etiquette: "Situation initiale",
+        legende: "Situation initiale, avant toute intervention.",
+      },
+      {
+        src: facettesProjet,
+        alt: "Projet esthétique numérique avant réalisation des facettes",
+        etiquette: "Projet",
+        legende: "Projet esthétique numérique réalisé avec SmileCloud. L’appareil orthodontique en place fait partie du traitement.",
+      },
+      {
+        src: facettesResultat,
+        alt: "Résultat clinique après traitement par facettes",
+        etiquette: "Résultat",
+        legende: "Résultat après la pose de quatre facettes en céramique.",
+      },
     ],
   },
   "facettes-ceramique": {
@@ -150,9 +168,24 @@ export const casCliniques: Record<string, CasClinique> = {
     legende: "De la situation initiale au projet esthétique puis au résultat clinique.",
     attribution: true,
     images: [
-      { src: bilanInitial, alt: "Situation initiale avant projet esthétique", etiquette: "Situation initiale" },
-      { src: bilanProjet, alt: "Projet esthétique numérique construit à partir des photographies du patient", etiquette: "Projet" },
-      { src: bilanResultat, alt: "Résultat clinique après réalisation du projet esthétique", etiquette: "Résultat" },
+      {
+        src: bilanInitial,
+        alt: "Situation initiale avant projet esthétique",
+        etiquette: "Situation initiale",
+        legende: "Situation initiale : usures importantes et déficit esthétique majeur.",
+      },
+      {
+        src: bilanProjet,
+        alt: "Projet esthétique numérique construit à partir des photographies du patient",
+        etiquette: "Projet",
+        legende: "Simulation numérique du projet esthétique, réalisée avec SmileCloud.",
+      },
+      {
+        src: bilanResultat,
+        alt: "Résultat clinique après réalisation du projet esthétique",
+        etiquette: "Résultat",
+        legende: "Résultat après la pose de vingt facettes en céramique.",
+      },
     ],
   },
   "usure-reconstruction": {

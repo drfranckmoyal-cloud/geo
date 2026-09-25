@@ -1,0 +1,65 @@
+---
+// Annonce d'un cas clinique depuis une page thérapeutique (POINT 3 §24) : une photographie de
+// petite taille, la problématique, l'approche en une ligne, le lien. Composition éditoriale —
+// un filet, du texte, aucun cadre, aucune ombre, aucune carte.
+import { Image } from "astro:assets";
+import TextLink from "../global/TextLink.astro";
+import { plain } from "../../lib/typo";
+import { casCliniques } from "../../content/cas-cliniques";
+import { annoncesCas } from "../../content/cas-pages";
+
+interface Props {
+  id: string; // clé de src/content/cas-pages.ts
+  class?: string;
+}
+const { id, class: cls } = Astro.props;
+const a = annoncesCas[id];
+if (!a) throw new Error(`Annonce de cas inconnue : « ${id} »`);
+const image = casCliniques[a.cas].images[0];
+---
+
+<aside class:list={["annonce", cls]}>
+  <Image src={image.src} alt={image.alt} widths={[280, 420]} sizes="(max-width: 47.99em) 7rem, 9rem" loading="lazy" decoding="async" class="annonce__image" />
+  <div class="annonce__texte">
+    <p class="annonce__probleme" set:html={plain(a.probleme)} />
+    <p class="annonce__approche" set:html={plain(a.approche)} />
+    <TextLink href={a.lien.href} label={a.lien.label} class="annonce__lien" />
+  </div>
+</aside>
+
+<style>
+  .annonce {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: clamp(1.25rem, 1rem + 1vw, 2rem);
+    align-items: start;
+    margin-top: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--c-stone);
+    max-width: 44rem;
+  }
+  .annonce :global(.annonce__image) {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: var(--c-ivory);
+  }
+  .annonce__probleme {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+  }
+  .annonce__approche {
+    margin-top: 0.5rem;
+    color: var(--c-ink-soft);
+    line-height: 1.5;
+  }
+  .annonce :global(.annonce__lien) {
+    margin-top: var(--gap-text-cta);
+  }
+  @media (max-width: 47.99em) {
+    .annonce {
+      grid-template-columns: 7rem 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>

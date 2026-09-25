@@ -52,7 +52,7 @@ export interface PackPage {
   cta?: { title: string; paragraphs: string[]; label?: string };
   related?: { title: string; labels: string[] };
   links: { label: string; href: string }[];
-  author: { name: string; href: string; date: string; iso: string };
+  author: { name: string; href: string; date: string; iso: string; published?: string };
   seo: { title: string; description: string; schema: string[]; robots?: string };
   images: string[];
   sources: Source[];
@@ -368,6 +368,7 @@ export function parsePack(md: string, file: string): PackPage {
       href: code(field(author, /Lien auteur/)),
       date: field(author, /Date de mise à jour/) ?? "",
       iso: code(field(author, /`dateModified`/)),
+      published: code(field(author, /`datePublished`/)) || undefined,
     },
     seo: {
       title: field(seo, /Title/) ?? "",

@@ -11,6 +11,7 @@ const raw = import.meta.glob(
     "/docs/pages-suivantes/v1.3/[0-9][0-9]_*.md",
     "/docs/pages-suivantes/v1.4/[0-9][0-9]_*.md",
     "/docs/pages-suivantes/v1.5/[0-9][0-9]_*.md",
+    "/docs/pages-suivantes/v1.6/[0-9][0-9]_*.md",
   ],
   {
     query: "?raw",

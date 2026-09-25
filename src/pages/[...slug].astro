@@ -21,7 +21,9 @@ import PrimaryButton from "../components/global/PrimaryButton.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
 import PackBlocks from "../components/pack/PackBlocks.astro";
 import CasClinique from "../components/clinical/CasClinique.astro";
+import ClinicalCaseSummary from "../components/clinical/ClinicalCaseSummary.astro";
 import { casCliniques } from "../content/cas-cliniques";
+import { MENTION_CLINIQUE } from "../content/cas-pages";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { usures } from "../content/usures";
@@ -60,7 +62,14 @@ const actionsOf = (id: string) => cfg.sections?.[id]?.actions ?? [];
 // Cas cliniques d'une section, sous son texte. Une photographie seule reste dans la colonne de
 // lecture ; un avant / après et une séquence prennent la largeur du site, juste après la section.
 const casOf = (id: string) => [cfg.sections?.[id]?.cas ?? []].flat();
-const casDansTexte = (id: string) => (casOf(id).length === 1 && casCliniques[casOf(id)[0]]?.type === "image" ? casOf(id) : []);
+// Pages de cas cliniques : la mention « Cas clinique — Dr Franck Moyal » n'apparaît qu'une fois,
+// sous la première photographie de la page (POINT 3 §29)
+const tousLesCas = plansCas();
+function plansCas() {
+  return Object.values(cfg.sections ?? {}).flatMap((o) => [o.cas ?? []].flat());
+}
+const attributionDe = (id: string) => (cfg.attributionUnique ? tousLesCas.indexOf(id) === 0 : undefined);
+const casDansTexte = (id: string) => (casOf(id).length === 1 && casCliniques[casOf(id)[0].split("#")[0]]?.type === "image" ? casOf(id) : []);
 const casPleineLargeur = (id: string) => (casDansTexte(id).length ? [] : casOf(id));
 
 const trail = crumbTrail(page);
@@ -113,6 +122,7 @@ const schema = graph([
     ...(pageTypes.includes("Article") ? { headline: page.h1 } : {}),
     author: { "@id": site.personId },
     ...(page.parent === "/franck-moyal/" ? { about: { "@id": site.personId } } : {}),
+    ...(page.author.published ? { datePublished: page.author.published } : {}),
     dateModified: page.author.iso,
     breadcrumb: { "@id": `${url}#fil` },
     ...(page.sources.length
@@ -179,14 +189,15 @@ const schema = graph([
                 </div>
               )
             }
-            {casDansTexte(p.section.id).map((id) => <CasClinique id={id} class="pack-cas-seul" />)}
+            {casDansTexte(p.section.id).map((id) => <CasClinique id={id} attribution={attributionDe(id)} class="pack-cas-seul" />)}
+            {p.annonce && <ClinicalCaseSummary id={p.annonce} class="pack-annonce" />}
             {p.media?.wide && <MediaFrame label={p.media.label} ratio={p.media.ratio} class="pack-wide-media" />}
           </TextImageSection>
         )}
         {casPleineLargeur(p.section.id).length > 0 && (
           <Container class:list={["pack-cas", casPleineLargeur(p.section.id).length > 1 && "pack-cas--duo"]}>
             {casPleineLargeur(p.section.id).map((id) => (
-              <CasClinique id={id} />
+              <CasClinique id={id} attribution={attributionDe(id)} />
             ))}
           </Container>
         )}
@@ -212,6 +223,13 @@ const schema = graph([
         notes={notes}
         orphans={orphans}
       />
+    )
+  }
+  {
+    cfg.mentionClinique && (
+      <Container class="pack-mention">
+        <p>{MENTION_CLINIQUE}</p>
+      </Container>
     )
   }
   {
@@ -259,6 +277,19 @@ const schema = graph([
       gap: 2.5rem;
     }
   }
+  /* Mention commune des pages de cas cliniques : discrète, jamais alarmante (POINT 3 §32) */
+  .pack-mention {
+    margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+  .pack-mention p {
+    max-width: 44rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--c-stone);
+    font-size: var(--fs-meta);
+    line-height: 1.6;
+    color: var(--c-ink-soft);
+  }
+
   /* Tableau comparatif (POINT 2) : la section est en colonne de lecture, calée sur le bord
      gauche ; le tableau, lui, prend toute la largeur du site pour respirer. */
   :global(.pb__table) {

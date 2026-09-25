@@ -8,12 +8,25 @@ import ClinicalSequence from "./ClinicalSequence.astro";
 import { casCliniques } from "../../content/cas-cliniques";
 
 interface Props {
+  /** Identifiant du cas, ou « identifiant#n » pour n'afficher que la n-ième photographie
+   *  (pages de cas cliniques : la situation initiale, le projet et le résultat sont commentés
+   *  séparément, chacun dans sa section) */
   id: string;
+  /** Force la mention « Cas clinique — Dr Franck Moyal » : une seule fois par page de cas */
+  attribution?: boolean;
   class?: string;
 }
-const { id, class: cls } = Astro.props;
-const cas = casCliniques[id];
-if (!cas) throw new Error(`Cas clinique inconnu : « ${id} »`);
+const { id, attribution, class: cls } = Astro.props;
+const [ref, rang] = id.split("#");
+const source = casCliniques[ref];
+if (!source) throw new Error(`Cas clinique inconnu : « ${ref} »`);
+const image = rang === undefined ? undefined : source.images[Number(rang)];
+if (rang !== undefined && !image) throw new Error(`Cas « ${ref} » : pas de photographie n° ${rang}`);
+const cas = {
+  ...source,
+  ...(attribution === undefined ? {} : { attribution }),
+  ...(image ? { type: "image" as const, images: [image], legende: image.legende ?? source.legende } : {}),
+};
 ---
 
 {cas.type === "image" && <ClinicalImage cas={cas} class={cls} />}

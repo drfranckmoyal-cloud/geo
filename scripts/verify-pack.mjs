@@ -43,6 +43,14 @@ const UI_PATTERNS = [/^Voir les \d+ sources scientifiques$/, /^\[\d+\]$/, /^DOI\
 // Légendes, étiquettes et attribution des cas cliniques : textes décidés par ChatGPT hors du pack
 // (intégration des photographies du 24/09/2026). Le registre est lu tel quel, sans charger les
 // images, que Node ne sait pas résoudre.
+// Textes des pages de cas cliniques décidés hors du pack (POINT 3, phase B) : la mention commune
+// de fin de page et les trois annonces posées dans les pages thérapeutiques.
+const casPages = await readFile("src/content/cas-pages.ts", "utf8");
+const CAS_PAGES_TEXTES = [
+  ...[...casPages.matchAll(/^\s*"(.+?)";$/gm)].map((m) => m[1]),
+  ...[...casPages.matchAll(/(?:probleme|approche|label): "(.+?)",/g)].map((m) => m[1]),
+].map(norm);
+
 const registre = await readFile("src/content/cas-cliniques.ts", "utf8");
 const attribution = registre.match(/const ATTRIBUTION = "(.+?)";/)[1];
 const CAS_TEXTES = [
@@ -211,6 +219,7 @@ export async function verifyPack() {
         !UI_EXACT.includes(b) &&
         !UI_PATTERNS.some((re) => re.test(b)) &&
         !CAS_TEXTES.includes(b) &&
+        !CAS_PAGES_TEXTES.includes(b) &&
         // Suite d'étapes (gradient thérapeutique) : le composant écrit « 01 » devant le mot du pack
         !(/^\d{2}\S/.test(b) && packLow.includes(b.replace(/^\d{2}/, "").toLocaleLowerCase("fr"))) &&
         !actions.some((a) => norm(a.label) === b),
@@ -237,6 +246,9 @@ export async function verifyPack() {
     if (deduced.length) out.push(`  • Liens à l'adresse déduite : ${deduced.join(" ; ")}`);
     for (const a of applied) out.push(`  • Remplacement décidé : ${a}`);
     for (const a of actions) out.push(`  • Bouton décidé hors du pack : « ${a.label} » → ${a.href} (fiche corrective du contact, correctif V1.3)`);
+    for (const a of Object.values(layouts[num]?.sections ?? {}).flatMap((o) => (o.annonce ? [o.annonce] : [])))
+      out.push(`  • Annonce d'un cas clinique : « ${a} » — texte décidé hors du pack (POINT 3, phase B)`);
+    if (layouts[num]?.mentionClinique) out.push("  • Mention commune des pages de cas — texte décidé hors du pack (POINT 3 §32)");
     for (const id of Object.values(layouts[num]?.sections ?? {}).flatMap((o) => [o.cas ?? []].flat()))
       out.push(`  • Cas clinique affiché : « ${id} » — photographie réelle, légende décidée hors du pack (intégration du 24/09/2026)`);
     if (!/\*\*Auteur\*\* : /.test(md)) out.push("  • Ouverture sans ligne auteur (le fichier ne nomme pas d'auteur)");

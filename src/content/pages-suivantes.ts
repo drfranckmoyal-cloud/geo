@@ -28,6 +28,10 @@ export const packReplacements: Record<string, string> = {
   "06": "docs/pages-suivantes/v1.3/06_taches-dentaires-dyschromies-icon_V1_3.md",
   // Page « Facettes ou composite : comment choisir ? » (POINT 2 SEO/GEO, 24/09/2026)
   "21": "docs/pages-suivantes/v1.5/21_facettes-ou-composite_V1_5.md",
+  // Trois pages de cas cliniques (POINT 3, phase B, 24/09/2026)
+  "22": "docs/pages-suivantes/v1.6/22_cas-planification-facettes-ceramique_V1_6.md",
+  "23": "docs/pages-suivantes/v1.6/23_cas-planification-rehabilitation-facettes_V1_6.md",
+  "24": "docs/pages-suivantes/v1.6/24_cas-mih-eclaircissement-erosion-infiltration_V1_6.md",
 };
 // Chemin du fichier d'une page, parmi les fichiers de la V1.2 (pour les contrôles)
 export const packPath = (num: string, v12Files: string[]): string =>
@@ -57,10 +61,14 @@ export const arborescence = [
   { num: "20", lot: "D", url: "/mentions-legales/" },
   // Ajoutée après le pack : page de décision du cluster esthétique (POINT 2, 24/09/2026)
   { num: "21", lot: "E", url: "/facettes-ou-composite/" },
+  // Cas cliniques (POINT 3, phase B) : chacun rattaché à sa page thérapeutique
+  { num: "22", lot: "F", url: "/cas-cliniques/planification-facettes-ceramique/" },
+  { num: "23", lot: "F", url: "/cas-cliniques/planification-rehabilitation-facettes/" },
+  { num: "24", lot: "F", url: "/cas-cliniques/mih-eclaircissement-erosion-infiltration/" },
 ] as const;
 
 // Lots construits à ce jour
-export const builtLots: string[] = ["A", "B", "C", "D", "E"];
+export const builtLots: string[] = ["A", "B", "C", "D", "E", "F"];
 export const builtNums: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.num);
 export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.includes(p.lot)).map((p) => p.url);
 
@@ -285,8 +293,11 @@ export interface SectionOverride {
   links?: boolean; // liste de noms de pages en gras : chaque nom devient un lien vers sa page
   actions?: { label: string; href: string }[];
   /** Un cas clinique (src/content/cas-cliniques.ts), ou deux présentés côte à côte, affichés sous
-   *  le texte de la section. Ils remplacent l'emplacement d'image prévu par le §9 du fichier. */
+   *  le texte de la section. Ils remplacent l'emplacement d'image prévu par le §9 du fichier.
+   *  « identifiant#n » n'affiche que la n-ième photographie du cas (pages de cas cliniques). */
   cas?: string | string[];
+  /** Annonce d'un cas clinique (src/content/cas-pages.ts), sous le texte de la section */
+  annonce?: string;
 }
 export interface PageLayout {
   hideByline?: boolean; // ouverture sans ligne auteur (Contact, Mentions légales : validation 23)
@@ -295,9 +306,41 @@ export interface PageLayout {
   sections?: Record<string, SectionOverride>;
   method?: { before: string }; // MethodSteps (page 02), placé avant cette section
   pathway?: boolean; // ClinicalPathway (sommaire cliquable des sections)
+  /** Pages de cas cliniques : « Cas clinique — Dr Franck Moyal » une seule fois (POINT 3 §29) */
+  attributionUnique?: boolean;
+  /** Pages de cas cliniques : mention commune de fin de page (POINT 3 §32) */
+  mentionClinique?: boolean;
 }
 
 export const layouts: Record<string, PageLayout> = {
+  // Pages de cas cliniques (POINT 3, phase B) : une photographie par étape, la mention commune en
+  // fin de page, et « Cas clinique — Dr Franck Moyal » une seule fois.
+  "22": {
+    attributionUnique: true,
+    mentionClinique: true,
+    sections: {
+      "la-situation-initiale": { cas: "facettes-planification#0" },
+      "commencer-par-definir-le-projet-final": { cas: "facettes-planification#1", tone: "ivory" },
+      "le-resultat": { cas: "facettes-planification#2" },
+    },
+  },
+  "23": {
+    attributionUnique: true,
+    mentionClinique: true,
+    sections: {
+      "situation-initiale": { cas: "bilan-esthetique#0" },
+      "visualiser-le-resultat-avant-de-traiter": { cas: "bilan-esthetique#1", tone: "ivory" },
+      "resultat-clinique": { cas: "bilan-esthetique#2" },
+    },
+  },
+  "24": {
+    attributionUnique: true,
+    mentionClinique: true,
+    sections: {
+      "cas-1-tache-de-mih-sur-une-incisive": { cas: "mih-erosion-infiltration" },
+      "cas-2-mih-sur-une-dent-dyschromiee-apres": { cas: "dyschromie-erosion-infiltration" },
+    },
+  },
   // Page de décision du cluster esthétique (V1.5, POINT 2) : deux définitions en grille, la phrase
   // de synthèse en panneau vert sauge, le gradient thérapeutique en suite d'étapes, le tableau
   // comparatif et la matrice d'orientation dans une colonne partant du bord gauche.
@@ -320,6 +363,7 @@ export const layouts: Record<string, PageLayout> = {
       "quelles-solutions-en-dentisterie-esthetique": { entries: true, media: { label: "3 à 5 cas cliniques réels — à fournir", ratio: "3 / 1", wide: true } },
       "et-si-les-dents-sont-usees": { layout: "panel" },
       "quelle-place-pour-le-smile-design": { media: { label: "Photographie réelle de planification esthétique — à fournir", ratio: "4 / 5" } },
+      // Annonce du cas clinique de planification (POINT 3 §21), sous la section qui en parle
       // Le gradient thérapeutique défend de commencer par le moins invasif : le cas
       // d'éclaircissement le montre (choix de Franck, 24/09/2026).
       "qu-est-ce-que-le-gradient-therapeutique": { cas: "eclaircissement-ambulatoire" },
@@ -330,7 +374,7 @@ export const layouts: Record<string, PageLayout> = {
     sections: {
       "deuxieme-etape-documenter": { media: { label: "Séquence photo / scan / simulation d’un vrai cas, avec consentement — à fournir", ratio: "4 / 5" } },
       // La séquence initial → projet → résultat montre ce que veut dire planifier avant de traiter
-      "qu-apporte-le-smile-design": { cas: "bilan-esthetique" },
+      "qu-apporte-le-smile-design": { cas: "bilan-esthetique", annonce: "rehabilitation-facettes" },
     },
   },
   "03": {
@@ -342,7 +386,7 @@ export const layouts: Record<string, PageLayout> = {
   "04": {
     sections: {
       "sublimer-un-sourire-plutot-que-remplacer-des-dents": { cas: "facettes-planification" },
-      "smile-design-et-simulation": { media: { label: "Vidéo / simulation SmileCloud réelle — à fournir", ratio: "4 / 3" } },
+      "smile-design-et-simulation": { media: { label: "Vidéo / simulation SmileCloud réelle — à fournir", ratio: "4 / 3" }, annonce: "planification-facettes" },
       "la-ceramique-lumiere-profondeur-et-finesse": { cas: "facettes-ceramique" },
     },
   },
@@ -355,7 +399,7 @@ export const layouts: Record<string, PageLayout> = {
   "06": {
     // §9 de la V1.3 : le cas de MIH en priorité, dans la section qui en parle
     sections: {
-      "taches-de-mih-peut-on-les-traiter-chez": { cas: "mih-erosion-infiltration" },
+      "taches-de-mih-peut-on-les-traiter-chez": { cas: "mih-erosion-infiltration", annonce: "mih-infiltration" },
       "pourquoi-une-tache-blanche-parait-elle-blanche": { media: { label: "Macro clinique réelle de lésion et résultat — à fournir", ratio: "4 / 5" } },
       "qu-est-ce-que-l-erosion-infiltration-de": { cas: "dyschromie-erosion-infiltration" },
     },
