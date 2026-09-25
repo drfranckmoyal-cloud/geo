@@ -5,6 +5,10 @@ versions web sont fabriquées par `npm run photos-usure`. Ne pas modifier ce fic
 
 # Article source — cas d'usure, approche additive en trois étapes
 
+> **Correction apportée par Franck le 25/09/2026, après lecture de la page en ligne : le patient a
+> 72 ans, et non 64.** L'âge est corrigé ci-dessous comme sur le site, pour qu'aucune reprise
+> ultérieure ne réintroduise l'ancien chiffre. Le document d'origine, lui, n'est pas modifié.
+
 Réhabilitation esthétique d’un sourire usé : approche additive en trois étapes
 
 Cas clinique - texte prêt à intégrer sur drfranckmoyal.fr
@@ -19,7 +23,7 @@ Après réhabilitation
 
 Résumé du cas
 
-Patient de 64 ans consultant pour un sourire qu’il juge usé, abîmé et vieilli. L’examen met en évidence une perte de substance importante au niveau des dents antérieures, maxillaires et mandibulaires.
+Patient de 72 ans consultant pour un sourire qu’il juge usé, abîmé et vieilli. L’examen met en évidence une perte de substance importante au niveau des dents antérieures, maxillaires et mandibulaires.
 
 Le traitement a été conçu selon une approche de type 3-Step, adaptée au cas : planification esthétique numérique, augmentation additive de la dimension verticale, puis reconstruction antérieure par facettes céramiques minimalement invasives au maxillaire et composite injecté à la mandibule.
 
@@ -149,7 +153,7 @@ H1 : Réhabilitation esthétique d’un sourire usé par facettes minimalement i
 
 Alt text / légendes conseillées
 
-avant.png — Sourire avant traitement montrant une usure importante des dents antérieures chez un patient de 64 ans.
+avant.png — Sourire avant traitement montrant une usure importante des dents antérieures chez un patient de 72 ans.
 
 apres.png — Sourire après réhabilitation additive esthétique et fonctionnelle des dents usées.
 

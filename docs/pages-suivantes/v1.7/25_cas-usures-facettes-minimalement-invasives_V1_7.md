@@ -16,7 +16,10 @@ TACO, planification SmileCloud pour ce patient, composante érosive associée, c
 scientifiques. **Franck les a explicitement validés le 25/09/2026** (« tout ton article ») ; ils
 sont recensés dans `livrables/point-3-5-cas-usure/RAPPORT.md` pour ChatGPT.
 
-Faits validés, à ne jamais dépasser : patient de **64 ans** ; demande esthétique ; usures
+Âge du patient : **72 ans**, corrigé par Franck le 25/09/2026 — son article écrivait 64 ans. C'est
+la correction qui fait foi.
+
+Faits validés, à ne jamais dépasser : patient de **72 ans** ; demande esthétique ; usures
 importantes des dents antérieures, maxillaires et mandibulaires ; habitude ancienne d'interposition
 d'un morceau de sucre entre les incisives, retrouvée à l'interrogatoire ; planification numérique
 SmileCloud ; augmentation additive de la dimension verticale par les secteurs postérieurs ;
@@ -39,7 +42,7 @@ collage, aucune durée, aucun nombre de séances : rien de tout cela n'est docum
 ## 3. RÉPONSE DIRECTE
 - **Composant** : `DirectAnswer`
 
-**Un patient de 64 ans consulte pour améliorer un sourire qu’il trouve usé et vieilli. L’examen met en évidence des usures importantes, notamment dans le secteur antérieur. Une anamnèse approfondie révèle une ancienne habitude d’interposition répétée d’un carreau de sucre entre certaines dents, permettant de mieux comprendre la morphologie de certaines lésions. Après analyse et planification esthétique, la réhabilitation est réalisée par facettes minimalement invasives.**
+**Un patient de 72 ans consulte pour améliorer un sourire qu’il trouve usé et vieilli. L’examen met en évidence des usures importantes, notamment dans le secteur antérieur. Une anamnèse approfondie révèle une ancienne habitude d’interposition répétée d’un carreau de sucre entre certaines dents, permettant de mieux comprendre la morphologie de certaines lésions. Après analyse et planification esthétique, la réhabilitation est réalisée par facettes minimalement invasives.**
 
 ## 4. CONTRAT DE COMPOSANTS
 - `ClinicalHero` pour l’ouverture.
@@ -57,7 +60,7 @@ collage, aucune durée, aucun nombre de séances : rien de tout cela n'est docum
 
 ## Une demande initialement esthétique
 
-Un patient de 64 ans consulte pour un sourire qu’il juge **usé, abîmé et vieilli**. Sa demande est esthétique.
+Un patient de 72 ans consulte pour un sourire qu’il juge **usé, abîmé et vieilli**. Sa demande est esthétique.
 
 L’examen met en évidence une perte de substance importante au niveau des dents antérieures, maxillaires et mandibulaires.
 
@@ -254,7 +257,7 @@ PubMed: https://pubmed.ncbi.nlm.nih.gov/33871489/
 
 ## 11. NOTES
 
-Interdits repris dans les contrôles : aucun autre âge que 64 ans ; aucun nombre de facettes ;
+Interdits repris dans les contrôles : aucun autre âge que 72 ans ; aucun nombre de facettes ;
 aucun matériau autre que « céramique » et « composite injecté » ; aucun laboratoire ; aucune
 mention de bruxisme, de reflux ni d'alimentation acide ; jamais « no-prep », « sans préparation »,
 « aucune perte de substance », « totalement réversible » ni « résultat garanti ». Le texte ne doit

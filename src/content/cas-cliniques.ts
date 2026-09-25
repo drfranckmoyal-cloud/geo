@@ -228,7 +228,7 @@ export const casCliniques: Record<string, CasClinique> = {
     images: [
       {
         src: u3SourireAvant,
-        alt: "Sourire avant traitement montrant une usure importante des dents antérieures chez un patient de 64 ans",
+        alt: "Sourire avant traitement montrant une usure importante des dents antérieures chez un patient de 72 ans",
         etiquette: "Avant",
         legende: "Sourire avant traitement.",
       },

@@ -69,7 +69,7 @@ Le mini-cas de la page Réhabilitation est conservé (§28).
 L’article n’existait pas dans le dépôt : il a été lu depuis le document. Aucune URL antérieure sur
 ce cas (vérifié dans le plan du site). En sont repris :
 
-- la demande et le profil : patient de 64 ans, sourire jugé usé, abîmé, vieilli ;
+- la demande et le profil : patient de **72 ans** (l'article écrivait 64 ; Franck a corrigé le 25/09/2026), sourire jugé usé, abîmé, vieilli ;
 - la perte de substance des dents antérieures, maxillaires et mandibulaires ;
 - l’habitude ancienne d’interposition d’un morceau de sucre entre les incisives ;
 - le caractère multifactoriel de l’usure et la composante érosive associée ;
@@ -155,7 +155,7 @@ Vérifié automatiquement sur la page fabriquée :
 
 | Contrôle | Résultat |
 |---|---|
-| Âge | « 64 ans », et aucun autre |
+| Âge | « 72 ans », et aucun autre — vérifié automatiquement, sur cette page comme sur tout le site |
 | Nombre de facettes | **jamais chiffré** |
 | Matériau | « céramique » et « composite injecté » ; type TACO ; rien d’autre |
 | Laboratoire | aucun nommé |
@@ -175,6 +175,7 @@ Les cinq références ont été **vérifiées sur PubMed** ; les deux PMID manqu
 
 | Élément | Cahier des charges | Article de Franck | Décision |
 |---|---|---|---|
+| Âge du patient | 64 ans | 64 ans | **72 ans** — correction de Franck du 25/09/2026, appliquée sur la page, dans le texte de remplacement de la première photographie, dans la copie éditoriale de l'article et dans les contrôles automatiques |
 | Dimension verticale | « ne pas inventer une modification de dimension verticale » | documentée, et centrale | **Publiée** — Franck l’a validée le 25/09 ; sans elle, la page ne peut pas expliquer pourquoi les facettes ont pu rester minimalement invasives |
 | Approche 3-Step + 5 références | absente | documentée | Publiée |
 | Composite injecté à la mandibule | absent | documenté | Publié |

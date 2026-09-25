@@ -259,5 +259,21 @@ const robots = await readFile("dist/robots.txt", "utf8");
   ? ok("robots.txt : tout est ouvert aux moteurs et aux robots d'IA, plan du site déclaré")
   : bad("robots.txt : politique ouverte ou plan du site absents");
 
+// Faits cliniques verrouillés : l'âge du patient du cas d'usure, corrigé par Franck le 25/09/2026
+// (son article écrivait 64 ans). Aucune page du site ne doit plus porter l'ancien âge.
+console.log("\n■ Âge du patient du cas d'usure (POINT 3.5)");
+{
+  const casUsure = "dist/cas-cliniques/usures-dentaires-facettes-minimalement-invasives/index.html";
+  const texte = parse(await readFile(casUsure, "utf8")).querySelector("main").structuredText;
+  const ages = [...new Set((texte.match(/\b\d{2} ans\b/g) ?? []))];
+  JSON.stringify(ages) === JSON.stringify(["72 ans"]) ? ok("la page du cas ne cite que « 72 ans »") : bad(`âges cités sur la page du cas : ${ages.join(", ") || "aucun"}`);
+  const partout = [];
+  for (const { file } of pages) {
+    const html = await readFile(file, "utf8");
+    if (/64\s?ans/.test(html)) partout.push(file.replace(/^dist|index\.html$/g, ""));
+  }
+  partout.length ? bad(`« 64 ans » subsiste : ${partout.join(" ")}`) : ok("« 64 ans » n'apparaît nulle part sur le site");
+}
+
 console.log(problems ? `\n${problems} problème(s).` : "\nContrôle HTML réussi.");
 process.exit(problems ? 1 : 0);
