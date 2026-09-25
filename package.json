@@ -14,7 +14,8 @@
     "check": "astro build && node scripts/verify-texts.mjs",
     "launch-check": "node scripts/check-launch.mjs",
     "paquet": "find dist \\( -name '* [0-9]' -o -name '* [0-9].*' \\) -exec rm -rf {} + 2>/dev/null; mkdir -p livrables/deploiement && cd dist && zip -qr -X -FS ../livrables/deploiement/drfranckmoyal-site.zip . && ls -l ../livrables/deploiement/drfranckmoyal-site.zip",
-    "photos": "node scripts/prepare-photos.mjs"
+    "photos": "node scripts/prepare-photos.mjs",
+    "photos-usure": "node scripts/prepare-photos-usure-3step.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

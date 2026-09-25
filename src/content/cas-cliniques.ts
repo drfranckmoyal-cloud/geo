@@ -35,6 +35,19 @@ import bilanResultat from "../assets/photos/cas/bilan-esthetique-resultat.jpg";
 import usureReconstruction from "../assets/photos/cas/usure-anterieure-reconstruction.jpg";
 import rehabilitationAvant from "../assets/photos/cas/rehabilitation-usure-avant.jpg";
 import rehabilitationApres from "../assets/photos/cas/rehabilitation-usure-apres.jpg";
+// Cas « usures antérieures et facettes minimalement invasives » (POINT 3.5) : photographies
+// extraites du document préparé par Franck (npm run photos-usure). La vue initiale et la vue
+// intra-orale finale de ce cas sont les deux photographies déjà publiées ci-dessus.
+import u3SourireAvant from "../assets/photos/cas/usure-3step-sourire-avant.jpg";
+import u3SourireApres from "../assets/photos/cas/usure-3step-sourire-apres.jpg";
+import u3PalatinInitial from "../assets/photos/cas/usure-3step-palatin-initial.jpg";
+import u3Planification from "../assets/photos/cas/usure-3step-planification.jpg";
+import u3Taco from "../assets/photos/cas/usure-3step-ceramiques-taco.jpg";
+import u3Controle from "../assets/photos/cas/usure-3step-controle-projet.jpg";
+import u3Gouttiere from "../assets/photos/cas/usure-3step-gouttiere-composite.jpg";
+import u3ResultatSourire from "../assets/photos/cas/usure-3step-resultat-sourire.jpg";
+import u3PalatinFinal from "../assets/photos/cas/usure-3step-palatin-final.jpg";
+import u3Detail from "../assets/photos/cas/usure-3step-detail-anterieur.jpg";
 
 export interface CasImage {
   src: ImageMetadata;
@@ -203,6 +216,78 @@ export const casCliniques: Record<string, CasClinique> = {
     images: [
       { src: rehabilitationAvant, alt: "Dents antérieures usées avant reconstruction", etiquette: "Avant" },
       { src: rehabilitationApres, alt: "Dents antérieures après reconstruction", etiquette: "Après" },
+    ],
+  },
+  // Douze photographies, dans l'ordre du document de Franck ; les légendes sont les siennes.
+  // La page les appelle une par une (« usure-3step#0 », « #1 »…), chacune dans sa section.
+  "usure-3step": {
+    id: "usure-3step",
+    type: "image",
+    legende: "Réhabilitation d’un sourire usé : approche additive en trois étapes.",
+    attribution: true,
+    images: [
+      {
+        src: u3SourireAvant,
+        alt: "Sourire avant traitement montrant une usure importante des dents antérieures chez un patient de 64 ans",
+        etiquette: "Avant",
+        legende: "Sourire avant traitement.",
+      },
+      {
+        src: u3SourireApres,
+        alt: "Sourire après réhabilitation additive esthétique et fonctionnelle des dents usées",
+        etiquette: "Après",
+        legende: "Sourire après réhabilitation.",
+      },
+      {
+        src: rehabilitationAvant,
+        alt: "Vue intra-orale initiale montrant le raccourcissement et l’usure des incisives supérieures et inférieures",
+        legende: "Vue initiale : usure marquée des dents antérieures.",
+      },
+      {
+        src: u3PalatinInitial,
+        alt: "Vue palatine initiale montrant la perte de substance des incisives maxillaires",
+        legende: "Vue palatine : perte importante de longueur et de substance.",
+      },
+      {
+        src: u3Planification,
+        alt: "Planification esthétique numérique du sourire réalisée avant la réhabilitation",
+        legende: "Planification numérique du sourire avant traitement.",
+      },
+      {
+        src: u3Taco,
+        alt: "Facettes céramiques minimalement invasives de type TACO destinées aux dents antérieures",
+        legende: "Restaurations céramiques antérieures de type TACO.",
+      },
+      {
+        src: u3Controle,
+        alt: "Contrôle du projet restaurateur avant finalisation",
+        legende: "Contrôle du projet restaurateur avant finalisation.",
+      },
+      {
+        src: u3Gouttiere,
+        alt: "Gouttière transparente utilisée pour la technique de composite injecté des dents antérieures mandibulaires",
+        legende: "Gouttière de composite injecté utilisée pour le secteur incisivo-canin mandibulaire.",
+      },
+      {
+        src: u3ResultatSourire,
+        alt: "Résultat clinique final du sourire après réhabilitation additive",
+        legende: "Résultat final du sourire.",
+      },
+      {
+        src: rehabilitationApres,
+        alt: "Vue intra-orale finale après facettes minimalement invasives au maxillaire et composite injecté à la mandibule",
+        legende: "Vue intra-orale finale.",
+      },
+      {
+        src: u3PalatinFinal,
+        alt: "Vue palatine après réhabilitation des incisives maxillaires",
+        legende: "Vue palatine après réhabilitation.",
+      },
+      {
+        src: u3Detail,
+        alt: "Détail du secteur antérieur restauré",
+        legende: "Détail du secteur antérieur restauré.",
+      },
     ],
   },
 };

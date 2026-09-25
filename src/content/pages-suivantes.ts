@@ -32,6 +32,8 @@ export const packReplacements: Record<string, string> = {
   "22": "docs/pages-suivantes/v1.6/22_cas-planification-facettes-ceramique_V1_6.md",
   "23": "docs/pages-suivantes/v1.6/23_cas-planification-rehabilitation-facettes_V1_6.md",
   "24": "docs/pages-suivantes/v1.6/24_cas-mih-eclaircissement-erosion-infiltration_V1_6.md",
+  // Cas d'usure documenté par Franck lui-même (POINT 3.5, 25/09/2026)
+  "25": "docs/pages-suivantes/v1.7/25_cas-usures-facettes-minimalement-invasives_V1_7.md",
 };
 // Chemin du fichier d'une page, parmi les fichiers de la V1.2 (pour les contrôles)
 export const packPath = (num: string, v12Files: string[]): string =>
@@ -65,6 +67,7 @@ export const arborescence = [
   { num: "22", lot: "F", url: "/cas-cliniques/planification-facettes-ceramique/" },
   { num: "23", lot: "F", url: "/cas-cliniques/planification-rehabilitation-facettes/" },
   { num: "24", lot: "F", url: "/cas-cliniques/mih-eclaircissement-erosion-infiltration/" },
+  { num: "25", lot: "F", url: "/cas-cliniques/usures-dentaires-facettes-minimalement-invasives/" },
 ] as const;
 
 // Lots construits à ce jour
@@ -111,6 +114,7 @@ const PATCH_V13 = "décisions pré-lancement, correctif V1.3";
 const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
 const POINT2 = "maillage entrant du POINT 2, ChatGPT, 24/09/2026";
 const MIH_AGE = "correction clinique de Franck, 24/09/2026 : la mention « pas avant 18 ans » est retirée";
+const POINT35 = "maillage entrant du POINT 3.5, ChatGPT, 25/09/2026";
 const PHOTOS = "intégration des photographies, ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
@@ -125,6 +129,11 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
   // Liens entrants vers la page « Facettes ou composite : comment choisir ? » (POINT 2 §28),
   // posés dans le contexte éditorial qui pose déjà la question, jamais ajoutés hors sujet.
   "01": [
+    {
+      from: "L’origine, l’étendue et l’évolution de l’usure doivent d’abord être évaluées.**\n\n→ **Comprendre les usures dentaires**\n",
+      to: "L’origine, l’étendue et l’évolution de l’usure doivent d’abord être évaluées.**\n\n→ **Comprendre les usures dentaires**\n\n→ **Un cas d’usures : du diagnostic aux facettes minimalement invasives**\n",
+      ref: POINT35,
+    },
     {
       from: "Les deux solutions présentent des possibilités et des contraintes différentes qui doivent être évaluées lors du diagnostic.\n",
       to: "Les deux solutions présentent des possibilités et des contraintes différentes qui doivent être évaluées lors du diagnostic.\n\n→ **Facettes ou composite : comment choisir ?**\n",
@@ -271,6 +280,8 @@ export const knownLabels: Record<string, string> = {
   // Ancres des liens entrants vers la page de décision (POINT 2 §28)
   "Facettes ou composite : comment choisir ?": "/facettes-ou-composite/",
   "Composite ou facettes : comprendre les différences": "/facettes-ou-composite/",
+  // Ancre du lien entrant vers le cas d'usure (POINT 3.5 §23)
+  "Un cas d’usures : du diagnostic aux facettes minimalement invasives": "/cas-cliniques/usures-dentaires-facettes-minimalement-invasives/",
 };
 
 // Mise en page, section par section (identifiant = titre de la section sans accents).
@@ -333,6 +344,22 @@ export const layouts: Record<string, PageLayout> = {
       "resultat-clinique": { cas: "bilan-esthetique#2" },
     },
   },
+  // Cas d'usure (POINT 3.5) : douze photographies, deux par section pour les vues comparables
+  "25": {
+    attributionUnique: true,
+    mentionClinique: true,
+    sections: {
+      "une-demande-initialement-esthetique": { cas: ["usure-3step#0", "usure-3step#1"] },
+      "des-usures-importantes-a-l-examen": { cas: ["usure-3step#2", "usure-3step#3"] },
+      "pourquoi-rechercher-la-cause-d-une-usure": { layout: "panel" },
+      "etape-1-planification-esthetique-numerique": { cas: "usure-3step#4", tone: "ivory" },
+      "etape-3-facettes-minimalement-invasives-au-maxillaire": { cas: ["usure-3step#5", "usure-3step#6"] },
+      "a-la-mandibule-composite-injecte": { cas: "usure-3step#7" },
+      "le-resultat-restaurer-le-sourire-sans-sur-preparer": { cas: ["usure-3step#8", "usure-3step#9"] },
+      "les-vues-finales": { cas: ["usure-3step#10", "usure-3step#11"] },
+      "ce-que-ce-cas-permet-de-comprendre": { entries: true },
+    },
+  },
   "24": {
     attributionUnique: true,
     mentionClinique: true,
@@ -388,6 +415,8 @@ export const layouts: Record<string, PageLayout> = {
       "sublimer-un-sourire-plutot-que-remplacer-des-dents": { cas: "facettes-planification" },
       "smile-design-et-simulation": { media: { label: "Vidéo / simulation SmileCloud réelle — à fournir", ratio: "4 / 3" }, annonce: "planification-facettes" },
       "la-ceramique-lumiere-profondeur-et-finesse": { cas: "facettes-ceramique" },
+      // Annonce du cas d'usure, sur l'angle de la préservation tissulaire (POINT 3.5 §22)
+      "faut-il-beaucoup-tailler-les-dents-pour-poser": { annonce: "usure-3step-facettes" },
     },
   },
   "05": {

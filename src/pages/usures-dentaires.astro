@@ -19,6 +19,7 @@ import TextLink from "../components/global/TextLink.astro";
 import BodyText from "../components/global/BodyText.astro";
 import MediaFrame from "../components/ui/MediaFrame.astro";
 import CasClinique from "../components/clinical/CasClinique.astro";
+import ClinicalCaseSummary from "../components/clinical/ClinicalCaseSummary.astro";
 import Container from "../components/global/Container.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { usures as u } from "../content/usures";
@@ -102,6 +103,8 @@ const schema = graph([
   <!-- 4. Diagnostic -->
   <TextImageSection id={u.diagnosis.id} layout="offset" eyebrow={u.diagnosis.label} title={u.diagnosis.title} paragraphs={[u.diagnosis.text]} links={[u.diagnosis.link]}>
     <SymptomList label={u.diagnosis.listLabel} items={u.diagnosis.list} columns={2} class="u-list" />
+    {/* Le cas d'usure documenté par Franck : chercher l'origine avant de restaurer (POINT 3.5 §21) */}
+    <ClinicalCaseSummary id="usure-3step-origine" />
   </TextImageSection>
 
   <!-- 5. Faut-il toujours traiter une usure dentaire ? -->

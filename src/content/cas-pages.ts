@@ -36,6 +36,20 @@ export const annoncesCas: Record<string, AnnonceCas> = {
       href: "/cas-cliniques/planification-rehabilitation-facettes/",
     },
   },
+  // Cas d'usure (POINT 3.5) : deux annonces, deux angles — l'origine des lésions sur la page
+  // Usures, la préservation tissulaire sur la page Facettes (§21 et §22)
+  "usure-3step-origine": {
+    cas: "usure-3step",
+    probleme: "Comprendre l’origine avant de restaurer",
+    approche: "Usures antérieures importantes, une habitude ancienne retrouvée à l’interrogatoire, puis une réhabilitation par facettes minimalement invasives.",
+    lien: { label: "Découvrir le cas clinique", href: "/cas-cliniques/usures-dentaires-facettes-minimalement-invasives/" },
+  },
+  "usure-3step-facettes": {
+    cas: "usure-3step",
+    probleme: "Facettes et préservation tissulaire",
+    approche: "Une réhabilitation esthétique réalisée après analyse d’usures importantes, selon une approche minimalement invasive.",
+    lien: { label: "Voir ce cas d’usures traité par facettes minimalement invasives", href: "/cas-cliniques/usures-dentaires-facettes-minimalement-invasives/" },
+  },
   "mih-infiltration": {
     cas: "mih-erosion-infiltration",
     probleme: "Réduire le contraste avant de traiter la tache",
