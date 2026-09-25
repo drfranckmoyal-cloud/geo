@@ -132,6 +132,7 @@ const EDITO = "audit éditorial de ChatGPT, 24/09/2026";
 const POINT2 = "maillage entrant du POINT 2, ChatGPT, 24/09/2026";
 const MIH_AGE = "correction clinique de Franck, 24/09/2026 : la mention « pas avant 18 ans » est retirée";
 const POINT35 = "maillage entrant du POINT 3.5, ChatGPT, 25/09/2026";
+const ANTI_PROMPT = "correctifs finaux de l’audit anti-prompt, ChatGPT, 25/09/2026";
 const PHOTOS = "intégration des photographies, ChatGPT, 24/09/2026";
 export const decisions: Record<string, { from: string; to: string; ref: string }[]> = {
   "04": [
@@ -189,6 +190,15 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
     },
   ],
   // Lien visible vers Smileclub Formation, avec le lien Blendi qui clôt la section (§4)
+  // Page Publications : la phrase d'origine désignait les moteurs de recherche comme
+  // destinataires de la page. Réécrite pour le lecteur seul (ChatGPT, correctifs finaux).
+  "14": [
+    {
+      from: "Elles permettent également aux patients, confrères et moteurs de recherche de retrouver les sources originales associées à ces domaines.",
+      to: "Elles permettent également aux patients et aux confrères de retrouver les sources originales associées à ces domaines.",
+      ref: ANTI_PROMPT,
+    },
+  ],
   "15": [
     {
       from: "**Voir mon profil de formateur Blendi**  \nhttps://blendi.fr/formateurs/franck-moyal\n",
@@ -255,6 +265,14 @@ export const decisions: Record<string, { from: string; to: string; ref: string }
     { from: "**Raison sociale** : [À FOURNIR]", to: `**Raison sociale** : ${fiche.hebergeur.raison}`, ref: FICHE },
     { from: "**Adresse** : [À FOURNIR]", to: `**Adresse** : ${fiche.hebergeur.adresse}`, ref: FICHE },
     { from: "**Téléphone / contact** : [À FOURNIR]", to: `**Téléphone / contact** : ${fiche.hebergeur.contact}`, ref: FICHE },
+    // Phrase d'origine adressée à l'équipe du site (« ne doivent être utilisées qu'après
+    // vérification ») : remplacée par ce que le site fait réellement. Conformité vérifiée
+    // avant publication — D44 et D45 du 22/09/2026, réponses de Franck du 24/09/2026.
+    {
+      from: "Les photographies cliniques publiées sur ce site ne doivent être utilisées qu’après vérification du consentement correspondant.",
+      to: "Les photographies cliniques présentées sur ce site sont publiées dans le respect du consentement des patients concernés.",
+      ref: ANTI_PROMPT,
+    },
   ],
 };
 
