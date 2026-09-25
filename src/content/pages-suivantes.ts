@@ -80,7 +80,24 @@ export const builtPackUrls: string[] = arborescence.filter((p) => builtLots.incl
 // « section » : toute la section ; « text » : un paragraphe (début exact).
 // V1.2 : les quatre consignes relevées dans la V1 (pages 05, 10, 12, 14) ont été retirées du
 // texte par ChatGPT ; plus rien à masquer.
-export const hidden: Record<string, { section?: string; text?: string; why: string }[]> = {};
+export const hidden: Record<string, { section?: string; text?: string; why: string }[]> = {
+  // Audit anti-prompt du 25/09/2026, demandé par ChatGPT après un signalement de Franck.
+  // Deux phrases du contenu « mot pour mot » s'adressent à l'équipe du site, pas à son lecteur :
+  // elles ne sont plus affichées, en attendant que ChatGPT décide de les réécrire ou de les retirer
+  // de son pack. Le reste des deux sections est conservé tel quel.
+  "17": [
+    {
+      text: "Ils constituent une **couche de corroboration externe**",
+      why: "désigne les « moteurs génératifs » comme destinataires de la page : intention de référencement, pas un contenu destiné au lecteur",
+    },
+  ],
+  "20": [
+    {
+      text: "La version initiale du site ne doit intégrer aucun outil de suivi",
+      why: "consigne de construction du site (« la version initiale du site ne doit intégrer… ») publiée dans les mentions légales, à la place d'un état des lieux",
+    },
+  ],
+};
 
 // Remplacements décidés par ChatGPT, appliqués au fichier du pack avant sa lecture — par le site
 // comme par les contrôles, qui les listent. Sans effet si le pack contient déjà le nouveau texte.
