@@ -12,7 +12,7 @@
 |---|---|
 | **URL contrôlées** | **28 / 28** — les 27 adresses du plan du site, plus `/mentions-legales/` (volontairement hors index) |
 | **Pages indexables** | 27 |
-| **Fichiers du serveur inventoriés** | 215 : 28 pages HTML, 178 fichiers d'images et de polices, 9 fichiers techniques. **Aucun fichier en double, aucune archive, aucune page orpheline hors celle signalée plus bas** |
+| **Fichiers du serveur inventoriés** | 215 avant nettoyage, 214 après : 28 pages HTML, 178 fichiers d'images et de polices, 9 fichiers techniques. **Aucun fichier en double, aucune archive, aucune page orpheline hors celle signalée plus bas** |
 | **Fichiers source analysés** | 127 sources éditoriales susceptibles d'être rendues : les rubriques 2, 3 et 5 des 28 fichiers du pack, les 9 fichiers de `src/content/`, et l'ensemble des composants, gabarits et routes (`src/components`, `src/layouts`, `src/pages`) |
 | **Documents internes** | 94 fichiers dans `docs/` et 108 dans `livrables/` : **aucun n'est publié** — vérifié dans le site fabriqué. Le dossier `public/`, copié tel quel en ligne, ne contient que quatre fichiers (favicons, `robots.txt`) |
 | **Build contrôlé** | **oui** : site refabriqué après correction, puis rebalayé — et rebalayé une seconde fois **sur le site en ligne** |
@@ -57,11 +57,12 @@ cahier des charges interdit de réécrire ce qui est validé.
 
 ### Constat technique, hors texte
 
-`https://drfranckmoyal.fr/default.php` répond **200** : c'est la « Page par défaut » d'Hostinger,
-déposée à la création de l'hébergement le 22 septembre et jamais retirée. Elle n'est liée nulle
-part, absente du plan du site, et ne contient aucune information du cabinet — mais elle est
-publiquement accessible. **Je ne l'ai pas supprimée** : c'est un fichier d'Hostinger, pas un
-contenu du site. Un mot de toi et je la mets à la corbeille du serveur.
+`https://drfranckmoyal.fr/default.php` répondait **200** : c'était la « Page par défaut »
+d'Hostinger, déposée à la création de l'hébergement le 22 septembre et jamais retirée. Elle n'était
+liée nulle part et ne contenait aucune information du cabinet, mais elle restait publiquement
+accessible. **Retirée le 25/09/2026 sur décision de Franck** : le fichier est à la corbeille du
+serveur (récupérable), et l'adresse répond désormais `404`. Le reste du site est inchangé,
+vérifié page par page.
 
 ---
 
@@ -118,7 +119,8 @@ utilisées par les rapports de contrôle et jamais envoyées au navigateur — v
 
 ```
 Fuites certaines restantes : 0 / 2
-Éléments suspects restant à valider : 5 (+ 1 constat technique : /default.php)
+Éléments suspects restant à valider : 5
+Constat technique : réglé — /default.php retiré, l'adresse répond 404
 Pages contrôlées : 28 / 28
 ```
 
