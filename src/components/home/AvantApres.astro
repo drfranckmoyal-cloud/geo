@@ -43,13 +43,13 @@ const { title, intro } = Astro.props;
     line-height: var(--lh-lead);
     color: var(--c-ink-soft);
     max-width: var(--measure);
-    margin: var(--gap-title-text) 0 0;
+    margin: 1rem 0 0;
   }
 
   .aa__grille {
     display: grid;
-    gap: clamp(2.5rem, 1.75rem + 3vw, 4.5rem) var(--col-gap);
-    margin-top: var(--gap-text-cta);
+    gap: clamp(1.75rem, 1.25rem + 2vw, 2.75rem) var(--col-gap);
+    margin-top: clamp(1.5rem, 1.25rem + 1vw, 2rem);
   }
   @media (min-width: 64rem) {
     .aa__grille {
@@ -60,13 +60,18 @@ const { title, intro } = Astro.props;
   .aa__titre {
     font-family: var(--f-serif);
     font-weight: var(--fw-heading);
-    font-size: var(--fs-h3);
-    line-height: var(--lh-h3);
-    margin: 0 0 1.25rem;
-    padding-bottom: 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--c-stone);
   }
   .aa__lien {
-    margin-top: 1.25rem;
+    margin-top: 0.75rem;
+  }
+  /* Les légendes de cas sont déjà sous chaque paire : on les resserre ici. */
+  .aa__cas :global(.cas-duo__legende) {
+    margin-top: 0.6rem;
+    font-size: var(--fs-meta);
   }
 </style>
