@@ -5,3 +5,10 @@ RewriteEngine On
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://drfranckmoyal.fr%{REQUEST_URI} [L,R=301]
+
+# Le serveur d'Hostinger ne connaît pas le format AVIF : il envoie ces images
+# étiquetées « texte », et certains navigateurs refusent alors de les afficher
+# (constaté le 26/09/2026 sur le portrait). On déclare les deux formats d'images
+# modernes utilisés par le site.
+AddType image/avif .avif
+AddType image/webp .webp

@@ -131,3 +131,54 @@ destinée à Claude ou à ChatGPT, aucune note de travail n'est publiée. Les de
 
 *Rien d'autre n'a été modifié : ni les textes validés, ni les titres, ni les adresses, ni le
 design, ni l'architecture. Aucune page créée.*
+
+---
+
+## Correctifs finaux après validation ChatGPT
+
+*25–26 septembre 2026. ChatGPT a tranché les deux suspects de la page Publications et des mentions
+légales, et confirmé le retrait de `/default.php`.*
+
+| Correctif | État |
+|---|---|
+| **`/publications/`** — « Elles permettent également aux patients, confrères et **moteurs de recherche** de retrouver les sources originales » → « Elles permettent également aux patients **et aux confrères** de retrouver les sources originales » | **Fait dans la source, contrôlé dans la version fabriquée — pas encore en ligne** |
+| **`/mentions-legales/`** — « Les photographies cliniques publiées sur ce site **ne doivent être utilisées qu'après vérification** du consentement correspondant » → « Les photographies cliniques présentées sur ce site **sont publiées dans le respect du consentement** des patients concernés » | **Fait dans la source, contrôlé dans la version fabriquée — pas encore en ligne** |
+| **Suppression de `/default.php`** | **Fait** — retirée le 25/09/2026, l'adresse répond `404` |
+| Scan anti-prompt final **en production** | **Impossible pour l'instant** : la mise en ligne est bloquée (voir plus bas) |
+| Scan anti-prompt sur la version fabriquée | **28 pages contrôlées, 0 fuite** — 31 signalements, tous connus : 28 fois `schema.org` dans les données structurées et les 3 tournures françaises déjà expliquées |
+
+### Vérification demandée avant de publier la phrase sur les consentements
+
+ChatGPT demandait de ne publier la nouvelle phrase que si elle décrit le fonctionnement réel du
+site. Vérification faite sur les pièces du projet :
+
+- **D44, 22/09/2026** — Franck confirme par écrit que **le consentement de publication est recueilli
+  pour tous les cas du dossier « Icono GEO »**, d'où viennent 13 des 14 cas publiés.
+- **D45, 22/09/2026** — règle permanente du projet : **aucun cas patient publié sans consentement
+  couvrant la publication web**.
+- **24/09/2026** — interrogé sur la publication d'un cas *commenté* (et non d'une simple
+  photographie), Franck répond : **« aucun problème de consentement »**.
+- **Le 14ᵉ cas** (usures, facettes minimalement invasives) vient de l'article que Franck a rédigé
+  lui-même pour le site ; **deux de ses photographies sont les mêmes fichiers** que celles du cas
+  « réhabilitation d'usures » d'Icono GEO — **même patient**, donc même consentement.
+- Aucune donnée nominative n'est publiée : ni nom, ni date, ni métadonnée dans les fichiers.
+
+**Conclusion : la phrase correspond au fonctionnement réel du site**, sur la foi des confirmations
+écrites de Franck. Les formulaires de consentement eux-mêmes sont au cabinet, pas dans le projet :
+le site affirme ce que le praticien atteste, ce qui est la situation normale.
+
+### Ce qui bloque la mise en ligne
+
+Le paquet du site a été fabriqué et **déposé** dans l'espace Hostinger, mais **l'extraction a
+échoué** : le gestionnaire de fichiers renvoie `409 Conflict` quand on lui demande d'écraser les
+fichiers existants, puis **le service entier répond `403` depuis 1 h 05 du matin** — y compris à une
+simple visite d'accueil, et hPanel affiche lui-même un bandeau « les fonctionnalités de gestion
+peuvent être temporairement indisponibles ». Le site en ligne est **intact** : il sert toujours la
+version du 25 septembre.
+
+Deux choses restent donc à faire dès que le gestionnaire de fichiers d'Hostinger répond :
+
+1. extraire le paquet (les 28 pages, dont les deux corrigées) ;
+2. **supprimer l'archive `drfranckmoyal-site.zip`**, actuellement déposée dans `public_html` et donc
+   téléchargeable à `https://drfranckmoyal.fr/drfranckmoyal-site.zip`. Elle ne contient que les
+   fichiers publics du site — aucune donnée privée — mais elle n'a rien à faire là.
