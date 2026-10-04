@@ -14,7 +14,8 @@ circule** — donc rien de ce qui a été gagné en référencement n'est remis 
 | Constat | Chiffre |
 |---|---|
 | Pages du site | 27 |
-| Pages présentes dans le menu | **9** |
+| Entrées visibles dans le menu | **5**, dont deux déroulantes |
+| Destinations atteignables par le menu | **9** |
 | Pages accessibles uniquement par un lien dans le texte | **18** |
 | Longueur de la page d'accueil | **403 mots** — la page la plus courte du site |
 | Liens dans le corps de l'accueil | 8 |
@@ -31,21 +32,26 @@ cas d'usures, 1 389 pour les taches.
 
 ## 2. Pourquoi on lâche
 
-### a) Le site parle à deux publics à la fois, sans jamais les séparer
+### a) Le menu ne contient aucun traitement
 
-Le menu aligne neuf entrées sur un seul niveau :
+Il compte cinq entrées, dont deux déroulantes :
 
 ```
-Dentisterie esthétique · Usures dentaires · Érosion dentaire · TCA et santé
-bucco-dentaire · Dr Franck Moyal · Publications · Conférences & formations ·
-Activité hospitalière · Médias & interviews
+Dentisterie esthétique · Usures dentaires · Érosion & TCA ⌄ ·
+Dr Franck Moyal · Publications & enseignement ⌄
 ```
 
-Les quatre premières s'adressent à un patient. Les cinq suivantes à un confrère, à un
-journaliste ou à un comité scientifique. **Personne n'a besoin des neuf.** Un patient
-inquiet pour ses dents usées traverse « Publications » et « Activité hospitalière » pour
-trouver son sujet ; un confrère qui cherche vos formations traverse des pages de soins.
-Chacun lit trois entrées qui ne le concernent pas avant la sienne.
+Il est donc **déjà groupé** — ce n'est pas une liste à plat. Mais il mène à neuf
+destinations seulement, et **aucune n'est un traitement**. Ni facettes, ni composite,
+ni éclaircissement, ni taches. Or c'est exactement ce qu'un patient cherche : il ne tape
+pas « dentisterie esthétique », il tape « facettes » ou « taches blanches sur les dents ».
+
+### a bis) Et il mêle deux publics
+
+« Publications & enseignement » s'adresse à un confrère, à un journaliste ou à un comité
+scientifique. « Dr Franck Moyal » est placé entre les sujets de soins et cette rubrique,
+sans que rien n'indique le basculement. Le regroupement existe par **sujet** ; il manque
+par **public**.
 
 ### b) L'accueil ne dit pas où aller
 

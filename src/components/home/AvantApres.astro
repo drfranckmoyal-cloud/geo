@@ -1,0 +1,72 @@
+---
+// Avant / après sur l'accueil (D65, 04/10/2026). Les photographies cliniques étaient
+// enterrées dans les pages : c'est pourtant ce qui convainc le plus vite, et les trois
+// sites donnés en exemple par Franck en montrent tous dès l'accueil.
+//
+// Un cas par traitement, chacun ouvrant sa page de soins. Les photographies, les
+// légendes et l'attribution viennent du registre existant : rien n'est réécrit ici.
+import Section from "../global/Section.astro";
+import EditorialH2 from "../global/EditorialH2.astro";
+import CasClinique from "../clinical/CasClinique.astro";
+import TextLink from "../global/TextLink.astro";
+import { casVitrine } from "../../content/parcours";
+
+interface Props {
+  title: string;
+  intro?: string;
+}
+const { title, intro } = Astro.props;
+---
+
+<Section spacing="compact" labelledby="avant-apres-titre">
+  <div class="container">
+    <EditorialH2 id="avant-apres-titre" text={title} />
+    {intro && <p class="aa__intro">{intro}</p>}
+
+    <div class="aa__grille">
+      {
+        casVitrine.map((v) => (
+          <article class="aa__cas">
+            <h3 class="aa__titre">{v.titre}</h3>
+            <CasClinique id={v.cas} />
+            <TextLink href={v.href} label={`En savoir plus : ${v.titre.toLowerCase()}`} class="aa__lien" />
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .aa__intro {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    color: var(--c-ink-soft);
+    max-width: var(--measure);
+    margin: var(--gap-title-text) 0 0;
+  }
+
+  .aa__grille {
+    display: grid;
+    gap: clamp(2.5rem, 1.75rem + 3vw, 4.5rem) var(--col-gap);
+    margin-top: var(--gap-text-cta);
+  }
+  @media (min-width: 64rem) {
+    .aa__grille {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .aa__titre {
+    font-family: var(--f-serif);
+    font-weight: var(--fw-heading);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .aa__lien {
+    margin-top: 1.25rem;
+  }
+</style>

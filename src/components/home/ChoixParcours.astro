@@ -1,0 +1,133 @@
+---
+// Les deux portes de l'accueil (D65, 04/10/2026). Le visiteur se reconnaît d'abord,
+// puis il lit. Modèle retenu par Franck d'après garyfinelle.com, adapté : la page
+// d'accueil garde tout son contenu — elle fait 92 % des clics du site dans Google,
+// un accueil réduit à deux portes les ferait perdre.
+//
+// Pas de composant nouveau dans la direction artistique : filets, encre, vert sauge,
+// et le même lien à flèche que partout ailleurs (V9).
+import Section from "../global/Section.astro";
+import TextLink from "../global/TextLink.astro";
+import { parcours } from "../../content/parcours";
+---
+
+<Section tone="ivory" spacing="compact" labelledby="parcours-titre">
+  <div class="container">
+    <h2 id="parcours-titre" class="parcours__chapeau">Par où commencer</h2>
+    <div class="parcours">
+      {
+        parcours.map((p) => (
+          <div class="porte" id={p.id}>
+            <p class="porte__surtitre">{p.surtitre}</p>
+            <p class="porte__titre">{p.titre}</p>
+            <p class="porte__intro">{p.intro}</p>
+            <ul class="porte__liste">
+              {p.destinations.map((d) => (
+                <li>
+                  <a
+                    href={d.href}
+                    class="porte__lien"
+                    {...(d.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  >
+                    {d.label}
+                    {d.externe && <span class="porte__externe" aria-label="(nouvelle fenêtre)">↗</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <TextLink href={p.suite.href} label={p.suite.label} class="porte__suite" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .parcours__chapeau {
+    font-family: var(--f-sans);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+    margin: 0 0 clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  }
+
+  .parcours {
+    display: grid;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  }
+  @media (min-width: 56rem) {
+    .parcours {
+      grid-template-columns: 1fr 1fr;
+      /* le filet qui sépare les deux parcours, dans le gris chaud des filets du site */
+      column-gap: 0;
+    }
+    .parcours > * + * {
+      border-left: 1px solid var(--c-stone);
+      padding-left: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+    }
+    .parcours > :first-child {
+      padding-right: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+    }
+  }
+
+  .porte__surtitre {
+    font-family: var(--f-sans);
+    font-size: var(--fs-meta);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+    margin: 0 0 0.35rem;
+  }
+  .porte__titre {
+    font-family: var(--f-serif);
+    font-weight: var(--fw-display);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+    margin: 0 0 var(--gap-title-text);
+  }
+  .porte__intro {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--c-ink-soft);
+    max-width: 34rem;
+    margin: 0 0 clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  }
+
+  .porte__liste {
+    list-style: none;
+    margin: 0 0 var(--gap-text-cta);
+    padding: 0;
+    border-top: 1px solid var(--c-stone);
+  }
+  .porte__liste li {
+    border-bottom: 1px solid var(--c-stone);
+  }
+  .porte__lien {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.85rem 0;
+    font-size: var(--fs-body);
+    color: var(--c-ink);
+    text-decoration: none;
+    transition: color var(--t-hover) var(--ease), padding-left var(--t-hover) var(--ease);
+  }
+  .porte__lien:hover,
+  .porte__lien:focus-visible {
+    color: var(--c-sage);
+    padding-left: 0.4rem;
+  }
+  .porte__externe {
+    font-size: var(--fs-meta);
+    color: var(--c-ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .porte__lien {
+      transition: none;
+    }
+  }
+</style>

@@ -9,9 +9,9 @@ import PhilosophyStatement from "../components/home/PhilosophyStatement.astro";
 import MethodSteps from "../components/home/MethodSteps.astro";
 import AuthorityStrip from "../components/home/AuthorityStrip.astro";
 import FinalCTA from "../components/home/FinalCTA.astro";
+import ChoixParcours from "../components/home/ChoixParcours.astro";
+import AvantApres from "../components/home/AvantApres.astro";
 import TextImageSection from "../components/editorial/TextImageSection.astro";
-import Section from "../components/global/Section.astro";
-import CasClinique from "../components/clinical/CasClinique.astro";
 import portrait from "../assets/photos/portrait-franck.jpg";
 import { home } from "../content/home";
 import { site } from "../content/site";
@@ -31,15 +31,15 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
     image={portrait}
     imageAlt="Portrait du Dr Franck Moyal"
   />
+  <ChoixParcours />
   <PillarPair title={home.pillars.title} items={home.pillars.items} />
   <PhilosophyStatement title={home.philosophy.title} text={home.philosophy.text} />
   {/* Ce que « Esthétique. Fonction. Préservation. » donne en bouche : une reconstruction
       additive, sans retrait de tissu dentaire (choix de Franck, 24/09/2026). */}
-  <Section tone="ivory" spacing="none" class="accueil-cas-bande">
-    <div class="container grid-12 accueil-cas-grille">
-      <CasClinique id="composite-six-dents" class="accueil-cas" />
-    </div>
-  </Section>
+  <AvantApres
+    title="Avant, après"
+    intro="Quatre situations cliniques traitées au cabinet, photographiées avant et après. Chaque cas renvoie à la page qui explique la démarche."
+  />
   <MethodSteps
     id="methode"
     title={home.method.title}
