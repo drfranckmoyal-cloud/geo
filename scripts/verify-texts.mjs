@@ -36,6 +36,20 @@ const DECISIONS = [
 ];
 // Passages du pack volontairement non affichés (décisions du fichier maître)
 const HIDDEN = [{ ref: "D19", kind: "source (note)", why: "notes « Soutient : » retirées de l'affichage" }];
+// Blocs retirés d'une page parce qu'une autre page les dit déjà, mieux (D66, 04/10/2026).
+// Le texte n'est pas perdu : la colonne « repris » dit où il se lit désormais. Le contrôle
+// les recense à chaque passage, au lieu de les signaler comme oubliés.
+const REPRIS_AILLEURS = [
+  {
+    ref: "D66",
+    page: "Accueil",
+    cles: /^(pillars|authority)\./,
+    blocs: "Deux axes de pratique, une même exigence » et « Clinique, enseignement, hôpital",
+    repris: "/franck-moyal/",
+    pourquoi:
+      "la page du praticien dit la même chose à la première personne : « Dentisterie esthétique et adhésive », « Comprendre les usures avant de les reconstruire », « Transmettre oblige à structurer sa pratique », « Activité hospitalière »",
+  },
+];
 // Libellés de structure du pack (consignes au rédacteur), jamais affichés
 const STRUCTURE = /^(Texte|Lien|Liens|CTA|Intro|Étapes|Sous-blocs|Message clé|Titre|Visuel|Objectif)\s*:?$/i;
 // Sections du pack qui sont des consignes, pas du contenu affichable
@@ -181,9 +195,17 @@ const pages = [
 for (const page of pages) {
   const { html, text, title, desc } = await pageText(page.file);
   const low_text = text.toLocaleLowerCase("fr");
-  let checked = 0, invented = [], lost = [], decided = [];
+  let checked = 0, invented = [], lost = [], decided = [], repris = [];
+  const deplaces = REPRIS_AILLEURS.filter((d) => d.page === page.name);
+  // Les textes des blocs repris ailleurs : on ne les attend plus sur cette page,
+  // mais on vérifie qu'ils restent présents dans les sources du pack.
+  const textesRepris = new Set();
+  for (const { path, value } of strings(page.content)) {
+    if (deplaces.some((d) => d.cles.test(path))) textesRepris.add(norm(value));
+  }
   for (const { path, value } of strings(page.content)) {
     if (SKIP_KEYS.test(path)) continue;
+    if (deplaces.some((d) => d.cles.test(path))) continue;
     const v = norm(value);
     checked++;
     const decision = DECISIONS.find((d) => norm(d.site) === v);
@@ -198,6 +220,7 @@ for (const page of pages) {
     const v = norm(seg.text);
     if (DECISIONS.some((d) => norm(d.pack) === v)) continue;
     if (HIDDEN.some((h) => h.kind === seg.kind)) { hidden++; continue; }
+    if (textesRepris.has(v)) { repris.push(v); continue; }
     const ok = seg.html ? html.includes(v) : seg.kind === "référencement" ? title === v || desc === v : text.includes(v) || (seg.ci && low_text.includes(v.toLocaleLowerCase("fr")));
     if (ok) found++;
     else missing.push(`[${seg.kind}] « ${v} »`);
@@ -208,6 +231,9 @@ for (const page of pages) {
   note(lost.length ? `  ✗ Préparés mais absents de la page :\n    ${lost.join("\n    ")}` : "  ✓ Tous les textes préparés sont dans la page");
   note(missing.length ? `  ✗ Passages du pack absents de la page :\n    ${missing.join("\n    ")}` : "  ✓ Aucun passage du pack oublié");
   if (decided.length) note(`  • Remplacements décidés :\n    ${decided.join("\n    ")}`);
+  for (const d of deplaces) {
+    note(`  • ${d.ref} — blocs « ${d.blocs} » retirés de cette page (${textesRepris.size} textes), repris sur ${d.repris} :\n    ${d.pourquoi}`);
+  }
   if (hidden) note(`  • ${hidden} passage(s) du pack volontairement non affiché(s) : ${HIDDEN.map((h) => `${h.why} (${h.ref})`).join(", ")}`);
 }
 

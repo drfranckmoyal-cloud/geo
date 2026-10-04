@@ -1,13 +1,15 @@
 ---
-// Page 1 — Accueil (02_HOME.md). Ordre des sections du pack (V3) :
-// ouverture, deux piliers, philosophie, méthode, TCA, autorité, appel final.
+// Page 1 — Accueil. Ordre du pack (V3) : ouverture, deux piliers, philosophie, méthode,
+// TCA, autorité, appel final.
+// Amendé le 04/10/2026 (D65, D66) : deux portes et des avant/après en tête, et retrait
+// des blocs « Deux axes de pratique » et « Clinique, enseignement, hôpital » — la page
+// /franck-moyal/ dit déjà la même chose, à la première personne. Les composants
+// PillarPair et AuthorityStrip restent au dépôt, prêts à resservir.
 import { getImage } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSplit from "../components/home/HeroSplit.astro";
-import PillarPair from "../components/home/PillarPair.astro";
 import PhilosophyStatement from "../components/home/PhilosophyStatement.astro";
 import MethodSteps from "../components/home/MethodSteps.astro";
-import AuthorityStrip from "../components/home/AuthorityStrip.astro";
 import FinalCTA from "../components/home/FinalCTA.astro";
 import ChoixParcours from "../components/home/ChoixParcours.astro";
 import AvantApres from "../components/home/AvantApres.astro";
@@ -33,7 +35,6 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
     imageAlt="Portrait du Dr Franck Moyal"
   />
   <ChoixParcours />
-  <PillarPair title={home.pillars.title} items={home.pillars.items} />
   <PhilosophyStatement title={home.philosophy.title} text={home.philosophy.text} />
   {/* Ce que « Esthétique. Fonction. Préservation. » donne en bouche : une reconstruction
       additive, sans retrait de tissu dentaire (choix de Franck, 24/09/2026). */}
@@ -55,7 +56,6 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
     paragraphs={[home.tca.text]}
     links={[home.tca.cta]}
   />
-  <AuthorityStrip title={home.authority.title} text={home.authority.text} links={home.authority.links} />
   <FinalCTA title={home.final.title} text={home.final.text} cta={home.final.cta} />
   </div>
 </BaseLayout>
