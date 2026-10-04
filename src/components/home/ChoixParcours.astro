@@ -1,132 +1,187 @@
 ---
-// Les deux portes de l'accueil (D65, 04/10/2026). Le visiteur se reconnaît d'abord,
-// puis il lit. Modèle retenu par Franck d'après garyfinelle.com, adapté : la page
-// d'accueil garde tout son contenu — elle fait 92 % des clics du site dans Google,
-// un accueil réduit à deux portes les ferait perdre.
+// Les deux portes de l'accueil (D65, 04/10/2026, deuxième version après retour de Franck).
+// Deux panneaux de même hauteur, l'un clair l'autre noir, côte à côte. Au repos ils ne
+// montrent que leur titre ; au survol, le panneau s'éclaire et son menu intérieur apparaît.
 //
-// Pas de composant nouveau dans la direction artistique : filets, encre, vert sauge,
-// et le même lien à flèche que partout ailleurs (V9).
+// Sans souris — téléphone, tablette — le survol n'existe pas : les menus sont alors
+// affichés en permanence (@media (hover: none)). Le clavier déclenche la même chose que
+// la souris, par :focus-within.
 import Section from "../global/Section.astro";
-import TextLink from "../global/TextLink.astro";
 import { parcours } from "../../content/parcours";
 ---
 
-<Section tone="ivory" spacing="compact" labelledby="parcours-titre">
-  <div class="container">
-    <h2 id="parcours-titre" class="parcours__chapeau">Par où commencer</h2>
-    <div class="parcours">
-      {
-        parcours.map((p) => (
-          <div class="porte" id={p.id}>
+<Section tone="paper" spacing="none" labelledby="parcours-titre">
+  <h2 id="parcours-titre" class="sr-only">Par où commencer</h2>
+  <div class="portes">
+    {
+      parcours.map((p, i) => (
+        <div class:list={["porte", i === 1 && "porte--encre"]} id={p.id}>
+          <div class="porte__haut">
             <p class="porte__surtitre">{p.surtitre}</p>
             <p class="porte__titre">{p.titre}</p>
-            <p class="porte__intro">{p.intro}</p>
-            <ul class="porte__liste">
-              {p.destinations.map((d) => (
-                <li>
-                  <a
-                    href={d.href}
-                    class="porte__lien"
-                    {...(d.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  >
-                    {d.label}
-                    {d.externe && <span class="porte__externe" aria-label="(nouvelle fenêtre)">↗</span>}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <TextLink href={p.suite.href} label={p.suite.label} class="porte__suite" />
           </div>
-        ))
-      }
-    </div>
+          <ul class="porte__menu">
+            {p.destinations.map((d) => (
+              <li>
+                <a
+                  href={d.href}
+                  {...(d.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {d.label}
+                  {d.externe && <span aria-hidden="true"> ↗</span>}
+                </a>
+              </li>
+            ))}
+            <li class="porte__suite">
+              <a href={p.suite.href}>{p.suite.label} <span aria-hidden="true">→</span></a>
+            </li>
+          </ul>
+        </div>
+      ))
+    }
   </div>
 </Section>
 
 <style>
-  .parcours__chapeau {
-    font-family: var(--f-sans);
-    font-size: var(--fs-meta);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--c-ink-soft);
-    margin: 0 0 clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  .parcours {
+  .portes {
     display: grid;
-    gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+    /* une seule ligne : les deux panneaux sont au même niveau, toujours */
+    grid-template-columns: 1fr;
   }
-  @media (min-width: 56rem) {
-    .parcours {
+  @media (min-width: 48rem) {
+    .portes {
       grid-template-columns: 1fr 1fr;
-      /* le filet qui sépare les deux parcours, dans le gris chaud des filets du site */
-      column-gap: 0;
     }
-    .parcours > * + * {
-      border-left: 1px solid var(--c-stone);
-      padding-left: clamp(2.5rem, 1.5rem + 4vw, 5rem);
-    }
-    .parcours > :first-child {
-      padding-right: clamp(2.5rem, 1.5rem + 4vw, 5rem);
-    }
+  }
+
+  .porte {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Alignés en haut, jamais centrés : un menu caché occupe quand même sa place,
+       et les deux menus n'ont pas le même nombre d'entrées. Centrer décalait les
+       deux titres l'un par rapport à l'autre. */
+    justify-content: flex-start;
+    gap: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    padding: clamp(2.25rem, 1.75rem + 2vw, 3rem) clamp(1.5rem, 1rem + 2.5vw, 3.5rem);
+    /* hauteur fixée sur le plus long des deux menus : rien ne bouge au survol */
+    min-height: clamp(19rem, 13rem + 20vw, 26rem);
+    background: var(--c-ivory);
+    color: var(--c-ink);
+    transition: background-color var(--t-hover) var(--ease);
+  }
+  .porte--encre {
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+  .porte:hover,
+  .porte:focus-within {
+    background: var(--c-paper);
+  }
+  .porte--encre:hover,
+  .porte--encre:focus-within {
+    background: #0e0e0d;
   }
 
   .porte__surtitre {
+    margin: 0 0 0.4rem;
     font-family: var(--f-sans);
     font-size: var(--fs-meta);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--c-ink-soft);
-    margin: 0 0 0.35rem;
+    opacity: 0.6;
   }
   .porte__titre {
+    margin: 0;
     font-family: var(--f-serif);
     font-weight: var(--fw-display);
-    font-size: var(--fs-h2);
-    line-height: var(--lh-heading);
-    margin: 0 0 var(--gap-title-text);
-  }
-  .porte__intro {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    color: var(--c-ink-soft);
-    max-width: 34rem;
-    margin: 0 0 clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem);
+    line-height: 1.04;
   }
 
-  .porte__liste {
+  /* Le menu intérieur : replié au repos, déplié au survol. */
+  .porte__menu {
     list-style: none;
-    margin: 0 0 var(--gap-text-cta);
+    margin: 0;
     padding: 0;
-    border-top: 1px solid var(--c-stone);
+    display: grid;
+    gap: 0;
+    align-content: start;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity var(--t-hover) var(--ease),
+      transform var(--t-hover) var(--ease),
+      visibility 0s linear var(--t-hover);
   }
-  .porte__liste li {
-    border-bottom: 1px solid var(--c-stone);
-  }
-  .porte__lien {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    padding: 0.85rem 0;
-    font-size: var(--fs-body);
-    color: var(--c-ink);
-    text-decoration: none;
-    transition: color var(--t-hover) var(--ease), padding-left var(--t-hover) var(--ease);
-  }
-  .porte__lien:hover,
-  .porte__lien:focus-visible {
-    color: var(--c-sage);
-    padding-left: 0.4rem;
-  }
-  .porte__externe {
-    font-size: var(--fs-meta);
-    color: var(--c-ink-soft);
+  .porte:hover .porte__menu,
+  .porte:focus-within .porte__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
   }
 
+  .porte__menu a {
+    display: block;
+    padding: 0.22rem 0;
+    font-family: var(--f-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.82;
+    transition: opacity var(--t-hover) var(--ease), padding-left var(--t-hover) var(--ease);
+  }
+  .porte__menu a:hover,
+  .porte__menu a:focus-visible {
+    opacity: 1;
+    padding-left: 0.35rem;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .porte__suite {
+    margin-top: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid currentColor;
+  }
+  .porte__suite a {
+    opacity: 1;
+    font-weight: 500;
+  }
+
+  /* Le filet qui sépare les deux panneaux clairs sur grand écran */
+  @media (min-width: 48rem) {
+    .porte:not(.porte--encre) {
+      border-right: 1px solid var(--c-stone);
+    }
+  }
+
+  /* Sans survol possible, le menu est toujours là : on ne cache rien au doigt. */
+  @media (hover: none) {
+    .porte__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .porte {
+      min-height: 0;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .porte__lien {
+    .porte,
+    .porte__menu,
+    .porte__menu a {
       transition: none;
     }
   }

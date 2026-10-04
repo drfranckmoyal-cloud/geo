@@ -22,6 +22,7 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
 ---
 
 <BaseLayout title={home.seo.title} description={home.seo.description} path="/" schema={schema} ogImage={og.src}>
+  <div class="accueil-resserre">
   <HeroSplit
     eyebrow={home.hero.eyebrow}
     h1={home.hero.h1}
@@ -56,6 +57,7 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
   />
   <AuthorityStrip title={home.authority.title} text={home.authority.text} links={home.authority.links} />
   <FinalCTA title={home.final.title} text={home.final.text} cta={home.final.cta} />
+  </div>
 </BaseLayout>
 
 <style>
@@ -71,5 +73,15 @@ const schema = graph([website(), person(abs(og.src)), practice()]);
     .accueil-cas-grille :global(.accueil-cas) {
       grid-column: 1 / -1;
     }
+  }
+</style>
+
+<style is:global>
+  /* Accueil resserré (D65, 04/10/2026) : Franck trouvait la page trop étalée et trop
+     longue à parcourir. On réduit la respiration verticale ici seulement ; la valeur
+     du pack (--section-y) reste celle des 27 autres pages. */
+  .accueil-resserre {
+    --section-y: clamp(2.5rem, 1.6rem + 3vw, 4.25rem); /* 40 → 68 px, au lieu de 72 → 136 */
+    --gap-text-cta: clamp(1.5rem, 1.35rem + 0.4vw, 1.875rem);
   }
 </style>
