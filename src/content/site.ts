@@ -53,30 +53,40 @@ export const site = {
 // Tout autre lien interne mène à une page à venir.
 export const builtPages = ["/", "/franck-moyal/", "/usures-dentaires/", ...builtPackUrls];
 
-// Deux rubriques groupées ouvrent un sous-menu (D18, contrôle du tour 1 par ChatGPT).
-export type NavLink = { label: string; href: string };
+// Menu par public (D68, 07/10/2026). Il groupait par sujet (D18) ; il groupe désormais
+// par lecteur, comme les deux portes de l'accueil et avec les mêmes mots : un patient ne
+// traverse plus les publications, un confrère ne traverse plus les pages de soins.
+// Surtout, les pages de soins entrent enfin au menu — elles n'y étaient pas du tout.
+// Libellés inchangés : Franck les garde en l'état pour l'instant.
+export type NavLink = { label: string; href: string; externe?: boolean };
 export type NavItem = { label: string; href?: string; children?: NavLink[] };
 
 export const nav: NavItem[] = [
-  { label: "Dentisterie esthétique", href: "/dentisterie-esthetique-paris/" },
-  { label: "Usures dentaires", href: "/usures-dentaires/" },
   {
-    label: "Érosion & TCA",
+    label: "Vous êtes patient",
     children: [
+      { label: "Dentisterie esthétique", href: "/dentisterie-esthetique-paris/" },
+      { label: "Usures dentaires", href: "/usures-dentaires/" },
+      { label: "Facettes dentaires", href: "/facettes-dentaires-paris/" },
+      { label: "Composite bonding", href: "/composite-bonding-paris/" },
+      { label: "Éclaircissement dentaire", href: "/eclaircissement-dentaire-paris/" },
+      { label: "Taches blanches, MIH et dyschromies", href: "/taches-dentaires-dyschromies-icon/" },
       { label: "Érosion dentaire", href: "/erosion-dentaire/" },
-      { label: "TCA et santé bucco-dentaire", href: "/tca-dents/" },
+      { label: "Bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
     ],
   },
-  { label: "Dr Franck Moyal", href: "/franck-moyal/" },
   {
-    label: "Publications & enseignement",
+    label: "Vous êtes chirurgien-dentiste",
     children: [
-      { label: "Publications", href: "/publications/" },
       { label: "Conférences & formations", href: "/conferences-formations/" },
+      { label: "Smile Club Formations", href: "https://smileclubformations.com/", externe: true },
+      { label: "Publications", href: "/publications/" },
       { label: "Activité hospitalière", href: "/activite-hospitaliere/" },
+      { label: "TCA et santé bucco-dentaire", href: "/tca-dents/" },
       { label: "Médias & interviews", href: "/medias-interviews/" },
     ],
   },
+  { label: "Dr Franck Moyal", href: "/franck-moyal/" },
 ];
 
 export const footer = {

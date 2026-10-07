@@ -245,10 +245,26 @@ const chrome = [
   footer.address,
   footer.legal.label,
 ];
-const unknown = chrome.filter((l) => !allSourcesLow.includes(low(l)));
+// Libellés de menu décidés hors pack (D68, 07/10/2026) : le menu groupe désormais par
+// public et non par sujet, et il fait enfin entrer les pages de soins. Les deux intitulés
+// de groupe reprennent mot pour mot les portes de l'accueil ; les quatre autres sont le
+// nom de la page qu'ils ouvrent. À soumettre à ChatGPT, à qui les libellés reviennent.
+const LIBELLES_DECIDES = [
+  { ref: "D68", label: "Vous êtes patient", pourquoi: "intitulé de groupe, repris de la porte de l'accueil" },
+  { ref: "D68", label: "Vous êtes chirurgien-dentiste", pourquoi: "intitulé de groupe, repris de la porte de l'accueil" },
+  { ref: "D68", label: "Facettes dentaires", pourquoi: "page de soins entrée au menu" },
+  { ref: "D68", label: "Éclaircissement dentaire", pourquoi: "page de soins entrée au menu" },
+  { ref: "D68", label: "Taches blanches, MIH et dyschromies", pourquoi: "page de soins entrée au menu" },
+  { ref: "D68", label: "Smile Club Formations", pourquoi: "lien vers l'organisme de formation, côté confrères" },
+];
+const decidesLow = LIBELLES_DECIDES.map((d) => low(d.label));
+const unknown = chrome.filter((l) => !allSourcesLow.includes(low(l)) && !decidesLow.includes(low(l)));
 problems += unknown.length;
 note(`\n■ Menu et pied de page — ${chrome.length} libellés`);
 note(unknown.length ? `  ✗ Libellés sans source : ${unknown.join(", ")}` : "  ✓ Tous les libellés viennent du pack ou de la réponse de ChatGPT");
+const utilises = LIBELLES_DECIDES.filter((d) => chrome.some((l) => low(l) === low(d.label)));
+if (utilises.length)
+  note(`  • ${utilises.length} libellé(s) décidé(s) hors pack, à soumettre à ChatGPT :\n    ${utilises.map((d) => `${d.ref} — « ${d.label} » : ${d.pourquoi}`).join("\n    ")}`);
 
 // Pages du pack « pages suivantes »
 const pack = await verifyPack();

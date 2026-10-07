@@ -39,8 +39,14 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                 <ul class="subnav" id={`sous-menu-${i}`} hidden>
                   {item.children.map((child) => (
                     <li>
-                      <a href={child.href} aria-current={isCurrent(child.href)} {...linkAttrs(child.href)}>
+                      <a
+                        href={child.href}
+                        aria-current={isCurrent(child.href)}
+                        {...linkAttrs(child.href)}
+                        {...(child.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      >
                         {child.label}
+                        {child.externe && <span aria-hidden="true"> ↗</span>}
                       </a>
                     </li>
                   ))}
@@ -72,8 +78,14 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                   <ul>
                     {item.children.map((child) => (
                       <li>
-                        <a href={child.href} aria-current={isCurrent(child.href)} {...linkAttrs(child.href)}>
+                        <a
+                          href={child.href}
+                          aria-current={isCurrent(child.href)}
+                          {...linkAttrs(child.href)}
+                          {...(child.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        >
                           {child.label}
+                          {child.externe && <span aria-hidden="true"> ↗</span>}
                         </a>
                       </li>
                     ))}
