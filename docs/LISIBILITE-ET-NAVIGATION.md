@@ -139,9 +139,16 @@ ligne perdue au milieu d'une page.
 2. **Deux menus** au lieu d'un, chacun groupé par intention et non par discipline.
 3. **Les 18 pages orphelines entrent dans un menu** — ce qui règle du même coup leur
    absence de l'index Google.
-4. **Un fil conducteur en bas de chaque page** : « et maintenant ? », avec les deux ou
-   trois pages qui suivent logiquement. C'est ce qui manque le plus : aujourd'hui, une
-   page finit et rien ne dit où aller.
+4. ~~**Un fil conducteur en bas de chaque page**~~ — **constat erroné, vérifié le
+   07/10/2026.** Je l'avais annoncé comme « ce qui manque le plus ». C'est faux : **21
+   pages sur 27 se terminent déjà par un bloc « À lire aussi » de trois à six liens, suivi
+   d'un appel à prendre rendez-vous.** Les deux pages sans « À lire aussi » n'en ont pas
+   besoin — l'accueil porte désormais les deux portes, et `/franck-moyal/` place un lien
+   sortant dans chacune de ses sections, sept en tout, ce qui vaut mieux qu'une liste en
+   bas. Les quatre pages sans appel final (publications, conférences, activité
+   hospitalière, médias) s'adressent à des confrères : « Prendre rendez-vous » y serait
+   hors sujet, et elles mènent toutes à Smile Club Formations depuis le nouveau menu.
+   **Rien à faire sur ce point.**
 
 ---
 
