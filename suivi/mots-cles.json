@@ -1,5 +1,5 @@
 {
-  "commentaire": "Les mots sur lesquels Franck veut être vu (8 octobre 2026). Base : sa propre liste, complétée des variations et combinaisons autour des mêmes notions. Le suivi quotidien lit la position de chacun dans Search Console.",
+  "commentaire": "Les mots sur lesquels Franck veut être vu (8 octobre 2026). Base : sa propre liste, complétée des variations et combinaisons autour des mêmes notions. Enrichie le 08/10/2026 des variantes qualifiées que Google a réellement servies au site entre le 21/09 et le 05/10 (relevé dans suivi/requetes/2026-10-08.json) : le relevé montre que le mot nu ne sort pas et que le mot qualifié sort — « bruxisme » rien contre « specialiste bruxisme paris » 3,8, « bonding dentaire » 51 contre « composite bonding paris » 6,7. Le suivi quotidien lit la position de chacun dans Search Console.",
   "site": "sc-domain:drfranckmoyal.fr",
   "familles": {
     "TCA et érosion": [
@@ -25,7 +25,10 @@
       "dents usées",
       "dents courtes",
       "reconstruction dents usées",
-      "dimension verticale dentaire"
+      "dimension verticale dentaire",
+      "specialiste bruxisme paris",
+      "traitement usure dentaire",
+      "cabinet spécialiste usure dentaire"
     ],
     "Composite": [
       "composite bonding",
@@ -36,14 +39,21 @@
       "composite dentaire avant apres",
       "bonding dentaire",
       "bonding dentaire paris",
-      "stratification composite"
+      "stratification composite",
+      "dentiste composite",
+      "composite esthétique dentaire",
+      "esthétique dentaire composite",
+      "composite bonding in paris",
+      "composite filling in paris"
     ],
     "Facettes": [
       "facettes dentaires",
       "facettes dentaires paris",
       "facettes ou composite",
       "facettes ceramique paris",
-      "prix facettes dentaires paris"
+      "prix facettes dentaires paris",
+      "facette dentaire paris 9",
+      "facettes dentaires paris 17"
     ],
     "Esthétique générale": [
       "dentiste esthetique paris",
@@ -53,7 +63,13 @@
       "eclaircissement dentaire paris",
       "blanchiment dentaire paris",
       "taches blanches dents",
-      "mih dents"
+      "mih dents",
+      "blanchiment dentaire professionnel paris 9",
+      "dentiste blanchiment dentaire",
+      "chirurgie dentaire esthétique",
+      "esthetique du sourire",
+      "dentiste esthétique du sourire",
+      "meilleur dentiste esthétique paris"
     ],
     "Marque": [
       "franck moyal",
