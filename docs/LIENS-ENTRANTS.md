@@ -174,6 +174,39 @@ Le site a **un seul lien entrant**, depuis drfranckmoyal.fr.
 
 ---
 
+## Ce que votre CV ajoute (8 octobre 2026)
+
+La lecture du CV fait apparaître des organismes qui vous ont fait enseigner et qui
+n'étaient pas dans cette liste. **Je n'ai pas pu vérifier en ligne s'ils ont une page
+à votre nom** : ces sites sont mal couverts par les moteurs auxquels j'ai accès.
+**Donnez-moi les adresses et je regarde**, ou allez voir vous-même : s'il y a une page
+formateur, elle doit porter votre lien.
+
+| Organisme | Ce que vous y avez fait |
+|---|---|
+| **DSF Formations** | Usures de A à Z (14 h), stratification des composites, inlays/onlays, dyschromies et ICON, photographie dentaire — six sessions en 2025 |
+| **CEMEDIS Formations** | Stratification, inlays/onlays, pose de digues, photographie et planification — quatre sessions en 2025 |
+| **LBS Formation** | Inlays, onlays, overlays (7 h), avril 2025 |
+| **Entretiens de Garancière** | « Prendre en charge les usures dentaires en 2025 », 19 septembre 2025. **50ᵉ édition, organisée par l'AUOG** — c'est le congrès de la faculté. Son programme archivé devrait vous nommer. |
+| **Internat MBD, Pitié-Salpêtrière** | « Usures : connaître, reconnaître et traiter », 5 mai 2025 |
+
+**Cinq thèses déposées vous citent comme directeur**, sur un domaine du CNRS
+(`dumas.ccsd.cnrs.fr`). Ce ne sont pas des liens — elles ne renvoient pas vers votre
+site — mais ce sont des mentions permanentes et vérifiables. La liste et les adresses
+sont dans `docs/PROFILS-SCIENTIFIQUES.md`.
+
+**Eugenol : vérifié, et sans intérêt pour les liens.** Le site tient des fiches de
+conférencier individuelles (celle de Lisa Friedlander, votre co-directrice de thèse,
+existe). Vous n'en avez pas. Mais **ces fiches n'ont aucun champ « site web »** : vous
+y gagneriez une page à votre nom dans les résultats, pas un lien.
+
+**Un détail utile pour la priorité 5** : l'adresse de votre fiche agenda.direct se
+termine par `10005198790`, qui est votre numéro RPPS. Ces annuaires recopient le
+répertoire national en s'y référant. Corriger à la source — votre fiche au répertoire
+partagé des professionnels de santé — peut donc corriger plusieurs annuaires d'un coup.
+
+---
+
 ## Ce que je n'ai pas pu vérifier
 
 - Les sites d'**Alpha Oméga France** et de la **SFPD** : les adresses essayées ne

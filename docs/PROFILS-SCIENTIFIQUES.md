@@ -1,64 +1,69 @@
 # Vos profils scientifiques — tout est prêt, il reste à les remplir
 
-*8 octobre 2026. Vérifié ce jour.*
+*8 octobre 2026. Établi à partir de votre CV 2026 et vérifié dans les registres
+publics le jour même.*
+
+> **Données personnelles** : votre CV contient votre téléphone portable, votre date de
+> naissance et votre arrondissement de résidence. Ils ne figurent dans aucun document
+> du projet et n'iront sur aucun profil.
 
 ---
 
-## D'abord, une mise au point honnête
+## Ce que la lecture du CV a changé
+
+Quatre choses, dont trois que le site ne disait pas :
+
+1. **Une publication manquait** : *30 questions en implantologie* (CdP / Espace ID,
+   2011). Elle n'est ni sur votre site ni dans ce que j'avais rassemblé.
+2. **L'ordre des auteurs de l'ouvrage de 2008 est tranché** par votre CV : Tarragano,
+   Illouz, **Moyal**, Missika, Ben Slama. Vous êtes 3ᵉ. Question réglée.
+3. **Une thèse que vous avez dirigée ne figure pas sur votre CV** : Chloé Costil,
+   2021, co-dirigée avec Frédéric Rilliard. Elle est pourtant déposée et publique.
+4. **Une date est à vérifier** : votre CV date *La chirurgie orale* de **2010**,
+   Google Books de **2015**. Probablement une édition d'origine et une réédition.
+
+---
+
+## Mise au point honnête avant de vous y mettre
 
 **Ces profils ne vous feront pas monter sur « usure dentaire ».** Ce ne sont pas des
-liens classiques :
+liens classiques : les pages ORCID sont fabriquées par JavaScript — j'ai récupéré la
+vôtre, **votre nom n'apparaît même pas** dans le code servi. Google n'y voit rien à
+créditer.
 
-- Les pages **ORCID** sont fabriquées par JavaScript. J'ai récupéré la page de votre
-  dossier : **votre nom n'apparaît même pas** dans le code que le serveur envoie.
-  Google n'y voit donc pas de lien à créditer.
-- **ResearchGate** bloque les consultations automatiques, je n'ai pas pu inspecter le
-  code. Ce que je sais en revanche : ses pages de profil **sortent dans Google** sur
-  les recherches de nom.
+L'intérêt est ailleurs, et il est réel :
 
-Alors pourquoi le faire ? Pour trois raisons réelles :
+1. **C'est le volet GEO du projet.** ORCID et HAL publient des services machine. Je
+   m'en suis servi aujourd'hui pour lire votre dossier et retrouver vos thèses en
+   quelques requêtes. C'est exactement par là que les intelligences artificielles
+   établissent *qui est expert de quoi*.
+2. **Vous occupez des résultats à votre nom.**
+3. **C'est l'identifiant que les revues réclament**, et vous allez publier.
 
-1. **C'est le volet GEO du projet**, celui qui vise les réponses des intelligences
-   artificielles. ORCID publie un service machine — je m'en suis servi moi-même pour
-   lire votre dossier en une requête. C'est exactement par là que les IA établissent
-   *qui est expert de quoi*. Votre dossier est vide : elles ne lisent rien.
-2. **Vous occupez des résultats à votre nom.** Un profil ResearchGate ou Scholar sort
-   sur « Franck Moyal » : une place de plus que vous contrôlez.
-3. **ORCID est l'identifiant que les revues réclament.** Chaque fois que vous
-   publiez, il rattache l'article à vous. Vous allez publier (priorité 6 des liens
-   entrants) : autant que ce soit rattaché.
-
-**Comptez une heure en tout.** C'est à vous de le faire : ces sites demandent un mot
+**Comptez une heure et demie.** C'est à vous de le faire : ces sites demandent un mot
 de passe et une adresse courriel, je ne peux pas créer de compte à votre place.
 
 ---
 
 ## 1. ORCID — vous l'avez déjà, et il est vide
 
-**Votre identifiant existe : `0009-0007-7025-1189`**
-→ [orcid.org/0009-0007-7025-1189](https://orcid.org/0009-0007-7025-1189)
+**`0009-0007-7025-1189`** → [orcid.org/0009-0007-7025-1189](https://orcid.org/0009-0007-7025-1189)
 
-Il a été ouvert le **28 juillet 2023**, il est marqué « revendiqué » — donc quelqu'un
-l'a bien créé avec un mot de passe — et **il n'a jamais été touché depuis.** Il ne
-contient que votre nom. Rien d'autre : ni poste, ni publication, ni site.
-
-Vous l'avez probablement ouvert en soumettant un article, puis oublié.
+Ouvert le **28 juillet 2023**, marqué « revendiqué » — donc créé avec un mot de passe
+— et **jamais modifié depuis**. Il ne contient que votre nom.
 
 > **Réserve** : je ne peux pas certifier que c'est le vôtre. Le nom correspond
 > exactement et aucun autre Franck Moyal n'existe au registre. Vous le saurez en
-> demandant un nouveau mot de passe : si le courriel arrive chez vous, c'est le vôtre.
+> demandant un nouveau mot de passe sur
+> [orcid.org/signin](https://orcid.org/signin) : si le courriel arrive chez vous,
+> c'est le vôtre.
 
-### Ce qu'il faut faire
+**Mettez chaque élément en visibilité « Everyone »**, sinon rien n'est lisible de
+l'extérieur — et c'est tout l'intérêt.
 
-1. Aller sur [orcid.org/signin](https://orcid.org/signin), cliquer **« Forgotten your
-   password? »** et saisir votre adresse habituelle.
-2. Une fois entré, remplir les champs ci-dessous.
-3. Mettre la visibilité sur **« Everyone »** pour chaque élément, sinon rien n'est
-   lisible de l'extérieur — et c'est tout l'intérêt.
+### Websites & social links
 
-### Le champ qui compte le plus : « Websites & social links »
-
-| Lien à ajouter | Intitulé à écrire |
+| Lien | Intitulé |
 |---|---|
 | `https://drfranckmoyal.fr` | Site professionnel |
 | `https://www.aphp.fr/dr-moyal-franck` | Profil AP-HP |
@@ -66,152 +71,208 @@ Vous l'avez probablement ouvert en soumettant un article, puis oublié.
 
 ### Biographie — à relire puis coller
 
-> Chirurgien-dentiste à Paris, exerçant en dentisterie esthétique et adhésive.
+> Chirurgien-dentiste à Paris, en pratique exclusive de dentisterie esthétique et
+> adhésive depuis 2008.
 >
-> Mon activité clinique est centrée sur les usures dentaires, l'érosion, la
-> dentisterie adhésive et la préservation tissulaire. Elle se prolonge par une
-> activité hospitalière dans deux services : le service de Médecine Bucco-dentaire de
-> l'hôpital Pitié-Salpêtrière (AP-HP), notamment au sein de la Permanence d'Accès aux
-> Soins de Santé bucco-dentaire, et la Clinique des Maladies Mentales et de
-> l'Encéphale (CMME) de l'hôpital Sainte-Anne, dans le champ des troubles des
-> conduites alimentaires.
+> Mon activité clinique est centrée sur les usures dentaires, l'érosion et la
+> préservation tissulaire. Elle se prolonge par une activité hospitalière dans deux
+> services : praticien hospitalier à la Permanence d'Accès aux Soins de Santé
+> bucco-dentaire du service de Médecine Bucco-dentaire de l'hôpital
+> Pitié-Salpêtrière (AP-HP) depuis 2012, où je suis responsable de la consultation
+> des internes en dentisterie esthétique et usures ; et praticien attaché à la
+> Clinique des Maladies Mentales et de l'Encéphale (CMME) de l'hôpital Sainte-Anne
+> depuis 2024, dans le champ des troubles des conduites alimentaires.
 >
-> Ce dernier axe a donné lieu à la création de DentCA, consacrée à la sensibilisation
-> aux effets dentaires des troubles des conduites alimentaires, et à l'encadrement de
-> travaux universitaires sur le dépistage bucco-dentaire des TCA.
+> Je préside l'association DentCA, consacrée à la promotion des soins dentaires chez
+> les patients atteints de troubles des conduites alimentaires, et j'ai co-dirigé
+> plusieurs travaux universitaires sur le dépistage bucco-dentaire de ces troubles,
+> sur l'accès aux soins et sur les partenariats ville-hôpital.
 >
 > J'enseigne par ailleurs la dentisterie adhésive et la prise en charge des usures en
 > formation continue.
 
-*Texte que j'ai rédigé à partir de votre site. À relire et corriger : c'est vous qui
-signez.*
+*Rédigé à partir de votre CV. À relire et corriger : c'est vous qui signez.*
 
-### Employment — deux entrées
+### Employment
 
-| Champ | Entrée 1 | Entrée 2 |
+| | Organization | Department / Role | Dates |
+|---|---|---|---|
+| 1 | Assistance Publique – Hôpitaux de Paris | Service de Médecine Bucco-dentaire, Hôpital Pitié-Salpêtrière — Praticien hospitalier, PASS bucco-dentaire | 2012 → |
+| 2 | GHU Paris Psychiatrie & Neurosciences | CMME, Hôpital Sainte-Anne — Praticien attaché, troubles des conduites alimentaires | 2024 → |
+| 3 | Cabinet dentaire, Paris 9ᵉ | Chirurgien-dentiste, pratique privée | 2008 → |
+| 4 | Service de santé des armées | Chirurgien-dentiste de réserve (CNE) | 2017 → |
+
+### Education & qualifications
+
+| Diplôme | Établissement | Année |
 |---|---|---|
-| Organization | Assistance Publique – Hôpitaux de Paris (AP-HP) | GHU Paris Psychiatrie & Neurosciences |
-| Department | Service de Médecine Bucco-dentaire, Hôpital Pitié-Salpêtrière | CMME, Hôpital Sainte-Anne |
-| Role | Chirurgien-dentiste — PASS bucco-dentaire | Chirurgien-dentiste |
-| City / Country | Paris / France | Paris / France |
-| Start date | **à compléter** | **à compléter** |
+| Diplôme d'État de Docteur en chirurgie dentaire | Université Paris VII | 2008 |
+| DIU de Carcinologie buccale | UFR Paris 7 | 2013-2014 |
+| Certificat AITEC — anatomie, dissection et imagerie tête et cou | | 2014-2015 |
 
-Ajoutez une troisième entrée pour votre cabinet si vous le souhaitez
-(2 rue Hippolyte Lebas, 75009 Paris).
+### Memberships (rubrique « Membership & service »)
 
-### Keywords — à coller tels quels
+- **Président**, Association DentCA — promotion des soins dentaires chez les patients
+  atteints de troubles des conduites alimentaires, depuis 2025
+- **Secrétaire général**, Association des chirurgiens-dentistes de réserve, région
+  Saint-Germain-en-Laye, depuis 2017
+
+### Keywords
 
 > dentisterie esthétique ; dentisterie adhésive ; usures dentaires ; érosion
 > dentaire ; troubles des conduites alimentaires ; composite ; préservation
 > tissulaire ; accès aux soins ; santé publique bucco-dentaire
 
-### Country
-
-> France
+### Country → France
 
 ---
 
-## 2. Vos cinq publications, prêtes à saisir
+## 2. Vos six publications et votre thèse
 
-Métadonnées vérifiées le 8 octobre 2026. **Votre nom en gras** pour repérer votre
-position dans chaque liste d'auteurs.
+**Votre nom en gras** pour repérer votre position dans chaque liste.
 
-**1 — Article** · 2023
+**1 — Article** · 2023 · *auteur unique*
 > **Moyal F.** Fermeture de diastème au composite en technique directe : la « Front
 > Wing Technique ». *Le Fil Dentaire*, 9 octobre 2023.
 > https://www.lefildentaire.com/articles/fermeture-de-diasteme-composite-technique-directe-front-wing-technique/
->
-> *Vous êtes seul auteur.* Type ORCID : **Journal article**
 
-**2 — Ouvrage** · 2015
-> Tarragano H, Missika P, **Moyal F**, Illouz B, Roche Y. *La chirurgie orale.*
-> Rueil-Malmaison : Éditions CdP / Initiatives Santé, 2015, 280 p.
-> ISBN 978-2-84361-220-6.
->
-> *Vous êtes 3ᵉ auteur.* Type ORCID : **Book**
-
-**3 — Article** · 2012
+**2 — Article** · 2012 · *5ᵉ auteur*
 > Rilliard F, Friedlander L, Descorps-Declère J, Khelifa N, **Moyal F**, Saadi S,
 > Schvallinger F, Naud-Llamas C. Santé et précarité : les permanences d'accès aux
 > soins de santé bucco-dentaire. *La Santé de l'Homme*, 2012 ; n° 417 : 31-33.
 > https://www.santepubliquefrance.fr/docs/article/sante-et-precarite-les-permanences-dacces-aux-soins-de-sante-bucco-dentaire
->
-> *Vous êtes 5ᵉ auteur.* Pas de DOI. Type ORCID : **Journal article**
 
-**4 — Article** · 2010
+**3 — Ouvrage** · 2011 · *co-auteur* — **absent de votre site**
+> *30 questions en implantologie.* Éditions CdP / Espace ID, 2011.
+>
+> ⚠️ Votre CV ne donne pas la liste des auteurs ni l'ISBN. **Donnez-les-moi, ou
+> prenez-les sur la couverture.**
+
+**4 — Article** · 2010 · *2ᵉ auteur*
 > Tarragano H, **Moyal F**, Illouz B, Missika P. La première consultation en
 > implantologie. *Le Fil Dentaire*, 16 janvier 2010.
 > https://www.lefildentaire.com/articles/clinique/implantologie/la-premiere-consultation-en-implantologie/
->
-> *Vous êtes 2ᵉ auteur.* Type ORCID : **Journal article**
 
-**5 — Ouvrage** · 2008
-> Missika P, Ben Slama L, **Moyal F**, Illouz B, Tarragano H. *Les cancers de la
+**5 — Ouvrage** · 2010 ou 2015 · *3ᵉ auteur*
+> Tarragano H, Missika P, **Moyal F**, Illouz B, Roche Y. *La chirurgie orale.*
+> Rueil-Malmaison : Éditions CdP, coll. JPIO. 280 p. ISBN 978-2-84361-220-6.
+>
+> ⚠️ **Date à trancher** : votre CV dit 2010, Google Books 2015.
+
+**6 — Ouvrage** · 2008 · *3ᵉ auteur*
+> Tarragano H, Illouz B, **Moyal F**, Missika P, Ben Slama L. *Les cancers de la
 > cavité buccale : du diagnostic aux applications thérapeutiques.* Rueil-Malmaison :
-> Éditions CdP, 2008, 138 p. Collection JPIO. ISBN 978-2-84361-129-2.
+> Éditions CdP, coll. JPIO, 2008, 138 p. ISBN 978-2-84361-129-2.
 >
-> *Vous êtes 3ᵉ auteur.* Type ORCID : **Book**
+> *Ordre des auteurs pris sur votre CV, qui fait foi.*
+
+**7 — Thèse d'exercice** · 2008
+> **Moyal F.** *Le rôle de l'odonto-stomatologiste dans le dépistage et le diagnostic
+> des cancers de la cavité buccale.* Thèse de Diplôme d'État de Docteur en chirurgie
+> dentaire, Université Paris VII, 2008.
 >
-> ⚠️ **Un point à trancher par vous** : les catalogues ne s'accordent pas sur l'ordre
-> des auteurs ni sur le titre exact. La bibliothèque de Nantes donne « **Les** cancers
-> de la cavité buccale » et cite trois auteurs puis « et al. » ; une autre notice
-> commence par Tarragano et oublie Ben Slama ; le libraire donne la forme courte
-> « Cancers de la cavité buccale ». **Prenez l'ordre imprimé sur la couverture.**
-
-### Les travaux universitaires que vous avez encadrés
-
-Votre page publications en cite sept thèmes : réseaux sociaux et dentisterie, IA en
-odontologie, relations ville-hôpital, renoncement aux soins, satisfaction des
-patients, connaissances des chirurgiens-dentistes sur les TCA, dépistage
-bucco-dentaire et TCA.
-
-**Si ces thèses sont déposées** (DUMAS, theses.fr, le catalogue de votre université),
-elles ont chacune une adresse permanente et vous pouvez les rattacher à votre dossier
-sous « Supervision ». **Donnez-moi les titres et les noms des étudiants et je
-retrouve les notices.** C'est ce qui donnerait le plus de poids à votre dossier : sept
-travaux encadrés, c'est un profil d'enseignant-chercheur, pas de praticien isolé.
+> Type ORCID : **Dissertation / Thesis**
 
 ---
 
-## 3. ResearchGate — à créer, et c'est celui qui sort dans Google
+## 3. Les thèses que vous avez dirigées — cinq sont publiques et en ligne
+
+C'est la découverte la plus utile de la journée. **Le registre national HAL vous
+crédite déjà comme directeur ou co-directeur sur cinq thèses déposées**, chacune avec
+une adresse permanente.
+
+| Étudiant | Titre | Année | Co-directeur | Adresse permanente |
+|---|---|---|---|---|
+| Chloé **Costil** | Enquête de satisfaction d'un partenariat entre un service hospitalier d'odontologie et un centre de santé | 2021 | Frédéric Rilliard | [dumas-03463579](https://dumas.ccsd.cnrs.fr/dumas-03463579v1) |
+| Yanis **Chpindel** | Élaboration d'un outil d'évaluation des centres de santé candidats au partenariat ville-hôpital | 2023 | Samantha Elbhar | [dumas-04434245](https://dumas.ccsd.cnrs.fr/dumas-04434245v1) |
+| Élisa **Roufé** | Évaluation de la satisfaction des patients du service de médecine bucco-dentaire de l'HUPS | 2023 | Lisa Friedlander | [dumas-04309890](https://dumas.ccsd.cnrs.fr/dumas-04309890v1) |
+| Raphaël **Benayoun** | L'Intelligence Artificielle en odontologie, de sa définition et ses contraintes légales à ses applications thérapeutiques | 2023 | Isabelle Rodriguez | [dumas-04233707](https://dumas.ccsd.cnrs.fr/dumas-04233707v1) |
+| Auriane **Engel** | Enquête sur l'influence des réseaux sociaux sur la pratique en odontologie des chirurgiens-dentistes ayant validé leur TCEO1 à l'Université Paris Cité en 2022 ou 2023 | 2024 | Samantha Elbhar | [dumas-05305631](https://dumas.ccsd.cnrs.fr/dumas-05305631v1) |
+
+**Deux remarques.**
+
+- **Chloé Costil n'est pas sur votre CV.** Elle devrait y être : c'est une sixième
+  direction, publique et vérifiable.
+- **Trois thèses de votre CV ne sont pas déposées** : Ethel Bismuth (2022, renoncement
+  aux soins), Wassila Doumi (2025, connaissances des chirurgiens-dentistes sur les
+  TCA) et Astrid Marnez (2026, outil de dépistage TCA). Les deux dernières sont
+  probablement trop récentes. **Celle de 2022 mérite une question à l'UFR** : si elle
+  n'a jamais été déposée, c'est une trace publique qui vous manque. Et les deux
+  thèses TCA sont précisément celles qui compteraient le plus pour votre
+  positionnement — à faire déposer dès qu'elles le peuvent.
+
+---
+
+## 4. HAL — la piste que je n'avais pas vue, et c'est la meilleure
+
+→ [hal.science](https://hal.science/)
+
+HAL est l'archive nationale de la recherche française, tenue par le CNRS. DUMAS, où
+sont vos cinq thèses, en fait partie.
+
+**Le constat** : vous y êtes cité cinq fois comme directeur, mais **vous n'avez aucun
+dépôt à votre nom comme auteur**. J'ai vérifié : les 446 « Moyal » du registre sont
+Pascal, Anne et d'autres — pas vous.
+
+**Ce qui est possible** : déposer vous-même vos publications. C'est gratuit, ouvert
+aux praticiens, et chaque dépôt crée une page permanente sur un domaine du CNRS qui
+vous nomme comme auteur. **HAL alimente aussi Google Scholar**, ce qui règle en
+partie le problème du point 6 ci-dessous.
+
+**Pourquoi c'est mieux qu'ORCID pour vous** : c'est français, institutionnel, et vos
+travaux encadrés y sont déjà.
+
+*Réserve : je n'ai pas pu inspecter le code des pages DUMAS, le site bloque les
+consultations automatiques. Je ne peux donc pas affirmer que Google y lit votre nom
+dans le champ « directeur ». Ce que je peux affirmer, c'est que le service machine le
+donne — et c'est lui que lisent les IA.*
+
+---
+
+## 5. ResearchGate
 
 → [researchgate.net](https://www.researchgate.net/)
 
-**L'intérêt** : contrairement à ORCID, les profils ResearchGate sortent dans les
-résultats Google sur les recherches de nom. Vous occupez une place de plus.
+Contrairement à ORCID, ses pages de profil sortent dans Google sur les recherches de
+nom. Une place de plus que vous occupez.
 
-**Ce qu'il demande** : une adresse courriel d'institution est préférable. Sans elle,
-la validation se fait à la main et prend plus longtemps — mais elle se fait.
-
-**À remplir** : la même biographie, les mêmes cinq publications, et le lien vers
-drfranckmoyal.fr dans le champ prévu.
+Une adresse courriel d'institution est préférable ; sans elle la validation se fait à
+la main et prend plus longtemps, mais elle se fait.
 
 ---
 
-## 4. Google Scholar — une question avant de s'y mettre
+## 6. Google Scholar — une question avant de s'y mettre
 
 → [scholar.google.com/citations](https://scholar.google.com/citations)
 
-**Attention, c'est bloquant** : un profil Scholar n'apparaît dans les résultats de
-recherche **que si vous validez une adresse courriel d'institution**. Gmail et les
-adresses personnelles ne comptent pas. Sans cela, le profil existe mais reste
-introuvable — autant ne rien faire.
+**Point bloquant** : un profil n'apparaît dans les résultats **que si vous validez une
+adresse courriel d'institution**. Gmail ne compte pas. Sans cela le profil existe mais
+reste introuvable.
 
-> **Ma question** : avez-vous une adresse en **@aphp.fr**, ou une adresse
-> universitaire ?
+> **Ma question** : avez-vous une adresse **@aphp.fr**, ou une adresse universitaire ?
 >
-> - **Oui** → on fait Scholar, c'est le plus visible des trois.
-> - **Non** → on laisse tomber Scholar et on met l'effort sur ResearchGate.
+> - **Oui** → on fait Scholar, le plus visible des trois.
+> - **Non** → on passe, et on met l'effort sur HAL, qui alimente Scholar de toute façon.
 
 ---
 
 ## Dans quel ordre
 
-| | Quoi | Durée | Pourquoi d'abord |
+| | Quoi | Durée | Pourquoi |
 |---|---|---|---|
-| 1 | **Récupérer votre ORCID** et le remplir | 30 min | Il existe déjà, il est vide depuis deux ans, et c'est l'identifiant auquel tout le reste se rattache. |
-| 2 | **ResearchGate** | 20 min | Le seul des trois qui sorte dans Google à coup sûr. |
-| 3 | **Google Scholar** | 15 min | Seulement si vous avez une adresse d'institution. |
+| 1 | **Récupérer votre ORCID** et le remplir | 40 min | Il existe, il est vide depuis deux ans, tout le reste s'y rattache. |
+| 2 | **Créer votre compte HAL** et y déposer vos publications | 30 min | Institutionnel, français, vos thèses encadrées y sont déjà, et il alimente Scholar. |
+| 3 | **ResearchGate** | 20 min | Sort dans Google sur votre nom. |
+| 4 | **Google Scholar** | 15 min | Seulement si vous avez une adresse d'institution. |
+
+---
+
+## Ce que j'attends de vous
+
+1. Les **auteurs et l'ISBN** de *30 questions en implantologie* (2011).
+2. La **vraie date** de *La chirurgie orale* : 2010 ou 2015.
+3. Avez-vous une **adresse courriel d'institution** (@aphp.fr ou universitaire) ?
+4. La thèse d'**Ethel Bismuth** (2022) a-t-elle été déposée ? Sinon, peut-elle l'être ?
 
 ---
 
