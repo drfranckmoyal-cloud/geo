@@ -256,6 +256,13 @@ const LIBELLES_DECIDES = [
   { ref: "D68", label: "Éclaircissement dentaire", pourquoi: "page de soins entrée au menu" },
   { ref: "D68", label: "Taches blanches, MIH et dyschromies", pourquoi: "page de soins entrée au menu" },
   { ref: "D68", label: "Smile Club Formations", pourquoi: "lien vers l'organisme de formation, côté confrères" },
+  // D70 (08/10/2026) : les deux pages n'étaient dans aucun menu et n'avaient que deux liens
+  // internes chacune, derrière la seule page pilier. Les libellés reprennent le titre des
+  // pages, sans rien réécrire. Les deux intertitres sont des mots de rangement, pas du contenu.
+  { ref: "D70", label: "Bruxisme et usure dentaire", pourquoi: "page de soins entrée au menu, libellé pris dans son titre" },
+  { ref: "D70", label: "Dents courtes ou usées", pourquoi: "page de soins entrée au menu, libellé pris dans son titre" },
+  { ref: "D70", label: "Esthétique", pourquoi: "intertitre de rangement dans le menu patient" },
+  { ref: "D70", label: "Usures et érosion", pourquoi: "intertitre de rangement dans le menu patient" },
 ];
 const decidesLow = LIBELLES_DECIDES.map((d) => low(d.label));
 const unknown = chrome.filter((l) => !allSourcesLow.includes(low(l)) && !decidesLow.includes(low(l)));

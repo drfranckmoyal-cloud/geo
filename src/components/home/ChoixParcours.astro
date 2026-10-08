@@ -8,6 +8,19 @@
 // la souris, par :focus-within.
 import Section from "../global/Section.astro";
 import { parcours } from "../../content/parcours";
+import type { Destination } from "../../content/parcours";
+
+// Les destinations arrivent à plat, avec parfois une « rubrique ». On les regroupe ici
+// en conservant l'ordre : une rubrique vide donne un groupe sans intertitre.
+const grouper = (destinations: Destination[]) => {
+  const groupes: { rubrique?: string; liens: Destination[] }[] = [];
+  for (const d of destinations) {
+    const dernier = groupes[groupes.length - 1];
+    if (dernier && dernier.rubrique === d.rubrique) dernier.liens.push(d);
+    else groupes.push({ rubrique: d.rubrique, liens: [d] });
+  }
+  return groupes;
+};
 ---
 
 <Section tone="paper" spacing="none" labelledby="parcours-titre">
@@ -20,22 +33,31 @@ import { parcours } from "../../content/parcours";
             <p class="porte__surtitre">{p.surtitre}</p>
             <p class="porte__titre">{p.titre}</p>
           </div>
-          <ul class="porte__menu">
-            {p.destinations.map((d) => (
-              <li>
-                <a
-                  href={d.href}
-                  {...(d.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {d.label}
-                  {d.externe && <span aria-hidden="true"> ↗</span>}
-                </a>
-              </li>
-            ))}
-            <li class="porte__suite">
+          <div class="porte__menu">
+            <div class="porte__rubriques">
+              {grouper(p.destinations).map((g) => (
+                <div class="porte__rubrique">
+                  {g.rubrique && <p class="porte__rubrique-titre">{g.rubrique}</p>}
+                  <ul>
+                    {g.liens.map((d) => (
+                      <li>
+                        <a
+                          href={d.href}
+                          {...(d.externe ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        >
+                          {d.label}
+                          {d.externe && <span aria-hidden="true"> ↗</span>}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <p class="porte__suite">
               <a href={p.suite.href}>{p.suite.label} <span aria-hidden="true">→</span></a>
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
       ))
     }
@@ -110,9 +132,7 @@ import { parcours } from "../../content/parcours";
 
   /* Le menu intérieur : replié au repos, déplié au survol. */
   .porte__menu {
-    list-style: none;
     margin: 0;
-    padding: 0;
     display: grid;
     gap: 0;
     align-content: start;
@@ -130,6 +150,33 @@ import { parcours } from "../../content/parcours";
     visibility: visible;
     transform: none;
     transition-delay: 0s;
+  }
+
+  .porte__rubriques {
+    display: grid;
+    gap: clamp(0.9rem, 0.7rem + 0.8vw, 1.4rem);
+  }
+  /* Deux colonnes dès qu'il y a la place : onze entrées à la file obligeaient à
+     descendre les yeux trop loin, c'est le reproche de Franck sur le scrolling. */
+  @media (min-width: 64rem) {
+    .porte__rubriques {
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+      align-items: start;
+    }
+  }
+  .porte__rubrique ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .porte__rubrique-titre {
+    margin: 0 0 0.3rem;
+    font-family: var(--f-sans);
+    font-size: var(--fs-meta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.5;
   }
 
   .porte__menu a {
@@ -151,7 +198,7 @@ import { parcours } from "../../content/parcours";
     text-underline-offset: 0.25em;
   }
   .porte__suite {
-    margin-top: 0.4rem;
+    margin: 0.9rem 0 0;
     padding-top: 0.5rem;
     border-top: 1px solid currentColor;
   }

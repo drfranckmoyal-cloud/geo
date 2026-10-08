@@ -37,7 +37,11 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                   </svg>
                 </button>
                 <ul class="subnav" id={`sous-menu-${i}`} hidden>
-                  {item.children.map((child) => (
+                  {item.children.map((child, j) => (
+                    <>
+                    {child.rubrique && child.rubrique !== item.children![j - 1]?.rubrique && (
+                      <li class="subnav__rubrique" aria-hidden="true">{child.rubrique}</li>
+                    )}
                     <li>
                       <a
                         href={child.href}
@@ -49,6 +53,7 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                         {child.externe && <span aria-hidden="true"> ↗</span>}
                       </a>
                     </li>
+                    </>
                   ))}
                 </ul>
               </li>
@@ -76,7 +81,11 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                 <li class="mobile-group">
                   <p class="mobile-group__label">{item.label}</p>
                   <ul>
-                    {item.children.map((child) => (
+                    {item.children.map((child, j) => (
+                      <>
+                      {child.rubrique && child.rubrique !== item.children![j - 1]?.rubrique && (
+                        <li class="mobile-group__rubrique" aria-hidden="true">{child.rubrique}</li>
+                      )}
                       <li>
                         <a
                           href={child.href}
@@ -88,6 +97,7 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
                           {child.externe && <span aria-hidden="true"> ↗</span>}
                         </a>
                       </li>
+                      </>
                     ))}
                   </ul>
                 </li>
@@ -400,5 +410,26 @@ const isCurrent = (href?: string) => (href && current === href ? "page" : undefi
       padding: 0 0.875rem;
       font-size: var(--fs-meta);
     }
+  }
+
+  /* Intertitres de rubrique dans les menus (D70, 08/10/2026) : purement visuels,
+     aria-hidden, les liens restent les seuls éléments annoncés. */
+  .subnav__rubrique,
+  .mobile-group__rubrique {
+    font-family: var(--f-sans);
+    font-size: var(--fs-meta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .subnav__rubrique {
+    padding: 0.55rem 0.9rem 0.2rem;
+  }
+  .subnav__rubrique:first-child {
+    padding-top: 0.25rem;
+  }
+  .mobile-group__rubrique {
+    padding: 0.7rem 0 0.15rem;
   }
 </style>

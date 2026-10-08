@@ -58,21 +58,30 @@ export const builtPages = ["/", "/franck-moyal/", "/usures-dentaires/", ...built
 // traverse plus les publications, un confrère ne traverse plus les pages de soins.
 // Surtout, les pages de soins entrent enfin au menu — elles n'y étaient pas du tout.
 // Libellés inchangés : Franck les garde en l'état pour l'instant.
-export type NavLink = { label: string; href: string; externe?: boolean };
+export type NavLink = {
+  label: string;
+  href: string;
+  externe?: boolean;
+  /** Intertitre de regroupement dans le menu déroulant (D70, 08/10/2026). */
+  rubrique?: string;
+};
 export type NavItem = { label: string; href?: string; children?: NavLink[] };
 
 export const nav: NavItem[] = [
   {
     label: "Vous êtes patient",
     children: [
-      { label: "Dentisterie esthétique", href: "/dentisterie-esthetique-paris/" },
-      { label: "Usures dentaires", href: "/usures-dentaires/" },
-      { label: "Facettes dentaires", href: "/facettes-dentaires-paris/" },
-      { label: "Composite bonding", href: "/composite-bonding-paris/" },
-      { label: "Éclaircissement dentaire", href: "/eclaircissement-dentaire-paris/" },
-      { label: "Taches blanches, MIH et dyschromies", href: "/taches-dentaires-dyschromies-icon/" },
-      { label: "Érosion dentaire", href: "/erosion-dentaire/" },
-      { label: "Bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
+      { rubrique: "Esthétique", label: "Dentisterie esthétique", href: "/dentisterie-esthetique-paris/" },
+      { rubrique: "Esthétique", label: "Facettes dentaires", href: "/facettes-dentaires-paris/" },
+      { rubrique: "Esthétique", label: "Composite bonding", href: "/composite-bonding-paris/" },
+      { rubrique: "Esthétique", label: "Éclaircissement dentaire", href: "/eclaircissement-dentaire-paris/" },
+      { rubrique: "Esthétique", label: "Taches blanches, MIH et dyschromies", href: "/taches-dentaires-dyschromies-icon/" },
+      { rubrique: "Esthétique", label: "Bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
+      { rubrique: "Usures et érosion", label: "Usures dentaires", href: "/usures-dentaires/" },
+      { rubrique: "Usures et érosion", label: "Bruxisme et usure dentaire", href: "/bruxisme-usure-dentaire/" },
+      { rubrique: "Usures et érosion", label: "Dents courtes ou usées", href: "/dents-courtes-usees/" },
+      { rubrique: "Usures et érosion", label: "Érosion dentaire", href: "/erosion-dentaire/" },
+      { rubrique: "Usures et érosion", label: "TCA et santé bucco-dentaire", href: "/tca-dents/" },
     ],
   },
   {

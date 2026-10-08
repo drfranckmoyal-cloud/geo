@@ -12,6 +12,13 @@ export interface Destination {
   href: string;
   /** Lien vers un autre site : ouvre une nouvelle page, marqué comme tel. */
   externe?: boolean;
+  /**
+   * Intertitre de regroupement (D70, 08/10/2026). La porte « Patient » listait huit
+   * pages d'esthétique et laissait toute la famille des usures derrière la seule page
+   * pilier : bruxisme et dents usées n'étaient atteignables qu'en deux clics, avec deux
+   * liens internes chacun, alors que ce sont des mots que les patients cherchent.
+   */
+  rubrique?: string;
 }
 
 export interface Parcours {
@@ -33,14 +40,17 @@ export const parcours: Parcours[] = [
     intro:
       "Vous cherchez à comprendre ce que vous avez, ou ce qu’il est possible de faire. Chaque page part d’une situation clinique et explique la démarche avant la technique.",
     destinations: [
-      { label: "Dentisterie esthétique et adhésive", href: "/dentisterie-esthetique-paris/" },
-      { label: "Usures dentaires", href: "/usures-dentaires/" },
-      { label: "Facettes dentaires", href: "/facettes-dentaires-paris/" },
-      { label: "Composite bonding", href: "/composite-bonding-paris/" },
-      { label: "Éclaircissement dentaire", href: "/eclaircissement-dentaire-paris/" },
-      { label: "Taches blanches, MIH et dyschromies", href: "/taches-dentaires-dyschromies-icon/" },
-      { label: "Érosion dentaire", href: "/erosion-dentaire/" },
-      { label: "Bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
+      { rubrique: "Esthétique", label: "Dentisterie esthétique et adhésive", href: "/dentisterie-esthetique-paris/" },
+      { rubrique: "Esthétique", label: "Facettes dentaires", href: "/facettes-dentaires-paris/" },
+      { rubrique: "Esthétique", label: "Composite bonding", href: "/composite-bonding-paris/" },
+      { rubrique: "Esthétique", label: "Éclaircissement dentaire", href: "/eclaircissement-dentaire-paris/" },
+      { rubrique: "Esthétique", label: "Taches blanches, MIH et dyschromies", href: "/taches-dentaires-dyschromies-icon/" },
+      { rubrique: "Esthétique", label: "Bilan esthétique personnalisé", href: "/bilan-esthetique-personnalise/" },
+      { rubrique: "Usures et érosion", label: "Usures dentaires", href: "/usures-dentaires/" },
+      { rubrique: "Usures et érosion", label: "Bruxisme et usure dentaire", href: "/bruxisme-usure-dentaire/" },
+      { rubrique: "Usures et érosion", label: "Dents courtes ou usées", href: "/dents-courtes-usees/" },
+      { rubrique: "Usures et érosion", label: "Érosion dentaire", href: "/erosion-dentaire/" },
+      { rubrique: "Usures et érosion", label: "TCA et santé bucco-dentaire", href: "/tca-dents/" },
     ],
     suite: { label: "Prendre rendez-vous", href: "/contact/#prendre-rendez-vous" },
   },
