@@ -62,7 +62,7 @@ export type NavLink = {
   label: string;
   href: string;
   externe?: boolean;
-  /** Intertitre de regroupement dans le menu déroulant (D70, 08/10/2026). */
+  /** Intertitre de regroupement dans le menu déroulant (D71, 08/10/2026). */
   rubrique?: string;
 };
 export type NavItem = { label: string; href?: string; children?: NavLink[] };

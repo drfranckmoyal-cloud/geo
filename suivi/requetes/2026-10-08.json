@@ -1,0 +1,413 @@
+{
+  "date": "2026-10-08",
+  "source": "Search Console, 28 jours glissants (21/09 → 05/10)",
+  "total": {
+    "clics": 58,
+    "impressions": 800,
+    "requetes": 105,
+    "position_moyenne": 9.4
+  },
+  "note": "80 requêtes sur 105 relevées ; les 25 manquantes sont la queue à 1 impression.",
+  "termes": {
+    "franck moyal": {
+      "clics": 13,
+      "impressions": 59,
+      "position": 3.4
+    },
+    "dr franck moyal": {
+      "clics": 9,
+      "impressions": 47,
+      "position": 4.4
+    },
+    "franck moyal dentiste": {
+      "clics": 3,
+      "impressions": 24,
+      "position": 3.3
+    },
+    "frank moyal": {
+      "clics": 2,
+      "impressions": 11,
+      "position": 4.3
+    },
+    "composite bonding paris": {
+      "clics": 1,
+      "impressions": 19,
+      "position": 6.7
+    },
+    "composite dentaire": {
+      "clics": 0,
+      "impressions": 32,
+      "position": 3.5
+    },
+    "blanchiment dentaire professionnel paris 9": {
+      "clics": 0,
+      "impressions": 16,
+      "position": 2.6
+    },
+    "moyal": {
+      "clics": 0,
+      "impressions": 13,
+      "position": 3.1
+    },
+    "composite bonding": {
+      "clics": 0,
+      "impressions": 12,
+      "position": 10.5
+    },
+    "esthetique dentaire paris": {
+      "clics": 0,
+      "impressions": 11,
+      "position": 5.5
+    },
+    "esthetique du sourire paris": {
+      "clics": 0,
+      "impressions": 10,
+      "position": 4.7
+    },
+    "yehiel moyal": {
+      "clics": 0,
+      "impressions": 8,
+      "position": 1.0
+    },
+    "tca": {
+      "clics": 0,
+      "impressions": 8,
+      "position": 3.8
+    },
+    "composite bonding in paris": {
+      "clics": 0,
+      "impressions": 8,
+      "position": 9.6
+    },
+    "blanchiment dentaire paris": {
+      "clics": 0,
+      "impressions": 7,
+      "position": 2.6
+    },
+    "moyal dentiste": {
+      "clics": 0,
+      "impressions": 7,
+      "position": 5.3
+    },
+    "edge bonding in paris": {
+      "clics": 0,
+      "impressions": 7,
+      "position": 11.6
+    },
+    "facette dentaire paris 9": {
+      "clics": 0,
+      "impressions": 7,
+      "position": 36.6
+    },
+    "blanchiment dentaire": {
+      "clics": 0,
+      "impressions": 6,
+      "position": 4.7
+    },
+    "dental bonding repair in paris": {
+      "clics": 0,
+      "impressions": 6,
+      "position": 9.3
+    },
+    "dr moyal": {
+      "clics": 0,
+      "impressions": 6,
+      "position": 9.7
+    },
+    "composite filling in paris": {
+      "clics": 0,
+      "impressions": 5,
+      "position": 3.8
+    },
+    "dentiste esthétique du sourire": {
+      "clics": 0,
+      "impressions": 5,
+      "position": 8.0
+    },
+    "meilleur dentiste paris 9": {
+      "clics": 0,
+      "impressions": 5,
+      "position": 13.4
+    },
+    "facettes dentaires paris 17": {
+      "clics": 0,
+      "impressions": 5,
+      "position": 37.8
+    },
+    "specialiste bruxisme paris": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 3.8
+    },
+    "rdv dentiste paris 9ème": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 4.2
+    },
+    "traitement parodontale paris": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 17.0
+    },
+    "traitement usure dentaire levallois": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 57.2
+    },
+    "traitement usure dentaire": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 86.5
+    },
+    "composite esthétique dentaire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 2.0
+    },
+    "veneer replacement near me today": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 4.3
+    },
+    "docteur lebas": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 6.0
+    },
+    "dentiste esthetique": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 7.3
+    },
+    "veneer teeth": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 8.3
+    },
+    "docteur moyal dentiste": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 10.0
+    },
+    "dentiste moyal": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 16.7
+    },
+    "dentiste esthétique paris": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 30.3
+    },
+    "bonding dentaire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 51.0
+    },
+    "usure dentaire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 86.0
+    },
+    "blanchiment dentaire paris 1": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 95.0
+    },
+    "dr lebas": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 2.0
+    },
+    "esthétique du sourire": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 2.0
+    },
+    "blanchissement dentaire paris": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 3.0
+    },
+    "esthetique sourire": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 3.0
+    },
+    "veneers": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 5.0
+    },
+    "veneers teeth": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 9.0
+    },
+    "franck mouyal": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 11.5
+    },
+    "cabinet dentaire paris 9ème": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 12.5
+    },
+    "avis sur franck moyal": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 13.0
+    },
+    "pédodontiste paris 9ème": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 14.0
+    },
+    "meilleur dentiste esthétique paris": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 23.0
+    },
+    "franck amoyel": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 31.0
+    },
+    "psychiatre tca paris": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 37.5
+    },
+    "cabinet spécialiste usure dentaire": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 52.0
+    },
+    "amalgam removal google reviews": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 1.0
+    },
+    "chirurgie dentaire esthétique": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "dentiste blanchiment dentaire": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "dentiste composite": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "dentiste franck": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "docteur lebas dentiste": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "edge bonding in lyon": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "endodontie": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "esthetique du sourire": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "esthétique dentaire composite": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "facettes dentaires paris": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "teeth filling": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "éclaircissement dentaire": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 2.0
+    },
+    "docteur sourire": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 3.0
+    },
+    "mjc dent": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 3.0
+    },
+    "amalgam removal waiting time": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "dental bonding repair in nantes": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "docteur moyal": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "icon tache": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "veneer replacement in paris": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "veneer replacement near me open now": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 4.0
+    },
+    "contouring dentaire": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 5.0
+    },
+    "filling teeth": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 5.0
+    },
+    "full mouth restoration near me today": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 5.0
+    },
+    "veneer replacement highly rated dentist": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 5.0
+    }
+  }
+}

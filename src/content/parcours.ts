@@ -13,7 +13,7 @@ export interface Destination {
   /** Lien vers un autre site : ouvre une nouvelle page, marqué comme tel. */
   externe?: boolean;
   /**
-   * Intertitre de regroupement (D70, 08/10/2026). La porte « Patient » listait huit
+   * Intertitre de regroupement (D71, 08/10/2026). La porte « Patient » listait huit
    * pages d'esthétique et laissait toute la famille des usures derrière la seule page
    * pilier : bruxisme et dents usées n'étaient atteignables qu'en deux clics, avec deux
    * liens internes chacun, alors que ce sont des mots que les patients cherchent.
