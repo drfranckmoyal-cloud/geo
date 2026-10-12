@@ -1,0 +1,564 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trois directions Moyal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+
+<style>
+/* Atelier de comparaison : une coquille neutre, trois maquettes qui vivent chacune
+   dans son propre monde visuel. Couleurs de la coquille tirées du bloc opératoire :
+   graphite froid et vert de champ stérile. */
+:root{
+  --coq-fond:#f2f3f4;
+  --coq-panneau:#ffffff;
+  --coq-encre:#191d21;
+  --coq-encre-douce:#5c666e;
+  --coq-trait:#d8dcdf;
+  --coq-signal:#176b63;
+  --coq-signal-pale:#e2efed;
+  --coq-ombre:0 1px 2px rgba(16,24,28,.06),0 8px 28px rgba(16,24,28,.08);
+  --f-ui:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --f-plex:"IBM Plex Sans",-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-instr:"Instrument Serif",Georgia,serif;
+  --f-source:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --coq-fond:#14181b; --coq-panneau:#1b2024; --coq-encre:#e9ecee; --coq-encre-douce:#9aa5ad;
+  --coq-trait:#2b3238; --coq-signal:#4fb3a6; --coq-signal-pale:#15302e;
+  --coq-ombre:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --coq-fond:#14181b; --coq-panneau:#1b2024; --coq-encre:#e9ecee; --coq-encre-douce:#9aa5ad;
+  --coq-trait:#2b3238; --coq-signal:#4fb3a6; --coq-signal-pale:#15302e;
+  --coq-ombre:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--coq-fond);color:var(--coq-encre);font-family:var(--f-ui);
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+.enveloppe{max-width:1180px;margin:0 auto;padding-block:clamp(1.5rem,1rem+2vw,2.75rem);padding-left:16px;padding-right:16px}
+
+/* ── en-tête ─────────────────────────────────────────── */
+.tete{display:grid;gap:.6rem;margin-bottom:1.6rem}
+.tete__sur{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--coq-signal)}
+.tete h1{margin:0;font-size:clamp(1.6rem,1.2rem+1.8vw,2.3rem);line-height:1.1;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+.tete p{margin:0;max-width:62ch;color:var(--coq-encre-douce);font-size:.95rem}
+
+.rappel{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--coq-trait);border:1px solid var(--coq-trait);border-radius:10px;overflow:hidden;margin:1.4rem 0 2rem}
+.rappel div{background:var(--coq-panneau);padding:.8rem .9rem}
+.rappel dt{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--coq-encre-douce);margin:0 0 .25rem}
+.rappel dd{margin:0;font-size:1.3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.rappel dd small{display:block;font-size:.72rem;font-weight:400;color:var(--coq-encre-douce);letter-spacing:0}
+
+/* ── onglets ─────────────────────────────────────────── */
+.onglets{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.1rem}
+.onglet{appearance:none;border:1px solid var(--coq-trait);background:var(--coq-panneau);color:var(--coq-encre);
+  font-family:var(--f-ui);font-size:.88rem;font-weight:500;padding:.6rem 1rem;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;gap:.5rem;transition:background .15s,border-color .15s,color .15s}
+.onglet:hover{border-color:var(--coq-signal)}
+.onglet[aria-selected="true"]{background:var(--coq-signal);border-color:var(--coq-signal);color:#fff}
+.onglet .lettre{font-family:var(--f-mono);font-size:.72rem;opacity:.75}
+.onglet:focus-visible{outline:2px solid var(--coq-signal);outline-offset:2px}
+
+/* ── cadre de maquette ───────────────────────────────── */
+.cadre{background:var(--coq-panneau);border:1px solid var(--coq-trait);border-radius:14px;overflow:hidden;box-shadow:var(--coq-ombre)}
+.cadre__barre{display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem;border-bottom:1px solid var(--coq-trait);
+  font-family:var(--f-mono);font-size:.7rem;color:var(--coq-encre-douce);background:var(--coq-fond)}
+.pastilles{display:flex;gap:5px}.pastilles i{width:9px;height:9px;border-radius:50%;background:var(--coq-trait);display:block}
+.cadre__url{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.densite{font-family:var(--f-mono);font-size:.68rem;padding:.2rem .5rem;border-radius:5px;
+  background:var(--coq-signal-pale);color:var(--coq-signal);font-weight:500;white-space:nowrap}
+.scene{height:min(76vh,680px);overflow-y:auto;overflow-x:hidden}
+@media (max-width:640px){.scene{height:68vh}}
+
+.notes{margin:1.1rem 0 0;display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.note{background:var(--coq-panneau);border:1px solid var(--coq-trait);border-left:3px solid var(--coq-signal);
+  border-radius:0 9px 9px 0;padding:.85rem 1rem}
+.note h4{margin:0 0 .3rem;font-size:.82rem;font-weight:600}
+.note p{margin:0;font-size:.82rem;color:var(--coq-encre-douce);line-height:1.5}
+
+/* ════════════════════════════════════════════════════════
+   A — CLINIQUE : blanc, grille serrée, registre d'information
+   ════════════════════════════════════════════════════════ */
+.A{--bg:#ffffff;--fg:#10171c;--doux:#5a6872;--trait:#dfe4e8;--acc:#0f5f84;--zone:#f4f7f9;
+  background:var(--bg);color:var(--fg);font-family:var(--f-plex);font-size:15px;line-height:1.55}
+.A a{color:inherit}
+.A .nav{display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;padding:.9rem 1.5rem;border-bottom:1px solid var(--trait);
+  position:sticky;top:0;background:var(--bg);z-index:5}
+.A .nav b{font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+.A .nav span{font-size:.8rem;color:var(--doux)}
+.A .nav .rdv{margin-left:auto;background:var(--acc);color:#fff;padding:.4rem .8rem;border-radius:4px;font-size:.78rem;font-weight:500}
+.A .hero{padding:1.8rem 1.5rem;display:grid;grid-template-columns:1.35fr 1fr;gap:2rem;align-items:start;border-bottom:1px solid var(--trait)}
+.A .hero h1{margin:0 0 .6rem;font-size:clamp(1.5rem,1.1rem+1.6vw,2.1rem);line-height:1.15;font-weight:600;letter-spacing:-.025em;text-wrap:balance}
+.A .hero p{margin:0 0 .9rem;color:var(--doux);font-size:.95rem;max-width:52ch}
+.A .faits{display:grid;gap:1px;background:var(--trait);border:1px solid var(--trait);font-size:.78rem}
+.A .faits div{background:var(--bg);padding:.55rem .7rem;display:flex;justify-content:space-between;gap:1rem}
+.A .faits b{font-weight:600;font-variant-numeric:tabular-nums}
+.A .faits span{color:var(--doux)}
+.A .sect{padding:1.6rem 1.5rem;border-bottom:1px solid var(--trait)}
+.A .sect--zone{background:var(--zone)}
+.A .eyebrow{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 .55rem}
+.A h2{margin:0 0 .9rem;font-size:1.15rem;font-weight:600;letter-spacing:-.015em}
+.A .deux{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.A .liste{display:grid;gap:1px;background:var(--trait);border:1px solid var(--trait)}
+.A .liste a{background:var(--bg);padding:.52rem .75rem;display:flex;justify-content:space-between;align-items:center;
+  gap:.6rem;text-decoration:none;font-size:.86rem}
+.A .liste a:hover{background:var(--zone)}
+.A .liste em{font-style:normal;color:var(--doux);font-size:.74rem;font-family:var(--f-mono)}
+.A .preuves{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:.65rem}
+.A figure{margin:0}
+.A .paire{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--trait)}
+.A .paire img,.A .solo img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.A .carre img{aspect-ratio:1}
+.A figcaption{font-size:.72rem;color:var(--doux);margin-top:.3rem;line-height:1.35}
+.A .qr{border-top:1px solid var(--trait);padding:.7rem 0}
+.A .qr:first-of-type{border-top:0}
+.A .qr b{display:block;font-size:.88rem;font-weight:600;margin-bottom:.2rem}
+.A .qr p{margin:0;font-size:.84rem;color:var(--doux)}
+@media (max-width:720px){.A .hero,.A .deux{grid-template-columns:1fr}}
+
+/* ════════════════════════════════════════════════════════
+   B — GALERIE : noir, la photographie d'abord
+   ════════════════════════════════════════════════════════ */
+.B{--bg:#0b0b0c;--fg:#f4f2ef;--doux:#9a958e;--trait:#242426;--acc:#c9a227;
+  background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.6}
+.B a{color:inherit}
+.B .nav{display:flex;align-items:center;gap:1.4rem;padding:1rem 1.6rem;font-size:.78rem;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--doux);border-bottom:1px solid var(--trait)}
+.B .nav b{font-family:var(--f-instr);font-size:1.15rem;text-transform:none;letter-spacing:0;color:var(--fg);font-weight:400}
+.B .nav .rdv{margin-left:auto;border:1px solid var(--acc);color:var(--acc);padding:.35rem .8rem;border-radius:2px;font-size:.7rem}
+/* La photographie d'ouverture est carrée : on la montre entière, à côté du titre,
+   plutôt que recadrée en bandeau — un recadrage large ne laissait voir que les lèvres. */
+.B .ouverture{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.B .ouverture img{width:100%;height:100%;aspect-ratio:1;object-fit:cover;display:block}
+.B .ouverture .texte{display:flex;flex-direction:column;justify-content:center;padding:1.8rem 1.6rem}
+@media (max-width:720px){.B .ouverture{grid-template-columns:1fr}
+  .B .ouverture .texte{padding-top:1.2rem}}
+.B .ouverture h1{margin:0 0 .4rem;font-family:var(--f-instr);font-weight:400;
+  font-size:clamp(1.9rem,1.2rem+3.2vw,3.4rem);line-height:1.04;letter-spacing:-.01em;text-wrap:balance}
+.B .ouverture p{margin:0;color:var(--doux);font-size:.92rem;max-width:48ch}
+.B .bande{display:flex;gap:1.6rem;flex-wrap:wrap;padding:.9rem 1.6rem;border-bottom:1px solid var(--trait);
+  font-size:.74rem;color:var(--doux);letter-spacing:.03em}
+.B .bande b{color:var(--fg);font-weight:500}
+.B .sect{padding:1.8rem 1.6rem;border-bottom:1px solid var(--trait)}
+.B .eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 .7rem}
+.B h2{margin:0 0 1rem;font-family:var(--f-instr);font-weight:400;font-size:1.7rem;line-height:1.15}
+.B .mur{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem}
+.B .mur figure{margin:0;position:relative;overflow:hidden}
+.B .mur img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform .5s ease}
+.B .mur figure:hover img{transform:scale(1.04)}
+.B .mur figcaption{position:absolute;inset:auto 0 0 0;padding:1.6rem .6rem .5rem;font-size:.7rem;
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);line-height:1.3}
+.B .colonnes{columns:2;column-gap:1.6rem;font-size:.9rem;color:var(--doux)}
+.B .colonnes p{margin:0 0 .7rem;break-inside:avoid}
+.B .menu2{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.B .menu2 ul{list-style:none;margin:0;padding:0;display:grid;gap:.1rem}
+.B .menu2 a{display:block;padding:.4rem 0;border-bottom:1px solid var(--trait);text-decoration:none;font-size:.88rem}
+.B .menu2 a:hover{color:var(--acc)}
+@media (max-width:720px){.B .colonnes{columns:1}.B .menu2{grid-template-columns:1fr}}
+
+/* ════════════════════════════════════════════════════════
+   C — REVUE : papier froid, colonnes, hiérarchie typographique
+   ════════════════════════════════════════════════════════ */
+.C{--bg:#fbfaf7;--fg:#1a1c19;--doux:#5e6360;--trait:#ddddd6;--acc:#2c5545;--zone:#f1f1ea;
+  background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.55}
+.C a{color:inherit}
+.C .nav{display:flex;align-items:baseline;gap:1.3rem;flex-wrap:wrap;padding:.85rem 1.5rem;border-bottom:2px solid var(--fg)}
+.C .nav b{font-family:var(--f-source);font-size:1.15rem;font-weight:700;letter-spacing:-.015em}
+.C .nav span{font-size:.78rem;color:var(--doux)}
+.C .nav .rdv{margin-left:auto;font-size:.75rem;font-weight:600;border-bottom:2px solid var(--acc);color:var(--acc)}
+.C .une{display:grid;grid-template-columns:1.5fr 1fr;gap:1.8rem;padding:1.6rem 1.5rem;border-bottom:1px solid var(--trait)}
+.C .une h1{margin:0 0 .5rem;font-family:var(--f-source);font-weight:700;
+  font-size:clamp(1.7rem,1.2rem+2.2vw,2.6rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.C .une .chapo{margin:0 0 .9rem;font-size:1rem;color:var(--doux);max-width:46ch}
+.C .une figure{margin:0}
+.C .une img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.C .une figcaption{font-size:.72rem;color:var(--doux);margin-top:.35rem;font-style:italic}
+.C .signature{display:flex;gap:.5rem;align-items:center;font-size:.76rem;color:var(--doux);
+  padding-top:.6rem;border-top:1px solid var(--trait)}
+.C .signature b{color:var(--fg);font-weight:600}
+.C .sect{padding:1.6rem 1.5rem;border-bottom:1px solid var(--trait)}
+.C .sect--zone{background:var(--zone)}
+.C .eyebrow{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-weight:600;margin:0 0 .5rem}
+.C h2{margin:0 0 .9rem;font-family:var(--f-source);font-weight:700;font-size:1.4rem;letter-spacing:-.015em}
+.C .grille3{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1.4rem}
+.C .grille3 h3{margin:0 0 .3rem;font-family:var(--f-source);font-size:1rem;font-weight:700}
+.C .grille3 p{margin:0 0 .5rem;font-size:.85rem;color:var(--doux)}
+.C .grille3 ul{margin:0;padding:0;list-style:none;display:grid;gap:.18rem}
+.C .grille3 li a{font-size:.83rem;text-decoration:none;border-bottom:1px solid var(--trait);display:block;padding:.22rem 0}
+.C .grille3 li a:hover{color:var(--acc);border-color:var(--acc)}
+.C .cas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem}
+.C .cas figure{margin:0}
+.C .cas .paire{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.C .cas img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.C .cas .carre img{aspect-ratio:1}
+.C .cas figcaption{font-size:.74rem;color:var(--doux);margin-top:.32rem;line-height:1.35}
+.C .qa{columns:2;column-gap:1.8rem}
+.C .qa div{break-inside:avoid;margin:0 0 .85rem}
+.C .qa b{display:block;font-family:var(--f-source);font-size:.95rem;font-weight:700;margin-bottom:.15rem}
+.C .qa p{margin:0;font-size:.84rem;color:var(--doux)}
+@media (max-width:720px){.C .une{grid-template-columns:1fr}.C .qa{columns:1}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="enveloppe">
+
+  <header class="tete">
+    <p class="tete__sur">drfranckmoyal.fr · refonte · 12 octobre 2026</p>
+    <h1>Trois directions pour l'accueil</h1>
+    <p>Même contenu, même photographies, trois mises en forme. Les photographies sont les vôtres,
+      affichées depuis le site en ligne. Rien n'est modifié sur le site.</p>
+  </header>
+
+  <dl class="rappel">
+    <div><dt>Aujourd'hui</dt><dd>104<small>mots par écran</small></dd></div>
+    <div><dt>Objectif</dt><dd>250<small>mots par écran</small></dd></div>
+    <div><dt>Page usures</dt><dd>13,4<small>écrans de défilement</small></dd></div>
+    <div><dt>Référence citée</dt><dd>5,4<small>écrans, même longueur</small></dd></div>
+    <div><dt>Titres par page</dt><dd>12,8<small>contre 4 à 5</small></dd></div>
+  </dl>
+
+  <div class="onglets" role="tablist" aria-label="Directions">
+    <button class="onglet" role="tab" id="t-A" aria-controls="p-A" aria-selected="true"><span class="lettre">A</span> Clinique</button>
+    <button class="onglet" role="tab" id="t-B" aria-controls="p-B" aria-selected="false"><span class="lettre">B</span> Galerie</button>
+    <button class="onglet" role="tab" id="t-C" aria-controls="p-C" aria-selected="false"><span class="lettre">C</span> Revue</button>
+  </div>
+
+  <!-- ══════════ A ══════════ -->
+  <section id="p-A" role="tabpanel" aria-labelledby="t-A">
+    <div class="cadre">
+      <div class="cadre__barre">
+        <span class="pastilles"><i></i><i></i><i></i></span>
+        <span class="cadre__url">drfranckmoyal.fr</span>
+        <span class="densite" title="mesuré sur cet extrait">100 mots / écran · mesuré</span>
+      </div>
+      <div class="scene A">
+        <nav class="nav">
+          <b>Dr Franck Moyal</b>
+          <span>Ce que vous constatez</span><span>Ce qu'on peut faire</span><span>Cas traités</span><span>Le praticien</span>
+          <span class="rdv">Prendre rendez-vous</span>
+        </nav>
+
+        <div class="hero">
+          <div>
+            <h1>Comprendre pourquoi les dents s'usent, avant de les reconstruire</h1>
+            <p>Exercice exclusif en dentisterie esthétique et adhésive, Paris 9<sup>e</sup>. Usures,
+              érosion, composite et facettes — en préservant les tissus restants.</p>
+            <div class="liste" style="max-width:340px">
+              <a href="#">Faire le point sur mes dents <em>bilan</em></a>
+              <a href="#">Prendre rendez-vous <em>01 83 75 52 16</em></a>
+            </div>
+          </div>
+          <div class="faits">
+            <div><span>Pitié-Salpêtrière</span><b>depuis 2012</b></div>
+            <div><span>CMME, Sainte-Anne — TCA</span><b>depuis 2024</b></div>
+            <div><span>Thèses co-dirigées</span><b>7</b></div>
+            <div><span>Références scientifiques citées</span><b>28</b></div>
+            <div><span>Cas documentés sur ce site</span><b>14</b></div>
+          </div>
+        </div>
+
+        <div class="sect sect--zone">
+          <div class="deux">
+            <div>
+              <p class="eyebrow">Ce que vous constatez</p>
+              <div class="liste">
+                <a href="#">Mes dents raccourcissent <em>usure</em></a>
+                <a href="#">Mes dents deviennent transparentes <em>érosion</em></a>
+                <a href="#">Je serre des dents la nuit <em>bruxisme</em></a>
+                <a href="#">J'ai des taches blanches <em>MIH</em></a>
+                <a href="#">Mes dents sont jaunes <em>dyschromie</em></a>
+                <a href="#">Mon sourire découvre peu les dents <em>dents courtes</em></a>
+              </div>
+            </div>
+            <div>
+              <p class="eyebrow">Ce qu'on peut faire</p>
+              <div class="liste">
+                <a href="#">Composite bonding <em>additif</em></a>
+                <a href="#">Facettes céramique <em>collé</em></a>
+                <a href="#">Éclaircissement ambulatoire <em>gouttière</em></a>
+                <a href="#">Infiltration ICON <em>taches</em></a>
+                <a href="#">Réhabilitation des dents usées <em>3-step</em></a>
+                <a href="#">Bilan esthétique personnalisé <em>projet</em></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <p class="eyebrow">Cas traités au cabinet</p>
+          <h2>Quatorze cas documentés, photographiés avant et après</h2>
+          <div class="preuves">
+            <figure class="carre"><img src="https://drfranckmoyal.fr/_astro/composite-bonding-six-dents-anterieures.BEOKIcTs_dwly0.webp" alt="Six dents antérieures avant puis après reconstruction en composite" loading="lazy">
+              <figcaption>Six dents antérieures, composite additif</figcaption></figure>
+            <figure class="carre"><img src="https://drfranckmoyal.fr/_astro/composite-bonding-quatre-dents-anterieures.BCF6eUNJ_Z12sKyK.webp" alt="Quatre dents antérieures avant puis après composite" loading="lazy">
+              <figcaption>Quatre dents, fermeture de diastème</figcaption></figure>
+            <figure class="paire"><img src="https://drfranckmoyal.fr/_astro/facettes-ceramique-avant.DbNvrs_M_ZGAbaa.webp" alt="Avant facettes céramique" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/facettes-ceramique-apres.1889C1VF_1yvdm4.webp" alt="Après facettes céramique" loading="lazy">
+              <figcaption>Facettes céramique</figcaption></figure>
+            <figure class="paire"><img src="https://drfranckmoyal.fr/_astro/rehabilitation-usure-avant.DL7eMaip_Z2oFaiG.webp" alt="Avant réhabilitation d'usure" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/rehabilitation-usure-apres.C_afurjL_2kQWQz.webp" alt="Après réhabilitation d'usure" loading="lazy">
+              <figcaption>Réhabilitation de dents usées</figcaption></figure>
+            <figure class="paire"><img src="https://drfranckmoyal.fr/_astro/eclaircissement-ambulatoire-avant.D-D96u-c_2bfrQJ.webp" alt="Avant éclaircissement" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/eclaircissement-ambulatoire-apres.CpsxKMKi_IADSD.webp" alt="Après éclaircissement" loading="lazy">
+              <figcaption>Éclaircissement ambulatoire</figcaption></figure>
+            <figure class="paire"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-avant.CDkBlTIO_QEAB9.webp" alt="Avant infiltration ICON" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-apres.Bbc_xZUa_Y80RM.webp" alt="Après infiltration ICON" loading="lazy">
+              <figcaption>Taches de MIH, infiltration</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="sect sect--zone">
+          <p class="eyebrow">Questions fréquentes</p>
+          <div class="deux">
+            <div>
+              <div class="qr"><b>Faut-il toujours traiter une usure ?</b>
+                <p>Non. Dans certaines situations, prévention, conseil et surveillance suffisent.</p></div>
+              <div class="qr"><b>Le bruxisme explique-t-il tout ?</b>
+                <p>Non. Les usures sont le plus souvent multifactorielles : mécaniques, érosives, ou les deux.</p></div>
+            </div>
+            <div>
+              <div class="qr"><b>Composite ou facettes ?</b>
+                <p>Le composite ajoute de la matière sans tailler. La céramique demande une préparation, même minime.</p></div>
+              <div class="qr"><b>Combien de séances ?</b>
+                <p>Cela dépend de l'étendue. Le bilan le détermine avant tout engagement.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note"><h4>Le parti pris</h4><p>Le registre d'un service hospitalier : grille serrée, chiffres visibles, rien de décoratif. On lit vite et on trouve.</p></div>
+      <div class="note"><h4>Ce que ça sert</h4><p>Votre autorité réelle — hôpital, enseignement, publications — devient visible dès le premier écran, en chiffres.</p></div>
+      <div class="note"><h4>Le risque</h4><p>Peu chaleureux pour un patient qui cherche d'abord à être rassuré sur son sourire.</p></div>
+    </div>
+  </section>
+
+  <!-- ══════════ B ══════════ -->
+  <section id="p-B" role="tabpanel" aria-labelledby="t-B" hidden>
+    <div class="cadre">
+      <div class="cadre__barre">
+        <span class="pastilles"><i></i><i></i><i></i></span>
+        <span class="cadre__url">drfranckmoyal.fr</span>
+        <span class="densite" title="mesuré sur cet extrait">85 mots / écran · mesuré</span>
+      </div>
+      <div class="scene B">
+        <nav class="nav">
+          <b>Franck Moyal</b>
+          <span>Constats</span><span>Traitements</span><span>Cas</span><span>Praticien</span>
+          <span class="rdv">Rendez-vous</span>
+        </nav>
+
+        <div class="ouverture">
+          <img src="https://drfranckmoyal.fr/_astro/composite-bonding-six-dents-anterieures.BEOKIcTs_dwly0.webp" alt="Six dents antérieures avant puis après reconstruction en composite">
+          <div class="texte">
+            <h1>Le travail avant le discours</h1>
+            <p>Dentisterie esthétique et adhésive, Paris 9<sup>e</sup>. Quatorze cas photographiés,
+              avant et après, sans retouche.</p>
+          </div>
+        </div>
+
+        <div class="bande">
+          <span>Pitié-Salpêtrière <b>2012</b></span>
+          <span>CMME Sainte-Anne <b>2024</b></span>
+          <span>Président <b>DenTCA</b></span>
+          <span><b>28</b> références citées</span>
+        </div>
+
+        <div class="sect">
+          <p class="eyebrow">Les cas</p>
+          <h2>Quatorze cas, photographiés sans retouche</h2>
+          <div class="mur">
+            <figure><img src="https://drfranckmoyal.fr/_astro/composite-bonding-quatre-dents-anterieures.BCF6eUNJ_Z12sKyK.webp" alt="Quatre dents antérieures, composite" loading="lazy"><figcaption>Composite, quatre dents</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/composite-stratifie-dyschromie.DIOMWOfe_ZOFyEN.webp" alt="Composite stratifié sur dyschromie" loading="lazy"><figcaption>Composite stratifié</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/facettes-ceramique-apres.1889C1VF_1yvdm4.webp" alt="Facettes céramique, résultat" loading="lazy"><figcaption>Facettes céramique</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/rehabilitation-usure-apres.C_afurjL_2kQWQz.webp" alt="Réhabilitation d'usure, résultat" loading="lazy"><figcaption>Dents usées, réhabilitation</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/eclaircissement-ambulatoire-apres.CpsxKMKi_IADSD.webp" alt="Éclaircissement, résultat" loading="lazy"><figcaption>Éclaircissement</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-apres.Bbc_xZUa_Y80RM.webp" alt="Infiltration ICON, résultat" loading="lazy"><figcaption>Taches de MIH</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/dyschromie-erosion-infiltration-apres.CEu6hWY3_ExNkc.webp" alt="Dyschromie infiltrée, résultat" loading="lazy"><figcaption>Dyschromie infiltrée</figcaption></figure>
+            <figure><img src="https://drfranckmoyal.fr/_astro/bilan-esthetique-resultat.TmN_kmX0_Ztc8NY.webp" alt="Bilan esthétique, résultat" loading="lazy"><figcaption>Bilan esthétique</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="menu2">
+            <div>
+              <p class="eyebrow">Ce que vous constatez</p>
+              <ul>
+                <li><a href="#">Mes dents raccourcissent</a></li>
+                <li><a href="#">Mes dents deviennent transparentes</a></li>
+                <li><a href="#">Je serre des dents la nuit</a></li>
+                <li><a href="#">J'ai des taches blanches</a></li>
+                <li><a href="#">Mon sourire découvre peu les dents</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="eyebrow">Ce qu'on peut faire</p>
+              <ul>
+                <li><a href="#">Composite bonding</a></li>
+                <li><a href="#">Facettes céramique</a></li>
+                <li><a href="#">Éclaircissement</a></li>
+                <li><a href="#">Infiltration ICON</a></li>
+                <li><a href="#">Réhabilitation des dents usées</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <p class="eyebrow">La démarche</p>
+          <h2>Comprendre avant de reconstruire</h2>
+          <div class="colonnes">
+            <p>Des dents qui raccourcissent, s'aplatissent ou se fragilisent ne doivent pas simplement
+              être réparées. Avant de reconstruire, il faut comprendre pourquoi elles s'usent.</p>
+            <p>Toutes les usures ne nécessitent pas une reconstruction : dans certaines situations,
+              prévention, conseil et surveillance suffisent.</p>
+            <p>L'activité hospitalière à la Pitié-Salpêtrière et à la CMME de Sainte-Anne nourrit cette
+              approche — diagnostic, prévention, coordination.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note"><h4>Le parti pris</h4><p>La photographie porte la page. C'est le registre des cabinets d'esthétique les plus visités.</p></div>
+      <div class="note"><h4>Ce que ça sert</h4><p>Convainc en trois secondes. Vos sourires avant/après sont votre meilleur argument.</p></div>
+      <div class="note"><h4>Le risque</h4><p>Vos photos sont cliniques, pas publicitaires. En grand et sur fond noir, les vues avec écarteurs peuvent rebuter — il faudrait réserver celles-là aux pages de cas.</p></div>
+    </div>
+  </section>
+
+  <!-- ══════════ C ══════════ -->
+  <section id="p-C" role="tabpanel" aria-labelledby="t-C" hidden>
+    <div class="cadre">
+      <div class="cadre__barre">
+        <span class="pastilles"><i></i><i></i><i></i></span>
+        <span class="cadre__url">drfranckmoyal.fr</span>
+        <span class="densite" title="mesuré sur cet extrait">187 mots / écran · mesuré</span>
+      </div>
+      <div class="scene C">
+        <nav class="nav">
+          <b>Dr Franck Moyal</b>
+          <span>Constats</span><span>Traitements</span><span>Cas cliniques</span><span>Parcours</span>
+          <span class="rdv">Rendez-vous</span>
+        </nav>
+
+        <div class="une">
+          <div>
+            <p class="eyebrow">Dentisterie esthétique et adhésive — Paris 9<sup>e</sup></p>
+            <h1>Comprendre pourquoi les dents s'usent avant de les reconstruire</h1>
+            <p class="chapo">Des dents qui raccourcissent, s'aplatissent ou se fragilisent ne doivent pas
+              simplement être « réparées ». Préserver les tissus restants, identifier la cause, puis
+              reconstruire seulement lorsque c'est nécessaire.</p>
+            <div class="signature">
+              <span>Praticien hospitalier, <b>Pitié-Salpêtrière</b> depuis 2012</span>
+              <span>·</span>
+              <span><b>CMME</b>, Sainte-Anne, depuis 2024</span>
+            </div>
+          </div>
+          <figure>
+            <img src="https://drfranckmoyal.fr/_astro/composite-bonding-six-dents-anterieures.BEOKIcTs_dwly0.webp" alt="Six dents antérieures avant puis après reconstruction additive en composite">
+            <figcaption>Reconstruction additive de six dents antérieures en composite.</figcaption>
+          </figure>
+        </div>
+
+        <div class="sect sect--zone">
+          <div class="grille3">
+            <div>
+              <p class="eyebrow">Vous constatez</p>
+              <h3>Un changement sur vos dents</h3>
+              <p>Partez de ce que vous voyez, pas du nom du traitement.</p>
+              <ul>
+                <li><a href="#">Mes dents raccourcissent</a></li>
+                <li><a href="#">Elles deviennent transparentes</a></li>
+                <li><a href="#">Je serre des dents la nuit</a></li>
+                <li><a href="#">J'ai des taches blanches</a></li>
+                <li><a href="#">Mon sourire découvre peu les dents</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="eyebrow">On peut faire</p>
+              <h3>Les traitements proposés</h3>
+              <p>Du plus conservateur au plus engageant.</p>
+              <ul>
+                <li><a href="#">Composite bonding</a></li>
+                <li><a href="#">Facettes céramique</a></li>
+                <li><a href="#">Éclaircissement ambulatoire</a></li>
+                <li><a href="#">Infiltration ICON</a></li>
+                <li><a href="#">Réhabilitation des dents usées</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="eyebrow">Commencer</p>
+              <h3>Le bilan esthétique</h3>
+              <p>Une séance pour comprendre l'état des dents, la cause de l'usure et les options —
+                avant tout engagement.</p>
+              <ul>
+                <li><a href="#">En quoi consiste le bilan</a></li>
+                <li><a href="#">Prendre rendez-vous — 01 83 75 52 16</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <p class="eyebrow">Cas cliniques</p>
+          <h2>Quatorze cas du cabinet, photographiés avant et après</h2>
+          <div class="cas">
+            <figure><div class="paire"><img src="https://drfranckmoyal.fr/_astro/rehabilitation-usure-avant.DL7eMaip_Z2oFaiG.webp" alt="Dents usées avant réhabilitation" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/rehabilitation-usure-apres.C_afurjL_2kQWQz.webp" alt="Dents usées après réhabilitation" loading="lazy"></div>
+              <figcaption>Réhabilitation de dents usées. Cas clinique — Dr Franck Moyal.</figcaption></figure>
+            <figure><div class="paire"><img src="https://drfranckmoyal.fr/_astro/facettes-ceramique-avant.DbNvrs_M_ZGAbaa.webp" alt="Avant facettes céramique" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/facettes-ceramique-apres.1889C1VF_1yvdm4.webp" alt="Après facettes céramique" loading="lazy"></div>
+              <figcaption>Facettes en céramique. Cas clinique — Dr Franck Moyal.</figcaption></figure>
+            <figure class="carre"><img src="https://drfranckmoyal.fr/_astro/composite-bonding-quatre-dents-anterieures.BCF6eUNJ_Z12sKyK.webp" alt="Quatre dents antérieures avant puis après composite" loading="lazy">
+              <figcaption>Composite additif sur quatre dents antérieures.</figcaption></figure>
+            <figure><div class="paire"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-avant.CDkBlTIO_QEAB9.webp" alt="Taches de MIH avant infiltration" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-apres.Bbc_xZUa_Y80RM.webp" alt="Taches de MIH après infiltration" loading="lazy"></div>
+              <figcaption>Taches de MIH traitées par infiltration.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="sect sect--zone">
+          <p class="eyebrow">Les questions qu'on me pose</p>
+          <div class="qa">
+            <div><b>Faut-il toujours traiter une usure dentaire ?</b>
+              <p>Non. Dans certaines situations, prévention, conseil et surveillance suffisent. La décision dépend de la sévérité, de l'évolution et des conséquences fonctionnelles.</p></div>
+            <div><b>Le bruxisme explique-t-il tout ?</b>
+              <p>Non. Les usures sont le plus souvent multifactorielles : mécaniques, érosives, ou les deux à la fois.</p></div>
+            <div><b>Composite ou facettes céramique ?</b>
+              <p>Le composite ajoute de la matière sans tailler la dent. La céramique demande une préparation, même minime, mais vieillit différemment.</p></div>
+            <div><b>Faut-il traiter la cause avant de reconstruire ?</b>
+              <p>Oui, lorsque la cause est active. Reconstruire sur une érosion non maîtrisée expose à une récidive.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note"><h4>Le parti pris</h4><p>Une revue clinique : titre fort, colonnes, photographies légendées. Dense sans être froid.</p></div>
+      <div class="note"><h4>Ce que ça sert</h4><p>Trois fois la densité actuelle, et la structure question → réponse que les IA extraient reste intacte.</p></div>
+      <div class="note"><h4>Le risque</h4><p>Proche de l'esprit actuel du site : si vous vouliez une rupture visible, c'est la moins rupture des trois.</p></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var ong = Array.prototype.slice.call(document.querySelectorAll('.onglet'));
+  function montre(id){
+    ong.forEach(function(b){
+      b.setAttribute('aria-selected', b.id === 't-' + id ? 'true' : 'false');
+    });
+    ['A','B','C'].forEach(function(k){
+      var p = document.getElementById('p-' + k);
+      if (p) p.hidden = (k !== id);
+    });
+    try { history.replaceState(null, '', '#' + id); } catch(e) {}
+  }
+  ong.forEach(function(b){
+    b.addEventListener('click', function(){ montre(b.id.slice(2)); });
+  });
+  function depuisAncre(){
+    var h = (location.hash || '').replace('#','');
+    if (['A','B','C'].indexOf(h) >= 0) montre(h);
+  }
+  depuisAncre();
+  window.addEventListener('hashchange', depuisAncre);
+})();
+</script>
