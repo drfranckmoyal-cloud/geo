@@ -175,11 +175,15 @@ body{margin:0;background:var(--coq-fond);color:var(--coq-encre);font-family:var(
   font-size:clamp(1.7rem,1.2rem+2.2vw,2.6rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
 .C .une .chapo{margin:0 0 .9rem;font-size:1rem;color:var(--doux);max-width:46ch}
 .C .une figure{margin:0}
-.C .une img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.C .une figure img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
 .C .une figcaption{font-size:.72rem;color:var(--doux);margin-top:.35rem;font-style:italic}
-.C .signature{display:flex;gap:.5rem;align-items:center;font-size:.76rem;color:var(--doux);
-  padding-top:.6rem;border-top:1px solid var(--trait)}
+.C .signature{display:flex;gap:.7rem;align-items:center;font-size:.76rem;color:var(--doux);
+  padding-top:.7rem;border-top:1px solid var(--trait);line-height:1.45}
 .C .signature b{color:var(--fg);font-weight:600}
+/* Le portrait fourni fait 480 px : on ne l'affiche jamais au-delà de 240 px,
+   sinon il se délave. En signature d'auteur, 56 px suffisent largement. */
+.C .signature .portrait{width:56px;height:56px;min-width:56px;border-radius:50%;
+  object-fit:cover;flex:none;aspect-ratio:1;filter:grayscale(1) contrast(1.05)}
 .C .sect{padding:1.6rem 1.5rem;border-bottom:1px solid var(--trait)}
 .C .sect--zone{background:var(--zone)}
 .C .eyebrow{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-weight:600;margin:0 0 .5rem}
@@ -196,6 +200,14 @@ body{margin:0;background:var(--coq-fond);color:var(--coq-encre);font-family:var(
 .C .cas img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
 .C .cas .carre img{aspect-ratio:1}
 .C .cas figcaption{font-size:.74rem;color:var(--doux);margin-top:.32rem;line-height:1.35}
+.C .praticien{display:grid;grid-template-columns:200px 1fr;gap:1.6rem;align-items:start}
+.C .praticien img{width:200px;height:200px;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05)}
+.C .praticien p{margin:0 0 .6rem;font-size:.9rem;color:var(--doux);max-width:58ch}
+.C .praticien .liens{font-size:.84rem;color:var(--fg)}
+.C .praticien .liens a{border-bottom:1px solid var(--trait);text-decoration:none}
+.C .praticien .liens a:hover{color:var(--acc);border-color:var(--acc)}
+@media (max-width:720px){.C .praticien{grid-template-columns:1fr}
+  .C .praticien img{width:140px;height:140px}}
 .C .qa{columns:2;column-gap:1.8rem}
 .C .qa div{break-inside:avoid;margin:0 0 .85rem}
 .C .qa b{display:block;font-family:var(--f-source);font-size:.95rem;font-weight:700;margin-bottom:.15rem}
@@ -449,9 +461,11 @@ body{margin:0;background:var(--coq-fond);color:var(--coq-encre);font-family:var(
               simplement être « réparées ». Préserver les tissus restants, identifier la cause, puis
               reconstruire seulement lorsque c'est nécessaire.</p>
             <div class="signature">
-              <span>Praticien hospitalier, <b>Pitié-Salpêtrière</b> depuis 2012</span>
-              <span>·</span>
-              <span><b>CMME</b>, Sainte-Anne, depuis 2024</span>
+              <img class="portrait" src="img/portrait-fm.png" alt="Dr Franck Moyal" width="56" height="56">
+              <div>
+                <b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
+                <span>Praticien hospitalier, Pitié-Salpêtrière depuis 2012 · CMME, Sainte-Anne, depuis 2024</span>
+              </div>
             </div>
           </div>
           <figure>
@@ -511,6 +525,22 @@ body{margin:0;background:var(--coq-fond);color:var(--coq-encre);font-family:var(
               <figcaption>Composite additif sur quatre dents antérieures.</figcaption></figure>
             <figure><div class="paire"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-avant.CDkBlTIO_QEAB9.webp" alt="Taches de MIH avant infiltration" loading="lazy"><img src="https://drfranckmoyal.fr/_astro/mih-erosion-infiltration-apres.Bbc_xZUa_Y80RM.webp" alt="Taches de MIH après infiltration" loading="lazy"></div>
               <figcaption>Taches de MIH traitées par infiltration.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="praticien">
+            <img src="img/portrait-fm.png" alt="Dr Franck Moyal, chirurgien-dentiste à Paris" width="200" height="200">
+            <div>
+              <p class="eyebrow">Le praticien</p>
+              <h2>Une pratique hospitalière qui nourrit le cabinet</h2>
+              <p>Praticien hospitalier au service de Médecine Bucco-dentaire de la Pitié-Salpêtrière
+                depuis 2012, où je suis responsable de la consultation des internes en dentisterie
+                esthétique et usures. Praticien attaché à la CMME de l'hôpital Sainte-Anne depuis 2024,
+                dans le champ des troubles des conduites alimentaires, et président de l'association
+                DenTCA.</p>
+              <p class="liens"><a href="#">Parcours et publications</a> · <a href="#">Activité hospitalière</a> · <a href="#">Conférences et formations</a></p>
+            </div>
           </div>
         </div>
 
