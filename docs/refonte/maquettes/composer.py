@@ -37,6 +37,10 @@ spec.loader.exec_module(gen)
 
 MEUBLE = ("dr franck moyal — chirurgien", "mis à jour le", "voir les ", "dentisterie esthétique et adhésive, usures")
 
+# Le diagnostic des usures a été fondu dans la page Usures (D77) : tout lien qui
+# le visait doit mener là, sinon il tombe sur une page qui n'existe plus.
+FONDUES = {"diagnostic-usures-dentaires": "usures-dentaires"}
+
 
 # ── lecture ───────────────────────────────────────────────────────────────────
 def nu(x, garder_gras=True):
@@ -63,7 +67,8 @@ def lire(slug):
     for href, lib in re.findall(r'<a[^>]*href="(/[^"#?]+/)"[^>]*>(.*?)</a>', main, re.S):
         lib = nu(lib, False)
         if lib and len(lib) < 90:
-            p["liens"].setdefault(lib, href.strip("/").replace("cas-cliniques/", "cas-"))
+            cible = href.strip("/").replace("cas-cliniques/", "cas-")
+            p["liens"].setdefault(lib, FONDUES.get(cible, cible))
 
     # Le bandeau d'ouverture n'est pas une <section> : son paragraphe de réponse,
     # qui est le vrai chapô de la page, n'était lu nulle part.

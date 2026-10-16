@@ -88,8 +88,10 @@ def _pages_composees():
 # Écrites entièrement à la main, avant que le composeur n'existe.
 A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
              "dentisterie-esthetique-paris", "index"} | _pages_composees()
-# le diagnostic est fondu dans les usures (D77) : plus de page à lui
+# le diagnostic est fondu dans les usures (D77) : plus de page à lui,
+# et tout lien qui le visait mène désormais à celle qui l'a absorbé
 FONDUES = {"diagnostic-usures-dentaires"}
+FONDUES_VERS = {"diagnostic-usures-dentaires": "usures-dentaires"}
 
 
 # ── extraction ────────────────────────────────────────────────────────────────
@@ -333,7 +335,8 @@ def rendre(page):
         liens = ""
         if s["liens"]:
             liens = '\n        <p class="suite">' + " · ".join(
-                f'<a href="{h.strip("/")}.html">{e(l)}</a>' for h, l in s["liens"]
+                f'<a href="{FONDUES_VERS.get(h.strip("/"), h.strip("/"))}.html">{e(l)}</a>'
+                for h, l in s["liens"]
             ) + "</p>"
 
         if s["li"]:
