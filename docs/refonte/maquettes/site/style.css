@@ -39,9 +39,9 @@ img{max-width:100%;display:block}
 a{color:inherit}
 
 .contenu{max-width:var(--page);margin:0 auto;padding-left:var(--gouttiere);padding-right:var(--gouttiere)}
-.sect{padding-block:clamp(.5rem,.35rem + .6vw,.85rem)}
-.sect:first-of-type{padding-top:clamp(.8rem,.5rem + 1vw,1.4rem)}
-.sect--serre{padding-block:clamp(.5rem,.35rem + .6vw,.85rem)}
+.sect{padding-block:clamp(.32rem,.24rem + .36vw,.55rem)}
+.sect:first-of-type{padding-top:clamp(.5rem,.35rem + .6vw,.9rem)}
+.sect--serre{padding-block:clamp(.32rem,.24rem + .36vw,.55rem)}
 /* .sect--zone ne teinte plus toute la largeur : la carte qu'elle contient
    prend simplement une nuance différente. */
 .sect--zone .carte{background:var(--zone)}
@@ -56,7 +56,7 @@ a{color:inherit}
 }
 .carte--duo{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
   gap:clamp(1.2rem,.9rem + 1.6vw,2.2rem);align-items:start}
-.carte h2{margin-bottom:.7rem}
+.carte h2{margin-bottom:.55rem}
 .carte > div > p:last-child{margin-bottom:0}
 @media (max-width:860px){.carte--duo{grid-template-columns:1fr}}
 
@@ -66,9 +66,9 @@ a{color:inherit}
 }
 h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.018em;text-wrap:balance;margin:0}
 h1{font-size:clamp(1.9rem,1.3rem + 2.4vw,3rem);line-height:1.06}
-h2{font-size:clamp(1.35rem,1.1rem + .9vw,1.75rem);line-height:1.15;margin-bottom:.8rem}
+h2{font-size:clamp(1.3rem,1.08rem + .8vw,1.65rem);line-height:1.15;margin-bottom:.6rem}
 h3{font-size:1.05rem;line-height:1.25;margin-bottom:.3rem}
-p{margin:0 0 .8rem;max-width:68ch}
+p{margin:0 0 .62rem;max-width:68ch}
 p:last-child{margin-bottom:0}
 .doux{color:var(--doux)}
 
@@ -109,11 +109,11 @@ p:last-child{margin-bottom:0}
   padding:.4rem .7rem;font:inherit;font-size:.82rem;cursor:pointer}
 
 /* ── la une ──────────────────────────────────────────────── */
-.une{display:grid;grid-template-columns:1.45fr 1fr;gap:clamp(1.3rem,1rem + 1.8vw,2.4rem);
-  align-items:start;margin-block:clamp(.8rem,.6rem + 1vw,1.4rem)}
+.une{display:grid;grid-template-columns:1.45fr 1fr;gap:clamp(1.1rem,.9rem + 1.2vw,1.9rem);
+  align-items:start;margin-block:clamp(.5rem,.4rem + .6vw,.9rem)}
 .une > div:first-child{background:var(--carte);border:1px solid var(--trait);
   border-radius:var(--rayon);box-shadow:var(--relief-fort);
-  padding:clamp(1.4rem,1.1rem + 1.8vw,2.5rem)}
+  padding:clamp(1.15rem,.95rem + 1.2vw,1.85rem)}
 .une figure img{border-radius:var(--rayon);box-shadow:var(--relief)}
 .une__chapo{font-size:1.05rem;color:var(--doux);max-width:48ch;margin-top:.7rem}
 .signature{display:flex;gap:.75rem;align-items:center;margin-top:1.1rem;padding-top:.8rem;
@@ -127,9 +127,9 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 
 /* ── trois colonnes d'orientation ────────────────────────── */
 .axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
-  gap:clamp(.9rem,.7rem + .9vw,1.4rem)}
+  gap:clamp(.75rem,.6rem + .7vw,1.15rem)}
 .axes > div{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
-  box-shadow:var(--relief);padding:clamp(1.1rem,.9rem + 1vw,1.6rem)}
+  box-shadow:var(--relief);padding:clamp(.95rem,.8rem + .75vw,1.3rem)}
 .axes p{font-size:.88rem;margin-bottom:.6rem}
 .axes ul{list-style:none;margin:0;padding:0}
 .axes li a{display:block;padding:.3rem 0;font-size:.87rem;text-decoration:none;border-bottom:1px solid var(--trait)}
@@ -153,7 +153,7 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .praticien{display:grid;grid-template-columns:200px 1fr;gap:clamp(1.3rem,1rem + 1.6vw,2.2rem);
   align-items:start;background:var(--carte);border:1px solid var(--trait);
   border-radius:var(--rayon);box-shadow:var(--relief);
-  padding:clamp(1.3rem,1rem + 1.6vw,2.3rem)}
+  padding:clamp(1.05rem,.85rem + 1.1vw,1.7rem)}
 .praticien img{border-radius:var(--rayon)}
 .praticien img{width:200px;height:200px;object-fit:cover;filter:grayscale(1) contrast(1.05)}
 .praticien p{font-size:.92rem;color:var(--doux)}
@@ -163,9 +163,9 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 
 /* ── questions ───────────────────────────────────────────── */
 .qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
-  gap:clamp(.8rem,.6rem + .8vw,1.2rem)}
+  gap:clamp(.68rem,.55rem + .6vw,1rem)}
 .qa>div{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
-  box-shadow:var(--relief);padding:clamp(.95rem,.8rem + .7vw,1.4rem)}
+  box-shadow:var(--relief);padding:clamp(.85rem,.72rem + .55vw,1.15rem)}
 .qa b{display:block;font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.2rem}
 .qa p{font-size:.88rem;color:var(--doux);margin:0}
 
@@ -175,18 +175,18 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .ariane a:hover{color:var(--acc)}
 .chapitre{
   display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
-  gap:clamp(1.2rem,.9rem + 1.6vw,2.2rem);align-items:start;
+  gap:clamp(1rem,.8rem + 1.1vw,1.7rem);align-items:start;
   background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
-  box-shadow:var(--relief);padding:clamp(1.3rem,1rem + 1.6vw,2.3rem);
+  box-shadow:var(--relief);padding:clamp(1.05rem,.85rem + 1.1vw,1.7rem);
 }
 .chapitre--plein{grid-template-columns:1fr}
 .sect--zone .chapitre{background:var(--zone)}
-.chapitre p{font-size:.95rem}
+.chapitre p{font-size:.95rem;line-height:1.5}
 .chapitre > div > *:last-child{margin-bottom:0}
 .chapitre .numero{font-family:var(--serif);font-size:.8rem;color:var(--acc);font-weight:700;
   letter-spacing:.06em;margin-bottom:.25rem}
 .fiche{background:var(--acc-clair);border-radius:var(--rayon);
-  padding:clamp(.95rem,.8rem + .6vw,1.35rem);font-size:.87rem;color:var(--fg)}
+  padding:clamp(.85rem,.72rem + .5vw,1.15rem);font-size:.87rem;color:var(--fg)}
 .fiche h4{margin:0 0 .6rem;padding-bottom:.45rem;border-bottom:1px solid rgba(44,85,69,.18);
   font-family:var(--sans);font-size:.65rem;font-weight:700;
   letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
@@ -199,9 +199,9 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .deux-col{columns:2;column-gap:2rem;font-size:.92rem;color:var(--doux)}
 .deux-col p{break-inside:avoid}
 
-.appel{margin-block:clamp(.5rem,.35rem + .6vw,.85rem)}
+.appel{margin-block:clamp(.32rem,.24rem + .36vw,.55rem)}
 .appel .contenu{background:var(--fg);color:#f3f2ee;border-radius:var(--rayon);
-  box-shadow:var(--relief-fort);padding:clamp(1.5rem,1.2rem + 1.8vw,2.6rem)}
+  box-shadow:var(--relief-fort);padding:clamp(1.2rem,1rem + 1.3vw,1.95rem)}
 .appel h2{color:#f8f7f4}
 .appel p{color:#cfd2cd;max-width:52ch}
 .appel .bouton{display:inline-block;margin-top:.9rem;background:var(--bg);color:var(--fg);
@@ -209,7 +209,7 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 
 .sources{font-size:.78rem;color:var(--tres-doux);background:var(--carte);
   border:1px solid var(--trait);border-radius:var(--rayon);
-  padding:clamp(1rem,.85rem + .8vw,1.5rem)}
+  padding:clamp(.9rem,.78rem + .6vw,1.25rem)}
 .sources ol{margin:.4rem 0 0;padding-left:1.1rem;columns:2;column-gap:2rem}
 .sources li{margin-bottom:.2rem;break-inside:avoid}
 
