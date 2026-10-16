@@ -196,6 +196,25 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
   border-radius:50%;background:var(--acc);opacity:.55}
 .fiche li:last-child{margin-bottom:0}
 .fiche p{margin:.6rem 0 0;font-size:.84rem}
+/* Sous-parties à l'intérieur d'une carte : un filet les sépare, discret,
+   pour qu'un chapitre puisse en contenir trois ou quatre sans se disloquer. */
+.bloc + .bloc{margin-top:clamp(1rem,.85rem + .7vw,1.45rem);
+  padding-top:clamp(1rem,.85rem + .7vw,1.45rem);border-top:1px solid var(--trait)}
+.bloc h3{font-size:1.02rem;margin-bottom:.4rem}
+.bloc > *:last-child{margin-bottom:0}
+
+/* Tableau comparatif : il porte l'essentiel de cette page, on le traite comme tel. */
+.tableau{overflow-x:auto;margin-top:.8rem}
+.tableau table{border-collapse:collapse;width:100%;min-width:620px;font-size:.87rem}
+.tableau th,.tableau td{text-align:left;vertical-align:top;padding:.62rem .8rem;
+  border-bottom:1px solid var(--trait)}
+.tableau thead th{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--acc);border-bottom:2px solid var(--acc);
+  background:var(--acc-clair);white-space:nowrap}
+.tableau tbody th{font-weight:600;width:10.5rem;color:var(--fg);background:var(--zone)}
+.tableau tbody tr:last-child th,.tableau tbody tr:last-child td{border-bottom:0}
+.tableau td{color:var(--doux)}
+
 .deux-col{columns:2;column-gap:2rem;font-size:.92rem;color:var(--doux)}
 .deux-col p{break-inside:avoid}
 
