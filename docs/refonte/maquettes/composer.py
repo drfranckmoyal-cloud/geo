@@ -49,7 +49,8 @@ def nu(x, garder_gras=True):
 
 
 def lire(slug):
-    brut = open(os.path.join(DIST, slug, "index.html"), encoding="utf-8").read()
+    chemin = slug.replace("cas-", "cas-cliniques/", 1) if slug.startswith("cas-") else slug
+    brut = open(os.path.join(DIST, chemin, "index.html"), encoding="utf-8").read()
     main = re.search(r"<main.*?</main>", brut, re.S).group(0)
     p = {"slug": slug, "main": main, "brut": brut}
     p["titre"] = H.unescape(re.search(r"<title>(.*?)</title>", brut, re.S).group(1).strip())
@@ -71,6 +72,22 @@ def lire(slug):
                  if len(x) > 18 and not any(x.lower().startswith(m) for m in MEUBLE)]
     # Le bloc « answer » — la réponse directe à la question du titre — est un div
     # posé entre deux <section>. Ni la tête ni les sections ne le voyaient.
+    dans_sections = "".join(re.findall(r"<section[^>]*>.*?</section>", main, re.S))
+    p["figures_libres"] = []
+    for fig in re.findall(r"<figure.*?</figure>", main, re.S):
+        if fig in dans_sections:
+            continue
+        srcs = re.findall(r'\bsrc="(/_astro/[^"]+\.(?:webp|jpg|png))"', fig)
+        alts = re.findall(r'\balt="([^"]*)"', fig)
+        cap = re.search(r"<figcaption[^>]*>(.*?)</figcaption>", fig, re.S)
+        if srcs:
+            p["figures_libres"].append({"src": [gen.locale(x) for x in srcs[:2]],
+                                        "alt": [H.unescape(a) for a in alts[:2]] or [""],
+                                        "legende": nu(cap.group(1), False) if cap else ""})
+
+    men = re.search(r'<div[^>]*class="[^"]*pack-mention[^"]*"[^>]*>(.*?)</div>', main, re.S)
+    p["mention"] = nu(men.group(1)) if men else ""
+
     for rep in re.findall(r'<div[^>]*class="answer"[^>]*>(.*?)</div>', main, re.S):
         t = nu(rep)
         if len(t) > 40 and t not in p["tete"]:
@@ -84,6 +101,15 @@ def lire(slug):
         lis = [nu(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", sec, re.S)]
         lis = [x for x in lis if 8 < len(x) < 240]
         tbl = re.search(r"<table.*?</table>", sec, re.S)
+        figures = []
+        for fig in re.findall(r"<figure.*?</figure>", sec, re.S):
+            srcs = re.findall(r'\bsrc="(/_astro/[^"]+\.(?:webp|jpg|png))"', fig)
+            alts = re.findall(r'\balt="([^"]*)"', fig)
+            cap = re.search(r"<figcaption[^>]*>(.*?)</figcaption>", fig, re.S)
+            if srcs:
+                figures.append({"src": [gen.locale(x) for x in srcs[:2]],
+                                "alt": [H.unescape(a) for a in alts[:2]] or [""],
+                                "legende": nu(cap.group(1), False) if cap else ""})
         p["sections"].append({
             "titre": nu(ti.group(1)) if ti else "",
             "p": paras,
@@ -91,6 +117,7 @@ def lire(slug):
             "renvois": [x for x in lis if x in p["liens"]],
             "h3": [nu(x) for x in re.findall(r"<h3[^>]*>(.*?)</h3>", sec, re.S)],
             "table": tbl.group(0) if tbl else None,
+            "figures": figures,
             "faq": "faq__item" in sec,
             "sources": "source__ref" in sec or "source__n" in sec,
         })
@@ -147,13 +174,28 @@ def bloc(p, i, avec_liste, titre=None):
         puces = "\n              ".join(f"<li>{e(x)}</li>" for x in s["li"])
         intro = f'<p>{e(a)}</p>\n          ' if a else ""
         liste = f'\n          {intro}<ul class="puces">\n              {puces}\n          </ul>'
+    photos = ""
+    if s["figures"]:
+        cartes = []
+        for fg in s["figures"]:
+            alts = fg["alt"] + [""] * 2
+            if len(fg["src"]) >= 2:
+                im = "".join(f'<img src="{x}" alt="{H.escape(alts[k])}" loading="lazy">'
+                             for k, x in enumerate(fg["src"][:2]))
+                dedans, cls = f'<div class="paire">{im}</div>', "paire"
+            else:
+                dedans, cls = (f'<img src="{fg["src"][0]}" alt="{H.escape(alts[0])}" loading="lazy">', "solo")
+            leg = f'<figcaption>{e(fg["legende"])}</figcaption>' if fg["legende"] else ""
+            cartes.append(f'<figure class="{cls}">{dedans}{leg}</figure>')
+        photos = f'\n          <div class="cas">{"".join(cartes)}</div>'
+
     tableau = ""
     if s["table"]:
         cols = len(re.findall(r"<th[^>]*>", s["table"].split("</thead>")[0])) if "</thead>" in s["table"] else 3
         t = re.sub(r'<span[^>]*class="cmp__col"[^>]*>.*?</span>', "", s["table"], flags=re.S)
         t = re.sub(r"\s+data-astro-cid-\w+", "", t)
         tableau = f'\n          <div class="tableau{" tableau--duo" if cols <= 2 else ""}">{t}</div>'
-    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{renvois(p, p["sections"][i])}\n        </div>'
+    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{photos}{renvois(p, p["sections"][i])}\n        </div>'
 
 
 def fiche(p, sections):
@@ -179,19 +221,25 @@ def composer(slug, plan):
     ariane = '<a href="index.html">Accueil</a>' + (f" › {e(public)}" if public else "") + f" › {e(lib)}"
 
     # chapô : le paragraphe le plus long de l'ouverture
-    ouverture = p["tete"] + sec[0]["p"]
+    # Tout ce qui précède le premier chapitre appartient à l'ouverture : certaines
+    # pages ont deux blocs d'en-tête, et le second se perdait.
+    premier = min((i for ch in plan["chapitres"] for i in ch["sections"]), default=1)
+    ouverture = p["tete"] + [x for s_ in sec[:premier] for x in s_["p"]]
     chapo = max(ouverture, key=len) if ouverture else ""
     # l'ouverture porte souvent deux paragraphes : le chapô et un résumé
     resume = [x for x in ouverture if x != chapo]
 
+    # La photo d'ouverture est prise à la première section qui en porte une,
+    # et retirée de celle-ci pour ne pas paraître deux fois.
     photo = ""
-    imgs = re.findall(r'\bsrc="(/_astro/[^"]+\.(?:webp|jpg|png))"', p["main"])
-    alts = re.findall(r'\balt="([^"]*)"', p["main"])
-    caps = re.findall(r"<figcaption[^>]*>(.*?)</figcaption>", p["main"], re.S)
-    if imgs:
-        src = gen.locale(imgs[0])
-        photo = (f'      <figure><img src="{src}" alt="{H.escape(alts[0] if alts else "")}">'
-                 f'{f"<figcaption>{e(nu(caps[0], False))}</figcaption>" if caps else ""}</figure>\n')
+    sources_photo = [p["figures_libres"]] + [s_["figures"] for s_ in sec]
+    for lot in sources_photo:
+        if lot:
+            fg = lot.pop(0)
+            leg = f'<figcaption>{e(fg["legende"])}</figcaption>' if fg["legende"] else ""
+            photo = (f'      <figure><img src="{fg["src"][0]}" '
+                     f'alt="{H.escape((fg["alt"] or [""])[0])}">{leg}</figure>\n')
+            break
 
     corps = []
     n = len(plan["chapitres"])
@@ -260,12 +308,38 @@ def composer(slug, plan):
     </div>
   </section>''')
 
+    if p["figures_libres"]:
+        cartes = []
+        for fg in p["figures_libres"]:
+            alts = fg["alt"] + [""] * 2
+            if len(fg["src"]) >= 2:
+                im = "".join(f'<img src="{x}" alt="{H.escape(alts[k])}" loading="lazy">'
+                             for k, x in enumerate(fg["src"][:2]))
+                dedans, cls = f'<div class="paire">{im}</div>', "paire"
+            else:
+                dedans, cls = (f'<img src="{fg["src"][0]}" alt="{H.escape(alts[0])}" loading="lazy">', "solo")
+            leg = f'<figcaption>{e(fg["legende"])}</figcaption>' if fg["legende"] else ""
+            cartes.append(f'<figure class="{cls}">{dedans}{leg}</figure>')
+        corps.append(f'''  <section class="sect">
+    <div class="contenu">
+      <p class="eyebrow">Les photographies du cas</p>
+      <div class="cas">{"".join(cartes)}</div>
+    </div>
+  </section>''')
+
+    if p["mention"]:
+        corps.append(f'''  <section class="sect sect--serre">
+    <div class="contenu">
+      <p class="mention">{e(p["mention"])}</p>
+    </div>
+  </section>''')
+
     # appel
     fin = sec[-1]
     corps.append(f'''  <section class="appel">
     <div class="contenu">
       <h2>{e(fin["titre"] or "Faire le point")}</h2>
-      <p>{e(fin["p"][0] if fin["p"] else "Un bilan permet de comprendre la situation et les options possibles, avant tout engagement.")}</p>
+      {"".join(f"<p>{e(x)}</p>" for x in fin["p"]) or "<p>Un bilan permet de comprendre la situation et les options possibles, avant tout engagement.</p>"}
       <a class="bouton" href="contact.html">Prendre rendez-vous</a>
     </div>
   </section>''')
@@ -385,6 +459,89 @@ PLANS = {
     {"titre": "L’anorexie est-elle une cause directe ?", "sections": [7]},
     {"titre": "Pourquoi dépister tôt", "sections": [8], "fiche": [8]},
     {"titre": "Que peut-on faire", "sections": [9, 10], "fiche": [9]},
+  ]},
+  "composite-bonding-paris": {"chapitres": [
+    {"titre": "Une technique conservatrice, mais exigeante", "sections": [1, 2]},
+    {"titre": "La stratification", "sections": [3]},
+    {"titre": "Quand on l’utilise", "sections": [4, 5], "fiche": [4]},
+    {"titre": "Composite ou facettes, et pour combien de temps", "sections": [6, 8]},
+    {"titre": "Le déroulement, et ce que je recherche", "sections": [7, 9]},
+  ]},
+  "facettes-dentaires-paris": {"chapitres": [
+    {"titre": "Transformer l’architecture du sourire", "sections": [1, 2]},
+    {"titre": "Décider du futur sourire", "sections": [3, 4]},
+    {"titre": "La céramique, et la préparation", "sections": [5, 6]},
+    {"titre": "Facettes ou composite, et la durée", "sections": [7, 8]},
+    {"titre": "À quoi ressemble le parcours", "sections": [9], "fiche": [9]},
+  ]},
+  "taches-dentaires-dyschromies-icon": {"chapitres": [
+    {"titre": "Toutes les taches ne se valent pas", "sections": [1, 3]},
+    {"titre": "Les taches de MIH", "sections": [2]},
+    {"titre": "L’érosion-infiltration de résine", "sections": [4, 5]},
+    {"titre": "Associer les approches", "sections": [6, 7]},
+    {"titre": "Pourquoi ne pas poser un composite d’emblée", "sections": [8]},
+  ]},
+  "bruxisme-usure-dentaire": {"chapitres": [
+    {"titre": "Une usure ne prouve pas un bruxisme", "sections": [1, 2], "fiche": [2]},
+    {"titre": "Pourquoi les dents s’usent chez un bruxeur", "sections": [3], "fiche": [3]},
+    {"titre": "Comment sait-on si l’on bruxe ?", "sections": [4], "fiche": [4]},
+    {"titre": "La gouttière, et la part de l’érosion", "sections": [5, 6], "fiche": [6]},
+    {"titre": "Reconstruire, et la question des douleurs", "sections": [7, 8], "fiche": [7]},
+  ]},
+  "dents-courtes-usees": {"chapitres": [
+    {"titre": "« Mes dents sont devenues plus petites »", "sections": [1, 2], "fiche": [1]},
+    {"titre": "Pourquoi le sourire paraît plus âgé", "sections": [3], "fiche": [3]},
+    {"titre": "Faut-il tout reconstruire ?", "sections": [4, 5], "fiche": [4]},
+    {"titre": "Quelle longueur, et la dimension verticale", "sections": [6, 7], "fiche": [6]},
+    {"titre": "Le résultat qu’on peut rechercher", "sections": [8], "fiche": [8]},
+  ]},
+  "eclaircissement-dentaire-paris": {"chapitres": [
+    {"titre": "Un traitement entièrement conservateur", "sections": [1, 2]},
+    {"titre": "L’éclaircissement ambulatoire", "sections": [3, 4], "fiche": [4]},
+    {"titre": "Les sensibilités", "sections": [5]},
+    {"titre": "Pendant le traitement", "sections": [6]},
+    {"titre": "Dans un projet esthétique global", "sections": [7]},
+  ]},
+  "franck-moyal": {"chapitres": [
+    {"titre": "Ma pratique", "sections": [2, 3]},
+    {"titre": "Érosion et troubles alimentaires", "sections": [4]},
+    {"titre": "Enseigner, et l’hôpital", "sections": [5, 6]},
+    {"titre": "Traiter juste", "sections": [7, 8]},
+  ]},
+  "chirurgien-dentiste-paris-9": {"chapitres": [
+    {"titre": "Une pratique orientée", "sections": [1]},
+    {"titre": "Pourquoi consulter", "sections": [2], "fiche": [2]},
+    {"titre": "La première consultation", "sections": [3], "fiche": [3]},
+    {"titre": "Trois principes", "sections": [4]},
+    {"titre": "Cabinet et hôpital", "sections": [5]},
+  ]},
+  "cas-usures-dentaires-facettes-minimalement-invasives": {"chapitres": [
+    {"titre": "La demande, et ce que l’examen montre", "sections": [1, 2]},
+    {"titre": "Comprendre avant de restaurer", "sections": [3, 4, 5, 6]},
+    {"titre": "Planifier, et créer l’espace", "sections": [7, 8]},
+    {"titre": "Le traitement", "sections": [9, 10]},
+    {"titre": "Le résultat, et ce qu’on en retient", "sections": [11, 12, 13]},
+  ]},
+  "cas-planification-facettes-ceramique": {"chapitres": [
+    {"titre": "La situation initiale", "sections": [1]},
+    {"titre": "Définir le projet final", "sections": [2]},
+    {"titre": "Une orthodontie guidée par le projet", "sections": [3]},
+    {"titre": "Quatre facettes, et le résultat", "sections": [4, 5]},
+    {"titre": "Ce que ce cas permet de comprendre", "sections": [6]},
+  ]},
+  "cas-planification-rehabilitation-facettes": {"chapitres": [
+    {"titre": "La situation initiale", "sections": [1]},
+    {"titre": "Visualiser avant de traiter", "sections": [2, 3]},
+    {"titre": "Une réhabilitation par vingt facettes", "sections": [4]},
+    {"titre": "Le résultat", "sections": [5]},
+    {"titre": "Ce que ce cas permet de comprendre", "sections": [6]},
+  ]},
+  "cas-mih-eclaircissement-erosion-infiltration": {"chapitres": [
+    {"titre": "Une tache, deux situations", "sections": [1, 2]},
+    {"titre": "Premier cas : MIH sur une incisive", "sections": [3]},
+    {"titre": "Deuxième cas : MIH sur une dent dyschromiée", "sections": [4]},
+    {"titre": "Pourquoi une approche conservatrice", "sections": [5]},
+    {"titre": "Ce que ces deux cas permettent de comprendre", "sections": [6]},
   ]},
   "bilan-esthetique-personnalise": {"chapitres": [
     {"titre": "Ce qu’est un bilan esthétique", "sections": [1, 2], "fiche": [2]},

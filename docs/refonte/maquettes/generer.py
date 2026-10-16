@@ -75,11 +75,19 @@ PUBLIC["mentions-legales"] = ("Informations", None, "Mentions légales")
 
 # pages déjà faites à la main, qu'on n'écrase pas
 # Pages dont les chapitres sont regroupés : composer.py les écrit, pas celui-ci.
-A_LA_MAIN = {
-    "usures-dentaires", "facettes-ou-composite", "dentisterie-esthetique-paris",
-    "erosion-dentaire", "tca-dents", "rehabilitation-dents-usees",
-    "anorexie-erosion-dentaire-sans-vomissements", "bilan-esthetique-personnalise",
-}
+# On lit ses plans plutôt que de tenir une seconde liste à jour — elles divergeaient.
+def _pages_composees():
+    chemin = os.path.join(os.path.dirname(os.path.abspath(__file__)), "composer.py")
+    if not os.path.exists(chemin):
+        return set()
+    src = open(chemin, encoding="utf-8").read()
+    bloc = src[src.index("PLANS = {"):] if "PLANS = {" in src else ""
+    return set(re.findall(r'^  "([a-z0-9-]+)":', bloc, re.M))
+
+
+# Écrites entièrement à la main, avant que le composeur n'existe.
+A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
+             "dentisterie-esthetique-paris", "index"} | _pages_composees()
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui
 FONDUES = {"diagnostic-usures-dentaires"}
 
@@ -122,11 +130,20 @@ def lire(slug):
     h1 = re.search(r"<h1[^>]*>(.*?)</h1>", main, re.S)
     page["h1"] = texte(h1.group(1)) if h1 else page["title"]
 
-    # le chapô : premier paragraphe long avant la première section
+    # Le chapô se cache à trois endroits selon les pages : avant la première
+    # section, dans un bloc « answer » posé entre deux sections, ou dans la
+    # première section elle-même. On les regarde tous les trois.
+    candidats = []
     avant = main.split("<section", 1)[0]
-    ps = [texte(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", avant, re.S)]
-    ps = [p for p in ps if len(p) > 60]
-    page["chapo"] = ps[0] if ps else ""
+    candidats += [texte(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", avant, re.S)]
+    candidats += [texte(x) for x in
+                  re.findall(r'<div[^>]*class="answer"[^>]*>(.*?)</div>', main, re.S)]
+    prem = re.search(r"<section[^>]*>.*?</section>", main, re.S)
+    if prem:
+        candidats += [texte(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", prem.group(0), re.S)]
+    candidats = [c for c in candidats
+                 if len(c) > 40 and "Chirurgien-dentiste à Paris" not in c]
+    page["chapo"] = max(candidats, key=len) if candidats else ""
 
     # photographies de la page
     page["photos"] = []
@@ -287,9 +304,9 @@ def rendre(page):
     <p class="ariane">{ariane}</p>
     <div class="une">
       <div>
-        <p class="eyebrow">{e(surtitre)}</p>
+        {f'<p class="eyebrow">{e(surtitre)}</p>' if surtitre else ""}
         <h1>{e(page["h1"])}</h1>
-        <p class="une__chapo">{e(page["chapo"])}</p>
+{f'        <p class="une__chapo">{e(page["chapo"])}</p>' if page["chapo"] else ""}
         <div class="signature">
           <img src="img/portrait-fm.png" alt="Dr Franck Moyal">
           <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
@@ -311,7 +328,7 @@ def rendre(page):
             continue
         zone = not zone
         cls = "sect sect--zone" if zone else "sect"
-        titre = f'<h2>{e(s["titre"])}</h2>' if s["titre"] else ""
+        titre = f'<h2>{e(s["titre"])}</h2>' if s["titre"].strip() else ""
         paras = "\n        ".join(f"<p>{e(p)}</p>" for p in s["p"][:4])
         liens = ""
         if s["liens"]:

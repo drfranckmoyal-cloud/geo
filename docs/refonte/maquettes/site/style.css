@@ -147,6 +147,9 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .paire{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--trait)}
 .paire img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .solo img{width:100%;aspect-ratio:3/2;object-fit:cover}
+/* Une photographie seule dans sa grille garde ses proportions : forcer le 3:2
+   rognait les vues panoramiques de planification. */
+.cas figure.solo:only-child img{aspect-ratio:auto;height:auto}
 .carre img{width:100%;aspect-ratio:1;object-fit:cover}
 
 /* ── le praticien ────────────────────────────────────────── */
@@ -229,6 +232,10 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .appel p{color:#cfd2cd;max-width:52ch}
 .appel .bouton{display:inline-block;margin-top:.9rem;background:var(--bg);color:var(--fg);
   text-decoration:none;padding:.6rem 1.1rem;font-size:.86rem;font-weight:600}
+
+/* Mention légale sur les photographies cliniques : discrète, mais jamais absente. */
+.mention{font-size:.78rem;color:var(--doux);background:var(--acc-clair);
+  border-radius:var(--rayon);padding:.75rem 1rem;max-width:none}
 
 .sources{font-size:.78rem;color:var(--tres-doux);background:var(--carte);
   border:1px solid var(--trait);border-radius:var(--rayon);
