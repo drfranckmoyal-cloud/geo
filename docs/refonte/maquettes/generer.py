@@ -63,13 +63,23 @@ for lib, slug in TRAITEMENTS:
     PUBLIC.setdefault(slug, ("Ce qu’on peut faire", "Patient", lib))
 for lib, slug in CONFRERES:
     PUBLIC[slug] = ("Pour les chirurgiens-dentistes", "Chirurgien-dentiste", lib)
+# Pages hors menu mais qui appartiennent bien à un axe : l'anorexie prolonge les TCA,
+# les cas cliniques illustrent les traitements.
+PUBLIC["anorexie-erosion-dentaire-sans-vomissements"] = (
+    "Ce que vous constatez", "Patient", "Anorexie et érosion")
+PUBLIC["diagnostic-usures-dentaires"] = ("Ce que vous constatez", "Patient", "Diagnostic des usures")
 PUBLIC["franck-moyal"] = ("Le praticien", None, "Dr Franck Moyal")
 PUBLIC["chirurgien-dentiste-paris-9"] = ("Le cabinet", None, "Paris 9ᵉ")
 PUBLIC["contact"] = ("Le cabinet", None, "Contact")
 PUBLIC["mentions-legales"] = ("Informations", None, "Mentions légales")
 
 # pages déjà faites à la main, qu'on n'écrase pas
-A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite", "dentisterie-esthetique-paris"}
+# Pages dont les chapitres sont regroupés : composer.py les écrit, pas celui-ci.
+A_LA_MAIN = {
+    "usures-dentaires", "facettes-ou-composite", "dentisterie-esthetique-paris",
+    "erosion-dentaire", "tca-dents", "rehabilitation-dents-usees",
+    "anorexie-erosion-dentaire-sans-vomissements", "bilan-esthetique-personnalise",
+}
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui
 FONDUES = {"diagnostic-usures-dentaires"}
 

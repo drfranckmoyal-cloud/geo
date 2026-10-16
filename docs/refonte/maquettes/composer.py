@@ -1,0 +1,414 @@
+#!/usr/bin/env python3
+"""
+Compose une page de la refonte en chapitres, à partir du site actuel.
+
+Le générateur voisin (generer.py) refait la mise en page sans toucher au découpage :
+une page à douze titres en garde douze. Ce composeur-ci va plus loin — il regroupe
+les sections en quatre ou cinq chapitres — mais il a besoin qu'on lui dise lesquelles
+vont ensemble. Ce jugement est dans PLANS, en bas du fichier.
+
+Ce qu'il fait tout seul, et qui m'avait échappé à la main sur les deux premières pages :
+
+  · il repère les phrases qui annoncent une liste (« L'esthétique dépend notamment : »)
+    et les garde collées à leur liste, où qu'elle aille ;
+  · il apparie les sous-titres d'une section avec leurs paragraphes ;
+  · il récupère les tableaux, que l'extraction par paragraphes ignorait ;
+  · il reprend la description pour Google, les sources avec leurs DOI, et les liens ;
+  · il compare ensuite, mot à mot, sa page à la page d'origine, et signale ce qui
+    manque. C'est ce contrôle qui compte : sans lui, on perd du texte sans le voir.
+
+    python3 docs/refonte/maquettes/composer.py            toutes les pages prévues
+    python3 docs/refonte/maquettes/composer.py erosion-dentaire
+"""
+import html as H
+import importlib.util
+import os
+import re
+import sys
+
+RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+DIST = os.path.join(RACINE, "dist")
+SORTIE = os.path.join(RACINE, "docs", "refonte", "maquettes", "site")
+
+spec = importlib.util.spec_from_file_location(
+    "gen", os.path.join(os.path.dirname(os.path.abspath(__file__)), "generer.py"))
+gen = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(gen)
+
+MEUBLE = ("dr franck moyal — chirurgien", "mis à jour le", "voir les ", "dentisterie esthétique et adhésive, usures")
+
+
+# ── lecture ───────────────────────────────────────────────────────────────────
+def nu(x, garder_gras=True):
+    x = re.sub(r"<(script|style)\b.*?</\1>", "", x, flags=re.S)
+    x = re.sub(r'<sup[^>]*class="cite"[^>]*>.*?</sup>', "", x, flags=re.S)
+    x = re.sub(r"<span[^>]*visually-hidden[^>]*>.*?</span>", "", x, flags=re.S)
+    x = re.sub(r"<(?!/?(strong|em)\b)[^>]+>", " ", x) if garder_gras else re.sub(r"<[^>]+>", " ", x)
+    x = re.sub(r"\s+data-astro-cid-\w+", "", x)
+    return re.sub(r"\s+", " ", x).strip()
+
+
+def lire(slug):
+    brut = open(os.path.join(DIST, slug, "index.html"), encoding="utf-8").read()
+    main = re.search(r"<main.*?</main>", brut, re.S).group(0)
+    p = {"slug": slug, "main": main, "brut": brut}
+    p["titre"] = H.unescape(re.search(r"<title>(.*?)</title>", brut, re.S).group(1).strip())
+    d = re.search(r'<meta name="description" content="([^"]*)"', brut)
+    p["description"] = H.unescape(d.group(1)) if d else ""
+    p["h1"] = nu(re.search(r"<h1[^>]*>(.*?)</h1>", main, re.S).group(1))
+
+    # où mène chaque libellé de lien, pour les refaire pointer dans la maquette
+    p["liens"] = {}
+    for href, lib in re.findall(r'<a[^>]*href="(/[^"#?]+/)"[^>]*>(.*?)</a>', main, re.S):
+        lib = nu(lib, False)
+        if lib and len(lib) < 90:
+            p["liens"].setdefault(lib, href.strip("/").replace("cas-cliniques/", "cas-"))
+
+    # Le bandeau d'ouverture n'est pas une <section> : son paragraphe de réponse,
+    # qui est le vrai chapô de la page, n'était lu nulle part.
+    tete = main.split("<section", 1)[0]
+    p["tete"] = [x for x in (nu(y) for y in re.findall(r"<p[^>]*>(.*?)</p>", tete, re.S))
+                 if len(x) > 18 and not any(x.lower().startswith(m) for m in MEUBLE)]
+    # Le bloc « answer » — la réponse directe à la question du titre — est un div
+    # posé entre deux <section>. Ni la tête ni les sections ne le voyaient.
+    for rep in re.findall(r'<div[^>]*class="answer"[^>]*>(.*?)</div>', main, re.S):
+        t = nu(rep)
+        if len(t) > 40 and t not in p["tete"]:
+            p["tete"].append(t)
+
+    p["sections"] = []
+    for sec in re.findall(r"<section[^>]*>.*?</section>", main, re.S):
+        ti = re.search(r"<h2[^>]*>(.*?)</h2>", sec, re.S)
+        paras = [nu(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", sec, re.S)]
+        paras = [x for x in paras if len(x) > 18 and not any(x.lower().startswith(m) for m in MEUBLE)]
+        lis = [nu(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", sec, re.S)]
+        lis = [x for x in lis if 8 < len(x) < 240]
+        tbl = re.search(r"<table.*?</table>", sec, re.S)
+        p["sections"].append({
+            "titre": nu(ti.group(1)) if ti else "",
+            "p": paras,
+            "li": [x for x in lis if x not in p["liens"]],
+            "renvois": [x for x in lis if x in p["liens"]],
+            "h3": [nu(x) for x in re.findall(r"<h3[^>]*>(.*?)</h3>", sec, re.S)],
+            "table": tbl.group(0) if tbl else None,
+            "faq": "faq__item" in sec,
+            "sources": "source__ref" in sec or "source__n" in sec,
+        })
+    return p
+
+
+# ── fabrication ───────────────────────────────────────────────────────────────
+def e(s):
+    out = H.escape(s, quote=False)
+    for t in ("strong", "em"):
+        out = out.replace(f"&lt;{t}&gt;", f"<{t}>").replace(f"&lt;/{t}&gt;", f"</{t}>")
+    return out
+
+
+def amorce(sec):
+    """La phrase qui annonce une liste doit rester collée à elle."""
+    for x in sec["p"]:
+        if x.rstrip().endswith(":") and len(x) < 110:
+            return x
+    return None
+
+
+def renvois(p, sec):
+    if not sec["renvois"]:
+        return ""
+    liens = " · ".join(f'<a href="{p["liens"][l]}.html">{e(l)}</a>' for l in sec["renvois"])
+    return f'\n          <p class="suite">{liens}</p>'
+
+
+def bloc(p, i, avec_liste, titre=None):
+    """Une section devient un bloc : son titre en sous-partie, ses paragraphes,
+       ses sous-titres appariés, et sa liste si elle ne part pas en encadré."""
+    s = p["sections"][i]
+    # La phrase d'annonce ne suit sa liste que si celle-ci part en encadré ;
+    # sinon elle reste dans le texte, sans quoi elle disparaissait purement.
+    a = amorce(s) if (s["li"] and not avec_liste) else None
+    tete = f'<h3>{e(titre if titre is not None else s["titre"])}</h3>\n          ' if (titre or s["titre"]) else ""
+    morceaux = []
+    if s["h3"] and len(s["h3"]) <= len(s["p"]):
+        # sous-titres appariés à leurs paragraphes
+        reste = [x for x in s["p"] if x != a]
+        for k, t3 in enumerate(s["h3"]):
+            txt = reste[k] if k < len(reste) else ""
+            if txt.startswith(t3):
+                txt = txt[len(t3):].strip()
+            morceaux.append(f'<h4 style="font-family:var(--serif);font-size:.95rem;margin:.7rem 0 .25rem">{e(t3)}</h4><p>{e(txt)}</p>')
+        for x in reste[len(s["h3"]):]:
+            morceaux.append(f"<p>{e(x)}</p>")
+    else:
+        morceaux = [f"<p>{e(x)}</p>" for x in s["p"] if x != a]
+    corps = "\n          ".join(morceaux)
+    liste = ""
+    if avec_liste and s["li"]:
+        puces = "\n              ".join(f"<li>{e(x)}</li>" for x in s["li"])
+        intro = f'<p>{e(a)}</p>\n          ' if a else ""
+        liste = f'\n          {intro}<ul class="puces">\n              {puces}\n          </ul>'
+    tableau = ""
+    if s["table"]:
+        cols = len(re.findall(r"<th[^>]*>", s["table"].split("</thead>")[0])) if "</thead>" in s["table"] else 3
+        t = re.sub(r'<span[^>]*class="cmp__col"[^>]*>.*?</span>', "", s["table"], flags=re.S)
+        t = re.sub(r"\s+data-astro-cid-\w+", "", t)
+        tableau = f'\n          <div class="tableau{" tableau--duo" if cols <= 2 else ""}">{t}</div>'
+    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{renvois(p, p["sections"][i])}\n        </div>'
+
+
+def fiche(p, sections):
+    morceaux = []
+    for i in sections:
+        s = p["sections"][i]
+        if not s["li"]:
+            continue
+        a = amorce(s)
+        court = a and len(a.rstrip(" :")) <= 52
+        titre = (a.rstrip(" :") if court else s["titre"])[:52]
+        annonce = f'        <p style="margin:0 0 .5rem">{e(a)}</p>\n' if (a and not court) else ""
+        puces = "\n            ".join(f"<li>{e(x)}</li>" for x in s["li"])
+        morceaux.append(f'        <h4{" style=\"margin-top:1rem\"" if morceaux else ""}>{e(titre)}</h4>\n'
+                        f'{annonce}        <ul>\n            {puces}\n        </ul>')
+    return "\n".join(morceaux)
+
+
+def composer(slug, plan):
+    p = lire(slug)
+    sec = p["sections"]
+    sur, public, lib = gen.PUBLIC.get(slug, ("", None, p["h1"][:40]))
+    ariane = '<a href="index.html">Accueil</a>' + (f" › {e(public)}" if public else "") + f" › {e(lib)}"
+
+    # chapô : le paragraphe le plus long de l'ouverture
+    ouverture = p["tete"] + sec[0]["p"]
+    chapo = max(ouverture, key=len) if ouverture else ""
+    # l'ouverture porte souvent deux paragraphes : le chapô et un résumé
+    resume = [x for x in ouverture if x != chapo]
+
+    photo = ""
+    imgs = re.findall(r'\bsrc="(/_astro/[^"]+\.(?:webp|jpg|png))"', p["main"])
+    alts = re.findall(r'\balt="([^"]*)"', p["main"])
+    caps = re.findall(r"<figcaption[^>]*>(.*?)</figcaption>", p["main"], re.S)
+    if imgs:
+        src = gen.locale(imgs[0])
+        photo = (f'      <figure><img src="{src}" alt="{H.escape(alts[0] if alts else "")}">'
+                 f'{f"<figcaption>{e(nu(caps[0], False))}</figcaption>" if caps else ""}</figure>\n')
+
+    corps = []
+    n = len(plan["chapitres"])
+    for k, ch in enumerate(plan["chapitres"], 1):
+        avec_fiche = ch.get("fiche", [])
+        blocs = "\n".join(bloc(p, i, avec_liste=i not in avec_fiche,
+                               titre=ch.get("titres", {}).get(i))
+                          for i in ch["sections"])
+        if k == 1 and resume:
+            intro = "\n          ".join(f"<p>{e(x)}</p>" for x in resume)
+            blocs = f'        <div class="bloc">\n          {intro}\n        </div>\n' + blocs
+        zone = ' sect--zone' if k % 2 == 0 else ""
+        if avec_fiche:
+            corps.append(f'''  <section class="sect{zone}">
+    <div class="contenu chapitre">
+      <div>
+        <p class="numero">{k} / {n}</p>
+        <h2>{e(ch["titre"])}</h2>
+{blocs}
+      </div>
+      <div class="fiche">
+{fiche(p, avec_fiche)}
+      </div>
+    </div>
+  </section>''')
+        else:
+            corps.append(f'''  <section class="sect{zone}">
+    <div class="contenu chapitre chapitre--plein">
+      <div>
+        <p class="numero">{k} / {n}</p>
+        <h2>{e(ch["titre"])}</h2>
+{blocs}
+      </div>
+    </div>
+  </section>''')
+
+    # les liens portés par les sections qu'aucun chapitre ne reprend
+    reprises = {i for ch in plan["chapitres"] for i in ch["sections"]}
+    poses = set()
+    for i in reprises:
+        poses.update(sec[i]["renvois"])
+    orphelins = [l for l in p["liens"] if l not in poses
+                 and p["liens"][l] != slug and len(l) < 60
+                 and not l.lower().startswith(("accueil", "prendre"))]
+    if orphelins:
+        liens = " · ".join(f'<a href="{p["liens"][l]}.html">{e(l)}</a>' for l in orphelins)
+        corps.append(f'''  <section class="sect sect--serre">
+    <div class="contenu chapitre chapitre--plein">
+      <div>
+        <p class="eyebrow">À lire aussi</p>
+        <p class="suite">{liens}</p>
+      </div>
+    </div>
+  </section>''')
+
+    # questions
+    faq = next((s for s in sec if s["faq"]), None)
+    if faq:
+        qs = "".join(f'\n        <div><b>{e(q)}</b><p>{e(r)}</p></div>'
+                     for q, r in zip(faq["h3"], faq["p"]))
+        corps.append(f'''  <section class="sect sect--serre">
+    <div class="contenu">
+      <p class="eyebrow">Questions fréquentes</p>
+      <div class="qa">{qs}
+      </div>
+    </div>
+  </section>''')
+
+    # appel
+    fin = sec[-1]
+    corps.append(f'''  <section class="appel">
+    <div class="contenu">
+      <h2>{e(fin["titre"] or "Faire le point")}</h2>
+      <p>{e(fin["p"][0] if fin["p"] else "Un bilan permet de comprendre la situation et les options possibles, avant tout engagement.")}</p>
+      <a class="bouton" href="contact.html">Prendre rendez-vous</a>
+    </div>
+  </section>''')
+
+    # sources
+    src = next((s for s in sec if s["sources"]), None)
+    if src:
+        intro, items, k = "", [], 0
+        ps = src["p"]
+        if ps and not ps[0].startswith("["):
+            intro, k = ps[0], 1
+        while k < len(ps):
+            ref = ps[k]
+            doi = ps[k + 1] if k + 1 < len(ps) and ps[k + 1].startswith("DOI") else ""
+            items.append(f"<li>{e(ref)}{(' — ' + e(doi)) if doi else ''}</li>")
+            k += 2 if doi else 1
+        corps.append(f'''  <section class="sect sect--serre">
+    <div class="contenu sources">
+      <p class="eyebrow">Sources scientifiques</p>
+      {f'<p style="margin-bottom:.6rem">{e(intro)}</p>' if intro else ""}
+      <ol>
+        {chr(10).join("        " + i for i in items).strip()}
+      </ol>
+    </div>
+  </section>''')
+
+    version = str(int(os.path.getmtime(os.path.join(SORTIE, "style.css"))))
+    page = f'''<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{e(p["titre"])}</title>
+<meta name="description" content="{H.escape(p["description"])}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="style.css?v={version}">
+</head>
+<body>
+
+{gen.menu(slug)}
+
+<main>
+
+  <div class="contenu">
+    <p class="ariane">{ariane}</p>
+    <div class="une">
+      <div>
+{f'        <p class="eyebrow">{e(sur)}</p>{chr(10)}' if sur else ""}        <h1>{e(p["h1"])}</h1>
+        <p class="une__chapo">{e(chapo)}</p>
+        <div class="signature">
+          <img src="img/portrait-fm.png" alt="Dr Franck Moyal">
+          <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
+            Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
+        </div>
+      </div>
+{photo}    </div>
+  </div>
+
+{chr(10).join(corps)}
+
+</main>
+
+{gen.PIED}
+
+<script src="menu.js"></script>
+</body>
+</html>
+'''
+    open(os.path.join(SORTIE, f"{slug}.html"), "w", encoding="utf-8").write(page)
+    return p, page
+
+
+# ── contrôle : rien ne doit disparaître ───────────────────────────────────────
+def controler(p, page):
+    ref = nu(p["main"], False).lower()
+    fait = nu(re.search(r"<main.*?</main>", page, re.S).group(0), False).lower()
+    manque = []
+    for tag in ("p", "li"):
+        for x in re.findall(rf"<{tag}[^>]*>(.*?)</{tag}>", p["main"], re.S):
+            t = nu(x, False)
+            if len(t) < 22 or any(t.lower().startswith(m) for m in MEUBLE):
+                continue
+            mots = re.findall(r"[a-zà-ÿ]{5,}", t.lower())[:5]
+            if mots and not all(w in fait for w in mots):
+                manque.append(t)
+    return manque, len(ref.split()), len(fait.split())
+
+
+# ── le découpage, décidé page par page ────────────────────────────────────────
+PLANS = {
+  "erosion-dentaire": {"chapitres": [
+    {"titre": "Ce qu’est une érosion", "sections": [1, 2], "fiche": [2]},
+    {"titre": "D’où viennent les acides", "sections": [3, 4]},
+    {"titre": "Dépister tôt", "sections": [5, 6], "fiche": [6]},
+    {"titre": "Protéger au quotidien", "sections": [7, 8, 9], "fiche": [7]},
+    {"titre": "Quand faut-il restaurer ?", "sections": [10]},
+  ]},
+  "tca-dents": {"chapitres": [
+    {"titre": "Ce que les TCA font aux dents", "sections": [1, 2], "fiche": [1]},
+    {"titre": "Même sans vomissements", "sections": [3]},
+    {"titre": "Pourquoi le dépistage compte", "sections": [4, 9], "fiche": [4]},
+    {"titre": "Pendant, puis après", "sections": [6, 7, 8], "fiche": [6]},
+    {"titre": "Mon engagement sur ce sujet", "sections": [5, 10]},
+  ]},
+  "rehabilitation-dents-usees": {"chapitres": [
+    {"titre": "Pourquoi reconstruire", "sections": [1, 2, 3], "fiche": [3]},
+    {"titre": "Avec quoi reconstruire", "sections": [4, 5], "fiche": [5]},
+    {"titre": "La dimension verticale", "sections": [6, 7], "fiche": [7]},
+    {"titre": "Comment on procède", "sections": [8, 10], "fiche": [8]},
+    {"titre": "Et l’esthétique ?", "sections": [9]},
+  ]},
+  "anorexie-erosion-dentaire-sans-vomissements": {"chapitres": [
+    {"titre": "Le risque existe sans vomissements", "sections": [1]},
+    {"titre": "Quatre mécanismes", "sections": [2, 3, 4, 5, 6], "fiche": [4]},
+    {"titre": "L’anorexie est-elle une cause directe ?", "sections": [7]},
+    {"titre": "Pourquoi dépister tôt", "sections": [8], "fiche": [8]},
+    {"titre": "Que peut-on faire", "sections": [9, 10], "fiche": [9]},
+  ]},
+  "bilan-esthetique-personnalise": {"chapitres": [
+    {"titre": "Ce qu’est un bilan esthétique", "sections": [1, 2], "fiche": [2]},
+    {"titre": "Du projet au traitement", "sections": [3, 4, 5, 6], "fiche": [6]},
+    {"titre": "Voir son futur sourire", "sections": [7, 8], "fiche": [8]},
+    {"titre": "Pourquoi planifier, même quand c’est simple", "sections": [9, 11]},
+    {"titre": "Sans engagement", "sections": [10]},
+  ]},
+}
+
+
+def main():
+    voulus = sys.argv[1:] or list(PLANS)
+    print(f"{'page':46s} {'chap':>5s} {'s-part':>6s} {'manque':>7s} {'mots'}")
+    print("─" * 78)
+    for slug in voulus:
+        p, page = composer(slug, PLANS[slug])
+        manque, mo, mf = controler(p, page)
+        alerte = "  ⚠" if manque else ""
+        print(f"{slug:46s} {page.count('<h2>'):5d} {page.count('<h3>'):6d} {len(manque):7d}"
+              f"   {mf}/{mo}{alerte}")
+        for m in manque[:4]:
+            print(f"      manquant : {m[:96]}")
+
+
+if __name__ == "__main__":
+    main()
