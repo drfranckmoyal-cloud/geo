@@ -108,8 +108,50 @@ p:last-child{margin-bottom:0}
 .burger{display:none;margin-left:auto;appearance:none;background:none;border:1px solid var(--trait);
   padding:.4rem .7rem;font:inherit;font-size:.82rem;cursor:pointer}
 
+/* ── le bandeau d'identité ───────────────────────────────────
+   Première chose vue : chez qui on est, ce qu'il fait, où.
+   Sans lui, le visiteur tombait sur une photographie de dents. */
+.identite{display:flex;align-items:center;gap:clamp(.8rem,.65rem + .7vw,1.2rem);
+  flex-wrap:wrap;background:var(--carte);border:1px solid var(--trait);
+  border-radius:var(--rayon);box-shadow:var(--relief);
+  padding:clamp(.9rem,.75rem + .8vw,1.3rem) clamp(1.05rem,.85rem + 1.1vw,1.7rem);
+  margin-top:clamp(.5rem,.4rem + .6vw,.9rem)}
+.identite img{width:68px;height:68px;min-width:68px;border-radius:50%;object-fit:cover;
+  filter:grayscale(1) contrast(1.05)}
+.identite__qui{flex:1;min-width:230px}
+.identite__nom{font-family:var(--serif);font-weight:700;font-size:clamp(1.25rem,1.1rem + .6vw,1.6rem);
+  letter-spacing:-.02em;line-height:1.15;margin:0}
+.identite__quoi{margin:.15rem 0 0;font-size:.92rem;color:var(--fg)}
+.identite__ou{margin:.3rem 0 0;font-size:.79rem;color:var(--doux)}
+.identite__ou b{color:var(--fg);font-weight:600}
+.identite .rdv{margin-left:auto}
+
+/* ── les deux portes ────────────────────────────────────────── */
+.portes{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.8rem,.65rem + .7vw,1.2rem)}
+.porte{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(1.05rem,.85rem + 1.1vw,1.7rem);
+  display:flex;flex-direction:column;gap:.5rem;text-decoration:none;
+  transition:box-shadow .18s ease,border-color .18s ease}
+.porte:hover{box-shadow:var(--relief-fort);border-color:var(--acc)}
+.porte--encre{background:var(--fg);border-color:var(--fg)}
+.porte--encre .porte__titre,.porte--encre .porte__quoi{color:#f6f5f1}
+.porte--encre .porte__sur{color:#9fc2b4}
+.porte--encre .porte__liste li{color:#d6d8d3}
+.porte--encre:hover{border-color:var(--acc)}
+.porte__sur{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--acc);margin:0}
+.porte__titre{font-family:var(--serif);font-weight:700;font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);
+  letter-spacing:-.02em;line-height:1.1;margin:0}
+.porte__quoi{margin:0;font-size:.9rem;color:var(--doux)}
+.porte__liste{list-style:none;margin:.2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
+.porte__liste li{font-size:.82rem;color:var(--doux)}
+.porte__fleche{margin-top:auto;padding-top:.5rem;font-size:.84rem;font-weight:600;color:var(--acc)}
+.porte--encre .porte__fleche{color:#7fc3ae}
+@media (max-width:720px){.portes{grid-template-columns:1fr}
+  .identite .rdv{margin-left:0;width:100%;text-align:center}}
+
 /* ── la une ──────────────────────────────────────────────── */
-.une{display:grid;grid-template-columns:1.45fr 1fr;gap:clamp(1.1rem,.9rem + 1.2vw,1.9rem);
+.une{display:grid;grid-template-columns:1.62fr 1fr;gap:clamp(1.1rem,.9rem + 1.2vw,1.9rem);
   align-items:start;margin-block:clamp(.5rem,.4rem + .6vw,.9rem)}
 .une > div:first-child{background:var(--carte);border:1px solid var(--trait);
   border-radius:var(--rayon);box-shadow:var(--relief-fort);
