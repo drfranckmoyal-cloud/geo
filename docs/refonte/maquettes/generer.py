@@ -69,7 +69,7 @@ PUBLIC["contact"] = ("Le cabinet", None, "Contact")
 PUBLIC["mentions-legales"] = ("Informations", None, "Mentions légales")
 
 # pages déjà faites à la main, qu'on n'écrase pas
-A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite"}
+A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite", "dentisterie-esthetique-paris"}
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui
 FONDUES = {"diagnostic-usures-dentaires"}
 

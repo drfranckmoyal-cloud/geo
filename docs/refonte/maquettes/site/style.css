@@ -206,6 +206,10 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 /* Tableau comparatif : il porte l'essentiel de cette page, on le traite comme tel. */
 .tableau{overflow-x:auto;margin-top:.8rem}
 .tableau table{border-collapse:collapse;width:100%;min-width:620px;font-size:.87rem}
+/* Un tableau à deux colonnes tient dans la colonne étroite d'un chapitre :
+   inutile de lui imposer la largeur d'un tableau à trois colonnes. */
+.tableau--duo table{min-width:0}
+.tableau--duo tbody th{width:auto;max-width:14rem}
 .tableau th,.tableau td{text-align:left;vertical-align:top;padding:.62rem .8rem;
   border-bottom:1px solid var(--trait)}
 .tableau thead th{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.12em;
