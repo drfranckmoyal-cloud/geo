@@ -27,6 +27,8 @@ import sys
 RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 DIST = os.path.join(RACINE, "dist")
 SORTIE = os.path.join(RACINE, "docs", "refonte", "maquettes", "site")
+# la feuille de style est signée par sa date, pour contourner le cache du navigateur
+VERSION = str(int(os.path.getmtime(os.path.join(SORTIE, "style.css"))))
 
 # ── l'arborescence décidée le 16 octobre ──────────────────────────────────────
 CONSTATS = [
@@ -330,8 +332,12 @@ def rendre(page):
                 img = f'\n      <div class="cas">{photo(photos.pop(0), "paire-ou-solo")}</div>'
             corps.append(f'''  <section class="{cls}">
     <div class="contenu">
-      {titre}
-      {inner}{liens}{img}
+      <div class="chapitre chapitre--plein">
+        <div>
+          {titre}
+          {inner}{liens}
+        </div>
+      </div>{img}
     </div>
   </section>''')
 
@@ -394,7 +400,7 @@ def rendre(page):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v={VERSION}">
 </head>
 <body>
 
