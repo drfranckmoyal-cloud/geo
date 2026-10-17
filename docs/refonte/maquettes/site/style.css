@@ -228,15 +228,49 @@ p:last-child{margin-bottom:0}
   transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
 .tuile:hover,.tuile:focus-visible{box-shadow:var(--relief-fort);
   border-color:var(--fg);transform:translateY(-2px)}
-/* La carte d'un acte : le nom en grand, parce que c'est lui qu'on cherche.
-   Elle occupe deux colonnes de la trame, les autres cartes une seule. */
-.tuile--acte{grid-column:span 2;justify-content:flex-start;gap:.45rem;
-  padding:clamp(1.15rem,.95rem + .9vw,1.6rem)}
+.tuile--acte:hover .tuile__visuel img{transform:scale(1.035)}
+@media (prefers-reduced-motion:reduce){
+  .tuile__visuel img{transition:none}
+  .tuile--acte:hover .tuile__visuel img{transform:none}}
+/* La carte d'un acte : allongée et peu haute, le nom en grand à gauche, la
+   photographie à droite. Elle ne s'arrête pas net : un dégradé la fond dans le
+   papier de la carte, si bien qu'elle éclaire le titre sans jamais le gêner.
+   Franck, 17/10/2026 : « des cartes plus allongées mais moins hautes avec des
+   visuels fondus ». */
+.tuile--acte{grid-column:span 2;position:relative;flex-direction:row;
+  align-items:stretch;gap:0;padding:0;overflow:hidden;
+  min-height:clamp(8.6rem,7.2rem + 3.2vw,11rem)}
+.tuile__visuel{position:absolute;top:0;right:0;bottom:0;width:58%;z-index:1;
+  pointer-events:none}
+.tuile__visuel img{width:100%;height:100%;object-fit:cover;display:block;
+  /* à peine désaturée : les six photographies se tiennent alors ensemble,
+     et la vraie couleur reste sur la page de l'acte, là où elle compte */
+  filter:saturate(.84) contrast(1.02);
+  transform:scale(1);transition:transform .5s cubic-bezier(.2,.7,.2,1);
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 40%,rgba(0,0,0,1) 82%);
+          mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 40%,rgba(0,0,0,1) 82%)}
+.tuile__dit{position:relative;z-index:2;display:flex;flex-direction:column;
+  justify-content:center;gap:.32rem;flex:1 1 auto;
+  padding:clamp(1.05rem,.9rem + .85vw,1.55rem)}
 .tuile__acte{font-family:var(--serif);font-weight:700;letter-spacing:-.025em;
-  font-size:clamp(1.5rem,1.2rem + 1.1vw,2.1rem);line-height:1.04;margin:0;color:var(--fg)}
-.tuile--acte .tuile__quoi{font-size:.9rem;max-width:40ch}
-@media (max-width:880px){.tuile--acte{grid-column:span 2}}
-@media (max-width:580px){.tuile--acte{grid-column:span 1}}
+  font-size:clamp(1.4rem,1.15rem + .95vw,1.95rem);line-height:1.04;margin:0;color:var(--fg)}
+.tuile--acte .tuile__quoi{font-size:.875rem;max-width:27ch}
+.tuile--acte .tuile__fleche{margin-top:.25rem;padding-top:0}
+/* Sans masque (vieux navigateur), la photographie resterait un bloc net collé
+   au texte : on la retire plutôt que de livrer une carte coupée en deux. */
+@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+  .tuile__visuel{display:none}
+}
+@media (max-width:880px){
+  .tuile--acte{grid-column:span 2}
+  .tuile__visuel{width:50%}
+  .tuile--acte .tuile__quoi{max-width:24ch}
+}
+@media (max-width:580px){
+  .tuile--acte{grid-column:span 1;min-height:8rem}
+  .tuile__visuel{width:46%}
+  .tuile--acte .tuile__quoi{max-width:22ch}
+}
 
 .tuile__titre{font-family:var(--serif);font-weight:700;letter-spacing:-.015em;
   font-size:1.04rem;line-height:1.2;margin:0;color:var(--fg)}

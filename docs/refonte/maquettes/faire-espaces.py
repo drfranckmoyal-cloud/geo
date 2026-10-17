@@ -20,12 +20,22 @@ def e(t):
     return H.escape(t, quote=False)
 
 
-def acte(titre, quoi, lien):
-    """La carte d'un acte : son nom, en grand, et rien qui le dilue."""
-    return f'''        <a class="tuile tuile--acte" href="{lien}.html">
-          <h3 class="tuile__acte">{e(titre)}</h3>
-          <p class="tuile__quoi">{e(quoi)}</p>
-          <span class="tuile__fleche">L’acte en détail <span>→</span></span>
+def acte(titre, quoi, lien, photo="", cadrage="", alt=""):
+    """La carte d'un acte : allongée, peu haute, le nom en grand à gauche et la
+    photographie à droite, fondue dans la carte par un dégradé — elle illustre
+    sans jamais passer sous le texte."""
+    visuel = ""
+    if photo:
+        pos = f" style=\"object-position:{cadrage}\"" if cadrage else ""
+        visuel = (f'\n          <span class="tuile__visuel">'
+                  f'<img src="{PHOTOS}{photo}" alt="{H.escape(alt)}" loading="lazy"{pos}>'
+                  f'</span>')
+    return f'''        <a class="tuile tuile--acte" href="{lien}.html">{visuel}
+          <span class="tuile__dit">
+            <h3 class="tuile__acte">{e(titre)}</h3>
+            <p class="tuile__quoi">{e(quoi)}</p>
+            <span class="tuile__fleche">L’acte en détail <span>→</span></span>
+          </span>
         </a>'''
 
 
@@ -126,25 +136,34 @@ def garder_jsonld(nom):
 # ── Espace patients ───────────────────────────────────────────────────────
 # Les actes : c'est eux que le patient cherche, et c'est eux qui portent le
 # grand titre de leur page. Ils passent donc en premier, en grand.
+# Chaque acte porte une photographie du cabinet. Les trois images de composite
+# sont des avant/après montés en carré : on cadre sur le bas, c'est-à-dire sur
+# l'après. Les autres sont des vues uniques, cadrées au centre.
 ACTES = [
     ("Facettes",
      "Des céramiques fines, conçues puis collées sur la face visible de la dent.",
-     "facettes-dentaires-paris"),
+     "facettes-dentaires-paris", "facettes-ceramique-apres.jpg", "",
+     "Sourire après la pose de facettes en céramique"),
     ("Composite bonding",
      "De la résine stratifiée directement sur la dent, en une séance, sans la tailler.",
-     "composite-bonding-paris"),
+     "composite-bonding-paris", "composite-bonding-six-dents-anterieures.jpg",
+     "center 78%", "Sourire après un composite bonding sur six dents"),
     ("Éclaircissement",
      "Le protocole en gouttières : la durée, les limites, les précautions.",
-     "eclaircissement-dentaire-paris"),
+     "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
+     "Sourire après un éclaircissement ambulatoire"),
     ("Infiltration ICON",
      "Le traitement des taches blanches, de la MIH et des dyschromies, sans fraise.",
-     "taches-dentaires-dyschromies-icon"),
+     "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
+     "Dents après infiltration de taches de MIH"),
     ("Réhabilitation des dents usées",
      "Rendre la hauteur et la fonction à une bouche usée, en gardant la dent.",
-     "rehabilitation-dents-usees"),
+     "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
+     "Sourire après la réhabilitation de dents usées"),
     ("Bilan esthétique",
      "La consultation qui précède tout le reste : ce que l’on regarde, et dans quel ordre.",
-     "bilan-esthetique-personnalise"),
+     "bilan-esthetique-personnalise", "bilan-esthetique-projet.jpg", "",
+     "Projet esthétique dessiné avant traitement"),
 ]
 
 # Deux pages qui ne sont pas des actes mais aident à choisir entre eux.
@@ -233,7 +252,7 @@ def patients():
         section("1", "Les actes",
                 "Chaque acte a sa page : ce qu’il fait, ce qu’il coûte en tissu dentaire, "
                 "combien de séances, et ce qu’il ne fait pas.",
-                [acte(t, q, l) for t, q, l in ACTES] +
+                [acte(*a) for a in ACTES] +
                 [tuile(*p) for p in POUR_CHOISIR]),
         section("2", "Ce que l’on traite",
                 "Les sujets cliniques derrière ces actes. Ce que vous voyez sur vos dents "
