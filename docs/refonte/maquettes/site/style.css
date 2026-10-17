@@ -132,40 +132,59 @@ p:last-child{margin-bottom:0}
 }
 
 /* ── les deux espaces, pleine largeur ────────────────────────
-   Au repos, le nom de l'espace. Au survol, ce qu'on y trouve et
-   l'invitation à entrer : le texte change, pas seulement la couleur. */
-.espaces{display:grid;grid-template-columns:1fr 1fr;width:100%}
+   Noir sur blanc à gauche, blanc sur noir à droite, et le portrait
+   posé sur la couture. Son fond est noir pur : il se fond dans la
+   carte sombre et se découpe sur la claire. */
+.espaces{position:relative;display:grid;grid-template-columns:1fr 1fr;width:100%}
 .espace{position:relative;display:flex;flex-direction:column;justify-content:center;
-  min-height:clamp(16rem,11rem + 16vw,23rem);
+  min-height:clamp(17rem,12rem + 17vw,25rem);
   padding:clamp(1.6rem,1.1rem + 2.4vw,3.4rem) clamp(1.3rem,.9rem + 2.4vw,3.6rem);
   text-decoration:none;overflow:hidden;isolation:isolate}
-.espace--clair{background:var(--carte);color:var(--fg)}
-.espace--encre{background:#111312;color:#f6f5f1}
+.espace--clair{background:#ffffff;color:#111312}
+.espace--encre{background:#000000;color:#ffffff}
+/* le texte s'écarte de la couture pour laisser passer le portrait */
+.espace--clair{padding-right:clamp(5.5rem,2rem + 11vw,10rem)}
+.espace--encre{padding-left:clamp(5.5rem,2rem + 11vw,10rem)}
 .espace::before{content:"";position:absolute;inset:0;z-index:-1;
   background:var(--acc);transform:scaleY(0);transform-origin:bottom;
   transition:transform .42s cubic-bezier(.2,.7,.2,1)}
 .espace:hover::before,.espace:focus-visible::before{transform:scaleY(1)}
 .espace__sur{margin:0 0 .35rem;font-size:.7rem;font-weight:700;letter-spacing:.17em;
-  text-transform:uppercase;opacity:.65;transition:color .3s ease,opacity .3s ease}
+  text-transform:uppercase;opacity:.6;transition:color .3s ease,opacity .3s ease}
 .espace__nom{font-family:var(--serif);font-weight:700;letter-spacing:-.022em;line-height:1.02;
-  font-size:clamp(1.9rem,1.3rem + 2.8vw,3.1rem);margin:0;transition:color .3s ease}
+  font-size:clamp(1.75rem,1.2rem + 2.5vw,2.9rem);margin:0;transition:color .3s ease}
 .espace__dessous{display:grid;grid-template-rows:0fr;opacity:0;
   transition:grid-template-rows .42s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
 .espace__dessous > div{overflow:hidden}
 .espace:hover .espace__dessous,.espace:focus-visible .espace__dessous{grid-template-rows:1fr;opacity:1}
-.espace__quoi{margin:.9rem 0 0;font-size:.92rem;max-width:30rem}
-.espace__liste{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem .9rem;
-  font-size:.82rem}
-.espace__entrer{margin:1rem 0 0;font-size:.92rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+.espace__quoi{margin:.9rem 0 0;font-size:.92rem;max-width:28rem}
+.espace__liste{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-wrap:wrap;
+  gap:.3rem .9rem;font-size:.82rem;max-width:28rem}
+.espace__entrer{margin:1rem 0 0;font-size:.92rem;font-weight:600;display:flex;
+  align-items:center;gap:.5rem}
 .espace__entrer span{transition:transform .3s ease}
 .espace:hover .espace__entrer span{transform:translateX(5px)}
-/* au survol, tout passe sur le vert : un seul fond, un seul jeu de couleurs */
 .espace:hover,.espace:focus-visible{color:#fff}
 .espace:hover .espace__sur{color:#cfe5dc;opacity:1}
 .espace:hover .espace__nom{color:#fff}
-@media (max-width:720px){.espaces{grid-template-columns:1fr}
-  .espace{min-height:0;padding-block:1.5rem}
-  .espace__dessous{grid-template-rows:1fr;opacity:1}}
+
+/* le portrait, à cheval sur les deux cartes */
+.espaces__portrait{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:3;width:clamp(9rem,6rem + 13vw,15.5rem);aspect-ratio:1;border-radius:50%;
+  overflow:hidden;background:#000;pointer-events:none;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 18px 50px rgba(0,0,0,.42)}
+.espaces__portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;
+  filter:grayscale(1) contrast(1.06)}
+
+@media (max-width:720px){
+  .espaces{grid-template-columns:1fr}
+  .espace{min-height:0;padding:1.5rem var(--gouttiere)}
+  .espace--clair,.espace--encre{padding-left:var(--gouttiere);padding-right:var(--gouttiere)}
+  .espace__dessous{grid-template-rows:1fr;opacity:1}
+  /* sur un écran étroit les cartes s'empilent : le portrait n'a plus de couture */
+  .espaces__portrait{position:static;transform:none;margin:0 auto;
+    width:7.5rem;box-shadow:var(--relief)}
+}
 @media (prefers-reduced-motion:reduce){
   .espace::before{transition:none}.espace__dessous{transition:none}}
 
