@@ -27,6 +27,9 @@ import sys
 RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 DIST = os.path.join(RACINE, "dist")
 SORTIE = os.path.join(RACINE, "docs", "refonte", "maquettes", "site")
+# le portrait change de fichier : on le signe pour contourner le cache
+PORTRAIT = "img/portrait-fm.png?v=" + str(int(os.path.getmtime(
+    os.path.join(SORTIE, "img", "portrait-fm.png"))))
 # la feuille de style est signée par sa date, pour contourner le cache du navigateur
 VERSION = str(int(os.path.getmtime(os.path.join(SORTIE, "style.css"))))
 
@@ -310,7 +313,7 @@ def rendre(page):
         <h1>{e(page["h1"])}</h1>
 {f'        <p class="une__chapo">{e(page["chapo"])}</p>' if page["chapo"] else ""}
         <div class="signature">
-          <img src="img/portrait-fm.png" alt="Dr Franck Moyal">
+          <img src="{PORTRAIT}" alt="Dr Franck Moyal">
           <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
             Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
         </div>

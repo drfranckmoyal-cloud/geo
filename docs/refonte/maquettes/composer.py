@@ -29,6 +29,9 @@ import sys
 RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 DIST = os.path.join(RACINE, "dist")
 SORTIE = os.path.join(RACINE, "docs", "refonte", "maquettes", "site")
+# le portrait change de fichier : on le signe pour contourner le cache
+PORTRAIT = "img/portrait-fm.png?v=" + str(int(os.path.getmtime(
+    os.path.join(SORTIE, "img", "portrait-fm.png"))))
 
 spec = importlib.util.spec_from_file_location(
     "gen", os.path.join(os.path.dirname(os.path.abspath(__file__)), "generer.py"))
@@ -397,7 +400,7 @@ def composer(slug, plan):
 {f'        <p class="eyebrow">{e(sur)}</p>{chr(10)}' if sur else ""}        <h1>{e(p["h1"])}</h1>
         <p class="une__chapo">{e(chapo)}</p>
         <div class="signature">
-          <img src="img/portrait-fm.png" alt="Dr Franck Moyal">
+          <img src="{PORTRAIT}" alt="Dr Franck Moyal">
           <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
             Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
         </div>
