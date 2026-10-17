@@ -11,11 +11,11 @@ RACINE = os.path.abspath(os.path.join(SITE, "..", "..", "..", ".."))
 
 
 def existe(cible):
-    """Les photos sont appelées en chemin absolu : elles vivent dans le dépôt,
-    pas dans le dossier de la maquette. Le serveur a la racine du projet."""
+    """Les photos vivent dans le dépôt, pas dans le dossier de la maquette :
+    elles sont appelées en relatif pour que la maquette s'ouvre sans serveur."""
     if cible.startswith("/"):
         return os.path.exists(os.path.join(RACINE, cible.lstrip("/")))
-    return os.path.exists(os.path.join(SITE, cible))
+    return os.path.exists(os.path.normpath(os.path.join(SITE, cible)))
 
 
 def main():

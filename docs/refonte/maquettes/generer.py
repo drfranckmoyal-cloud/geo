@@ -108,13 +108,19 @@ def texte(frag):
     return f.strip()
 
 
+# Chemin du dossier de la maquette jusqu'à la racine du dépôt. Les photos sont
+# appelées en relatif et non en absolu : la maquette s'ouvre alors d'un double-clic,
+# sans serveur, tout en marchant aussi derrière le serveur local.
+VERS_DEPOT = "../../../../"
+
+
 def locale(src):
     """/_astro/nom.hash_hash.webp → le fichier d'origine dans le dépôt."""
     nom = re.sub(r"\.[A-Za-z0-9_-]+_[A-Za-z0-9_-]+\.(?:webp|jpg|png)$", ".jpg",
                  os.path.basename(src))
     if os.path.exists(os.path.join(RACINE, "src", "assets", "photos", "cas", nom)):
-        return "/src/assets/photos/cas/" + nom
-    return "/dist" + src
+        return VERS_DEPOT + "src/assets/photos/cas/" + nom
+    return VERS_DEPOT + "dist" + src
 
 
 def lire(slug):
