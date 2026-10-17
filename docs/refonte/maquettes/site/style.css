@@ -239,7 +239,8 @@ p:last-child{margin-bottom:0}
    visuels fondus ». */
 .tuile--acte,.tuile--long{grid-column:span 2;position:relative;flex-direction:row;
   align-items:stretch;gap:0;padding:0;overflow:hidden;
-  min-height:clamp(7.6rem,6.4rem + 2.8vw,9.6rem)}
+  /* un bon tiers de moins qu'avant : la carte s'allonge d'autant */
+  min-height:clamp(5.4rem,4.6rem + 1.8vw,6.6rem)}
 .tuile__visuel{position:absolute;top:0;right:0;bottom:0;width:58%;z-index:1;
   pointer-events:none}
 .tuile__visuel img{width:100%;height:100%;object-fit:cover;display:block;
@@ -253,13 +254,16 @@ p:last-child{margin-bottom:0}
   -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 46%,rgba(0,0,0,.74) 100%);
           mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 46%,rgba(0,0,0,.74) 100%)}
 .tuile__dit{position:relative;z-index:2;display:flex;flex-direction:column;
-  justify-content:center;gap:.32rem;flex:1 1 auto;
-  padding:clamp(1.05rem,.9rem + .85vw,1.55rem)}
+  justify-content:center;gap:.18rem;flex:1 1 auto;
+  padding:clamp(.8rem,.7rem + .5vw,1.08rem) clamp(1rem,.85rem + .8vw,1.5rem)}
 .tuile__acte .ext{font-size:.42em;vertical-align:.35em;opacity:.5;font-weight:400}
 .tuile__acte{font-family:var(--serif);font-weight:700;letter-spacing:-.025em;
-  font-size:clamp(1.4rem,1.15rem + .95vw,1.95rem);line-height:1.04;margin:0;color:var(--fg)}
-.tuile--acte .tuile__quoi,.tuile--long .tuile__quoi{font-size:.875rem;max-width:30ch}
-.tuile--acte .tuile__fleche,.tuile--long .tuile__fleche{margin-top:.25rem;padding-top:0}
+  font-size:clamp(1.25rem,1.05rem + .8vw,1.7rem);line-height:1.02;margin:0;color:var(--fg)}
+/* une seule ligne : la photographie est assez effacée pour que le texte
+   puisse courir devant elle sans gêne */
+.tuile--acte .tuile__quoi,.tuile--long .tuile__quoi{font-size:.845rem;max-width:46ch}
+.tuile--acte .tuile__fleche,.tuile--long .tuile__fleche{margin-top:.2rem;padding-top:0;
+  font-size:.74rem}
 /* sans photographie, le texte prend toute la carte */
 .tuile--long .tuile__dit{padding-right:clamp(1.5rem,1.2rem + 2vw,3rem)}
 /* Sans masque (vieux navigateur), la photographie resterait un bloc net collé
@@ -273,7 +277,7 @@ p:last-child{margin-bottom:0}
   .tuile--acte .tuile__quoi{max-width:24ch}
 }
 @media (max-width:580px){
-  .tuile--acte,.tuile--long{grid-column:span 1;min-height:7.2rem}
+  .tuile--acte,.tuile--long{grid-column:span 1;min-height:5.2rem}
   .tuile__visuel{width:46%}
   .tuile--acte .tuile__quoi{max-width:22ch}
 }

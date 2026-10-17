@@ -154,7 +154,7 @@ ACTES = [
      "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
      "Dents après infiltration de taches de MIH"),
     ("Réhabilitation des dents usées",
-     "Rendre la hauteur et la fonction, en gardant la dent.",
+     "Rendre la hauteur et la fonction.",
      "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
      "Sourire après la réhabilitation de dents usées"),
     ("Bilan esthétique",
@@ -244,9 +244,9 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 def patients():
     sections = [
         section("1", "Mon expertise",
-                [acte(*a) for a in ACTES] + [tuile(*p) for p in POUR_CHOISIR]),
+                [acte(*a) for a in ACTES] + [tuile(*p, longue=True) for p in POUR_CHOISIR]),
         section("2", "Ce que je traite",
-                [tuile(t, q, l) for t, q, l in SUJETS], zone=True),
+                [tuile(t, q, l, longue=True) for t, q, l in SUJETS], zone=True),
         section("3", "Cas cliniques", [paire(*c) for c in CAS]),
         f'''  <section class="sect sect--zone">
     <div class="contenu">
@@ -272,7 +272,7 @@ def patients():
 # ── Espace pro ────────────────────────────────────────────────────────────
 PRO_ENSEIGNEMENT = [
     ("Conférences et formations",
-     "Dentisterie esthétique, composites, planification, usures.",
+     "Esthétique, composites, planification, usures.",
      "conferences-formations", "Le détail"),
     ("Smile Club Formations",
      "Calendrier, sessions, inscriptions.",
@@ -281,7 +281,7 @@ PRO_ENSEIGNEMENT = [
 
 PRO_TRAVAUX = [
     ("Publications et travaux",
-     "Six publications, sept thèses encadrées, Le Fil Dentaire, Ouvrages CdP.",
+     "Six publications, sept thèses encadrées.",
      "publications", "La liste"),
     ("Médias et interviews",
      "Entretiens, articles, ressources externes.",
@@ -290,7 +290,7 @@ PRO_TRAVAUX = [
 
 PRO_HOSPITALIER = [
     ("Activité hospitalière",
-     "Pitié-Salpêtrière depuis 2012, CMME de Sainte-Anne depuis 2024.",
+     "Pitié-Salpêtrière 2012, CMME Sainte-Anne 2024.",
      "activite-hospitaliere", "Le détail"),
     ("TCA et santé bucco-dentaire",
      "Ce que le chirurgien-dentiste repère en premier.", "tca-dents", "Lire"),
