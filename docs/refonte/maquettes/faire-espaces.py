@@ -39,18 +39,19 @@ def acte(titre, quoi, lien, photo="", cadrage="", alt=""):
         </a>'''
 
 
-def tuile(titre, quoi, lien, verbe="Lire", externe=False):
-    if externe:
-        return f'''        <a class="tuile" href="{lien}" target="_blank" rel="noopener">
-          <h3 class="tuile__titre">{e(titre)} <span class="ext">↗</span></h3>
-          <p class="tuile__quoi">{e(quoi)}</p>
-          <span class="tuile__fleche">{e(verbe)} <span>→</span></span>
-        </a>'''
-    return f'''        <a class="tuile" href="{lien}.html">
-          <h3 class="tuile__titre">{e(titre)}</h3>
-          <p class="tuile__quoi">{e(quoi)}</p>
-          <span class="tuile__fleche">{e(verbe)} <span>→</span></span>
-        </a>'''
+def tuile(titre, quoi, lien, verbe="Lire", externe=False, longue=False):
+    classe = "tuile tuile--long" if longue else "tuile"
+    corps = (f'<h3 class="tuile__{"acte" if longue else "titre"}">{e(titre)}'
+             f'{" <span class=\'ext\'>↗</span>" if externe else ""}</h3>\n'
+             f'            <p class="tuile__quoi">{e(quoi)}</p>\n'
+             f'            <span class="tuile__fleche">{e(verbe)} <span>→</span></span>')
+    cible = (f'href="{lien}" target="_blank" rel="noopener"' if externe
+             else f'href="{lien}.html"')
+    if longue:
+        return (f'        <a class="{classe}" {cible}>\n'
+                f'          <span class="tuile__dit">\n            {corps}\n'
+                f'          </span>\n        </a>')
+    return f'        <a class="{classe}" {cible}>\n            {corps}\n        </a>' 
 
 
 def paire(titre, quoi, lien, avant, apres):
@@ -64,16 +65,13 @@ def paire(titre, quoi, lien, avant, apres):
         </a>'''
 
 
-def section(rang, titre, phrase, tuiles, zone=False):
+def section(rang, titre, tuiles, zone=False):
     classe = "sect sect--zone" if zone else "sect"
     return f'''  <section class="{classe}">
     <div class="contenu">
       <div class="tete-rang">
         <p class="rang">{rang}</p>
-        <div>
-          <h2>{e(titre)}</h2>
-          <p class="doux">{e(phrase)}</p>
-        </div>
+        <h2>{e(titre)}</h2>
       </div>
       <div class="tuiles">
 {chr(10).join(tuiles)}
@@ -82,7 +80,7 @@ def section(rang, titre, phrase, tuiles, zone=False):
   </section>'''
 
 
-def page(slug, titre, description, ariane, eyebrow, h1, chapo, sections, jsonld=""):
+def page(slug, titre, description, ariane, eyebrow, h1, sections, jsonld=""):
     return f'''<!doctype html>
 <html lang="fr">
 <head>
@@ -107,7 +105,6 @@ def page(slug, titre, description, ariane, eyebrow, h1, chapo, sections, jsonld=
       <p class="ariane"><a href="index.html">Accueil</a> › {e(ariane)}</p>
       <p class="eyebrow">{e(eyebrow)}</p>
       <h1>{e(h1)}</h1>
-      <p class="chapo">{e(chapo)}</p>
     </div>
   </section>
 
@@ -141,27 +138,27 @@ def garder_jsonld(nom):
 # l'après. Les autres sont des vues uniques, cadrées au centre.
 ACTES = [
     ("Facettes",
-     "Des céramiques fines, conçues puis collées sur la face visible de la dent.",
+     "Céramique collée sur la face visible de la dent.",
      "facettes-dentaires-paris", "facettes-ceramique-apres.jpg", "",
      "Sourire après la pose de facettes en céramique"),
     ("Composite bonding",
-     "De la résine stratifiée directement sur la dent, en une séance, sans la tailler.",
+     "Résine stratifiée sur la dent, en une séance.",
      "composite-bonding-paris", "composite-bonding-six-dents-anterieures.jpg",
      "center 78%", "Sourire après un composite bonding sur six dents"),
     ("Éclaircissement",
-     "Le protocole en gouttières : la durée, les limites, les précautions.",
+     "Gouttières à domicile, suivi au cabinet.",
      "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
      "Sourire après un éclaircissement ambulatoire"),
     ("Infiltration ICON",
-     "Le traitement des taches blanches, de la MIH et des dyschromies, sans fraise.",
+     "Taches blanches, MIH, fluorose. Sans fraise.",
      "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
      "Dents après infiltration de taches de MIH"),
     ("Réhabilitation des dents usées",
-     "Rendre la hauteur et la fonction à une bouche usée, en gardant la dent.",
+     "Rendre la hauteur et la fonction, en gardant la dent.",
      "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
      "Sourire après la réhabilitation de dents usées"),
     ("Bilan esthétique",
-     "La consultation qui précède tout le reste : ce que l’on regarde, et dans quel ordre.",
+     "Photographies, analyse du sourire, projet.",
      "bilan-esthetique-personnalise", "bilan-esthetique-projet.jpg", "",
      "Projet esthétique dessiné avant traitement"),
 ]
@@ -169,32 +166,32 @@ ACTES = [
 # Deux pages qui ne sont pas des actes mais aident à choisir entre eux.
 POUR_CHOISIR = [
     ("Dentisterie esthétique",
-     "La vue d’ensemble : comment choisir un praticien, et entre quels actes choisir.",
+     "Vue d’ensemble des actes.",
      "dentisterie-esthetique-paris", "La vue d’ensemble"),
     ("Facettes ou composite ?",
-     "Les deux comparés point par point : tenue, teinte, réparabilité, entretien, coût en dent.",
+     "Tenue, teinte, réparabilité, coût en tissu dentaire.",
      "facettes-ou-composite", "Comparer"),
 ]
 
 # Les sujets cliniques : ce que les actes traitent.
 SUJETS = [
     ("Usure dentaire",
-     "Pourquoi l’usure s’installe, comment on la mesure, et quand il faut agir.",
+     "Attrition, érosion, abrasion. Mesure BEWE.",
      "usures-dentaires"),
     ("Érosion dentaire",
-     "L’acide dissout l’émail sans que rien ne frotte : origines et prévention.",
+     "Origines alimentaires, gastriques, professionnelles.",
      "erosion-dentaire"),
     ("Bruxisme",
-     "Serrement et grincement : ce qu’ils usent, et ce qui les calme.",
+     "Serrement, grincement, gouttière.",
      "bruxisme-usure-dentaire"),
     ("Dents courtes ou usées",
-     "Usure du bord, gencive trop basse, ou les deux : on ne traite pas pareil.",
+     "Usure du bord ou excès de gencive.",
      "dents-courtes-usees"),
     ("Troubles des conduites alimentaires",
-     "Anorexie, boulimie : les atteintes bucco-dentaires, et leur dépistage.",
+     "Anorexie, boulimie. Dépistage et prévention.",
      "tca-dents"),
     ("Anorexie restrictive",
-     "Un mécanisme peu décrit : l’érosion peut s’installer sans vomissements.",
+     "Érosion sans vomissements.",
      "anorexie-erosion-dentaire-sans-vomissements"),
 ]
 
@@ -202,19 +199,19 @@ SUJETS = [
 # montre un cas et on en ouvre un autre.
 CAS = [
     ("Usures antérieures et facettes",
-     "Du diagnostic aux facettes minimalement invasives, étape par étape.",
+     "Diagnostic, gouttière composite, facettes.",
      "cas-usures-dentaires-facettes-minimalement-invasives",
      "rehabilitation-usure-avant.jpg", "rehabilitation-usure-apres.jpg"),
     ("Réhabilitation par vingt facettes",
-     "Un projet dessiné et essayé en bouche avant la moindre préparation.",
+     "Projet dessiné, essayé en bouche, puis posé.",
      "cas-planification-rehabilitation-facettes",
      "bilan-esthetique-initial.jpg", "bilan-esthetique-resultat.jpg"),
     ("Quatre facettes céramique",
-     "La planification numérique, puis le résultat posé.",
+     "Planification numérique, puis pose.",
      "cas-planification-facettes-ceramique",
      "facettes-planification-initial.jpg", "facettes-planification-resultat.jpg"),
     ("Taches de MIH",
-     "Éclaircissement d’abord, infiltration ensuite : rien n’est taillé.",
+     "Éclaircissement, puis infiltration.",
      "cas-mih-eclaircissement-erosion-infiltration",
      "dyschromie-erosion-infiltration-avant.jpg", "dyschromie-erosion-infiltration-apres.jpg"),
 ]
@@ -226,22 +223,19 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
           <span class="tuile__texte">
             <h3 class="tuile__titre">Dr Franck Moyal</h3>
             <p class="tuile__quoi">Chirurgien-dentiste à Paris 9<sup>e</sup>, exercice exclusif en
-              dentisterie esthétique et adhésive. Praticien hospitalier à la Pitié-Salpêtrière
-              depuis 2012 et à la CMME de Sainte-Anne depuis 2024, où il conduit la consultation
-              dentaire des troubles du comportement alimentaire.</p>
+              dentisterie esthétique et adhésive. Praticien hospitalier, Pitié-Salpêtrière et
+              CMME de Sainte-Anne.</p>
             <span class="tuile__fleche">Son parcours <span>→</span></span>
           </span>
         </a>
         <a class="tuile" href="chirurgien-dentiste-paris-9.html">
           <h3 class="tuile__titre">Le cabinet, Paris 9<sup>e</sup></h3>
-          <p class="tuile__quoi">2 rue Hippolyte Lebas, 75009 Paris. Comment venir, comment se
-            passe une première consultation.</p>
+          <p class="tuile__quoi">2 rue Hippolyte Lebas, 75009 Paris.</p>
           <span class="tuile__fleche">Voir <span>→</span></span>
         </a>
         <a class="tuile" href="contact.html">
           <h3 class="tuile__titre">Prendre rendez-vous</h3>
-          <p class="tuile__quoi">Par téléphone au 01 83 75 52 16, ou par courriel. Les horaires
-            et ce qu’il faut apporter.</p>
+          <p class="tuile__quoi">01 83 75 52 16, ou par courriel.</p>
           <span class="tuile__fleche">Nous écrire <span>→</span></span>
         </a>
       </div>'''
@@ -249,27 +243,16 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def patients():
     sections = [
-        section("1", "Les actes",
-                "Chaque acte a sa page : ce qu’il fait, ce qu’il coûte en tissu dentaire, "
-                "combien de séances, et ce qu’il ne fait pas.",
-                [acte(*a) for a in ACTES] +
-                [tuile(*p) for p in POUR_CHOISIR]),
-        section("2", "Ce que l’on traite",
-                "Les sujets cliniques derrière ces actes. Ce que vous voyez sur vos dents "
-                "est expliqué en ouverture de la page qui le concerne.",
+        section("1", "Mon expertise",
+                [acte(*a) for a in ACTES] + [tuile(*p) for p in POUR_CHOISIR]),
+        section("2", "Ce que je traite",
                 [tuile(t, q, l) for t, q, l in SUJETS], zone=True),
-        section("3", "Des cas, en photographies",
-                "Quatre cas du cabinet suivis de bout en bout. Photographies réelles, "
-                "sans retouche de couleur ni de netteté.",
-                [paire(*c) for c in CAS]),
+        section("3", "Cas cliniques", [paire(*c) for c in CAS]),
         f'''  <section class="sect sect--zone">
     <div class="contenu">
       <div class="tete-rang">
         <p class="rang">4</p>
-        <div>
-          <h2>Le praticien et le cabinet</h2>
-          <p class="doux">Qui vous recevra, où, et comment le joindre.</p>
-        </div>
+        <h2>Le praticien</h2>
       </div>
 {PRATICIEN}
     </div>
@@ -281,8 +264,6 @@ def patients():
         "Facettes, composite bonding, éclaircissement, infiltration ICON, réhabilitation des "
         "dents usées, bilan esthétique : chaque acte a sa page. Dr Franck Moyal, Paris 9e.",
         "Espace patients", "Vous consultez", "Espace patients",
-        "Les actes d’abord, parce que c’est ce que l’on cherche. Puis ce qu’ils traitent, "
-        "des cas en photographies, et qui vous recevra.",
         sections, garder_jsonld("espace-patients.html"))
 
 
@@ -291,31 +272,30 @@ def patients():
 # ── Espace pro ────────────────────────────────────────────────────────────
 PRO_ENSEIGNEMENT = [
     ("Conférences et formations",
-     "Enseignement clinique autour de la dentisterie esthétique, des composites, "
-     "de la planification et des usures.", "conferences-formations", "Le détail"),
+     "Dentisterie esthétique, composites, planification, usures.",
+     "conferences-formations", "Le détail"),
     ("Smile Club Formations",
-     "L’organisme de formation : le calendrier, les sessions et les inscriptions.",
+     "Calendrier, sessions, inscriptions.",
      "https://smileclubformations.com/", "Le site", True),
 ]
 
 PRO_TRAVAUX = [
     ("Publications et travaux",
-     "Articles, ouvrages et travaux académiques : six publications, sept thèses "
-     "encadrées, Le Fil Dentaire, les Ouvrages CdP.", "publications", "La liste"),
+     "Six publications, sept thèses encadrées, Le Fil Dentaire, Ouvrages CdP.",
+     "publications", "La liste"),
     ("Médias et interviews",
-     "Entretiens, articles et ressources externes permettant de retrouver les "
-     "thèmes qui structurent la pratique.", "medias-interviews", "Les parutions"),
+     "Entretiens, articles, ressources externes.",
+     "medias-interviews", "Les parutions"),
 ]
 
 PRO_HOSPITALIER = [
     ("Activité hospitalière",
-     "Pitié-Salpêtrière depuis 2012, CMME de Sainte-Anne depuis 2024 : diagnostic, "
-     "prévention, adaptation du soin et coordination.", "activite-hospitaliere", "Le détail"),
+     "Pitié-Salpêtrière depuis 2012, CMME de Sainte-Anne depuis 2024.",
+     "activite-hospitaliere", "Le détail"),
     ("TCA et santé bucco-dentaire",
-     "Anorexie, boulimie : l’érosion que les complications dentaires révèlent, "
-     "et ce que le chirurgien-dentiste peut repérer en premier.", "tca-dents", "Lire"),
+     "Ce que le chirurgien-dentiste repère en premier.", "tca-dents", "Lire"),
     ("Anorexie et érosion sans vomissements",
-     "Un mécanisme peu décrit : l’érosion peut s’installer sans conduite de purge.",
+     "Érosion sans conduite de purge.",
      "anorexie-erosion-dentaire-sans-vomissements", "Lire"),
 ]
 
@@ -326,22 +306,20 @@ PRO_PRATICIEN = '''      <div class="tuiles tuiles--praticien">
           <span class="tuile__texte">
             <h3 class="tuile__titre">Dr Franck Moyal</h3>
             <p class="tuile__quoi">Chirurgien-dentiste à Paris 9<sup>e</sup>, exercice exclusif en
-              dentisterie esthétique et adhésive. Praticien hospitalier à la Pitié-Salpêtrière
-              et à la CMME de Sainte-Anne, président de DenTCA. Formation initiale, diplômes,
-              responsabilités hospitalières et universitaires.</p>
+              dentisterie esthétique et adhésive. Praticien hospitalier, Pitié-Salpêtrière et
+              CMME de Sainte-Anne. Président de DenTCA.</p>
             <span class="tuile__fleche">Son parcours <span>→</span></span>
           </span>
         </a>
         <a class="tuile" href="contact.html">
           <h3 class="tuile__titre">Échanger sur un cas</h3>
-          <p class="tuile__quoi">Pour une question clinique, une intervention ou une
-            collaboration : 01 83 75 52 16, ou par courriel.</p>
+          <p class="tuile__quoi">Question clinique, intervention, collaboration.
+            01 83 75 52 16.</p>
           <span class="tuile__fleche">Me contacter <span>→</span></span>
         </a>
         <a class="tuile" href="chirurgien-dentiste-paris-9.html">
           <h3 class="tuile__titre">Le cabinet, Paris 9<sup>e</sup></h3>
-          <p class="tuile__quoi">2 rue Hippolyte Lebas, 75009 Paris. Le plateau technique et
-            l’organisation des séances.</p>
+          <p class="tuile__quoi">2 rue Hippolyte Lebas, 75009 Paris.</p>
           <span class="tuile__fleche">Voir <span>→</span></span>
         </a>
       </div>'''
@@ -349,29 +327,15 @@ PRO_PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def pro():
     sections = [
-        section("1", "Enseignement et formation",
-                "Ce que j’enseigne, et où.",
-                [tuile(*t) for t in PRO_ENSEIGNEMENT]),
-        section("2", "Travaux publiés",
-                "Articles, ouvrages, thèses encadrées et interventions dans la presse "
-                "professionnelle.",
-                [tuile(*t) for t in PRO_TRAVAUX], zone=True),
-        section("3", "Activité hospitalière et troubles alimentaires",
-                "Le sujet sur lequel je travaille à l’hôpital, et que la profession "
-                "regarde encore peu.",
-                [tuile(*t) for t in PRO_HOSPITALIER]),
-        section("4", "Des cas documentés de bout en bout",
-                "Diagnostic, planification, exécution et résultat — sans sauter les "
-                "étapes intermédiaires.",
-                [paire(*c) for c in CAS], zone=True),
+        section("1", "Enseignement et formation", [tuile(*t, longue=True) for t in PRO_ENSEIGNEMENT]),
+        section("2", "Publications", [tuile(*t, longue=True) for t in PRO_TRAVAUX], zone=True),
+        section("3", "Activité hospitalière", [tuile(*t, longue=True) for t in PRO_HOSPITALIER]),
+        section("4", "Cas cliniques", [paire(*c) for c in CAS], zone=True),
         f'''  <section class="sect">
     <div class="contenu">
       <div class="tete-rang">
         <p class="rang">5</p>
-        <div>
-          <h2>Le praticien et le contact</h2>
-          <p class="doux">Qui je suis, où j’exerce, et comment me joindre.</p>
-        </div>
+        <h2>Le praticien</h2>
       </div>
 {PRO_PRATICIEN}
     </div>
@@ -383,8 +347,6 @@ def pro():
         "Conférences et formations, publications, activité hospitalière à la Pitié-Salpêtrière "
         "et à la CMME de Sainte-Anne, cas documentés : l’espace professionnel du Dr Franck Moyal.",
         "Espace pro", "Vous exercez", "Espace pro",
-        "Tout l’espace professionnel, rangé en cinq temps : l’enseignement, les travaux publiés, "
-        "l’activité hospitalière, des cas documentés, et comment me joindre.",
         sections, garder_jsonld("espace-pro.html"))
 
 

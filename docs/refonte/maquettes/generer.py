@@ -600,30 +600,30 @@ def jsonld_dorigine(slug):
 # que Google affiche dans ses résultats.
 TITRES = {
     # les actes
-    "facettes-dentaires-paris": ("Facettes", "Céramique collée : redessiner et sublimer un sourire, à Paris 9ᵉ"),
-    "composite-bonding-paris": ("Composite bonding", "Stratification et précision, en une séance, à Paris 9ᵉ"),
-    "eclaircissement-dentaire-paris": ("Éclaircissement", "Le protocole en gouttières, sa durée et ses limites, à Paris 9ᵉ"),
-    "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH et dyschromies : quelles solutions ?"),
-    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Rendre l’esthétique et la fonction sans tailler"),
-    "bilan-esthetique-personnalise": ("Bilan esthétique", "Concevoir avant de traiter : ce que l’on regarde, et dans quel ordre"),
+    "facettes-dentaires-paris": ("Facettes", "Céramique collée"),
+    "composite-bonding-paris": ("Composite bonding", "Résine stratifiée, en une séance"),
+    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières à domicile"),
+    "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
+    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Technique additive"),
+    "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),
     # pour s'y retrouver
-    "dentisterie-esthetique-paris": ("Dentisterie esthétique", "La vue d’ensemble : concevoir un sourire, à Paris 9ᵉ"),
-    "facettes-ou-composite": ("Facettes ou composite ?", "Les deux comparés point par point, pour choisir"),
+    "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
+    "facettes-ou-composite": ("Facettes ou composite ?", "Comparatif"),
     # ce que l'on traite
-    "usures-dentaires": ("Usure dentaire", "Comprendre avant de reconstruire"),
-    "erosion-dentaire": ("Érosion dentaire", "Dépister, prévenir, traiter"),
-    "bruxisme-usure-dentaire": ("Bruxisme", "Serrement, grincement, et leur lien avec l’usure"),
-    "dents-courtes-usees": ("Dents courtes ou usées", "Pourquoi le sourire change, et ce qui le rend"),
-    "tca-dents": ("Troubles des conduites alimentaires", "Dépister et prévenir les atteintes bucco-dentaires"),
-    "anorexie-erosion-dentaire-sans-vomissements": ("Anorexie restrictive", "L’érosion dentaire sans vomissements"),
+    "usures-dentaires": ("Usure dentaire", "Attrition, érosion, abrasion"),
+    "erosion-dentaire": ("Érosion dentaire", "Origines et prévention"),
+    "bruxisme-usure-dentaire": ("Bruxisme", "Serrement, grincement, gouttière"),
+    "dents-courtes-usees": ("Dents courtes ou usées", "Usure du bord ou excès de gencive"),
+    "tca-dents": ("Troubles des conduites alimentaires", "Anorexie, boulimie"),
+    "anorexie-erosion-dentaire-sans-vomissements": ("Anorexie restrictive", "Érosion sans vomissements"),
     # le praticien, le cabinet
-    "franck-moyal": ("Dr Franck Moyal", "Chirurgien-dentiste, exercice exclusif en dentisterie esthétique et adhésive"),
+    "franck-moyal": ("Dr Franck Moyal", "Chirurgien-dentiste, Paris 9ᵉ"),
     "chirurgien-dentiste-paris-9": ("Le cabinet", "2 rue Hippolyte Lebas, Paris 9ᵉ"),
-    "contact": ("Contact", "Prendre rendez-vous, venir au cabinet, écrire"),
-    "conferences-formations": ("Conférences et formations", "Enseignement clinique et interventions"),
-    "publications": ("Publications", "Articles, ouvrages et travaux académiques"),
-    "activite-hospitaliere": ("Activité hospitalière", "Pitié-Salpêtrière et CMME de Sainte-Anne"),
-    "medias-interviews": ("Médias et interviews", "Entretiens, articles et ressources externes"),
+    "contact": ("Contact", "01 83 75 52 16"),
+    "conferences-formations": ("Conférences et formations", ""),
+    "publications": ("Publications", ""),
+    "activite-hospitaliere": ("Activité hospitalière", "Pitié-Salpêtrière, CMME de Sainte-Anne"),
+    "medias-interviews": ("Médias et interviews", ""),
 }
 
 

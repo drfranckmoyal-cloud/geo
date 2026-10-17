@@ -70,8 +70,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.018em;text-wr
 h1{font-size:clamp(1.9rem,1.3rem + 2.4vw,3rem);line-height:1.06}
 /* Le grand titre porte le nom de l'acte ; la phrase qui l'explique vient
    dessous, en plus petit, pour qu'on lise l'acte d'un coup d'œil. */
-.sous-titre{margin:.55rem 0 0;font-size:clamp(1rem,.92rem + .35vw,1.2rem);
-  line-height:1.35;color:var(--doux);max-width:46ch;font-weight:400}
+.sous-titre{margin:.5rem 0 0;font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--doux);max-width:46ch}
 h2{font-size:clamp(1.3rem,1.08rem + .8vw,1.65rem);line-height:1.15;margin-bottom:.6rem}
 h3{font-size:1.05rem;line-height:1.25;margin-bottom:.3rem}
 p{margin:0 0 .62rem;max-width:68ch}
@@ -237,37 +237,43 @@ p:last-child{margin-bottom:0}
    papier de la carte, si bien qu'elle éclaire le titre sans jamais le gêner.
    Franck, 17/10/2026 : « des cartes plus allongées mais moins hautes avec des
    visuels fondus ». */
-.tuile--acte{grid-column:span 2;position:relative;flex-direction:row;
+.tuile--acte,.tuile--long{grid-column:span 2;position:relative;flex-direction:row;
   align-items:stretch;gap:0;padding:0;overflow:hidden;
-  min-height:clamp(8.6rem,7.2rem + 3.2vw,11rem)}
+  min-height:clamp(7.6rem,6.4rem + 2.8vw,9.6rem)}
 .tuile__visuel{position:absolute;top:0;right:0;bottom:0;width:58%;z-index:1;
   pointer-events:none}
 .tuile__visuel img{width:100%;height:100%;object-fit:cover;display:block;
   /* à peine désaturée : les six photographies se tiennent alors ensemble,
      et la vraie couleur reste sur la page de l'acte, là où elle compte */
-  filter:saturate(.84) contrast(1.02);
+  filter:saturate(.62) contrast(1.01);
   transform:scale(1);transition:transform .5s cubic-bezier(.2,.7,.2,1);
-  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 40%,rgba(0,0,0,1) 82%);
-          mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 40%,rgba(0,0,0,1) 82%)}
+  /* le dégradé ne monte jamais jusqu'à l'opaque : la photographie reste une
+     présence, pas une illustration posée à côté du texte */
+  opacity:.52;
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 46%,rgba(0,0,0,.74) 100%);
+          mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 46%,rgba(0,0,0,.74) 100%)}
 .tuile__dit{position:relative;z-index:2;display:flex;flex-direction:column;
   justify-content:center;gap:.32rem;flex:1 1 auto;
   padding:clamp(1.05rem,.9rem + .85vw,1.55rem)}
+.tuile__acte .ext{font-size:.42em;vertical-align:.35em;opacity:.5;font-weight:400}
 .tuile__acte{font-family:var(--serif);font-weight:700;letter-spacing:-.025em;
   font-size:clamp(1.4rem,1.15rem + .95vw,1.95rem);line-height:1.04;margin:0;color:var(--fg)}
-.tuile--acte .tuile__quoi{font-size:.875rem;max-width:27ch}
-.tuile--acte .tuile__fleche{margin-top:.25rem;padding-top:0}
+.tuile--acte .tuile__quoi,.tuile--long .tuile__quoi{font-size:.875rem;max-width:30ch}
+.tuile--acte .tuile__fleche,.tuile--long .tuile__fleche{margin-top:.25rem;padding-top:0}
+/* sans photographie, le texte prend toute la carte */
+.tuile--long .tuile__dit{padding-right:clamp(1.5rem,1.2rem + 2vw,3rem)}
 /* Sans masque (vieux navigateur), la photographie resterait un bloc net collé
    au texte : on la retire plutôt que de livrer une carte coupée en deux. */
 @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
   .tuile__visuel{display:none}
 }
 @media (max-width:880px){
-  .tuile--acte{grid-column:span 2}
+  .tuile--acte,.tuile--long{grid-column:span 2}
   .tuile__visuel{width:50%}
   .tuile--acte .tuile__quoi{max-width:24ch}
 }
 @media (max-width:580px){
-  .tuile--acte{grid-column:span 1;min-height:8rem}
+  .tuile--acte,.tuile--long{grid-column:span 1;min-height:7.2rem}
   .tuile__visuel{width:46%}
   .tuile--acte .tuile__quoi{max-width:22ch}
 }
