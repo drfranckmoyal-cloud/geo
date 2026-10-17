@@ -108,6 +108,67 @@ p:last-child{margin-bottom:0}
 .burger{display:none;margin-left:auto;appearance:none;background:none;border:1px solid var(--trait);
   padding:.4rem .7rem;font:inherit;font-size:.82rem;cursor:pointer}
 
+/* ── l'ouverture : gros plan sur le praticien ────────────────
+   Le visiteur doit savoir chez qui il est avant toute chose. */
+.ouverture{display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  gap:clamp(1.4rem,1rem + 2.4vw,3.2rem);
+  padding-block:clamp(1.6rem,1.1rem + 2.4vw,3.2rem)}
+.ouverture__photo{justify-self:end;width:100%;max-width:470px}
+.ouverture__photo img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--rayon);
+  box-shadow:var(--relief-fort);filter:grayscale(1) contrast(1.04)}
+.ouverture__qui{max-width:30rem}
+.ouverture__sur{margin:0 0 .7rem;font-size:.7rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--acc)}
+.ouverture h1{font-size:clamp(2.1rem,1.5rem + 3vw,3.4rem);line-height:1.02;margin:0 0 .5rem}
+.ouverture__role{margin:0 0 1rem;font-size:clamp(1rem,.92rem + .3vw,1.18rem);color:var(--fg);
+  max-width:26rem}
+.ouverture__faits{list-style:none;margin:0 0 1.3rem;padding:0;display:grid;gap:.28rem;
+  font-size:.84rem;color:var(--doux)}
+.ouverture__faits b{color:var(--fg);font-weight:600}
+.ouverture .rdv{display:inline-block;padding:.65rem 1.2rem;font-size:.86rem}
+@media (max-width:860px){
+  .ouverture{grid-template-columns:1fr;gap:1.2rem;text-align:left}
+  .ouverture__photo{justify-self:start;max-width:260px}
+}
+
+/* ── les deux espaces, pleine largeur ────────────────────────
+   Au repos, le nom de l'espace. Au survol, ce qu'on y trouve et
+   l'invitation à entrer : le texte change, pas seulement la couleur. */
+.espaces{display:grid;grid-template-columns:1fr 1fr;width:100%}
+.espace{position:relative;display:flex;flex-direction:column;justify-content:center;
+  min-height:clamp(16rem,11rem + 16vw,23rem);
+  padding:clamp(1.6rem,1.1rem + 2.4vw,3.4rem) clamp(1.3rem,.9rem + 2.4vw,3.6rem);
+  text-decoration:none;overflow:hidden;isolation:isolate}
+.espace--clair{background:var(--carte);color:var(--fg)}
+.espace--encre{background:#111312;color:#f6f5f1}
+.espace::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--acc);transform:scaleY(0);transform-origin:bottom;
+  transition:transform .42s cubic-bezier(.2,.7,.2,1)}
+.espace:hover::before,.espace:focus-visible::before{transform:scaleY(1)}
+.espace__sur{margin:0 0 .35rem;font-size:.7rem;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;opacity:.65;transition:color .3s ease,opacity .3s ease}
+.espace__nom{font-family:var(--serif);font-weight:700;letter-spacing:-.022em;line-height:1.02;
+  font-size:clamp(1.9rem,1.3rem + 2.8vw,3.1rem);margin:0;transition:color .3s ease}
+.espace__dessous{display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .42s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+.espace__dessous > div{overflow:hidden}
+.espace:hover .espace__dessous,.espace:focus-visible .espace__dessous{grid-template-rows:1fr;opacity:1}
+.espace__quoi{margin:.9rem 0 0;font-size:.92rem;max-width:30rem}
+.espace__liste{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem .9rem;
+  font-size:.82rem}
+.espace__entrer{margin:1rem 0 0;font-size:.92rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+.espace__entrer span{transition:transform .3s ease}
+.espace:hover .espace__entrer span{transform:translateX(5px)}
+/* au survol, tout passe sur le vert : un seul fond, un seul jeu de couleurs */
+.espace:hover,.espace:focus-visible{color:#fff}
+.espace:hover .espace__sur{color:#cfe5dc;opacity:1}
+.espace:hover .espace__nom{color:#fff}
+@media (max-width:720px){.espaces{grid-template-columns:1fr}
+  .espace{min-height:0;padding-block:1.5rem}
+  .espace__dessous{grid-template-rows:1fr;opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .espace::before{transition:none}.espace__dessous{transition:none}}
+
 /* ── le bandeau d'identité ───────────────────────────────────
    Première chose vue : chez qui on est, ce qu'il fait, où.
    Sans lui, le visiteur tombait sur une photographie de dents. */
