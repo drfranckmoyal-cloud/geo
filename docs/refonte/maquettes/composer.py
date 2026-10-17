@@ -398,7 +398,8 @@ def composer(slug, plan):
     <p class="ariane">{ariane}</p>
     <div class="une">
       <div>
-{f'        <p class="eyebrow">{e(sur)}</p>{chr(10)}' if sur else ""}        <h1>{e(p["h1"])}</h1>
+{f'        <p class="eyebrow">{e(sur)}</p>{chr(10)}' if sur else ""}        <h1>{e(gen.grand_titre(slug, p["h1"])[0])}</h1>
+{gen.soustitre(gen.grand_titre(slug, p["h1"])[1])}
         <p class="une__chapo">{e(chapo)}</p>
         <div class="signature">
           <img src="{PORTRAIT}" alt="Dr Franck Moyal">

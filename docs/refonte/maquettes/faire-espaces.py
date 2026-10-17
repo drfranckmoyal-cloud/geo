@@ -20,6 +20,15 @@ def e(t):
     return H.escape(t, quote=False)
 
 
+def acte(titre, quoi, lien):
+    """La carte d'un acte : son nom, en grand, et rien qui le dilue."""
+    return f'''        <a class="tuile tuile--acte" href="{lien}.html">
+          <h3 class="tuile__acte">{e(titre)}</h3>
+          <p class="tuile__quoi">{e(quoi)}</p>
+          <span class="tuile__fleche">L’acte en détail <span>→</span></span>
+        </a>'''
+
+
 def tuile(titre, quoi, lien, verbe="Lire", externe=False):
     if externe:
         return f'''        <a class="tuile" href="{lien}" target="_blank" rel="noopener">
@@ -115,52 +124,59 @@ def garder_jsonld(nom):
 
 
 # ── Espace patients ───────────────────────────────────────────────────────
-CONSTATS = [
-    ("Mes dents s’usent",
-     "Pourquoi l’usure s’installe, comment on la mesure, et quand il faut agir.",
-     "usures-dentaires"),
-    ("Mes dents deviennent fines",
-     "L’érosion : l’acide dissout l’émail sans que rien ne frotte.",
-     "erosion-dentaire"),
-    ("Je serre des dents la nuit",
-     "Le bruxisme : ce qu’il use, ce qui le déclenche, ce qui le calme.",
-     "bruxisme-usure-dentaire"),
-    ("Mes dents paraissent courtes",
-     "Usure du bord, gencive trop basse, ou les deux : on ne traite pas pareil.",
-     "dents-courtes-usees"),
-    ("J’ai des taches blanches",
-     "MIH, fluorose, déminéralisation : les distinguer avant de les traiter.",
-     "taches-dentaires-dyschromies-icon"),
-    ("Mes dents sont jaunes",
-     "Ce que l’éclaircissement change, ce qu’il ne change pas.",
-     "eclaircissement-dentaire-paris"),
-    ("Troubles alimentaires et dents",
-     "Anorexie, boulimie : une érosion que l’on voit avant tout le monde.",
-     "tca-dents"),
-]
-
-TRAITEMENTS = [
-    ("Dentisterie esthétique",
-     "La vue d’ensemble : comment choisir un praticien, et entre quoi choisir.",
-     "dentisterie-esthetique-paris"),
-    ("Composite bonding",
-     "De la résine posée et sculptée directement sur la dent, sans la tailler.",
-     "composite-bonding-paris"),
-    ("Facettes céramique",
-     "Des céramiques fines, conçues puis collées sur la face visible.",
+# Les actes : c'est eux que le patient cherche, et c'est eux qui portent le
+# grand titre de leur page. Ils passent donc en premier, en grand.
+ACTES = [
+    ("Facettes",
+     "Des céramiques fines, conçues puis collées sur la face visible de la dent.",
      "facettes-dentaires-paris"),
-    ("Facettes ou composite ?",
-     "Les deux comparés point par point : tenue, teinte, réparabilité, entretien.",
-     "facettes-ou-composite"),
+    ("Composite bonding",
+     "De la résine stratifiée directement sur la dent, en une séance, sans la tailler.",
+     "composite-bonding-paris"),
     ("Éclaircissement",
-     "Le protocole en gouttières, la durée, les limites et les précautions.",
+     "Le protocole en gouttières : la durée, les limites, les précautions.",
      "eclaircissement-dentaire-paris"),
+    ("Infiltration ICON",
+     "Le traitement des taches blanches, de la MIH et des dyschromies, sans fraise.",
+     "taches-dentaires-dyschromies-icon"),
     ("Réhabilitation des dents usées",
-     "Reconstruire une bouche usée en gardant le plus de dent possible.",
+     "Rendre la hauteur et la fonction à une bouche usée, en gardant la dent.",
      "rehabilitation-dents-usees"),
     ("Bilan esthétique",
-     "Ce que l’on regarde, et dans quel ordre, avant de proposer quoi que ce soit.",
+     "La consultation qui précède tout le reste : ce que l’on regarde, et dans quel ordre.",
      "bilan-esthetique-personnalise"),
+]
+
+# Deux pages qui ne sont pas des actes mais aident à choisir entre eux.
+POUR_CHOISIR = [
+    ("Dentisterie esthétique",
+     "La vue d’ensemble : comment choisir un praticien, et entre quels actes choisir.",
+     "dentisterie-esthetique-paris", "La vue d’ensemble"),
+    ("Facettes ou composite ?",
+     "Les deux comparés point par point : tenue, teinte, réparabilité, entretien, coût en dent.",
+     "facettes-ou-composite", "Comparer"),
+]
+
+# Les sujets cliniques : ce que les actes traitent.
+SUJETS = [
+    ("Usure dentaire",
+     "Pourquoi l’usure s’installe, comment on la mesure, et quand il faut agir.",
+     "usures-dentaires"),
+    ("Érosion dentaire",
+     "L’acide dissout l’émail sans que rien ne frotte : origines et prévention.",
+     "erosion-dentaire"),
+    ("Bruxisme",
+     "Serrement et grincement : ce qu’ils usent, et ce qui les calme.",
+     "bruxisme-usure-dentaire"),
+    ("Dents courtes ou usées",
+     "Usure du bord, gencive trop basse, ou les deux : on ne traite pas pareil.",
+     "dents-courtes-usees"),
+    ("Troubles des conduites alimentaires",
+     "Anorexie, boulimie : les atteintes bucco-dentaires, et leur dépistage.",
+     "tca-dents"),
+    ("Anorexie restrictive",
+     "Un mécanisme peu décrit : l’érosion peut s’installer sans vomissements.",
+     "anorexie-erosion-dentaire-sans-vomissements"),
 ]
 
 # Chaque vignette est prise DANS la page vers laquelle elle mène : sinon on
@@ -214,13 +230,15 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def patients():
     sections = [
-        section("1", "Ce que vous constatez",
-                "Partez de ce que vous voyez sur vos dents, pas du nom d’un traitement.",
-                [tuile(t, q, l) for t, q, l in CONSTATS]),
-        section("2", "Ce qu’on peut faire",
-                "Les traitements, expliqués avant d’être proposés : ce qu’ils font, "
-                "ce qu’ils coûtent en tissu dentaire, et ce qu’ils ne font pas.",
-                [tuile(t, q, l) for t, q, l in TRAITEMENTS], zone=True),
+        section("1", "Les actes",
+                "Chaque acte a sa page : ce qu’il fait, ce qu’il coûte en tissu dentaire, "
+                "combien de séances, et ce qu’il ne fait pas.",
+                [acte(t, q, l) for t, q, l in ACTES] +
+                [tuile(*p) for p in POUR_CHOISIR]),
+        section("2", "Ce que l’on traite",
+                "Les sujets cliniques derrière ces actes. Ce que vous voyez sur vos dents "
+                "est expliqué en ouverture de la page qui le concerne.",
+                [tuile(t, q, l) for t, q, l in SUJETS], zone=True),
         section("3", "Des cas, en photographies",
                 "Quatre cas du cabinet suivis de bout en bout. Photographies réelles, "
                 "sans retouche de couleur ni de netteté.",
@@ -241,10 +259,10 @@ def patients():
     return page(
         "espace-patients",
         "Espace patients | Dr Franck Moyal — dentisterie esthétique à Paris",
-        "Usures, érosion, bruxisme, taches blanches, composite, facettes, éclaircissement : "
-        "partez de ce que vous constatez sur vos dents. Dr Franck Moyal, Paris 9e.",
+        "Facettes, composite bonding, éclaircissement, infiltration ICON, réhabilitation des "
+        "dents usées, bilan esthétique : chaque acte a sa page. Dr Franck Moyal, Paris 9e.",
         "Espace patients", "Vous consultez", "Espace patients",
-        "Tout le site, rangé en quatre temps : ce que vous constatez, ce qu’on peut faire, "
+        "Les actes d’abord, parce que c’est ce que l’on cherche. Puis ce qu’ils traitent, "
         "des cas en photographies, et qui vous recevra.",
         sections, garder_jsonld("espace-patients.html"))
 

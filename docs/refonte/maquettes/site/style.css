@@ -68,6 +68,10 @@ a{color:inherit}
 }
 h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.018em;text-wrap:balance;margin:0}
 h1{font-size:clamp(1.9rem,1.3rem + 2.4vw,3rem);line-height:1.06}
+/* Le grand titre porte le nom de l'acte ; la phrase qui l'explique vient
+   dessous, en plus petit, pour qu'on lise l'acte d'un coup d'œil. */
+.sous-titre{margin:.55rem 0 0;font-size:clamp(1rem,.92rem + .35vw,1.2rem);
+  line-height:1.35;color:var(--doux);max-width:46ch;font-weight:400}
 h2{font-size:clamp(1.3rem,1.08rem + .8vw,1.65rem);line-height:1.15;margin-bottom:.6rem}
 h3{font-size:1.05rem;line-height:1.25;margin-bottom:.3rem}
 p{margin:0 0 .62rem;max-width:68ch}
@@ -96,6 +100,8 @@ p:last-child{margin-bottom:0}
 .volet[data-ouvert]{display:block}
 .volet--deux{display:none;grid-template-columns:repeat(2,minmax(190px,1fr));gap:1.6rem}
 .volet--deux[data-ouvert]{display:grid}
+.volet--trois{display:none;grid-template-columns:repeat(3,minmax(180px,1fr));gap:1.6rem}
+.volet--trois[data-ouvert]{display:grid}
 .volet h4{margin:0 0 .45rem;font-family:var(--sans);font-size:.66rem;font-weight:600;
   letter-spacing:.13em;text-transform:uppercase;color:var(--acc)}
 .volet ul{list-style:none;margin:0;padding:0}
@@ -222,6 +228,16 @@ p:last-child{margin-bottom:0}
   transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
 .tuile:hover,.tuile:focus-visible{box-shadow:var(--relief-fort);
   border-color:var(--fg);transform:translateY(-2px)}
+/* La carte d'un acte : le nom en grand, parce que c'est lui qu'on cherche.
+   Elle occupe deux colonnes de la trame, les autres cartes une seule. */
+.tuile--acte{grid-column:span 2;justify-content:flex-start;gap:.45rem;
+  padding:clamp(1.15rem,.95rem + .9vw,1.6rem)}
+.tuile__acte{font-family:var(--serif);font-weight:700;letter-spacing:-.025em;
+  font-size:clamp(1.5rem,1.2rem + 1.1vw,2.1rem);line-height:1.04;margin:0;color:var(--fg)}
+.tuile--acte .tuile__quoi{font-size:.9rem;max-width:40ch}
+@media (max-width:880px){.tuile--acte{grid-column:span 2}}
+@media (max-width:580px){.tuile--acte{grid-column:span 1}}
+
 .tuile__titre{font-family:var(--serif);font-weight:700;letter-spacing:-.015em;
   font-size:1.04rem;line-height:1.2;margin:0;color:var(--fg)}
 .tuile__quoi{margin:0;font-size:.855rem;line-height:1.45;color:var(--doux);max-width:none}
@@ -498,7 +514,7 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
   .nav[data-deplie]{display:flex;position:absolute;top:100%;left:0;right:0;background:var(--bg);
     border-bottom:1px solid var(--trait);flex-direction:column;align-items:stretch;
     gap:0;padding:.6rem var(--gouttiere) 1rem;margin:0}
-  .volet,.volet--deux{position:static;display:grid!important;grid-template-columns:1fr;
+  .volet,.volet--deux,.volet--trois{position:static;display:grid!important;grid-template-columns:1fr;
     border:0;box-shadow:none;padding:.2rem 0 .6rem}
   /* Les deux intitulés d'espace ne sont plus des boutons : tout est déjà
      déplié. Ils deviennent les titres des deux moitiés du menu. */

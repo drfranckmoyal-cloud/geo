@@ -34,23 +34,30 @@ PORTRAIT = "img/portrait-fm.png?v=" + str(int(os.path.getmtime(
 VERSION = str(int(os.path.getmtime(os.path.join(SORTIE, "style.css"))))
 
 # ── l'arborescence décidée le 16 octobre ──────────────────────────────────────
-CONSTATS = [
-    ("Mes dents s’usent", "usures-dentaires"),
-    ("Mes dents deviennent fines", "erosion-dentaire"),
-    ("Je serre des dents la nuit", "bruxisme-usure-dentaire"),
-    ("Mes dents paraissent courtes", "dents-courtes-usees"),
-    ("J’ai des taches blanches", "taches-dentaires-dyschromies-icon"),
-    ("Mes dents sont jaunes", "eclaircissement-dentaire-paris"),
-    ("Troubles alimentaires et dents", "tca-dents"),
-]
-TRAITEMENTS = [
-    ("Dentisterie esthétique", "dentisterie-esthetique-paris"),
+# Le menu porte les mêmes mots que les pages : le nom de l'acte d'un côté,
+# le nom clinique du sujet de l'autre. Plus de « mes dents s'usent ».
+ACTES = [
+    ("Facettes", "facettes-dentaires-paris"),
     ("Composite bonding", "composite-bonding-paris"),
-    ("Facettes céramique", "facettes-dentaires-paris"),
-    ("Facettes ou composite ?", "facettes-ou-composite"),
     ("Éclaircissement", "eclaircissement-dentaire-paris"),
+    ("Infiltration ICON", "taches-dentaires-dyschromies-icon"),
     ("Réhabilitation des dents usées", "rehabilitation-dents-usees"),
     ("Bilan esthétique", "bilan-esthetique-personnalise"),
+]
+# Ni des actes ni des sujets : elles aident à choisir entre les actes.
+# Elles ont leur propre colonne, sinon elles tombent du menu — c'est arrivé,
+# et la page pilier du site avec elles.
+POUR_CHOISIR = [
+    ("Dentisterie esthétique", "dentisterie-esthetique-paris"),
+    ("Facettes ou composite ?", "facettes-ou-composite"),
+]
+SUJETS = [
+    ("Usure dentaire", "usures-dentaires"),
+    ("Érosion dentaire", "erosion-dentaire"),
+    ("Bruxisme", "bruxisme-usure-dentaire"),
+    ("Dents courtes ou usées", "dents-courtes-usees"),
+    ("Troubles des conduites alimentaires", "tca-dents"),
+    ("Anorexie restrictive", "anorexie-erosion-dentaire-sans-vomissements"),
 ]
 CONFRERES = [
     ("Conférences et formations", "conferences-formations"),
@@ -60,17 +67,27 @@ CONFRERES = [
 ]
 # surtitre affiché en haut de chaque page, et fil d'Ariane
 PUBLIC = {}
-for lib, slug in CONSTATS:
-    PUBLIC[slug] = ("Ce que vous constatez", "Patient", lib)
-for lib, slug in TRAITEMENTS:
-    PUBLIC.setdefault(slug, ("Ce qu’on peut faire", "Patient", lib))
+for lib, slug in ACTES:
+    PUBLIC[slug] = ("L’acte", "Patient", lib)
+for lib, slug in SUJETS:
+    PUBLIC.setdefault(slug, ("Le sujet", "Patient", lib))
+# deux pages qui ne sont ni un acte ni un sujet : elles aident à choisir entre les actes
+PUBLIC["dentisterie-esthetique-paris"] = ("Pour choisir", "Patient", "Dentisterie esthétique")
+PUBLIC["facettes-ou-composite"] = ("Pour choisir", "Patient", "Facettes ou composite ?")
+PUBLIC["bilan-esthetique-personnalise"] = ("La consultation", "Patient", "Bilan esthétique")
+for _slug, _lib in (
+        ("cas-usures-dentaires-facettes-minimalement-invasives", "Usures et facettes"),
+        ("cas-planification-rehabilitation-facettes", "Réhabilitation par facettes"),
+        ("cas-planification-facettes-ceramique", "Facettes céramique"),
+        ("cas-mih-eclaircissement-erosion-infiltration", "MIH et infiltration")):
+    PUBLIC[_slug] = ("Cas clinique", "Patient", _lib)
 for lib, slug in CONFRERES:
     PUBLIC[slug] = ("Pour les chirurgiens-dentistes", "Chirurgien-dentiste", lib)
 # Pages hors menu mais qui appartiennent bien à un axe : l'anorexie prolonge les TCA,
 # les cas cliniques illustrent les traitements.
 PUBLIC["anorexie-erosion-dentaire-sans-vomissements"] = (
-    "Ce que vous constatez", "Patient", "Anorexie et érosion")
-PUBLIC["diagnostic-usures-dentaires"] = ("Ce que vous constatez", "Patient", "Diagnostic des usures")
+    "Le sujet", "Patient", "Anorexie restrictive")
+PUBLIC["diagnostic-usures-dentaires"] = ("Le sujet", "Patient", "Diagnostic des usures")
 PUBLIC["franck-moyal"] = ("Le praticien", None, "Dr Franck Moyal")
 PUBLIC["chirurgien-dentiste-paris-9"] = ("Le cabinet", None, "Paris 9ᵉ")
 PUBLIC["contact"] = ("Le cabinet", None, "Contact")
@@ -240,17 +257,23 @@ def menu(slug):
     <nav class="nav" id="nav">
       <div>
         <button data-volet="v1" aria-expanded="false">Espace patients</button>
-        <div class="volet volet--deux" id="v1">
+        <div class="volet volet--trois" id="v1">
           <div>
-            <h4>Ce que vous constatez</h4>
+            <h4>Les actes</h4>
             <ul>
-{liste(CONSTATS)}
+{liste(ACTES)}
             </ul>
           </div>
           <div>
-            <h4>Ce qu’on peut faire</h4>
+            <h4>Ce que l’on traite</h4>
             <ul>
-{liste(TRAITEMENTS)}
+{liste(SUJETS)}
+            </ul>
+          </div>
+          <div>
+            <h4>Pour choisir</h4>
+            <ul>
+{liste(POUR_CHOISIR)}
               <li><a href="espace-patients.html"><b>Tout l’espace patients</b></a></li>
             </ul>
           </div>
@@ -277,8 +300,8 @@ PIED = '''<footer class="pied">
   <div class="contenu">
     <div class="pied__grille">
       <div><h4>Le cabinet</h4><ul><li>2 rue Hippolyte Lebas</li><li>75009 Paris</li><li>01 83 75 52 16</li></ul></div>
-      <div><h4>Vous constatez</h4><ul><li><a href="usures-dentaires.html">Usures dentaires</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="tca-dents.html">Troubles alimentaires</a></li></ul></div>
-      <div><h4>Traitements</h4><ul><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="facettes-dentaires-paris.html">Facettes céramique</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li></ul></div>
+      <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
+      <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires</a></li></ul></div>
       <div><h4>Le praticien</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
       <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     </div>
@@ -325,7 +348,8 @@ def rendre(page):
     <div class="une">
       <div>
         {f'<p class="eyebrow">{e(surtitre)}</p>' if surtitre else ""}
-        <h1>{e(page["h1"])}</h1>
+        <h1>{e(grand_titre(slug, page["h1"])[0])}</h1>
+{soustitre(grand_titre(slug, page["h1"])[1])}
 {f'        <p class="une__chapo">{e(page["chapo"])}</p>' if page["chapo"] else ""}
         <div class="signature">
           <img src="{PORTRAIT}" alt="Dr Franck Moyal">
@@ -487,8 +511,8 @@ NOUVELLES = {
         "type": "CollectionPage",
         "chemin": "espace-patients/",
         "nom": "Espace patients | Dr Franck Moyal",
-        "desc": "Partir de ce que vous constatez sur vos dents, pas du nom d’un "
-                "traitement : usures, érosion, bruxisme, taches, facettes, composite.",
+        "desc": "Les actes un par un — facettes, composite bonding, éclaircissement, "
+                "infiltration ICON, réhabilitation des dents usées, bilan esthétique.",
         "fil": [("Espace patients", "espace-patients/")],
     },
     "espace-pro": {
@@ -568,6 +592,54 @@ def jsonld_dorigine(slug):
     return ""
 
 
+# Le grand titre d'une page, c'est le nom de l'acte — ou, pour un sujet clinique,
+# son nom de métier. Franck, 17/10/2026 : « JE VEUX EN GRAND TITRE DE PAGE LES
+# ACTES… FACETTES COMPOSITE ETC ! le nom de l'acte ! »
+# La phrase qui servait de H1 n'est pas perdue : elle passe en sous-titre, juste
+# dessous. Le <title> et la description de la page ne bougent pas : ce sont eux
+# que Google affiche dans ses résultats.
+TITRES = {
+    # les actes
+    "facettes-dentaires-paris": ("Facettes", "Céramique collée : redessiner et sublimer un sourire, à Paris 9ᵉ"),
+    "composite-bonding-paris": ("Composite bonding", "Stratification et précision, en une séance, à Paris 9ᵉ"),
+    "eclaircissement-dentaire-paris": ("Éclaircissement", "Le protocole en gouttières, sa durée et ses limites, à Paris 9ᵉ"),
+    "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH et dyschromies : quelles solutions ?"),
+    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Rendre l’esthétique et la fonction sans tailler"),
+    "bilan-esthetique-personnalise": ("Bilan esthétique", "Concevoir avant de traiter : ce que l’on regarde, et dans quel ordre"),
+    # pour s'y retrouver
+    "dentisterie-esthetique-paris": ("Dentisterie esthétique", "La vue d’ensemble : concevoir un sourire, à Paris 9ᵉ"),
+    "facettes-ou-composite": ("Facettes ou composite ?", "Les deux comparés point par point, pour choisir"),
+    # ce que l'on traite
+    "usures-dentaires": ("Usure dentaire", "Comprendre avant de reconstruire"),
+    "erosion-dentaire": ("Érosion dentaire", "Dépister, prévenir, traiter"),
+    "bruxisme-usure-dentaire": ("Bruxisme", "Serrement, grincement, et leur lien avec l’usure"),
+    "dents-courtes-usees": ("Dents courtes ou usées", "Pourquoi le sourire change, et ce qui le rend"),
+    "tca-dents": ("Troubles des conduites alimentaires", "Dépister et prévenir les atteintes bucco-dentaires"),
+    "anorexie-erosion-dentaire-sans-vomissements": ("Anorexie restrictive", "L’érosion dentaire sans vomissements"),
+    # le praticien, le cabinet
+    "franck-moyal": ("Dr Franck Moyal", "Chirurgien-dentiste, exercice exclusif en dentisterie esthétique et adhésive"),
+    "chirurgien-dentiste-paris-9": ("Le cabinet", "2 rue Hippolyte Lebas, Paris 9ᵉ"),
+    "contact": ("Contact", "Prendre rendez-vous, venir au cabinet, écrire"),
+    "conferences-formations": ("Conférences et formations", "Enseignement clinique et interventions"),
+    "publications": ("Publications", "Articles, ouvrages et travaux académiques"),
+    "activite-hospitaliere": ("Activité hospitalière", "Pitié-Salpêtrière et CMME de Sainte-Anne"),
+    "medias-interviews": ("Médias et interviews", "Entretiens, articles et ressources externes"),
+}
+
+
+def soustitre(texte):
+    if not texte:
+        return ""
+    return f'        <p class="sous-titre">{e(texte)}</p>'
+
+
+def grand_titre(slug, h1_dorigine):
+    """Rend (titre, sous-titre). Sans entrée dans TITRES, la page garde son H1."""
+    if slug in TITRES:
+        return TITRES[slug]
+    return h1_dorigine, ""
+
+
 CAS = [
     ("Usures : facettes minimalement invasives", "cas-usures-dentaires-facettes-minimalement-invasives"),
     ("Planification d’une réhabilitation", "cas-planification-rehabilitation-facettes"),
@@ -609,8 +681,9 @@ def sommaire():
         colonne("La porte d’entrée", [("Page d’accueil — les deux espaces", "index")]),
         colonne("Les deux espaces", [("Espace patients", "espace-patients"),
                                      ("Espace pro", "espace-pro")]),
-        colonne("Ce que vous constatez", CONSTATS),
-        colonne("Ce qu’on peut faire", TRAITEMENTS),
+        colonne("Les actes", ACTES),
+        colonne("Ce que l’on traite", SUJETS),
+        colonne("Pour choisir", POUR_CHOISIR),
         colonne("Cas documentés", CAS),
         colonne("Pour les confrères", CONFRERES),
         colonne("Le praticien et le cabinet", AUTRES),
@@ -643,6 +716,25 @@ def reharmoniser():
         if '<footer class="pied">' in page:
             page = re.sub(r'<footer class="pied">.*?</footer>',
                           lambda _m: PIED, page, flags=re.S)
+        # le grand titre : l'acte, pas la phrase (voir TITRES)
+        slug = nom[:-5]
+        if slug in PUBLIC and PUBLIC[slug][0]:
+            page = re.sub(r'<p class="eyebrow">[^<]*</p>',
+                          lambda _m: f'<p class="eyebrow">{e(PUBLIC[slug][0])}</p>',
+                          page, count=1)
+        if slug in TITRES:
+            titre, sous = TITRES[slug]
+            page = re.sub(r"<h1>.*?</h1>", lambda _m: f"<h1>{e(titre)}</h1>", page,
+                          count=1, flags=re.S)
+            if sous:
+                if '<p class="sous-titre">' in page:
+                    page = re.sub(r'<p class="sous-titre">.*?</p>',
+                                  lambda _m: f'<p class="sous-titre">{e(sous)}</p>',
+                                  page, count=1, flags=re.S)
+                else:
+                    page = page.replace(f"<h1>{e(titre)}</h1>",
+                                        f'<h1>{e(titre)}</h1>\n'
+                                        f'        <p class="sous-titre">{e(sous)}</p>', 1)
         page = re.sub(r'style\.css\?v=\d+', f"style.css?v={VERSION}", page)
         # Une page sans données structurées est muette pour les moteurs et les IA :
         # on les reprend du site en ligne, ou on les fabrique si la page est neuve.
