@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Toutes les pages de la maquette</title>
+<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
-<link rel="stylesheet" href="style.css?v=1792224120">
+<link rel="stylesheet" href="style.css?v=1792254045">
 <style>
-  .sommaire{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
-    gap:clamp(1.3rem,1rem+1.5vw,2.2rem);margin-top:1.4rem}
+  .sommaire{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+    gap:clamp(1.3rem,1rem + 1.5vw,2.2rem);margin-top:1.4rem}
   .sommaire h3{margin-bottom:.5rem;font-size:.98rem}
   .sommaire ul{list-style:none;margin:0;padding:0}
   .sommaire li a{display:block;padding:.32rem 0;font-size:.88rem;text-decoration:none;
@@ -33,71 +34,86 @@
   <section class="sect" style="border-top:0">
     <div class="contenu">
       <p class="eyebrow">Refonte — maquette</p>
-      <h1>Les 27 pages, dans le nouveau format</h1>
-      <p class="doux" style="margin-top:.7rem">Textes et photographies repris du site actuel,
-        sans rien réécrire. <strong>Vingt et une pages sur vingt-sept sont regroupées en quatre ou
-        cinq chapitres.</strong> Les six autres — publications, médias, conférences, contact,
-        activité hospitalière, mentions légales — gardent leurs rubriques : ce sont des catalogues
-        ou des pages de service, où chaque section est une entrée qu’on cherche, pas un chapitre
-        qu’on lit.</p>
+      <h1>Le site entier, dans le nouveau format</h1>
+      <p class="doux" style="margin-top:.7rem">Cette page n’existe que pour vous : elle liste
+        tout. Le site, lui, s’ouvre sur <a href="index.html"><strong>la porte d’entrée</strong></a>,
+        qui ne propose que deux choses — l’espace patients ou l’espace pro.</p>
+      <p class="doux">Les textes et les photographies sont ceux du site en ligne, repris sans
+        rien réécrire. Ce qui change, c’est la mise en page : des chapitres à la place d’une
+        suite de questions, et des cartes qui respirent. <strong>Le site en ligne n’a pas été
+        touché.</strong></p>
       <dl class="rappel-maquette">
-        <div><dt>Défilement, médiane</dt><dd>4,6 <small>écrans, contre ~10</small></dd></div>
-        <div><dt>Mots par écran</dt><dd>188 <small>contre 104</small></dd></div>
-        <div><dt>Page la plus longue</dt><dd>8,9 <small>écrans, contre 20,8</small></dd></div>
-        <div><dt>Pages en défaut</dt><dd>0 <small>sur 27</small></dd></div>
+        <div><dt>Pages</dt><dd>28<small>+ la porte d’entrée</small></dd></div>
+        <div><dt>Chapitres</dt><dd>6<small>par page, en médiane</small></dd></div>
+        <div><dt>Mots repris</dt><dd>26 k<small>sans rien perdre</small></dd></div>
+        <div><dt>Site en ligne</dt><dd>intact<small>aucune modification</small></dd></div>
       </dl>
       <div class="sommaire">
-      <div>
-        <h3>Patient — ce que vous constatez</h3>
-        <ul>
-          <li><a href="anorexie-erosion-dentaire-sans-vomissements.html">Anorexie sans vomissements et érosion dentaire</a></li>
-          <li><a href="bruxisme-usure-dentaire.html">Bruxisme et usure dentaire à Paris</a></li>
-          <li><a href="dents-courtes-usees.html">Dents courtes ou usées à Paris</a></li>
-          <li><a href="tca-dents.html">TCA et dents à Paris</a></li>
-          <li><a href="taches-dentaires-dyschromies-icon.html">Taches blanches, MIH et ICON à Paris</a></li>
-          <li><a href="usures-dentaires.html">Usures dentaires à Paris</a></li>
-          <li><a href="erosion-dentaire.html">Érosion dentaire à Paris</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Patient — ce qu'on peut faire</h3>
-        <ul>
-          <li><a href="bilan-esthetique-personnalise.html">Bilan esthétique personnalisé à Paris</a></li>
-          <li><a href="composite-bonding-paris.html">Composite bonding à Paris</a></li>
-          <li><a href="dentisterie-esthetique-paris.html">Dentiste esthétique à Paris : approche et traitements</a></li>
-          <li><a href="facettes-dentaires-paris.html">Facettes dentaires à Paris</a></li>
-          <li><a href="facettes-ou-composite.html">Facettes ou composite : comment choisir ?</a></li>
-          <li><a href="rehabilitation-dents-usees.html">Réhabilitation des dents usées à Paris</a></li>
-          <li><a href="eclaircissement-dentaire-paris.html">Éclaircissement dentaire à Paris</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Chirurgien-dentiste</h3>
-        <ul>
-          <li><a href="activite-hospitaliere.html">Activité hospitalière</a></li>
+        <div>
+          <h3>La porte d’entrée</h3>
+          <ul>
+          <li><a href="index.html">Page d’accueil — les deux espaces</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Les deux espaces</h3>
+          <ul>
+          <li><a href="espace-patients.html">Espace patients</a></li>
+          <li><a href="espace-pro.html">Espace pro</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ce que vous constatez</h3>
+          <ul>
+          <li><a href="usures-dentaires.html">Mes dents s’usent</a></li>
+          <li><a href="erosion-dentaire.html">Mes dents deviennent fines</a></li>
+          <li><a href="bruxisme-usure-dentaire.html">Je serre des dents la nuit</a></li>
+          <li><a href="dents-courtes-usees.html">Mes dents paraissent courtes</a></li>
+          <li><a href="taches-dentaires-dyschromies-icon.html">J’ai des taches blanches</a></li>
+          <li><a href="eclaircissement-dentaire-paris.html">Mes dents sont jaunes</a></li>
+          <li><a href="tca-dents.html">Troubles alimentaires et dents</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ce qu’on peut faire</h3>
+          <ul>
+          <li><a href="dentisterie-esthetique-paris.html">Dentisterie esthétique</a></li>
+          <li><a href="composite-bonding-paris.html">Composite bonding</a></li>
+          <li><a href="facettes-dentaires-paris.html">Facettes céramique</a></li>
+          <li><a href="facettes-ou-composite.html">Facettes ou composite ?</a></li>
+          <li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li>
+          <li><a href="rehabilitation-dents-usees.html">Réhabilitation des dents usées</a></li>
+          <li><a href="bilan-esthetique-personnalise.html">Bilan esthétique</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cas documentés</h3>
+          <ul>
+          <li><a href="cas-usures-dentaires-facettes-minimalement-invasives.html">Usures : facettes minimalement invasives</a></li>
+          <li><a href="cas-planification-rehabilitation-facettes.html">Planification d’une réhabilitation</a></li>
+          <li><a href="cas-planification-facettes-ceramique.html">Planification de facettes céramique</a></li>
+          <li><a href="cas-mih-eclaircissement-erosion-infiltration.html">MIH : éclaircissement et infiltration</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Pour les confrères</h3>
+          <ul>
           <li><a href="conferences-formations.html">Conférences et formations</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="activite-hospitaliere.html">Activité hospitalière</a></li>
           <li><a href="medias-interviews.html">Médias et interviews</a></li>
-          <li><a href="publications.html">Publications et travaux</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Cas cliniques</h3>
-        <ul>
-          <li><a href="cas-mih-eclaircissement-erosion-infiltration.html">MIH : éclaircissement et érosion-infiltration</a></li>
-          <li><a href="cas-planification-facettes-ceramique.html">Planification de 4 facettes en céramique</a></li>
-          <li><a href="cas-planification-rehabilitation-facettes.html">Réhabilitation esthétique par 20 facettes</a></li>
-          <li><a href="cas-usures-dentaires-facettes-minimalement-invasives.html">Usures dentaires et facettes minimalement invasives</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Le praticien et le cabinet</h3>
-        <ul>
-          <li><a href="contact.html">Contact et rendez-vous</a></li>
-          <li><a href="chirurgien-dentiste-paris-9.html">Dr Franck Moyal</a></li>
-          <li><a href="franck-moyal.html">Dr Franck Moyal — Chirurgien-dentiste à Paris</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Le praticien et le cabinet</h3>
+          <ul>
+          <li><a href="franck-moyal.html">Le praticien</a></li>
+          <li><a href="chirurgien-dentiste-paris-9.html">Le cabinet, Paris 9ᵉ</a></li>
+          <li><a href="anorexie-erosion-dentaire-sans-vomissements.html">Anorexie et érosion</a></li>
+          <li><a href="contact.html">Contact</a></li>
           <li><a href="mentions-legales.html">Mentions légales</a></li>
-        </ul>
-      </div>
+          </ul>
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toutes les pages de la maquette</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="style.css?v=@@STYLE@@">
+<style>
+  .sommaire{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+    gap:clamp(1.3rem,1rem + 1.5vw,2.2rem);margin-top:1.4rem}
+  .sommaire h3{margin-bottom:.5rem;font-size:.98rem}
+  .sommaire ul{list-style:none;margin:0;padding:0}
+  .sommaire li a{display:block;padding:.32rem 0;font-size:.88rem;text-decoration:none;
+    border-bottom:1px solid var(--trait)}
+  .sommaire li a:hover{color:var(--acc);border-color:var(--acc)}
+  .rappel-maquette{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:.8rem;margin:1.3rem 0 0;padding:0}
+  .rappel-maquette div{background:var(--carte);border:1px solid var(--trait);
+    border-radius:var(--rayon);box-shadow:var(--relief);padding:.75rem .9rem}
+  .rappel-maquette dt{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--acc);font-weight:700;margin:0 0 .25rem}
+  .rappel-maquette dd{margin:0;font-family:var(--serif);font-size:1.5rem;font-weight:700;
+    letter-spacing:-.02em}
+  .rappel-maquette small{display:block;font-family:var(--sans);font-size:.72rem;
+    font-weight:400;color:var(--doux);letter-spacing:0}
+</style>
+</head>
+<body>
+<main>
+  <section class="sect" style="border-top:0">
+    <div class="contenu">
+      <p class="eyebrow">Refonte — maquette</p>
+      <h1>Le site entier, dans le nouveau format</h1>
+      <p class="doux" style="margin-top:.7rem">Cette page n’existe que pour vous : elle liste
+        tout. Le site, lui, s’ouvre sur <a href="index.html"><strong>la porte d’entrée</strong></a>,
+        qui ne propose que deux choses — l’espace patients ou l’espace pro.</p>
+      <p class="doux">Les textes et les photographies sont ceux du site en ligne, repris sans
+        rien réécrire. Ce qui change, c’est la mise en page : des chapitres à la place d’une
+        suite de questions, et des cartes qui respirent. <strong>Le site en ligne n’a pas été
+        touché.</strong></p>
+      <dl class="rappel-maquette">
+        <div><dt>Pages</dt><dd>@@PAGES@@<small>+ la porte d’entrée</small></dd></div>
+        <div><dt>Chapitres</dt><dd>@@CHAPITRES@@<small>par page, en médiane</small></dd></div>
+        <div><dt>Mots repris</dt><dd>@@MOTS@@ k<small>sans rien perdre</small></dd></div>
+        <div><dt>Site en ligne</dt><dd>intact<small>aucune modification</small></dd></div>
+      </dl>
+      <div class="sommaire">
+@@CORPS@@
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

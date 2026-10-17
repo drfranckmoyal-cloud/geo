@@ -150,6 +150,12 @@ def lire(slug):
                  if len(c) > 40 and "Chirurgien-dentiste à Paris" not in c]
     page["chapo"] = max(candidats, key=len) if candidats else ""
 
+    # Données structurées : c'est par elles que les moteurs et les IA
+    # comprennent qui parle et de quoi. On les reprend telles quelles —
+    # la refonte change la mise en page, pas ce que la page affirme.
+    page["jsonld"] = re.findall(
+        r'<script type="application/ld\+json"[^>]*>.*?</script>', brut, re.S)
+
     # photographies de la page
     page["photos"] = []
     for fig in re.findall(r"<figure.*?</figure>", main, re.S):
@@ -227,7 +233,7 @@ def menu(slug):
     <button class="burger" id="burger" aria-expanded="false">Menu</button>
     <nav class="nav" id="nav">
       <div>
-        <button data-volet="v1" aria-expanded="false">Vous êtes patient</button>
+        <button data-volet="v1" aria-expanded="false">Espace patients</button>
         <div class="volet volet--deux" id="v1">
           <div>
             <h4>Ce que vous constatez</h4>
@@ -239,16 +245,18 @@ def menu(slug):
             <h4>Ce qu’on peut faire</h4>
             <ul>
 {liste(TRAITEMENTS)}
+              <li><a href="espace-patients.html"><b>Tout l’espace patients</b></a></li>
             </ul>
           </div>
         </div>
       </div>
       <div>
-        <button data-volet="v2" aria-expanded="false">Vous êtes chirurgien-dentiste</button>
+        <button data-volet="v2" aria-expanded="false">Espace pro</button>
         <div class="volet" id="v2">
           <ul>
 {liste(CONFRERES)}
             <li><a href="https://smileclubformations.com/" target="_blank" rel="noopener">Smile Club Formations <span class="ext">↗</span></a></li>
+            <li><a href="espace-pro.html"><b>Tout l’espace pro</b></a></li>
           </ul>
         </div>
       </div>
@@ -266,6 +274,7 @@ PIED = '''<footer class="pied">
       <div><h4>Vous constatez</h4><ul><li><a href="usures-dentaires.html">Usures dentaires</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="tca-dents.html">Troubles alimentaires</a></li></ul></div>
       <div><h4>Traitements</h4><ul><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="facettes-dentaires-paris.html">Facettes céramique</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li></ul></div>
       <div><h4>Le praticien</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
+      <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     </div>
     <p class="pied__bas">Maquette de refonte — rien n’est en ligne. Mentions légales.</p>
   </div>
@@ -434,6 +443,7 @@ def rendre(page):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
 <link rel="stylesheet" href="style.css?v={VERSION}">
+{chr(10).join(page.get("jsonld") or [])}
 </head>
 <body>
 
@@ -454,6 +464,192 @@ def rendre(page):
 
 
 # ── exécution ─────────────────────────────────────────────────────────────────
+# Les trois pages nouvelles (la porte d'entrée et les deux espaces) n'existent pas
+# dans le site en ligne : elles n'ont donc pas de données structurées à reprendre.
+# On leur en fabrique, sur le même modèle que les autres, pour que les moteurs et
+# les IA sachent qui parle, où, et ce que la page rassemble.
+NOUVELLES = {
+    "index": {
+        "type": "WebPage",
+        "chemin": "",
+        "nom": "Dr Franck Moyal | Dentisterie esthétique et adhésive à Paris 9e",
+        "desc": "Chirurgien-dentiste à Paris 9e, exercice exclusif en dentisterie "
+                "esthétique et adhésive. Espace patients et espace professionnel.",
+        "fil": [],
+    },
+    "espace-patients": {
+        "type": "CollectionPage",
+        "chemin": "espace-patients/",
+        "nom": "Espace patients | Dr Franck Moyal",
+        "desc": "Partir de ce que vous constatez sur vos dents, pas du nom d’un "
+                "traitement : usures, érosion, bruxisme, taches, facettes, composite.",
+        "fil": [("Espace patients", "espace-patients/")],
+    },
+    "espace-pro": {
+        "type": "CollectionPage",
+        "chemin": "espace-pro/",
+        "nom": "Espace pro | Dr Franck Moyal",
+        "desc": "Conférences et formations, publications, activité hospitalière et "
+                "cas documentés, pour les chirurgiens-dentistes.",
+        "fil": [("Espace pro", "espace-pro/")],
+    },
+}
+RACINE_WEB = "https://drfranckmoyal.fr/"
+
+
+def _socle():
+    """Les nœuds d'identité (le site, la personne, le cabinet) sont relevés sur une
+    page existante plutôt que recopiés à la main : ils ne peuvent pas diverger."""
+    for nom in ("contact.html", "franck-moyal.html"):
+        chemin = os.path.join(SORTIE, nom)
+        if not os.path.exists(chemin):
+            continue
+        blocs = re.findall(r'<script type="application/ld\+json"[^>]*>(.*?)</script>',
+                           open(chemin, encoding="utf-8").read(), re.S)
+        for b in blocs:
+            try:
+                graphe = json.loads(b).get("@graph", [])
+            except Exception:
+                continue
+            garde = [n for n in graphe
+                     if n.get("@type") in ("WebSite", "Person", "Dentist")]
+            if len(garde) == 3:
+                return garde
+    return []
+
+
+def donnees_structurees(slug):
+    fiche = NOUVELLES.get(slug)
+    socle = _socle()
+    if not fiche or not socle:
+        return ""
+    url = RACINE_WEB + fiche["chemin"]
+    page = {
+        "@type": fiche["type"],
+        "@id": url + "#page",
+        "url": url,
+        "name": fiche["nom"],
+        "description": fiche["desc"],
+        "inLanguage": "fr-FR",
+        "isPartOf": {"@id": RACINE_WEB + "#website"},
+        "author": {"@id": RACINE_WEB + "#franck-moyal"},
+    }
+    graphe = [socle[0], page]
+    if fiche["fil"]:
+        page["breadcrumb"] = {"@id": url + "#fil"}
+        elements = [{"@type": "ListItem", "position": 1, "name": "Accueil",
+                     "item": RACINE_WEB}]
+        for i, (nom, chemin) in enumerate(fiche["fil"], start=2):
+            elements.append({"@type": "ListItem", "position": i, "name": nom,
+                             "item": RACINE_WEB + chemin})
+        graphe.append({"@type": "BreadcrumbList", "@id": url + "#fil",
+                       "itemListElement": elements})
+    graphe += socle[1:]
+    return ('<script type="application/ld+json">'
+            + json.dumps({"@context": "https://schema.org", "@graph": graphe},
+                         ensure_ascii=False)
+            + "</script>")
+
+
+def jsonld_dorigine(slug):
+    """Pour une page refaite à la main, les données structurées se relisent
+    directement dans le site en ligne : rien n'est réécrit."""
+    for chemin in (os.path.join(DIST, slug, "index.html"),):
+        if os.path.exists(chemin):
+            return "\n".join(re.findall(
+                r'<script type="application/ld\+json"[^>]*>.*?</script>',
+                open(chemin, encoding="utf-8").read(), re.S))
+    return ""
+
+
+CAS = [
+    ("Usures : facettes minimalement invasives", "cas-usures-dentaires-facettes-minimalement-invasives"),
+    ("Planification d’une réhabilitation", "cas-planification-rehabilitation-facettes"),
+    ("Planification de facettes céramique", "cas-planification-facettes-ceramique"),
+    ("MIH : éclaircissement et infiltration", "cas-mih-eclaircissement-erosion-infiltration"),
+]
+AUTRES = [
+    ("Le praticien", "franck-moyal"),
+    ("Le cabinet, Paris 9ᵉ", "chirurgien-dentiste-paris-9"),
+    ("Anorexie et érosion", "anorexie-erosion-dentaire-sans-vomissements"),
+    ("Contact", "contact"),
+    ("Mentions légales", "mentions-legales"),
+]
+
+
+def sommaire():
+    """Le sommaire se fabrique à partir des pages réellement présentes : il ne peut
+    plus annoncer un nombre de pages que le dossier ne contient pas."""
+    presentes = {n[:-5] for n in os.listdir(SORTIE) if n.endswith(".html")}
+    comptees = presentes - {"index", "sommaire"}
+
+    def colonne(titre, items):
+        liens = "\n".join(
+            '          <li><a href="%s.html">%s</a></li>' % (sl, e(l))
+            for l, sl in items if sl in presentes)
+        return ('        <div>\n          <h3>%s</h3>\n          <ul>\n%s\n'
+                '          </ul>\n        </div>' % (e(titre), liens))
+
+    chapitres, mots = [], 0
+    for sl in sorted(comptees):
+        h = open(os.path.join(SORTIE, sl + ".html"), encoding="utf-8").read()
+        corps = re.search(r"<main.*?</main>", h, re.S)
+        if corps:
+            mots += len(re.sub(r"<[^>]+>", " ", corps.group(0)).split())
+        chapitres.append(len(re.findall(r"<h2", h)))
+    med = sorted(chapitres)[len(chapitres) // 2] if chapitres else 0
+
+    corps = "\n".join([
+        colonne("La porte d’entrée", [("Page d’accueil — les deux espaces", "index")]),
+        colonne("Les deux espaces", [("Espace patients", "espace-patients"),
+                                     ("Espace pro", "espace-pro")]),
+        colonne("Ce que vous constatez", CONSTATS),
+        colonne("Ce qu’on peut faire", TRAITEMENTS),
+        colonne("Cas documentés", CAS),
+        colonne("Pour les confrères", CONFRERES),
+        colonne("Le praticien et le cabinet", AUTRES),
+    ])
+
+    gabarit = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "sommaire.gabarit.html"), encoding="utf-8").read()
+    return (gabarit.replace("@@STYLE@@", VERSION)
+                   .replace("@@PAGES@@", str(len(comptees)))
+                   .replace("@@CHAPITRES@@", str(med))
+                   .replace("@@MOTS@@", str(mots // 1000))
+                   .replace("@@CORPS@@", corps))
+
+
+def reharmoniser():
+    """Les pages écrites à la main gardaient chacune sa copie du menu et du pied,
+    qui prenaient du retard dès qu'on touchait à l'un des deux. Elles vont désormais
+    les rechercher ici : une seule source, plus de divergence possible."""
+    reprises = []
+    for nom in sorted(os.listdir(SORTIE)):
+        if not nom.endswith(".html"):
+            continue
+        chemin = os.path.join(SORTIE, nom)
+        page = open(chemin, encoding="utf-8").read()
+        avant = page
+        # le portail n'a ni menu ni pied : il ne reçoit que la signature du style
+        if '<header class="entete">' in page:
+            page = re.sub(r'<header class="entete">.*?</header>',
+                          lambda _m: menu(nom[:-5]), page, flags=re.S)
+        if '<footer class="pied">' in page:
+            page = re.sub(r'<footer class="pied">.*?</footer>',
+                          lambda _m: PIED, page, flags=re.S)
+        page = re.sub(r'style\.css\?v=\d+', f"style.css?v={VERSION}", page)
+        # Une page sans données structurées est muette pour les moteurs et les IA :
+        # on les reprend du site en ligne, ou on les fabrique si la page est neuve.
+        if "application/ld+json" not in page and nom != "sommaire.html":
+            bloc = jsonld_dorigine(nom[:-5]) or donnees_structurees(nom[:-5])
+            if bloc:
+                page = page.replace("</head>", bloc + "\n</head>", 1)
+        if page != avant:
+            open(chemin, "w", encoding="utf-8").write(page)
+            reprises.append(nom)
+    return reprises
+
+
 def main():
     slugs = sorted(
         d for d in os.listdir(DIST)
@@ -492,6 +688,11 @@ def main():
         print("\n  non générées :")
         for c, pourquoi in passes:
             print(f"    {c:42s} {pourquoi}")
+    open(os.path.join(SORTIE, "sommaire.html"), "w", encoding="utf-8").write(sommaire())
+    reprises = reharmoniser()
+    if reprises:
+        print(f"\n  en-tête et pied remis à jour sur {len(reprises)} page(s) :")
+        print("    " + ", ".join(r[:-5] for r in reprises))
 
 
 if __name__ == "__main__":

@@ -386,6 +386,7 @@ def composer(slug, plan):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
 <link rel="stylesheet" href="style.css?v={version}">
+{chr(10).join(re.findall(r"<script type=.application/ld\+json.[^>]*>.*?</script>", p["brut"], re.S))}
 </head>
 <body>
 
