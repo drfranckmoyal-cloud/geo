@@ -13,8 +13,8 @@
   --tres-doux:#868b87;
   --trait:#e0ded4;
   --trait-fort:#1a1c19;
-  --acc:#2c5545;
-  --acc-clair:#e9efeb;
+  --acc:#1f221f;        /* l'accent n'est plus une couleur mais une encre (Franck, 17/10/2026) */
+  --acc-clair:#edebe3;
   --zone:#f6f5f0;
   --relief:0 1px 2px rgba(26,28,25,.05), 0 8px 24px rgba(26,28,25,.055);
   --relief-fort:0 2px 4px rgba(26,28,25,.06), 0 14px 38px rgba(26,28,25,.08);
@@ -106,7 +106,7 @@ p:last-child{margin-bottom:0}
 
 .rdv{margin-left:auto;background:var(--acc);color:#fff;text-decoration:none;
   padding:.5rem .9rem;font-size:.82rem;font-weight:600;white-space:nowrap}
-.rdv:hover{background:#1f4033}
+.rdv:hover{background:#000}
 .burger{display:none;margin-left:auto;appearance:none;background:none;border:1px solid var(--trait);
   padding:.4rem .7rem;font:inherit;font-size:.82rem;cursor:pointer}
 
@@ -148,9 +148,13 @@ p:last-child{margin-bottom:0}
 /* le texte s'écarte de la couture pour laisser passer le portrait */
 .espace--clair{padding-right:clamp(5.5rem,2rem + 11vw,10rem)}
 .espace--encre{padding-left:clamp(5.5rem,2rem + 11vw,10rem)}
+/* Le survol n'ajoute pas de couleur : il retourne la moitié survolée.
+   Le blanc passe à l'encre, l'encre passe au papier. */
 .espace::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:var(--acc);transform:scaleY(0);transform-origin:bottom;
+  transform:scaleY(0);transform-origin:bottom;
   transition:transform .42s cubic-bezier(.2,.7,.2,1)}
+.espace--clair::before{background:#111312}
+.espace--encre::before{background:#f4f3ee}
 .espace:hover::before,.espace:focus-visible::before{transform:scaleY(1)}
 .espace__sur{margin:0 0 .35rem;font-size:.7rem;font-weight:700;letter-spacing:.17em;
   text-transform:uppercase;opacity:.6;transition:color .3s ease,opacity .3s ease}
@@ -167,9 +171,11 @@ p:last-child{margin-bottom:0}
   align-items:center;gap:.5rem}
 .espace__entrer span{transition:transform .3s ease}
 .espace:hover .espace__entrer span{transform:translateX(5px)}
-.espace:hover,.espace:focus-visible{color:#fff}
-.espace:hover .espace__sur{color:#cfe5dc;opacity:1}
-.espace:hover .espace__nom{color:#fff}
+.espace--clair:hover,.espace--clair:focus-visible{color:#f4f3ee}
+.espace--clair:hover .espace__nom{color:#fff}
+.espace--encre:hover,.espace--encre:focus-visible{color:#3a3d3a}
+.espace--encre:hover .espace__nom{color:#111312}
+.espace:hover .espace__sur,.espace:focus-visible .espace__sur{opacity:1}
 
 /* le portrait, à cheval sur les deux cartes */
 .espaces__portrait{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
@@ -190,6 +196,86 @@ p:last-child{margin-bottom:0}
 }
 @media (prefers-reduced-motion:reduce){
   .espace::before{transition:none}.espace__dessous{transition:none}}
+
+/* ── les sommaires en cartes ─────────────────────────────────
+   Une seule sorte de carte, répétée, sous des sections numérotées.
+   Franck, 17/10/2026 : « le mot d'ordre est COHÉRENCE et HIÉRARCHIE ». */
+.tete-rang{display:flex;align-items:baseline;gap:clamp(.8rem,.6rem + 1vw,1.4rem)}
+.tete-rang .rang{font-family:var(--serif);font-weight:700;line-height:1;margin:0;
+  font-size:clamp(1.6rem,1.2rem + 1.8vw,2.6rem);color:var(--fg);
+  min-width:1.3em;text-align:right;flex-shrink:0;
+  border-bottom:2px solid var(--fg);padding-bottom:.1rem;line-height:.95}
+.tete-rang h2{margin:0}
+.tete-rang .doux{margin:.3rem 0 0;font-size:.92rem;max-width:52ch}
+
+/* Quatre colonnes fixes, et non « autant qu'il en tient » : une section de deux
+   cartes garde alors la même largeur de carte qu'une section de sept, et laisse
+   simplement la fin de ligne vide. C'est ce qui tient la trame d'un bout à l'autre. */
+.tuiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(.7rem,.55rem + .7vw,1.1rem);margin-top:clamp(1rem,.8rem + 1vw,1.6rem)}
+@media (max-width:1180px){.tuiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:880px){.tuiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:580px){.tuiles{grid-template-columns:minmax(0,1fr)}}
+.tuile{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(.95rem,.8rem + .7vw,1.3rem);
+  transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
+.tuile:hover,.tuile:focus-visible{box-shadow:var(--relief-fort);
+  border-color:var(--fg);transform:translateY(-2px)}
+.tuile__titre{font-family:var(--serif);font-weight:700;letter-spacing:-.015em;
+  font-size:1.04rem;line-height:1.2;margin:0;color:var(--fg)}
+.tuile__quoi{margin:0;font-size:.855rem;line-height:1.45;color:var(--doux);max-width:none}
+.tuile__fleche{margin-top:auto;padding-top:.65rem;font-size:.78rem;font-weight:600;
+  color:var(--fg);display:flex;align-items:center;gap:.4rem}
+.tuile__fleche > span{transition:transform .22s ease}
+.tuile:hover .tuile__fleche > span{transform:translateX(5px)}
+
+/* la vignette avant / après d'une carte de cas */
+.tuile__paire{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--trait);
+  margin:calc(-1 * clamp(.95rem,.8rem + .7vw,1.3rem));
+  margin-bottom:.75rem;border-radius:var(--rayon) var(--rayon) 0 0;overflow:hidden}
+.tuile__paire img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+
+/* la carte du praticien tient deux colonnes et porte le portrait */
+.tuile--large{grid-column:span 2;flex-direction:row;align-items:flex-end;gap:0;
+  padding-bottom:0;overflow:hidden}
+.tuile--large .tuile__portrait{width:36%;max-width:190px;height:auto;align-self:flex-end;
+  margin:0 clamp(.8rem,.6rem + .8vw,1.2rem) 0 0;filter:grayscale(1) contrast(1.04)}
+.tuile--large .tuile__texte{display:flex;flex-direction:column;gap:.3rem;flex:1;
+  padding-bottom:clamp(.95rem,.8rem + .7vw,1.3rem)}
+.tuile__titre sup{font-size:.62em;vertical-align:super}
+
+@media (max-width:860px){
+  .tuile--large{grid-column:span 1;flex-direction:column;align-items:stretch;
+    padding-bottom:clamp(.95rem,.8rem + .7vw,1.3rem)}
+  .tuile--large .tuile__portrait{width:118px;margin:0 0 .5rem}
+  .tuile--large .tuile__texte{padding-bottom:0}
+}
+@media (max-width:560px){
+  .tete-rang{gap:.7rem}
+  .tete-rang .rang{font-size:1.5rem}
+}
+
+/* ── le nom, en haut de la porte ──────────────────────────────
+   Il est centré, donc à cheval sur la couture entre le blanc et le noir.
+   « difference » le fait s'inverser tout seul : noir sur le blanc,
+   blanc sur le noir, et il suit le survol sans qu'on s'en occupe. */
+.portail__nom{position:absolute;top:clamp(1.2rem,.9rem + 1.4vw,2.2rem);left:0;right:0;
+  z-index:5;text-align:center;pointer-events:none;color:#fff;mix-blend-mode:difference}
+.portail__nom p{max-width:none}
+.portail__nom-nom{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.05rem,.95rem + .5vw,1.45rem);line-height:1.1}
+.portail__nom-quoi{margin:.3rem 0 0;font-size:.64rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;opacity:.75}
+@supports not (mix-blend-mode:difference){
+  .portail__nom{mix-blend-mode:normal;color:var(--fg)}
+}
+@media (max-width:720px){
+  /* Les cartes s'empilent : il n'y a plus de couture, le nom se pose
+     simplement sur le fond de page. */
+  .portail__nom{position:static;mix-blend-mode:normal;color:var(--fg);
+    padding:1.3rem var(--gouttiere) .2rem}
+}
 
 /* ── le bandeau d'identité ───────────────────────────────────
    Première chose vue : chez qui on est, ce qu'il fait, où.
@@ -445,9 +531,9 @@ body.portail{min-height:100%}
 /* la carte survolée passe au vert : la ligne d'adresse qui la longe doit suivre,
    sinon elle disparaît dans le fond. */
 .espaces:has(.espace--clair:hover) .portail__pied .g,
-.espaces:has(.espace--clair:focus-visible) .portail__pied .g{color:#cfe5dc}
+.espaces:has(.espace--clair:focus-visible) .portail__pied .g{color:#9b9f9b}
 .espaces:has(.espace--encre:hover) .portail__pied .d,
-.espaces:has(.espace--encre:focus-visible) .portail__pied .d{color:#cfe5dc}
+.espaces:has(.espace--encre:focus-visible) .portail__pied .d{color:#6e726e}
 @media (max-width:720px){
   .portail .espaces{min-height:0}
   .portail .espace{min-height:0;padding-block:1.6rem}
