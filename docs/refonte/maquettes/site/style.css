@@ -164,7 +164,78 @@ p:last-child{margin-bottom:0}
    entre les deux reste visible. */
 .espace--clair::before{background:#3e433e}
 
-/* ── joindre le cabinet ──────────────────────────────────────
+/* ── prendre rendez-vous ─────────────────────────────────────
+   Une page qui décide ce qui compte. Le téléphone d'abord, en très grand :
+   c'est ainsi que l'on prend rendez-vous. Le courriel à côté, plus discret.
+   Puis le lieu avec son plan, sur toute la largeur. Puis les réseaux avec
+   leurs logos. Ce qu'il faut apporter ferme la page. */
+.prise{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief-fort);margin-top:clamp(1rem,.8rem + 1vw,1.6rem);overflow:hidden}
+.prise__appel,.prise__ecrire{padding:clamp(1.3rem,1rem + 1.6vw,2.4rem)}
+.prise__ecrire{border-left:1px solid var(--trait);background:var(--zone);
+  display:flex;flex-direction:column;justify-content:center}
+.prise__sur{margin:0 0 .5rem;font-size:.68rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--doux)}
+.prise__numero{display:inline-block;font-family:var(--serif);font-weight:700;
+  letter-spacing:-.025em;line-height:1;color:var(--fg);text-decoration:none;
+  font-size:clamp(2.3rem,1.5rem + 3.8vw,4.4rem);
+  border-bottom:3px solid transparent;transition:border-color .2s ease}
+.prise__numero:hover,.prise__numero:focus-visible{border-bottom-color:var(--fg)}
+.prise__quand{margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;
+  font-size:.95rem;color:var(--doux);max-width:none}
+.prise__quand b{color:var(--fg);font-weight:600}
+.prise__ferme{color:var(--doux)}
+.prise__mail{display:inline-block;font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);letter-spacing:-.01em;color:var(--fg);
+  text-decoration:none;border-bottom:2px solid var(--trait);line-height:1.3;
+  overflow-wrap:anywhere;transition:border-color .2s ease}
+.prise__mail:hover,.prise__mail:focus-visible{border-bottom-color:var(--fg)}
+.prise__note{margin:.7rem 0 0;font-size:.82rem;color:var(--doux);max-width:30ch}
+
+/* le lieu : l'adresse à gauche, le plan interactif à droite, bord à bord */
+.lieu{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);margin-top:clamp(.8rem,.65rem + .7vw,1.1rem);overflow:hidden}
+.lieu__texte{padding:clamp(1.3rem,1rem + 1.6vw,2.4rem);display:flex;flex-direction:column}
+.lieu__adresse{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.15;
+  font-size:clamp(1.35rem,1.15rem + .9vw,1.9rem);margin:.2rem 0 0;max-width:none}
+.lieu__acces{margin:1rem 0 0;font-size:.92rem;line-height:1.5;color:var(--doux);max-width:none}
+.lieu__acces b{color:var(--fg);font-weight:600;margin-right:.3rem}
+.lieu__ligne{font-size:.78rem;border:1px solid var(--trait);border-radius:999px;
+  padding:0 .45rem;margin-left:.1rem;white-space:nowrap}
+.lieu__plan{min-height:320px;background:var(--zone)}
+.lieu__plan iframe{width:100%;height:100%;min-height:320px;border:0;display:block;
+  filter:grayscale(1) contrast(1.02)}
+.bouton-encre{display:inline-block;margin-top:auto;padding-top:0;align-self:flex-start;
+  background:var(--fg);color:#f6f5f1;text-decoration:none;font-size:.86rem;font-weight:600;
+  padding:.62rem 1.1rem;border-radius:var(--rayon);margin-top:1.3rem;
+  transition:background .18s ease}
+.bouton-encre:hover,.bouton-encre:focus-visible{background:#000}
+.bouton-encre .ext{opacity:.6;font-size:.85em}
+
+/* les réseaux : le logo d'abord, grand, puis le nom et le compte */
+.reseaux{list-style:none;margin:clamp(1rem,.8rem + 1vw,1.6rem) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(.7rem,.55rem + .7vw,1.05rem)}
+.reseau{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;
+  column-gap:1rem;align-items:center;text-decoration:none;color:var(--fg);
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(.95rem,.8rem + .7vw,1.3rem);
+  transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
+.reseau:hover,.reseau:focus-visible{box-shadow:var(--relief-fort);border-color:var(--fg);
+  transform:translateY(-2px)}
+.reseau .logo{grid-row:1 / span 2;width:40px;height:40px;fill:currentColor}
+.reseau__nom{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:-.015em;
+  line-height:1.1}
+.reseau__compte{font-size:.84rem;color:var(--doux)}
+
+@media (max-width:860px){
+  .prise,.lieu{grid-template-columns:minmax(0,1fr)}
+  .prise__ecrire{border-left:0;border-top:1px solid var(--trait)}
+  .lieu__plan,.lieu__plan iframe{min-height:260px}
+}
+
+/* ── (ancien bandeau en cartes, conservé pour mémoire) ────────────────────
    Tout ce qu'on vient chercher sur une page contact, au-dessus de la ligne
    de flottaison et d'un seul geste : appeler, écrire, savoir quand c'est
    ouvert, ouvrir le plan, suivre le cabinet. */
