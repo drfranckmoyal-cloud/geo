@@ -601,11 +601,11 @@ def jsonld_dorigine(slug):
 TITRES = {
     # les actes
     "facettes-dentaires-paris": ("Facettes", "Céramique collée"),
-    "composite-bonding-paris": ("Composite bonding", "Résine stratifiée"),
-    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières, peroxyde de carbamide"),
+    "composite-bonding-paris": ("Composite bonding", "Résine stratifiée, en une séance"),
+    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières à domicile"),
     "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
-    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Composite ou céramique"),
-    "bilan-esthetique-personnalise": ("Bilan esthétique", "Photographies et simulation"),
+    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Technique additive"),
+    "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),
     # pour s'y retrouver
     "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
     "facettes-ou-composite": ("Facettes ou composite ?", "Comparatif"),
@@ -627,6 +627,25 @@ TITRES = {
 }
 
 
+def phrases(prefixe):
+    """Les phrases que Franck écrit lui-même, dans phrases.txt. Ce fichier est la
+    source : ce qui est écrit ici en dur n'est qu'un point de départ, et toute
+    ligne du fichier le remplace. Format : « carte.slug = la phrase »."""
+    chemin = os.path.join(os.path.dirname(os.path.abspath(__file__)), "phrases.txt")
+    trouvees = {}
+    if not os.path.exists(chemin):
+        return trouvees
+    for ligne in open(chemin, encoding="utf-8"):
+        ligne = ligne.rstrip("\n")
+        if not ligne.strip() or ligne.lstrip().startswith("#") or "=" not in ligne:
+            continue
+        cle, _, valeur = ligne.partition("=")
+        cle = cle.strip()
+        if cle.startswith(prefixe + "."):
+            trouvees[cle[len(prefixe) + 1:]] = valeur.strip()
+    return trouvees
+
+
 def soustitre(texte):
     if not texte:
         return ""
@@ -634,10 +653,10 @@ def soustitre(texte):
 
 
 def grand_titre(slug, h1_dorigine):
-    """Rend (titre, sous-titre). Sans entrée dans TITRES, la page garde son H1."""
-    if slug in TITRES:
-        return TITRES[slug]
-    return h1_dorigine, ""
+    """Rend (titre, sous-titre). Sans entrée dans TITRES, la page garde son H1.
+    Une ligne « titre.slug = … » dans phrases.txt l'emporte toujours."""
+    titre, sous = TITRES.get(slug, (h1_dorigine, ""))
+    return titre, phrases("titre").get(slug, sous)
 
 
 CAS = [

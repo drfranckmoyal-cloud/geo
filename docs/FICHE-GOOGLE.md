@@ -26,7 +26,7 @@ Identifiant de la fiche : `/g/11g901j57p`. Franck en est bien le gestionnaire (f
    Usures dentaires et TCA ». Les règles Google demandent le nom réel ; un nom bourré de mots-clés
    expose à une suspension. Recommandation déjà faite en V1.3 (point 41) : « Dr Franck Moyal ».
 4. **Une seule catégorie, « Dentiste ».** Des catégories secondaires existent (par exemple
-   « Dentiste esthétique », « Prothésiste dentaire » si pertinent) : à choisir par Franck.
+   « Dentisterie esthétique ») : à choisir par Franck.
 5. **Services sans description**, ni « Zones desservies », ni « Date de création ».
 6. **Horaires : mardi et vendredi seulement.** Si c'est exact, rien à changer ; Google suggère de
    confirmer les horaires de la Toussaint.

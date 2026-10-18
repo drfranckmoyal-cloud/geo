@@ -20,6 +20,25 @@ def e(t):
     return H.escape(t, quote=False)
 
 
+def phrases(prefixe):
+    """Les phrases que Franck écrit lui-même, dans phrases.txt. Ce fichier est la
+    source : ce qui est écrit ici en dur n'est qu'un point de départ, et toute
+    ligne du fichier le remplace. Format : « carte.slug = la phrase »."""
+    chemin = os.path.join(os.path.dirname(os.path.abspath(__file__)), "phrases.txt")
+    trouvees = {}
+    if not os.path.exists(chemin):
+        return trouvees
+    for ligne in open(chemin, encoding="utf-8"):
+        ligne = ligne.rstrip("\n")
+        if not ligne.strip() or ligne.lstrip().startswith("#") or "=" not in ligne:
+            continue
+        cle, _, valeur = ligne.partition("=")
+        cle = cle.strip()
+        if cle.startswith(prefixe + "."):
+            trouvees[cle[len(prefixe) + 1:]] = valeur.strip()
+    return trouvees
+
+
 def aussi(liens):
     """Les pages de contexte, sous la carte. Ce sont de vrais liens : la carte
     n'est donc pas un <a>, c'est le titre qui l'est, et son ::after couvre la
@@ -32,6 +51,7 @@ def aussi(liens):
 
 
 def acte(titre, quoi, lien, photo="", cadrage="", alt="", liens=()):
+    quoi = phrases("carte").get(lien, quoi)
     """La carte d'un acte : allongée, peu haute, le nom en grand à gauche et la
     photographie à droite, fondue dans la carte par un dégradé — elle illustre
     sans jamais passer sous le texte."""
@@ -158,33 +178,33 @@ def garder_jsonld(nom):
 # lisible dès la première page.
 SOINS = [
     ("Bilan esthétique",
-     "Photographies, simulation 2D, 3D ou dynamique.",
+     "Photographies, analyse du sourire, projet.",
      "bilan-esthetique-personnalise", "bilan-esthetique-projet.jpg", "",
      "Projet esthétique dessiné avant traitement",
      [("Dentisterie esthétique : la vue d’ensemble", "dentisterie-esthetique-paris")]),
     ("Éclaircissement",
-     "Gouttières personnalisées, peroxyde de carbamide, port nocturne.",
+     "Gouttières à domicile, suivi au cabinet.",
      "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
      "Sourire après un éclaircissement ambulatoire",
      [("Un cas documenté", "cas-mih-eclaircissement-erosion-infiltration")]),
     ("Infiltration ICON",
-     "Infiltration de résine ou microabrasion, selon la profondeur.",
+     "Taches blanches, MIH, fluorose. Sans fraise.",
      "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
      "Dents après infiltration de taches de MIH",
      [("Un cas documenté", "cas-mih-eclaircissement-erosion-infiltration")]),
     ("Composite bonding",
-     "Résine stratifiée couche après couche, directement sur la dent.",
+     "Résine stratifiée sur la dent, en une séance.",
      "composite-bonding-paris", "composite-bonding-six-dents-anterieures.jpg",
      "center 78%", "Sourire après un composite bonding sur six dents",
      [("Facettes ou composite ?", "facettes-ou-composite")]),
     ("Facettes",
-     "Céramique collée, préparation minimale.",
+     "Céramique collée sur la face visible de la dent.",
      "facettes-dentaires-paris", "facettes-ceramique-apres.jpg", "",
      "Sourire après la pose de facettes en céramique",
      [("Facettes ou composite ?", "facettes-ou-composite"),
       ("Un cas documenté", "cas-planification-facettes-ceramique")]),
     ("Réhabilitation des dents usées",
-     "Composite ou céramique : le matériau vient après le projet.",
+     "Rendre la hauteur et la fonction.",
      "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
      "Sourire après la réhabilitation de dents usées",
      [("Usure dentaire", "usures-dentaires"),
@@ -196,7 +216,7 @@ SOINS = [
     # En emprunter une à un autre cas ferait porter un diagnostic psychiatrique
     # à quelqu'un qui ne l'a pas.
     ("Troubles des conduites alimentaires",
-     "Dépistage, prévention, coordination, moment restaurateur.",
+     "Ce que le chirurgien-dentiste repère en premier.",
      "tca-dents", "", "", "",
      [("Anorexie restrictive : érosion sans vomissements",
        "anorexie-erosion-dentaire-sans-vomissements")]),
@@ -296,7 +316,7 @@ PRO_HOSPITALIER = [
      "Pitié-Salpêtrière 2012, CMME Sainte-Anne 2024.",
      "activite-hospitaliere", "Le détail"),
     ("TCA et santé bucco-dentaire",
-     "Dépistage, prévention, coordination, moment restaurateur.", "tca-dents", "Lire"),
+     "Ce que le chirurgien-dentiste repère en premier.", "tca-dents", "Lire"),
     ("Anorexie et érosion sans vomissements",
      "Érosion sans conduite de purge.",
      "anorexie-erosion-dentaire-sans-vomissements", "Lire"),
