@@ -352,10 +352,12 @@ p:last-child{margin-bottom:0}
 .portail__nom{position:absolute;top:clamp(1.2rem,.9rem + 1.4vw,2.2rem);left:0;right:0;
   z-index:5;text-align:center;pointer-events:none;color:#fff;mix-blend-mode:difference}
 .portail__nom p{max-width:none}
-.portail__nom-nom{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:-.02em;
-  font-size:clamp(1.05rem,.95rem + .5vw,1.45rem);line-height:1.1}
-.portail__nom-quoi{margin:.3rem 0 0;font-size:.64rem;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;opacity:.75}
+/* Le nom tient la page : grand, étalé, et maigre — le serif en graisse
+   normale, pas en gras, avec de l'air entre les lettres. */
+.portail__nom-nom{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:.08em;
+  font-size:clamp(1.65rem,1.1rem + 2.4vw,3.3rem);line-height:1.05}
+.portail__nom-quoi{margin:.55rem 0 0;font-size:clamp(.6rem,.55rem + .2vw,.74rem);
+  font-weight:500;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
 @supports not (mix-blend-mode:difference){
   .portail__nom{mix-blend-mode:normal;color:var(--fg)}
 }
@@ -646,11 +648,11 @@ body.portail{min-height:100%}
 .intro__texte{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:.5rem;text-align:center;
   padding:0 clamp(16px,4vw,40px);animation:intro-sortir .5s ease 1.6s forwards}
-.intro__nom{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:-.03em;
-  font-size:clamp(2.2rem,1.4rem + 4vw,4.6rem);line-height:1;color:var(--fg);
+.intro__nom{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:.08em;
+  font-size:clamp(2rem,1.3rem + 3.6vw,4.3rem);line-height:1.05;color:var(--fg);
   opacity:0;animation:intro-monter .9s cubic-bezier(.2,.7,.2,1) .15s forwards}
-.intro__quoi{margin:0;font-size:clamp(.78rem,.7rem + .3vw,.95rem);font-weight:600;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--acc);
+.intro__quoi{margin:0;font-size:clamp(.7rem,.64rem + .25vw,.86rem);font-weight:500;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--acc);
   opacity:0;animation:intro-monter .8s cubic-bezier(.2,.7,.2,1) .65s forwards}
 .intro__filet{width:0;height:1px;background:var(--acc);opacity:.4;margin-top:.3rem;
   animation:intro-filet .9s cubic-bezier(.2,.7,.2,1) 1s forwards}
