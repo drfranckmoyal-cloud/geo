@@ -88,7 +88,7 @@ for lib, slug in CONFRERES:
 PUBLIC["anorexie-erosion-dentaire-sans-vomissements"] = (
     "Le sujet", "Patient", "Anorexie restrictive")
 PUBLIC["diagnostic-usures-dentaires"] = ("Le sujet", "Patient", "Diagnostic des usures")
-PUBLIC["franck-moyal"] = ("Le praticien", None, "Dr Franck Moyal")
+PUBLIC["franck-moyal"] = ("Mon parcours", None, "Dr Franck Moyal")
 PUBLIC["chirurgien-dentiste-paris-9"] = ("Le cabinet", None, "Paris 9ᵉ")
 PUBLIC["contact"] = ("Le cabinet", None, "Contact")
 PUBLIC["mentions-legales"] = ("Informations", None, "Mentions légales")
@@ -289,7 +289,7 @@ def menu(slug):
           </ul>
         </div>
       </div>
-      <a class="lien" href="franck-moyal.html">Le praticien</a>
+      <a class="lien" href="franck-moyal.html">Mon parcours</a>
     </nav>
     <a class="rdv" href="contact.html">Prendre rendez-vous</a>
   </div>
@@ -302,7 +302,7 @@ PIED = '''<footer class="pied">
       <div><h4>Le cabinet</h4><ul><li>2 rue Hippolyte Lebas</li><li>75009 Paris</li><li>01 83 75 52 16</li></ul></div>
       <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
       <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires</a></li></ul></div>
-      <div><h4>Le praticien</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
+      <div><h4>Mon exercice</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
       <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     </div>
     <p class="pied__bas">Maquette de refonte — rien n’est en ligne. Mentions légales.</p>
@@ -666,7 +666,7 @@ CAS = [
     ("MIH : éclaircissement et infiltration", "cas-mih-eclaircissement-erosion-infiltration"),
 ]
 AUTRES = [
-    ("Le praticien", "franck-moyal"),
+    ("Mon parcours", "franck-moyal"),
     ("Le cabinet, Paris 9ᵉ", "chirurgien-dentiste-paris-9"),
     ("Anorexie et érosion", "anorexie-erosion-dentaire-sans-vomissements"),
     ("Contact", "contact"),
@@ -705,7 +705,7 @@ def sommaire():
         colonne("Pour choisir", POUR_CHOISIR),
         colonne("Cas documentés", CAS),
         colonne("Pour les confrères", CONFRERES),
-        colonne("Le praticien et le cabinet", AUTRES),
+        colonne("Mon parcours et le cabinet", AUTRES),
     ])
 
     gabarit = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
