@@ -208,8 +208,17 @@ p:last-child{margin-bottom:0}
    Franck, 17/10/2026 : « le mot d'ordre est COHÉRENCE et HIÉRARCHIE ». */
 /* Un titre de bande, pas un chapitre d'exposé : le filet le pose, rien de plus.
    Franck, 18/10/2026 : « le concept de numérotation n'est pas naturel ». */
-.tete-bande{font-size:clamp(1.15rem,1.02rem + .5vw,1.5rem);letter-spacing:-.015em;
-  padding-bottom:.55rem;border-bottom:1px solid var(--trait);margin:0}
+.tete-bande{font-family:var(--serif);font-weight:700;letter-spacing:-.018em;
+  font-size:clamp(1.15rem,1.02rem + .5vw,1.5rem);
+  padding-bottom:.6rem;border-bottom:1px solid var(--trait);margin:0}
+/* La première bande porte le H1 : elle est plus haute et plus ample, pour
+   tenir la page maintenant qu'il n'y a plus de grand titre au-dessus. */
+.tete-bande--haut{font-size:clamp(1.6rem,1.3rem + 1.1vw,2.2rem);
+  padding-bottom:.75rem;border-bottom-color:var(--fg);
+  margin-top:clamp(.9rem,.7rem + 1vw,1.7rem)}
+/* Le fil d'Ariane devient la seule chose au-dessus de la première bande. */
+.ariane--seule{max-width:var(--page);margin:0 auto;
+  padding:clamp(1rem,.85rem + .8vw,1.5rem) var(--gouttiere) 0}
 /* les pages de contexte, sous chaque soin */
 .tuile__aussi{margin-top:.2rem;font-size:.78rem;color:var(--doux);
   display:flex;flex-wrap:wrap;gap:.1rem .4rem;position:relative;z-index:4}

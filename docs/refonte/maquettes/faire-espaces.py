@@ -96,13 +96,17 @@ def paire(titre, quoi, lien, avant, apres):
         </a>'''
 
 
-def section(titre, tuiles, zone=False):
+def section(titre, tuiles, zone=False, premier=False):
     """Pas de numéro : une page n'est pas un exposé. Un titre, un filet, la
-    grille — c'est ce que font les sites de référence."""
+    grille — c'est ce que font les sites de référence. La première section
+    porte le H1 : la page n'a plus de grand titre au-dessus, il faisait
+    doublon avec le fil d'Ariane et le menu."""
     classe = "sect sect--zone" if zone else "sect"
+    balise = "h1" if premier else "h2"
+    tete = f'<{balise} class="tete-bande{" tete-bande--haut" if premier else ""}">{e(titre)}</{balise}>'
     return f'''  <section class="{classe}">
     <div class="contenu">
-      <h2 class="tete-bande">{e(titre)}</h2>
+      {tete}
       <div class="tuiles">
 {chr(10).join(tuiles)}
       </div>
@@ -110,7 +114,7 @@ def section(titre, tuiles, zone=False):
   </section>'''
 
 
-def page(slug, titre, description, ariane, eyebrow, h1, sections, jsonld=""):
+def page(slug, titre, description, ariane, sections, jsonld=""):
     return f'''<!doctype html>
 <html lang="fr">
 <head>
@@ -130,13 +134,7 @@ def page(slug, titre, description, ariane, eyebrow, h1, sections, jsonld=""):
 
 <main>
 
-  <section class="sect sect--tete" style="border-top:0">
-    <div class="contenu">
-      <p class="ariane"><a href="index.html">Accueil</a> › {e(ariane)}</p>
-      <p class="eyebrow">{e(eyebrow)}</p>
-      <h1>{e(h1)}</h1>
-    </div>
-  </section>
+  <p class="ariane ariane--seule"><a href="index.html">Accueil</a> › {e(ariane)}</p>
 
 {chr(10).join(sections)}
 
@@ -272,11 +270,11 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def patients():
     sections = [
-        section("Mon expertise", [acte(*a) for a in SOINS]),
-        section("Les cas", [paire(*c) for c in CAS], zone=True),
+        section("Mes expertises", [acte(*a) for a in SOINS], premier=True),
+        section("Cas cliniques", [paire(*c) for c in CAS], zone=True),
         f'''  <section class="sect">
     <div class="contenu">
-      <h2 class="tete-bande">Le praticien</h2>
+      <h2 class="tete-bande">Me rencontrer</h2>
 {PRATICIEN}
     </div>
   </section>''',
@@ -286,7 +284,7 @@ def patients():
         "Espace patients | Dr Franck Moyal — dentisterie esthétique à Paris",
         "Facettes, composite bonding, éclaircissement, infiltration ICON, réhabilitation des "
         "dents usées, bilan esthétique : chaque acte a sa page. Dr Franck Moyal, Paris 9e.",
-        "Espace patients", "Vous consultez", "Espace patients",
+        "Espace patients",
         sections, garder_jsonld("espace-patients.html"))
 
 
@@ -351,13 +349,14 @@ PRO_PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 def pro():
     sections = [
         section("Enseignement et publications",
-                [tuile(*t, longue=True) for t in PRO_ENSEIGNEMENT + PRO_TRAVAUX]),
+                [tuile(*t, longue=True) for t in PRO_ENSEIGNEMENT + PRO_TRAVAUX],
+                premier=True),
         section("Activité hospitalière",
                 [tuile(*t, longue=True) for t in PRO_HOSPITALIER], zone=True),
-        section("Les cas", [paire(*c) for c in CAS]),
+        section("Cas cliniques", [paire(*c) for c in CAS]),
         f'''  <section class="sect sect--zone">
     <div class="contenu">
-      <h2 class="tete-bande">Le praticien</h2>
+      <h2 class="tete-bande">Me rencontrer</h2>
 {PRO_PRATICIEN}
     </div>
   </section>''',
@@ -367,7 +366,7 @@ def pro():
         "Espace pro | Formations, publications et activité hospitalière — Dr Franck Moyal",
         "Conférences et formations, publications, activité hospitalière à la Pitié-Salpêtrière "
         "et à la CMME de Sainte-Anne, cas documentés : l’espace professionnel du Dr Franck Moyal.",
-        "Espace pro", "Vous exercez", "Espace pro",
+        "Espace pro",
         sections, garder_jsonld("espace-pro.html"))
 
 
