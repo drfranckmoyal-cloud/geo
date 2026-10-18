@@ -601,11 +601,11 @@ def jsonld_dorigine(slug):
 TITRES = {
     # les actes
     "facettes-dentaires-paris": ("Facettes", "Céramique collée"),
-    "composite-bonding-paris": ("Composite bonding", "Résine stratifiée, en une séance"),
-    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières à domicile"),
+    "composite-bonding-paris": ("Composite bonding", "Résine stratifiée"),
+    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières, peroxyde de carbamide"),
     "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
-    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Technique additive"),
-    "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),
+    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Composite ou céramique"),
+    "bilan-esthetique-personnalise": ("Bilan esthétique", "Photographies et simulation"),
     # pour s'y retrouver
     "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
     "facettes-ou-composite": ("Facettes ou composite ?", "Comparatif"),

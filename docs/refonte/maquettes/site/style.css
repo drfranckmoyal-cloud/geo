@@ -279,7 +279,7 @@ p:last-child{margin-bottom:0}
   font-size:clamp(1.25rem,1.05rem + .8vw,1.7rem);line-height:1.02;margin:0;color:var(--fg)}
 /* une seule ligne : la photographie est assez effacée pour que le texte
    puisse courir devant elle sans gêne */
-.tuile--acte .tuile__quoi,.tuile--long .tuile__quoi{font-size:.845rem;max-width:46ch}
+.tuile--acte .tuile__quoi,.tuile--long .tuile__quoi{font-size:.845rem;max-width:64ch}
 .tuile--acte .tuile__fleche,.tuile--long .tuile__fleche{margin-top:.2rem;padding-top:0;
   font-size:.74rem}
 /* sans photographie, le texte prend toute la carte */
