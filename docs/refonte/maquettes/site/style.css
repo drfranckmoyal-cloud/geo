@@ -356,7 +356,7 @@ p:last-child{margin-bottom:0}
 /* Le nom tient la page : grand, étalé, et maigre — le serif en graisse
    normale, pas en gras, avec de l'air entre les lettres. */
 .portail__nom-nom{margin:0;font-family:var(--porte);font-weight:300;letter-spacing:.10em;
-  font-size:clamp(1.8rem,1.2rem + 2.7vw,3.6rem);line-height:1.05}
+  font-size:clamp(1.55rem,1.05rem + 2.2vw,3rem);line-height:1.05}
 .portail__nom-quoi{margin:.5rem 0 0;font-family:var(--porte);
   font-size:clamp(.66rem,.6rem + .25vw,.82rem);
   font-weight:400;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
@@ -651,7 +651,7 @@ body.portail{min-height:100%}
   align-items:center;justify-content:center;gap:.5rem;text-align:center;
   padding:0 clamp(16px,4vw,40px);animation:intro-sortir .5s ease 1.6s forwards}
 .intro__nom{margin:0;font-family:var(--porte);font-weight:300;letter-spacing:.10em;
-  font-size:clamp(2.2rem,1.4rem + 4vw,4.7rem);line-height:1.05;color:var(--fg);
+  font-size:clamp(2rem,1.3rem + 3.5vw,4.1rem);line-height:1.05;color:var(--fg);
   opacity:0;animation:intro-monter .9s cubic-bezier(.2,.7,.2,1) .15s forwards}
 .intro__quoi{margin:0;font-family:var(--porte);
   font-size:clamp(.76rem,.68rem + .3vw,.95rem);font-weight:400;
