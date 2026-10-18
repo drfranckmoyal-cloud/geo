@@ -160,7 +160,9 @@ p:last-child{margin-bottom:0}
 .espace::before{content:"";position:absolute;inset:0;z-index:-1;
   transform:scaleY(0);transform-origin:bottom;
   transition:transform .42s cubic-bezier(.2,.7,.2,1)}
-.espace--clair::before{background:#111312}
+/* Plus clair que le noir de la moitié droite : au survol, la couture
+   entre les deux reste visible. */
+.espace--clair::before{background:#3e433e}
 .espace--encre::before{background:#f4f3ee}
 .espace:hover::before,.espace:focus-visible::before{transform:scaleY(1)}
 .espace__sur{margin:0 0 .35rem;font-size:.7rem;font-weight:700;letter-spacing:.17em;
