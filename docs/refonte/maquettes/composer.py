@@ -46,13 +46,38 @@ FONDUES = {"diagnostic-usures-dentaires": "usures-dentaires"}
 
 
 # ── lecture ───────────────────────────────────────────────────────────────────
+# Un numéro de téléphone et une adresse e-mail doivent rester cliquables : sur
+# un téléphone, c'est la seule façon d'appeler le cabinet d'un geste. Le site en
+# ligne les porte ; la mise en page les effaçait avec le reste du balisage.
+_APPEL = re.compile(r'<a\b[^>]*href="((?:tel|mailto):[^"]+)"[^>]*>(.*?)</a>', re.S)
+
+
+def _mettre_de_cote(frag):
+    gardes = []
+
+    def prendre(m):
+        gardes.append((m.group(1), re.sub(r"<[^>]+>", "", m.group(2)).strip()))
+        return "\x00%d\x00" % (len(gardes) - 1)
+
+    return _APPEL.sub(prendre, frag), gardes
+
+
+def _remettre(frag, gardes):
+    for i, (ou, quoi) in enumerate(gardes):
+        frag = frag.replace("\x00%d\x00" % i, '<a href="%s">%s</a>' % (ou, quoi))
+    return frag
+
+
 def nu(x, garder_gras=True):
+    gardes = []
+    if garder_gras:                      # on ne protège pas pour le contrôle de texte
+        x, gardes = _mettre_de_cote(x)
     x = re.sub(r"<(script|style)\b.*?</\1>", "", x, flags=re.S)
     x = re.sub(r'<sup[^>]*class="cite"[^>]*>.*?</sup>', "", x, flags=re.S)
     x = re.sub(r"<span[^>]*visually-hidden[^>]*>.*?</span>", "", x, flags=re.S)
     x = re.sub(r"<(?!/?(strong|em)\b)[^>]+>", " ", x) if garder_gras else re.sub(r"<[^>]+>", " ", x)
     x = re.sub(r"\s+data-astro-cid-\w+", "", x)
-    return re.sub(r"\s+", " ", x).strip()
+    return _remettre(re.sub(r"\s+", " ", x).strip(), gardes)
 
 
 def lire(slug):
@@ -137,6 +162,12 @@ def e(s):
     out = H.escape(s, quote=False)
     for t in ("strong", "em"):
         out = out.replace(f"&lt;{t}&gt;", f"<{t}>").replace(f"&lt;/{t}&gt;", f"</{t}>")
+    # Les liens d'appel portent un attribut : la liste blanche ci-dessus, qui ne
+    # connaît que les balises nues, les laissait échappés et donc affichés en clair.
+    out = re.sub(r'&lt;a href="((?:tel|mailto):[^"]+)"&gt;(.*?)&lt;/a&gt;',
+                 lambda m: '<a href="%s">%s</a>' % (m.group(1).replace("&amp;", "&"),
+                                                    m.group(2)),
+                 out, flags=re.S)
     return out
 
 

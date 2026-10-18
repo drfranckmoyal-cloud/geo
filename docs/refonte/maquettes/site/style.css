@@ -163,6 +163,10 @@ p:last-child{margin-bottom:0}
 /* Plus clair que le noir de la moitié droite : au survol, la couture
    entre les deux reste visible. */
 .espace--clair::before{background:#3e433e}
+
+/* Deux actions côte à côte, appeler ou écrire, au bas de la page contact. */
+.appel__duo{display:flex;flex-wrap:wrap;gap:.7rem;margin:0}
+.bouton--clair{background:transparent;color:inherit;border:1px solid currentColor}
 .espace--encre::before{background:#f4f3ee}
 .espace:hover::before,.espace:focus-visible::before{transform:scaleY(1)}
 .espace__sur{margin:0 0 .35rem;font-size:.7rem;font-weight:700;letter-spacing:.17em;

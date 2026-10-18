@@ -115,14 +115,37 @@ FONDUES_VERS = {"diagnostic-usures-dentaires": "usures-dentaires"}
 
 
 # ── extraction ────────────────────────────────────────────────────────────────
+# Un numéro de téléphone et une adresse e-mail doivent rester cliquables : sur
+# un téléphone, c'est la seule façon d'appeler le cabinet d'un geste. Le site en
+# ligne les porte ; la mise en page les effaçait avec le reste du balisage.
+_APPEL = re.compile(r'<a\b[^>]*href="((?:tel|mailto):[^"]+)"[^>]*>(.*?)</a>', re.S)
+
+
+def _mettre_de_cote(frag):
+    gardes = []
+
+    def prendre(m):
+        gardes.append((m.group(1), re.sub(r"<[^>]+>", "", m.group(2)).strip()))
+        return "\x00%d\x00" % (len(gardes) - 1)
+
+    return _APPEL.sub(prendre, frag), gardes
+
+
+def _remettre(frag, gardes):
+    for i, (ou, quoi) in enumerate(gardes):
+        frag = frag.replace("\x00%d\x00" % i, '<a href="%s">%s</a>' % (ou, quoi))
+    return frag
+
+
 def texte(frag):
-    """Garde le gras et les liens internes, jette le reste du balisage."""
+    """Garde le gras et les liens d'appel, jette le reste du balisage."""
+    frag, gardes = _mettre_de_cote(frag)
     f = re.sub(r"<(script|style)\b.*?</\1>", "", frag, flags=re.S)
     f = re.sub(r"<sup[^>]*class=\"cite\"[^>]*>.*?</sup>", "", f, flags=re.S)
     f = re.sub(r"<span[^>]*visually-hidden[^>]*>.*?</span>", "", f, flags=re.S)
     f = re.sub(r"<(?!/?(strong|em|b|i)\b)[^>]+>", " ", f)
     f = re.sub(r"\s+", " ", f)
-    return f.strip()
+    return _remettre(f.strip(), gardes)
 
 
 # Chemin du dossier de la maquette jusqu'à la racine du dépôt. Les photos sont
@@ -242,6 +265,12 @@ def e(s):
     out = H.escape(s, quote=False)
     for t in AUTORISES:
         out = out.replace(f"&lt;{t}&gt;", f"<{t}>").replace(f"&lt;/{t}&gt;", f"</{t}>")
+    # Les liens d'appel portent un attribut : la liste blanche ci-dessus, qui ne
+    # connaît que les balises nues, les laissait échappés et donc affichés en clair.
+    out = re.sub(r'&lt;a href="((?:tel|mailto):[^"]+)"&gt;(.*?)&lt;/a&gt;',
+                 lambda m: '<a href="%s">%s</a>' % (m.group(1).replace("&amp;", "&"),
+                                                    m.group(2)),
+                 out, flags=re.S)
     return out
 
 
@@ -441,7 +470,22 @@ def rendre(page):
   </section>''')
 
     # ── appel ──
-    corps.append('''  <section class="appel">
+    # Sur la page contact, « Prendre rendez-vous » renvoyait à la page contact :
+    # un bouton qui ne mène nulle part. Elle reçoit les deux vraies actions.
+    if slug == "contact":
+        corps.append('''  <section class="appel">
+    <div class="contenu">
+      <h2>Prendre rendez-vous</h2>
+      <p>Par téléphone pour un rendez-vous, par courriel pour une question
+        avant de venir.</p>
+      <p class="appel__duo">
+        <a class="bouton" href="tel:+33183755216">Appeler le cabinet</a>
+        <a class="bouton bouton--clair" href="mailto:drfranckmoyal@gmail.com?subject=Demande%20de%20rendez-vous%20-%20Dr%20Franck%20Moyal">Écrire au cabinet</a>
+      </p>
+    </div>
+  </section>''')
+    else:
+        corps.append('''  <section class="appel">
     <div class="contenu">
       <h2>Faire le point</h2>
       <p>Un bilan permet de comprendre l’état des dents et les options possibles,
