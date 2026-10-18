@@ -76,6 +76,13 @@
   if (!intro) return;
   var vue = false;
   try { vue = sessionStorage.getItem('intro-vue') === '1'; } catch (e) {}
+  // La mémoire de session est refusée quand on ouvre le fichier directement
+  // (file://). On regarde alors d'où l'on vient : arriver d'une autre page du
+  // site, c'est revenir à l'accueil — l'entrée ne se rejoue pas.
+  if (!vue && document.referrer) {
+    var ici = location.href.replace(/[^/]*$/, '');
+    if (document.referrer.replace(/[^/]*$/, '') === ici) { vue = true; }
+  }
   if (vue || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     intro.setAttribute('data-passee', '');
     return;
