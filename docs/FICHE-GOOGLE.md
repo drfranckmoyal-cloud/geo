@@ -27,10 +27,10 @@ Identifiant de la fiche : `/g/11g901j57p`. Franck en est bien le gestionnaire (f
    expose à une suspension. Recommandation déjà faite en V1.3 (point 41) : « Dr Franck Moyal ».
 4. **Une seule catégorie, « Dentiste ».** Des catégories secondaires existent (par exemple
    « Dentisterie esthétique ») : à choisir par Franck.
-5. **Services sans description**, ni « Zones desservies », ni « Date de création ».
+5. **Aucune description affichée sous les services**, et ni « Zones desservies », ni « Date de création ».
 6. **Horaires : mardi et vendredi seulement.** Si c'est exact, rien à changer ; Google suggère de
    confirmer les horaires de la Toussaint.
-7. **Pas de photo de devanture** (suggestion Google « Photo de l'extérieur »), pas de posts.
+7. **Pas de photo de devanture** (suggestion Google « Photo de l'extérieur ») ; Google propose aussi de publier des actualités (posts), non vérifié s'il en existe.
 
 ## Incohérences d'adresses ailleurs
 
