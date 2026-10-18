@@ -20,6 +20,7 @@
   --relief-fort:0 2px 4px rgba(26,28,25,.06), 0 14px 38px rgba(26,28,25,.08);
   --rayon:4px;
 
+  --porte:'Cormorant Garamond',Garamond,'Times New Roman',serif;  /* le nom sur la porte, choisi le 18/10/2026 */
   --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
   --sans:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 
@@ -354,10 +355,11 @@ p:last-child{margin-bottom:0}
 .portail__nom p{max-width:none}
 /* Le nom tient la page : grand, étalé, et maigre — le serif en graisse
    normale, pas en gras, avec de l'air entre les lettres. */
-.portail__nom-nom{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:.08em;
-  font-size:clamp(1.65rem,1.1rem + 2.4vw,3.3rem);line-height:1.05}
-.portail__nom-quoi{margin:.55rem 0 0;font-size:clamp(.6rem,.55rem + .2vw,.74rem);
-  font-weight:500;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
+.portail__nom-nom{margin:0;font-family:var(--porte);font-weight:300;letter-spacing:.10em;
+  font-size:clamp(1.8rem,1.2rem + 2.7vw,3.6rem);line-height:1.05}
+.portail__nom-quoi{margin:.5rem 0 0;font-family:var(--porte);
+  font-size:clamp(.66rem,.6rem + .25vw,.82rem);
+  font-weight:400;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
 @supports not (mix-blend-mode:difference){
   .portail__nom{mix-blend-mode:normal;color:var(--fg)}
 }
@@ -648,10 +650,11 @@ body.portail{min-height:100%}
 .intro__texte{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:.5rem;text-align:center;
   padding:0 clamp(16px,4vw,40px);animation:intro-sortir .5s ease 1.6s forwards}
-.intro__nom{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:.08em;
-  font-size:clamp(2rem,1.3rem + 3.6vw,4.3rem);line-height:1.05;color:var(--fg);
+.intro__nom{margin:0;font-family:var(--porte);font-weight:300;letter-spacing:.10em;
+  font-size:clamp(2.2rem,1.4rem + 4vw,4.7rem);line-height:1.05;color:var(--fg);
   opacity:0;animation:intro-monter .9s cubic-bezier(.2,.7,.2,1) .15s forwards}
-.intro__quoi{margin:0;font-size:clamp(.7rem,.64rem + .25vw,.86rem);font-weight:500;
+.intro__quoi{margin:0;font-family:var(--porte);
+  font-size:clamp(.76rem,.68rem + .3vw,.95rem);font-weight:400;
   letter-spacing:.3em;text-transform:uppercase;color:var(--acc);
   opacity:0;animation:intro-monter .8s cubic-bezier(.2,.7,.2,1) .65s forwards}
 .intro__filet{width:0;height:1px;background:var(--acc);opacity:.4;margin-top:.3rem;
