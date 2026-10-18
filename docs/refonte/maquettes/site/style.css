@@ -178,12 +178,14 @@ p:last-child{margin-bottom:0}
 .prise__sur{margin:0 0 .5rem;font-size:.68rem;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;color:var(--doux)}
 .prise__numero{display:inline-block;font-family:var(--serif);font-weight:700;
-  letter-spacing:-.025em;line-height:1;color:var(--fg);text-decoration:none;
-  font-size:clamp(2.3rem,1.5rem + 3.8vw,4.4rem);
+  letter-spacing:-.02em;line-height:1.1;color:var(--fg);text-decoration:none;
+  font-size:clamp(1.45rem,1.25rem + 1vw,2.05rem);
   border-bottom:3px solid transparent;transition:border-color .2s ease}
 .prise__numero:hover,.prise__numero:focus-visible{border-bottom-color:var(--fg)}
-.prise__quand{margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;
-  font-size:.95rem;color:var(--doux);max-width:none}
+.prise__quand{margin:.7rem 0 0;font-size:.92rem;color:var(--doux);max-width:none}
+.prise__consigne{margin:1rem 0 .25rem;font-size:.9rem;font-weight:600;color:var(--fg);max-width:none}
+.prise__liste{margin:0;padding-left:1.1rem;font-size:.92rem;line-height:1.5;color:var(--fg)}
+.prise__liste li{margin:.15rem 0}
 .prise__quand b{color:var(--fg);font-weight:600}
 .prise__ferme{color:var(--doux)}
 .prise__mail{display:inline-block;font-family:var(--serif);font-weight:700;
@@ -205,8 +207,20 @@ p:last-child{margin-bottom:0}
 .lieu__ligne{font-size:.78rem;border:1px solid var(--trait);border-radius:999px;
   padding:0 .45rem;margin-left:.1rem;white-space:nowrap}
 .lieu__plan{min-height:320px;background:var(--zone)}
-.lieu__plan iframe{width:100%;height:100%;min-height:320px;border:0;display:block;
-  filter:grayscale(1) contrast(1.02)}
+.lieu__plan iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+.lieu__ligne-info{margin:.6rem 0 0;font-size:.92rem;color:var(--fg);max-width:none}
+.lieu__avis{margin:.9rem 0 0;font-size:.9rem;max-width:none;display:flex;flex-wrap:wrap;
+  align-items:baseline;gap:.2rem .6rem}
+.lieu__avis a{color:var(--fg);text-decoration:none;font-weight:600;
+  border-bottom:1px solid var(--trait)}
+.lieu__avis a:hover{border-color:var(--fg)}
+.lieu__etoile{color:#e7a600}
+.lieu__releve{font-size:.76rem;color:var(--doux)}
+/* emplacement réservé, clairement signalé : la photographie manque encore */
+.lieu__photo{margin:1.1rem 0 0;border:1px dashed var(--doux);border-radius:var(--rayon);
+  padding:.8rem .9rem;background:repeating-linear-gradient(135deg,transparent 0 10px,
+  rgba(26,28,25,.035) 10px 12px)}
+.lieu__photo figcaption{font-size:.76rem;color:var(--doux);line-height:1.4}
 .bouton-encre{display:inline-block;margin-top:auto;padding-top:0;align-self:flex-start;
   background:var(--fg);color:#f6f5f1;text-decoration:none;font-size:.86rem;font-weight:600;
   padding:.62rem 1.1rem;border-radius:var(--rayon);margin-top:1.3rem;
@@ -224,12 +238,21 @@ p:last-child{margin-bottom:0}
   transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
 .reseau:hover,.reseau:focus-visible{box-shadow:var(--relief-fort);border-color:var(--fg);
   transform:translateY(-2px)}
-.reseau .logo{grid-row:1 / span 2;width:40px;height:40px;fill:currentColor}
+.reseau .logo{grid-row:1 / span 2;width:44px;height:44px}
 .reseau__nom{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:-.015em;
   line-height:1.1}
 .reseau__compte{font-size:.84rem;color:var(--doux)}
 
+/* la barre d'appel fixe, téléphone seulement : écrire, appeler, s'y rendre */
+.barre-mobile{display:none}
 @media (max-width:860px){
+  .barre-mobile{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;
+    left:0;right:0;bottom:0;z-index:50;background:var(--fg);
+    padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -6px 20px rgba(26,28,25,.18)}
+  .barre-mobile a{color:#f6f5f1;text-decoration:none;text-align:center;
+    font-size:.84rem;font-weight:600;padding:.85rem .4rem;border-right:1px solid rgba(255,255,255,.14)}
+  .barre-mobile a:last-child{border-right:0}
+  body:not(.portail){padding-bottom:3.4rem}
   .prise,.lieu{grid-template-columns:minmax(0,1fr)}
   .prise__ecrire{border-left:0;border-top:1px solid var(--trait)}
   .lieu__plan,.lieu__plan iframe{min-height:260px}

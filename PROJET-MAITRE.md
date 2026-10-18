@@ -338,6 +338,11 @@ décision.
 | 42 | **Remarques visuelles du correctif V1.3** : sur les 3 pages gelées, les sections prévues avec image gardent leur composition, et l'autre moitié reste vide sur ordinateur tant que la photo manque ; le titre « Prendre rendez-vous ou nous écrire » passe à la ligne au trait d'union de « rendez-vous ». | Laissé tel quel (V24). | ChatGPT. |
 | 26 | **Libellés d'interface ajoutés**, hors contenu éditorial : « Menu », « Fermer », « Accueil » (fil d'Ariane), « Auteur », « © 2026 Dr Franck Moyal », et, invisibles à l'écran, « Aller au contenu », le texte de remplacement du portrait et les intitulés des zones de navigation. Depuis D33 : « Rendez-vous » sur l'en-tête mobile. Les autres interprétations sont listées au §6 du rapport du tour 1. | Appliqué. | ChatGPT. |
 
+- **Première consultation** — durée, tarif, prise en charge, déroulé : à ajouter sur la page contact (Franck, 19/10/2026 : « noter qu'on le rajoute »). En attente de ses éléments.
+- **Langues parlées** — sur la fiche Google, **à ne pas afficher** sur le site (Franck, 19/10/2026).
+- **Photo de la façade** — emplacement réservé sur la page contact, photographie à fournir par Franck.
+- **Doctolib** — Franck rattache lui-même la fiche Google au bon cabinet (Flandre → Paris 9) ; le site n'aura un bouton de réservation en ligne qu'avec ce lien.
+
 ### Tranchés
 
 - **Lignes « Prise de rendez-vous en ligne »** (ancien point 3) → supprimées ; téléphone et e-mail au même niveau (D45).
@@ -621,6 +626,8 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 18/10/2026 | F | Demande une analyse critique de la page contact, fournit sa fiche Google, confirme métro Cadet et Notre-Dame-de-Lorette. | D81 |
 | 19/10/2026 | F | Rejette la première version en cartes alignées « sans hiérarchie » ; veut des logos de réseaux visibles, un plan interactif, et que Claude propose ce qui manque encore. | D81 |
 | 19/10/2026 | C | Page refaite en hiérarchie (téléphone, lieu + plan, réseaux à logos). Neuf liens d'appel perdus par la maquette retrouvés. Bouton « Réserver en ligne » de la fiche Google vers le centre Flandre signalé. | Attente de Franck sur les ajouts proposés |
+| 19/10/2026 | F | Sur la page contact : plus de phrases d'accroche ; le standard est ouvert du lundi au vendredi 9 h–19 h ; le numéro « énorme » est ridicule ; il préfère les demandes par courriel avec trois consignes (expliquer la demande, dire par quel biais on est adressé, joindre les pièces) ; plan et logos en couleurs ; faire la barre d'appel mobile, la note Google et l'emplacement photo ; l'accès est sur la fiche Google ; les langues ne s'affichent pas ; il change Doctolib lui-même. | D81, §6 |
+| 19/10/2026 | C | Page refaite : courriel d'abord avec ses trois consignes, téléphone ensuite (33 px) avec le standard lundi–vendredi, consultations mardi et vendredi avec l'adresse, accès relevé sur la fiche (fauteuil, parking, boucle magnétique), note 4,9/5 sur 113 avis datée, plan OSM en couleurs, logos aux couleurs des réseaux, emplacement photo réservé, barre « Écrire · Appeler · Itinéraire » fixée en bas sur téléphone sur les 28 pages. JSON-LD : standard en `contactPoint`, accessibilité en `amenityFeature` ; pas d'`aggregateRating` (Google le refuse pour ses propres avis). | Attente : photo de la façade, éléments « première consultation » |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---

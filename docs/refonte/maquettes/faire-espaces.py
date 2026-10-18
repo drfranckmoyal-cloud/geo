@@ -372,31 +372,40 @@ def pro():
 
 
 # ── Contact ───────────────────────────────────────────────────────────────
-# Tout vient de la fiche Google du cabinet, relevée le 18/10/2026, et des deux
-# stations de métro indiquées par Franck. Rien n'est inventé.
+# Tout vient de la fiche Google du cabinet (relevée les 18 et 19/10/2026) et
+# des précisions de Franck : standard téléphonique du lundi au vendredi, métro,
+# consignes pour écrire. Rien n'est inventé ; aucune phrase d'accroche.
 #
-# La page a une hiérarchie, pas une grille : le téléphone domine, parce que
-# c'est ainsi que les patients prennent rendez-vous ; le lieu et son plan
-# occupent la largeur ; les réseaux viennent ensuite, avec leurs logos ; ce
-# qu'il faut apporter ferme la page. Franck, 19/10/2026 : « tu es un
-# webdesigner pro », après une première version en cinq boîtes identiques.
+# Hiérarchie voulue par Franck (19/10/2026) : le courriel d'abord — c'est le
+# canal qu'il préfère —, le téléphone ensuite, puis le lieu avec son plan et
+# son accès, puis les réseaux avec leurs logos en couleurs.
 TEL_AFFICHE = "01 83 75 52 16"
 TEL_LIEN = "tel:+33183755216"
 COURRIEL = "drfranckmoyal@gmail.com"
 COURRIEL_LIEN = ("mailto:drfranckmoyal@gmail.com"
                  "?subject=Demande%20de%20rendez-vous%20-%20Dr%20Franck%20Moyal")
+CONSIGNES = ["expliquez votre demande ;",
+             "précisez par quel biais vous m’êtes adressé ;",
+             "joignez vos documents — courriers ou autres pièces."]
+STANDARD = "Standard ouvert du lundi au vendredi, 9 h – 19 h"
+CONSULTATIONS = "Consultations le mardi et le vendredi, 9 h – 19 h"
 ADRESSE_1, ADRESSE_2 = "2 rue Hippolyte Lebas", "75009 Paris"
 LAT, LON = 48.8770687, 2.3417544
 ITINERAIRE = f"https://www.google.com/maps/dir/?api=1&destination={LAT},{LON}"
+FICHE = "https://www.google.com/maps?cid=151850546430860136"
 # Plan interactif OpenStreetMap : zoom et déplacement, sans clé et sans cookie
 # de pistage — un plan Google exigerait une bannière de consentement.
 PLAN_EMBED = ("https://www.openstreetmap.org/export/embed.html"
               f"?bbox={LON-0.006},{LAT-0.0032},{LON+0.006},{LAT+0.0032}"
               f"&layer=mapnik&marker={LAT},{LON}")
-HORAIRES = [("Mardi", "9 h – 19 h"), ("Vendredi", "9 h – 19 h")]
 ACCES = [("Cadet", "ligne 7"), ("Notre-Dame-de-Lorette", "ligne 12")]
+# Rubrique « Accessibilité » de la fiche Google, mot pour mot regroupée.
+ACCESSIBILITE = ("Entrée, places assises et toilettes accessibles en fauteuil roulant · "
+                 "parking accessible · boucle magnétique pour les malentendants")
+# Note Google : un relevé daté, pas une donnée vivante — à mettre à jour à la main.
+AVIS = ("4,9", "113", "octobre 2026")
 
-# Logos officiels, tracés monochromes (jeu Simple Icons, licence CC0).
+# Logos officiels (tracés Simple Icons), aux couleurs de chaque réseau.
 LOGOS = {
     "Instagram": "M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z",
     "LinkedIn": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
@@ -408,14 +417,28 @@ RESEAUX = [("Instagram", "@drfranckmoyal", "https://www.instagram.com/drfranckmo
 
 
 def logo(nom):
-    return (f'<svg class="logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
-            f'<path d="{LOGOS[nom]}"/></svg>')
+    d = LOGOS[nom]
+    if nom == "Instagram":
+        return ('<svg class="logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+                '<defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">'
+                '<stop offset="0" stop-color="#f9ce34"/><stop offset=".5" stop-color="#ee2a7b"/>'
+                '<stop offset="1" stop-color="#6228d7"/></linearGradient></defs>'
+                f'<path fill="url(#ig)" d="{d}"/></svg>')
+    if nom == "LinkedIn":
+        return (f'<svg class="logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+                f'<path fill="#0A66C2" d="{d}"/></svg>')
+    # TikTok : le glyphe noir et ses deux décalages, cyan et rouge
+    return ('<svg class="logo" viewBox="-2 -2 28 28" aria-hidden="true" focusable="false">'
+            f'<path fill="#25F4EE" transform="translate(-.9 -.9)" d="{d}"/>'
+            f'<path fill="#FE2C55" transform="translate(.9 .9)" d="{d}"/>'
+            f'<path fill="#000" d="{d}"/></svg>')
 
 
 def jsonld_contact():
-    """Les données structurées de la page, enrichies de ce que la fiche Google
-    nous a appris : horaires et coordonnées sur le nœud Dentist. C'est ce que
-    Google et les IA lisent pour répondre « est-ce ouvert ? où ? »."""
+    """Les données structurées, enrichies de ce que la fiche Google et Franck
+    nous ont appris : jours de consultation, standard téléphonique, coordonnées,
+    plan, réseaux. Pas de note d'avis : Google refuse qu'un établissement
+    balise ses propres avis (« self-serving reviews »)."""
     brut = garder_jsonld("contact.html")
     m = re.search(r'<script type="application/ld\+json">(.*?)</script>', brut, re.S)
     if not m:
@@ -428,17 +451,28 @@ def jsonld_contact():
         if n.get("@type") == "Dentist":
             n["openingHoursSpecification"] = [{
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Tuesday", "Friday"],
-                "opens": "09:00", "closes": "19:00"}]
+                "dayOfWeek": ["Tuesday", "Friday"], "opens": "09:00", "closes": "19:00"}]
+            n["contactPoint"] = [{
+                "@type": "ContactPoint", "contactType": "prise de rendez-vous",
+                "telephone": "+33183755216", "email": COURRIEL,
+                "availableLanguage": "fr",
+                "hoursAvailable": [{
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00", "closes": "19:00"}]}]
             n["geo"] = {"@type": "GeoCoordinates", "latitude": LAT, "longitude": LON}
-            n["hasMap"] = ITINERAIRE
+            n["hasMap"] = FICHE
             n["sameAs"] = [u for _, _, u in RESEAUX]
+            n["amenityFeature"] = [
+                {"@type": "LocationFeatureSpecification", "name": "Entrée accessible en fauteuil roulant", "value": True},
+                {"@type": "LocationFeatureSpecification", "name": "Toilettes accessibles en fauteuil roulant", "value": True},
+                {"@type": "LocationFeatureSpecification", "name": "Boucle magnétique", "value": True}]
     return ('<script type="application/ld+json">'
             + json.dumps(d, ensure_ascii=False) + "</script>")
 
 
 def contact():
-    jours = "".join(f'<span><b>{e(j)}</b> {e(h)}</span>' for j, h in HORAIRES)
+    consignes = "\n".join(f"            <li>{e(c)}</li>" for c in CONSIGNES)
     acces = " · ".join(f'{e(s)} <span class="lieu__ligne">{e(l)}</span>' for s, l in ACCES)
     reseaux = "\n".join(
         f'''        <li><a class="reseau" href="{u}" target="_blank" rel="noopener">
@@ -446,22 +480,25 @@ def contact():
           <span class="reseau__nom">{e(n)}</span>
           <span class="reseau__compte">{e(c)}</span>
         </a></li>''' for n, c, u in RESEAUX)
+    note, nb, quand = AVIS
 
     page_html = f'''  <section class="sect">
     <div class="contenu">
       <h1 class="tete-bande tete-bande--haut">Prendre rendez-vous</h1>
 
       <div class="prise">
-        <div class="prise__appel">
-          <p class="prise__sur">Par téléphone, le plus simple</p>
-          <a class="prise__numero" href="{TEL_LIEN}">{e(TEL_AFFICHE)}</a>
-          <p class="prise__quand">{jours}<span class="prise__ferme">Fermé les autres jours</span></p>
-        </div>
         <div class="prise__ecrire">
-          <p class="prise__sur">Une question avant de venir</p>
+          <p class="prise__sur">Courriel</p>
           <a class="prise__mail" href="{COURRIEL_LIEN}">{e(COURRIEL)}</a>
-          <p class="prise__note">Pour un rendez-vous, préférez le téléphone : la réponse est
-            immédiate.</p>
+          <p class="prise__consigne">Dans votre message :</p>
+          <ul class="prise__liste">
+{consignes}
+          </ul>
+        </div>
+        <div class="prise__appel">
+          <p class="prise__sur">Téléphone</p>
+          <a class="prise__numero" href="{TEL_LIEN}">{e(TEL_AFFICHE)}</a>
+          <p class="prise__quand">{e(STANDARD)}</p>
         </div>
       </div>
 
@@ -469,8 +506,17 @@ def contact():
         <div class="lieu__texte">
           <p class="eyebrow">Le cabinet</p>
           <p class="lieu__adresse">{e(ADRESSE_1)}<br>{e(ADRESSE_2)}</p>
+          <p class="lieu__ligne-info">{e(CONSULTATIONS)}</p>
           <p class="lieu__acces"><b>Métro</b> {acces}</p>
+          <p class="lieu__acces"><b>Accès</b> {e(ACCESSIBILITE)}</p>
+          <p class="lieu__avis"><a href="{FICHE}" target="_blank" rel="noopener">
+            <span class="lieu__etoile">★</span> {e(note)} / 5 · {e(nb)} avis Google <span class="ext">↗</span></a>
+            <span class="lieu__releve">relevé en {e(quand)}</span></p>
           <a class="bouton-encre" href="{ITINERAIRE}" target="_blank" rel="noopener">Itinéraire <span class="ext">↗</span></a>
+          <figure class="lieu__photo">
+            <figcaption>Photographie de la façade ou de l’entrée — à fournir par Franck ;
+              emplacement réservé.</figcaption>
+          </figure>
         </div>
         <div class="lieu__plan">
           <iframe src="{PLAN_EMBED}" title="Plan : 2 rue Hippolyte Lebas, Paris 9e"
@@ -511,8 +557,9 @@ def contact():
     return page(
         "contact",
         "Contact et rendez-vous | Dr Franck Moyal Paris 9",
-        "Prendre rendez-vous avec le Dr Franck Moyal : 2 rue Hippolyte Lebas, 75009 "
-        "Paris, 01 83 75 52 16. Cabinet ouvert le mardi et le vendredi de 9 h à 19 h.",
+        "Prendre rendez-vous avec le Dr Franck Moyal, 2 rue Hippolyte Lebas, 75009 Paris : "
+        "par courriel, ou au 01 83 75 52 16 du lundi au vendredi de 9 h à 19 h. "
+        "Consultations le mardi et le vendredi.",
         "Contact", [page_html], jsonld_contact())
 
 
