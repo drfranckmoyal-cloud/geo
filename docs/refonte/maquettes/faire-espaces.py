@@ -370,9 +370,105 @@ def pro():
         sections, garder_jsonld("espace-pro.html"))
 
 
+# ── Contact ───────────────────────────────────────────────────────────────
+# Tout vient de la fiche Google du cabinet, relevée le 18/10/2026 : adresse,
+# téléphone, horaires (mardi et vendredi, 9h–19h, fermé le reste), coordonnées.
+# Rien n'est inventé ; ce que la fiche ne dit pas ne figure pas ici.
+TEL_AFFICHE = "01 83 75 52 16"
+TEL_LIEN = "tel:+33183755216"
+COURRIEL = "drfranckmoyal@gmail.com"
+COURRIEL_LIEN = ("mailto:drfranckmoyal@gmail.com"
+                 "?subject=Demande%20de%20rendez-vous%20-%20Dr%20Franck%20Moyal")
+ADRESSE = "2 rue Hippolyte Lebas, 75009 Paris"
+PLAN = ("https://www.google.com/maps/place/Docteur+Franck+Moyal/"
+        "@48.8770687,2.3417544,17z")
+HORAIRES = [("Mardi", "9 h – 19 h"), ("Vendredi", "9 h – 19 h")]
+RESEAUX = [("Instagram", "https://www.instagram.com/drfranckmoyal/"),
+           ("LinkedIn", "https://www.linkedin.com/in/franck-moyal-7581b6161/"),
+           ("TikTok", "https://www.tiktok.com/@drfranckmoyal")]
+
+
+def contact():
+    jours = "\n".join(
+        f'            <div><dt>{e(j)}</dt><dd>{e(h)}</dd></div>' for j, h in HORAIRES)
+    liens = "\n".join(
+        f'              <li><a href="{u}" target="_blank" rel="noopener">{e(n)}'
+        f' <span class="ext">↗</span></a></li>' for n, u in RESEAUX)
+
+    bandeau = f'''  <section class="sect">
+    <div class="contenu">
+      <h1 class="tete-bande tete-bande--haut">Prendre rendez-vous</h1>
+      <div class="joindre">
+
+        <a class="joindre__acte" href="{TEL_LIEN}">
+          <span class="joindre__quoi">Téléphone</span>
+          <span class="joindre__gros">{e(TEL_AFFICHE)}</span>
+          <span class="joindre__plus">Appeler le cabinet →</span>
+        </a>
+
+        <a class="joindre__acte" href="{COURRIEL_LIEN}">
+          <span class="joindre__quoi">Courriel</span>
+          <span class="joindre__gros joindre__gros--petit">{e(COURRIEL)}</span>
+          <span class="joindre__plus">Écrire au cabinet →</span>
+        </a>
+
+        <div class="joindre__bloc">
+          <span class="joindre__quoi">Le cabinet est ouvert</span>
+          <dl class="joindre__jours">
+{jours}
+          </dl>
+          <p class="joindre__note">Fermé les autres jours.</p>
+        </div>
+
+        <a class="joindre__acte" href="{PLAN}" target="_blank" rel="noopener">
+          <span class="joindre__quoi">Adresse</span>
+          <span class="joindre__gros joindre__gros--petit">{e(ADRESSE)}</span>
+          <span class="joindre__plus">Ouvrir le plan <span class="ext">↗</span></span>
+        </a>
+
+        <div class="joindre__bloc joindre__bloc--large">
+          <span class="joindre__quoi">Suivre le cabinet</span>
+          <ul class="joindre__reseaux">
+{liens}
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>'''
+
+    avant = '''  <section class="sect sect--zone">
+    <div class="contenu">
+      <h2 class="tete-bande">Avant votre consultation</h2>
+      <div class="chapitre chapitre--plein">
+        <div>
+          <p>Aucun document n’est obligatoire pour demander un premier rendez-vous.
+            Selon le motif, il peut être utile d’apporter :</p>
+          <ul>
+            <li>les radiographies ou examens récents dont vous disposez ;</li>
+            <li>d’anciennes photographies du sourire lorsqu’une évolution des usures
+              est recherchée ;</li>
+            <li>la liste de vos traitements médicaux lorsque cela peut influencer la
+              prise en charge.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>'''
+
+    return page(
+        "contact",
+        "Contact et rendez-vous | Dr Franck Moyal Paris 9",
+        "Prendre rendez-vous avec le Dr Franck Moyal : 2 rue Hippolyte Lebas, 75009 "
+        "Paris, 01 83 75 52 16. Cabinet ouvert le mardi et le vendredi de 9 h à 19 h.",
+        "Contact", [bandeau, avant], garder_jsonld("contact.html"))
+
+
 if __name__ == "__main__":
     open(os.path.join(SORTIE, "espace-patients.html"), "w",
          encoding="utf-8").write(patients())
     open(os.path.join(SORTIE, "espace-pro.html"), "w",
          encoding="utf-8").write(pro())
-    print("espace-patients.html et espace-pro.html refaits en sommaires")
+    open(os.path.join(SORTIE, "contact.html"), "w",
+         encoding="utf-8").write(contact())
+    print("espace-patients, espace-pro et contact refaits")

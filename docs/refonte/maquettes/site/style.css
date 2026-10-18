@@ -164,6 +164,42 @@ p:last-child{margin-bottom:0}
    entre les deux reste visible. */
 .espace--clair::before{background:#3e433e}
 
+/* ── joindre le cabinet ──────────────────────────────────────
+   Tout ce qu'on vient chercher sur une page contact, au-dessus de la ligne
+   de flottaison et d'un seul geste : appeler, écrire, savoir quand c'est
+   ouvert, ouvrir le plan, suivre le cabinet. */
+.joindre{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:clamp(.7rem,.55rem + .7vw,1.05rem);margin-top:clamp(1rem,.8rem + 1vw,1.6rem)}
+.joindre__acte,.joindre__bloc{display:flex;flex-direction:column;gap:.25rem;
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(1rem,.85rem + .7vw,1.35rem);
+  text-decoration:none;color:var(--fg)}
+.joindre__acte{transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
+.joindre__acte:hover,.joindre__acte:focus-visible{box-shadow:var(--relief-fort);
+  border-color:var(--fg);transform:translateY(-2px)}
+.joindre__quoi{font-size:.66rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--doux)}
+.joindre__gros{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.3rem,1.1rem + .9vw,1.85rem);line-height:1.1;margin-top:.1rem}
+.joindre__gros--petit{font-size:clamp(.92rem,.88rem + .2vw,1rem);line-height:1.3;
+  /* « break-word » coupait l'adresse en plein milieu d'un mot : on ne coupe
+     plus qu'entre les mots, et la taille est calculée pour que ça tienne. */
+  overflow-wrap:break-word}
+.joindre__plus{margin-top:auto;padding-top:.6rem;font-size:.78rem;font-weight:600}
+.joindre__jours{display:grid;gap:.1rem;margin:.3rem 0 0}
+.joindre__jours div{display:flex;justify-content:space-between;gap:1rem;
+  padding:.3rem 0;border-bottom:1px solid var(--trait)}
+.joindre__jours div:last-child{border-bottom:0}
+.joindre__jours dt{font-weight:600;font-size:.9rem;margin:0}
+.joindre__jours dd{margin:0;font-size:.9rem;color:var(--doux)}
+.joindre__note{margin:.45rem 0 0;font-size:.78rem;color:var(--doux)}
+.joindre__reseaux{list-style:none;margin:.45rem 0 0;padding:0;display:flex;
+  flex-wrap:wrap;gap:.35rem .9rem}
+.joindre__reseaux a{font-size:.9rem;font-weight:600;text-decoration:none;color:var(--fg);
+  border-bottom:1px solid var(--trait);padding-bottom:1px}
+.joindre__reseaux a:hover{border-color:var(--fg)}
+@media (min-width:980px){.joindre__bloc--large{grid-column:span 2}}
+
 /* Deux actions côte à côte, appeler ou écrire, au bas de la page contact. */
 .appel__duo{display:flex;flex-wrap:wrap;gap:.7rem;margin:0}
 .bouton--clair{background:transparent;color:inherit;border:1px solid currentColor}

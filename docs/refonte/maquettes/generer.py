@@ -107,7 +107,8 @@ def _pages_composees():
 
 # Écrites entièrement à la main, avant que le composeur n'existe.
 A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
-             "dentisterie-esthetique-paris", "index"} | _pages_composees()
+             "dentisterie-esthetique-paris", "index",
+             "contact"} | _pages_composees()
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui,
 # et tout lien qui le visait mène désormais à celle qui l'a absorbé
 FONDUES = {"diagnostic-usures-dentaires"}
