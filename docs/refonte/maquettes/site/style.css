@@ -206,6 +206,24 @@ p:last-child{margin-bottom:0}
 /* ── les sommaires en cartes ─────────────────────────────────
    Une seule sorte de carte, répétée, sous des sections numérotées.
    Franck, 17/10/2026 : « le mot d'ordre est COHÉRENCE et HIÉRARCHIE ». */
+/* Un titre de bande, pas un chapitre d'exposé : le filet le pose, rien de plus.
+   Franck, 18/10/2026 : « le concept de numérotation n'est pas naturel ». */
+.tete-bande{font-size:clamp(1.15rem,1.02rem + .5vw,1.5rem);letter-spacing:-.015em;
+  padding-bottom:.55rem;border-bottom:1px solid var(--trait);margin:0}
+/* les pages de contexte, sous chaque soin */
+.tuile__aussi{margin-top:.2rem;font-size:.78rem;color:var(--doux);
+  display:flex;flex-wrap:wrap;gap:.1rem .4rem;position:relative;z-index:4}
+.tuile__aussi a{color:var(--doux);text-decoration:none;
+  border-bottom:1px solid var(--trait);padding-bottom:1px}
+.tuile__aussi a:hover{color:var(--fg);border-color:var(--fg)}
+.tuile__aussi > span{opacity:.45}
+/* le titre porte le lien, et son ::after rend toute la carte cliquable */
+.tuile__lien{color:inherit;text-decoration:none}
+.tuile__lien::after{content:"";position:absolute;inset:0;z-index:3}
+.tuile--acte:has(.tuile__lien:hover),.tuile--acte:has(.tuile__lien:focus-visible){
+  box-shadow:var(--relief-fort);border-color:var(--fg);transform:translateY(-2px)}
+.tuile--acte:has(.tuile__lien:hover) .tuile__visuel img{transform:scale(1.035)}
+
 .tete-rang{display:flex;align-items:baseline;gap:clamp(.8rem,.6rem + 1vw,1.4rem)}
 .tete-rang .rang{font-family:var(--serif);font-weight:700;line-height:1;margin:0;
   font-size:clamp(1.6rem,1.2rem + 1.8vw,2.6rem);color:var(--fg);
@@ -265,7 +283,9 @@ p:last-child{margin-bottom:0}
 .tuile--acte .tuile__fleche,.tuile--long .tuile__fleche{margin-top:.2rem;padding-top:0;
   font-size:.74rem}
 /* sans photographie, le texte prend toute la carte */
-.tuile--long .tuile__dit{padding-right:clamp(1.5rem,1.2rem + 2vw,3rem)}
+.tuile--long .tuile__dit,
+.tuile--acte:not(:has(.tuile__visuel)) .tuile__dit{padding-right:clamp(1.5rem,1.2rem + 2vw,3rem)}
+.tuile--acte:not(:has(.tuile__visuel)) .tuile__quoi{max-width:56ch}
 /* Sans masque (vieux navigateur), la photographie resterait un bloc net collé
    au texte : on la retire plutôt que de livrer une carte coupée en deux. */
 @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){

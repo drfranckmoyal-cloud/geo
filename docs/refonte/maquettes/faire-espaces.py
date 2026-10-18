@@ -20,7 +20,18 @@ def e(t):
     return H.escape(t, quote=False)
 
 
-def acte(titre, quoi, lien, photo="", cadrage="", alt=""):
+def aussi(liens):
+    """Les pages de contexte, sous la carte. Ce sont de vrais liens : la carte
+    n'est donc pas un <a>, c'est le titre qui l'est, et son ::after couvre la
+    carte entière pour qu'elle reste cliquable d'un bout à l'autre."""
+    if not liens:
+        return '<span class="tuile__fleche">En détail <span>→</span></span>'
+    corps = " <span>·</span> ".join(
+        f'<a href="{sl}.html">{e(l)}</a>' for l, sl in liens)
+    return f'<span class="tuile__aussi">{corps}</span>'
+
+
+def acte(titre, quoi, lien, photo="", cadrage="", alt="", liens=()):
     """La carte d'un acte : allongée, peu haute, le nom en grand à gauche et la
     photographie à droite, fondue dans la carte par un dégradé — elle illustre
     sans jamais passer sous le texte."""
@@ -30,13 +41,13 @@ def acte(titre, quoi, lien, photo="", cadrage="", alt=""):
         visuel = (f'\n          <span class="tuile__visuel">'
                   f'<img src="{PHOTOS}{photo}" alt="{H.escape(alt)}" loading="lazy"{pos}>'
                   f'</span>')
-    return f'''        <a class="tuile tuile--acte" href="{lien}.html">{visuel}
+    return f'''        <article class="tuile tuile--acte">{visuel}
           <span class="tuile__dit">
-            <h3 class="tuile__acte">{e(titre)}</h3>
+            <h3 class="tuile__acte"><a class="tuile__lien" href="{lien}.html">{e(titre)}</a></h3>
             <p class="tuile__quoi">{e(quoi)}</p>
-            <span class="tuile__fleche">L’acte en détail <span>→</span></span>
+            {aussi(liens)}
           </span>
-        </a>'''
+        </article>'''
 
 
 def tuile(titre, quoi, lien, verbe="Lire", externe=False, longue=False):
@@ -65,14 +76,13 @@ def paire(titre, quoi, lien, avant, apres):
         </a>'''
 
 
-def section(rang, titre, tuiles, zone=False):
+def section(titre, tuiles, zone=False):
+    """Pas de numéro : une page n'est pas un exposé. Un titre, un filet, la
+    grille — c'est ce que font les sites de référence."""
     classe = "sect sect--zone" if zone else "sect"
     return f'''  <section class="{classe}">
     <div class="contenu">
-      <div class="tete-rang">
-        <p class="rang">{rang}</p>
-        <h2>{e(titre)}</h2>
-      </div>
+      <h2 class="tete-bande">{e(titre)}</h2>
       <div class="tuiles">
 {chr(10).join(tuiles)}
       </div>
@@ -136,64 +146,63 @@ def garder_jsonld(nom):
 # Chaque acte porte une photographie du cabinet. Les trois images de composite
 # sont des avant/après montés en carré : on cadre sur le bas, c'est-à-dire sur
 # l'après. Les autres sont des vues uniques, cadrées au centre.
-ACTES = [
-    ("Facettes",
-     "Céramique collée sur la face visible de la dent.",
-     "facettes-dentaires-paris", "facettes-ceramique-apres.jpg", "",
-     "Sourire après la pose de facettes en céramique"),
-    ("Composite bonding",
-     "Résine stratifiée sur la dent, en une séance.",
-     "composite-bonding-paris", "composite-bonding-six-dents-anterieures.jpg",
-     "center 78%", "Sourire après un composite bonding sur six dents"),
-    ("Éclaircissement",
-     "Gouttières à domicile, suivi au cabinet.",
-     "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
-     "Sourire après un éclaircissement ambulatoire"),
-    ("Infiltration ICON",
-     "Taches blanches, MIH, fluorose. Sans fraise.",
-     "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
-     "Dents après infiltration de taches de MIH"),
-    ("Réhabilitation des dents usées",
-     "Rendre la hauteur et la fonction.",
-     "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
-     "Sourire après la réhabilitation de dents usées"),
+# Une seule grille. La coupure « l'acte » d'un côté, « le sujet » de l'autre
+# faisait lire deux fois la même chose : l'usure et sa réhabilitation, les taches
+# et leur infiltration, la couleur et l'éclaircissement. Chaque soin porte donc
+# maintenant son acte en titre, et les pages de contexte passent en dessous,
+# en liens. Franck, 18/10/2026 : « c'est très redondant entre le 1 et le 2,
+# il faut les fondre ».
+#
+# L'ordre suit le gradient d'économie tissulaire — on regarde, puis on traite
+# du plus léger au plus engageant. C'est la doctrine du cabinet, elle devient
+# lisible dès la première page.
+SOINS = [
     ("Bilan esthétique",
      "Photographies, analyse du sourire, projet.",
      "bilan-esthetique-personnalise", "bilan-esthetique-projet.jpg", "",
-     "Projet esthétique dessiné avant traitement"),
-]
-
-# Deux pages qui ne sont pas des actes mais aident à choisir entre eux.
-POUR_CHOISIR = [
-    ("Dentisterie esthétique",
-     "Vue d’ensemble des actes.",
-     "dentisterie-esthetique-paris", "La vue d’ensemble"),
-    ("Facettes ou composite ?",
-     "Tenue, teinte, réparabilité, coût en tissu dentaire.",
-     "facettes-ou-composite", "Comparer"),
-]
-
-# Les sujets cliniques : ce que les actes traitent.
-SUJETS = [
-    ("Usure dentaire",
-     "Attrition, érosion, abrasion. Mesure BEWE.",
-     "usures-dentaires"),
-    ("Érosion dentaire",
-     "Origines alimentaires, gastriques, professionnelles.",
-     "erosion-dentaire"),
-    ("Bruxisme",
-     "Serrement, grincement, gouttière.",
-     "bruxisme-usure-dentaire"),
-    ("Dents courtes ou usées",
-     "Usure du bord ou excès de gencive.",
-     "dents-courtes-usees"),
+     "Projet esthétique dessiné avant traitement",
+     [("Dentisterie esthétique : la vue d’ensemble", "dentisterie-esthetique-paris")]),
+    ("Éclaircissement",
+     "Gouttières à domicile, suivi au cabinet.",
+     "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
+     "Sourire après un éclaircissement ambulatoire",
+     [("Un cas documenté", "cas-mih-eclaircissement-erosion-infiltration")]),
+    ("Infiltration ICON",
+     "Taches blanches, MIH, fluorose. Sans fraise.",
+     "taches-dentaires-dyschromies-icon", "mih-erosion-infiltration-apres.jpg", "",
+     "Dents après infiltration de taches de MIH",
+     [("Un cas documenté", "cas-mih-eclaircissement-erosion-infiltration")]),
+    ("Composite bonding",
+     "Résine stratifiée sur la dent, en une séance.",
+     "composite-bonding-paris", "composite-bonding-six-dents-anterieures.jpg",
+     "center 78%", "Sourire après un composite bonding sur six dents",
+     [("Facettes ou composite ?", "facettes-ou-composite")]),
+    ("Facettes",
+     "Céramique collée sur la face visible de la dent.",
+     "facettes-dentaires-paris", "facettes-ceramique-apres.jpg", "",
+     "Sourire après la pose de facettes en céramique",
+     [("Facettes ou composite ?", "facettes-ou-composite"),
+      ("Un cas documenté", "cas-planification-facettes-ceramique")]),
+    ("Réhabilitation des dents usées",
+     "Rendre la hauteur et la fonction.",
+     "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
+     "Sourire après la réhabilitation de dents usées",
+     [("Usure dentaire", "usures-dentaires"),
+      ("Érosion", "erosion-dentaire"),
+      ("Bruxisme", "bruxisme-usure-dentaire"),
+      ("Dents courtes", "dents-courtes-usees")]),
+    # Pas de photographie ici : le registre des cas n'en documente aucune comme
+    # venant d'un patient souffrant d'un trouble du comportement alimentaire.
+    # En emprunter une à un autre cas ferait porter un diagnostic psychiatrique
+    # à quelqu'un qui ne l'a pas.
     ("Troubles des conduites alimentaires",
-     "Anorexie, boulimie. Dépistage et prévention.",
-     "tca-dents"),
-    ("Anorexie restrictive",
-     "Érosion sans vomissements.",
-     "anorexie-erosion-dentaire-sans-vomissements"),
+     "Ce que le chirurgien-dentiste repère en premier.",
+     "tca-dents", "", "", "",
+     [("Anorexie restrictive : érosion sans vomissements",
+       "anorexie-erosion-dentaire-sans-vomissements")]),
 ]
+
+
 
 # Chaque vignette est prise DANS la page vers laquelle elle mène : sinon on
 # montre un cas et on en ouvre un autre.
@@ -243,17 +252,11 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def patients():
     sections = [
-        section("1", "Mon expertise",
-                [acte(*a) for a in ACTES] + [tuile(*p, longue=True) for p in POUR_CHOISIR]),
-        section("2", "Ce que je traite",
-                [tuile(t, q, l, longue=True) for t, q, l in SUJETS], zone=True),
-        section("3", "Cas cliniques", [paire(*c) for c in CAS]),
-        f'''  <section class="sect sect--zone">
+        section("Mon expertise", [acte(*a) for a in SOINS]),
+        section("Les cas", [paire(*c) for c in CAS], zone=True),
+        f'''  <section class="sect">
     <div class="contenu">
-      <div class="tete-rang">
-        <p class="rang">4</p>
-        <h2>Le praticien</h2>
-      </div>
+      <h2 class="tete-bande">Le praticien</h2>
 {PRATICIEN}
     </div>
   </section>''',
@@ -327,16 +330,14 @@ PRO_PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 
 def pro():
     sections = [
-        section("1", "Enseignement et formation", [tuile(*t, longue=True) for t in PRO_ENSEIGNEMENT]),
-        section("2", "Publications", [tuile(*t, longue=True) for t in PRO_TRAVAUX], zone=True),
-        section("3", "Activité hospitalière", [tuile(*t, longue=True) for t in PRO_HOSPITALIER]),
-        section("4", "Cas cliniques", [paire(*c) for c in CAS], zone=True),
-        f'''  <section class="sect">
+        section("Enseignement et publications",
+                [tuile(*t, longue=True) for t in PRO_ENSEIGNEMENT + PRO_TRAVAUX]),
+        section("Activité hospitalière",
+                [tuile(*t, longue=True) for t in PRO_HOSPITALIER], zone=True),
+        section("Les cas", [paire(*c) for c in CAS]),
+        f'''  <section class="sect sect--zone">
     <div class="contenu">
-      <div class="tete-rang">
-        <p class="rang">5</p>
-        <h2>Le praticien</h2>
-      </div>
+      <h2 class="tete-bande">Le praticien</h2>
 {PRO_PRATICIEN}
     </div>
   </section>''',
