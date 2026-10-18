@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essai de polices pour le nom</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Cormorant+Garamond:wght@300;400&family=Italiana&family=Marcellus&family=Playfair+Display:wght@400;500&family=Spectral:wght@200;300&family=Tenor+Sans&family=Jost:wght@300;400&family=Outfit:wght@200;300&display=swap">
+<style>
+  :root{--bg:#eeede6;--fg:#1a1c19;--doux:#585d5a;--trait:#e0ded4}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:'Archivo',system-ui,sans-serif;padding:clamp(16px,4vw,48px)}
+  header{max-width:1100px;margin:0 auto clamp(1.5rem,4vw,3rem)}
+  h1{font-family:'Source Serif 4',serif;font-size:clamp(1.4rem,1.2rem+1vw,2rem);
+    margin:0 0 .4rem;letter-spacing:-.02em}
+  header p{margin:0;color:var(--doux);font-size:.92rem;max-width:62ch;line-height:1.5}
+  .essai{max-width:1100px;margin:0 auto;padding:clamp(1.2rem,3vw,2.2rem) 0;
+    border-top:1px solid var(--trait)}
+  .essai__num{margin:0;font-size:.7rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase}
+  .essai__note{margin:.2rem 0 1rem;font-size:.8rem;color:var(--doux)}
+  .essai__duo{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .essai__clair{background:#fff;color:#111312}
+  .essai__encre{background:#000;color:#fff}
+  .essai__clair,.essai__encre{padding:clamp(1.3rem,3vw,2.4rem) clamp(1rem,2vw,1.8rem);
+    text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .essai__nom{margin:0;font-size:clamp(1.5rem,1rem+2.2vw,3.1rem);line-height:1.05}
+  .essai__quoi{margin:.55rem 0 0;font-size:.68rem;font-weight:500;letter-spacing:.3em;
+    text-transform:uppercase;opacity:.7}
+  .essai__caps{background:#fff;color:#111312;padding:clamp(1rem,2.4vw,1.8rem);
+    text-align:center;border-top:1px solid var(--trait)}
+  .essai__nom--caps{text-transform:uppercase;font-size:clamp(1.1rem,.8rem+1.5vw,2.1rem)}
+  @media (max-width:640px){.essai__duo{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Le nom sur la porte d’entrée — dix polices</h1>
+  <p>Chaque essai est montré sur blanc et sur noir, comme sur la porte, puis une
+    troisième fois tout en capitales. Dites-moi le numéro, et je l’installe.
+    Les tailles et l’espacement entre les lettres sont ceux de la vraie page.</p>
+</header>
+  <section class="essai">
+    <p class="essai__num">01 · Source Serif 4 400</p>
+    <p class="essai__note">l’actuelle — serif de lecture, graisse normale</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Source Serif 4',serif;font-weight:400;letter-spacing:.08em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Source Serif 4',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Source Serif 4',serif;font-weight:400;letter-spacing:.08em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Source Serif 4',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Source Serif 4',serif;font-weight:400;letter-spacing:.08em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">02 · Cormorant Garamond 300</p>
+    <p class="essai__note">serif très fin, contraste marqué — registre joaillerie</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:.10em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Cormorant Garamond',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:.10em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Cormorant Garamond',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:.10em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">03 · Italiana 400</p>
+    <p class="essai__note">serif d’affiche, extrêmement fin — très haute couture</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Italiana',serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Italiana',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Italiana',serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Italiana',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Italiana',serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">04 · Marcellus 400</p>
+    <p class="essai__note">romain inscriptionnel, calme et sobre</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Marcellus',serif;font-weight:400;letter-spacing:.10em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Marcellus',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Marcellus',serif;font-weight:400;letter-spacing:.10em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Marcellus',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Marcellus',serif;font-weight:400;letter-spacing:.10em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">05 · Playfair Display 400</p>
+    <p class="essai__note">didone, fort contraste plein/délié</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Playfair Display',serif;font-weight:400;letter-spacing:.06em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Playfair Display',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Playfair Display',serif;font-weight:400;letter-spacing:.06em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Playfair Display',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Playfair Display',serif;font-weight:400;letter-spacing:.06em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">06 · Spectral 200</p>
+    <p class="essai__note">serif maigre, lignes égales</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Spectral',serif;font-weight:200;letter-spacing:.09em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Spectral',serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Spectral',serif;font-weight:200;letter-spacing:.09em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Spectral',serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Spectral',serif;font-weight:200;letter-spacing:.09em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">07 · Tenor Sans 400</p>
+    <p class="essai__note">sans élégant et large, sans empattement</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Tenor Sans',sans-serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Tenor Sans',sans-serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Tenor Sans',sans-serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Tenor Sans',sans-serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Tenor Sans',sans-serif;font-weight:400;letter-spacing:.14em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">08 · Jost 300</p>
+    <p class="essai__note">géométrique, dans l’esprit Futura</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Jost',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Jost',sans-serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Jost',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Jost',sans-serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Jost',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">09 · Outfit 200</p>
+    <p class="essai__note">géométrique très épuré, traits égaux</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Outfit',sans-serif;font-weight:200;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Outfit',sans-serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Outfit',sans-serif;font-weight:200;letter-spacing:.14em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Outfit',sans-serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Outfit',sans-serif;font-weight:200;letter-spacing:.14em">Dr Franck Moyal</p>
+    </div>
+  </section>
+  <section class="essai">
+    <p class="essai__num">10 · Archivo 300</p>
+    <p class="essai__note">la sans du site, en maigre</p>
+    <div class="essai__duo">
+      <div class="essai__clair">
+        <p class="essai__nom" style="font-family:'Archivo',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Archivo',sans-serif">Dentisterie esthétique</p>
+      </div>
+      <div class="essai__encre">
+        <p class="essai__nom" style="font-family:'Archivo',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+        <p class="essai__quoi" style="font-family:'Archivo',sans-serif">Dentisterie esthétique</p>
+      </div>
+    </div>
+    <div class="essai__caps">
+      <p class="essai__nom essai__nom--caps" style="font-family:'Archivo',sans-serif;font-weight:300;letter-spacing:.13em">Dr Franck Moyal</p>
+    </div>
+  </section>
+</body>
+</html>

@@ -59,8 +59,11 @@ def main():
         # données structurées : c'est par elles que les IA citent le site
         blocs = re.findall(
             r'<script type="application/ld\+json"[^>]*>(.*?)</script>', h, re.S)
+        # une page en noindex ne sera jamais lue par un moteur : les données
+        # structurées n'y servent à rien. C'est le cas des pages de travail.
+        hors_index = 'name="robots" content="noindex"' in h
         structurees += 1 if blocs else 0
-        if not blocs and nom != "sommaire.html":
+        if not blocs and not hors_index:
             ennuis.append(f"{nom} → aucune donnée structurée")
         for b in blocs:
             try:
