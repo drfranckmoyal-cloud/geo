@@ -383,6 +383,9 @@ ADRESSE = "2 rue Hippolyte Lebas, 75009 Paris"
 PLAN = ("https://www.google.com/maps/place/Docteur+Franck+Moyal/"
         "@48.8770687,2.3417544,17z")
 HORAIRES = [("Mardi", "9 h – 19 h"), ("Vendredi", "9 h – 19 h")]
+# Les deux stations sont celles que Franck a indiquées le 18/10/2026 ; les
+# numéros de ligne sont ceux du réseau parisien.
+ACCES = "Métro Cadet (ligne 7) ou Notre-Dame-de-Lorette (ligne 12)"
 RESEAUX = [("Instagram", "https://www.instagram.com/drfranckmoyal/"),
            ("LinkedIn", "https://www.linkedin.com/in/franck-moyal-7581b6161/"),
            ("TikTok", "https://www.tiktok.com/@drfranckmoyal")]
@@ -423,6 +426,7 @@ def contact():
         <a class="joindre__acte" href="{PLAN}" target="_blank" rel="noopener">
           <span class="joindre__quoi">Adresse</span>
           <span class="joindre__gros joindre__gros--petit">{e(ADRESSE)}</span>
+          <span class="joindre__note">{e(ACCES)}</span>
           <span class="joindre__plus">Ouvrir le plan <span class="ext">↗</span></span>
         </a>
 
