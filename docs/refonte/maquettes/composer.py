@@ -267,7 +267,8 @@ SEQUENCES = {
         "etapes": [
             ("eclaircissement-cas-1-avant-apres.jpg",
              "Cas 1 — éclaircissement préalable au traitement d’une tache blanche sur l’incisive centrale",
-             "Avant et après éclaircissement préalable au traitement d’une tache blanche, sourire de face"),
+             "Avant et après éclaircissement préalable au traitement d’une tache blanche, sourire de face",
+             ("tache blanche", "taches-dentaires-dyschromies-icon")),   # le pont vers ICON
             ("eclaircissement-cas-2-avant-apres.jpg",
              "Cas 2 — éclaircissement avant réhabilitation de l’harmonie du sourire",
              "Avant et après éclaircissement, avant réhabilitation du sourire, vue intra-orale avec écarteurs"),
@@ -359,12 +360,18 @@ def sequence(slug):
         return ""
     figs = []
     large = seq.get("large", False)
-    for i, (fichier, legende, alt) in enumerate(seq["etapes"], 1):
+    for i, etape in enumerate(seq["etapes"], 1):
+        fichier, legende, alt = etape[:3]
         src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
         badge = "" if large else f'<span class="parcours__num">{i}</span>'
+        texte = e(legende)
+        # un quatrième élément (mots, page) rend ces mots cliquables vers cette page
+        if len(etape) > 3 and etape[3]:
+            mots, cible = etape[3]
+            texte = texte.replace(e(mots), f'<a href="{cible}.html">{e(mots)}</a>', 1)
         figs.append(f'''        <figure class="parcours__etape">
           <img src="{src}" alt="{H.escape(alt)}" loading="lazy">
-          <figcaption>{badge}{e(legende)}</figcaption>
+          <figcaption>{badge}{texte}</figcaption>
         </figure>''')
     classe = "parcours parcours--large" if large else "parcours"
     return f'''  <section class="sect sect--zone">
