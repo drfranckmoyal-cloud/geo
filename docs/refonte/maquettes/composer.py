@@ -265,8 +265,9 @@ SEQUENCES = {
         "apres_chapitre": 2,
         "large": True,
         "etapes": [
-            ("eclaircissement-cas-1-avant-apres.jpg", "Cas 1",
-             "Avant et après éclaircissement, sourire de face"),
+            ("eclaircissement-cas-1-avant-apres.jpg",
+             "Cas 1 — éclaircissement préalable au traitement d’une tache blanche sur l’incisive centrale",
+             "Avant et après éclaircissement préalable au traitement d’une tache blanche, sourire de face"),
             ("eclaircissement-cas-2-avant-apres.jpg", "Cas 2",
              "Avant et après éclaircissement, vue intra-orale avec écarteurs"),
             ("eclaircissement-cas-3-avant-apres.jpg",
