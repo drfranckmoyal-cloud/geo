@@ -278,6 +278,17 @@ SEQUENCES = {
              "Avant et après : éclaircissement et remplacement d’une dent manquante, sourire de face"),
         ],
     },
+    "taches-dentaires-dyschromies-icon": {"titre": "Avant / après", "apres_chapitre": 3, "large": True, "etapes": [
+        ("icon-cas-1-avant-apres.jpg",
+         "Cas 1 — plusieurs taches profondes dues à une MIH sévère : résultat après "
+         "érosion-infiltration par ICON",
+         "Avant et après érosion-infiltration : taches de MIH sur les incisives, puis émail uniforme, sur fond noir"),
+        ("icon-cas-2-avant-apres.jpg",
+         "Cas 2 — dyschromie après un choc sur 11, associée à une tache blanche de MIH : "
+         "résultat après éclaircissement unitaire sur 11 et érosion-infiltration ICON de la tache",
+         "Avant et après : incisive assombrie portant une tache blanche, puis teinte et tache corrigées, sur fond noir",
+         ("éclaircissement", "eclaircissement-dentaire-paris")),
+    ]},
     "_exemple_desactive": {
         "titre": "Le bilan, en quatre étapes",
         "apres_chapitre": 1,
@@ -313,8 +324,17 @@ PHOTO_EN_TETE = {
         "Avant et après éclaircissement — cas 1, préalable au traitement "
         "d’une tache blanche sur l’incisive centrale",
         "Avant et après éclaircissement dentaire, sourire de face"),
+    # Franck, 19/10/2026 : « illustrer la page sur le même modèle qu'Éclaircissement ».
+    # Le cas d'érosion-infiltration seule, détouré sur fond noir.
+    "taches-dentaires-dyschromies-icon": (
+        "icon-cas-1-couverture.jpg",
+        "Avant et après érosion-infiltration ICON — cas 1, plusieurs taches profondes "
+        "dues à une MIH sévère",
+        "Avant et après infiltration de résine de taches de MIH sur les incisives, fond noir"),
 }
-SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise"}
+# Les photographies de l'ancienne page ICON quittent la page : la tache de MIH et son
+# résultat sont désormais montrés par chapitre, avec le traitement entre les deux.
+SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise", "taches-dentaires-dyschromies-icon"}
 
 # ── une photographie par chapitre ─────────────────────────────────────────
 # Posée dans la colonne de droite du chapitre, au-dessus de l'encadré : le texte
@@ -350,21 +370,55 @@ ILLUSTRATIONS = {
             "Café, thé, vin rouge, tabac : ce qui colore les dents.",
             "Illustration : verre de vin rouge, tasse de café, tasse de thé et cigarette"),
     },
+    # Photographies du cabinet (19/10/2026). Les chapitres 2 à 4 suivent un même cas :
+    # la tache, le traitement, le résultat. Les légendes reprennent celles de Franck.
+    "taches-dentaires-dyschromies-icon": {
+        1: ("icon-fluorose.jpg",
+            "Exemple d’atteinte par fluorose grave.",
+            "Fluorose sévère : taches brunes et blanches sur l’ensemble des dents, sourire de face"),
+        2: ("icon-mih-tache.jpg",
+            "Tache blanche de MIH sur une incisive.",
+            "Tache blanche de MIH sur une incisive centrale, sourire de face"),
+        3: ("icon-traitement-21.jpg",
+            "Le même cas : traitement ICON de la dent 21, sous digue.",
+            "Infiltration de résine en cours sur une incisive isolée par une digue et des matrices métalliques"),
+        4: ("icon-resultat-associe.jpg",
+            "Le même cas, résultat après éclaircissement, composite stratifié sur 11 et "
+            "érosion-infiltration ICON sur 21.",
+            "Sourire après éclaircissement, composite sur une incisive et infiltration de la tache de MIH",
+            [("Le même cas", "cas-mih-eclaircissement-erosion-infiltration"),
+             ("éclaircissement", "eclaircissement-dentaire-paris"),
+             ("composite stratifié", "composite-bonding-paris")]),
+    },
 }
 # Seules les suites d'étapes portent un numéro ; une illustration isolée, non.
 ILLUSTRATIONS_NUMEROTEES = {"bilan-esthetique-personnalise"}
+
+
+def lier(texte, liens):
+    """Rend cliquables, dans une légende déjà échappée, les mots donnés :
+    un couple (mots, page) ou une liste de couples."""
+    if not liens:
+        return texte
+    if isinstance(liens[0], str):
+        liens = [liens]
+    for mots, cible in liens:
+        texte = texte.replace(e(mots), f'<a href="{cible}.html">{e(mots)}</a>', 1)
+    return texte
 
 
 def illustration(slug, k):
     ill = ILLUSTRATIONS.get(slug, {}).get(k)
     if not ill:
         return ""
-    fichier, legende, alt = ill
+    fichier, legende, alt = ill[:3]
     src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
     badge = f'<span class="parcours__num">{k}</span>' if slug in ILLUSTRATIONS_NUMEROTEES else ""
     return (f'        <figure class="illus">\n'
             f'          <img src="{src}" alt="{H.escape(alt)}" loading="lazy">\n'
-            f'          <figcaption>{badge}{e(legende)}</figcaption>\n'
+            # le texte dans un seul bloc : la légende est une rangée souple (pastille + texte),
+            # et chaque lien en serait sinon devenu une colonne
+            f'          <figcaption>{badge}<span>{lier(e(legende), ill[3] if len(ill) > 3 else None)}</span></figcaption>\n'
             f'        </figure>\n')
 
 
@@ -378,14 +432,11 @@ def sequence(slug):
         fichier, legende, alt = etape[:3]
         src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
         badge = "" if large else f'<span class="parcours__num">{i}</span>'
-        texte = e(legende)
-        # un quatrième élément (mots, page) rend ces mots cliquables vers cette page
-        if len(etape) > 3 and etape[3]:
-            mots, cible = etape[3]
-            texte = texte.replace(e(mots), f'<a href="{cible}.html">{e(mots)}</a>', 1)
+        # un quatrième élément (mots, page), ou une liste de couples, rend ces mots cliquables
+        texte = lier(e(legende), etape[3] if len(etape) > 3 else None)
         figs.append(f'''        <figure class="parcours__etape">
           <img src="{src}" alt="{H.escape(alt)}" loading="lazy">
-          <figcaption>{badge}{texte}</figcaption>
+          <figcaption>{badge}<span>{texte}</span></figcaption>
         </figure>''')
     classe = "parcours parcours--large" if large else "parcours"
     return f'''  <section class="sect sect--zone">

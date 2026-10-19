@@ -64,6 +64,15 @@ const photosThemes = {
   "02 Eclaircissement/_montages/eclaircissement-cas-2-avant-apres.jpg": "eclaircissement-cas-2-avant-apres.jpg",
   "02 Eclaircissement/_montages/eclaircissement-cas-3-avant-apres.jpg": "eclaircissement-cas-3-avant-apres.jpg",
   "02 Eclaircissement/_montages/eclaircissement-cas-1-couverture.jpg": "eclaircissement-cas-1-couverture.jpg",
+  // Infiltration ICON (19/10/2026) : deux cas détourés sur fond noir (Canva), montés sur le Mac ;
+  // un cas en trois temps (tache, traitement, résultat) et un exemple de fluorose. Noms neutres.
+  "03 Infiltration ICON/_montages/icon-cas-1-avant-apres.jpg": "icon-cas-1-avant-apres.jpg",
+  "03 Infiltration ICON/_montages/icon-cas-2-avant-apres.jpg": "icon-cas-2-avant-apres.jpg",
+  "03 Infiltration ICON/_montages/icon-cas-1-couverture.jpg": "icon-cas-1-couverture.jpg",
+  "03 Infiltration ICON/_montages/icon-fluorose.jpg": "icon-fluorose.jpg",
+  "03 Infiltration ICON/_montages/icon-mih-tache.jpg": "icon-mih-tache.jpg",
+  "03 Infiltration ICON/_montages/icon-traitement-21.jpg": "icon-traitement-21.jpg",
+  "03 Infiltration ICON/_montages/icon-resultat-associe.jpg": "icon-resultat-associe.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });
