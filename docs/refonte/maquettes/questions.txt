@@ -13,7 +13,10 @@
 #   - l'ordre du fichier est l'ordre d'affichage ; huit questions au plus sont publiées.
 #
 # Ce qui n'est pas dans le texte de la page est signalé « à valider » : à vous de
-# confirmer, corriger ou supprimer. Rien n'a été inventé sur les prix ni les délais.
+# confirmer, corriger ou supprimer. Rien n'a été inventé sur les délais.
+#
+# PRIX — règle de Franck, 19/10/2026 : jamais de chiffre ; le prix est établi de
+# manière personnalisée et remis après le bilan.
 
 == eclaircissement-dentaire-paris ==
 Q : Le blanchiment abîme-t-il l’émail ?
@@ -45,8 +48,8 @@ Q : Les facettes font-elles « fausses » ?
 R : Non, quand le design, les proportions et la céramique sont pensés pour le visage. Le résultat dépend du projet, du travail du céramiste et de l’intégration au sourire, pas de la seule blancheur.
 Q : Faut-il faire toutes les dents ?
 R : Non. Le nombre de facettes dépend du projet : deux incisives, un secteur antérieur ou le sourire entier. Un éclaircissement préalable permet souvent de limiter le nombre de dents à restaurer.
-Q : Combien coûtent des facettes, et sont-elles remboursées ?
-R : [À compléter par Franck : fourchette par facette, prise en charge, ou renvoi au devis remis après le bilan.]
+Q : Combien coûtent des facettes ?
+R : Le prix est établi de manière personnalisée, selon le nombre de facettes et le projet retenu, et vous est remis après le bilan esthétique.
 
 == composite-bonding-paris ==
 Q : Le composite se tache-t-il ou jaunit-il ?
@@ -63,7 +66,7 @@ R : Oui, dans de nombreux cas. La fermeture d’un diastème est une indication 
 Q : Que se passe-t-il si un composite s’ébrèche ?
 R : Il se répare, le plus souvent sans tout refaire : on ajoute de la matière sur place, puis on repolit. La réparabilité est l’un des grands intérêts de cette technique.
 Q : Combien coûte un composite bonding ?
-R : [À compléter par Franck : fourchette par dent, ou renvoi au devis après le bilan.]
+R : Le prix est établi de manière personnalisée, selon le nombre de dents et l’ampleur des corrections, et vous est remis après le bilan esthétique.
 
 == taches-dentaires-dyschromies-icon ==
 Q : D’où viennent les taches blanches sur les dents ?
@@ -82,7 +85,7 @@ R : La résine infiltrée est stable dans le temps. Comme toute surface traitée
 Q : Peut-on traiter une tache de MIH chez un enfant ou un adolescent ?
 R : Oui, lorsqu’elle touche une dent définitive et qu’elle gêne réellement. Il n’est pas nécessaire d’attendre l’âge adulte : le choix entre microabrasion, infiltration ou association dépend de la profondeur de la tache, de l’âge et de la coopération.
 Q : Combien coûte une infiltration ICON ?
-R : [À compléter par Franck : par dent, ou renvoi au devis après le bilan.]
+R : Le prix est établi de manière personnalisée, selon le nombre de dents à traiter et un éventuel éclaircissement associé, et vous est remis après le bilan.
 
 == usures-dentaires ==
 Q : Mes dents s’usent : est-ce grave ?
@@ -165,10 +168,6 @@ Q : Que peut faire le dentiste si l’anorexie n’est pas encore prise en charg
 R : Protéger la bouche : dépister, conseiller sur l’alimentation et l’hygiène, prescrire un dentifrice adapté, traiter les sensibilités, surveiller. Il ne traite pas le TCA lui-même, mais peut aider à l’orientation, avec tact.
 
 == bilan-esthetique-personnalise ==
-Q : Combien de temps dure un bilan esthétique ?
-R : [À compléter par Franck : durée de la consultation, en une ou deux séances ?]
-Q : Combien coûte un bilan esthétique ?
-R : [À compléter par Franck : tarif, ou ce que comprend le bilan.]
 Q : Dois-je savoir ce que je veux avant de venir ?
 R : Non. Le bilan sert justement à mettre des mots et des images sur votre demande : trop court, trop sombre, asymétrique, ou simplement « autrement ».
 Q : Que se passe-t-il pendant la consultation ?
@@ -180,6 +179,13 @@ R : Non. C’est un outil de planification et de communication. Le résultat ré
 # à valider : pas dans la page
 Q : Faut-il apporter quelque chose ?
 R : D’anciennes photographies de votre sourire sont précieuses : elles montrent comment les dents ont changé. Apportez aussi vos radiographies récentes et la liste de vos traitements en cours, si vous en avez.
+Q : Quand connaîtrai-je le prix du traitement ?
+R : À l’issue du bilan. Le prix est établi de manière personnalisée, selon le traitement choisi ensemble, et vous est remis après le bilan, avant tout engagement.
+# la règle des prix ne répond pas au tarif du bilan lui-même : questions gardées, non publiées
+Q : Combien coûte la consultation de bilan ?
+R : [À compléter par Franck : tarif de la consultation de bilan.]
+Q : Combien de temps dure un bilan esthétique ?
+R : [À compléter par Franck : durée de la consultation, en une ou deux séances ?]
 
 == rehabilitation-dents-usees ==
 Q : Faut-il obligatoirement poser des couronnes ?
@@ -194,7 +200,7 @@ R : Comme toute restauration, elles peuvent s’user, s’écailler ou demander 
 Q : Peut-on tout reconstruire en composite ?
 R : C’est possible dans certains cas, mais ce n’est pas une règle : le choix dépend du projet, de la quantité de tissu perdu et des contraintes. Un même patient reçoit souvent plusieurs types de restaurations.
 Q : Combien coûte une réhabilitation ?
-R : [À compléter par Franck : ordre de grandeur, ou renvoi au devis après le bilan.]
+R : Le prix est établi de manière personnalisée, selon le nombre de dents, les matériaux et les étapes du traitement, et vous est remis après le bilan.
 
 == facettes-ou-composite ==
 Q : Lequel est le plus naturel ?
@@ -207,8 +213,8 @@ Q : Peut-on commencer par du composite et passer aux facettes plus tard ?
 R : Dans certaines situations, oui. Une approche composite additive préserve la dent et laisse la porte ouverte. Mais toutes les transitions ne sont pas simples : cela s’évalue cliniquement, le moment venu.
 Q : Faut-il éclaircir les dents avant ?
 R : Souvent, oui, quand la teinte fait partie de la demande : l’éclaircissement se fait avant, pour choisir la teinte des restaurations sur des dents déjà plus lumineuses. La séquence dépend du traitement envisagé.
-Q : Lequel coûte le moins cher ?
-R : [À compléter par Franck : ordres de grandeur respectifs, ou renvoi au devis.]
+Q : Combien coûtent le composite et les facettes ?
+R : Le prix est établi de manière personnalisée, selon la technique, le nombre de dents et le projet retenu, et vous est remis après le bilan esthétique.
 
 == dentisterie-esthetique-paris ==
 Q : Comment choisir un dentiste esthétique à Paris ?
@@ -238,5 +244,8 @@ R : Il est évalué lorsqu’il intervient dans une usure, mais toutes les usure
 # à valider : pas dans la page
 Q : Recevez-vous les enfants et les adolescents ?
 R : Oui, pour les questions esthétiques qui les concernent, notamment les taches blanches de MIH sur les incisives, lorsque l’indication est posée.
+Q : Combien coûtent les soins ?
+R : Le prix est établi de manière personnalisée, selon votre situation et le traitement retenu, et vous est remis après le bilan.
+# la règle des prix ne dit rien du remboursement : question gardée, non publiée
 Q : Les soins sont-ils remboursés ?
-R : [À compléter par Franck : conventionnement, carte Vitale, mutuelles, devis.]
+R : [À compléter par Franck : conventionnement, carte Vitale, mutuelles.]
