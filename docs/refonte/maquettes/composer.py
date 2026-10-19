@@ -310,6 +310,10 @@ ILLUSTRATIONS = {
         2: ("eclaircissement-gouttieres.jpg",
             "Gouttières personnalisées et gel de peroxyde de carbamide, portés à domicile.",
             "Illustration : gouttières de blanchiment transparentes et seringue de gel"),
+        3: ("eclaircissement-sensibilites.jpg",
+            "Le froid est ce qui réveille une sensibilité : elle est transitoire et régresse "
+            "après adaptation ou interruption du protocole.",
+            "Illustration : verre d’eau glacée, glaçons et condensation"),
         4: ("eclaircissement-colorants.jpg",
             "Café, thé, vin rouge, tabac : ce qui colore les dents.",
             "Illustration : verre de vin rouge, tasse de café, tasse de thé et cigarette"),

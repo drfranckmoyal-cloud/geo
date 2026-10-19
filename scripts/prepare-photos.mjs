@@ -57,6 +57,8 @@ const photosThemes = {
     "eclaircissement-gouttieres.jpg",
   "02 Eclaircissement/colorants vin rouge cafe the cigarette (image generee).jpg":
     "eclaircissement-colorants.jpg",
+  "02 Eclaircissement/sensibilites eau glacee (image generee).jpg":
+    "eclaircissement-sensibilites.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });
