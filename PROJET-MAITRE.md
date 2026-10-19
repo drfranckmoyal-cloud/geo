@@ -340,7 +340,7 @@ décision.
 
 - **Première consultation** — durée, tarif, prise en charge, déroulé : à ajouter sur la page contact (Franck, 19/10/2026 : « noter qu'on le rajoute »). En attente de ses éléments.
 - **Langues parlées** — sur la fiche Google, **à ne pas afficher** sur le site (Franck, 19/10/2026).
-- **Photo de la façade** — emplacement réservé sur la page contact, photographie à fournir par Franck.
+- **Photo de la façade** — à ajouter sur la page contact quand Franck la fournira ; pas d'emplacement réservé affiché (retiré à sa demande le 19/10/2026).
 - **Doctolib** — Franck rattache lui-même la fiche Google au bon cabinet (Flandre → Paris 9) ; le site n'aura un bouton de réservation en ligne qu'avec ce lien.
 
 ### Tranchés

@@ -404,7 +404,7 @@ ACCES = [("Cadet", "ligne 7"), ("Notre-Dame-de-Lorette", "ligne 12")]
 # Rubrique « Accessibilité » de la fiche Google, mot pour mot regroupée.
 ACCESSIBILITE = ("Entrée, places assises et toilettes accessibles en fauteuil roulant · "
                  "parking accessible · boucle magnétique pour les malentendants")
-# Note Google : un relevé daté, pas une donnée vivante — à mettre à jour à la main.
+# Note Google : un relevé (octobre 2026), pas une donnée vivante — à mettre à jour à la main.
 AVIS = ("4,9", "113", "octobre 2026")
 
 # Logos officiels (tracés Simple Icons), aux couleurs de chaque réseau.
@@ -512,13 +512,8 @@ def contact():
           <p class="lieu__acces"><b>Métro</b> {acces}</p>
           <p class="lieu__acces"><b>Accès</b> {e(ACCESSIBILITE)}</p>
           <p class="lieu__avis"><a href="{FICHE}" target="_blank" rel="noopener">
-            <span class="lieu__etoile">★</span> {e(note)} / 5 · {e(nb)} avis Google <span class="ext">↗</span></a>
-            <span class="lieu__releve">relevé en {e(quand)}</span></p>
+            <span class="lieu__etoile">★</span> {e(note)} / 5 · {e(nb)} avis Google <span class="ext">↗</span></a></p>
           <a class="bouton-encre" href="{ITINERAIRE}" target="_blank" rel="noopener">Itinéraire <span class="ext">↗</span></a>
-          <figure class="lieu__photo">
-            <figcaption>Photographie de la façade ou de l’entrée — à fournir par Franck ;
-              emplacement réservé.</figcaption>
-          </figure>
         </div>
         <div class="lieu__plan">
           <iframe src="{PLAN_EMBED}" title="Plan : 2 rue Hippolyte Lebas, Paris 9e"
