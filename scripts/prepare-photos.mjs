@@ -59,6 +59,10 @@ const photosThemes = {
     "eclaircissement-colorants.jpg",
   "02 Eclaircissement/sensibilites eau glacee (image generee).jpg":
     "eclaircissement-sensibilites.jpg",
+  // Trois cas d'éclaircissement, montages avant/après fabriqués sur le Mac (19/10/2026).
+  "02 Eclaircissement/_montages/eclaircissement-cas-1-avant-apres.jpg": "eclaircissement-cas-1-avant-apres.jpg",
+  "02 Eclaircissement/_montages/eclaircissement-cas-2-avant-apres.jpg": "eclaircissement-cas-2-avant-apres.jpg",
+  "02 Eclaircissement/_montages/eclaircissement-cas-3-avant-apres.jpg": "eclaircissement-cas-3-avant-apres.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

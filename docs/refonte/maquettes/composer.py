@@ -259,6 +259,20 @@ def fiche(p, sections):
 # sont celles que Franck a écrites dans les noms de fichiers (orthographe reprise),
 # les photographies celles du dossier « PHOTOS SITE - par theme » (19/10/2026).
 SEQUENCES = {
+    # Trois cas d'éclaircissement, en montages avant/après pleine largeur.
+    "eclaircissement-dentaire-paris": {
+        "titre": "Avant / après",
+        "apres_chapitre": 2,
+        "large": True,
+        "etapes": [
+            ("eclaircissement-cas-1-avant-apres.jpg", "Cas 1",
+             "Avant et après éclaircissement, sourire de face"),
+            ("eclaircissement-cas-2-avant-apres.jpg", "Cas 2",
+             "Avant et après éclaircissement, vue intra-orale avec écarteurs"),
+            ("eclaircissement-cas-3-avant-apres.jpg", "Cas 3",
+             "Avant et après, sourire de face"),
+        ],
+    },
     "_exemple_desactive": {
         "titre": "Le bilan, en quatre étapes",
         "apres_chapitre": 1,
@@ -341,16 +355,19 @@ def sequence(slug):
     if not seq:
         return ""
     figs = []
+    large = seq.get("large", False)
     for i, (fichier, legende, alt) in enumerate(seq["etapes"], 1):
         src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
+        badge = "" if large else f'<span class="parcours__num">{i}</span>'
         figs.append(f'''        <figure class="parcours__etape">
           <img src="{src}" alt="{H.escape(alt)}" loading="lazy">
-          <figcaption><span class="parcours__num">{i}</span>{e(legende)}</figcaption>
+          <figcaption>{badge}{e(legende)}</figcaption>
         </figure>''')
+    classe = "parcours parcours--large" if large else "parcours"
     return f'''  <section class="sect sect--zone">
     <div class="contenu">
       <h2 class="tete-bande">{e(seq["titre"])}</h2>
-      <div class="parcours">
+      <div class="{classe}">
 {chr(10).join(figs)}
       </div>
     </div>
