@@ -462,9 +462,10 @@ def rendre(page):
   </section>''')
 
     # ── questions ──
-    if page["faq"]:
+    paires = page["faq"] if questions(slug) is None else questions(slug)
+    if paires:
         qs = "\n        ".join(
-            f'<div><h3>{e(q["q"])}</h3><p>{e(q["r"])}</p></div>' for q in page["faq"][:8]
+            f'<div><h3>{e(q["q"])}</h3><p>{e(q["r"])}</p></div>' for q in paires[:8]
         )
         corps.append(f'''  <section class="sect sect--serre">
     <div class="contenu">
@@ -860,6 +861,139 @@ def relier_dans_le_texte(page, slug):
 MAILLAGE_JOURNAL = {}
 
 
+# ── les questions fréquentes, dans questions.txt ──────────────────────────────
+# Franck, 19/10/2026 : « rédige les propositions de questions, je corrigerai ».
+# Le fichier est la source : une page qui y figure remplace les questions héritées
+# de l'ancien site ; une réponse entre crochets est « à compléter » et n'est pas
+# publiée ; une page absente du fichier garde ses anciennes questions.
+QUESTIONS_FICHIER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "questions.txt")
+_QUESTIONS = None
+
+
+def questions_lues():
+    global _QUESTIONS
+    if _QUESTIONS is not None:
+        return _QUESTIONS
+    pages, a_completer = {}, {}
+    slug = q = None
+    if os.path.exists(QUESTIONS_FICHIER):
+        for ligne in open(QUESTIONS_FICHIER, encoding="utf-8"):
+            l = ligne.strip()
+            if not l or l.startswith("#"):
+                continue
+            m = re.match(r"^==\s*([a-z0-9-]+)\s*==$", l)
+            if m:
+                slug = m.group(1)
+                pages.setdefault(slug, [])
+                a_completer.setdefault(slug, 0)
+                q = None
+                continue
+            m = re.match(r"^([QR])\s*:\s*(.*)$", l)
+            if not m or slug is None:
+                continue
+            if m.group(1) == "Q":
+                q = m.group(2).strip()
+            elif q:
+                r = m.group(2).strip()
+                if r.startswith("["):
+                    a_completer[slug] += 1
+                else:
+                    pages[slug].append({"q": q, "r": r})
+                q = None
+    _QUESTIONS = (pages, a_completer)
+    return _QUESTIONS
+
+
+def questions(slug):
+    """Les questions publiables d'une page ; None si la page n'est pas dans le fichier."""
+    return questions_lues()[0].get(slug)
+
+
+def bloc_questions(paires):
+    qs = "".join(f'\n        <div><h3>{e(x["q"])}</h3><p>{e(x["r"])}</p></div>'
+                 for x in paires[:8])
+    return f"""  <section class="sect sect--serre">
+    <div class="contenu">
+      <h2 class="tete-bande">Questions fréquentes</h2>
+      <div class="qa">{qs}
+      </div>
+    </div>
+  </section>"""
+
+
+_MOTIF_QUESTIONS = re.compile(
+    r'  <section class="sect sect--serre">\s*<div class="contenu">\s*'
+    r'(?:<p class="eyebrow">Questions fréquentes</p>|<h2 class="tete-bande">Questions fréquentes</h2>)'
+    r'\s*<div class="qa">.*?</div>\s*</div>\s*</section>', re.S)
+
+
+def normaliser_questions(page, slug):
+    """Si la page figure dans questions.txt, son bloc est refait depuis le fichier.
+    Sinon, un bloc à l'ancienne (eyebrow, question en gras) passe au bloc actuel :
+    les pages faites à la main l'avaient gardé."""
+    paires = questions(slug)
+    m = _MOTIF_QUESTIONS.search(page)
+    if paires is not None:
+        neuf = bloc_questions(paires) if paires else ""
+        if m:
+            return page[:m.start()] + neuf + page[m.end():]
+        if neuf and '  <section class="appel">' in page:
+            return page.replace('  <section class="appel">', neuf + '\n  <section class="appel">', 1)
+        return page
+    if m and 'class="eyebrow">Questions' in m.group(0):
+        vieux = m.group(0)
+        neuf = vieux.replace('<p class="eyebrow">Questions fréquentes</p>',
+                             '<h2 class="tete-bande">Questions fréquentes</h2>')
+        neuf = re.sub(r'<div>\s*<b>(.*?)</b>\s*<p>', r'<div><h3>\1</h3><p>', neuf, flags=re.S)
+        return page.replace(vieux, neuf, 1)
+    return page
+
+
+def _brut(s):
+    return re.sub(r"\s+", " ", H.unescape(re.sub(r"<[^>]+>", "", s))).strip()
+
+
+def synchroniser_faqpage(page, slug):
+    """Les données structurées FAQPage disent exactement ce que la page affiche :
+    reconstruites depuis le bloc rendu, retirées s'il n'y en a plus."""
+    m = re.search(r'<div class="qa">(.*?)</div>\s*</div>\s*</section>', page, re.S)
+    paires = [(_brut(q), _brut(r)) for q, r in
+              re.findall(r"<h3>(.*?)</h3>\s*<p>(.*?)</p>", m.group(1), re.S)] if m else []
+    blocs = list(re.finditer(r'<script type="application/ld\+json">(.*?)</script>', page, re.S))
+    if not blocs:
+        return page
+    graphes = []
+    for b in blocs:
+        try:
+            d = json.loads(b.group(1))
+        except ValueError:
+            return page
+        graphes.append(d)
+    ancien, url = None, None
+    for d in graphes:
+        for n in d.get("@graph", []) if isinstance(d.get("@graph"), list) else []:
+            if n.get("@type") == "FAQPage" and ancien is None:
+                ancien = n
+            if isinstance(n.get("@type"), str) and n["@type"].endswith("WebPage") and n.get("url"):
+                url = n["url"]
+    cible = next((d for d in graphes if isinstance(d.get("@graph"), list)), None)
+    if cible is None:
+        return page
+    for d in graphes:
+        if isinstance(d.get("@graph"), list):
+            d["@graph"] = [n for n in d["@graph"] if n.get("@type") != "FAQPage"]
+    if paires:
+        noeud = dict(ancien) if ancien else {"@type": "FAQPage",
+                                             "@id": (url or RACINE_WEB + slug + "/") + "#faq"}
+        noeud["mainEntity"] = [{"@type": "Question", "name": q,
+                                "acceptedAnswer": {"@type": "Answer", "text": r}} for q, r in paires]
+        cible["@graph"].append(noeud)
+    for b, d in reversed(list(zip(blocs, graphes))):
+        page = (page[:b.start()] + '<script type="application/ld+json">'
+                + json.dumps(d, ensure_ascii=False) + "</script>" + page[b.end():])
+    return page
+
+
 def reharmoniser():
     """Les pages écrites à la main gardaient chacune sa copie du menu et du pied,
     qui prenaient du retard dès qu'on touchait à l'un des deux. Elles vont désormais
@@ -898,6 +1032,7 @@ def reharmoniser():
                                         f'<h1>{e(titre)}</h1>\n'
                                         f'        <p class="sous-titre">{e(sous)}</p>', 1)
         page = re.sub(r'style\.css\?v=\d+', f"style.css?v={VERSION}", page)
+        page = normaliser_questions(page, slug)
         page, poses = relier_dans_le_texte(page, slug)
         if poses:
             MAILLAGE_JOURNAL[slug] = poses
@@ -907,6 +1042,7 @@ def reharmoniser():
             bloc = jsonld_dorigine(nom[:-5]) or donnees_structurees(nom[:-5])
             if bloc:
                 page = page.replace("</head>", bloc + "\n</head>", 1)
+        page = synchroniser_faqpage(page, slug)
         if page != avant:
             open(chemin, "w", encoding="utf-8").write(page)
             reprises.append(nom)
@@ -956,6 +1092,11 @@ def main():
     if MAILLAGE_JOURNAL:
         total = sum(len(v) for v in MAILLAGE_JOURNAL.values())
         print(f"\n  maillage dans le texte : {total} liens posés sur {len(MAILLAGE_JOURNAL)} pages")
+    pages_q, a_completer = questions_lues()
+    if pages_q:
+        print(f"  questions fréquentes : {len(pages_q)} pages depuis questions.txt, "
+              f"{sum(len(v) for v in pages_q.values())} questions publiées, "
+              f"{sum(a_completer.values())} à compléter (entre crochets)")
         for sl, poses in sorted(MAILLAGE_JOURNAL.items()):
             print(f"    {sl[:40]:40s} " + " · ".join(f"{c.split('-')[0]}←« {m} »" for c, m in poses))
     if reprises:

@@ -473,9 +473,14 @@ def composer(slug, plan):
     # questions — avant « À lire aussi » : elles font partie du contenu, les
     # renvois sont de la navigation. Franck, 19/10/2026 : « un FAQ plus marqué ».
     faq = next((s for s in sec if s["faq"]), None)
-    if faq:
-        qs = "".join(f'\n        <div><h3>{e(q)}</h3><p>{e(r)}</p></div>'
-                     for q, r in zip(faq["h3"], faq["p"]))
+    paires = gen.questions(slug)
+    if paires is None and faq:
+        # un paragraphe d'introduction dans la section décalait toutes les réponses d'un cran
+        ps = faq["p"][max(0, len(faq["p"]) - len(faq["h3"])):]
+        paires = [{"q": q, "r": r} for q, r in zip(faq["h3"], ps)]
+    if paires:
+        qs = "".join(f'\n        <div><h3>{e(x["q"])}</h3><p>{e(x["r"])}</p></div>'
+                     for x in paires[:8])
         corps.append(f'''  <section class="sect sect--serre">
     <div class="contenu">
       <h2 class="tete-bande">Questions fréquentes</h2>

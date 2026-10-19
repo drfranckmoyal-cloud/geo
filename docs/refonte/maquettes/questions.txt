@@ -1,0 +1,242 @@
+# QUESTIONS FRÉQUENTES, page par page — propositions de Claude, 19/10/2026, à corriger.
+#
+# Comment lire ce fichier :
+#   == nom-de-la-page ==      ouvre la liste d'une page
+#   Q : la question           telle qu'un patient la tape
+#   R : la réponse            une seule ligne, aussi longue qu'il faut ; la première phrase répond
+#   # …                       commentaire, ignoré (les notes « à valider » sont pour vous)
+#
+# Règles de fabrication :
+#   - une réponse entre crochets [ … ] est une question à compléter : elle reste ici
+#     mais n'est pas publiée tant que les crochets sont là ;
+#   - une page absente de ce fichier garde les questions de l'ancien site ;
+#   - l'ordre du fichier est l'ordre d'affichage ; huit questions au plus sont publiées.
+#
+# Ce qui n'est pas dans le texte de la page est signalé « à valider » : à vous de
+# confirmer, corriger ou supprimer. Rien n'a été inventé sur les prix ni les délais.
+
+== eclaircissement-dentaire-paris ==
+Q : Le blanchiment abîme-t-il l’émail ?
+R : Non. L’éclaircissement ne taille aucune dent et ne retire aucune matière : le gel modifie la teinte sans toucher à la structure de la dent. Une sensibilité peut apparaître pendant le traitement ; elle est transitoire et le protocole s’adapte.
+# à valider : l'ordre de grandeur « quelques semaines »
+Q : Combien de temps dure un éclaircissement ?
+R : Le plus souvent quelques semaines de port nocturne des gouttières. La durée exacte dépend de la teinte de départ, de la concentration du gel et du résultat recherché : elle est fixée au début et ajustée en cours de route.
+Q : Est-ce douloureux ?
+R : Non, mais des sensibilités au froid peuvent apparaître pendant le traitement. Elles sont transitoires et disparaissent à l’arrêt ou après adaptation du protocole : concentration, fréquence ou durée des applications.
+Q : Combien de temps le résultat tient-il ?
+R : Longtemps, mais pas pour toujours : la teinte évolue lentement avec les habitudes alimentaires et le vieillissement naturel. Avec des gouttières, un entretien ponctuel de quelques nuits suffit quand il devient nécessaire.
+# à valider : pas dans la page
+Q : Le blanchiment agit-il sur les couronnes, les facettes et les composites ?
+R : Non. Seules les dents naturelles s’éclaircissent ; les restaurations gardent leur teinte. C’est pourquoi, dans un projet esthétique, l’éclaircissement se fait avant les restaurations, pour choisir leur teinte sur des dents déjà plus lumineuses.
+Q : Blanchiment au fauteuil ou à la maison : lequel choisir ?
+R : Je privilégie l’éclaircissement ambulatoire : des gouttières sur mesure portées à domicile, le plus souvent la nuit, avec un gel au peroxyde de carbamide. Il est progressif, contrôlable et s’ajuste en cours de route ; à protocole suivi, le résultat est comparable à celui du fauteuil, avec moins de sensibilités.
+
+== facettes-dentaires-paris ==
+Q : Faut-il tailler les dents pour poser des facettes ?
+R : Le moins possible, et parfois presque pas. La quantité de préparation se décide à partir du projet : quand la dent a déjà une forme et une position compatibles, elle peut être très faible. Le « sans préparation » n’est pas un objectif en soi ; la priorité est de garder le maximum d’émail compatible avec le résultat voulu.
+Q : Les facettes abîment-elles les dents ?
+R : Une facette collée sur l’émail, avec une préparation limitée, préserve la dent. Les meilleurs résultats à long terme sont obtenus quand la céramique est collée principalement à l’émail : c’est pourquoi la préparation est réduite au minimum.
+# à valider : pas dans la page
+Q : Est-ce douloureux ?
+R : Non. La préparation, quand elle est nécessaire, se fait sous anesthésie locale, et la pose des facettes est indolore. Des sensibilités passagères au froid sont possibles entre les deux séances.
+Q : Peut-on voir le résultat avant de commencer ?
+R : Oui. Le bilan esthétique comprend des photographies, un scan et une simulation numérique, parfois un essai en bouche. La simulation n’est pas une photographie contractuelle du résultat : elle sert à choisir la direction ensemble, avant de toucher aux dents.
+Q : Les facettes font-elles « fausses » ?
+R : Non, quand le design, les proportions et la céramique sont pensés pour le visage. Le résultat dépend du projet, du travail du céramiste et de l’intégration au sourire, pas de la seule blancheur.
+Q : Faut-il faire toutes les dents ?
+R : Non. Le nombre de facettes dépend du projet : deux incisives, un secteur antérieur ou le sourire entier. Un éclaircissement préalable permet souvent de limiter le nombre de dents à restaurer.
+Q : Combien coûtent des facettes, et sont-elles remboursées ?
+R : [À compléter par Franck : fourchette par facette, prise en charge, ou renvoi au devis remis après le bilan.]
+
+== composite-bonding-paris ==
+Q : Le composite se tache-t-il ou jaunit-il ?
+R : Il peut perdre un peu de brillance ou se colorer légèrement en surface avec le temps, surtout avec le café, le thé, le vin rouge ou le tabac. Un polissage au cabinet lui rend son aspect : c’est l’un des intérêts du composite, il s’entretient.
+Q : Le composite bonding est-il réversible ?
+R : Il est le plus souvent additif : la dent n’est pas ou très peu touchée, et le composite peut être retouché, modifié ou retiré. Parler de réversibilité absolue serait excessif ; c’est une approche très conservatrice et modifiable.
+Q : Combien de séances faut-il ?
+R : Une seule séance pour la plupart des traitements, sans empreinte ni laboratoire : le composite est sculpté directement sur la dent. Un contrôle et un polissage de finition peuvent suivre.
+# à valider : pas dans la page
+Q : Est-ce douloureux ?
+R : Non. Quand le composite est simplement ajouté sur la dent, il n’y a le plus souvent pas besoin d’anesthésie.
+Q : Peut-on fermer un espace entre les dents avec du composite ?
+R : Oui, dans de nombreux cas. La fermeture d’un diastème est une indication classique, à condition de respecter les proportions des dents et les contacts.
+Q : Que se passe-t-il si un composite s’ébrèche ?
+R : Il se répare, le plus souvent sans tout refaire : on ajoute de la matière sur place, puis on repolit. La réparabilité est l’un des grands intérêts de cette technique.
+Q : Combien coûte un composite bonding ?
+R : [À compléter par Franck : fourchette par dent, ou renvoi au devis après le bilan.]
+
+== taches-dentaires-dyschromies-icon ==
+Q : D’où viennent les taches blanches sur les dents ?
+R : D’un émail devenu plus poreux à un endroit, ce qui change la façon dont il renvoie la lumière. Les causes les plus fréquentes : une MIH, une fluorose, une déminéralisation après un appareil orthodontique, plus rarement un ancien traumatisme ou une carie débutante. Le traitement dépend de l’origine et de la profondeur de la tache.
+Q : ICON enlève-t-il la tache blanche ?
+R : Il peut la masquer très fortement dans certaines indications, mais le degré de camouflage est variable selon l’origine et la profondeur de la lésion. L’objectif est de réduire le contraste, pas de promettre le même résultat pour toutes les taches.
+# à valider : pas dans la page (déroulement, anesthésie)
+Q : Est-ce douloureux, faut-il une anesthésie ?
+R : Non. L’infiltration ne taille pas la dent : la surface est préparée par un gel, séchée, puis la résine pénètre l’émail poreux et est durcie à la lumière. Il n’y a généralement pas besoin d’anesthésie.
+# à valider : nombre de séances et délai après éclaircissement
+Q : Combien de séances faut-il ?
+R : Une séance suffit le plus souvent. Lorsqu’un éclaircissement est prévu avant, il précède l’infiltration de quelques semaines, le temps que la teinte se stabilise.
+# à valider : pas dans la page
+Q : Le résultat est-il définitif ?
+R : La résine infiltrée est stable dans le temps. Comme toute surface traitée, elle peut demander un polissage si elle se colore légèrement.
+Q : Peut-on traiter une tache de MIH chez un enfant ou un adolescent ?
+R : Oui, lorsqu’elle touche une dent définitive et qu’elle gêne réellement. Il n’est pas nécessaire d’attendre l’âge adulte : le choix entre microabrasion, infiltration ou association dépend de la profondeur de la tache, de l’âge et de la coopération.
+Q : Combien coûte une infiltration ICON ?
+R : [À compléter par Franck : par dent, ou renvoi au devis après le bilan.]
+
+== usures-dentaires ==
+Q : Mes dents s’usent : est-ce grave ?
+R : Pas forcément, mais ce n’est pas anodin : le tissu perdu ne repousse pas. Ce qui compte est de savoir si l’usure est encore active, à quelle vitesse elle progresse et pourquoi. Une usure légère et stable se surveille ; une usure active se traite d’abord à sa cause.
+Q : Quels sont les premiers signes d’une usure dentaire ?
+R : Des dents qui paraissent plus courtes, des bords fins ou translucides, des surfaces qui s’aplatissent, une sensibilité au froid ou à l’acide, d’anciennes restaurations qui semblent dépasser, un sourire qui découvre moins les dents.
+Q : Est-ce forcément du bruxisme ?
+R : Non. Le bruxisme est souvent accusé dès que les dents sont plates, mais une érosion acide — alimentation, reflux, vomissements — ou la combinaison de plusieurs facteurs est fréquente. Une dent usée n’est pas un diagnostic : il faut en chercher la cause avant de la réparer.
+Q : Comment savoir si l’usure continue ?
+R : En comparant dans le temps. Des photographies standardisées et une empreinte numérique fixent un état de référence, et l’indice BEWE classe la sévérité par secteur. Seule la comparaison à distance dit si l’usure progresse encore.
+Q : Faut-il reconstruire les dents usées ?
+R : Pas toujours. Prévention, conseils et surveillance suffisent dans bien des cas. Quand une reconstruction est indiquée, elle se fait le plus souvent en ajoutant de la matière, en composite ou par des pièces collées, après contrôle de la cause : reconstruire sur une érosion non maîtrisée expose à une récidive.
+Q : Que puis-je faire moi-même ?
+R : Repérer et espacer les expositions acides — sodas même sans sucre, agrumes, boissons énergétiques —, ne pas brosser fort, utiliser un dentifrice fluoré adapté, signaler un reflux. Et faire un bilan de référence tôt, pour avoir un point de comparaison.
+
+== erosion-dentaire ==
+Q : Qu’est-ce qui attaque les dents au quotidien ?
+R : Les acides, répétés : sodas et boissons light, boissons énergétiques, agrumes, vinaigre, certains médicaments ou compléments, et du côté de l’estomac le reflux, les régurgitations ou les vomissements. C’est la fréquence des expositions qui compte, plus que la quantité.
+Q : Les boissons « sans sucre » abîment-elles les dents ?
+R : Oui. L’érosion dépend de l’acidité, pas du sucre : un soda light ou une eau aromatisée acide attaquent l’émail autant qu’une boisson sucrée.
+Q : Le reflux peut-il abîmer les dents sans brûlures d’estomac ?
+R : Oui. Un reflux peut être silencieux et n’attaquer que les dents. Des érosions sur les faces internes des dents, sans cause alimentaire évidente, doivent faire évoquer un reflux et conduire à une évaluation médicale.
+Q : Une érosion peut-elle s’arrêter ?
+R : Sa progression peut être fortement ralentie, voire stabilisée, quand les facteurs actifs sont identifiés et contrôlés. Ce qui est perdu ne revient pas : c’est pourquoi le dépistage précoce compte.
+Q : Une gouttière protège-t-elle de l’érosion ?
+R : Non. Une gouttière protège des contacts entre les dents, pas des acides. Il faut traiter la cause chimique et les facteurs de risque.
+Q : Peut-on réparer des dents érodées ?
+R : Oui, par les techniques adhésives, en composite ou en céramique collée, une fois la cause contrôlée. Restaurer sans traiter la cause expose à une nouvelle dégradation.
+
+== bruxisme-usure-dentaire ==
+Q : Mes dents sont plates : est-ce forcément du bruxisme ?
+R : Non. Des dents plates ou raccourcies ne prouvent pas un bruxisme : une érosion acide ou plusieurs facteurs combinés sont souvent en cause. Le diagnostic repose sur l’interrogatoire, les symptômes, l’examen et parfois un enregistrement du sommeil, pas sur l’aspect des dents seul.
+Q : Peut-on avoir du bruxisme sans grincer des dents ?
+R : Oui. Le serrement, sans bruit, est une forme fréquente de bruxisme, de jour comme de nuit. Des tensions de la mâchoire ou des douleurs musculaires au réveil en sont parfois le seul signe.
+Q : Si je porte une gouttière, mes dents ne s’useront plus ?
+R : Pas forcément. Une gouttière protège les dents des contacts et peut modifier les appuis, mais elle ne guérit pas le bruxisme et ne protège pas d’une érosion acide. Son intérêt se décide selon le mécanisme dominant de l’usure.
+Q : Le stress est-il la seule cause ?
+R : Non. Le bruxisme est multifactoriel et n’est pas automatiquement une maladie à traiter : son importance dépend du contexte et de ses conséquences sur les dents, les muscles et les articulations.
+# à valider : pas dans la page
+Q : Faut-il une gouttière après une reconstruction des dents usées ?
+R : Souvent, oui, pour protéger les restaurations la nuit. Le projet tient compte des contraintes, du choix des matériaux et de leur réparabilité.
+
+== dents-courtes-usees ==
+Q : Peut-on rallonger seulement les deux incisives ?
+R : Oui, dans certaines situations, si le diagnostic et les proportions le permettent. Allonger deux dents modifie souvent l’équilibre des voisines : la planification le vérifie avant de commencer.
+Q : Composite ou céramique pour rallonger les dents ?
+R : Le composite suffit souvent : il reconstruit directement les longueurs, sans tailler, et se retouche. Pour des volumes importants ou des contraintes fortes, la céramique collée, ou une combinaison des deux, est plus pertinente.
+Q : Les dents vont-elles continuer à s’user après ?
+R : Cela dépend du contrôle de la cause : bruxisme, acides, brossage. C’est pourquoi le diagnostic et la prévention précèdent la reconstruction, et qu’un suivi est prévu ensuite.
+Q : Des dents plus longues feront-elles artificielles ?
+R : Pas lorsqu’elles sont planifiées à partir du visage, des lèvres, de l’exposition au repos et de la phonétique. Les longueurs sont testées sur le projet avant d’être réalisées.
+Q : Combien de temps tient une reconstruction de bord ?
+R : Un composite de bord incisif tient en général plusieurs années ; je donne comme repère un ordre de grandeur de 6 à 7 ans, avec des retouches possibles. La céramique est plus stable mais se répare moins simplement.
+
+== tca-dents ==
+Q : Faut-il dire à son dentiste que l’on a un trouble alimentaire ?
+R : Oui, si vous le pouvez : cette information améliore le diagnostic, les conseils de prévention et le choix du bon moment pour restaurer. Elle reste confidentielle et n’entraîne aucun jugement.
+Q : Un dentiste peut-il voir que l’on a un TCA ?
+R : Il peut repérer des signes — érosions, sensibilités, modifications de la salive — mais une érosion ne diagnostique jamais à elle seule un trouble alimentaire. Son rôle est d’ouvrir le dialogue avec tact, de protéger la bouche et d’orienter si besoin.
+Q : Les vomissements sont-ils indispensables pour abîmer les dents ?
+R : Non. Ils augmentent fortement le risque, mais une alimentation acide, une salive moins abondante, la déshydratation, la dénutrition ou certains médicaments peuvent suffire. C’est le cas notamment dans l’anorexie restrictive.
+Q : Peut-on faire des soins dentaires pendant un TCA actif ?
+R : Oui. Prévention, protection des dents, soins urgents ou nécessaires et traitement des sensibilités se font pendant la prise en charge du trouble. Seule la reconstruction définitive importante est programmée selon la stabilité de la situation.
+# à valider : conseils après un épisode acide (rinçage, bicarbonate, brossage)
+Q : Que faire après un vomissement pour protéger les dents ?
+R : Rincer la bouche à l’eau, éventuellement avec un peu de bicarbonate, et ne pas brosser aussitôt de façon énergique. Un dentifrice fluoré adapté et une bonne hydratation complètent la protection ; ces conseils sont précisés au cas par cas.
+Q : Peut-on retrouver un sourire normal après des années d’érosion ?
+R : Oui, souvent. Les techniques adhésives permettent des reconstructions conservatrices — composite, pièces collées, facettes — et la planification esthétique réintègre le patient dans le projet. Le moment se choisit avec l’équipe soignante.
+
+== anorexie-erosion-dentaire-sans-vomissements ==
+Q : Peut-on avoir les dents érodées sans jamais avoir vomi ?
+R : Oui. Dans l’anorexie restrictive, une salive moins abondante et plus acide, une alimentation acide, la déshydratation ou certains médicaments suffisent à fragiliser l’émail. Le diagnostic repose sur l’ensemble du contexte, pas sur la seule présence de vomissements.
+Q : Une alimentation « saine » peut-elle abîmer les dents ?
+R : Oui. Sodas light, eaux aromatisées, boissons énergétiques, agrumes, tomates, vinaigre, boissons chaudes citronnées sont acides. C’est la fréquence des prises qui compte, plus que la quantité.
+Q : Les antidépresseurs ou d’autres médicaments jouent-ils un rôle ?
+R : Certains favorisent une bouche sèche, donc une moindre protection des dents. L’impact est évalué au cas par cas ; aucun traitement ne doit être modifié sans le prescripteur.
+Q : Le brossage peut-il être responsable ?
+R : Un brossage très énergique participe aux pertes sur un émail déjà fragilisé par les acides, sans en être la cause principale. On recherche l’ensemble des facteurs et on adapte la technique.
+Q : Que peut faire le dentiste si l’anorexie n’est pas encore prise en charge ?
+R : Protéger la bouche : dépister, conseiller sur l’alimentation et l’hygiène, prescrire un dentifrice adapté, traiter les sensibilités, surveiller. Il ne traite pas le TCA lui-même, mais peut aider à l’orientation, avec tact.
+
+== bilan-esthetique-personnalise ==
+Q : Combien de temps dure un bilan esthétique ?
+R : [À compléter par Franck : durée de la consultation, en une ou deux séances ?]
+Q : Combien coûte un bilan esthétique ?
+R : [À compléter par Franck : tarif, ou ce que comprend le bilan.]
+Q : Dois-je savoir ce que je veux avant de venir ?
+R : Non. Le bilan sert justement à mettre des mots et des images sur votre demande : trop court, trop sombre, asymétrique, ou simplement « autrement ».
+Q : Que se passe-t-il pendant la consultation ?
+R : Un échange sur ce qui vous gêne, puis des photographies, un scan 3D du sourire et, si besoin, des radiographies. L’analyse et la planification suivent ; selon les cas, une simulation en 2D, 3D ou en vidéo permet de comparer plusieurs directions avant de décider ensemble.
+Q : Peut-on comparer plusieurs sourires ?
+R : Oui. Plusieurs propositions peuvent être simulées et discutées : plus naturel ou plus transformé, plus long, plus lumineux. Le choix se fait sur des images, pas sur des mots.
+Q : La simulation garantit-elle le résultat ?
+R : Non. C’est un outil de planification et de communication. Le résultat réel dépend de la biologie, des matériaux, des contraintes cliniques et du traitement choisi.
+# à valider : pas dans la page
+Q : Faut-il apporter quelque chose ?
+R : D’anciennes photographies de votre sourire sont précieuses : elles montrent comment les dents ont changé. Apportez aussi vos radiographies récentes et la liste de vos traitements en cours, si vous en avez.
+
+== rehabilitation-dents-usees ==
+Q : Faut-il obligatoirement poser des couronnes ?
+R : Non, et de moins en moins. Les techniques adhésives reconstruisent les volumes perdus en ajoutant de la matière — composite, pièces partielles collées, céramiques — en gardant l’émail. Une couronne reste possible, mais elle n’est plus le point de départ.
+Q : Faut-il dévitaliser les dents ?
+R : Non, pas de façon systématique. L’approche adhésive vise justement à préserver la structure des dents et leur vitalité.
+Q : « Remonter l’occlusion », est-ce dangereux ?
+R : Non lorsque c’est planifié et justifié par le besoin de reconstruire. Les données montrent qu’une augmentation correctement préparée est bien tolérée ; elle est individualisée, et une phase de test n’est pas obligatoire pour tous.
+# à valider : protection nocturne
+Q : Les reconstructions sont-elles définitives ?
+R : Comme toute restauration, elles peuvent s’user, s’écailler ou demander un entretien. La réparabilité fait partie du choix des matériaux ; un suivi et, souvent, une protection nocturne sont prévus.
+Q : Peut-on tout reconstruire en composite ?
+R : C’est possible dans certains cas, mais ce n’est pas une règle : le choix dépend du projet, de la quantité de tissu perdu et des contraintes. Un même patient reçoit souvent plusieurs types de restaurations.
+Q : Combien coûte une réhabilitation ?
+R : [À compléter par Franck : ordre de grandeur, ou renvoi au devis après le bilan.]
+
+== facettes-ou-composite ==
+Q : Lequel est le plus naturel ?
+R : Ni l’un ni l’autre par principe. Le naturel dépend de la forme, des proportions, de la texture et de l’intégration aux dents voisines : composite et céramique y parviennent tous deux lorsqu’ils sont bien indiqués et bien réalisés.
+Q : Lequel dure le plus longtemps ?
+R : La céramique est plus stable en teinte et en surface. Le composite peut perdre de la brillance ou se colorer avec le temps, mais il se repolit et se répare sur place ; repère clinique : autour de 6 à 7 ans avant retouche, sans date d’expiration.
+Q : Lequel abîme le moins les dents ?
+R : Le composite, le plus souvent : il est additif, avec peu ou pas de préparation. Une facette peut aussi être posée avec une préparation très limitée quand la position et le volume de la dent s’y prêtent ; cela se décide sur le projet.
+Q : Peut-on commencer par du composite et passer aux facettes plus tard ?
+R : Dans certaines situations, oui. Une approche composite additive préserve la dent et laisse la porte ouverte. Mais toutes les transitions ne sont pas simples : cela s’évalue cliniquement, le moment venu.
+Q : Faut-il éclaircir les dents avant ?
+R : Souvent, oui, quand la teinte fait partie de la demande : l’éclaircissement se fait avant, pour choisir la teinte des restaurations sur des dents déjà plus lumineuses. La séquence dépend du traitement envisagé.
+Q : Lequel coûte le moins cher ?
+R : [À compléter par Franck : ordres de grandeur respectifs, ou renvoi au devis.]
+
+== dentisterie-esthetique-paris ==
+Q : Comment choisir un dentiste esthétique à Paris ?
+R : Il n’existe pas de classement officiel. Regardez la qualité du diagnostic, les alternatives proposées, la préservation des tissus dentaires, la planification du résultat et le suivi dans le temps : ce sont ces éléments qui distinguent une prise en charge.
+Q : La dentisterie esthétique est-elle une spécialité ?
+R : Non. C’est un domaine de pratique, pas une spécialité reconnue en France. Plusieurs disciplines y participent : éclaircissement, composite, céramique, orthodontie, parodontie.
+Q : Peut-on améliorer son sourire sans tailler les dents ?
+R : Dans beaucoup de situations, oui : éclaircissement, orthodontie, composite additif, infiltration de résine. Cela dépend de la situation de départ et du résultat recherché ; la planification sert à choisir le niveau d’intervention.
+Q : Faut-il forcément des facettes pour un beau sourire ?
+R : Non. Certains sourires sont transformés par un éclaircissement ou du composite ; d’autres projets justifient la céramique. Le matériau vient après le projet.
+Q : Par quoi commencer ?
+R : Par un bilan esthétique : écouter la demande, photographier, scanner, analyser, puis simuler et comparer les options. Le traitement se choisit après, et seulement si son bénéfice est réel.
+Q : Peut-on voir le résultat avant de commencer ?
+R : Oui, sous forme de projet : simulation numérique, parfois essai en bouche. Ce n’est pas une photographie contractuelle, c’est un support de décision partagée.
+
+== chirurgien-dentiste-paris-9 ==
+Q : Où se trouve le cabinet, et comment y aller ?
+R : 2 rue Hippolyte Lebas, 75009 Paris, entre les métros Cadet (ligne 7) et Notre-Dame-de-Lorette (ligne 12). Le plan et l’itinéraire sont sur la page Contact.
+Q : Comment prendre rendez-vous ?
+R : Par téléphone au 01 83 75 52 16, du lundi au vendredi de 9 h à 19 h, ou par courriel en précisant votre demande, par qui vous êtes adressé et en joignant vos documents. Les consultations ont lieu le mardi et le vendredi.
+Q : Peut-on venir uniquement pour un avis ?
+R : Oui. Une consultation peut servir à analyser un projet ou une inquiétude sans impliquer automatiquement un traitement.
+Q : Que soigne-t-on au cabinet ?
+R : L’ensemble de la dentisterie esthétique et adhésive — éclaircissement, composite bonding, facettes, taches blanches — et le diagnostic et la reconstruction des usures et érosions dentaires, y compris dans le contexte des troubles alimentaires.
+Q : Prenez-vous en charge le bruxisme ?
+R : Il est évalué lorsqu’il intervient dans une usure, mais toutes les usures ne sont pas liées au bruxisme : la cause est recherchée avant de proposer une gouttière ou une reconstruction.
+# à valider : pas dans la page
+Q : Recevez-vous les enfants et les adolescents ?
+R : Oui, pour les questions esthétiques qui les concernent, notamment les taches blanches de MIH sur les incisives, lorsque l’indication est posée.
+Q : Les soins sont-ils remboursés ?
+R : [À compléter par Franck : conventionnement, carte Vitale, mutuelles, devis.]
