@@ -821,6 +821,29 @@ body.portail{min-height:100%}
 .espaces:has(.espace--clair:focus-visible) .portail__pied .g{color:#9b9f9b}
 .espaces:has(.espace--encre:hover) .portail__pied .d,
 .espaces:has(.espace--encre:focus-visible) .portail__pied .d{color:#6e726e}
+/* Le bas de la porte dit en clair ce que fait le cabinet : l'accueil n'avait presque
+   plus de texte, ni pour le patient qui arrive de Google ni pour les moteurs et les IA.
+   Franck, 19/10/2026 : « laisse Dentisterie esthétique sous mon nom, et marque
+   dentisterie esthétique à Paris plus bas avec la petite description ».
+   Le bloc tient à gauche du portrait : sa demi-largeur vaut 0,605 fois sa hauteur,
+   sans dépasser le quart de l'écran. */
+.portail__qui{pointer-events:auto;max-width:min(23rem, calc(50vw - min(.605 * min(74svh, 640px), 25vw) - clamp(16px, 4vw, 40px) - 2.5rem))}
+.portail__qui h2{margin:0 0 .4rem;font-family:var(--sans);font-size:.74rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fg);transition:color .3s ease}
+.portail__qui p{margin:0 0 .55rem;font-size:.84rem;line-height:1.5;max-width:none}
+.portail__qui p.portail__adresse{margin:0;font-size:.74rem}
+.portail__qui a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.espaces:has(.espace--clair:hover) .portail__qui h2,
+.espaces:has(.espace--clair:focus-visible) .portail__qui h2{color:#f3f2ee}
+/* écran étroit ou bas, encore en deux moitiés : le bloc passe sous la porte, en entier,
+   plutôt que de se tasser contre le portrait */
+@media (max-width:1359px), (max-height:739px){
+  .portail__pied{position:static;grid-column:1/-1;background:var(--carte);
+    border-top:1px solid var(--trait);pointer-events:auto}
+  .portail__qui{max-width:40rem}
+  .espaces:has(.espace--clair:hover) .portail__pied .g{color:#5e6360}
+  .espaces:has(.espace--clair:hover) .portail__qui h2{color:var(--fg)}
+}
 @media (max-width:720px){
   .portail .espaces{min-height:0}
   .portail .espace{min-height:0;padding-block:1.6rem}
