@@ -11,6 +11,8 @@ import { mkdir, readdir, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 
 const SOURCE = `${homedir()}/Desktop/icono GEO`;
+// Depuis le 19/10/2026, Franck dépose aussi des photographies par thème de carte :
+const SOURCE_THEMES = `${homedir()}/Desktop/PHOTOS SITE - par theme`;
 const CIBLE = "src/assets/photos/cas";
 const LARGEUR_MAX = 2000;
 
@@ -39,15 +41,40 @@ const photos = {
   "Usures /cas 2 /avant .jpg": "rehabilitation-usure-avant.jpg",
   "Usures /cas 2 /après.jpg": "rehabilitation-usure-apres.jpg",
 };
+// Les quatre étapes du bilan esthétique (dossier « 01 Bilan esthetique », 19/10/2026).
+// Les noms de fichiers sont ceux de Franck, qui y a écrit les légendes et l'ordre.
+const photosThemes = {
+  "01 Bilan esthetique/Un bilan photographique est réalisé à chaque premiere consultation (photo a placer avant 1).png":
+    "bilan-parcours-1-photographies.jpg",
+  "01 Bilan esthetique/1 - La forme des dents du futur sourire est determinée grace aux logiciels de planification .png":
+    "bilan-parcours-2-planification.jpg",
+  "01 Bilan esthetique/2 - une modélisation 3D du projet esthétique est ensuite réalisée .png":
+    "bilan-parcours-3-modelisation-3d.jpg",
+  "01 Bilan esthetique/3 - une simulation en situation réele eest générée en fonction du projet pour donner une idée du resultat final à atteindre.jpg":
+    "bilan-parcours-4-simulation.jpg",
+};
 
 await mkdir(CIBLE, { recursive: true });
 const existants = new Set(await readdir(CIBLE).catch(() => []));
 let total = 0;
-for (const [origine, nom] of Object.entries(photos)) {
-  const src = `${SOURCE}/${origine}`;
-  const entree = await sharp(src).metadata();
+const lots = [
+  ...Object.entries(photos).map(([o, n]) => [`${SOURCE}/${o}`, n]),
+  ...Object.entries(photosThemes).map(([o, n]) => [`${SOURCE_THEMES}/${o}`, n]),
+];
+for (const [src, nom] of lots) {
+  // Un original absent (dossier déplacé, rangé) n'arrête pas tout : la version web
+  // déjà publiée dans le dépôt reste telle quelle, on le signale et on continue.
+  let entree;
+  try {
+    entree = await sharp(src).metadata();
+  } catch {
+    console.log(`${nom.padEnd(46)} original introuvable — version publiée conservée`);
+    existants.delete(nom);
+    continue;
+  }
   await sharp(src)
     .rotate() // respecte l'orientation enregistrée par l'appareil avant de retirer les métadonnées
+    .flatten({ background: "#ffffff" }) // un PNG avec transparence s'aplatit sur blanc
     .resize({ width: Math.min(LARGEUR_MAX, entree.width), withoutEnlargement: true })
     .jpeg({ quality: 84, chromaSubsampling: "4:4:4", mozjpeg: true })
     .toFile(`${CIBLE}/${nom}`);

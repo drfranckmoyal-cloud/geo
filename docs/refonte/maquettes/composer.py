@@ -253,6 +253,58 @@ def fiche(p, sections):
     return "\n".join(morceaux)
 
 
+
+# ── parcours en images ────────────────────────────────────────────────────
+# Une suite de photographies légendées, posée entre deux chapitres. Les légendes
+# sont celles que Franck a écrites dans les noms de fichiers (orthographe reprise),
+# les photographies celles du dossier « PHOTOS SITE - par theme » (19/10/2026).
+SEQUENCES = {
+    "bilan-esthetique-personnalise": {
+        "titre": "Le bilan, en quatre étapes",
+        "apres_chapitre": 1,
+        "etapes": [
+            ("bilan-parcours-1-photographies.jpg",
+             "Un bilan photographique est réalisé à chaque première consultation.",
+             "Le praticien photographie le sourire d’une patiente au cabinet"),
+            ("bilan-parcours-2-planification.jpg",
+             "La forme des dents du futur sourire est déterminée grâce aux logiciels de planification.",
+             "Logiciel de planification : tracé des futures dents sur la photographie du sourire"),
+            ("bilan-parcours-3-modelisation-3d.jpg",
+             "Une modélisation 3D du projet esthétique est ensuite réalisée.",
+             "Modélisation 3D du projet esthétique sur l’empreinte numérique"),
+            ("bilan-parcours-4-simulation.jpg",
+             "Une simulation en situation réelle est générée en fonction du projet, pour donner "
+             "une idée du résultat final à atteindre.",
+             "Avant et après simulés sur le visage, yeux masqués"),
+        ],
+    },
+}
+
+
+SANS_PHOTO_EN_TETE = {"bilan-esthetique-personnalise"}
+
+
+def sequence(slug):
+    seq = SEQUENCES.get(slug)
+    if not seq:
+        return ""
+    figs = []
+    for i, (fichier, legende, alt) in enumerate(seq["etapes"], 1):
+        src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
+        figs.append(f'''        <figure class="parcours__etape">
+          <img src="{src}" alt="{H.escape(alt)}" loading="lazy">
+          <figcaption><span class="parcours__num">{i}</span>{e(legende)}</figcaption>
+        </figure>''')
+    return f'''  <section class="sect sect--zone">
+    <div class="contenu">
+      <h2 class="tete-bande">{e(seq["titre"])}</h2>
+      <div class="parcours">
+{chr(10).join(figs)}
+      </div>
+    </div>
+  </section>'''
+
+
 def composer(slug, plan):
     p = lire(slug)
     sec = p["sections"]
@@ -272,6 +324,9 @@ def composer(slug, plan):
     # et retirée de celle-ci pour ne pas paraître deux fois.
     photo = ""
     sources_photo = [p["figures_libres"]] + [s_["figures"] for s_ in sec]
+    # Franck, 19/10/2026 : la photo de tête du bilan « ne correspond pas » — retirée.
+    if slug in SANS_PHOTO_EN_TETE:
+        sources_photo = []
     for lot in sources_photo:
         if lot:
             fg = lot.pop(0)
@@ -314,6 +369,8 @@ def composer(slug, plan):
       </div>
     </div>
   </section>''')
+        if SEQUENCES.get(slug, {}).get("apres_chapitre") == k:
+            corps.append(sequence(slug))
 
     # les liens portés par les sections qu'aucun chapitre ne reprend
     reprises = {i for ch in plan["chapitres"] for i in ch["sections"]}
