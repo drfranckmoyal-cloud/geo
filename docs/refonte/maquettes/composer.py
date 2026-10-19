@@ -304,7 +304,19 @@ ILLUSTRATIONS = {
             "une idée du résultat final à atteindre.",
             "Avant et après simulés sur le visage, yeux masqués"),
     },
+    # Deux images générées (19/10/2026), pas des photographies de patients :
+    # l'alternative textuelle le dit.
+    "eclaircissement-dentaire-paris": {
+        2: ("eclaircissement-gouttieres.jpg",
+            "Gouttières personnalisées et gel de peroxyde de carbamide, portés à domicile.",
+            "Illustration : gouttières de blanchiment transparentes et seringue de gel"),
+        4: ("eclaircissement-colorants.jpg",
+            "Café, thé, vin rouge, tabac : ce qui colore les dents.",
+            "Illustration : verre de vin rouge, tasse de café, tasse de thé et cigarette"),
+    },
 }
+# Seules les suites d'étapes portent un numéro ; une illustration isolée, non.
+ILLUSTRATIONS_NUMEROTEES = {"bilan-esthetique-personnalise"}
 
 
 def illustration(slug, k):
@@ -313,9 +325,10 @@ def illustration(slug, k):
         return ""
     fichier, legende, alt = ill
     src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
+    badge = f'<span class="parcours__num">{k}</span>' if slug in ILLUSTRATIONS_NUMEROTEES else ""
     return (f'        <figure class="illus">\n'
             f'          <img src="{src}" alt="{H.escape(alt)}" loading="lazy">\n'
-            f'          <figcaption><span class="parcours__num">{k}</span>{e(legende)}</figcaption>\n'
+            f'          <figcaption>{badge}{e(legende)}</figcaption>\n'
             f'        </figure>\n')
 
 

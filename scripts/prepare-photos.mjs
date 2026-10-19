@@ -52,6 +52,11 @@ const photosThemes = {
     "bilan-parcours-3-modelisation-3d.jpg",
   "01 Bilan esthetique/3 - une simulation en situation réele eest générée en fonction du projet pour donner une idée du resultat final à atteindre.jpg":
     "bilan-parcours-4-simulation.jpg",
+  // Éclaircissement : deux images générées (Canva, 19/10/2026), pas des photographies de patients.
+  "02 Eclaircissement/gouttieres-de-blanchiment (image generee).jpg":
+    "eclaircissement-gouttieres.jpg",
+  "02 Eclaircissement/colorants vin rouge cafe the cigarette (image generee).jpg":
+    "eclaircissement-colorants.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });
