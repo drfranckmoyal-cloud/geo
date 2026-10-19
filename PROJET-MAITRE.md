@@ -636,6 +636,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 19/10/2026 | F | Demande une illustration pour « Les sensibilités », sans le cliché de la personne qui se tient la joue. | Verre d'eau glacée généré (Canva), déposé dans « 02 Eclaircissement », posé dans le chapitre 3 |
 | 19/10/2026 | F | Dépose trois cas d'éclaircissement (avant/après) dans « 02 Eclaircissement » et demande un montage pour chacun, à publier dans la page. | Montages faits sur le Mac (pas sur Canva : photos de patients), étiquettes AVANT / APRÈS, bande « Avant / après » pleine largeur après le chapitre 2. Les dossiers déposés portent des noms de patients : rien n'en passe dans le dépôt ni sur le site, les montages ont des noms neutres |
 | 19/10/2026 | F | « Oui » au lien tache blanche → ICON, et « recherche un maximum de connexions de ce type dans nos pages ». | D82 : passe de maillage interne, 92 liens dans le texte sur 24 pages |
+| 19/10/2026 | F | « Diminue un peu la taille des avant/après, c'est massif sur ordinateur. » | Montages aux trois quarts de la largeur, légende à côté (bande de 1294 à 860 px de haut sur un écran de 1440) ; sur téléphone, légende dessous comme avant |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---
