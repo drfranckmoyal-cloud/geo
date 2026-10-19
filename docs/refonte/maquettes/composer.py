@@ -271,7 +271,8 @@ SEQUENCES = {
              ("tache blanche", "taches-dentaires-dyschromies-icon")),   # le pont vers ICON
             ("eclaircissement-cas-2-avant-apres.jpg",
              "Cas 2 — éclaircissement avant réhabilitation de l’harmonie du sourire",
-             "Avant et après éclaircissement, avant réhabilitation du sourire, vue intra-orale avec écarteurs"),
+             "Avant et après éclaircissement, avant réhabilitation du sourire, vue intra-orale avec écarteurs",
+             ("réhabilitation de l’harmonie du sourire", "dentisterie-esthetique-paris")),
             ("eclaircissement-cas-3-avant-apres.jpg",
              "Cas 3 — éclaircissement et remplacement d’une dent manquante due à une agénésie",
              "Avant et après : éclaircissement et remplacement d’une dent manquante, sourire de face"),

@@ -767,6 +767,99 @@ def sommaire():
                    .replace("@@CORPS@@", corps))
 
 
+# ── maillage interne dans le texte ──────────────────────────────────────────
+# Dans chaque page de contenu, la première mention d'un sujet qui a sa page
+# devient un lien vers elle — dans les paragraphes et les listes, jamais dans
+# les titres, jamais deux fois vers la même page, jamais vers la page elle-même.
+# Franck, 19/10/2026 : « recherche un maximum de connexions de ce type ».
+# Les motifs vont du plus précis au plus général : « facettes ou composite »
+# se décide avant « facettes ».
+LIENS_DANS_LE_TEXTE = [
+    ("facettes-ou-composite", [r"facettes? ou composites?"]),
+    ("facettes-dentaires-paris", [r"facettes? (?:en )?c[ée]ramiques?", r"\bfacettes?\b"]),
+    ("composite-bonding-paris", [r"composite bonding", r"composites? stratifi[ée]s?", r"\bcomposites?\b"]),
+    ("eclaircissement-dentaire-paris", [r"[ée]claircissement dentaire", r"[ée]claircissement", r"blanchiment dentaire", r"\bblanchiment\b"]),
+    ("taches-dentaires-dyschromies-icon", [r"taches? blanches?", r"infiltration de r[ée]sine", r"\bMIH\b", r"\bICON\b"]),
+    ("usures-dentaires", [r"usures? dentaires?", r"\busures?\b"]),
+    ("erosion-dentaire", [r"[ée]rosion dentaire", r"\b[ée]rosions?\b"]),
+    ("bruxisme-usure-dentaire", [r"\bbruxisme\b"]),
+    ("dents-courtes-usees", [r"dents courtes"]),
+    ("tca-dents", [r"troubles? des conduites alimentaires", r"troubles? du comportement alimentaire", r"\bTCA\b"]),
+    ("anorexie-erosion-dentaire-sans-vomissements", [r"anorexie restrictive", r"\banorexie\b"]),
+    ("bilan-esthetique-personnalise", [r"bilan esth[ée]tique"]),
+    ("rehabilitation-dents-usees", [r"r[ée]habilitation des dents us[ée]es", r"r[ée]habilitation adh[ée]sive"]),
+    ("dentisterie-esthetique-paris", [r"dentisterie esth[ée]tique(?: et adh[ée]sive)?"]),
+]
+SANS_MAILLAGE = {"index", "espace-patients", "espace-pro", "contact", "sommaire",
+                 "polices", "mentions-legales"}
+MAILLAGE_MAX = 8
+
+
+def relier_dans_le_texte(page, slug):
+    """Pose les liens dans <main>, dans les seuls nœuds de texte des <p> et <li>
+    qui ne sont ni dans un lien, ni dans une figure, ni dans un titre."""
+    if slug in SANS_MAILLAGE:
+        return page, []
+    m = re.search(r"<main.*?</main>", page, re.S)
+    if not m:
+        return page, []
+    main = m.group(0)
+    deja = set(re.findall(r'<a class="lt" href="([a-z0-9-]+)\.html"', main))
+    poses = []
+
+    # découpe en segments : balises / texte ; on sait à tout moment si l'on est
+    # dans un lien, une figure ou un titre, et si l'on est dans un <p> ou <li>
+    morceaux = re.split(r"(<[^>]+>)", main)
+    dans_a = dans_fig = dans_titre = 0
+    dans_pli = 0
+    exclus = ("ariane", "eyebrow", "sous-titre", "numero", "sig", "tuile", "prise",
+              "joindre", "lieu", "reseau", "appel__", "suite", "renvoi", "lire-aussi")
+    etat = []  # pour chaque morceau de texte : (index, autorisé ?)
+    for i, x in enumerate(morceaux):
+        if x.startswith("<"):
+            nom = re.match(r"</?([a-zA-Z0-9]+)", x)
+            nom = nom.group(1).lower() if nom else ""
+            fermant = x.startswith("</")
+            if nom == "a": dans_a += -1 if fermant else 1
+            elif nom in ("figure", "figcaption"): dans_fig += -1 if fermant else 1
+            elif nom in ("h1", "h2", "h3", "h4", "h5"): dans_titre += -1 if fermant else 1
+            elif nom in ("p", "li"):
+                if fermant: dans_pli = max(0, dans_pli - 1)
+                else:
+                    cls = re.search(r'class="([^"]*)"', x)
+                    ok = not (cls and any(e_ in cls.group(1) for e_ in exclus))
+                    dans_pli += 1 if ok else 0
+            continue
+        etat.append((i, dans_a == 0 and dans_fig == 0 and dans_titre == 0 and dans_pli > 0))
+
+    for cible, motifs in LIENS_DANS_LE_TEXTE:
+        if cible == slug or cible in deja or len(poses) >= MAILLAGE_MAX:
+            continue
+        fait = False
+        for motif in motifs:
+            rx = re.compile(motif, re.I)
+            for i, ok in etat:
+                if not ok:
+                    continue
+                mm = rx.search(morceaux[i])
+                if not mm:
+                    continue
+                txt = morceaux[i]
+                morceaux[i] = (txt[:mm.start()] + f'<a class="lt" href="{cible}.html">'
+                               + txt[mm.start():mm.end()] + "</a>" + txt[mm.end():])
+                poses.append((cible, txt[mm.start():mm.end()]))
+                fait = True
+                break
+            if fait:
+                break
+    if not poses:
+        return page, []
+    return page.replace(main, "".join(morceaux), 1), poses
+
+
+MAILLAGE_JOURNAL = {}
+
+
 def reharmoniser():
     """Les pages écrites à la main gardaient chacune sa copie du menu et du pied,
     qui prenaient du retard dès qu'on touchait à l'un des deux. Elles vont désormais
@@ -805,6 +898,9 @@ def reharmoniser():
                                         f'<h1>{e(titre)}</h1>\n'
                                         f'        <p class="sous-titre">{e(sous)}</p>', 1)
         page = re.sub(r'style\.css\?v=\d+', f"style.css?v={VERSION}", page)
+        page, poses = relier_dans_le_texte(page, slug)
+        if poses:
+            MAILLAGE_JOURNAL[slug] = poses
         # Une page sans données structurées est muette pour les moteurs et les IA :
         # on les reprend du site en ligne, ou on les fabrique si la page est neuve.
         if "application/ld+json" not in page and nom != "sommaire.html":
@@ -857,6 +953,11 @@ def main():
             print(f"    {c:42s} {pourquoi}")
     open(os.path.join(SORTIE, "sommaire.html"), "w", encoding="utf-8").write(sommaire())
     reprises = reharmoniser()
+    if MAILLAGE_JOURNAL:
+        total = sum(len(v) for v in MAILLAGE_JOURNAL.values())
+        print(f"\n  maillage dans le texte : {total} liens posés sur {len(MAILLAGE_JOURNAL)} pages")
+        for sl, poses in sorted(MAILLAGE_JOURNAL.items()):
+            print(f"    {sl[:40]:40s} " + " · ".join(f"{c.split('-')[0]}←« {m} »" for c, m in poses))
     if reprises:
         print(f"\n  en-tête et pied remis à jour sur {len(reprises)} page(s) :")
         print("    " + ", ".join(r[:-5] for r in reprises))

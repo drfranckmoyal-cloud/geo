@@ -248,6 +248,12 @@ p:last-child{margin-bottom:0}
 .une:not(:has(figure)){grid-template-columns:minmax(0,1fr)}
 .une:not(:has(figure)) > div:first-child{max-width:none}
 
+/* ── les liens posés dans le texte (maillage interne) ─────────
+   Discrets : l'encre du texte, un filet fin dessous, qui se renforce au survol. */
+a.lt{color:inherit;text-decoration:none;border-bottom:1px solid var(--trait-fort);
+  transition:border-color .15s ease,background .15s ease}
+a.lt:hover{background:var(--zone);border-bottom-width:2px}
+
 /* ── la colonne de droite d'un chapitre : une photographie, puis l'encadré ── */
 .cote{display:flex;flex-direction:column;gap:clamp(.8rem,.65rem + .7vw,1.1rem);min-width:0}
 .illus{margin:0;background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
