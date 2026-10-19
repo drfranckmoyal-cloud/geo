@@ -269,8 +269,9 @@ SEQUENCES = {
              "Avant et après éclaircissement, sourire de face"),
             ("eclaircissement-cas-2-avant-apres.jpg", "Cas 2",
              "Avant et après éclaircissement, vue intra-orale avec écarteurs"),
-            ("eclaircissement-cas-3-avant-apres.jpg", "Cas 3",
-             "Avant et après, sourire de face"),
+            ("eclaircissement-cas-3-avant-apres.jpg",
+             "Cas 3 — éclaircissement et remplacement d’une dent manquante due à une agénésie",
+             "Avant et après : éclaircissement et remplacement d’une dent manquante, sourire de face"),
         ],
     },
     "_exemple_desactive": {
