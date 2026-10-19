@@ -259,6 +259,8 @@ a.lt:hover{background:var(--zone);border-bottom-width:2px}
 .illus{margin:0;background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
   box-shadow:var(--relief);overflow:hidden}
 .illus img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+/* un avant/après empilé garde son format carré : le 16:10 en couperait la moitié */
+.illus--libre img{aspect-ratio:auto}
 .illus figcaption{padding:.7rem .85rem .85rem;font-size:.82rem;line-height:1.45;color:var(--fg);
   display:flex;gap:.55rem;align-items:flex-start}
 
@@ -644,6 +646,13 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .praticien img{width:200px;height:200px;object-fit:cover;filter:grayscale(1) contrast(1.05)}
 .praticien p{font-size:.92rem;color:var(--doux)}
 .suite{font-size:.86rem;margin-top:.2rem}
+/* l'encart « cas clinique » de l'ancien site, ramené à une ligne de renvoi : une
+   étiquette, le titre du cas en lien, sa phrase dessous */
+.renvoi-cas{margin:1rem 0 0;padding:.15rem 0 .15rem .9rem;border-left:2px solid var(--trait-fort);max-width:62ch}
+.renvoi-cas__eti{display:block;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--doux);margin-bottom:.2rem}
+.renvoi-cas a{font-family:var(--serif);font-weight:700;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--trait-fort)}
+.renvoi-cas a:hover{border-bottom-width:2px}
+.renvoi-cas__txt{display:block;font-size:.88rem;color:var(--doux);margin-top:.2rem}
 .suite a{text-decoration:none;border-bottom:1px solid var(--trait)}
 .suite a:hover{color:var(--acc);border-color:var(--acc)}
 

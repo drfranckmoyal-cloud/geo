@@ -70,9 +70,9 @@ const photosThemes = {
   "03 Infiltration ICON/_montages/icon-cas-2-avant-apres.jpg": "icon-cas-2-avant-apres.jpg",
   "03 Infiltration ICON/_montages/icon-cas-1-couverture.jpg": "icon-cas-1-couverture.jpg",
   "03 Infiltration ICON/_montages/icon-fluorose.jpg": "icon-fluorose.jpg",
-  "03 Infiltration ICON/_montages/icon-mih-tache.jpg": "icon-mih-tache.jpg",
+  // le cas de la tache de MIH, réuni en avant/après pour le chapitre 2 (Franck, 19/10/2026)
+  "03 Infiltration ICON/_montages/icon-mih-avant-apres.jpg": "icon-mih-avant-apres.jpg",
   "03 Infiltration ICON/_montages/icon-traitement-21.jpg": "icon-traitement-21.jpg",
-  "03 Infiltration ICON/_montages/icon-resultat-associe.jpg": "icon-resultat-associe.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

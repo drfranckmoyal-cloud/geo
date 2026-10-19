@@ -129,7 +129,16 @@ def lire(slug):
     p["sections"] = []
     for sec in re.findall(r"<section[^>]*>.*?</section>", main, re.S):
         ti = re.search(r"<h2[^>]*>(.*?)</h2>", sec, re.S)
-        paras = [nu(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", sec, re.S)]
+        # L'encart de l'ancien site qui annonçait un cas clinique (vignettes, titre, phrase,
+        # lien) s'aplatissait en deux phrases orphelines et perdait son lien, trop long pour
+        # « À lire aussi ». Il devient une ligne de renvoi vers la page du cas.
+        annonces = [{"titre": nu(m.group(1)), "texte": nu(m.group(2)),
+                     "cible": m.group(3).strip("/").replace("cas-cliniques/", "cas-")}
+                    for m in re.finditer(r'<p class="annonce__probleme"[^>]*>(.*?)</p>\s*'
+                                         r'<p class="annonce__approche"[^>]*>(.*?)</p>\s*'
+                                         r'<a href="([^"]+)"', sec, re.S)]
+        sans_annonce = re.sub(r'<p class="annonce__(?:probleme|approche)"[^>]*>.*?</p>', "", sec, flags=re.S)
+        paras = [nu(x) for x in re.findall(r"<p[^>]*>(.*?)</p>", sans_annonce, re.S)]
         paras = [x for x in paras if len(x) > 18 and not any(x.lower().startswith(m) for m in MEUBLE)]
         lis = [nu(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", sec, re.S)]
         lis = [x for x in lis if 8 < len(x) < 240]
@@ -151,6 +160,7 @@ def lire(slug):
             "h3": [nu(x) for x in re.findall(r"<h3[^>]*>(.*?)</h3>", sec, re.S)],
             "table": tbl.group(0) if tbl else None,
             "figures": figures,
+            "annonces": annonces,
             "faq": "faq__item" in sec,
             "sources": "source__ref" in sec or "source__n" in sec,
         })
@@ -234,7 +244,12 @@ def bloc(p, i, avec_liste, titre=None):
         t = re.sub(r'<span[^>]*class="cmp__col"[^>]*>.*?</span>', "", s["table"], flags=re.S)
         t = re.sub(r"\s+data-astro-cid-\w+", "", t)
         tableau = f'\n          <div class="tableau{" tableau--duo" if cols <= 2 else ""}">{t}</div>'
-    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{photos}{renvois(p, p["sections"][i])}\n        </div>'
+    cas = "".join(
+        f'\n          <p class="renvoi-cas"><span class="renvoi-cas__eti">Cas clinique</span>'
+        f'<a href="{x["cible"]}.html">{e(x["titre"])}</a>'
+        f'<span class="renvoi-cas__txt">{e(x["texte"])}</span></p>'
+        for x in s.get("annonces", []))
+    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{photos}{cas}{renvois(p, p["sections"][i])}\n        </div>'
 
 
 def fiche(p, sections):
@@ -370,25 +385,23 @@ ILLUSTRATIONS = {
             "Café, thé, vin rouge, tabac : ce qui colore les dents.",
             "Illustration : verre de vin rouge, tasse de café, tasse de thé et cigarette"),
     },
-    # Photographies du cabinet (19/10/2026). Les chapitres 2 à 4 suivent un même cas :
-    # la tache, le traitement, le résultat. Les légendes reprennent celles de Franck.
+    # Photographies du cabinet (19/10/2026). Franck : « utilise le cas que tu as fractionné
+    # comme avant/après en illustration du 2/5 » : la tache et son résultat, même zoom ;
+    # le traitement sous digue reste au chapitre 3. Les légendes reprennent celles de Franck.
     "taches-dentaires-dyschromies-icon": {
         1: ("icon-fluorose.jpg",
             "Exemple d’atteinte par fluorose grave.",
             "Fluorose sévère : taches brunes et blanches sur l’ensemble des dents, sourire de face"),
-        2: ("icon-mih-tache.jpg",
-            "Tache blanche de MIH sur une incisive.",
-            "Tache blanche de MIH sur une incisive centrale, sourire de face"),
+        2: ("icon-mih-avant-apres.jpg",
+            "Tache blanche de MIH sur une incisive : résultat après éclaircissement, "
+            "composite stratifié sur 11 et érosion-infiltration ICON sur 21.",
+            "Avant et après : tache blanche de MIH sur une incisive, puis dents éclaircies et tache traitée",
+            [("éclaircissement", "eclaircissement-dentaire-paris"),
+             ("composite stratifié", "composite-bonding-paris")],
+            {"libre": True}),
         3: ("icon-traitement-21.jpg",
             "Le même cas : traitement ICON de la dent 21, sous digue.",
             "Infiltration de résine en cours sur une incisive isolée par une digue et des matrices métalliques"),
-        4: ("icon-resultat-associe.jpg",
-            "Le même cas, résultat après éclaircissement, composite stratifié sur 11 et "
-            "érosion-infiltration ICON sur 21.",
-            "Sourire après éclaircissement, composite sur une incisive et infiltration de la tache de MIH",
-            [("Le même cas", "cas-mih-eclaircissement-erosion-infiltration"),
-             ("éclaircissement", "eclaircissement-dentaire-paris"),
-             ("composite stratifié", "composite-bonding-paris")]),
     },
 }
 # Seules les suites d'étapes portent un numéro ; une illustration isolée, non.
@@ -412,9 +425,11 @@ def illustration(slug, k):
     if not ill:
         return ""
     fichier, legende, alt = ill[:3]
+    options = ill[4] if len(ill) > 4 else {}
+    classe = "illus illus--libre" if options.get("libre") else "illus"
     src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
     badge = f'<span class="parcours__num">{k}</span>' if slug in ILLUSTRATIONS_NUMEROTEES else ""
-    return (f'        <figure class="illus">\n'
+    return (f'        <figure class="{classe}">\n'
             f'          <img src="{src}" alt="{H.escape(alt)}" loading="lazy">\n'
             # le texte dans un seul bloc : la légende est une rangée souple (pastille + texte),
             # et chaque lien en serait sinon devenu une colonne
