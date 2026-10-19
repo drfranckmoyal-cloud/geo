@@ -464,11 +464,11 @@ def rendre(page):
     # ── questions ──
     if page["faq"]:
         qs = "\n        ".join(
-            f'<div><b>{e(q["q"])}</b><p>{e(q["r"])}</p></div>' for q in page["faq"][:8]
+            f'<div><h3>{e(q["q"])}</h3><p>{e(q["r"])}</p></div>' for q in page["faq"][:8]
         )
         corps.append(f'''  <section class="sect sect--serre">
     <div class="contenu">
-      <p class="eyebrow">Questions fréquentes</p>
+      <h2 class="tete-bande">Questions fréquentes</h2>
       <div class="qa">
         {qs}
       </div>

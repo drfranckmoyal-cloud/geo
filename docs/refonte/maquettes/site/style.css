@@ -648,12 +648,16 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .suite a:hover{color:var(--acc);border-color:var(--acc)}
 
 /* ── questions ───────────────────────────────────────────── */
-.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
-  gap:clamp(.68rem,.55rem + .6vw,1rem)}
-.qa>div{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
-  box-shadow:var(--relief);padding:clamp(.85rem,.72rem + .55vw,1.15rem)}
-.qa b{display:block;font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.2rem}
-.qa p{font-size:.88rem;color:var(--doux);margin:0}
+/* Franck, 19/10/2026 : « un FAQ plus marqué par page ». Un titre de bande, la
+   question en vrai titre et non en gras, la réponse en regard, un filet entre
+   deux : la question se lit d'un coup d'œil, et le moteur lit un titre. */
+.qa>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);
+  gap:.4rem clamp(1rem,.8rem + 1.2vw,2rem);align-items:start;
+  padding:clamp(.9rem,.75rem + .6vw,1.2rem) 0;border-bottom:1px solid var(--trait)}
+.qa h3{font-family:var(--serif);font-size:clamp(1.02rem,.96rem + .3vw,1.18rem);font-weight:700;
+  line-height:1.3;letter-spacing:-.01em;margin:0}
+.qa p{font-size:.95rem;line-height:1.55;margin:0;max-width:62ch}
+@media (max-width:700px){.qa>div{grid-template-columns:minmax(0,1fr)}}
 
 /* ── page intérieure ─────────────────────────────────────── */
 .ariane{font-size:.75rem;color:var(--tres-doux);padding-block:.9rem 0}

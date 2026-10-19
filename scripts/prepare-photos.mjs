@@ -63,6 +63,7 @@ const photosThemes = {
   "02 Eclaircissement/_montages/eclaircissement-cas-1-avant-apres.jpg": "eclaircissement-cas-1-avant-apres.jpg",
   "02 Eclaircissement/_montages/eclaircissement-cas-2-avant-apres.jpg": "eclaircissement-cas-2-avant-apres.jpg",
   "02 Eclaircissement/_montages/eclaircissement-cas-3-avant-apres.jpg": "eclaircissement-cas-3-avant-apres.jpg",
+  "02 Eclaircissement/_montages/eclaircissement-cas-1-couverture.jpg": "eclaircissement-cas-1-couverture.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

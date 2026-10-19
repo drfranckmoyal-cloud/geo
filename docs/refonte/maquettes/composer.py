@@ -301,6 +301,19 @@ SEQUENCES = {
 
 
 SANS_PHOTO_EN_TETE = {"bilan-esthetique-personnalise"}
+
+# ── une couverture choisie, à la place de la première photo de l'ancienne page ──
+# Franck, 19/10/2026 : « la photo de couverture ne sert à rien, c'est juste une
+# bouche sans intérêt : montre un avant/après (cas 1 par exemple) ».
+# Montage carré (avant dessus, après dessous) fabriqué depuis les originaux du
+# dossier 02 Eclaircissement, publié par scripts/prepare-photos.mjs.
+PHOTO_EN_TETE = {
+    "eclaircissement-dentaire-paris": (
+        "eclaircissement-cas-1-couverture.jpg",
+        "Avant et après éclaircissement — cas 1, préalable au traitement "
+        "d’une tache blanche sur l’incisive centrale",
+        "Avant et après éclaircissement dentaire, sourire de face"),
+}
 SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise"}
 
 # ── une photographie par chapitre ─────────────────────────────────────────
@@ -420,6 +433,11 @@ def composer(slug, plan):
             photo = (f'      <figure><img src="{fg["src"][0]}" '
                      f'alt="{H.escape((fg["alt"] or [""])[0])}">{leg}</figure>\n')
             break
+    if slug in PHOTO_EN_TETE:  # la photo héritée reste consommée, mais c'est celle-ci qui s'affiche
+        fichier, leg, alt = PHOTO_EN_TETE[slug]
+        src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
+        photo = (f'      <figure><img src="{src}" alt="{H.escape(alt)}">'
+                 f'<figcaption>{e(leg)}</figcaption></figure>\n')
 
     corps = []
     n = len(plan["chapitres"])
@@ -452,6 +470,20 @@ def composer(slug, plan):
         if SEQUENCES.get(slug, {}).get("apres_chapitre") == k:
             corps.append(sequence(slug))
 
+    # questions — avant « À lire aussi » : elles font partie du contenu, les
+    # renvois sont de la navigation. Franck, 19/10/2026 : « un FAQ plus marqué ».
+    faq = next((s for s in sec if s["faq"]), None)
+    if faq:
+        qs = "".join(f'\n        <div><h3>{e(q)}</h3><p>{e(r)}</p></div>'
+                     for q, r in zip(faq["h3"], faq["p"]))
+        corps.append(f'''  <section class="sect sect--serre">
+    <div class="contenu">
+      <h2 class="tete-bande">Questions fréquentes</h2>
+      <div class="qa">{qs}
+      </div>
+    </div>
+  </section>''')
+
     # les liens portés par les sections qu'aucun chapitre ne reprend
     reprises = {i for ch in plan["chapitres"] for i in ch["sections"]}
     poses = set()
@@ -467,19 +499,6 @@ def composer(slug, plan):
       <div>
         <p class="eyebrow">À lire aussi</p>
         <p class="suite">{liens}</p>
-      </div>
-    </div>
-  </section>''')
-
-    # questions
-    faq = next((s for s in sec if s["faq"]), None)
-    if faq:
-        qs = "".join(f'\n        <div><b>{e(q)}</b><p>{e(r)}</p></div>'
-                     for q, r in zip(faq["h3"], faq["p"]))
-        corps.append(f'''  <section class="sect sect--serre">
-    <div class="contenu">
-      <p class="eyebrow">Questions fréquentes</p>
-      <div class="qa">{qs}
       </div>
     </div>
   </section>''')
