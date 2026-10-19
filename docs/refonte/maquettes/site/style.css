@@ -248,6 +248,14 @@ p:last-child{margin-bottom:0}
 .une:not(:has(figure)){grid-template-columns:minmax(0,1fr)}
 .une:not(:has(figure)) > div:first-child{max-width:none}
 
+/* ── la colonne de droite d'un chapitre : une photographie, puis l'encadré ── */
+.cote{display:flex;flex-direction:column;gap:clamp(.8rem,.65rem + .7vw,1.1rem);min-width:0}
+.illus{margin:0;background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);overflow:hidden}
+.illus img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.illus figcaption{padding:.7rem .85rem .85rem;font-size:.82rem;line-height:1.45;color:var(--fg);
+  display:flex;gap:.55rem;align-items:flex-start}
+
 /* ── un parcours en images ───────────────────────────────────
    Quatre étapes légendées, numérotées, de même taille. */
 .parcours{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));

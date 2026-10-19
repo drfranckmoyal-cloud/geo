@@ -259,7 +259,7 @@ def fiche(p, sections):
 # sont celles que Franck a écrites dans les noms de fichiers (orthographe reprise),
 # les photographies celles du dossier « PHOTOS SITE - par theme » (19/10/2026).
 SEQUENCES = {
-    "bilan-esthetique-personnalise": {
+    "_exemple_desactive": {
         "titre": "Le bilan, en quatre étapes",
         "apres_chapitre": 1,
         "etapes": [
@@ -282,6 +282,41 @@ SEQUENCES = {
 
 
 SANS_PHOTO_EN_TETE = {"bilan-esthetique-personnalise"}
+SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise"}
+
+# ── une photographie par chapitre ─────────────────────────────────────────
+# Posée dans la colonne de droite du chapitre, au-dessus de l'encadré : le texte
+# est long, l'image le rythme. Franck, 19/10/2026 : « les dispatcher au fil du
+# texte pour le rendre plus lisible et illustré ».
+ILLUSTRATIONS = {
+    "bilan-esthetique-personnalise": {
+        1: ("bilan-parcours-1-photographies.jpg",
+            "Un bilan photographique est réalisé à chaque première consultation.",
+            "Le praticien photographie le sourire d’une patiente au cabinet"),
+        2: ("bilan-parcours-2-planification.jpg",
+            "La forme des dents du futur sourire est déterminée grâce aux logiciels de planification.",
+            "Logiciel de planification : tracé des futures dents sur la photographie du sourire"),
+        3: ("bilan-parcours-3-modelisation-3d.jpg",
+            "Une modélisation 3D du projet esthétique est ensuite réalisée.",
+            "Modélisation 3D du projet esthétique sur l’empreinte numérique"),
+        4: ("bilan-parcours-4-simulation.jpg",
+            "Une simulation en situation réelle est générée en fonction du projet, pour donner "
+            "une idée du résultat final à atteindre.",
+            "Avant et après simulés sur le visage, yeux masqués"),
+    },
+}
+
+
+def illustration(slug, k):
+    ill = ILLUSTRATIONS.get(slug, {}).get(k)
+    if not ill:
+        return ""
+    fichier, legende, alt = ill
+    src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
+    return (f'        <figure class="illus">\n'
+            f'          <img src="{src}" alt="{H.escape(alt)}" loading="lazy">\n'
+            f'          <figcaption><span class="parcours__num">{k}</span>{e(legende)}</figcaption>\n'
+            f'        </figure>\n')
 
 
 def sequence(slug):
@@ -323,6 +358,12 @@ def composer(slug, plan):
     # La photo d'ouverture est prise à la première section qui en porte une,
     # et retirée de celle-ci pour ne pas paraître deux fois.
     photo = ""
+    # Franck, 19/10/2026 : les photographies de l'ancien cas ne correspondent
+    # plus à la page ; seules ses quatre nouvelles images l'illustrent.
+    if slug in SANS_PHOTOS_SOURCE:
+        p["figures_libres"] = []
+        for s_ in sec:
+            s_["figures"] = []
     sources_photo = [p["figures_libres"]] + [s_["figures"] for s_ in sec]
     # Franck, 19/10/2026 : la photo de tête du bilan « ne correspond pas » — retirée.
     if slug in SANS_PHOTO_EN_TETE:
@@ -346,28 +387,22 @@ def composer(slug, plan):
             intro = "\n          ".join(f"<p>{e(x)}</p>" for x in resume)
             blocs = f'        <div class="bloc">\n          {intro}\n        </div>\n' + blocs
         zone = ' sect--zone' if k % 2 == 0 else ""
+        illus = illustration(slug, k)
+        droite = ""
         if avec_fiche:
-            corps.append(f'''  <section class="sect{zone}">
-    <div class="contenu chapitre">
+            droite = (f'      <div class="cote">\n{illus}        <div class="fiche">\n'
+                      f'{fiche(p, avec_fiche)}\n        </div>\n      </div>\n')
+        elif illus:
+            droite = f'      <div class="cote">\n{illus}      </div>\n'
+        classe = "contenu chapitre" if droite else "contenu chapitre chapitre--plein"
+        corps.append(f'''  <section class="sect{zone}">
+    <div class="{classe}">
       <div>
         <p class="numero">{k} / {n}</p>
         <h2>{e(ch["titre"])}</h2>
 {blocs}
       </div>
-      <div class="fiche">
-{fiche(p, avec_fiche)}
-      </div>
-    </div>
-  </section>''')
-        else:
-            corps.append(f'''  <section class="sect{zone}">
-    <div class="contenu chapitre chapitre--plein">
-      <div>
-        <p class="numero">{k} / {n}</p>
-        <h2>{e(ch["titre"])}</h2>
-{blocs}
-      </div>
-    </div>
+{droite}    </div>
   </section>''')
         if SEQUENCES.get(slug, {}).get("apres_chapitre") == k:
             corps.append(sequence(slug))
