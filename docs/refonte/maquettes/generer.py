@@ -39,7 +39,7 @@ VERSION = str(int(os.path.getmtime(os.path.join(SORTIE, "style.css"))))
 ACTES = [
     ("Facettes", "facettes-dentaires-paris"),
     ("Composite bonding", "composite-bonding-paris"),
-    ("Éclaircissement", "eclaircissement-dentaire-paris"),
+    ("Éclaircissement dentaire", "eclaircissement-dentaire-paris"),
     ("Infiltration ICON", "taches-dentaires-dyschromies-icon"),
     ("Réhabilitation des dents usées", "rehabilitation-dents-usees"),
     ("Bilan esthétique", "bilan-esthetique-personnalise"),
@@ -330,7 +330,7 @@ PIED = '''<footer class="pied">
   <div class="contenu">
     <div class="pied__grille">
       <div><h4>Le cabinet</h4><ul><li>2 rue Hippolyte Lebas</li><li>75009 Paris</li><li><a href="tel:+33183755216">01 83 75 52 16</a></li><li>Consultations mardi et vendredi, 9 h – 19 h</li><li>Standard lundi–vendredi, 9 h – 19 h</li></ul></div>
-      <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
+      <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement dentaire</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
       <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires</a></li></ul></div>
       <div><h4>Mon exercice</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
       <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
@@ -652,7 +652,7 @@ TITRES = {
     # les actes
     "facettes-dentaires-paris": ("Facettes", "Céramique collée"),
     "composite-bonding-paris": ("Composite bonding", "Résine stratifiée, en une séance"),
-    "eclaircissement-dentaire-paris": ("Éclaircissement", "Gouttières à domicile"),
+    "eclaircissement-dentaire-paris": ("Éclaircissement dentaire", "Gouttières à domicile"),
     "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
     "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Technique additive"),
     "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),

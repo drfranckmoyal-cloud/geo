@@ -181,7 +181,7 @@ SOINS = [
      "bilan-esthetique-personnalise", "bilan-esthetique-projet.jpg", "",
      "Projet esthétique dessiné avant traitement",
      [("Dentisterie esthétique : la vue d’ensemble", "dentisterie-esthetique-paris")]),
-    ("Éclaircissement",
+    ("Éclaircissement dentaire",
      "Gouttières à domicile, suivi au cabinet.",
      "eclaircissement-dentaire-paris", "eclaircissement-ambulatoire-apres.jpg", "",
      "Sourire après un éclaircissement ambulatoire",
