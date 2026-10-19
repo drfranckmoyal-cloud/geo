@@ -384,9 +384,11 @@ TEL_LIEN = "tel:+33183755216"
 COURRIEL = "drfranckmoyal@gmail.com"
 COURRIEL_LIEN = ("mailto:drfranckmoyal@gmail.com"
                  "?subject=Demande%20de%20rendez-vous%20-%20Dr%20Franck%20Moyal")
-CONSIGNES = ["expliquez votre demande ;",
-             "précisez par quel biais vous m’êtes adressé ;",
-             "joignez vos documents — courriers ou autres pièces."]
+# Au conditionnel courtois, pas à l'impératif : Franck trouvait la première
+# version agressive (19/10/2026).
+CONSIGNES = ["le motif de votre demande ;",
+             "par quel biais vous m’êtes adressé ;",
+             "et de joindre vos documents, s’il y en a — courriers ou autres pièces."]
 STANDARD = "Standard ouvert du lundi au vendredi, 9 h – 19 h"
 CONSULTATIONS = "Consultations le mardi et le vendredi, 9 h – 19 h"
 ADRESSE_1, ADRESSE_2 = "2 rue Hippolyte Lebas", "75009 Paris"
@@ -490,7 +492,7 @@ def contact():
         <div class="prise__ecrire">
           <p class="prise__sur">Courriel</p>
           <a class="prise__mail" href="{COURRIEL_LIEN}">{e(COURRIEL)}</a>
-          <p class="prise__consigne">Dans votre message :</p>
+          <p class="prise__consigne">Pour vous répondre au mieux, merci d’indiquer :</p>
           <ul class="prise__liste">
 {consignes}
           </ul>
