@@ -1,0 +1,115 @@
+{
+  "commentaire": "Les questions posées chaque jour aux IA, telles qu'un patient ou un confrère les écrirait. Créée le 21/10/2026 à la demande de Franck (« quotidien avec une liste très exhaustive »), à partir des 31 pages du site, des 63 mots suivis dans Search Console et des quatre recherches du premier relevé du 08/10/2026 (D70), reprises mot pour mot pour garder la continuité. Les questions ne contiennent jamais le nom de Franck, sauf la famille « Marque » : là, ce qui compte est que son site soit la source. On ajoute ou retire une question ici ; elle est suivie le lendemain.",
+  "moteurs": {
+    "google-apercu": "L'aperçu IA en tête d'une recherche Google ordinaire : ce que voient la plupart des patients.",
+    "google-mode-ia": "Le Mode IA de Google, une conversation qui remplace la page de résultats.",
+    "chatgpt": "ChatGPT avec la recherche web, en conversation temporaire pour qu'il ne se serve pas de ce qu'il sait déjà de Franck."
+  },
+  "familles": {
+    "TCA et érosion": [
+      "érosion dentaire et troubles du comportement alimentaire",
+      "quel dentiste consulter pour une érosion dentaire liée à l'anorexie ou à la boulimie",
+      "boulimie et dents abîmées, que faire",
+      "anorexie : quelles conséquences sur les dents",
+      "l'anorexie sans vomissements peut-elle abîmer les dents",
+      "vomissements répétés et émail dentaire : comment protéger ses dents",
+      "érosion dentaire : causes et traitement",
+      "comment soigner une érosion dentaire",
+      "dentiste spécialiste des troubles alimentaires à Paris",
+      "reflux gastrique et érosion des dents",
+      "prise en charge dentaire des patients atteints de TCA à l'hôpital à Paris",
+      "érosion dentaire chez l'adolescent"
+    ],
+    "Usures et bruxisme": [
+      "usure dentaire : causes et traitement",
+      "dentiste spécialiste de l'usure dentaire à Paris",
+      "bruxisme et usure des dents, que faire",
+      "spécialiste du bruxisme à Paris",
+      "mes dents s'usent, est-ce grave",
+      "faut-il toujours traiter une usure dentaire",
+      "comment savoir si mes dents sont usées par le bruxisme ou par l'acidité",
+      "une gouttière contre le bruxisme suffit-elle à protéger des dents usées",
+      "usure dentaire et sensibilité des dents",
+      "en quoi consiste un bilan d'usure dentaire",
+      "usures dentaires sévères dimension verticale Paris",
+      "dents usées à 40 ans, que faire"
+    ],
+    "Dents courtes et réhabilitation": [
+      "dents courtes et usées : comment les rallonger",
+      "reconstruire des dents usées sans couronnes",
+      "réhabilitation complète de dents usées : étapes et prix",
+      "augmenter la dimension verticale dentaire",
+      "rallonger les dents avec du composite ou des facettes",
+      "réhabilitation des usures dentaires avec facettes et onlays"
+    ],
+    "Composite": [
+      "composite bonding Paris",
+      "composite bonding : avis et durée de vie",
+      "composite bonding prix Paris",
+      "combien de temps dure un composite esthétique sur les dents de devant",
+      "stratification composite des dents antérieures",
+      "fermer un diastème avec du composite",
+      "fermeture de diastème Front Wing Technique",
+      "dent de devant cassée : réparation esthétique en composite",
+      "meilleur dentiste pour un composite bonding à Paris"
+    ],
+    "Facettes": [
+      "facettes dentaires Paris",
+      "facettes en céramique à Paris : prix",
+      "facettes dentaires sans meuler les dents",
+      "facettes dentaires minimalement invasives",
+      "facettes dentaires avant après",
+      "combien de facettes faut-il pour un beau sourire",
+      "facettes dentaires : risques et durée de vie",
+      "meilleur dentiste pour des facettes à Paris",
+      "planification des facettes dentaires : wax-up et mock-up"
+    ],
+    "Facettes ou composite": [
+      "facettes ou composite comment choisir",
+      "facettes en céramique ou composite : que choisir pour les dents de devant",
+      "quelle différence entre facettes et composite bonding"
+    ],
+    "Éclaircissement et taches": [
+      "éclaircissement dentaire chez le dentiste à Paris",
+      "blanchiment dentaire professionnel Paris prix",
+      "l'éclaircissement dentaire est-il dangereux pour l'émail",
+      "taches blanches sur les dents : comment les enlever",
+      "MIH dents : quel traitement",
+      "infiltration ICON pour les taches blanches",
+      "taches blanches sur les dents d'un enfant, que faire",
+      "dents jaunes, que faire"
+    ],
+    "Esthétique et choix du praticien": [
+      "dentiste esthétique Paris",
+      "meilleur dentiste esthétique à Paris",
+      "comment choisir son dentiste esthétique",
+      "bilan esthétique du sourire à Paris",
+      "dentisterie esthétique Paris 9",
+      "dentiste recommandé Paris 9e",
+      "dentiste esthétique qui préserve les dents naturelles",
+      "refaire son sourire à Paris",
+      "chirurgien-dentiste hospitalier à la Pitié-Salpêtrière en dentisterie esthétique"
+    ],
+    "Marque": [
+      "Dr Franck Moyal",
+      "qui est le Dr Franck Moyal",
+      "Franck Moyal dentiste avis",
+      "Franck Moyal Pitié-Salpêtrière",
+      "Front Wing Technique",
+      "DenTCA association",
+      "Smileclub Formations",
+      "Franck Moyal publications érosion dentaire"
+    ],
+    "Confrères": [
+      "formation composite antérieur pour dentistes",
+      "formation sur l'usure dentaire pour chirurgiens-dentistes",
+      "formation facettes dentaires à Paris pour dentistes",
+      "conférence érosion dentaire et TCA pour dentistes"
+    ],
+    "En anglais": [
+      "best dentist for tooth wear in Paris",
+      "composite bonding dentist in Paris",
+      "English speaking cosmetic dentist in Paris"
+    ]
+  }
+}

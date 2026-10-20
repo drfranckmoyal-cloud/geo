@@ -1,6 +1,6 @@
-# Fiche Doctolib — proposition de mise à jour (21/10/2026)
+# Fiche Doctolib — mise à jour du 21/10/2026
 
-Rédigée d'après le CV 2026 et la fiche actuelle. **Rien n'est encore enregistré sur Doctolib.**
+Rédigée d'après le CV 2026 et la fiche d'alors, **validée par Franck** (« oui, suis le CV, sans la réserve ») puis **saisie et enregistrée sur Doctolib le 21/10/2026**. Ce qui a dû être adapté à Doctolib est noté en fin de document.
 But : que Google et les IA (ChatGPT, Perplexity, réponses d'IA de Google) trouvent sur Doctolib
 les mêmes informations que sur drfranckmoyal.fr : qui, quoi, où, avec quels titres.
 
@@ -117,3 +117,30 @@ Ajouter : **Métro – Notre-Dame-de-Lorette (ligne 12)**. Le reste ne change pa
 - **« Carte Vitale non acceptée »**, affiché sur la fiche publique : à vérifier.
 - **Réservation en ligne désactivée** sur la fiche publique.
 - **Adresse** : la fiche publique affiche « Centre de santé dentaire Flandre » au-dessus de « Centre médical et dentaire Saint-Georges, 2 rue Hippolyte Lebas ». Pour les moteurs, le nom du lieu doit être le même partout (site, fiche Google, Doctolib).
+
+---
+
+## 5. Ce qui a été enregistré, et ce qui a dû être adapté (21/10/2026)
+
+Enregistré et vérifié sur la fiche publique : la **présentation**, **19 autres formations**, les **expériences**
+(services mis à jour, nouvelle ligne d'enseignement), **19 travaux et publications** (dont les deux livres
+aux années du CV, 2010 et 2008). La réserve (expérience et association) est **laissée de côté**, à la demande
+de Franck. Les trois écarts sont tranchés selon le CV : diplôme de carcinologie à l'Université Paris 7.
+
+Adapté, parce que Doctolib impose ses listes :
+- **Titre de la thèse** : le diplôme d'État n'accepte qu'un intitulé de la liste officielle. La thèse est
+  donc entrée dans les publications, type « Thèse », 2008.
+- **Responsable de la consultation des internes** : la fonction doit être choisie dans une liste ; c'est
+  « Enseignant », le détail étant dans le service (« Médecine bucco-dentaire — consultation des internes :
+  dentisterie esthétique et usures »), à l'Hôpital universitaire Pitié-Salpêtrière (APHP).
+- **CMME** : l'établissement reste celui de la liste Doctolib (« Clinique des Maladies Mentales et de
+  l'Encéphale (CMME) - Paris ») ; le service devient « Troubles des conduites alimentaires ».
+
+Non fait :
+- **« Occlusal Overview » (2026, 27 h)** : l'organisme est obligatoire et le CV ne le donne pas. À ajouter
+  avec le nom de l'organisme.
+- **Association DentCA** : absente de la liste de Doctolib ; son ajout a été **proposé à Doctolib**, en
+  attente de validation. À ajouter (rôle : président) dès qu'elle apparaît. DentCA figure déjà dans la
+  présentation.
+- **Métro Notre-Dame-de-Lorette** : la liste des stations est calculée par Doctolib à partir de l'adresse ;
+  aucun champ ne permet de la modifier.
