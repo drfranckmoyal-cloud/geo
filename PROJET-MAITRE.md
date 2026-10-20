@@ -651,6 +651,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 19/10/2026 | F | « Pour les avant/après : garde le même niveau de zoom (meilleure référence dans les avant), et utilise le cas fractionné comme avant/après en illustration du 2/5. » | Après recalés sur les avant ; cas de la tache de MIH réuni au chapitre 2 ; encarts « cas clinique » réparés sur quatre pages (D85) |
 | 19/10/2026 | F | « Quand le site sera publié, quelle incidence SEO/GEO ? Ça comptera comme de nouvelles pages ? » puis « corrige les points 3 et 4… » | D86 : description en bas de la porte, titre de la page pilier rétabli |
 | 20/10/2026 | F | « Fais la même chose avec la page 04 Composite bonding. » | D87 : couverture, trois chapitres illustrés, bande de deux cas, chaque après calé sur son avant |
+| 20/10/2026 | F | « Photos trop zoomées : garde le cadrage du sourire quand elles ne sont pas avec écarteurs. » | Règle retenue : pour un sourire photographié sans écarteurs, la plus grande fenêtre commune aux deux photos recalées, et non plus un cadre resserré sur les dents. Refaits : couverture, microdontie et les deux montages de la bande sur Composite ; l'avant/après de la tache de MIH sur ICON. Les vues avec écarteurs ou contrasteur ne changent pas |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---
