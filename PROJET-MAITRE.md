@@ -652,6 +652,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 19/10/2026 | F | « Quand le site sera publié, quelle incidence SEO/GEO ? Ça comptera comme de nouvelles pages ? » puis « corrige les points 3 et 4… » | D86 : description en bas de la porte, titre de la page pilier rétabli |
 | 20/10/2026 | F | « Fais la même chose avec la page 04 Composite bonding. » | D87 : couverture, trois chapitres illustrés, bande de deux cas, chaque après calé sur son avant |
 | 20/10/2026 | F | « Photos trop zoomées : garde le cadrage du sourire quand elles ne sont pas avec écarteurs. » | Règle retenue : pour un sourire photographié sans écarteurs, la plus grande fenêtre commune aux deux photos recalées, et non plus un cadre resserré sur les dents. Refaits : couverture, microdontie et les deux montages de la bande sur Composite ; l'avant/après de la tache de MIH sur ICON. Les vues avec écarteurs ou contrasteur ne changent pas |
+| 21/10/2026 | F | « Voici ma fiche Doctolib et mon CV : mets à jour les différentes parties de mon profil Doctolib pour optimiser les recherches GEO. » | Fiche lue dans Chrome sans rien modifier ; proposition rédigée dans `docs/geo-externe/DOCTOLIB-PROPOSITION.md` (présentation, parcours, associations, publications, accès) ; trois écarts relevés entre la fiche et le CV ; **en attente du « oui » de Franck avant toute saisie** |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---
