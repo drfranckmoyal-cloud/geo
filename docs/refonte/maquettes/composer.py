@@ -304,6 +304,17 @@ SEQUENCES = {
          "Avant et après : incisive assombrie portant une tache blanche, puis teinte et tache corrigées, sur fond noir",
          ("éclaircissement", "eclaircissement-dentaire-paris")),
     ]},
+    "composite-bonding-paris": {"titre": "Avant / après", "apres_chapitre": 3, "large": True, "etapes": [
+        ("composite-rehabilitation-avant-apres.jpg",
+         "Cas 1 — demande de réhabilitation du sourire sans facettes : composite direct sur les six "
+         "dents antérieures, sans préparation",
+         "Avant et après : dents antérieures usées et colorées, puis reconstruites en composite, sourire de face",
+         ("facettes", "facettes-dentaires-paris")),
+        ("composite-diasteme-avant-apres.jpg",
+         "Cas 2 — demande d’uniformisation et de fermeture naturelle du diastème antérieur : fermeture "
+         "du diastème au composite et allongement des incisives latérales",
+         "Avant et après : espace entre les incisives centrales, puis fermé en composite, sourire de face"),
+    ]},
     "_exemple_desactive": {
         "titre": "Le bilan, en quatre étapes",
         "apres_chapitre": 1,
@@ -346,10 +357,19 @@ PHOTO_EN_TETE = {
         "Avant et après érosion-infiltration ICON — cas 1, plusieurs taches profondes "
         "dues à une MIH sévère",
         "Avant et après infiltration de résine de taches de MIH sur les incisives, fond noir"),
+    # Franck, 20/10/2026 : « fais la même chose avec la page 04 Composite bonding ».
+    "composite-bonding-paris": (
+        "composite-harmonisation-couverture.jpg",
+        "Avant et après — demande d’harmonisation du sourire sans orthodontie : diastème à fermer, "
+        "incisive latérale riziforme à remodeler, malpositions à compenser. Résultat uniquement "
+        "additif, 100 % conservateur, en composite stratifié réalisé après éclaircissement.",
+        "Avant et après : diastème fermé et incisive latérale remodelée en composite, sourire de face",
+        [("éclaircissement", "eclaircissement-dentaire-paris")]),
 }
 # Les photographies de l'ancienne page ICON quittent la page : la tache de MIH et son
 # résultat sont désormais montrés par chapitre, avec le traitement entre les deux.
-SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise", "taches-dentaires-dyschromies-icon"}
+SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise", "taches-dentaires-dyschromies-icon",
+                      "composite-bonding-paris"}
 
 # ── une photographie par chapitre ─────────────────────────────────────────
 # Posée dans la colonne de droite du chapitre, au-dessus de l'encadré : le texte
@@ -402,6 +422,25 @@ ILLUSTRATIONS = {
         3: ("icon-traitement-21.jpg",
             "Le même cas : traitement ICON de la dent 21, sous digue.",
             "Infiltration de résine en cours sur une incisive isolée par une digue et des matrices métalliques"),
+    },
+    # Composite bonding (20/10/2026) : la vue de profil d'un cas de la bande au chapitre 1,
+    # deux avant/après carrés aux chapitres 2 et 4. Légendes de Franck.
+    "composite-bonding-paris": {
+        1: ("composite-addition-profil.jpg",
+            "Le composite, par addition uniquement, ne touche pas aux dents et permet de "
+            "restaurer forme et longueur.",
+            "Vue de profil des dents antérieures allongées par addition de composite"),
+        2: ("composite-microdontie-avant-apres.jpg",
+            "Incisives latérales présentant une microdontie, une forme anormale : modification de la "
+            "forme par deux composites stratifiés, pour retrouver une forme et une esthétique naturelles.",
+            "Avant et après : incisives latérales trop petites, puis remodelées en composite stratifié",
+            None, {"libre": True}),
+        4: ("composite-usures-avant-apres.jpg",
+            "Usures dentaires importantes, la patiente ne souhaitait pas de facettes : composites sur "
+            "les six dents antérieures, pour retrouver forme, fonction et esthétique naturelle.",
+            "Avant et après : bords des incisives usés, puis reconstruits en composite",
+            [("Usures dentaires", "usures-dentaires"), ("facettes", "facettes-dentaires-paris")],
+            {"libre": True}),
     },
 }
 # Seules les suites d'étapes portent un numéro ; une illustration isolée, non.
@@ -500,10 +539,11 @@ def composer(slug, plan):
                      f'alt="{H.escape((fg["alt"] or [""])[0])}">{leg}</figure>\n')
             break
     if slug in PHOTO_EN_TETE:  # la photo héritée reste consommée, mais c'est celle-ci qui s'affiche
-        fichier, leg, alt = PHOTO_EN_TETE[slug]
+        fichier, leg, alt = PHOTO_EN_TETE[slug][:3]
+        liens = PHOTO_EN_TETE[slug][3] if len(PHOTO_EN_TETE[slug]) > 3 else None
         src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
         photo = (f'      <figure><img src="{src}" alt="{H.escape(alt)}">'
-                 f'<figcaption>{e(leg)}</figcaption></figure>\n')
+                 f'<figcaption>{lier(e(leg), liens)}</figcaption></figure>\n')
 
     corps = []
     n = len(plan["chapitres"])

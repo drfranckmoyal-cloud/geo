@@ -73,6 +73,13 @@ const photosThemes = {
   // le cas de la tache de MIH, réuni en avant/après pour le chapitre 2 (Franck, 19/10/2026)
   "03 Infiltration ICON/_montages/icon-mih-avant-apres.jpg": "icon-mih-avant-apres.jpg",
   "03 Infiltration ICON/_montages/icon-traitement-21.jpg": "icon-traitement-21.jpg",
+  // Composite bonding (20/10/2026) : cinq cas, chaque après calé sur son avant ; montages sur le Mac. Noms neutres.
+  "04 Composite bonding/_montages/composite-harmonisation-couverture.jpg": "composite-harmonisation-couverture.jpg",
+  "04 Composite bonding/_montages/composite-addition-profil.jpg": "composite-addition-profil.jpg",
+  "04 Composite bonding/_montages/composite-microdontie-avant-apres.jpg": "composite-microdontie-avant-apres.jpg",
+  "04 Composite bonding/_montages/composite-usures-avant-apres.jpg": "composite-usures-avant-apres.jpg",
+  "04 Composite bonding/_montages/composite-rehabilitation-avant-apres.jpg": "composite-rehabilitation-avant-apres.jpg",
+  "04 Composite bonding/_montages/composite-diasteme-avant-apres.jpg": "composite-diasteme-avant-apres.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });
