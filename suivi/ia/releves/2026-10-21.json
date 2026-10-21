@@ -46,6 +46,20 @@
         ],
         "praticiens": [],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "pmc.ncbi.nlm.nih.gov",
+          "doi.org",
+          "has-sante.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "quel dentiste consulter pour une érosion dentaire liée à l'anorexie ou à la boulimie": {
@@ -88,6 +102,19 @@
           "Dr Debouvry"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "rothschild.aphp.fr"
+        ],
+        "praticiens": [
+          "Docteur Bruno ABEHASSERA"
+        ],
+        "extrait": "n parisienne ? J'ai identifié plusieurs pistes pertinentes, avec une préférence pour les deux premières. 1. Dr Franck Moyal — Paris 9e et Pitié-Salpêtrière Piste particulièrement intéressante pour les usures dentaires Son activité est orientée vers la dentisterie re"
       }
     },
     "boulimie et dents abîmées, que faire": {
@@ -136,6 +163,17 @@
           "Dr Debouvry",
           "Dr Jean-Yves GEORGE"
         ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ffab.fr"
+        ],
+        "praticiens": [],
         "extrait": ""
       }
     },
@@ -186,6 +224,19 @@
           "Dr Vanina Debouvry"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ameli.fr",
+          "inserm.fr",
+          "ada.org"
+        ],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "l'anorexie sans vomissements peut-elle abîmer les dents": {
@@ -234,6 +285,15 @@
           "Dr Vanina Debouvry"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "vomissements répétés et émail dentaire : comment protéger ses dents": {
@@ -281,6 +341,18 @@
         "praticiens": [
           "Dr Delphine Uzan"
         ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ameli.fr",
+          "ada.org"
+        ],
+        "praticiens": [],
         "extrait": ""
       }
     },
@@ -331,6 +403,19 @@
           "Dr Kamioner"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ada.org",
+          "gov.uk",
+          "ameli.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "comment soigner une érosion dentaire": {
@@ -373,6 +458,15 @@
           "Dr Kamioner"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "dentiste spécialiste des troubles alimentaires à Paris": {
@@ -408,6 +502,19 @@
           "Dr Kods Mahdhaoui"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "drfranckmoyal.fr",
+          "aonews-lemag.fr",
+          "aphp.fr"
+        ],
+        "praticiens": [],
+        "extrait": "les du comportement alimentaire (TCA), notamment l’anorexie, la boulimie et leurs conséquences dentaires. 1. Dr Franck Moyal — Paris 9e Docteur Franck Moyal - Esthétique du sourire / Usures dentaires et TCA 2 Rue Hippolyte Lebas, 75009 Paris, France 07 69 05 85 31 S"
       }
     },
     "reflux gastrique et érosion des dents": {
@@ -455,6 +562,19 @@
         ],
         "praticiens": [],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ada.org",
+          "pubmed.ncbi.nlm.nih.gov",
+          "ameli.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "prise en charge dentaire des patients atteints de TCA à l'hôpital à Paris": {
@@ -493,6 +613,19 @@
           "Pr Géraldine Lescaille",
           "Pr Yves Boucher"
         ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "rothschild.aphp.fr",
+          "has-sante.fr"
+        ],
+        "praticiens": [],
         "extrait": ""
       }
     },
@@ -541,6 +674,20 @@
           "Dr Pierre Sultan"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pmc.ncbi.nlm.nih.gov",
+          "doi.org",
+          "mdpi.com",
+          "ufsbd.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
       }
     },
     "usure dentaire : causes et traitement": {
@@ -575,6 +722,20 @@
           "crookedentalclinic.com",
           "centre-medico-dentaire-paris-18-myrha.fr",
           "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "fdiworlddental.org",
+          "gov.uk",
+          "pubmed.ncbi.nlm.nih.gov",
+          "ameli.fr"
         ],
         "praticiens": [],
         "extrait": ""
@@ -635,6 +796,24 @@
           "Dr David Guenassia"
         ],
         "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "dentiste-paris6-gucciardi.fr",
+          "drbrunoabehassera.com",
+          "aphp.fr"
+        ],
+        "praticiens": [
+          "Dr Sylvia Bensoussan-Gucciardi",
+          "Dr Gucciardi",
+          "Dr Bruno Abehassera",
+          "Dr Bensoussan-Gucciardi"
+        ],
+        "extrait": "ue les dentistes qui proposent uniquement des soins esthétiques. Les praticiens les plus pertinents 1. Docteur Franck Moyal - Esthétique du sourire / Usures dentaires et TCA — Paris 9e 2 Rue Hippolyte Lebas, 75009 Paris, France Expertise très ciblée sur l’usure dent"
       }
     },
     "bruxisme et usure des dents, que faire": {
@@ -673,6 +852,15 @@
           "dentistes-lyon-hillsalih.fr",
           "youtube.com"
         ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
         "praticiens": [],
         "extrait": ""
       }
@@ -726,6 +914,3803 @@
           "Dr Charles-Mathieu Bandini",
           "Docteur Flore Roul-Yvonnet",
           "Dr Christophe Weill"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "occlusodontieparis.fr"
+        ],
+        "praticiens": [
+          "Dr Nadia Medina",
+          "Dr Andrea GOMEZ",
+          "Docteur Ylann Rouah",
+          "Docteur Serge DA",
+          "Dr Laurianne Foscolo",
+          "Dr Andrea Gomez"
+        ],
+        "extrait": ""
+      }
+    },
+    "mes dents s'usent, est-ce grave": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairemont-royal.ca",
+          "elone-clinic.com",
+          "denteka.fr",
+          "centre-dentaire-pierrelaye.fr",
+          "instagram.com",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairemont-royal.ca",
+          "elone-clinic.com",
+          "denteka.fr",
+          "youtube.com",
+          "instagram.com",
+          "centre-dentaire-pierrelaye.fr",
+          "facebook.com",
+          "pierrefabre-oralcare.com",
+          "centredentairepepiniere.com",
+          "koiscenter.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "faut-il toujours traiter une usure dentaire": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-riester.fr",
+          "learnylib.com",
+          "dentiste92.com",
+          "centre-dentaire-pierrelaye.fr",
+          "centredentairemont-royal.ca",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "dr-medina-avigael.chirurgiens-dentistes-en-france.fr",
+          "fr.dental-tribune.com",
+          "dentaire365.fr"
+        ],
+        "praticiens": [
+          "Dr Philippe Riester",
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centre-dentaire-des-tilleuls.com",
+          "cabinet-riester.fr",
+          "dentiste92.com",
+          "centre-dentaire-pierrelaye.fr",
+          "dr-medina-avigael.chirurgiens-dentistes-en-france.fr",
+          "ordre-chirurgiens-dentistes.fr",
+          "fr.dental-tribune.com"
+        ],
+        "praticiens": [
+          "Dr Philippe Riester",
+          "Dr Pierre Sultan",
+          "Dr Medina Avigael"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "efcd.eu",
+          "nature.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "comment savoir si mes dents sont usées par le bruxisme ou par l'acidité": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cdpm.paris",
+          "elone-clinic.com",
+          "cabinet-dentaire-alme.fr",
+          "cabinet-riester.fr",
+          "learnylib.com",
+          "mutuellesaintmartin.fr",
+          "denteka.fr"
+        ],
+        "praticiens": [
+          "Dr Philippe Riester"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "cdpm.paris",
+          "centredentairemont-royal.ca",
+          "clinique-dentaire-saint-vaast-douai.fr",
+          "pierrefabre-oralcare.com",
+          "youtube.com",
+          "cabinet-riester.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "une gouttière contre le bruxisme suffit-elle à protéger des dents usées": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "bruxless.com",
+          "drkamioner.fr",
+          "dr-laure-helene-toledano.fr",
+          "selarl-cgdentaire.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "id-mediterraneo.com",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "learnylib.com",
+          "dr-laure-helene-toledano.fr",
+          "dentiste92.com",
+          "bruxless.com",
+          "youtube.com",
+          "selarl-cgdentaire.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "usure dentaire et sensibilité des dents": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "learnylib.com",
+          "centredentairepepiniere.com",
+          "dentiste-roanne.com",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "pierrefabre-oralcare.com",
+          "centre-dentaire-saint-ouen.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairepepiniere.com",
+          "dentiste-roanne.com",
+          "pierrefabre-oralcare.com",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "doctolib.fr",
+          "harmonie-sante.fr",
+          "centre-dentaire-saint-ouen.com",
+          "facebook.com",
+          "denteka.fr",
+          "sensodyne.be"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ufsbd.fr",
+          "ameli.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "en quoi consiste un bilan d'usure dentaire": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "opaldentalstudio.fr",
+          "cabinet-riester.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "koiscenter.com",
+          "haleonhealthpartner.com",
+          "elone-clinic.com",
+          "gacd.fr",
+          "information-dentaire.fr"
+        ],
+        "praticiens": [
+          "Dr Philippe Riester"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-riester.fr",
+          "elone-clinic.com",
+          "information-dentaire.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "koiscenter.com",
+          "centredentairemont-royal.ca",
+          "gacd.fr"
+        ],
+        "praticiens": [
+          "Dr Philippe Riester"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cneoc.fr",
+          "nature.com",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "usures dentaires sévères dimension verticale Paris": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "aonews-lemag.fr",
+          "drbrunoabehassera.com",
+          "centre-dentaire-paris-2-louvre.fr",
+          "elone-clinic.com"
+        ],
+        "praticiens": [
+          "Dr Bruno Abehassera",
+          "Dr Abehassera"
+        ],
+        "extrait": "u couronnes) pour remonter la hauteur de morsure. www.aonews-lemag.fr +4 Spécialistes et Praticiens à Paris Dr Franck Moyal (2 Rue Hippolyte Lebas, 75009 Paris) : exercice exclusif en dentisterie esthétique/adhésive et prise en charge des usures sévères, praticien hos"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drbrunoabehassera.com",
+          "elone-clinic.com",
+          "cabinet-dentaire-paris-carnot.fr",
+          "dentiste-paris6-delphine-uzan.fr",
+          "dr-gomezcasado.com",
+          "sanaoris.com",
+          "centre-dentaire-paris-2-louvre.fr",
+          "thierry-neimann-dentiste.fr"
+        ],
+        "praticiens": [
+          "Dr Bruno Abehassera",
+          "Dr Ylann Rouah",
+          "Dr Delphine Uzan",
+          "Dr Andrea Gomez",
+          "Dr Ari Elhyani",
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "american-hospital.org"
+        ],
+        "praticiens": [
+          "Pr Marie-Violaine Berteretche",
+          "Pr Jean-François Nguyen",
+          "Dr Hélène Citterio",
+          "Dr Mithridade Davarpanah"
+        ],
+        "extrait": "vec modification de DVO. American Hospital of Paris 01 46 41 27 81 Centre de réhabilitation orale 4. Docteur Franck Moyal - Esthétique du sourire / Usures dentaires et TCA — Paris 9e 2 Rue Hippolyte Lebas, 75009 Paris, France Pratique orientée notamment vers les u"
+      }
+    },
+    "dents usées à 40 ans, que faire": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairemont-royal.ca",
+          "biodental.be",
+          "cabinetdentaireduparc.fr",
+          "dentiste92.com",
+          "pierrefabre-oralcare.com",
+          "elone-clinic.com",
+          "dentistes-lyon-hillsalih.fr",
+          "cabinetdentaireargia.fr"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "dentiste92.com",
+          "biodental.be",
+          "clinadent.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "centredentairemont-royal.ca",
+          "cabinetdentaireduparc.fr",
+          "cabinetdentaireargia.fr",
+          "pierrefabre-oralcare.com"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "dents courtes et usées : comment les rallonger": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "dentisteprive.fr",
+          "estheticaplus.com",
+          "cabinet-dentaire-dentalzen.fr",
+          "drcadieuxlangevin.com",
+          "colgate.com"
+        ],
+        "praticiens": [
+          "Dr Circiumarescu"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "dentisteprive.fr",
+          "cabinet-dentaire-madeleine.com",
+          "cabinet-dentaire-dentalzen.fr",
+          "drcadieuxlangevin.com",
+          "estheticaplus.com",
+          "lemaclinic.com",
+          "youtube.com",
+          "colgate.com"
+        ],
+        "praticiens": [
+          "Dr Circiumarescu"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "reconstruire des dents usées sans couronnes": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste92.com",
+          "drbrunoabehassera.com",
+          "instagram.com",
+          "youtube.com",
+          "mysodental.be"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan",
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentistemurciano.com",
+          "drjeremyhaccoun.com",
+          "dentiste92.com",
+          "bodyexpert.online",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "sanaoris.com",
+          "dentiste-richard-amouyal.com",
+          "dentistealaval.com",
+          "uniklinik.fr",
+          "youtube.com",
+          "instagram.com",
+          "drkamioner.fr"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "réhabilitation complète de dents usées : étapes et prix": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "drbrunoabehassera.com",
+          "eurodentaire.com",
+          "dentistealaval.com",
+          "dentiste-paris-2-perrin.fr",
+          "ma-clinique.fr",
+          "ircem.com"
+        ],
+        "praticiens": [
+          "Dr Abehassera",
+          "Dr Bruno Abehassera"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drbrunoabehassera.com",
+          "cabinet-dentaire-madeleine.com",
+          "dentistealaval.com",
+          "ma-clinique.fr",
+          "dentiste-paris-2-perrin.fr",
+          "ircem.com"
+        ],
+        "praticiens": [
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ameli.fr",
+          "lefildentaire.com",
+          "drbrunoabehassera.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "augmenter la dimension verticale dentaire": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "praticien.dentalespace.com",
+          "youtube.com",
+          "selarl-sommeville.chirurgiens-dentistes.fr",
+          "dumas.ccsd.cnrs.fr",
+          "editionscdp.fr",
+          "information-dentaire.fr",
+          "savoirdc.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "youtube.com",
+          "praticien.dentalespace.com",
+          "dumas.ccsd.cnrs.fr",
+          "savoirdc.com",
+          "selarl-sommeville.chirurgiens-dentistes.fr",
+          "editionscdp.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "rallonger les dents avec du composite ou des facettes": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "smile2impress.com",
+          "dentisteprive.fr",
+          "docteurhaddad.fr",
+          "drbrunoabehassera.com",
+          "dr-temstet-dentiste.paris",
+          "implant-dentaire-en-hongrie.fr",
+          "karatdent.com.tr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Circiumarescu"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentisteprive.fr",
+          "smile2impress.com",
+          "karatdent.com.tr",
+          "doctolib.fr",
+          "dr-temstet-dentiste.paris",
+          "facebook.com",
+          "docteurhaddad.fr",
+          "drbrunoabehassera.com",
+          "dentaltix.com"
+        ],
+        "praticiens": [
+          "Dr Nathaniel Temstet",
+          "Dr Temstet",
+          "Dr Circiumarescu"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "solventum.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "réhabilitation des usures dentaires avec facettes et onlays": {
+      "famille": "Dents courtes et réhabilitation",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drbrunoabehassera.com",
+          "youtube.com",
+          "jasperdental.fr",
+          "cabinet-dentaire-evident.fr",
+          "instagram.com",
+          "dentistes-toulouse-ozenne.fr",
+          "dumas.ccsd.cnrs.fr"
+        ],
+        "praticiens": [
+          "Docteur Cristian Kelemen",
+          "Dr Clarisse Bonnet"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drbrunoabehassera.com",
+          "youtube.com",
+          "pmc.ncbi.nlm.nih.gov",
+          "information-dentaire.fr",
+          "jasperdental.fr",
+          "researchgate.net",
+          "cabinet-dentaire-evident.fr",
+          "bsrd.org.uk",
+          "dentistes-toulouse-ozenne.fr",
+          "jcda.ca",
+          "cabinet-dentaire-drouhet.fr",
+          "dumas.ccsd.cnrs.fr"
+        ],
+        "praticiens": [
+          "Docteur Cristian Kelemen"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "doi.org",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "composite bonding Paris": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "parisdentalstudios.com",
+          "cabinet-medico-dentaire-addms.com",
+          "dentiste-dr-ngo-paris20.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-medico-dentaire-addms.com",
+          "wupdoc.com",
+          "parisdentalstudios.com",
+          "cabinet-dentaire-madeleine.com",
+          "dr-laura-saal.fr"
+        ],
+        "praticiens": [
+          "Dr. Ralph Badaoui",
+          "Dr. Maxime Lucas",
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "dr-preciliaziri.com"
+        ],
+        "praticiens": [
+          "Dr Précilia Ziri",
+          "Dr. Marta Hidalgo",
+          "Dr. Grossetti François",
+          "Dr Claude FINELLE",
+          "Dr Marta Hidalgo",
+          "Dr François Grossetti"
+        ],
+        "extrait": ""
+      }
+    },
+    "composite bonding : avis et durée de vie": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cliniquehygienedentaire.ch",
+          "vitasmile.istanbul",
+          "fr.adalyadentalclinic.com",
+          "dr-abdurrahmanozturk.com",
+          "infosoins.fr",
+          "drmarieclement.com",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "lavivaclinic.com",
+          "drmarieclement.com",
+          "fr.adalyadentalclinic.com",
+          "vitasmile.istanbul",
+          "youtube.com",
+          "cliniquehygienedentaire.ch",
+          "clinadent.fr",
+          "infosoins.fr",
+          "dr-abdurrahmanozturk.com",
+          "instagram.com"
+        ],
+        "praticiens": [
+          "Dr Marie Clément"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "reddit.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "composite bonding prix Paris": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "crpce.com",
+          "docteurhaddad.fr",
+          "elone-clinic.com",
+          "instagram.com",
+          "cabinet-dentaire-madeleine.com",
+          "sanaoris.com",
+          "tiktok.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "crpce.com",
+          "cabinet-dentaire-madeleine.com",
+          "docteurhaddad.fr",
+          "doctolib.fr",
+          "parisdentalstudios.com",
+          "elone-clinic.com",
+          "sanaoris.com",
+          "infosoins.fr",
+          "cabinet-medico-dentaire-addms.com",
+          "tiktok.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Jean-Baptiste Varea",
+          "Dr Nathaniel Temstet",
+          "Dr Axel Hollmann"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com"
+        ],
+        "praticiens": [
+          "Dr. Marta Hidalgo"
+        ],
+        "extrait": ""
+      }
+    },
+    "combien de temps dure un composite esthétique sur les dents de devant": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "clinadent.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "jasperdental.fr",
+          "infosoins.fr",
+          "smile2impress.com",
+          "centredentairepepiniere.com",
+          "cliniquehygienedentaire.ch",
+          "drkamioner.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "clinadent.fr",
+          "youtube.com",
+          "jasperdental.fr",
+          "drkamioner.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "infosoins.fr",
+          "cliniquehygienedentaire.ch",
+          "bodyexpert.online",
+          "smile2impress.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "stratification composite des dents antérieures": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "lefildentaire.com",
+          "bibnum.univ-lyon1.fr",
+          "idwebformation.fr",
+          "youtube.com",
+          "dumas.ccsd.cnrs.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "hal.univ-lorraine.fr",
+          "bibnum.univ-lyon1.fr",
+          "idwebformation.fr",
+          "lefildentaire.com",
+          "youtube.com",
+          "dentistes-biarritz-cdf.fr",
+          "dumas.ccsd.cnrs.fr",
+          "doctolib.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "nature.com",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "fermer un diastème avec du composite": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-gabison-laurence.chirurgiens-dentistes-en-france.fr",
+          "youtube.com",
+          "dentaltix.com",
+          "instagram.com",
+          "gc-expertise-dentaire.fr",
+          "centredentairese.com",
+          "dental-addict.be",
+          "facebook.com"
+        ],
+        "praticiens": [
+          "Dr David HACMOUN",
+          "Dr Laurence Gabison"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairese.com",
+          "dr-gabison-laurence.chirurgiens-dentistes-en-france.fr",
+          "dentaltix.com",
+          "lefildentaire.com",
+          "instagram.com",
+          "gc-expertise-dentaire.fr",
+          "youtube.com",
+          "dental-addict.be",
+          "opaldentalstudio.fr"
+        ],
+        "praticiens": [
+          "Dr Laurence Gabison"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentaljuce.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "fermeture de diastème Front Wing Technique": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "lefildentaire.com",
+          "styleitaliano.org",
+          "vitrinclinic.com",
+          "dentaire365.fr",
+          "instagram.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "lefildentaire.com",
+          "vitrinclinic.com",
+          "styleitaliano.org"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "lefildentaire.com",
+          "pubmed.ncbi.nlm.nih.gov",
+          "styleitaliano.org",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Jordi Manauta",
+          "Dr Osama Shaalan"
+        ],
+        "extrait": "leitaliano.org Pour apprendre la technique en pratique, je recommande de commencer par l'article français du Dr Franck Moyal, puis d'étudier les photographies opératoires de Style Italiano, particulièrement la construction des ailes vestibulaires et la gestion du profi"
+      }
+    },
+    "dent de devant cassée : réparation esthétique en composite": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drkamioner.fr",
+          "instagram.com",
+          "vimazal.com",
+          "dentego.fr",
+          "dr-alexandre-sarfati.paris",
+          "sanaoris.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner",
+          "Dr Boutros Ralph",
+          "Docteur Vimazal",
+          "Dr. Silviya Vimazal",
+          "Dr Alexandre Sarfati"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-alexandre-sarfati.paris",
+          "instagram.com",
+          "dentego.fr",
+          "sanaoris.com",
+          "drkamioner.fr",
+          "doctolib.fr",
+          "vimazal.com",
+          "cabinet-dentaire-georgev.fr"
+        ],
+        "praticiens": [
+          "Dr Alexandre Sarfati",
+          "Dr Boutros Ralph",
+          "Dr Kamioner",
+          "Docteur Vimazal"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "meilleur dentiste pour un composite bonding à Paris": {
+      "famille": "Composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentistes-davarpanah.fr",
+          "docteurhaddad.fr",
+          "cabinet-medico-dentaire-addms.com",
+          "centre-medico-dentaire-paris-18-myrha.fr"
+        ],
+        "praticiens": [
+          "Dr. Ralph Badaoui",
+          "Dr. Jean-Baptiste Varea",
+          "Dr. Sofia Trindade",
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "opaldentalstudio.fr",
+          "doctolib.fr",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr",
+          "dr-laura-saal.fr",
+          "dr-benguigui-francis-chirurgiens-dentistes.fr",
+          "dr-alexandre-sarfati.paris",
+          "docteurhaddad.fr",
+          "dentalog.fr",
+          "drkamioner.fr",
+          "drmarinpomperski.com"
+        ],
+        "praticiens": [
+          "Dr. Ralph Badaoui",
+          "Dr. Maxime Lucas",
+          "Dr. Jean-Baptiste Varea",
+          "Dr. Laura Di",
+          "Dr. Sofia Trindade",
+          "Dr. Laura Zeitoun",
+          "Dr Alexandre Sarfati",
+          "Dr. Francis Benguigui",
+          "Dr Sarfati"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "drmarinpomperski.com",
+          "dental7paris.com"
+        ],
+        "praticiens": [
+          "Dr Marin Pomperski",
+          "Dr Claude FINELLE",
+          "Dr. Grossetti François"
+        ],
+        "extrait": "urel, harmonieux, sans effet « fausses dents », tout en préservant au maximum l’émail. Mon top 4 à Paris 1. Dr Franck Moyal — Paris 9e 2 rue Hippolyte Lebas Mon premier choix pour du composite bonding esthétique. Son activité est particulièrement orientée vers les r"
+      }
+    },
+    "facettes dentaires Paris": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "crpce.com",
+          "drmorganecohensamama.com",
+          "facebook.com",
+          "centre-dentaire-opera-paris.fr"
+        ],
+        "praticiens": [
+          "Dr Morgane Cohen-Samama",
+          "Dr Morgane Cohen",
+          "Dr Cohen"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "dr-laura-saal.fr",
+          "centre-dentaire-paris.com"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Ralph Badaoui",
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cmdparisetoile.fr",
+          "dr-laura-saal.fr"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Pierre Layan",
+          "Dr. Marta Hidalgo",
+          "Dr. Laura Di",
+          "Docteur Yoann Saal",
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "facettes en céramique à Paris : prix": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "elone-clinic.com",
+          "sanaoris.com",
+          "drbrunoabehassera.com",
+          "dentiste-richard-amouyal.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Ari Elhyani"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "selarl-zarrinpour-chirurgiens-dentistes.fr",
+          "drkamioner.fr",
+          "bodyexpert.online",
+          "elone-clinic.com",
+          "drbrunoabehassera.com",
+          "opaldentalstudio.fr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Arash ZARRINPOUR",
+          "Dr Kamioner",
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "david-guenassia-chirurgien-dentiste.fr",
+          "dr-laura-saal.fr",
+          "elone-clinic.com"
+        ],
+        "praticiens": [
+          "Dr David Guenassia",
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "facettes dentaires sans meuler les dents": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurgutman.com",
+          "elone-clinic.com",
+          "opaldentalstudio.fr",
+          "dentakay.com",
+          "dr-wahnich-gabriel.chirurgiens-dentistes.fr",
+          "facebook.com"
+        ],
+        "praticiens": [
+          "Dr Jean-Baptiste Varea"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-jean-baptiste-prudentos.chirurgiens-dentistes.fr",
+          "docteurgutman.com",
+          "dentakay.com",
+          "elone-clinic.com",
+          "opaldentalstudio.fr",
+          "instagram.com",
+          "youtube.com",
+          "omeristanbul.com"
+        ],
+        "praticiens": [
+          "Dr Gutman"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "opaldentalstudio.fr",
+          "dr-laura-saal.fr"
+        ],
+        "praticiens": [
+          "Dr Laura Zeitoun",
+          "Dr. Laura Di"
+        ],
+        "extrait": ""
+      }
+    },
+    "facettes dentaires minimalement invasives": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "crownceram.com",
+          "dentalinc.fr",
+          "learnylib.com",
+          "information-dentaire.fr",
+          "magazine.zhermack.com",
+          "em-consulte.com",
+          "dr-tonnot-mathieu.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "crownceram.com",
+          "information-dentaire.fr",
+          "magazine.zhermack.com",
+          "youtube.com",
+          "learnylib.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "facettes dentaires avant après": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "clinadent.fr",
+          "elone-clinic.com",
+          "dr-temstet-dentiste.paris",
+          "mutuelle-conseil.com",
+          "dentiste-toulouse-benichou.fr",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Nathaniel TemstetLe",
+          "Dr Nathaniel TemstetFacettes",
+          "Dr Temstet",
+          "Dr Ari Elhyani"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "jildent.fr",
+          "dr-benguigui-francis-chirurgiens-dentistes.fr",
+          "elone-clinic.com",
+          "belladentaire.com",
+          "docteur-tourrolier-didier.chirurgiens-dentistes.fr",
+          "cabinet-dentaire-montesson.fr",
+          "dr-temstet-dentiste.paris",
+          "dr-alexandre-sarfati.paris",
+          "elsan.care",
+          "jeromeweinman.com",
+          "sourireconcept.com",
+          "clearsmile.ch"
+        ],
+        "praticiens": [
+          "Dr Didier Tourrolier",
+          "Dr Nathaniel Temstet",
+          "Dr Alexandre Sarfati",
+          "Dr Temstet",
+          "Dr Ari Elhyani"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "docteur-nooshika.fr",
+          "dentiste-paris6-delphine-uzan.fr"
+        ],
+        "praticiens": [
+          "Dr Nooshika",
+          "Dr Delphine Uzan"
+        ],
+        "extrait": ""
+      }
+    },
+    "combien de facettes faut-il pour un beau sourire": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "endetadental.com",
+          "bestclinic-turkey.com",
+          "dr-addi-laurence.chirurgiens-dentistes.fr",
+          "uedentaire.com",
+          "vitasmile.istanbul",
+          "cinikdental.com",
+          "docteurhaddad.fr",
+          "dentakay.com",
+          "eurodentaire.com"
+        ],
+        "praticiens": [
+          "Dr Laurence Addi",
+          "Dr. Cinik Dental",
+          "Docteur Haddad",
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "endetadental.com",
+          "bestclinic-turkey.com",
+          "dr-addi-laurence.chirurgiens-dentistes.fr",
+          "doctolib.fr",
+          "uedentaire.com",
+          "cinikdental.com",
+          "docteurhaddad.fr",
+          "vitasmile.istanbul",
+          "smiledesignboutique.com",
+          "youtube.com",
+          "dentakay.com"
+        ],
+        "praticiens": [
+          "Dr Laurence Addi",
+          "Dr. Cinik Dental",
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Choukair Vilvoorde",
+          "Dr. Fatmi"
+        ],
+        "extrait": ""
+      }
+    },
+    "facettes dentaires : risques et durée de vie": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cliniquehygienedentaire.ch",
+          "drkamioner.fr",
+          "elone-clinic.com",
+          "opaldentalstudio.fr",
+          "jasperdental.fr",
+          "dr-temstet-dentiste.paris",
+          "centredentairemont-royal.ca"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cliniquehygienedentaire.ch",
+          "vitrinclinic.com",
+          "esthetique.cabinetmaupassant.com",
+          "dentaire-fute.com",
+          "38marceau.com",
+          "dr-temstet-dentiste.paris",
+          "drzisserman-chirurgien-dentiste.fr",
+          "dentakademiglobal.com",
+          "jildent.fr",
+          "centredentairedelatour.ch",
+          "dentaltix.com",
+          "implant-dentaire-en-hongrie.fr"
+        ],
+        "praticiens": [
+          "Dr Nathaniel Temstet",
+          "Dr Zisserman Vous",
+          "Dr. Zisserman",
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "my.clevelandclinic.org",
+          "urmc.rochester.edu"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "meilleur dentiste pour des facettes à Paris": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "elone-clinic.com",
+          "crpce.com",
+          "drmorganecohensamama.com"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Ari Elhyani",
+          "Dr Morgane Cohen",
+          "Dr Cattan Denis",
+          "Dr Cohen",
+          "Dr. Morgane Cohen"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "dr-laura-saal.fr",
+          "drmorganecohensamama.com",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Guillaume Brahami",
+          "Dr Laura Zeitoun",
+          "Dr Morgane Cohen-Samama",
+          "Dr Morgane Cohen",
+          "Dr Thierry Rouach",
+          "Dr Rouach",
+          "Dr Laura Di",
+          "Dr Cohen",
+          "Dr. Morgane Cohen"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr DROSSART Maxime",
+          "Dr Pierre Layan",
+          "Dr Ari Elhyani",
+          "Dr. Marta Hidalgo"
+        ],
+        "extrait": ""
+      }
+    },
+    "planification des facettes dentaires : wax-up et mock-up": {
+      "famille": "Facettes",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "newdentaire.be",
+          "savoirdc.com",
+          "youtube.com",
+          "fr.dental-tribune.com",
+          "dumas.ccsd.cnrs.fr",
+          "cliniquedentairedechantepoulet.ch",
+          "information-dentaire.fr",
+          "smileimplant.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "newdentaire.be",
+          "savoirdc.com",
+          "fr.dental-tribune.com",
+          "frenchtooth.fr",
+          "youtube.com",
+          "lefildentaire.com",
+          "labocast.fr",
+          "information-dentaire.fr",
+          "instagram.com",
+          "ditramax.com",
+          "cabinetneuillydentaire.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "pmc.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "facettes ou composite comment choisir": {
+      "famille": "Facettes ou composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "sanaoris.com",
+          "centredentairedaneault.com",
+          "38marceau.com",
+          "youtube.com",
+          "lefildentaire.com",
+          "dr-temstet-dentiste.paris",
+          "karatdent.com.tr",
+          "learnylib.com",
+          "parisdentalstudios.com",
+          "tiktok.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Nathaniel Temstet"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "sanaoris.com",
+          "lefildentaire.com",
+          "38marceau.com",
+          "dr-temstet-dentiste.paris",
+          "karatdent.com.tr",
+          "centredentairedaneault.com",
+          "tiktok.com",
+          "youtube.com",
+          "drkamioner.fr",
+          "parisdentalstudios.com",
+          "learnylib.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Nathaniel Temstet",
+          "Dr Temstet"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "facettes en céramique ou composite : que choisir pour les dents de devant": {
+      "famille": "Facettes ou composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "dr-temstet-dentiste.paris",
+          "38marceau.com",
+          "drbrunoabehassera.com",
+          "facebook.com",
+          "dr-gabison-laurence.chirurgiens-dentistes-en-france.fr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Nathaniel Temstet",
+          "Dr Bruno Abehassera",
+          "Dr Temstet"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "drbrunoabehassera.com",
+          "sanaoris.com",
+          "38marceau.com",
+          "dr-temstet-dentiste.paris",
+          "youtube.com",
+          "dents.ma",
+          "la-dentisterie.com",
+          "drzisserman-chirurgien-dentiste.fr",
+          "dentaltix.com",
+          "facebook.com",
+          "swissmeddental.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Nathaniel Temstet",
+          "Dr Temstet"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "quelle différence entre facettes et composite bonding": {
+      "famille": "Facettes ou composite",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairewestminster.com",
+          "docteurhaddad.fr",
+          "vitasmile.istanbul",
+          "karatdent.com.tr",
+          "instagram.com",
+          "dentakay.com",
+          "youtube.com",
+          "mcandental.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "vitasmile.istanbul",
+          "instagram.com",
+          "centredentairewestminster.com",
+          "dentakay.com",
+          "docteurhaddad.fr",
+          "serenklinik.com",
+          "youtube.com",
+          "mcandental.com",
+          "karatdent.com.tr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "éclaircissement dentaire chez le dentiste à Paris": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "doctolib.fr",
+          "dr-rattier-evelyne.chirurgiens-dentistes.fr",
+          "dentiste-paris20-meimoun.fr",
+          "crpce.com"
+        ],
+        "praticiens": [
+          "Dr SUZANNE COUDERT"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "elone-clinic.com",
+          "sanaoris.com",
+          "drmorganecohensamama.com",
+          "dr-laura-saal.fr",
+          "dentistesparis.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "dentimad.fr"
+        ],
+        "praticiens": [
+          "Dr Ari Elhyani",
+          "Dr Elhyani",
+          "Dr Morgane Cohen-Samama",
+          "Dr Denis Cattan"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-laura-saal.fr",
+          "parisdentalstudios.com",
+          "elone-clinic.com",
+          "sanaoris.com"
+        ],
+        "praticiens": [
+          "Dr Laura Zeitoun",
+          "Dr Ari Elhyani"
+        ],
+        "extrait": ""
+      }
+    },
+    "blanchiment dentaire professionnel Paris prix": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-orthodontiste-paris.fr",
+          "dr-rattier-evelyne.chirurgiens-dentistes.fr",
+          "dentimad.fr",
+          "aetmgroupe.com",
+          "vivortho.fr",
+          "treatwell.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentimad.fr",
+          "opaldentalstudio.fr",
+          "dentiste-orthodontiste-paris.fr",
+          "dr-rattier-evelyne.chirurgiens-dentistes.fr",
+          "aetmgroupe.com",
+          "vivortho.fr",
+          "parisdentalstudios.com",
+          "dentistemontparnasse.com",
+          "planity.com",
+          "treatwell.fr",
+          "tiktok.com",
+          "macif.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "l'éclaircissement dentaire est-il dangereux pour l'émail": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centre-dentaire-paris-19-leon-giraud.fr",
+          "citysmile.ch",
+          "denteka.fr",
+          "le-fauteuil-bleu.fr",
+          "crpce.com",
+          "cite-sciences.fr",
+          "instagram.com",
+          "swissmeddental.com",
+          "white-care.com"
+        ],
+        "praticiens": [
+          "Dr Laurence Addi"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "monblanchiment.com",
+          "cite-sciences.fr",
+          "aetmgroupe.com",
+          "white-care.com",
+          "centre-dentaire-paris-19-leon-giraud.fr",
+          "crpce.com",
+          "instagram.com",
+          "citysmile.ch",
+          "be-expertwhitening--expertwhitegel.glopalstore.com",
+          "facebook.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "taches blanches sur les dents : comment les enlever": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "philips.fr",
+          "drkamioner.fr",
+          "clinadent.fr",
+          "centredentairemont-royal.ca",
+          "myvariations.com",
+          "dentora.fr",
+          "pierrefabre-oralcare.com",
+          "cabinet-dentaire-madeleine.com",
+          "dentalgeneva.ch",
+          "neveclinic.ch",
+          "colgate.fr"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pierrefabre-oralcare.com",
+          "drkamioner.fr",
+          "cabinet-dentaire-madeleine.com",
+          "centredentairemont-royal.ca",
+          "clinadent.fr",
+          "myvariations.com",
+          "universpharmacie.fr",
+          "dentalgeneva.ch",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "MIH dents : quel traitement": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "kidsdentalparis.com",
+          "dentiste-enfant.com",
+          "ufsbd.fr",
+          "qare.fr",
+          "cabinetdelarosace.fr",
+          "orthodontie-sourire-sante.fr"
+        ],
+        "praticiens": [
+          "Dr. Agachi"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "kidsdentalparis.com",
+          "ufsbd.fr",
+          "dentiste-enfant.com",
+          "chu-nantes.fr",
+          "youtube.com",
+          "cabinetdelarosace.fr",
+          "orthodontie-sourire-sante.fr"
+        ],
+        "praticiens": [
+          "Dr. Agachi"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "infiltration ICON pour les taches blanches": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dmg-dental.com",
+          "drmorganecohensamama.com",
+          "lefildentaire.com",
+          "wesmile-clinic.fr",
+          "youtube.com",
+          "frimouth.com",
+          "btsmile.com",
+          "mon-cabinetdentaire.com",
+          "pred.fr"
+        ],
+        "praticiens": [
+          "Dr Morgane Cohen",
+          "Dr Cohen"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dmg-dental.com",
+          "drmorganecohensamama.com",
+          "wesmile-clinic.fr",
+          "crpce.com",
+          "youtube.com",
+          "frimouth.com",
+          "centre-dentaire-montpellier-34.fr",
+          "btsmile.com",
+          "mon-cabinetdentaire.com",
+          "pred.fr",
+          "frenchtooth.fr",
+          "dentaire365.fr"
+        ],
+        "praticiens": [
+          "Dr Morgane Cohen",
+          "Dr Cohen"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dmg-dental.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "taches blanches sur les dents d'un enfant, que faire": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "boticinal.com",
+          "karex.com",
+          "santedentairerivesud.com",
+          "drkamioner.fr",
+          "youtube.com",
+          "pierrefabre-oralcare.com",
+          "colgate.com",
+          "soinsdenosenfants.cps.ca",
+          "centredentairemont-royal.ca",
+          "kidsdentalparis.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "santedentairerivesud.com",
+          "karex.com",
+          "boticinal.com",
+          "soinsdenosenfants.cps.ca",
+          "drkamioner.fr",
+          "youtube.com",
+          "centredentairemont-royal.ca",
+          "kidsdentalparis.com",
+          "colgate.com",
+          "docmorris.fr",
+          "ufsbd.fr"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "dents jaunes, que faire": {
+      "famille": "Éclaircissement et taches",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "denteka.fr",
+          "dentego.fr",
+          "clinadent.fr",
+          "pierrefabre-oralcare.com",
+          "sanaoris.com",
+          "youtube.com",
+          "dr-temstet-dentiste.paris",
+          "instagram.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "denteka.fr",
+          "dentakay.com",
+          "clinadent.fr",
+          "dentego.fr",
+          "instagram.com",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "dentiste esthétique Paris": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "smile-clinic.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "pierrelayandentisteesthetique.fr",
+          "drmorganecohensamama.com",
+          "38marceau.com",
+          "dentiste-paris-13.fr",
+          "dracheludovic.fr"
+        ],
+        "praticiens": [
+          "Dr Ralph Badaoui",
+          "Dr Guillaume Brahami",
+          "Dr Pierre Layan",
+          "Dr Morgane Cohen",
+          "Dr Laura Di",
+          "Dr Pierrel Layan",
+          "Dr. Pierre Layan",
+          "Dr. Frédéric Herszenfis",
+          "Dr Cohen",
+          "Dr. Morgane Cohen"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "dr-laura-saal.fr",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "elone-clinic.com",
+          "opaldentalstudio.fr"
+        ],
+        "praticiens": [
+          "Dr Ralph BADAOUI",
+          "Dr Laura Zeitoun",
+          "Dr Guillaume Brahami",
+          "Dr Thierry Rouach",
+          "Dr Rouach",
+          "Dr Jean-Baptiste Varea",
+          "Dr Varea",
+          "Dr Ari Elhyani"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "opaldentalstudio.fr"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Pierre Layan",
+          "Dr DROSSART Maxime",
+          "Dr. Marta Hidalgo",
+          "Dr. Laura Di",
+          "Dr Nathaniel Temstet",
+          "Dr Laura Zeitoun"
+        ],
+        "extrait": ""
+      }
+    },
+    "meilleur dentiste esthétique à Paris": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "doctolib.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "drmorganecohensamama.com",
+          "elone-clinic.com"
+        ],
+        "praticiens": [
+          "Dr Ralph Badaoui",
+          "Dr Guillaume Brahami",
+          "Dr Morgane Cohen-Samama",
+          "Dr Morgane Cohen",
+          "Dr Laura Di",
+          "Dr. Ari Elhyani",
+          "Dr Cohen",
+          "Dr. Morgane Cohen",
+          "Dr Ralph BADAOUI"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "pierrelayandentisteesthetique.fr",
+          "cabinet-dentaire-madeleine.com",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Pierre Layan",
+          "Dr Ralph Badaoui",
+          "Dr Maxime Lucas",
+          "Dr Thierry Rouach",
+          "Dr Jean-Baptiste Varea",
+          "Dr Ari Elhyani",
+          "Dr Laura Zeitoun",
+          "Dr Pierrel Layan",
+          "Dr. Pierre Layan"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Nathaniel Temstet",
+          "Dr DROSSART Maxime",
+          "Dr Pierre Layan",
+          "Dr. Laura Di",
+          "Dr Temstet",
+          "Dr Guenassia"
+        ],
+        "extrait": ""
+      }
+    },
+    "comment choisir son dentiste esthétique": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-paris-2-perrin.fr",
+          "docteurhaddad.fr",
+          "drmarieclement.com",
+          "elone-clinic.com",
+          "drkamioner.fr",
+          "magazine-esthetique.fr"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "docteurhaddad.fr",
+          "elone-clinic.com",
+          "drkamioner.fr",
+          "dentiste-paris-2-perrin.fr",
+          "youtube.com",
+          "doctolib.fr",
+          "magazine-esthetique.fr",
+          "drmarieclement.com",
+          "facebook.com"
+        ],
+        "praticiens": [
+          "Dr Raphael Haddad",
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ordre-chirurgiens-dentistes.fr",
+          "ameli.fr",
+          "annuaire.esante.gouv.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "bilan esthétique du sourire à Paris": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-paris6-delphine-uzan.fr",
+          "sanaoris.com",
+          "palaisdusourire.fr",
+          "dr-mariana-burlacu.com",
+          "dr-gomezcasado.com"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan",
+          "Dr Mariana Burlacu"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-paris6-delphine-uzan.fr",
+          "sanaoris.com",
+          "smile-clinic.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "ivsourire.fr",
+          "elone-clinic.com",
+          "cabinet-dentaire-madeleine.com",
+          "dr-temstet-dentiste.paris",
+          "docteurhaddad.fr",
+          "esthetique.dentisana.fr",
+          "lelabodusourire.fr",
+          "selarl-zarrinpour-chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan",
+          "Dr Guillaume Brahami",
+          "Dr Nathaniel Temstet",
+          "Dr Raphael Haddad",
+          "Dr. Camille Renard"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-temstet-dentiste.paris",
+          "opaldentalstudio.fr",
+          "ivsourire.fr",
+          "elone-clinic.com",
+          "drhansdindoyal.com"
+        ],
+        "praticiens": [
+          "Dr Nathaniel Temstet",
+          "Dr. Laura Di",
+          "Dr DINDOYAL Hans",
+          "Dr Temstet"
+        ],
+        "extrait": ""
+      }
+    },
+    "dentisterie esthétique Paris 9": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "opaldentalstudio.fr",
+          "dr-preciliaziri.com",
+          "doctolib.fr",
+          "drhansdindoyal.com",
+          "april.fr",
+          "dr-haas-olivier.chirurgiens-dentistes.fr",
+          "dr-ohayon.fr"
+        ],
+        "praticiens": [
+          "Dr Jean-Baptiste Varea",
+          "Dr Précilia Ziri",
+          "Dr Hans Dindoyal",
+          "Dr Olivier Haas",
+          "Dr Olivier Haa",
+          "Dr Ohayon"
+        ],
+        "extrait": "l Dental Studio (Dr Jean-Baptiste Varea, 36 rue Tronchet), le Dr Précilia Ziri (quartier Opéra), ou encore le Dr Franck Moyal au Centre de Santé Saint-Georges. Opal Dental Studio +3 Principaux soins proposés Facettes dentaires (céramique ou composite) Blanchiment dent"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "doctolib.fr",
+          "drfranckmoyal.fr",
+          "dr-preciliaziri.com",
+          "cabinet-dentaire-madeleine.com",
+          "smile-clinic.fr",
+          "opaldentalstudio.fr",
+          "centre-dentaire-lorette-paris.fr",
+          "centre-dentaire-chaussee-dantin-trinite.fr"
+        ],
+        "praticiens": [
+          "Dr. Ralph Badaoui",
+          "Dr. Précilia Ziri",
+          "Dr. Jean-Baptiste Varea",
+          "Dr. Laura Di"
+        ],
+        "extrait": " ou si vous appréhendez les soins. Les spécialistes des réhabilitations ciblées : Pour l'usure dentaire : Le Dr. Franck Moyal (Rue Hippolyte Lebas). Sa consultation se concentre spécifiquement sur la dentisterie esthétique liée aux usures dentaires et aux réhabilitation"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "opaldentalstudio.fr",
+          "dr-preciliaziri.com",
+          "drhansdindoyal.com",
+          "centre-dentaire-lorette-paris.fr",
+          "centre-dentaire-chaussee-dantin-trinite.fr"
+        ],
+        "praticiens": [
+          "Dr Laura Di",
+          "Dr Précilia Ziri",
+          "Dr Hans Dindoyal"
+        ],
+        "extrait": ""
+      }
+    },
+    "dentiste recommandé Paris 9e": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drhansdindoyal.com",
+          "doctolib.fr",
+          "centre-dentaire-chaussee-dantin-trinite.fr",
+          "centre-dentaire-lorette-paris.fr"
+        ],
+        "praticiens": [
+          "Dr Hans Dindoyal",
+          "Dr Sy",
+          "Dr Kadia Sy",
+          "Dr Remi Arvieu",
+          "Dr Dindoyal",
+          "Dr DINDOYAL Hans",
+          "Dr Remi ARVIEU"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "drfranckmoyal.fr",
+          "dr-preciliaziri.com",
+          "cabinet-dentaire-madeleine.com",
+          "doctolib.fr",
+          "dentimad.fr"
+        ],
+        "praticiens": [
+          "Dr Precilia Ziri",
+          "Dr Maxime Lucas",
+          "Dr Ralph Badaoui",
+          "Dr Kadia Sy",
+          "Dr Marine Jaffres",
+          "Dr Ziri",
+          "Dr Sy",
+          "Dr Lucille Beaugrand"
+        ],
+        "extrait": "). Ce qu'on en dit : Les patients saluent un accompagnement rassurant et des détartrages presque \"plaisants\". Dr Franck Moyal (Quartier Saint-Georges) Le profil : Expert en esthétique du sourire et reconstruction, il prend notamment en charge les usures dentaires comple"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "doctolib.fr"
+        ],
+        "praticiens": [
+          "Dr Maxime Lucas",
+          "Dr Laura Di",
+          "Dr. Maxime Lucas",
+          "Dr. Laura Di"
+        ],
+        "extrait": ""
+      }
+    },
+    "dentiste esthétique qui préserve les dents naturelles": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-laura-saal.fr",
+          "drmorganecohensamama.com",
+          "drhansdindoyal.com",
+          "cabinet-medico-dentaire-addms.com",
+          "dentiste-paris-14-alesia.fr",
+          "instagram.com"
+        ],
+        "praticiens": [
+          "Dr Morgane Cohen-Samama",
+          "Dr Morgane Cohen",
+          "Dr Raphaël Haddad",
+          "Dr Laura Zeitoun",
+          "Dr Laura Saal",
+          "Dr David Gutman",
+          "Dr Hans Dindoyal",
+          "Docteur Berkane"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "doctolib.fr",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "nethanel-bellahsen-dentiste-esthetique-paris.fr",
+          "dentistesparis.fr",
+          "dentisteparis19.fr",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr",
+          "cabinet-dentaire-madeleine.com",
+          "pierrelayandentisteesthetique.fr",
+          "david-guenassia-chirurgien-dentiste.fr",
+          "drmarinpomperski.com",
+          "dr-laura-saal.fr"
+        ],
+        "praticiens": [
+          "Dr David Guenassia",
+          "Dr Marin Pomperski",
+          "Dr Laura Zeitoun",
+          "Dr Guillaume Brahami",
+          "Dr Aurore Delacourt",
+          "Dr Laura Di",
+          "Dr. David Guenassia",
+          "Dr. Marin Pomperski"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "drvossdental.fr",
+          "eugenol.com",
+          "ivoirenaturalsmile.fr",
+          "dr-laura-saal.fr",
+          "dredwinbiret.fr"
+        ],
+        "praticiens": [
+          "Dr Olivier Voss",
+          "Dr Maxime Drossart",
+          "Dr Maxime DROSSART",
+          "Dr. Marta Hidalgo",
+          "Dr Marta HIDALGO",
+          "Dr Laura Zeitoun",
+          "Dr Edwin Biret",
+          "Dr Voss",
+          "Dr DROSSART Maxime"
+        ],
+        "extrait": ""
+      }
+    },
+    "refaire son sourire à Paris": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "palaisdusourire.fr",
+          "drmorganecohensamama.com",
+          "docteurhaddad.fr",
+          "elone-clinic.com",
+          "instagram.com"
+        ],
+        "praticiens": [
+          "Dr Cohen",
+          "Dr Morgane Cohen",
+          "Dr Raphael Haddad",
+          "Dr Haddad"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "dr-benguigui-francis-chirurgiens-dentistes.fr",
+          "palaisdusourire.fr",
+          "drmorganecohensamama.com",
+          "cabinet-dentaire-madeleine.com",
+          "parisdentalstudios.com",
+          "dr-guillaume-brahami.chirurgiens-dentistes.fr",
+          "centre-dentaire-paris16.fr",
+          "studiosmile.fr",
+          "crpce.com",
+          "david-coiffier-chirurgien-dentiste.fr",
+          "cabinet-dentaire-felix-faure.fr"
+        ],
+        "praticiens": [
+          "Dr Morgane Cohen",
+          "Dr Morgane Cohen-Samama",
+          "Dr Guillaume Brahami"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com"
+        ],
+        "praticiens": [
+          "Dr Guillaume Brahami",
+          "Dr Pierre Layan",
+          "Dr. Marta Hidalgo",
+          "Dr DROSSART Maxime"
+        ],
+        "extrait": ""
+      }
+    },
+    "chirurgien-dentiste hospitalier à la Pitié-Salpêtrière en dentisterie esthétique": {
+      "famille": "Esthétique et choix du praticien",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "pitiesalpetriere.aphp.fr",
+          "doctolib.fr",
+          "implant-dentaire.eu",
+          "cmf-paris.com"
+        ],
+        "praticiens": [
+          "Pr Tchilalo Boukpessi",
+          "Dr Marjorie Zanini",
+          "Pr Jean-François Nguyen",
+          "Dr Hélène Citterio",
+          "Dr Benjamin Pomes",
+          "Pr Chloé Bertolus",
+          "Dr Samantha Elbhar",
+          "Pr Géraldine Lescaille",
+          "Pr Yves Boucher"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "doctolib.fr",
+          "medere.fr",
+          "philippe-leclercq.fr",
+          "pitiesalpetriere.aphp.fr"
+        ],
+        "praticiens": [
+          "Pr Tchilalo Boukpessi",
+          "Dr Marjorie Zanini",
+          "Pr Jean-François Nguyen",
+          "Dr Hélène Citterio",
+          "Dr Dov Derman",
+          "Dr Philippe Leclercq",
+          "Docteur Philippe Leclercq",
+          "Dr Vanessa Baaroun",
+          "Dr Juliette Rochefort"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pitiesalpetriere.aphp.fr"
+        ],
+        "praticiens": [
+          "Pr Géraldine Lescaille",
+          "Pr Jean-François Nguyen",
+          "Dr Hélène Citterio",
+          "Pr Tchilalo Boukpessi",
+          "Dr Marjorie Zanini"
+        ],
+        "extrait": ""
+      }
+    },
+    "Dr Franck Moyal": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "pas d'aperçu"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "doctolib.fr",
+          "threads.com",
+          "aonews-lemag.fr",
+          "blendi.fr",
+          "instagram.com",
+          "drfranckmoyal.fr"
+        ],
+        "praticiens": [],
+        "extrait": "on tissulaire comme les facettes ou le composite bonding (restaurations en résine composite directe). Threads ·drfranckmoyal +1 Prise en charge des usures : Spécialisé dans le traitement des pathologies liées aux pertes de substance dentaire, notamment dues au bruxism"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "drfranckmoyal.fr",
+          "aphp.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ChatGPT said: Voici les informations publiques que j’ai trouvées sur le Dr Franck Moyal, chirurgien-dentiste à Paris. Dr Franck Moyal Chirurgien-dentiste — Paris Spécialisé dans la dentisterie esthétique, la réhabilitation dentai"
+      }
+    },
+    "qui est le Dr Franck Moyal": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "doctolib.fr",
+          "aphp.fr",
+          "blendi.fr",
+          "endo-academie.fr",
+          "aonews-lemag.fr",
+          "instagram.com",
+          "eugenol.com"
+        ],
+        "praticiens": [],
+        "extrait": "Aperçu IA Le Dr Franck Moyal est un chirurgien-dentiste basé à Paris, spécialisé en dentisterie esthétique et adhésive, et praticien hospitalier à l'Hôpital de la Pitié-Salp"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "blendi.fr",
+          "aphp.fr",
+          "doctolib.fr",
+          "instagram.com",
+          "aonews-lemag.fr",
+          "eugenol.com",
+          "endo-academie.fr",
+          "fr.linkedin.com"
+        ],
+        "praticiens": [],
+        "extrait": "Conversation en Mode IA : Le Dr Franck Moyal est un chirurgien-dentiste exerçant à Paris, spécialisé en dentisterie esthétique et adhésive, en réhabilitation des usures dentaires et en pris"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "aonews-lemag.fr",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ChatGPT said: Dr Franck Moyal Chirurgien-dentiste à Paris, spécialisé en dentisterie esthétique, adhésive et dans le traitement des usures dentaires. Il exerce à la fois en"
+      }
+    },
+    "Franck Moyal dentiste avis": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentisteprive.fr",
+          "laboratoire-medident.fr",
+          "nathaliekadoch.com",
+          "ahoa.es",
+          "toutdentaire.com",
+          "cliniquealaincyr.com",
+          "doctissimo.fr",
+          "hospitadent.com"
+        ],
+        "praticiens": [
+          "Dr. Jérémy Amzalag"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "instagram.com",
+          "doctolib.fr",
+          "aonews-lemag.fr",
+          "aphp.fr",
+          "dentistepro.fr",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "Conversation en Mode IA : Les avis concernant le Dr Franck Moyal, chirurgien-dentiste exerçant principalement à Paris, sont très majoritairement excellents, avec une note globale qui s'élève à 4,9/5 sur les pl"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "dentistepro.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ChatGPT said: J’ai recherché les avis sur le Dr Franck Moyal, chirurgien-dentiste à Paris, spécialisé en esthétique du sourire et en usure dentaire. Avis des patients 4,9/5 113 avis Google Répartition de"
+      }
+    },
+    "Franck Moyal Pitié-Salpêtrière": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "pas d'aperçu"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "blendi.fr",
+          "aonews-lemag.fr",
+          "doctolib.fr",
+          "instagram.com"
+        ],
+        "praticiens": [],
+        "extrait": "Conversation en Mode IA : Le Dr Franck Moyal est un chirurgien-dentiste exerçant en tant que Praticien Hospitalier au sein du Service de Médecine Bucco-dentaire de l'Hôpital Pitié-Salpêtriè"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "aphp.fr",
+          "pitiesalpetriere.aphp.fr",
+          "etablissements.fhf.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ChatGPT said: J’ai trouvé plusieurs sources officielles confirmant que le Dr Franck Moyal exerce à l’hôpital de la Pitié-Salpêtrière, au sein du service de médecine bucco-dentaire de l’AP-HP. Informations professionnelles Profession"
+      }
+    },
+    "Front Wing Technique": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "lefildentaire.com",
+          "styleitaliano.org",
+          "in.dental-tribune.com",
+          "scribd.com"
+        ],
+        "praticiens": [
+          "Dr. Nisha"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "styleitaliano.org",
+          "lefildentaire.com",
+          "scribd.com",
+          "in.dental-tribune.com",
+          "instagram.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "pubmed.ncbi.nlm.nih.gov",
+          "lefildentaire.com",
+          "styleitaliano.org"
+        ],
+        "praticiens": [
+          "Dr Jordi Manauta"
+        ],
+        "extrait": "rticle de référence décrivant les principes et les applications cliniques de la FWT. Fermeture de diastème — Dr Franck Moyal Le Fil Dentaire · 9 octobre 2023 · Français Présentation du protocole et d'un cas clinique, avec photographies et explications. Single-Visit "
+      }
+    },
+    "DenTCA association": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "dentca-asso.com",
+          "fr.linkedin.com",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "Aperçu IA DenTCA est une association française fondée en juillet 2025 et présidée par le Dr Franck Moyal. Elle vise à promouvoir la prévention, le dépistage et la prise en charge de l'érosion et des troubles dentaires liés aux troubles du comporteme"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "dentca-asso.com",
+          "fr.linkedin.com",
+          "dentca.com",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "), tels que l'anorexie mentale, la boulimie ou l'hyperphagie boulimique. dentca-asso.com +1 Présidée par le Dr Franck Moyal, chirurgien-dentiste, l'association est née d'un constat majeur : l'érosion et les troubles dentaires sont des conséquences directes, fréquentes"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentca.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "Smileclub Formations": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "smileclubformations.com",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ormations pratiques en dentisterie esthétique et adhésive destinées aux chirurgiens-dentistes, animées par le Dr Franck Moyal. Les sessions ont lieu en petits groupes au 61 rue Balard, 75015 Paris. Programmes proposés Masterclass Composites : techniques avancées de str"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "smileclubformations.com",
+          "blendi.fr",
+          "bar-a-sourire-paris.fr",
+          "faq.ffa-aero.fr"
+        ],
+        "praticiens": [],
+        "extrait": "ure (érosion, attrition, bruxisme). blendi.fr +2 👨‍🏫 Le Formateur Les enseignements sont dispensés par le Dr Franck Moyal. Il est chirurgien-dentiste à Paris 9e, praticien hospitalier à l'hôpital de la Pitié-Salpêtrière et attaché à la CMME Sainte-Anne. smileclubfo"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "smileclubformations.com"
+        ],
+        "praticiens": [],
+        "extrait": "e spécialisé dans la formation des chirurgiens-dentistes en dentisterie esthétique et adhésive, dirigé par le Dr Franck Moyal. Smile Club Formations 61 rue Balard, 75015 Paris Site officiel WhatsApp : 06 27 68 36 17 Formations proposées Formation Prochaine ses"
+      }
+    },
+    "Franck Moyal publications érosion dentaire": {
+      "famille": "Marque",
+      "google-apercu": {
+        "statut": "pas d'aperçu"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "instagram.com",
+          "fr.linkedin.com",
+          "dentaire365.fr",
+          "blendi.fr",
+          "drfranckmoyal.fr"
+        ],
+        "praticiens": [],
+        "extrait": "Conversation en Mode IA : Le Dr Franck Moyal, chirurgien-dentiste à Paris spécialisé en dentisterie esthétique et adhésive, est l'auteur de plusieurs publications et articles cliniques cons"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "fr.linkedin.com",
+          "blendi.fr",
+          "aonews-lemag.fr",
+          "pubmed.ncbi.nlm.nih.gov"
+        ],
+        "praticiens": [],
+        "extrait": "ChatGPT said: Publications du Dr Franck Moyal sur l’érosion dentaire J’ai retrouvé plusieurs publications et interventions du Dr Franck Moyal, chirurgien-dentiste exerçant notamment à l’hôp"
+      }
+    },
+    "formation composite antérieur pour dentistes": {
+      "famille": "Confrères",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "frenchtooth.fr",
+          "icdp.paris",
+          "academie-du-sourire.com",
+          "odonto.univ-lorraine.fr",
+          "learnylib.com"
+        ],
+        "praticiens": [
+          "Dr Grégory Camaleonte",
+          "Dr Pascal Zyman"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "learnylib.com",
+          "frenchtooth.fr",
+          "youtube.com",
+          "icdp.paris",
+          "dcofrance.fr",
+          "academie-du-sourire.com",
+          "easygoodsmile.fr",
+          "facebook.com",
+          "fide.fr",
+          "odonto.univ-lorraine.fr",
+          "tiktok.com",
+          "idwebformation.fr"
+        ],
+        "praticiens": [
+          "Dr Grégory Camaleonte"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "smileclubformations.com",
+          "easygoodsmile.fr",
+          "odonto.univ-lorraine.fr",
+          "icdp.paris",
+          "sop.asso.fr"
+        ],
+        "praticiens": [
+          "Dr Grégory Camaléonte",
+          "Dr Pascal Zyman"
+        ],
+        "extrait": ""
+      }
+    },
+    "formation sur l'usure dentaire pour chirurgiens-dentistes": {
+      "famille": "Confrères",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "idwebformation.fr",
+          "up-care.fr",
+          "blendi.fr",
+          "learnylib.com"
+        ],
+        "praticiens": [
+          "Dr Benjamin Attuil"
+        ],
+        "extrait": "ation) ou des formations pratiques et cliniques en présentiel (telles que celles d'UP Care ou le programme du Dr Franck Moyal via Blendi). Id Webformation +2 Principaux types de formations disponibles Formation en e-learning (DPC) Exemple : Programme de 14 heures prop"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "proforma-france.fr",
+          "learnylib.com",
+          "up-care.fr",
+          "blendi.fr"
+        ],
+        "praticiens": [],
+        "extrait": "n esthétique (patient virtuel), gestion pratique de la DVO et cas cliniques interactifs. Blendi & Smile Club (Dr Franck Moyal) Format : Sessions cliniques ciblées sur l'omnipratique pour réhabiliter les sourires usés en toute confiance. 🎯 Objectifs cliniques de ces par"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentalclub.fr",
+          "easygoodsmile.fr",
+          "sop.asso.fr",
+          "clinic-all.fr",
+          "dcofrance.fr"
+        ],
+        "praticiens": [
+          "Dr Marie Clément"
+        ],
+        "extrait": ""
+      }
+    },
+    "formation facettes dentaires à Paris pour dentistes": {
+      "famille": "Confrères",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "mmdental.fr",
+          "ae-paris.fr",
+          "academieartdentaire.fr",
+          "iatros-formation.com",
+          "frenchtooth.fr"
+        ],
+        "praticiens": [
+          "Dr Chiara Burgio",
+          "Dr Jérémy Haccoun"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "sop.asso.fr",
+          "odf.u-paris.fr",
+          "dentalclub.fr",
+          "mmdental.fr",
+          "ae-paris.fr",
+          "pierrelayanformation.fr",
+          "zenith-dental-formation.fr",
+          "learnylib.com",
+          "frenchtooth.fr"
+        ],
+        "praticiens": [
+          "Pr Jean-François Lasserre"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "webdental-formation.santeformapro.com",
+          "smileclubformations.com",
+          "sop.asso.fr",
+          "est-p.fr",
+          "zenith-dental-formation.fr"
+        ],
+        "praticiens": [
+          "Dr Gauthier Weisrock"
+        ],
+        "extrait": ""
+      }
+    },
+    "conférence érosion dentaire et TCA pour dentistes": {
+      "famille": "Confrères",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "drfranckmoyal.fr",
+          "conferences-dentaires.com",
+          "hal.univ-lorraine.fr",
+          "centre-dentaire-marseille-5-sakakini.fr",
+          "dumas.ccsd.cnrs.fr",
+          "dentalclub.fr",
+          "doctolib.fr",
+          "dentiste-paris16-drzyman.fr"
+        ],
+        "praticiens": [],
+        "extrait": "est un sujet clé en odontologie moderne. À Paris et en ligne, plusieurs praticiens et organismes — tel que le Dr Franck Moyal ou des plateformes de formation continue comme Les Conférences Dentaires — proposent des ressources, des publications et des éclairages clinique"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "hal.univ-lorraine.fr",
+          "dentalclub.fr",
+          "conferences-dentaires.com",
+          "information-dentaire.fr",
+          "dumas.ccsd.cnrs.fr",
+          "instagram.com",
+          "drfranckmoyal.fr",
+          "dentiste-paris16-drzyman.fr"
+        ],
+        "praticiens": [],
+        "extrait": " de traitements non invasifs (vernis fluorés) sur les plateformes professionnelles. C'est notamment le cas du Dr Franck Moyal sur Instagram ou via son site clinicien Cabinet Dentaire Flandre, qui communique régulièrement auprès de la communauté médicale sur la triade TC"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "adfcongres.com",
+          "sop.asso.fr",
+          "appea.org"
+        ],
+        "praticiens": [
+          "Dr Gil Tirlet"
+        ],
+        "extrait": ""
+      }
+    },
+    "best dentist for tooth wear in Paris": {
+      "famille": "En anglais",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "yelp.com",
+          "drbrunoabehassera.com",
+          "threebestrated.fr",
+          "doctolib.fr"
+        ],
+        "praticiens": [
+          "Dr. Ralph Badaoui",
+          "Dr. Bruno Abehassera",
+          "Dr. Gabriel Wahnich",
+          "Dr. Ylann Rouah",
+          "Dr. Badaoui",
+          "Dr. Abehassera",
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "doctolib.fr",
+          "dentiste-paris6-delphine-uzan.fr",
+          "dr-laura-saal.fr",
+          "cabinet-dentaire-madeleine.com"
+        ],
+        "praticiens": [
+          "Dr. Henri-Xavier Aubé",
+          "Dr. David Schachmann",
+          "Dr. Delphine Uzan",
+          "Dr. Laura Zeitoun",
+          "Dr. Zeitoun Saal",
+          "Dr. Ralph Badaoui",
+          "Dr. Badaoui"
+        ],
+        "extrait": "te restoration completely through bonded techniques without shaving down what remains of your natural teeth. Dr. Franck Moyal (Paris 9): Operating out of his practice, Dr. Moyal specializes in aesthetic dentistry, global smile restorations, and specifically treats tooth"
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": false,
+        "sources": [
+          "dentiste-paris6-delphine-uzan.fr",
+          "dentiste-paris6-gucciardi.fr",
+          "drbrunoabehassera.com"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan",
+          "Dr Sylvia Bensoussan",
+          "Dr Gucciardi",
+          "Dr Bruno Abehassera",
+          "Dr Uzan"
+        ],
+        "extrait": "e dentaire), enamel erosion, bruxism, and minimally invasive dental rehabilitation. My strongest matches are Dr Franck Moyal, Dr Delphine Uzan, and Dr Sylvia Bensoussan–Gucciardi. Unlike a general cosmetic dentist, they explicitly work with worn teeth and restorative t"
+      }
+    },
+    "composite bonding dentist in Paris": {
+      "famille": "En anglais",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "drfranckmoyal.fr",
+          "wupdoc.com",
+          "kissdental.co.uk",
+          "doctolib.fr"
+        ],
+        "praticiens": [
+          "Dr. Yassine Ben",
+          "Dr. Kadia Sy"
+        ],
+        "extrait": "aps in a single appointment. cabinet dentaire de la Madeleine Paris +1 Notable Dentists & Clinics in Paris Dr. Franck Moyal (Specializes in direct composite bonding and layering — see Dr. Franck Moyal) The Madeleine Dental Practice (Le Cabinet Dentaire de la Madelein"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "parisdentalstudios.com",
+          "wupdoc.com",
+          "dentiste-paris-13.fr",
+          "dr-laura-saal.fr",
+          "cabinet-dentaire-madeleine.com",
+          "opaldentalstudio.fr",
+          "dentistes-davarpanah.fr",
+          "magalitiberghien-dentiste.fr",
+          "tiktok.com",
+          "doctolib.fr"
+        ],
+        "praticiens": [
+          "Dr. Jean-Baptiste Varea",
+          "Dr. Varea",
+          "Dr. Laura Zeitoun",
+          "Dr. Zeitoun Saal"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-madeleine.com",
+          "dr-preciliaziri.com",
+          "drbrunoabehassera.com"
+        ],
+        "praticiens": [
+          "Dr Précilia Ziri",
+          "Dr François Grossetti",
+          "Dr Laurent Elbaz",
+          "Dr Bruno Abehassera",
+          "Dr. Grossetti François",
+          "Docteur Bruno ABEHASSERA",
+          "Dr Abehassera"
+        ],
+        "extrait": ""
+      }
+    },
+    "English speaking cosmetic dentist in Paris": {
+      "famille": "En anglais",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "parisdentalstudios.com",
+          "dr-bauer-patrick.chirurgiens-dentistes.fr",
+          "dentist-paris-16.fr",
+          "dr-levy-charles.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr. Patrick Bauer",
+          "Dr. Virginie Héry",
+          "Dr. Charles Levy",
+          "Dr Djebabra",
+          "Dr Benamran",
+          "Dr Patrick Bauer"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "cabinet-dentaire-madeleine.com",
+          "drpariente.fr",
+          "dr-bauer-patrick.chirurgiens-dentistes.fr",
+          "dentimad.fr",
+          "sanaoris.com",
+          "doctolib.fr",
+          "vimazal.com",
+          "parisdentalstudios.com"
+        ],
+        "praticiens": [
+          "Dr. Ari Elhyani",
+          "Dr. Ralph Badaoui",
+          "Dr. Maxime Lucas",
+          "Dr. Leon Pariente",
+          "Dr. Pariente",
+          "Dr. Patrick Bauer",
+          "Dr. Milesi",
+          "Dr. Agnes Kohen",
+          "Dr Patrick Bauer",
+          "Dr Maxime Lucas"
+        ],
+        "extrait": ""
+      },
+      "chatgpt": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-laura-saal.fr",
+          "katarinahealth.com",
+          "elone-clinic.com",
+          "dentiste-richard-amouyal.com"
+        ],
+        "praticiens": [
+          "Dr Laura Zeitoun",
+          "Dr Roxana Spataru",
+          "Dr Richard Amouyal"
         ],
         "extrait": ""
       }
