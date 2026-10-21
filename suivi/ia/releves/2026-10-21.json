@@ -1,0 +1,734 @@
+{
+  "date": "2026-10-21",
+  "moteurs": [
+    "google-apercu",
+    "google-mode-ia",
+    "chatgpt"
+  ],
+  "questions": {
+    "érosion dentaire et troubles du comportement alimentaire": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "helvident.ch",
+          "diabeteetobesite.fr",
+          "youtube.com",
+          "sanaoris.com",
+          "dentiste-lille-cormontaigne.fr",
+          "has-sante.fr",
+          "sciencedirect.com"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dumas.ccsd.cnrs.fr",
+          "instagram.com",
+          "sanaoris.com",
+          "helvident.ch",
+          "www2.acteursdesante.fr",
+          "sciencedirect.com",
+          "has-sante.fr",
+          "cdpm.paris",
+          "sso.ch",
+          "facebook.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "quel dentiste consulter pour une érosion dentaire liée à l'anorexie ou à la boulimie": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-lille-cormontaigne.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "cdpm.paris",
+          "dentiste-paris6-delphine-uzan.fr",
+          "pepite.univ-lille.fr",
+          "doctolib.fr",
+          "dr-george-et-associes.lu"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry",
+          "Dr Debouvry",
+          "Dr Delphine Uzan"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cdpm.paris",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "sanaoris.com",
+          "dentiste-lille-cormontaigne.fr",
+          "lefildentaire.com"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry",
+          "Dr Debouvry"
+        ],
+        "extrait": ""
+      }
+    },
+    "boulimie et dents abîmées, que faire": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "crookedentalclinic.com",
+          "santemagazine.fr",
+          "drkamioner.fr",
+          "centredentairemont-royal.ca",
+          "elone-clinic.com",
+          "drmorganecohensamama.com",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner",
+          "Dr KamionerComment",
+          "Dr Morgane CohenAméliorer",
+          "Dr CohenSi"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-lille-cormontaigne.fr",
+          "dr-george-et-associes.lu",
+          "helvident.ch",
+          "colgate.fr",
+          "diabeteetobesite.fr",
+          "prismadentistes.ca",
+          "has-sante.fr",
+          "sunstargum.com",
+          "cdpm.paris",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry",
+          "Dr Debouvry",
+          "Dr Jean-Yves GEORGE"
+        ],
+        "extrait": ""
+      }
+    },
+    "anorexie : quelles conséquences sur les dents": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cabinet-dentaire-defense.com",
+          "helvident.ch",
+          "cdpm.paris",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "dr-george-et-associes.lu",
+          "dentiste-lille-cormontaigne.fr",
+          "sanaoris.com",
+          "diabeteetobesite.fr"
+        ],
+        "praticiens": [
+          "Dr Jean-Yves GEORGE",
+          "Dr Vanina Debouvry"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "dr-george-et-associes.lu",
+          "dentiste-lille-cormontaigne.fr",
+          "cdpm.paris",
+          "dentalcorbella.com",
+          "cabinet-dentaire-defense.com",
+          "helvident.ch",
+          "sante.lefigaro.fr",
+          "sanaoris.com",
+          "youtube.com",
+          "mouthhealthy.org",
+          "diabeteetobesite.fr"
+        ],
+        "praticiens": [
+          "Dr Jean-Yves GEORGE",
+          "Dr Vanina Debouvry"
+        ],
+        "extrait": ""
+      }
+    },
+    "l'anorexie sans vomissements peut-elle abîmer les dents": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": true,
+        "nom": true,
+        "site": true,
+        "sources": [
+          "helvident.ch",
+          "cabinet-dentaire-defense.com",
+          "dentiste-lille-cormontaigne.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "dr-george-et-associes.lu",
+          "cdpm.paris",
+          "drfranckmoyal.fr",
+          "sante.lefigaro.fr",
+          "mouthhealthy.org"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry",
+          "Dr Jean-Yves GEORGE",
+          "Dr Debouvry"
+        ],
+        "extrait": " alimentaire et de la sécheresse buccale sont disponibles auprès du Cabinet Dentaire CDPM ou via l'analyse du Dr Franck Moyal. Il est recommandé de consulter un dentiste et un professionnel de santé pour une prise en charge globale. Cabinet Dentaire Paris Monceau +3 L"
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": true,
+        "nom": false,
+        "site": true,
+        "sources": [
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "helvident.ch",
+          "cabinet-dentaire-defense.com",
+          "dentiste-lille-cormontaigne.fr",
+          "sante.lefigaro.fr",
+          "cdpm.paris",
+          "drfranckmoyal.fr",
+          "sanaoris.com",
+          "youtube.com",
+          "mouthhealthy.org"
+        ],
+        "praticiens": [
+          "Dr Vanina Debouvry"
+        ],
+        "extrait": ""
+      }
+    },
+    "vomissements répétés et émail dentaire : comment protéger ses dents": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "neveclinic.ch",
+          "dentiste-paris6-delphine-uzan.fr",
+          "minvelle.com",
+          "cdpm.paris",
+          "medipole.org",
+          "fr.dentalhealth.org",
+          "sso.ch",
+          "elmex.be",
+          "bioniq-repair-zahnpflege.com",
+          "sunstargum.com",
+          "ramsayservices.fr"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "neveclinic.ch",
+          "cdpm.paris",
+          "dentiste-paris6-delphine-uzan.fr",
+          "fr.dentalhealth.org",
+          "minvelle.com",
+          "sso.ch",
+          "elmex.be",
+          "medipole.org",
+          "helvident.ch",
+          "bioniq-repair-zahnpflege.com"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan"
+        ],
+        "extrait": ""
+      }
+    },
+    "érosion dentaire : causes et traitement": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "kin.es",
+          "pierrefabre-oralcare.com",
+          "sanaoris.com",
+          "drkamioner.fr",
+          "dentiste-paris16-drzyman.fr",
+          "dumas.ccsd.cnrs.fr",
+          "dentiste92.com",
+          "dentistealaval.com",
+          "youtube.com",
+          "elmex.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "kin.es",
+          "pierrefabre-oralcare.com",
+          "dentiste-paris16-drzyman.fr",
+          "drkamioner.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "doctolib.fr",
+          "sanaoris.com",
+          "mabouchemasante.fr",
+          "youtube.com",
+          "dentiste92.com",
+          "dentistealaval.com"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      }
+    },
+    "comment soigner une érosion dentaire": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pierrefabre-oralcare.com",
+          "dentiste-paris16-drzyman.fr",
+          "drkamioner.fr",
+          "sanaoris.com",
+          "dentiste92.com",
+          "regeneratenr5.fr"
+        ],
+        "praticiens": [
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pierrefabre-oralcare.com",
+          "dentiste-paris16-drzyman.fr",
+          "dentiste92.com",
+          "drkamioner.fr",
+          "regeneratenr5.fr",
+          "kin.es",
+          "sanaoris.com",
+          "youtube.com"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan",
+          "Dr Kamioner"
+        ],
+        "extrait": ""
+      }
+    },
+    "dentiste spécialiste des troubles alimentaires à Paris": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cdpm.paris",
+          "ghu-paris.fr",
+          "doctolib.fr",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "sanaoris.com",
+          "aphp.fr",
+          "annuaire.autismeinfoservice.fr",
+          "cdpm.paris",
+          "doctolib.fr",
+          "pitiesalpetriere.aphp.fr"
+        ],
+        "praticiens": [
+          "Dr Kods Mahdhaoui"
+        ],
+        "extrait": ""
+      }
+    },
+    "reflux gastrique et érosion des dents": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "sanaoris.com",
+          "apigroupe.com",
+          "mabouchemasante.fr",
+          "dentisteprive.fr",
+          "kin.es",
+          "dentairesaintjust.com",
+          "www2.acteursdesante.fr",
+          "youtube.com",
+          "dr-ananou-antibes-dentiste.fr"
+        ],
+        "praticiens": [
+          "Dr Jacques Léonard",
+          "Dr David ATTIA"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "apigroupe.com",
+          "dentisteprive.fr",
+          "mutuellesaintmartin.fr",
+          "dentairesaintjust.com",
+          "sanaoris.com",
+          "santedentairerivesud.com",
+          "www2.acteursdesante.fr",
+          "editionscdp.fr",
+          "youtube.com",
+          "mabouchemasante.fr",
+          "instagram.com",
+          "dentiste-paris16-drzyman.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "prise en charge dentaire des patients atteints de TCA à l'hôpital à Paris": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "ghu-paris.fr",
+          "aphp.fr",
+          "pitiesalpetriere.aphp.fr",
+          "cdpm.paris",
+          "has-sante.fr"
+        ],
+        "praticiens": [
+          "Pr Géraldine Lescaille",
+          "Pr Yves Boucher"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "cdpm.paris",
+          "has-sante.fr",
+          "aphp.fr",
+          "ghu-paris.fr",
+          "pitiesalpetriere.aphp.fr"
+        ],
+        "praticiens": [
+          "Pr Géraldine Lescaille",
+          "Pr Yves Boucher"
+        ],
+        "extrait": ""
+      }
+    },
+    "érosion dentaire chez l'adolescent": {
+      "famille": "TCA et érosion",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dumas.ccsd.cnrs.fr",
+          "dentiste92.com",
+          "dentaly.org",
+          "fr.dentalhealth.org",
+          "dentsainthubert.com",
+          "youtube.com",
+          "sciencedirect.com",
+          "kin.es"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan",
+          "Dr. Pierre Sultan"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dumas.ccsd.cnrs.fr",
+          "dentiste92.com",
+          "dentaly.org",
+          "bienetre-et-sante.fr",
+          "sciencedirect.com",
+          "apollohospitals.com",
+          "dentsainthubert.com",
+          "fr.dentalhealth.org",
+          "youtube.com",
+          "ordre-chirurgiens-dentistes.fr",
+          "centre-dentaire-noisy-le-sec-93.fr"
+        ],
+        "praticiens": [
+          "Dr Pierre Sultan"
+        ],
+        "extrait": ""
+      }
+    },
+    "usure dentaire : causes et traitement": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairepepiniere.com",
+          "dentiste-roanne.com",
+          "dentistealdente.com",
+          "apollinedentalcare.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "learnylib.com",
+          "clinique-dentaire-saint-vaast-douai.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairepepiniere.com",
+          "apollinedentalcare.fr",
+          "clinique-dentaire-saint-vaast-douai.fr",
+          "crookedentalclinic.com",
+          "centre-medico-dentaire-paris-18-myrha.fr",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "dentiste spécialiste de l'usure dentaire à Paris": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dentiste-paris6-delphine-uzan.fr",
+          "david-guenassia-chirurgien-dentiste.fr",
+          "doctolib.fr",
+          "dr-remy-ouazana.chirurgiens-dentistes.fr",
+          "elone-clinic.com"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan",
+          "Dr David Guenassia",
+          "Dr Henri-Xavier Aubé",
+          "Dr David Schachmann",
+          "Dr Rémy Ouazana",
+          "Dr Ari Elhyani",
+          "Dr Guenassia"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "elone-clinic.com",
+          "doctolib.fr",
+          "dentistesparis.fr",
+          "dr-thierry-rouach.chirurgiens-dentistes.fr",
+          "dr-laura-saal.fr",
+          "cabinet-dentaire-madeleine.com",
+          "smile-clinic.fr",
+          "dentiste-paris6-delphine-uzan.fr",
+          "dentiste-paris-16-cohen.fr",
+          "david-guenassia-chirurgien-dentiste.fr",
+          "drbrunoabehassera.com"
+        ],
+        "praticiens": [
+          "Dr David Schachmann",
+          "Dr Henri-Xavier Aubé",
+          "Dr Delphine Uzan",
+          "Dr Sandy Cohen",
+          "Dr Gabriel Wahnich",
+          "Dr Constance Cai",
+          "Dr Ralph Badaoui",
+          "Dr Maxime Lucas",
+          "Dr David Guenassia"
+        ],
+        "extrait": ""
+      }
+    },
+    "bruxisme et usure des dents, que faire": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "centredentairemont-royal.ca",
+          "centre-sante-de-lhermine.fr",
+          "cabinet-dentaire-alme.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "pierrefabre-oralcare.com",
+          "youtube.com",
+          "dentego.fr",
+          "drzisserman-chirurgien-dentiste.fr"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "pierrefabre-oralcare.com",
+          "centre-sante-de-lhermine.fr",
+          "cabinet-dentaire-alme.fr",
+          "dentego.fr",
+          "centredentairemont-royal.ca",
+          "dr-touati-herve.chirurgiens-dentistes.fr",
+          "dentistes-lyon-hillsalih.fr",
+          "youtube.com"
+        ],
+        "praticiens": [],
+        "extrait": ""
+      }
+    },
+    "spécialiste du bruxisme à Paris": {
+      "famille": "Usures et bruxisme",
+      "google-apercu": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "dr-roul-yvonnet-maxillo-paris.fr",
+          "cmvs.fr",
+          "chirurgien-maxillofacial-paris.fr",
+          "doctolib.fr"
+        ],
+        "praticiens": [
+          "Dr Grégory Badach",
+          "Dr Charles-Mathieu Bandini",
+          "Dr Elie Amsellem",
+          "Dr Ylann Rouah",
+          "Dr Jessica Scherman",
+          "Dr Flore Roul-Yvonnet",
+          "Dr Serge Ketoff",
+          "Docteur Flore Roul-Yvonnet",
+          "Dr Sandra Konopnicki"
+        ],
+        "extrait": ""
+      },
+      "google-mode-ia": {
+        "statut": "ok",
+        "cite": false,
+        "nom": false,
+        "site": false,
+        "sources": [
+          "institutdubruxisme.fr",
+          "dr-badach-gregory.chirurgiens-dentistes-en-france.fr",
+          "cabinet-dentaire-paris-carnot.fr",
+          "dr-gomezcasado.com",
+          "dr-roul-yvonnet-maxillo-paris.fr",
+          "chirurgie-maxillo-faciale-paris.com",
+          "dentiste-paris6-delphine-uzan.fr"
+        ],
+        "praticiens": [
+          "Dr Delphine Uzan",
+          "Docteur Ylann Rouah",
+          "Dr Andrea Gomez",
+          "Dr Badach Grégory",
+          "Dr Elie Amsellem",
+          "Dr Charles-Mathieu Bandini",
+          "Docteur Flore Roul-Yvonnet",
+          "Dr Christophe Weill"
+        ],
+        "extrait": ""
+      }
+    }
+  }
+}
