@@ -32,7 +32,8 @@ là que l'effort rapporte le plus, parce qu'il suffit de quelques places.
 ## Ce que le suivi ne dit pas
 
 Il mesure le **référencement classique**. Il ne dit rien de ce que répondent les IA : ça,
-c'est `docs/VISIBILITE-IA.md`, à refaire à la main tous les trois mois.
+c'est le suivi quotidien de `suivi/ia/`, mis en place le 21 octobre 2026 (83 questions,
+trois IA, chaque matin vers 9 h).
 
 ## Ajouter un mot
 

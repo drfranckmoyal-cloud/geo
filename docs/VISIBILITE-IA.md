@@ -87,3 +87,8 @@ chercher deux cabinets qui n'en font pas leur spécialité. C'est une place vaca
 Ce relevé est à répéter dans trois mois, avec les mêmes quatre recherches, pour voir si
 les publications et les liens déplacent la ligne. C'est la seule façon de savoir si le
 travail GEO produit autre chose que des intentions.
+
+**Mise à jour du 21 octobre 2026** : ce relevé n'est plus à refaire à la main. Il est
+remplacé par un suivi quotidien automatique, beaucoup plus large — 83 questions, trois IA
+(aperçu IA et Mode IA de Google, ChatGPT) —, décrit dans `suivi/ia/LISEZ-MOI.md` (D88). Les
+quatre recherches ci-dessus en font partie, mot pour mot, pour garder la comparaison.
