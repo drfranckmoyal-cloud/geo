@@ -902,3 +902,69 @@ body.portail{min-height:100%}
 .pro__entrer{margin-top:auto;padding-top:.7rem;font-size:.85rem;font-weight:600;color:var(--acc)}
 .pro__entrer em{font-style:normal;display:inline-block;transition:transform .25s ease}
 .pro__carte:hover .pro__entrer em{transform:translateX(4px)}
+
+
+/* ── les articles ────────────────────────────────────────────
+   Franck, 21/10/2026 : ses articles vivent sur le site, chacun à sa propre
+   adresse, et ses posts LinkedIn renvoient vers elle. Une liste, une page
+   par article : on lit d'abord la date, le public et la durée, puis le titre. */
+.filtres{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 .2rem}
+.filtres button{appearance:none;font:inherit;font-size:.8rem;padding:.4rem .85rem;cursor:pointer;
+  background:transparent;color:var(--fg);border:1px solid var(--trait);border-radius:var(--rayon)}
+.filtres button:hover{border-color:var(--fg)}
+.filtres button[aria-pressed="true"]{background:var(--fg);color:#fff;border-color:var(--fg)}
+.liste-articles{list-style:none;margin:.8rem 0 0;padding:0;display:grid;
+  gap:clamp(.6rem,.5rem + .5vw,.9rem)}
+.liste-articles--courte{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.carte-article{position:relative;display:flex;flex-direction:column;gap:.35rem;
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(1rem,.85rem + .9vw,1.55rem);
+  transition:box-shadow .18s ease,border-color .18s ease}
+.carte-article[hidden]{display:none}
+.carte-article:hover{box-shadow:var(--relief-fort);border-color:var(--fg)}
+.carte-article__meta{margin:0;font-size:.68rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--doux)}
+.carte-article__titre{font-size:clamp(1.12rem,1rem + .55vw,1.45rem);line-height:1.2;margin:0;max-width:40ch}
+.carte-article__titre a{text-decoration:none}
+/* toute la carte est cliquable, sans qu'un second lien la traverse */
+.carte-article__titre a::after{content:"";position:absolute;inset:0}
+.carte-article__chapo{margin:0;font-size:.92rem;color:var(--doux);max-width:72ch}
+.carte-article__lire{margin-top:auto;padding-top:.3rem;font-size:.8rem;font-weight:600}
+.liste-articles--courte .carte-article__titre{font-size:1.05rem}
+.liste-articles--courte .carte-article__chapo{font-size:.85rem;display:-webkit-box;
+  -webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* La page d'un article : le texte à gauche, à une largeur de lecture ;
+   à droite, ce qui sert à le partager et à poursuivre. */
+.billet{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,19rem);
+  gap:clamp(1rem,.8rem + 1.2vw,1.9rem);align-items:start;
+  margin-block:clamp(.5rem,.4rem + .6vw,.9rem)}
+.billet__texte{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief-fort);padding:clamp(1.2rem,.95rem + 1.6vw,2.4rem)}
+.billet__tete h1{font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem);line-height:1.12;max-width:30ch}
+.billet__meta{margin:.75rem 0 0;font-size:.78rem;color:var(--doux)}
+.billet__chapo{margin:1rem 0 0;font-family:var(--serif);font-size:clamp(1.08rem,1rem + .35vw,1.25rem);
+  line-height:1.5;color:var(--fg);max-width:60ch}
+.billet__corps{margin-top:clamp(1.3rem,1rem + 1vw,1.9rem);padding-top:clamp(1.3rem,1rem + 1vw,1.9rem);
+  border-top:1px solid var(--trait)}
+.billet__corps p,.billet__corps li{font-size:1.02rem;line-height:1.68;max-width:66ch}
+.billet__corps p{margin-bottom:.95rem}
+.billet__corps h2{margin:1.9rem 0 .7rem;max-width:34ch}
+.billet__corps h2:first-child{margin-top:0}
+.billet__corps blockquote{margin:1.3rem 0;padding:.1rem 0 .1rem 1.1rem;border-left:2px solid var(--fg)}
+.billet__corps blockquote p{font-family:var(--serif);font-size:1.12rem;line-height:1.55;margin:0}
+.billet__corps ul{margin:0 0 .95rem;padding-left:1.2rem}
+.billet__cote{display:grid;gap:clamp(.6rem,.5rem + .5vw,.9rem);position:sticky;top:5.2rem}
+.billet__cote p{margin:0;font-size:.86rem;line-height:1.5}
+.billet__cote a{text-decoration:none;border-bottom:1px solid var(--trait)}
+.billet__cote a:hover{border-color:var(--fg)}
+.billet__cote .ext{font-size:.8em;opacity:.6}
+.billet__copier{appearance:none;background:none;border:0;padding:0;font:inherit;font-size:.86rem;
+  color:var(--fg);cursor:pointer;border-bottom:1px solid var(--trait)}
+.billet__copier:hover{border-color:var(--fg)}
+.billet__voir{line-height:1.9}
+.billet__tous{margin:.9rem 0 0;font-size:.86rem;font-weight:600}
+@media (max-width:860px){
+  .billet{grid-template-columns:minmax(0,1fr)}
+  .billet__cote{position:static}
+}

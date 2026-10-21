@@ -320,6 +320,7 @@ def menu(slug):
         </div>
       </div>
       <a class="lien" href="franck-moyal.html">Mon parcours</a>
+      <a class="lien" href="articles.html">Articles</a>
     </nav>
     <a class="rdv" href="contact.html">Prendre rendez-vous</a>
   </div>
@@ -332,7 +333,7 @@ PIED = '''<footer class="pied">
       <div><h4>Le cabinet</h4><ul><li>2 rue Hippolyte Lebas</li><li>75009 Paris</li><li><a href="tel:+33183755216">01 83 75 52 16</a></li><li>Consultations mardi et vendredi, 9 h – 19 h</li><li>Standard lundi–vendredi, 9 h – 19 h</li></ul></div>
       <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement dentaire</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
       <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires</a></li></ul></div>
-      <div><h4>Mon exercice</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li></ul></div>
+      <div><h4>Mon exercice</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li><li><a href="articles.html">Articles</a></li></ul></div>
       <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     </div>
     <p class="pied__bas">Maquette de refonte — rien n’est en ligne. Mentions légales.</p>
@@ -725,6 +726,16 @@ AUTRES = [
 ]
 
 
+def articles_presents():
+    """Les pages d'article qu'articles.py a fabriquées, avec leur titre."""
+    trouves = []
+    for nom in sorted(os.listdir(SORTIE)):
+        if nom.startswith("article-") and nom.endswith(".html"):
+            h1 = re.search(r"<h1>(.*?)</h1>", open(os.path.join(SORTIE, nom), encoding="utf-8").read(), re.S)
+            trouves.append((H.unescape(h1.group(1)) if h1 else nom[8:-5], nom[:-5]))
+    return trouves
+
+
 def sommaire():
     """Le sommaire se fabrique à partir des pages réellement présentes : il ne peut
     plus annoncer un nombre de pages que le dossier ne contient pas."""
@@ -757,6 +768,7 @@ def sommaire():
         colonne("Cas documentés", CAS),
         colonne("Pour les confrères", CONFRERES),
         colonne("Mon parcours et le cabinet", AUTRES),
+        colonne("Articles", [("Tous les articles", "articles")] + articles_presents()),
     ])
 
     gabarit = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -792,7 +804,7 @@ LIENS_DANS_LE_TEXTE = [
     ("dentisterie-esthetique-paris", [r"dentisterie esth[ée]tique(?: et adh[ée]sive)?"]),
 ]
 SANS_MAILLAGE = {"index", "espace-patients", "espace-pro", "contact", "sommaire",
-                 "polices", "mentions-legales"}
+                 "polices", "mentions-legales", "articles"}
 MAILLAGE_MAX = 8
 
 
@@ -814,7 +826,8 @@ def relier_dans_le_texte(page, slug):
     dans_a = dans_fig = dans_titre = 0
     dans_pli = 0
     exclus = ("ariane", "eyebrow", "sous-titre", "numero", "sig", "tuile", "prise",
-              "joindre", "lieu", "reseau", "appel__", "suite", "renvoi", "lire-aussi")
+              "joindre", "lieu", "reseau", "appel__", "suite", "renvoi", "lire-aussi",
+              "billet__", "carte-article")
     etat = []  # pour chaque morceau de texte : (index, autorisé ?)
     for i, x in enumerate(morceaux):
         if x.startswith("<"):
