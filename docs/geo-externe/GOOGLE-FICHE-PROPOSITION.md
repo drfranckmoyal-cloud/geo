@@ -64,4 +64,4 @@ promotion. Les mots sont ceux du site : « troubles des conduites alimentaires �
 
 ## Statut
 
-**En attente du choix et du « oui » de Franck** avant toute saisie dans la fiche.
+**Version 3 choisie par Franck** (« ok la 3, mets-la dans ma fiche Google ») et **saisie le 21/10/2026** dans la fiche (743/750 caractères au compteur de Google). Google l'a mise « en attente » d'examen, « généralement 10 minutes maximum » ; l'ancienne description reste affichée d'ici là.
