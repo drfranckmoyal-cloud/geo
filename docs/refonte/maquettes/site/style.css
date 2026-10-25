@@ -1085,3 +1085,8 @@ body.portail{min-height:100%}
 .fiche ol{margin:0;padding-left:1.15rem}
 .fiche ol li{padding-left:.15rem}
 .fiche ol li::before{content:none}
+/* La porte d'accueil n'a pas de pied de page : les mentions légales doivent pourtant
+   rester accessibles d'un clic depuis l'accueil (Franck, 25/10/2026). */
+.portail__legal{pointer-events:auto;margin:0;align-self:flex-end;font-size:.72rem}
+.portail__legal a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+@media (max-width:1359px), (max-height:739px){.portail__pied .portail__legal{color:var(--doux)}}

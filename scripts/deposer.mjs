@@ -162,6 +162,11 @@ async function main() {
     await executer("ssh", [...sshArgs, cible,
       `mkdir -p "${posix.dirname(copie)}" && cp -a "${CHEMIN}" "${copie}" && du -sh "${copie}"`]);
     console.log(`Site en ligne sauvegardé sur le serveur : ${copie}\n`);
+    // une sauvegarde par dépôt : on garde la toute première (le site d'avant la refonte)
+    // et les trois plus récentes, pour ne pas remplir l'hébergement
+    const dossier = `${posix.dirname(CHEMIN)}/sauvegardes`;
+    await executer("ssh", [...sshArgs, cible,
+      `cd "${dossier}" && ls -1d public_html-* | sort | sed '1d' | head -n -3 | xargs -r rm -rf`]);
   }
 
   // rsync fait le transfert. --delete retire du serveur ce que le site ne produit plus ;

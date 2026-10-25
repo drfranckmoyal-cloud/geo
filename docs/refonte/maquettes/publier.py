@@ -115,6 +115,14 @@ def reecrire(page, slug, a_copier):
 def entete(page, slug, url):
     """Polices locales, icônes, adresse de référence."""
     page = re.sub(r'<link rel="preconnect" href="https://fonts\.g(?:oogleapis|static)\.com"[^>]*>\n?', "", page)
+    # chaque police que la maquette demandait à Google doit être hébergée sur le site : la
+    # porte d'accueil en appelait une troisième, oubliée au premier dépôt (25/10/2026)
+    hebergees = open(os.path.join(POLICES, "polices.css"), encoding="utf-8").read()
+    for lien in re.findall(r'<link rel="stylesheet" href="(https://fonts\.googleapis\.com/[^"]*)">', page):
+        for famille in re.findall(r"family=([^:&]+)", lien):
+            nom = famille.replace("+", " ")
+            if f"font-family:'{nom}'" not in hebergees:
+                problemes.append(f"{slug} : la police « {nom} » n'est pas hébergée sur le site")
     page = re.sub(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com/[^"]*">\n?', "", page)
     vue = re.search(r'<meta name="viewport"[^>]*>\n', page)
     ajout = ICONES + "\n" + PRECHARGE + "\n"
