@@ -105,6 +105,9 @@ def section(titre, tuiles, zone=False, premier=False):
     classe = "sect sect--zone" if zone else "sect"
     balise = "h1" if premier else "h2"
     tete = f'<{balise} class="tete-bande{" tete-bande--haut" if premier else ""}">{e(titre)}</{balise}>'
+    if premier:
+        # sous le h1, les titres des cartes sont de niveau 2 : un h3 sautait un niveau (audit du 25/10/2026)
+        tuiles = [re.sub(r"<(/?)h3\b", r"<\1h2", t) for t in tuiles]
     return f'''  <section class="{classe}">
     <div class="contenu">
       {tete}

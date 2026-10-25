@@ -38,3 +38,5 @@ livrables/deploiement/
 # version en ligne de la refonte, refabriquée par docs/refonte/maquettes/publier.py
 dist-refonte
 dist-refonte.nosync/
+# variantes d images et aperçus de partage de la version en ligne (docs/refonte/maquettes/affiner.py)
+.cache-images.nosync/

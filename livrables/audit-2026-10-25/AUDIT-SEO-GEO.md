@@ -44,6 +44,8 @@ chiffres de départ, à comparer dans trois à quatre semaines.
 
 ### Priorité 1 — technique, sans toucher aux textes (Claude, une soirée)
 
+**Faite le 26/10/2026 (D99)** : points 1 à 6. Mesuré ensuite : accueil 99, Espace patients 99, Usure 100, TCA 99 ; référencement, accessibilité et bonnes pratiques à 100.
+
 1. **Alléger les images** — le plus gros levier. Le portrait de la signature (811 Ko, affiché en vignette) est
    chargé sur 34 pages, et c'est lui qui retarde l'accueil ; les cartes de l'Espace patients chargent des
    photos de 2 000 px pour un affichage de 400. Versions WebP aux bonnes tailles : 60 à 90 % de poids en moins,

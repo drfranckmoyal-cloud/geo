@@ -10,7 +10,7 @@
   --carte:#fffefb;
   --fg:#1a1c19;
   --doux:#585d5a;
-  --tres-doux:#868b87;
+  --tres-doux:#646965;   /* #868b87 avant l'audit du 25/10/2026 : contraste 2,9 à 3,4, sous le seuil */
   --trait:#e0ded4;
   --trait-fort:#1a1c19;
   --acc:#1f221f;        /* l'accent n'est plus une couleur mais une encre (Franck, 17/10/2026) */
@@ -756,11 +756,14 @@ figcaption{font-size:.74rem;color:var(--tres-doux);margin-top:.35rem;line-height
 .pied{margin-top:clamp(.8rem,.6rem + .8vw,1.3rem);background:var(--carte);
   border-top:1px solid var(--trait);padding-block:1.8rem;font-size:.82rem;color:var(--doux)}
 .pied__grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.4rem}
-.pied h4{margin:0 0 .4rem;font-family:var(--sans);font-size:.66rem;font-weight:600;
+.pied h4,.pied .pied__titre{margin:0 0 .4rem;line-height:1.3;font-family:var(--sans);font-size:.66rem;font-weight:600;
   letter-spacing:.13em;text-transform:uppercase;color:var(--acc)}
 .pied ul{list-style:none;margin:0;padding:0}
 .pied li{margin-bottom:.22rem}
 .pied a{text-decoration:none}
+/* liens assez hauts pour être touchés du doigt (24 px), audit du 25/10/2026 */
+.pied__grille a{display:inline-block;padding-block:.3rem}
+.pied li{margin-bottom:0}
 .pied a:hover{color:var(--acc)}
 .pied__bas{margin-top:1.3rem;padding-top:.9rem;border-top:1px solid var(--trait);
   font-size:.75rem;color:var(--tres-doux)}
@@ -1090,3 +1093,7 @@ body.portail{min-height:100%}
 .portail__legal{pointer-events:auto;margin:0;align-self:flex-end;font-size:.72rem}
 .portail__legal a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
 @media (max-width:1359px), (max-height:739px){.portail__pied .portail__legal{color:var(--doux)}}
+
+/* La version en ligne sert chaque image dans un <picture> (WebP et repli) : l'enveloppe
+   s'efface, l'image se place exactement comme avant (audit du 25/10/2026). */
+picture{display:contents}

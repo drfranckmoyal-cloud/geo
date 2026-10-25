@@ -28,6 +28,8 @@ import re
 import shutil
 import sys
 
+import affiner   # images, aperçus de partage, données des moteurs, dates (audit du 25/10/2026)
+
 ICI = os.path.dirname(os.path.abspath(__file__))
 DEPOT = os.path.abspath(os.path.join(ICI, "..", "..", ".."))
 SITE = os.path.join(ICI, "site")
@@ -150,6 +152,7 @@ def page_404(modele):
                   '<meta name="robots" content="noindex">', page, count=1)
     page = re.sub(r'<script type="application/ld\+json">.*?</script>\n?', "", page, flags=re.S)
     page = re.sub(r'<link rel="canonical"[^>]*>\n?', "", page)
+    page = re.sub(r'<meta (?:property="og:|name="twitter:)[^>]*>\n?', "", page)
     corps = '''<main>
 
   <section class="sect">
@@ -226,6 +229,10 @@ def controler(adresses):
             for trace in ("../../../../", "fonts.googleapis", "Maquette de refonte", "/_astro/"):
                 if trace in h:
                     problemes.append(f"{court} : reste « {trace} »")
+            for jeu in re.findall(r'\bsrcset="([^"]*)"', h):
+                for v in (x.strip().split(" ")[0] for x in jeu.split(",")):
+                    if v.startswith("/") and not os.path.exists(fichier_de(v)):
+                        problemes.append(f"{court} : variante d'image absente {v}")
             for v in re.findall(r'\b(?:href|src|poster)="(/[^"]*)"', h):
                 if not os.path.exists(fichier_de(v)):
                     problemes.append(f"{court} : lien mort {v}")
@@ -286,6 +293,10 @@ def main():
         page = entete(page, slug, url)
         if PIED_MAQUETTE in page:
             page = page.replace(PIED_MAQUETTE, PIED_EN_LIGNE)
+        a_copier["/assets/img/portrait-franck.jpg"] = os.path.join(SITE, "img", "portrait-franck.jpg")
+        page = affiner.donnees(page, url)
+        page = affiner.partage(page, url, os.path.join(SITE, "img", "portrait-fm.png"), SORTIE)
+        page = affiner.images(page, a_copier, SORTIE, problemes)
         cible = fichier_de(url)
         os.makedirs(os.path.dirname(cible), exist_ok=True)
         open(cible, "w", encoding="utf-8").write(page)
