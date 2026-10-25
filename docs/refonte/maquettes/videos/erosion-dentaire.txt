@@ -1,10 +1,10 @@
 titre: Qu’est-ce que l’érosion dentaire ?
 court: L’érosion dentaire
 theme: Usures
-page: erosion-dentaire
-aussi: usures-dentaires:2
-lien: Tout savoir sur l’érosion dentaire
-chapitre: 1
+page: usures-dentaires
+aussi: tca-dents:3
+lien: Tout savoir sur l’usure dentaire
+chapitre: 2
 fichier: erosion-dentaire
 duree: 52
 date: 2026-10-25

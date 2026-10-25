@@ -1,9 +1,8 @@
 titre: L’impact de l’anorexie sur les dents
 court: L’anorexie et les dents
 theme: TCA
-page: anorexie-erosion-dentaire-sans-vomissements
-aussi: tca-dents
-lien: Anorexie restrictive et érosion dentaire
+page: tca-dents
+lien: Les TCA et la santé des dents
 chapitre: 1
 fichier: anorexie-dents
 duree: 32

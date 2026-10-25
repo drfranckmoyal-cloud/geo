@@ -66,7 +66,8 @@ def toutes():
 
 def cibles(v):
     """Les pages qui portent la vignette de la vidéo, chacune avec son chapitre."""
-    return [(v["page"], int(v.get("chapitre", 1)))] + v["aussi"]
+    principale = [(v["page"], int(v.get("chapitre", 1)))] if v.get("page") else []
+    return principale + v["aussi"]
 
 
 def vignette(v):
@@ -84,7 +85,7 @@ def poser_vignettes(vids):
     main (la page Usure dentaire, par exemple) les reçoivent ici, dans la colonne du chapitre
     voulu ; et une vignette dont la vidéo n'existe plus est retirée."""
     import re
-    existantes = {v["fichier_page"] for v in vids}
+    voulues = {v["fichier_page"]: {p for p, _ in cibles(v)} for v in vids}
     for v in vids:
         for page, k in cibles(v):
             chemin = os.path.join(G.SORTIE, page + ".html")
@@ -106,8 +107,9 @@ def poser_vignettes(vids):
             continue
         chemin = os.path.join(G.SORTIE, nom)
         h = open(chemin, encoding="utf-8").read()
+        page = nom[:-5]
         neuf = re.sub(r'        <a class="vignette-video" href="(video-[a-z0-9-]+)\.html">.*?</a>\n',
-                      lambda m: m.group(0) if m.group(1) in existantes else "", h, flags=re.S)
+                      lambda m: m.group(0) if page in voulues.get(m.group(1), ()) else "", h, flags=re.S)
         if neuf != h:
             open(chemin, "w", encoding="utf-8").write(neuf)
             print(f"  vignette retirée : {nom}")
@@ -179,7 +181,7 @@ def noeud_video(v):
 
 def page_video(v, autres):
     questions = "\n".join(f"          <li><b>{t(q)}</b><span>{t(r)}</span></li>" for q, r in v["questions"])
-    libelle = G.PUBLIC.get(v["page"], ("", None, v["page"]))[2]
+    libelle = G.PUBLIC.get(v["page"], ("", None, v["page"]))[2] if v.get("page") else ""
     suite = (f'''
   <section class="sect">
     <div class="contenu">
@@ -189,6 +191,9 @@ def page_video(v, autres):
       </ul>
     </div>
   </section>''' if autres else "")
+    bouton = (f'      <a class="film__lien" href="{v["page"]}.html">{t(v["lien"])} '
+              f'<span aria-hidden="true">→</span></a>\n') if v.get("page") else ""
+    suite_page = f' · <a href="{v["page"]}.html">{t(libelle)}</a>' if v.get("page") else ""
     og = (f'<meta property="og:type" content="video.other">\n'
           f'<meta property="og:title" content="{H.escape(v["titre"])}">\n'
           f'<meta property="og:description" content="{H.escape(v["description"])}">\n'
@@ -217,13 +222,12 @@ def page_video(v, autres):
 {questions}
         </ul>
       </div>
-      <a class="film__lien" href="{v['page']}.html">{t(v['lien'])} <span aria-hidden="true">→</span></a>
-      <div class="signature">
+{bouton}      <div class="signature">
         <img src="{G.PORTRAIT}" alt="Dr Franck Moyal">
         <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
           Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
       </div>
-      <p class="film__tout"><a href="videos.html">Toutes les vidéos</a> · <a href="{v['page']}.html">{t(libelle)}</a></p>
+      <p class="film__tout"><a href="videos.html">Toutes les vidéos</a>{suite_page}</p>
     </div>
   </div>
 {suite}
@@ -320,7 +324,8 @@ def main():
     poser_vignettes(vids)
     print(f"vidéos : {len(vids)} page(s) de vidéo")
     for v in vids:
-        print(f"  {v['date']}  {duree(v['duree']):>6}  {v['theme']:12s} {v['fichier_page']} → {v['page']}")
+        print(f"  {v['date']}  {duree(v['duree']):>8}  {v['theme']:16s} {v['fichier_page']} → "
+              f"{', '.join(f'{p} (ch. {k})' for p, k in cibles(v)) or 'aucune page'}")
 
 
 if __name__ == "__main__":

@@ -1,9 +1,6 @@
 titre: Comment traiter un sourire gingival
 court: Le sourire gingival
 theme: Sourire gingival
-page: dents-courtes-usees
-lien: Dents courtes ou usées : comprendre et traiter
-chapitre: 1
 fichier: sourire-gingival
 duree: 74
 date: 2026-10-25
