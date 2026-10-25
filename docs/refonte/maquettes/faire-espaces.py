@@ -244,6 +244,32 @@ CAS = [
      "dyschromie-erosion-infiltration-avant.jpg", "dyschromie-erosion-infiltration-apres.jpg"),
 ]
 
+# Entre les expertises et les cas, une rangée de vidéos (Franck, 25/10/2026).
+# Quatre, dans l'ordre des expertises au-dessus : une rangée sur ordinateur,
+# deux sur téléphone, jamais une vidéo seule sur sa ligne. Les autres restent
+# sur la page Vidéos, que le lien sous la rangée ouvre.
+VIDEOS = ["premiere-consultation-esthetique", "composite-bonding",
+          "erosion-dentaire", "anorexie-dents"]
+
+
+def rangee_videos():
+    """Les cartes sont celles de la page Vidéos, fabriquées par videos.py : une
+    vidéo ajoutée ou renommée là-bas l'est ici aussi."""
+    import videos as vid
+    par_slug = {v["slug"]: v for v in vid.toutes()}
+    cartes = [vid.carte(par_slug[s]) for s in VIDEOS if s in par_slug]
+    if not cartes:
+        return ""
+    return f'''  <section class="sect">
+    <div class="contenu">
+      <h2 class="tete-bande">Une minute pour comprendre</h2>
+      <ul class="videos-grille videos-grille--quatre">
+{chr(10).join(cartes)}
+      </ul>
+      <p class="videos__toutes"><a href="videos.html">Toutes les vidéos <span>→</span></a></p>
+    </div>
+  </section>'''
+
 PRATICIEN = '''      <div class="tuiles tuiles--praticien">
         <a class="tuile tuile--large" href="franck-moyal.html">
           <img class="tuile__portrait" src="img/portrait-fm.png?v=0"
@@ -272,6 +298,7 @@ PRATICIEN = '''      <div class="tuiles tuiles--praticien">
 def patients():
     sections = [
         section("Mes expertises", [acte(*a) for a in SOINS], premier=True),
+        rangee_videos(),
         section("Cas cliniques", [paire(*c) for c in CAS], zone=True),
         f'''  <section class="sect">
     <div class="contenu">

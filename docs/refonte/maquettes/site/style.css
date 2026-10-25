@@ -1057,3 +1057,12 @@ body.portail{min-height:100%}
   .carte-video__lecture::before{border-left-width:13px;border-top-width:8px;border-bottom-width:8px}
   .carte-video__theme{top:.5rem;left:.5rem;font-size:.55rem;padding:.22rem .45rem}
 }
+/* Espace patients : une rangée de quatre vidéos entre les expertises et les cas.
+   Quatre colonnes, ou deux — jamais trois, qui laisseraient une vidéo seule. */
+.videos-grille--quatre{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.videos-grille--quatre{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.videos__toutes{margin:.9rem 0 0;font-size:.86rem;font-weight:600}
+.videos__toutes a{text-decoration:none;border-bottom:1px solid var(--trait)}
+.videos__toutes a:hover{color:var(--acc);border-color:var(--acc)}
+.videos__toutes span{display:inline-block;transition:transform .22s ease}
+.videos__toutes a:hover span{transform:translateX(5px)}
