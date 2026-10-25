@@ -171,9 +171,10 @@ def fil(url, etapes):
 def noeud_video(v):
     return {"@type": "VideoObject", "@id": v["url"] + "#video", "name": v["titre"],
             "description": v["description"], "inLanguage": "fr-FR",
-            # adresses du futur site, à confirmer à la fabrication du site Astro
-            "thumbnailUrl": f"{G.RACINE_WEB}videos/{v['fichier']}.jpg",
-            "contentUrl": f"{G.RACINE_WEB}videos/{v['fichier']}.mp4",
+            # les adresses où publier.py dépose réellement la couverture et la vidéo ;
+            # celles de la maquette (/videos/<fichier>.jpg) menaient à une erreur (audit du 25/10/2026)
+            "thumbnailUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.jpg",
+            "contentUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.mp4",
             "uploadDate": v["date"], "duration": f"PT{v['duree']}S",
             "author": {"@id": G.RACINE_WEB + "#franck-moyal"},
             "publisher": {"@id": G.RACINE_WEB + "#franck-moyal"}}

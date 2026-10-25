@@ -241,6 +241,11 @@ def controler(adresses):
                     json.loads(bloc)
                 except ValueError as err:
                     problemes.append(f"{court} : données structurées illisibles ({err})")
+                # toute adresse du site citée pour les moteurs doit exister (les vidéos citaient
+                # des fichiers introuvables, relevé à l'audit du 25/10/2026)
+                for u in set(re.findall(r'"(https://drfranckmoyal\.fr/[^"#]*)"', bloc)):
+                    if not os.path.exists(fichier_de(u[len(RACINE):])):
+                        problemes.append(f"{court} : données structurées, adresse introuvable {u}")
     # chaque adresse du site actuel est servie, ou redirigée
     actuel = os.path.join(DEPOT, "dist", "sitemap-0.xml")
     if os.path.exists(actuel):
