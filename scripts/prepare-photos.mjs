@@ -80,6 +80,16 @@ const photosThemes = {
   "04 Composite bonding/_montages/composite-usures-avant-apres.jpg": "composite-usures-avant-apres.jpg",
   "04 Composite bonding/_montages/composite-rehabilitation-avant-apres.jpg": "composite-rehabilitation-avant-apres.jpg",
   "04 Composite bonding/_montages/composite-diasteme-avant-apres.jpg": "composite-diasteme-avant-apres.jpg",
+  // Facettes (25/10/2026) : quatre cas, chaque après calé sur son avant ; deux photographies de
+  // céramiques. Montages sur le Mac, noms neutres.
+  "05 Facettes/_montages/facettes-diastemes-couverture.jpg": "facettes-diastemes-couverture.jpg",
+  "05 Facettes/_montages/facettes-diastemes-avant-apres.jpg": "facettes-diastemes-avant-apres.jpg",
+  "05 Facettes/_montages/facettes-fractures-avant-apres.jpg": "facettes-fractures-avant-apres.jpg",
+  "05 Facettes/_montages/facettes-fractures-sourire-avant-apres.jpg": "facettes-fractures-sourire-avant-apres.jpg",
+  "05 Facettes/_montages/facettes-transformation-avant-apres.jpg": "facettes-transformation-avant-apres.jpg",
+  "05 Facettes/_montages/facettes-incisives-eclaircissement-avant-apres.jpg": "facettes-incisives-eclaircissement-avant-apres.jpg",
+  "05 Facettes/_montages/facettes-pieces-ceramique.jpg": "facettes-pieces-ceramique.jpg",
+  "05 Facettes/_montages/facettes-modele-ceramique.jpg": "facettes-modele-ceramique.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

@@ -315,6 +315,15 @@ SEQUENCES = {
          "du diastème au composite et allongement des incisives latérales",
          "Avant et après : espace entre les incisives centrales, puis fermé en composite, sourire de face"),
     ]},
+    # Facettes (25/10/2026) : deux cas vus avec écarteurs, chaque après calé sur son avant.
+    "facettes-dentaires-paris": {"titre": "Avant / après", "apres_chapitre": 3, "large": True, "etapes": [
+        ("facettes-diastemes-avant-apres.jpg",
+         "Cas 1 — espaces entre les dents antérieures, refermés par des facettes : vue avec écarteurs",
+         "Avant et après facettes, vue intra-orale avec écarteurs : espaces entre les dents, puis refermés"),
+        ("facettes-fractures-avant-apres.jpg",
+         "Cas 2 — bords des incisives fracturés et usés : forme et longueur rendues par des facettes",
+         "Avant et après facettes, vue avec écarteurs : incisives fracturées et usées, puis reconstruites"),
+    ]},
     "_exemple_desactive": {
         "titre": "Le bilan, en quatre étapes",
         "apres_chapitre": 1,
@@ -365,11 +374,17 @@ PHOTO_EN_TETE = {
         "additif, 100 % conservateur, en composite stratifié réalisé après éclaircissement.",
         "Avant et après : diastème fermé et incisive latérale remodelée en composite, sourire de face",
         [("éclaircissement", "eclaircissement-dentaire-paris")]),
+    # Franck, 25/10/2026 : « tu peux fabriquer la page facettes, les photos sont dans le
+    # dossier ». Le cas qu'il a rangé dans « cascouverture », sourire sans écarteurs.
+    "facettes-dentaires-paris": (
+        "facettes-diastemes-couverture.jpg",
+        "Avant et après facettes : les espaces entre les dents antérieures sont refermés.",
+        "Avant et après facettes : espaces entre les incisives, puis refermés, sourire de face"),
 }
 # Les photographies de l'ancienne page ICON quittent la page : la tache de MIH et son
 # résultat sont désormais montrés par chapitre, avec le traitement entre les deux.
 SANS_PHOTOS_SOURCE = {"bilan-esthetique-personnalise", "taches-dentaires-dyschromies-icon",
-                      "composite-bonding-paris"}
+                      "composite-bonding-paris", "facettes-dentaires-paris"}
 
 # ── une photographie par chapitre ─────────────────────────────────────────
 # Posée dans la colonne de droite du chapitre, au-dessus de l'encadré : le texte
@@ -441,6 +456,31 @@ ILLUSTRATIONS = {
             "Avant et après : bords des incisives usés, puis reconstruits en composite",
             [("Usures dentaires", "usures-dentaires"), ("facettes", "facettes-dentaires-paris")],
             {"libre": True}),
+    },
+    # Facettes (25/10/2026) : trois avant/après carrés et les deux photographies de céramiques.
+    # La légende du chapitre 4 est celle que Franck a écrite dans les noms de fichiers.
+    "facettes-dentaires-paris": {
+        1: ("facettes-transformation-avant-apres.jpg",
+            "Dents usées et colorées : le sourire redessiné par des facettes, formes, longueurs et teinte.",
+            "Avant et après : dents usées et jaunies, puis sourire refait par des facettes",
+            None, {"libre": True}),
+        2: ("facettes-fractures-sourire-avant-apres.jpg",
+            "Le cas 2, sourire : incisives fracturées et usées, puis forme et longueur rendues par des facettes.",
+            "Avant et après facettes, sourire : incisives fracturées et usées, puis reconstruites",
+            None, {"libre": True}),
+        3: ("facettes-pieces-ceramique.jpg",
+            "Facettes en céramique, prêtes pour le collage.",
+            "Six facettes en céramique posées sur des tiges de préhension orange, fond blanc"),
+        4: ("facettes-incisives-eclaircissement-avant-apres.jpg",
+            "Une dent dévitalisée et des composites infiltrés : deux facettes réalisées sur les dents "
+            "11 et 21, après éclaircissement.",
+            "Avant et après : incisive dévitalisée assombrie et anciens composites, puis deux facettes "
+            "sur les incisives centrales",
+            [("éclaircissement", "eclaircissement-dentaire-paris")],
+            {"libre": True}),
+        5: ("facettes-modele-ceramique.jpg",
+            "Les pièces en céramique sur le modèle, avant le collage.",
+            "Modèle de l’arcade supérieure tenu dans une main gantée, pièces en céramique en place"),
     },
 }
 # Seules les suites d'étapes portent un numéro ; une illustration isolée, non.
