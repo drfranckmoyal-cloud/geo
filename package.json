@@ -20,7 +20,8 @@
     "publier": "npm run refonte && npm run refonte:deposer",
     "refonte": "bash docs/refonte/maquettes/construire.sh && python3 docs/refonte/maquettes/publier.py",
     "refonte:essai": "DOSSIER=dist-refonte node scripts/deposer.mjs --essai",
-    "refonte:deposer": "DOSSIER=dist-refonte node scripts/deposer.mjs --sauvegarde"
+    "refonte:deposer": "DOSSIER=dist-refonte node scripts/deposer.mjs --sauvegarde",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

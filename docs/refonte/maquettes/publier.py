@@ -293,6 +293,11 @@ def main():
     shutil.copy2(os.path.join(SITE, "menu.js"), os.path.join(SORTIE, "assets", "menu.js"))
     for nom in ("favicon.svg", "favicon-48.png", "apple-touch-icon.png", "robots.txt"):
         shutil.copy2(os.path.join(PUBLIC, nom), os.path.join(SORTIE, nom))
+    # la clé IndexNow : un fichier à la racine qui prouve à Bing que les signalements
+    # de pages viennent bien du site (scripts/indexnow.mjs)
+    for nom in os.listdir(PUBLIC):
+        if re.fullmatch(r"[0-9a-f]{32}\.txt", nom):
+            shutil.copy2(os.path.join(PUBLIC, nom), os.path.join(SORTIE, nom))
     open(os.path.join(SORTIE, ".htaccess"), "w", encoding="utf-8").write(htaccess())
     plan, index = plan_du_site(adresses)
     for nom, contenu in (("sitemap-0.xml", plan), ("sitemap.xml", plan), ("sitemap-index.xml", index)):

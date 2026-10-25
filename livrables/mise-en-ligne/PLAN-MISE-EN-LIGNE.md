@@ -80,6 +80,8 @@ Le reste peut suivre la mise en ligne : le site se met à jour en une commande, 
 
 ### Étape 4 — Après la mise en ligne
 
+**Faite le 25/10/2026 (D98)** : Search Console (plans du site, 8 pages), Bing par IndexNow (35 adresses).
+
 - Search Console : renvoyer le plan du site, demander l'indexation des pages nouvelles et des pages réécrites
   (Espace patients, Usure dentaire, TCA, Vidéos) ; surveiller les erreurs les jours suivants.
 - Bing Webmaster Tools : même chose.
