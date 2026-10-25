@@ -968,3 +968,7 @@ body.portail{min-height:100%}
   .billet{grid-template-columns:minmax(0,1fr)}
   .billet__cote{position:static}
 }
+
+/* La réponse courte qui ouvre un chapitre : la phrase que Google et les IA
+   recopient. Franck, 25/10/2026, page Usure dentaire. */
+.chapitre .reponse{font-size:1.03rem;line-height:1.55;font-weight:500;color:var(--fg)}

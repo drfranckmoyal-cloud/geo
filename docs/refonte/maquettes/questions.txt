@@ -90,8 +90,10 @@ R : Le prix est établi de manière personnalisée, selon le nombre de dents à 
 == usures-dentaires ==
 Q : Mes dents s’usent : est-ce grave ?
 R : Pas forcément, mais ce n’est pas anodin : le tissu perdu ne repousse pas. Ce qui compte est de savoir si l’usure est encore active, à quelle vitesse elle progresse et pourquoi. Une usure légère et stable se surveille ; une usure active se traite d’abord à sa cause.
-Q : Quels sont les premiers signes d’une usure dentaire ?
-R : Des dents qui paraissent plus courtes, des bords fins ou translucides, des surfaces qui s’aplatissent, une sensibilité au froid ou à l’acide, d’anciennes restaurations qui semblent dépasser, un sourire qui découvre moins les dents.
+Q : Est-il possible de réparer des dents usées ?
+R : Oui. Une fois la cause identifiée et maîtrisée, on reconstruit ce que l’usure a enlevé en ajoutant de la matière : composite collé, facettes, onlays ou overlays, et, pour une usure avancée, une réhabilitation complète qui rend aux dents leur hauteur. Le plus souvent sans tailler les dents.
+Q : L’émail usé peut-il se reconstituer ?
+R : Non. L’émail ne se régénère pas : ce qui est perdu l’est définitivement. Le fluor renforce la surface restante et freine l’usure, mais seule une restauration rend le volume perdu.
 Q : Est-ce forcément du bruxisme ?
 R : Non. Le bruxisme est souvent accusé dès que les dents sont plates, mais une érosion acide — alimentation, reflux, vomissements — ou la combinaison de plusieurs facteurs est fréquente. Une dent usée n’est pas un diagnostic : il faut en chercher la cause avant de la réparer.
 Q : Comment savoir si l’usure continue ?
@@ -100,6 +102,9 @@ Q : Faut-il reconstruire les dents usées ?
 R : Pas toujours. Prévention, conseils et surveillance suffisent dans bien des cas. Quand une reconstruction est indiquée, elle se fait le plus souvent en ajoutant de la matière, en composite ou par des pièces collées, après contrôle de la cause : reconstruire sur une érosion non maîtrisée expose à une récidive.
 Q : Que puis-je faire moi-même ?
 R : Repérer et espacer les expositions acides — sodas même sans sucre, agrumes, boissons énergétiques —, ne pas brosser fort, utiliser un dentifrice fluoré adapté, signaler un reflux. Et faire un bilan de référence tôt, pour avoir un point de comparaison.
+Q : Combien coûte le traitement d’une usure dentaire ?
+R : Le prix est établi de manière personnalisée, selon l’étendue de l’usure et le traitement retenu, et vous est remis après le bilan, avant tout engagement.
+# « Quels sont les premiers signes d’une usure dentaire ? » est devenu le chapitre 3 de la page (25/10/2026).
 
 == erosion-dentaire ==
 Q : Qu’est-ce qui attaque les dents au quotidien ?

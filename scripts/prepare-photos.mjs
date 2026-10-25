@@ -90,6 +90,14 @@ const photosThemes = {
   "05 Facettes/_montages/facettes-incisives-eclaircissement-avant-apres.jpg": "facettes-incisives-eclaircissement-avant-apres.jpg",
   "05 Facettes/_montages/facettes-pieces-ceramique.jpg": "facettes-pieces-ceramique.jpg",
   "05 Facettes/_montages/facettes-modele-ceramique.jpg": "facettes-modele-ceramique.jpg",
+  // Usure dentaire (25/10/2026) : trois cas recalés, le montage de Franck étiqueté, deux photos de
+  // conférence. Dossier 06, noms neutres.
+  "06 Rehabilitation des dents usees/_montages/usure-erosion-couverture.jpg": "usure-erosion-couverture.jpg",
+  "06 Rehabilitation des dents usees/_montages/usure-reflux-grincement-avant-apres.jpg": "usure-reflux-grincement-avant-apres.jpg",
+  "06 Rehabilitation des dents usees/_montages/usure-composite-sans-preparation-avant-apres.jpg": "usure-composite-sans-preparation-avant-apres.jpg",
+  "06 Rehabilitation des dents usees/_montages/usure-molaires-overlays-avant-apres.jpg": "usure-molaires-overlays-avant-apres.jpg",
+  "06 Rehabilitation des dents usees/_montages/usure-conference-erosions.jpg": "usure-conference-erosions.jpg",
+  "06 Rehabilitation des dents usees/_montages/usure-conference-wear.jpg": "usure-conference-wear.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

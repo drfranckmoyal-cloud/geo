@@ -662,7 +662,7 @@ TITRES = {
     "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
     "facettes-ou-composite": ("Facettes ou composite ?", "Comparatif"),
     # ce que l'on traite
-    "usures-dentaires": ("Usure dentaire", "Attrition, érosion, abrasion"),
+    "usures-dentaires": ("Usure dentaire", "Causes, signes et traitements"),
     "erosion-dentaire": ("Érosion dentaire", "Origines et prévention"),
     "bruxisme-usure-dentaire": ("Bruxisme", "Serrement, grincement, gouttière"),
     "dents-courtes-usees": ("Dents courtes ou usées", "Usure du bord ou excès de gencive"),
