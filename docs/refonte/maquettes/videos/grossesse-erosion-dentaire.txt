@@ -1,0 +1,13 @@
+titre: Grossesse et érosion dentaire : protéger ses dents
+court: Grossesse et érosion dentaire
+theme: Grossesse
+fichier: grossesse-erosion-dentaire
+duree: 44
+date: 2026-10-25
+description: Le Dr Franck Moyal explique pourquoi la grossesse expose à l’érosion dentaire — reflux, nausées, hyperémèse gravidique — et comment le chirurgien-dentiste aide à protéger l’émail.
+---
+Qu’est-ce que l’érosion dentaire ? | La dégradation de l’émail par une attaque acide : pendant la grossesse, ces acides sont plus souvent présents dans la bouche.
+Quels sont les principaux facteurs de risque ? | Les reflux et les nausées, qui exposent les dents à l’acidité de l’estomac.
+Qu’est-ce que l’hyperémèse gravidique ? | Des nausées et des vomissements très fréquents, qui peuvent durer une grande partie de la grossesse et augmentent nettement le risque d’érosion.
+Que faire en cas de reflux ou de nausées fréquentes ? | Consulter son chirurgien-dentiste, idéalement pendant la grossesse : il donne les conseils adaptés pour se protéger.
+Comment protéger ses dents ? | De petits traitements à appliquer sur les dents pour limiter l’érosion, et des conseils d’hygiène : le brossage et le choix du dentifrice.
