@@ -802,13 +802,8 @@ PLANS = {
     {"titre": "Protéger au quotidien", "sections": [7, 8, 9], "fiche": [7]},
     {"titre": "Quand faut-il restaurer ?", "sections": [10]},
   ]},
-  "tca-dents": {"chapitres": [
-    {"titre": "Ce que les TCA font aux dents", "sections": [1, 2], "fiche": [1]},
-    {"titre": "Même sans vomissements", "sections": [3]},
-    {"titre": "Pourquoi le dépistage compte", "sections": [4, 9], "fiche": [4]},
-    {"titre": "Pendant, puis après", "sections": [6, 7, 8], "fiche": [6]},
-    {"titre": "Mon engagement sur ce sujet", "sections": [5, 10]},
-  ]},
+  # « tca-dents » n'est plus composée ici : la page est écrite à la main depuis le 25/10/2026,
+  # sur le plan validé par Franck (livrables/tca-seo-geo/PLAN-PAGE-TCA.md), comme la page Usure.
   "rehabilitation-dents-usees": {"chapitres": [
     {"titre": "Pourquoi reconstruire", "sections": [1, 2, 3], "fiche": [3]},
     {"titre": "Avec quoi reconstruire", "sections": [4, 5], "fiche": [5]},

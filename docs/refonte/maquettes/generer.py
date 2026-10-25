@@ -56,7 +56,7 @@ SUJETS = [
     ("Érosion dentaire", "erosion-dentaire"),
     ("Bruxisme", "bruxisme-usure-dentaire"),
     ("Dents courtes ou usées", "dents-courtes-usees"),
-    ("Troubles des conduites alimentaires", "tca-dents"),
+    ("Troubles des conduites alimentaires (TCA)", "tca-dents"),
     ("Anorexie restrictive", "anorexie-erosion-dentaire-sans-vomissements"),
 ]
 CONFRERES = [
@@ -105,10 +105,11 @@ def _pages_composees():
     return set(re.findall(r'^  "([a-z0-9-]+)":', bloc, re.M))
 
 
-# Écrites entièrement à la main, avant que le composeur n'existe.
+# Écrites entièrement à la main, avant que le composeur n'existe — et la page TCA,
+# réécrite à la main le 25/10/2026 sur le plan validé par Franck.
 A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
              "dentisterie-esthetique-paris", "index",
-             "contact"} | _pages_composees()
+             "contact", "tca-dents"} | _pages_composees()
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui,
 # et tout lien qui le visait mène désormais à celle qui l'a absorbé
 FONDUES = {"diagnostic-usures-dentaires"}
@@ -333,7 +334,7 @@ PIED = '''<footer class="pied">
     <div class="pied__grille">
       <div><h4>Le cabinet</h4><ul><li>2 rue Hippolyte Lebas</li><li>75009 Paris</li><li><a href="tel:+33183755216">01 83 75 52 16</a></li><li>Consultations mardi et vendredi, 9 h – 19 h</li><li>Standard lundi–vendredi, 9 h – 19 h</li></ul></div>
       <div><h4>Les actes</h4><ul><li><a href="facettes-dentaires-paris.html">Facettes</a></li><li><a href="composite-bonding-paris.html">Composite bonding</a></li><li><a href="eclaircissement-dentaire-paris.html">Éclaircissement dentaire</a></li><li><a href="taches-dentaires-dyschromies-icon.html">Infiltration ICON</a></li></ul></div>
-      <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires</a></li></ul></div>
+      <div><h4>Ce que l’on traite</h4><ul><li><a href="usures-dentaires.html">Usure dentaire</a></li><li><a href="erosion-dentaire.html">Érosion dentaire</a></li><li><a href="bruxisme-usure-dentaire.html">Bruxisme</a></li><li><a href="tca-dents.html">Troubles des conduites alimentaires (TCA)</a></li></ul></div>
       <div><h4>Mon exercice</h4><ul><li><a href="franck-moyal.html">Parcours</a></li><li><a href="publications.html">Publications</a></li><li><a href="activite-hospitaliere.html">Activité hospitalière</a></li><li><a href="articles.html">Articles</a></li><li><a href="videos.html">Vidéos</a></li></ul></div>
       <div><h4>Les deux espaces</h4><ul><li><a href="espace-patients.html">Espace patients</a></li><li><a href="espace-pro.html">Espace pro</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     </div>
@@ -667,7 +668,8 @@ TITRES = {
     "erosion-dentaire": ("Érosion dentaire", "Origines et prévention"),
     "bruxisme-usure-dentaire": ("Bruxisme", "Serrement, grincement, gouttière"),
     "dents-courtes-usees": ("Dents courtes ou usées", "Usure du bord ou excès de gencive"),
-    "tca-dents": ("Troubles des conduites alimentaires", "Anorexie, boulimie"),
+    "tca-dents": ("Troubles des conduites alimentaires (TCA)",
+                  "Les dents face à l’anorexie, à la boulimie et aux vomissements"),
     "anorexie-erosion-dentaire-sans-vomissements": ("Anorexie restrictive", "Érosion sans vomissements"),
     # le praticien, le cabinet
     "franck-moyal": ("Dr Franck Moyal", "Chirurgien-dentiste, Paris 9ᵉ"),

@@ -52,4 +52,4 @@ jamais en emprunter une à un autre cas). Trois possibilités, à trancher par F
 
 ## Statut
 
-**En attente de la validation de Franck.**
+**Validé par Franck le 25/10/2026** (« ok pour le plan »), avec trois consignes : « spécialisé » et « référence en France », « (TCA) » dans le bandeau, les photos du dossier 07. Grand titre retenu : « Troubles des conduites alimentaires (TCA) ». Page écrite le même jour (D94).

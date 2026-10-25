@@ -98,6 +98,17 @@ const photosThemes = {
   "06 Rehabilitation des dents usees/_montages/usure-molaires-overlays-avant-apres.jpg": "usure-molaires-overlays-avant-apres.jpg",
   "06 Rehabilitation des dents usees/_montages/usure-conference-erosions.jpg": "usure-conference-erosions.jpg",
   "06 Rehabilitation des dents usees/_montages/usure-conference-wear.jpg": "usure-conference-wear.jpg",
+  // TCA et dents (25/10/2026) : trois avant/après recalés — dont un portrait ramené aux seules
+  // lèvres, sur fond noir, à la demande de Franck — et cinq vues recadrées sur les dents. Dossier 07.
+  "07 Troubles des conduites alimentaires/_montages/tca-composite-couverture.jpg": "tca-composite-couverture.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-composite-apres.jpg": "tca-composite-apres.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-facettes-dimension-verticale-avant-apres.jpg": "tca-facettes-dimension-verticale-avant-apres.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-sourire-avant-apres.jpg": "tca-sourire-avant-apres.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-boulimie-dents-courtes.jpg": "tca-boulimie-dents-courtes.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-boulimie-molaires.jpg": "tca-boulimie-molaires.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-erosion-palatine.jpg": "tca-erosion-palatine.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-anorexie-occlusal.jpg": "tca-anorexie-occlusal.jpg",
+  "07 Troubles des conduites alimentaires/_montages/tca-anorexie-collets.jpg": "tca-anorexie-collets.jpg",
 };
 
 await mkdir(CIBLE, { recursive: true });

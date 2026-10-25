@@ -146,19 +146,24 @@ Q : Combien de temps tient une reconstruction de bord ?
 R : Un composite de bord incisif tient en général plusieurs années ; je donne comme repère un ordre de grandeur de 6 à 7 ans, avec des retouches possibles. La céramique est plus stable mais se répare moins simplement.
 
 == tca-dents ==
+# Réécrites le 25/10/2026 avec la page (plan validé par Franck) : les questions que posent les patients
+# et leurs parents ; « que faire après avoir vomi » est devenu un chapitre de la page.
+Q : Le dentiste peut-il voir que je me fais vomir ?
+R : Souvent, oui : les vomissements répétés laissent une érosion caractéristique sur la face interne des dents du haut. Mais le dentiste n’est là ni pour juger ni pour dénoncer : il protège vos dents, et ce que vous lui confiez reste couvert par le secret médical.
 Q : Faut-il dire à son dentiste que l’on a un trouble alimentaire ?
-R : Oui, si vous le pouvez : cette information améliore le diagnostic, les conseils de prévention et le choix du bon moment pour restaurer. Elle reste confidentielle et n’entraîne aucun jugement.
-Q : Un dentiste peut-il voir que l’on a un TCA ?
-R : Il peut repérer des signes — érosions, sensibilités, modifications de la salive — mais une érosion ne diagnostique jamais à elle seule un trouble alimentaire. Son rôle est d’ouvrir le dialogue avec tact, de protéger la bouche et d’orienter si besoin.
-Q : Les vomissements sont-ils indispensables pour abîmer les dents ?
-R : Non. Ils augmentent fortement le risque, mais une alimentation acide, une salive moins abondante, la déshydratation, la dénutrition ou certains médicaments peuvent suffire. C’est le cas notamment dans l’anorexie restrictive.
+R : Oui, si vous le pouvez : cette information améliore le diagnostic, les conseils de prévention et le choix du bon moment pour reconstruire. Elle reste confidentielle et n’entraîne aucun jugement.
+Q : L’émail abîmé par les vomissements peut-il repousser ?
+R : Non. L’émail ne se régénère pas : ce qui est perdu l’est définitivement. Le fluor durcit la surface restante et freine l’érosion ; seule une restauration rend le volume perdu, le plus souvent sans tailler les dents.
+Q : Pourquoi mes dents sont-elles sensibles depuis que je vomis ?
+R : Parce que l’acide a dissous l’émail et mis la dentine à nu : elle conduit le froid, le chaud et l’acide jusqu’au nerf de la dent. Un dentifrice adapté, du fluor et, si besoin, une fine couche de résine collée sur les zones exposées soulagent rapidement.
 Q : Peut-on faire des soins dentaires pendant un TCA actif ?
-R : Oui. Prévention, protection des dents, soins urgents ou nécessaires et traitement des sensibilités se font pendant la prise en charge du trouble. Seule la reconstruction définitive importante est programmée selon la stabilité de la situation.
-# à valider : conseils après un épisode acide (rinçage, bicarbonate, brossage)
-Q : Que faire après un vomissement pour protéger les dents ?
-R : Rincer la bouche à l’eau, éventuellement avec un peu de bicarbonate, et ne pas brosser aussitôt de façon énergique. Un dentifrice fluoré adapté et une bonne hydratation complètent la protection ; ces conseils sont précisés au cas par cas.
-Q : Peut-on retrouver un sourire normal après des années d’érosion ?
-R : Oui, souvent. Les techniques adhésives permettent des reconstructions conservatrices — composite, pièces collées, facettes — et la planification esthétique réintègre le patient dans le projet. Le moment se choisit avec l’équipe soignante.
+R : Oui. Prévention, protection des dents, soins urgents ou nécessaires et traitement des sensibilités se font pendant la prise en charge du trouble, sans attendre. Seule la reconstruction importante est programmée selon la stabilité de la situation.
+Q : Faut-il attendre la guérison pour reconstruire ses dents ?
+R : Pas forcément. Il n’existe pas de délai universel : on protège et on soigne tout de suite, et la reconstruction plus importante se programme quand la situation est assez stable, en accord avec l’équipe soignante. Les techniques collées se réparent facilement si l’érosion reprend.
+Q : Mon enfant souffre d’anorexie ou de boulimie : quand consulter un dentiste ?
+R : Dès le début de la prise en charge, sans attendre de voir des dégâts. Un premier bilan sert de référence, permet de protéger l’émail avant que l’érosion ne s’installe et de conseiller votre enfant ; des contrôles réguliers suivent, en lien avec l’équipe qui le soigne.
+Q : Combien coûtent les soins ?
+R : Le prix est établi de manière personnalisée, selon l’étendue des lésions et le traitement retenu, et vous est remis après le bilan, avant tout engagement.
 
 == anorexie-erosion-dentaire-sans-vomissements ==
 Q : Peut-on avoir les dents érodées sans jamais avoir vomi ?

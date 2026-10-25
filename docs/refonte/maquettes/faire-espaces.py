@@ -210,13 +210,14 @@ SOINS = [
       ("Érosion", "erosion-dentaire"),
       ("Bruxisme", "bruxisme-usure-dentaire"),
       ("Dents courtes", "dents-courtes-usees")]),
-    # Pas de photographie ici : le registre des cas n'en documente aucune comme
-    # venant d'un patient souffrant d'un trouble du comportement alimentaire.
-    # En emprunter une à un autre cas ferait porter un diagnostic psychiatrique
-    # à quelqu'un qui ne l'a pas.
-    ("Troubles des conduites alimentaires",
+    # Jamais une photographie empruntée à un autre cas : ce serait faire porter un
+    # diagnostic psychiatrique à quelqu'un qui ne l'a pas. Celle-ci vient du dossier
+    # 07, déposée par Franck le 25/10/2026 et documentée comme un cas de TCA :
+    # l'après de la réparation au composite, comme il l'a demandé pour cette carte.
+    ("Troubles des conduites alimentaires (TCA)",
      "Ce que le chirurgien-dentiste repère en premier.",
-     "tca-dents", "", "", "",
+     "tca-dents", "tca-composite-apres.jpg", "",
+     "Sourire après la réparation au composite de dents abîmées par l’érosion",
      [("Anorexie restrictive : érosion sans vomissements",
        "anorexie-erosion-dentaire-sans-vomissements")]),
 ]
