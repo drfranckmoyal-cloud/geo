@@ -972,3 +972,79 @@ body.portail{min-height:100%}
 /* La réponse courte qui ouvre un chapitre : la phrase que Google et les IA
    recopient. Franck, 25/10/2026, page Usure dentaire. */
 .chapitre .reponse{font-size:1.03rem;line-height:1.55;font-weight:500;color:var(--fg)}
+
+
+/* ── les vidéos ──────────────────────────────────────────────
+   Franck, 25/10/2026 : une page qui présente toutes les vidéos par thème, une
+   page par vidéo où elle se lance sur place, et une vignette sur la page de soins.
+   Format vertical, celui des vidéos tournées pour les réseaux. */
+.videos__intro{margin:.8rem 0 0;color:var(--doux);font-size:.98rem;max-width:56ch}
+.videos-grille{list-style:none;margin:1rem 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:clamp(.8rem,.6rem + 1vw,1.4rem)}
+.videos-grille > li[hidden]{display:none}
+.carte-video{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;isolation:isolate;
+  border-radius:var(--rayon);background:#111;color:#fff;text-decoration:none;box-shadow:var(--relief)}
+.carte-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.carte-video::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,11,10,0) 40%,rgba(10,11,10,.84) 100%)}
+.carte-video:hover img,.carte-video:focus-visible img{transform:scale(1.045)}
+.carte-video__theme{position:absolute;top:.75rem;left:.75rem;z-index:2;padding:.28rem .55rem;
+  border-radius:2px;background:rgba(255,254,251,.93);color:var(--fg);
+  font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.carte-video__lecture{position:absolute;top:50%;left:50%;z-index:2;width:62px;height:62px;
+  border-radius:50%;transform:translate(-50%,-50%);background:rgba(255,254,251,.94);
+  box-shadow:0 6px 24px rgba(0,0,0,.25);transition:transform .25s ease}
+.carte-video__lecture::before{content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);
+  border-left:17px solid var(--fg);border-top:11px solid transparent;border-bottom:11px solid transparent}
+.carte-video:hover .carte-video__lecture{transform:translate(-50%,-50%) scale(1.08)}
+.carte-video__pied{position:absolute;left:0;right:0;bottom:0;z-index:2;display:grid;gap:.3rem;
+  padding:1rem 1rem 1.1rem}
+.carte-video__titre{font-family:var(--serif);font-weight:700;font-size:1.12rem;line-height:1.2;letter-spacing:-.01em}
+.carte-video__duree{font-size:.74rem;opacity:.82}
+
+/* La page d'une vidéo : l'écran à gauche, le propos à droite. */
+.film{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1.2rem,1rem + 2vw,2.8rem);
+  align-items:start;margin-block:clamp(.6rem,.5rem + .6vw,1rem)}
+.film__ecran{position:sticky;top:5.2rem;background:#0e0f0e;border-radius:calc(var(--rayon) + 4px);
+  padding:clamp(.45rem,.35rem + .5vw,.75rem);box-shadow:var(--relief-fort)}
+.film__ecran video{display:block;height:min(78vh,780px);width:auto;aspect-ratio:9/16;max-width:100%;
+  border-radius:var(--rayon);background:#000}
+.film__texte{background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  box-shadow:var(--relief);padding:clamp(1.2rem,1rem + 1.5vw,2.2rem)}
+.film__texte h1{font-size:clamp(1.6rem,1.25rem + 1.5vw,2.4rem);line-height:1.1;max-width:22ch}
+.film__resume{margin:.9rem 0 0;font-family:var(--serif);font-size:clamp(1.05rem,1rem + .3vw,1.2rem);
+  line-height:1.5;color:var(--fg);max-width:56ch}
+.film__dans{margin-top:1.4rem}
+.film__titre-liste{margin:0 0 .4rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--doux)}
+.film__questions{list-style:none;margin:0;padding:0;border-top:1px solid var(--trait)}
+.film__questions li{display:grid;gap:.15rem;padding:.75rem 0;border-bottom:1px solid var(--trait);max-width:62ch}
+.film__questions b{font-family:var(--serif);font-weight:700;font-size:1rem}
+.film__questions span{font-size:.92rem;line-height:1.5;color:var(--doux)}
+.film__lien{display:inline-block;margin-top:1.3rem;padding:.7rem 1.15rem;background:var(--fg);color:#fff;
+  text-decoration:none;font-size:.88rem;font-weight:600;border-radius:2px}
+.film__lien:hover{background:#000}
+.film__tout{margin:1rem 0 0;font-size:.82rem;color:var(--doux)}
+.film__tout a{color:inherit}
+@media (max-width:860px){
+  .film{grid-template-columns:minmax(0,1fr)}
+  .film__ecran{position:static;justify-self:center;width:min(100%,420px)}
+  .film__ecran video{height:auto;width:100%}
+}
+
+/* La vignette posée sur la page de soins, qui mène à la vidéo. */
+.vignette-video{display:grid;grid-template-columns:88px minmax(0,1fr);gap:.9rem;align-items:center;
+  padding:.65rem;background:var(--fg);color:#f3f2ee;text-decoration:none;border-radius:var(--rayon);
+  box-shadow:var(--relief);transition:transform .2s ease,box-shadow .2s ease}
+.vignette-video:hover{transform:translateY(-2px);box-shadow:var(--relief-fort)}
+.vignette-video__image{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;border-radius:2px}
+.vignette-video__image img{width:100%;height:100%;object-fit:cover;display:block}
+.vignette-video__lecture{position:absolute;top:50%;left:50%;width:32px;height:32px;border-radius:50%;
+  transform:translate(-50%,-50%);background:rgba(255,254,251,.93)}
+.vignette-video__lecture::before{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);
+  border-left:10px solid var(--fg);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.vignette-video__dit{display:grid;gap:.25rem}
+.vignette-video__sur{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+.vignette-video__titre{font-family:var(--serif);font-weight:700;font-size:1.05rem;line-height:1.2}
+.vignette-video__voir{font-size:.78rem;font-weight:600;opacity:.85}

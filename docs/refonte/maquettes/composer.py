@@ -487,6 +487,36 @@ ILLUSTRATIONS = {
 ILLUSTRATIONS_NUMEROTEES = {"bilan-esthetique-personnalise"}
 
 
+# ── une vignette vers la vidéo de la page ──────────────────────────────────
+# Franck, 25/10/2026 : « dans la page composite, une vignette photo de couverture
+# cliquable qui renvoie vers la page de cette vidéo ». C'est la vidéo qui déclare
+# sa page et son chapitre (videos/<slug>.txt) : la page n'a rien à tenir à jour.
+def vignettes_video(slug):
+    dossier = os.path.join(os.path.dirname(os.path.abspath(__file__)), "videos")
+    trouvees = {}
+    if not os.path.isdir(dossier):
+        return trouvees
+    for n in sorted(os.listdir(dossier)):
+        if not n.endswith(".txt"):
+            continue
+        tete = open(os.path.join(dossier, n), encoding="utf-8").read().partition("\n---\n")[0]
+        v = {k.strip(): val.strip() for k, _, val in (l.partition(":") for l in tete.splitlines()) if val}
+        if v.get("page") != slug:
+            continue
+        d = int(v["duree"])
+        duree = f"{d} s" if d < 60 else f"{d // 60} min {d % 60:02d}"
+        trouvees.setdefault(int(v.get("chapitre", 1)), []).append(
+            f'        <a class="vignette-video" href="video-{n[:-4]}.html">\n'
+            f'          <span class="vignette-video__image"><img src="{gen.VERS_DEPOT}src/assets/videos/'
+            f'{v["fichier"]}.jpg" alt="" loading="lazy"><span class="vignette-video__lecture" aria-hidden="true">'
+            f'</span></span>\n'
+            f'          <span class="vignette-video__dit"><span class="vignette-video__sur">En vidéo · {duree}</span>'
+            f'<span class="vignette-video__titre">{e(v.get("court", v["titre"]))}</span>'
+            f'<span class="vignette-video__voir">Voir la vidéo →</span></span>\n'
+            f'        </a>\n')
+    return trouvees
+
+
 def lier(texte, liens):
     """Rend cliquables, dans une légende déjà échappée, les mots donnés :
     un couple (mots, page) ou une liste de couples."""
@@ -586,6 +616,7 @@ def composer(slug, plan):
                  f'<figcaption>{lier(e(leg), liens)}</figcaption></figure>\n')
 
     corps = []
+    videos_page = vignettes_video(slug)
     n = len(plan["chapitres"])
     for k, ch in enumerate(plan["chapitres"], 1):
         avec_fiche = ch.get("fiche", [])
@@ -596,7 +627,7 @@ def composer(slug, plan):
             intro = "\n          ".join(f"<p>{e(x)}</p>" for x in resume)
             blocs = f'        <div class="bloc">\n          {intro}\n        </div>\n' + blocs
         zone = ' sect--zone' if k % 2 == 0 else ""
-        illus = illustration(slug, k)
+        illus = "".join(videos_page.get(k, [])) + illustration(slug, k)
         droite = ""
         if avec_fiche:
             droite = (f'      <div class="cote">\n{illus}        <div class="fiche">\n'
