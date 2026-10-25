@@ -50,7 +50,7 @@ Dr Franck Moyal        Cas cliniques        [ Prendre rendez-vous ]
 | Facettes céramique | `/facettes-dentaires-paris/` |
 | Facettes ou composite ? | `/facettes-ou-composite/` |
 | Éclaircissement | `/eclaircissement-dentaire-paris/` |
-| Réhabilitation des dents usées | `/rehabilitation-dents-usees/` |
+| ~~Réhabilitation des dents usées~~ | `/rehabilitation-dents-usees/` — **fondue dans `/usures-dentaires/` le 25/10/2026 (D95)** : redirection permanente à prévoir à la mise en ligne |
 | Bilan esthétique | `/bilan-esthetique-personnalise/` |
 
 ### Côté chirurgien-dentiste

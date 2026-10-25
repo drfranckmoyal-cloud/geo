@@ -197,20 +197,22 @@ R : [À compléter par Franck : tarif de la consultation de bilan.]
 Q : Combien de temps dure un bilan esthétique ?
 R : [À compléter par Franck : durée de la consultation, en une ou deux séances ?]
 
-== rehabilitation-dents-usees ==
-Q : Faut-il obligatoirement poser des couronnes ?
-R : Non, et de moins en moins. Les techniques adhésives reconstruisent les volumes perdus en ajoutant de la matière — composite, pièces partielles collées, céramiques — en gardant l’émail. Une couronne reste possible, mais elle n’est plus le point de départ.
-Q : Faut-il dévitaliser les dents ?
-R : Non, pas de façon systématique. L’approche adhésive vise justement à préserver la structure des dents et leur vitalité.
-Q : « Remonter l’occlusion », est-ce dangereux ?
-R : Non lorsque c’est planifié et justifié par le besoin de reconstruire. Les données montrent qu’une augmentation correctement préparée est bien tolérée ; elle est individualisée, et une phase de test n’est pas obligatoire pour tous.
+# Page fondue dans la page Usure le 25/10/2026 (D95) : ces questions ne sont plus publiées,
+# gardées ici pour mémoire.
+# == rehabilitation-dents-usees ==
+# Q : Faut-il obligatoirement poser des couronnes ?
+# R : Non, et de moins en moins. Les techniques adhésives reconstruisent les volumes perdus en ajoutant de la matière — composite, pièces partielles collées, céramiques — en gardant l’émail. Une couronne reste possible, mais elle n’est plus le point de départ.
+# Q : Faut-il dévitaliser les dents ?
+# R : Non, pas de façon systématique. L’approche adhésive vise justement à préserver la structure des dents et leur vitalité.
+# Q : « Remonter l’occlusion », est-ce dangereux ?
+# R : Non lorsque c’est planifié et justifié par le besoin de reconstruire. Les données montrent qu’une augmentation correctement préparée est bien tolérée ; elle est individualisée, et une phase de test n’est pas obligatoire pour tous.
 # à valider : protection nocturne
-Q : Les reconstructions sont-elles définitives ?
-R : Comme toute restauration, elles peuvent s’user, s’écailler ou demander un entretien. La réparabilité fait partie du choix des matériaux ; un suivi et, souvent, une protection nocturne sont prévus.
-Q : Peut-on tout reconstruire en composite ?
-R : C’est possible dans certains cas, mais ce n’est pas une règle : le choix dépend du projet, de la quantité de tissu perdu et des contraintes. Un même patient reçoit souvent plusieurs types de restaurations.
-Q : Combien coûte une réhabilitation ?
-R : Le prix est établi de manière personnalisée, selon le nombre de dents, les matériaux et les étapes du traitement, et vous est remis après le bilan.
+# Q : Les reconstructions sont-elles définitives ?
+# R : Comme toute restauration, elles peuvent s’user, s’écailler ou demander un entretien. La réparabilité fait partie du choix des matériaux ; un suivi et, souvent, une protection nocturne sont prévus.
+# Q : Peut-on tout reconstruire en composite ?
+# R : C’est possible dans certains cas, mais ce n’est pas une règle : le choix dépend du projet, de la quantité de tissu perdu et des contraintes. Un même patient reçoit souvent plusieurs types de restaurations.
+# Q : Combien coûte une réhabilitation ?
+# R : Le prix est établi de manière personnalisée, selon le nombre de dents, les matériaux et les étapes du traitement, et vous est remis après le bilan.
 
 == facettes-ou-composite ==
 Q : Lequel est le plus naturel ?

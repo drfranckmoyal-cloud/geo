@@ -12,7 +12,7 @@ carte.eclaircissement-dentaire-paris = Gouttières à domicile, suivi au cabinet
 carte.taches-dentaires-dyschromies-icon = Taches blanches, MIH, fluorose. Sans fraise.
 carte.composite-bonding-paris = Résine stratifiée sur la dent, en une séance.
 carte.facettes-dentaires-paris = Céramique collée sur la face visible de la dent.
-carte.rehabilitation-dents-usees = Rendre la hauteur et la fonction.
+carte.usures-dentaires = Rendre la hauteur et la fonction.
 carte.tca-dents = Ce que le chirurgien-dentiste repère en premier.
 
 
@@ -21,7 +21,7 @@ titre.facettes-dentaires-paris = Céramique collée
 titre.composite-bonding-paris = Résine stratifiée, en une séance
 titre.eclaircissement-dentaire-paris = Gouttières à domicile
 titre.taches-dentaires-dyschromies-icon = Taches blanches, MIH, fluorose
-titre.rehabilitation-dents-usees = Technique additive
+# titre.rehabilitation-dents-usees = Technique additive   (page fondue dans la page Usure, 25/10/2026)
 titre.bilan-esthetique-personnalise = Première consultation
 titre.dentisterie-esthetique-paris = Vue d’ensemble des actes
 titre.facettes-ou-composite = Comparatif

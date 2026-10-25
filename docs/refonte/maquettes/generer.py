@@ -41,9 +41,10 @@ ACTES = [
     ("Composite bonding", "composite-bonding-paris"),
     ("Éclaircissement dentaire", "eclaircissement-dentaire-paris"),
     ("Infiltration ICON", "taches-dentaires-dyschromies-icon"),
-    ("Réhabilitation des dents usées", "rehabilitation-dents-usees"),
     ("Bilan esthétique", "bilan-esthetique-personnalise"),
 ]
+# « Réhabilitation des dents usées » n'est plus une page : fondue dans la page Usure
+# le 25/10/2026 (Franck : « il faut la fondre en une seule page Usures dentaires »).
 # Ni des actes ni des sujets : elles aident à choisir entre les actes.
 # Elles ont leur propre colonne, sinon elles tombent du menu — c'est arrivé,
 # et la page pilier du site avec elles.
@@ -112,8 +113,10 @@ A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
              "contact", "tca-dents"} | _pages_composees()
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui,
 # et tout lien qui le visait mène désormais à celle qui l'a absorbé
-FONDUES = {"diagnostic-usures-dentaires"}
-FONDUES_VERS = {"diagnostic-usures-dentaires": "usures-dentaires"}
+# … et la réhabilitation des dents usées aussi, le 25/10/2026 (D95).
+FONDUES_VERS = {"diagnostic-usures-dentaires": "usures-dentaires",
+                "rehabilitation-dents-usees": "usures-dentaires"}
+FONDUES = set(FONDUES_VERS)
 
 
 # ── extraction ────────────────────────────────────────────────────────────────
@@ -658,7 +661,6 @@ TITRES = {
     "composite-bonding-paris": ("Composite bonding", "Résine stratifiée, en une séance"),
     "eclaircissement-dentaire-paris": ("Éclaircissement dentaire", "Gouttières à domicile"),
     "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
-    "rehabilitation-dents-usees": ("Réhabilitation des dents usées", "Technique additive"),
     "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),
     # pour s'y retrouver
     "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
@@ -797,14 +799,13 @@ LIENS_DANS_LE_TEXTE = [
     ("composite-bonding-paris", [r"composite bonding", r"composites? stratifi[ée]s?", r"\bcomposites?\b"]),
     ("eclaircissement-dentaire-paris", [r"[ée]claircissement dentaire", r"[ée]claircissement", r"blanchiment dentaire", r"\bblanchiment\b"]),
     ("taches-dentaires-dyschromies-icon", [r"taches? blanches?", r"infiltration de r[ée]sine", r"\bMIH\b", r"\bICON\b"]),
-    ("usures-dentaires", [r"usures? dentaires?", r"\busures?\b"]),
+    ("usures-dentaires", [r"usures? dentaires?", r"r[ée]habilitation des dents us[ée]es", r"\busures?\b"]),
     ("erosion-dentaire", [r"[ée]rosion dentaire", r"\b[ée]rosions?\b"]),
     ("bruxisme-usure-dentaire", [r"\bbruxisme\b"]),
     ("dents-courtes-usees", [r"dents courtes"]),
     ("tca-dents", [r"troubles? des conduites alimentaires", r"troubles? du comportement alimentaire", r"\bTCA\b"]),
     ("anorexie-erosion-dentaire-sans-vomissements", [r"anorexie restrictive", r"\banorexie\b"]),
     ("bilan-esthetique-personnalise", [r"bilan esth[ée]tique"]),
-    ("rehabilitation-dents-usees", [r"r[ée]habilitation des dents us[ée]es", r"r[ée]habilitation adh[ée]sive"]),
     ("dentisterie-esthetique-paris", [r"dentisterie esth[ée]tique(?: et adh[ée]sive)?"]),
 ]
 SANS_MAILLAGE = {"index", "espace-patients", "espace-pro", "contact", "sommaire",
@@ -1049,6 +1050,10 @@ def reharmoniser():
                                         f'<h1>{e(titre)}</h1>\n'
                                         f'        <p class="sous-titre">{e(sous)}</p>', 1)
         page = re.sub(r'style\.css\?v=\d+', f"style.css?v={VERSION}", page)
+        # un lien vers une page fondue mène à celle qui l'a absorbée, partout
+        for _f, _vers in FONDUES_VERS.items():
+            page = page.replace(f'href="{_f}.html', f'href="{_vers}.html')
+            page = page.replace(f"{RACINE_WEB}{_f}/", f"{RACINE_WEB}{_vers}/")
         page = normaliser_questions(page, slug)
         page, poses = relier_dans_le_texte(page, slug)
         if poses:
@@ -1085,7 +1090,11 @@ def main():
             passes.append((court, "faite à la main"))
             continue
         if court in FONDUES:
-            passes.append((court, "fondue dans les usures (D77)"))
+            # l'ancienne page ne doit pas rester dans le dossier : elle y serait encore servie
+            ancienne = os.path.join(SORTIE, f"{court}.html")
+            if os.path.exists(ancienne):
+                os.remove(ancienne)
+            passes.append((court, f"fondue dans {FONDUES_VERS[court]}"))
             continue
         page = lire(slug)
         if not page:

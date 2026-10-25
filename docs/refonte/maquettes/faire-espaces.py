@@ -202,12 +202,13 @@ SOINS = [
      "Sourire après la pose de facettes en céramique",
      [("Facettes ou composite ?", "facettes-ou-composite"),
       ("Un cas documenté", "cas-planification-facettes-ceramique")]),
-    ("Réhabilitation des dents usées",
+    # La réhabilitation des dents usées est fondue dans la page Usure (25/10/2026) :
+    # la carte porte le nom de la page qu'elle ouvre.
+    ("Usure dentaire",
      "Rendre la hauteur et la fonction.",
-     "rehabilitation-dents-usees", "rehabilitation-usure-apres.jpg", "",
+     "usures-dentaires", "rehabilitation-usure-apres.jpg", "",
      "Sourire après la réhabilitation de dents usées",
-     [("Usure dentaire", "usures-dentaires"),
-      ("Érosion", "erosion-dentaire"),
+     [("Érosion", "erosion-dentaire"),
       ("Bruxisme", "bruxisme-usure-dentaire"),
       ("Dents courtes", "dents-courtes-usees")]),
     # Jamais une photographie empruntée à un autre cas : ce serait faire porter un

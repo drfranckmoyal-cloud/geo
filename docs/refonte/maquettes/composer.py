@@ -42,7 +42,8 @@ MEUBLE = ("dr franck moyal — chirurgien", "mis à jour le", "voir les ", "dent
 
 # Le diagnostic des usures a été fondu dans la page Usures (D77) : tout lien qui
 # le visait doit mener là, sinon il tombe sur une page qui n'existe plus.
-FONDUES = {"diagnostic-usures-dentaires": "usures-dentaires"}
+FONDUES = {"diagnostic-usures-dentaires": "usures-dentaires",
+           "rehabilitation-dents-usees": "usures-dentaires"}
 
 
 # ── lecture ───────────────────────────────────────────────────────────────────
@@ -804,13 +805,8 @@ PLANS = {
   ]},
   # « tca-dents » n'est plus composée ici : la page est écrite à la main depuis le 25/10/2026,
   # sur le plan validé par Franck (livrables/tca-seo-geo/PLAN-PAGE-TCA.md), comme la page Usure.
-  "rehabilitation-dents-usees": {"chapitres": [
-    {"titre": "Pourquoi reconstruire", "sections": [1, 2, 3], "fiche": [3]},
-    {"titre": "Avec quoi reconstruire", "sections": [4, 5], "fiche": [5]},
-    {"titre": "La dimension verticale", "sections": [6, 7], "fiche": [7]},
-    {"titre": "Comment on procède", "sections": [8, 10], "fiche": [8]},
-    {"titre": "Et l’esthétique ?", "sections": [9]},
-  ]},
+  # « rehabilitation-dents-usees » n'est plus composée : fondue dans la page Usure
+  # le 25/10/2026 (D95), son contenu utile est passé au chapitre 5 de celle-ci.
   "anorexie-erosion-dentaire-sans-vomissements": {"chapitres": [
     {"titre": "Le risque existe sans vomissements", "sections": [1]},
     {"titre": "Quatre mécanismes", "sections": [2, 3, 4, 5, 6], "fiche": [4]},
