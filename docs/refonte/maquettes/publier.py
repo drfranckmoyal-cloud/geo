@@ -31,7 +31,11 @@ import sys
 ICI = os.path.dirname(os.path.abspath(__file__))
 DEPOT = os.path.abspath(os.path.join(ICI, "..", "..", ".."))
 SITE = os.path.join(ICI, "site")
-SORTIE = os.path.join(DEPOT, "dist-refonte")
+# Le Bureau est synchronisé par iCloud : un dossier effacé puis refait aussitôt y laisse des
+# copies « cas-cliniques 2 », « assets 2 »… (constaté le 25/10/2026). Un dossier en « .nosync »
+# est ignoré d'iCloud ; dist-refonte n'en est qu'un raccourci, que tout le reste utilise.
+SORTIE = os.path.join(DEPOT, "dist-refonte.nosync")
+RACCOURCI = os.path.join(DEPOT, "dist-refonte")
 PUBLIC = os.path.join(DEPOT, "public")
 POLICES = os.path.join(DEPOT, "src", "assets", "fonts")
 RACINE = "https://drfranckmoyal.fr"
@@ -232,6 +236,10 @@ def controler(adresses):
 
 
 def main():
+    if os.path.isdir(RACCOURCI) and not os.path.islink(RACCOURCI):
+        shutil.rmtree(RACCOURCI)          # l'ancien dossier, synchronisé par iCloud
+    if not os.path.lexists(RACCOURCI):
+        os.symlink(os.path.basename(SORTIE), RACCOURCI)
     if os.path.exists(SORTIE):
         shutil.rmtree(SORTIE)
     os.makedirs(SORTIE)
@@ -281,6 +289,14 @@ def main():
     plan, index = plan_du_site(adresses)
     for nom, contenu in (("sitemap-0.xml", plan), ("sitemap.xml", plan), ("sitemap-index.xml", index)):
         open(os.path.join(SORTIE, nom), "w", encoding="utf-8").write(contenu)
+
+    # Tout lisible par le serveur web : un fichier réglé « moi seul » sur le Mac y garderait
+    # ce réglage et répondrait 403 (le portrait, le 25/10/2026).
+    for racine, dossiers, fichiers in os.walk(SORTIE):
+        for d in dossiers:
+            os.chmod(os.path.join(racine, d), 0o755)
+        for f in fichiers:
+            os.chmod(os.path.join(racine, f), 0o644)
 
     controler(adresses)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(SORTIE) for f in fs)

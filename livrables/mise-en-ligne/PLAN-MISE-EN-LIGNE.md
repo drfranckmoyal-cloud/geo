@@ -70,6 +70,8 @@ Le reste peut suivre la mise en ligne : le site se met à jour en une commande, 
 
 ### Étape 3 — Le dépôt (avec l'accord explicite de Franck, le jour venu)
 
+**Faite le 25/10/2026 (D97)**, sur l'accord de Franck (« toutes les autorisations sont OK, tu peux mettre en ligne »). Sauvegarde : `domains/drfranckmoyal.fr/sauvegardes/public_html-202610252154`.
+
 1. Sauvegarde du site actuel, sur le serveur (hors du dossier public) et sur le Mac : retour arrière possible en une
    commande. Le code de l'ancien site reste de toute façon dans GitHub.
 2. Dépôt par SSH, comme pour Smile Club : seuls les fichiers changés partent, le site n'est jamais vide.
