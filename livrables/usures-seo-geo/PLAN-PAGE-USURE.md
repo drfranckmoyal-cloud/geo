@@ -25,19 +25,25 @@ la prévention, les preuves.
 | 4 | Est-ce grave ? Ce que dit le bilan d'usure | Irréversible mais pas forcément grave ; ce qui compte : active ou stable, vitesse, cause ; le bilan : questions (alimentation, reflux, médicaments, serrement), examen, indice BEWE, photographies et empreinte numérique comparées dans le temps | usure dentaire grave, bilan usure dentaire | « Comment on l'évalue » (et la page Diagnostic, fondue, D77) |
 | 5 | Comment soigner l'usure dentaire ? Peut-on réparer des dents usées ? | D'abord arrêter la cause ; puis, si besoin, ajouter de la matière : composite, facettes, onlays et overlays collés ; usure avancée : réhabilitation globale avec rehausse de la dimension verticale ; le moins de couronnes possible ; renvois Composite, Facettes, Réhabilitation | comment soigner l'usure dentaire, réparer dents usées, traitement usure dentaire, reconstruction dents usées | « Ce qu'on fait — et ce qu'on ne fait pas », complété des traitements |
 | — | Bande « Avant / après » | Deux ou trois cas d'usure, puis renvoi au cas publié (usures et facettes minimalement invasives) | | photos à fournir (dossier 08) |
-| 6 | Que puis-je faire moi-même ? | Espacer les boissons acides, ne pas brosser fort ni juste après un acide, dentifrice fluoré, signaler un reflux, porter la gouttière si elle est prescrite | protéger ses dents de l'usure, émail usé que faire | une question de la FAQ actuelle |
+| 6 | Quel dentiste consulter pour une usure dentaire ? | **Axe demandé par Franck (25/10)** : c'est la décision la plus importante ; une usure avancée ne se répare pas comme une carie (causes, analyse de l'occlusion, planification) ; mal conduite, elle peut compromettre confort et mastication ; il faut un praticien qui en a une réelle expérience. Pas de spécialité officielle des usures en France : on le dit, et les faits parlent — conférences (ARTEMIS, Alpha Omega Paris, Marseille et Jeunes Paris, Entretiens de Garancière), Smile Club Formations, consultation des internes à la Pitié-Salpêtrière ; deux photos de conférence, liens vers AO News, ARTEMIS, Eugenol, Blendi, Smile Club. À la troisième personne. | quel dentiste consulter usure dentaire, dentiste spécialiste usure dentaire paris | nouveau |
 
 ## Après les chapitres
 
-- **Encadré « Qui vous reçoit »** : la consultation des internes en dentisterie esthétique et usures
-  (Pitié-Salpêtrière) ; l'enseignement des usures aux chirurgiens-dentistes (Entretiens de Garancière 2025,
-  formation Eugenol, AO News 2026) ; une photo de Franck en conférence, légendée (événement, sujet).
+- « Que puis-je faire moi-même ? » passe dans les questions fréquentes (elle y est déjà).
 - **Questions fréquentes** (8 au plus) : celles de Franck, plus celles que Google affiche : « Est-il possible de
   réparer des dents usées ? », « L'émail usé peut-il se reconstituer ? », « Quel dentiste consulter pour une
   usure dentaire ? », « Combien coûte le traitement ? » (règle des prix, D84).
 - **Sources scientifiques**, puis l'appel « Faire le point ».
 
-## Photos
+## Photos (dossier 06, montages le 25/10/2026)
+
+- Couverture : érosion acide avancée → réhabilitation sans préparation en composites stratifiés (lien Composite).
+- Chapitre 2 : usures avancées dues à des années d'érosion acide (reflux) et au grincement.
+- Chapitre 5 : réhabilitation par facettes et overlays en composite, sans préparation (montage de Franck, étiquettes ajoutées).
+- Bande après le chapitre 5 : molaires usées, overlays en céramique.
+- Chapitre 6 : les deux photographies de conférence (événements à préciser par Franck).
+
+Règles :
 
 - La couverture reste un avant/après clinique.
 - La photo de conférence va dans l'encadré « Qui vous reçoit » ; les autres photos de conférence, sur la page
@@ -46,4 +52,4 @@ la prévention, les preuves.
 
 ## Statut
 
-**En attente de la validation du plan par Franck.** Ensuite : Claude rédige, Franck corrige.
+Plan révisé le 25/10/2026 après la remarque de Franck sur le chapitre 6. **En attente de sa validation.** Ne pas écrire « spécialiste » ni « reconnu en France » (titre réservé aux spécialités officielles, pas d'auto-qualification) : à faire valider par Franck.
