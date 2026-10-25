@@ -34,3 +34,6 @@ scripts/.zoom.mjs
 
 # Archives du site prêtes à déposer chez l'hébergeur (régénérables)
 livrables/deploiement/
+
+# version en ligne de la refonte, refabriquée par docs/refonte/maquettes/publier.py
+dist-refonte/

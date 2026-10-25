@@ -36,6 +36,8 @@ le dépôt sur le serveur ne se fera qu'avec son accord explicite, donné au mom
 
 ### Étape 1 — Fabriquer la version « en ligne » (Claude)
 
+**Faite le 25/10/2026 (D96)** : `npm run refonte`, aperçu sur le port 4340, essai de dépôt (135 fichiers à envoyer, 180 à retirer). Les 20 liens extérieurs perdus par la maquette sont rétablis.
+
 Un programme de publication transforme la maquette en site déposable, sans toucher à la maquette :
 
 - chaque page à son adresse propre (`usures-dentaires.html` → `/usures-dentaires/`), les cas cliniques sous
@@ -61,7 +63,7 @@ Bloquantes :
 1. ~~**Hébergement**~~ — **réglé le 25/10/2026** : offre active, en renouvellement automatique, prochaine échéance le 22/11/2026.
 2. **Le guide TCA** porte le logo du GHU Paris : accord de l'hôpital, ou guide retiré jusqu'à son accord.
 3. **La vidéo de la première consultation** montre le visage d'une patiente : accord confirmé pour le site.
-4. **Les liens extérieurs** perdus dans la maquette sur les pages Conférences, Médias et Publications : à rétablir.
+4. ~~**Les liens extérieurs** perdus dans la maquette~~ — **rétablis le 25/10/2026** (D96).
 5. **La liste de corrections de Franck.**
 
 Le reste peut suivre la mise en ligne : le site se met à jour en une commande, à tout moment.

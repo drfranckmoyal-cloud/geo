@@ -17,7 +17,10 @@
     "photos": "node scripts/prepare-photos.mjs",
     "photos-usure": "node scripts/prepare-photos-usure-3step.mjs",
     "deposer": "find dist \\( -name '* [0-9]' -o -name '* [0-9].*' \\) -exec rm -rf {} + 2>/dev/null; node scripts/deposer.mjs",
-    "publier": "npm run build && npm run verify && npm run deposer"
+    "publier": "npm run build && npm run verify && npm run deposer",
+    "refonte": "bash docs/refonte/maquettes/construire.sh && python3 docs/refonte/maquettes/publier.py",
+    "refonte:essai": "DOSSIER=dist-refonte node scripts/deposer.mjs --essai",
+    "refonte:deposer": "DOSSIER=dist-refonte node scripts/deposer.mjs --sauvegarde"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

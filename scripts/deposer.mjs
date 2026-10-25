@@ -12,7 +12,7 @@
 //
 // Les réglages vivent dans .env, qui n'est pas versionné. L'authentification se fait
 // par clé : aucun mot de passe nulle part.
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
 import { join, posix, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,7 +22,14 @@ import { createHash } from "node:crypto";
 
 const executer = promisify(execFile);
 const racine = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const DIST = join(racine, "dist");
+// Le dossier déposé : dist/ (le site Astro) par défaut, ou celui de la refonte
+// (DOSSIER=dist-refonte, fabriqué par docs/refonte/maquettes/publier.py).
+const NOM_DOSSIER = process.env.DOSSIER || "dist";
+const DIST = join(racine, NOM_DOSSIER);
+// --essai : compare et dit ce qui partirait, sans rien envoyer.
+// --sauvegarde : copie d'abord le site en ligne sur le serveur, hors du dossier public.
+const ESSAI = process.argv.includes("--essai");
+const SAUVEGARDE = process.argv.includes("--sauvegarde");
 const ORIGINE = "https://drfranckmoyal.fr/";
 
 // ——— les réglages ————————————————————————————————————————————————
@@ -96,7 +103,7 @@ Impossible de se connecter au serveur en SSH.
 
 async function main() {
   if (!existsSync(DIST)) {
-    console.error("Le dossier dist/ n'existe pas. Lancez d'abord : npm run build");
+    console.error(`Le dossier ${NOM_DOSSIER}/ n'existe pas : fabriquez d'abord le site.`);
     process.exit(1);
   }
   await verifierConnexion();
@@ -142,6 +149,21 @@ async function main() {
     console.log();
   }
 
+  if (ESSAI) {
+    console.log("Essai seulement : rien n'a été envoyé.");
+    return;
+  }
+
+  // Avant un changement de site, une copie de ce qui est en ligne, hors de public_html :
+  // revenir en arrière, c'est la recopier à sa place.
+  if (SAUVEGARDE) {
+    const horodatage = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
+    const copie = `${posix.dirname(CHEMIN)}/sauvegardes/public_html-${horodatage}`;
+    await executer("ssh", [...sshArgs, cible,
+      `mkdir -p "${posix.dirname(copie)}" && cp -a "${CHEMIN}" "${copie}" && du -sh "${copie}"`]);
+    console.log(`Site en ligne sauvegardé sur le serveur : ${copie}\n`);
+  }
+
   // rsync fait le transfert. --delete retire du serveur ce que le site ne produit plus ;
   // public_html ne contient rien d'autre que notre build, et la liste ci-dessus le redit
   // à chaque fois avant que ça parte.
@@ -157,6 +179,12 @@ async function main() {
   const soucis = [];
   for (const f of fichiers) {
     if (f.distant === ".htaccess") continue; // 403 attendu : Apache refuse de le servir
+    if ((await stat(f.chemin)).size > 5e6) {
+      const t = await fetch(ORIGINE + f.distant, { method: "HEAD", cache: "no-store" });
+      if (t.ok && Number(t.headers.get("content-length")) === (await stat(f.chemin)).size) bons++;
+      else soucis.push(`${f.distant} (${t.status})`);
+      continue;
+    }
     const r = await fetch(ORIGINE + f.distant, { cache: "no-store" });
     const enLigne = r.ok
       ? createHash("sha1").update(Buffer.from(await r.arrayBuffer())).digest("hex")

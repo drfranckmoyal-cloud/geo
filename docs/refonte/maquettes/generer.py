@@ -123,14 +123,18 @@ FONDUES = set(FONDUES_VERS)
 # Un numéro de téléphone et une adresse e-mail doivent rester cliquables : sur
 # un téléphone, c'est la seule façon d'appeler le cabinet d'un geste. Le site en
 # ligne les porte ; la mise en page les effaçait avec le reste du balisage.
-_APPEL = re.compile(r'<a\b[^>]*href="((?:tel|mailto):[^"]+)"[^>]*>(.*?)</a>', re.S)
+# Les liens vers l'extérieur aussi : AO News, Eugenol, Blendi, Le Fil Dentaire, l'AP-HP…
+# sont les preuves de ce que la page affirme. La mise en page les réduisait à leur texte
+# (relevé du 25/10/2026 : vingt liens perdus sur quatre pages).
+_APPEL = re.compile(r'<a\b[^>]*href="((?:tel|mailto):[^"]+|https?://(?!drfranckmoyal\.fr)[^"]+)"[^>]*>(.*?)</a>',
+                    re.S)
 
 
 def _mettre_de_cote(frag):
     gardes = []
 
     def prendre(m):
-        gardes.append((m.group(1), re.sub(r"<[^>]+>", "", m.group(2)).strip()))
+        gardes.append((m.group(1), H.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(2))).strip())))
         return "\x00%d\x00" % (len(gardes) - 1)
 
     return _APPEL.sub(prendre, frag), gardes
@@ -138,7 +142,8 @@ def _mettre_de_cote(frag):
 
 def _remettre(frag, gardes):
     for i, (ou, quoi) in enumerate(gardes):
-        frag = frag.replace("\x00%d\x00" % i, '<a href="%s">%s</a>' % (ou, quoi))
+        dehors = ' target="_blank" rel="noopener"' if ou.startswith("http") else ""
+        frag = frag.replace("\x00%d\x00" % i, '<a href="%s"%s>%s</a>' % (ou, dehors, H.escape(quoi, quote=False)))
     return frag
 
 
@@ -249,7 +254,7 @@ def lire(slug):
                  and "Dr Franck Moyal — Chirurgien" not in p
                  and p != page["chapo"]]
         lis = [texte(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", sec, re.S)]
-        lis = [l for l in lis if 10 < len(l) < 240]
+        lis = [l for l in lis if 10 < len(re.sub(r"<[^>]+>", "", l)) < 240]
         liens = []
         for href, lib in re.findall(r'<a[^>]*href="(/[^"#?]+/)"[^>]*>(.*?)</a>', sec, re.S):
             lib = texte(lib)
@@ -272,9 +277,9 @@ def e(s):
         out = out.replace(f"&lt;{t}&gt;", f"<{t}>").replace(f"&lt;/{t}&gt;", f"</{t}>")
     # Les liens d'appel portent un attribut : la liste blanche ci-dessus, qui ne
     # connaît que les balises nues, les laissait échappés et donc affichés en clair.
-    out = re.sub(r'&lt;a href="((?:tel|mailto):[^"]+)"&gt;(.*?)&lt;/a&gt;',
-                 lambda m: '<a href="%s">%s</a>' % (m.group(1).replace("&amp;", "&"),
-                                                    m.group(2)),
+    out = re.sub(r'&lt;a href="((?:tel|mailto|https?):[^"]+)"( target="_blank" rel="noopener")?&gt;(.*?)&lt;/a&gt;',
+                 lambda m: '<a href="%s"%s>%s</a>' % (m.group(1).replace("&amp;", "&"),
+                                                      m.group(2) or "", m.group(3).replace("&amp;", "&")),
                  out, flags=re.S)
     return out
 
@@ -423,7 +428,11 @@ def rendre(page):
             ) + "</p>"
 
         if s["li"]:
-            items = "\n            ".join(f"<li>{e(l)}</li>" for l in s["li"][:7])
+            # sept puces de texte au plus, mais jamais une preuve coupée : une puce qui
+            # mène à l'extérieur (une source, un programme, un entretien) reste toujours
+            simples = [l for l in s["li"] if "<a href=" not in l][:7]
+            items = "\n            ".join(f"<li>{e(l)}</li>" for l in s["li"]
+                                         if "<a href=" in l or l in simples)
             corps.append(f'''  <section class="{cls}">
     <div class="contenu chapitre">
       <div>
