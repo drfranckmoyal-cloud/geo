@@ -5,7 +5,7 @@
 ## Ce que c'est
 
 Chaque matin à 8 h, un agent relève la position de **drfranckmoyal.fr** dans Google sur
-**47 mots-clés** choisis par Franck, écrit le relevé du jour, le compare à celui de la
+**63 mots-clés** (47 choisis par Franck, puis complétés), écrit le relevé du jour, le compare à celui de la
 veille, et dit ce qui a bougé.
 
 La source est **Search Console** — les chiffres de Google lui-même, pas une estimation.
@@ -18,7 +18,7 @@ un test anti-robot au bout de quelques requêtes.
 |---|---|
 | `mots-cles.json` | Les 47 termes, rangés en six familles. **C'est ici qu'on ajoute ou retire un mot.** |
 | `releves/AAAA-MM-JJ.json` | Un relevé par jour : clics, impressions et position de chaque terme. |
-| `comparer.mjs` | Compare deux relevés. `node suivi/comparer.mjs` prend le dernier contre le précédent. |
+| `comparer.mjs` | Compare deux relevés. `node suivi/comparer.mjs` prend le dernier contre le précédent, puis liste tous les termes du plus actif au moins actif. |
 
 ## Lire un relevé
 

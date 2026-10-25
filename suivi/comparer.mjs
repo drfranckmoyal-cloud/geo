@@ -80,3 +80,13 @@ bloc(`✕ ${sorties.length} terme(s) qui ne sortent plus`,
 
 const absents = Object.entries(courant.termes).filter(([, v]) => v.position == null).length;
 console.log(`${stables.length} stable(s), ${absents} terme(s) toujours absents sur ${Object.keys(courant.termes).length}.`);
+
+// La liste complète, du terme le plus actif au moins actif : d'abord les impressions,
+// puis les clics, puis la meilleure position. Les absents ferment la marche.
+const tous = Object.entries(courant.termes).sort(([ma, a], [mb, b]) =>
+  (b.impressions - a.impressions) || (b.clics - a.clics) ||
+  ((a.position ?? 999) - (b.position ?? 999)) || ma.localeCompare(mb, "fr"));
+console.log(`\nTous les termes suivis, du plus actif au moins actif\n`);
+console.log(`   impr.  clics  position  terme`);
+tous.forEach(([m, v]) => console.log(
+  `  ${String(v.impressions).padStart(6)} ${String(v.clics).padStart(6)}  ${(v.position == null ? "absent" : String(v.position)).padStart(8)}  ${m}`));
