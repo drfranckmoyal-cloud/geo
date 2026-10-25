@@ -58,8 +58,7 @@ passe sur le serveur du portail, pour l'essayer sur téléphone.
 
 Bloquantes :
 
-1. **Hébergement** : l'offre Hostinger arrivait à échéance le 22/10/2026 (toujours « en attente » au tableau de bord).
-   Le site répond encore ; vérifier dans hPanel que le renouvellement est fait.
+1. ~~**Hébergement**~~ — **réglé le 25/10/2026** : offre active, en renouvellement automatique, prochaine échéance le 22/11/2026.
 2. **Le guide TCA** porte le logo du GHU Paris : accord de l'hôpital, ou guide retiré jusqu'à son accord.
 3. **La vidéo de la première consultation** montre le visage d'une patiente : accord confirmé pour le site.
 4. **Les liens extérieurs** perdus dans la maquette sur les pages Conférences, Médias et Publications : à rétablir.
@@ -85,7 +84,7 @@ Le reste peut suivre la mise en ligne : le site se met à jour en une commande, 
 
 ## 4. Ce que Franck décide
 
-1. Vérifier le renouvellement de l'hébergement.
+1. ~~Vérifier le renouvellement de l'hébergement~~ — fait.
 2. Sa liste de corrections, et ce qui doit absolument être fait avant le lancement.
 3. Le guide TCA (logo du GHU) et la vidéo de consultation (accord de la patiente).
 4. La date de mise en ligne.
