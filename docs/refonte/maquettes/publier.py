@@ -54,6 +54,11 @@ MEDIAS = [("../../../../src/assets/photos/cas/", "/assets/photos/"),
           ("img/", "/assets/img/")]
 FICHIERS_SITE = {"style.css": "/assets/style.css", "menu.js": "/assets/menu.js"}
 
+# Les données structurées reprises du site Astro citent des images de son dossier /_astro/,
+# effacé à la mise en ligne de la refonte : on les remplace par leur équivalent publié ici.
+ANCIENNES_IMAGES = [(r"https://drfranckmoyal\.fr/_astro/portrait-franck\.[^\"]+",
+                     "/assets/img/portrait-franck.jpg", "img/portrait-franck.jpg")]
+
 PIED_MAQUETTE = "Maquette de refonte — rien n’est en ligne. Mentions légales."
 PIED_EN_LIGNE = '© 2026 Dr Franck Moyal · <a href="/mentions-legales/">Mentions légales</a>'
 ICONES = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n'
@@ -165,6 +170,14 @@ def htaccess():
     base = open(os.path.join(PUBLIC, ".htaccess"), encoding="utf-8").read().rstrip() + "\n"
     regles = "\n".join(f"RewriteRule ^{a}/?$ {RACINE}/{b}/ [R=301,L]" for a, b in sorted(FONDUES.items()))
     return base + f"""
+# Les pages se revalident à chaque visite : le navigateur ne ressert jamais une ancienne
+# version gardée en mémoire (l'accueil de l'ancien site, constaté le 25/10/2026).
+<IfModule mod_headers.c>
+  <FilesMatch "\\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
 # Pages fondues dans une autre lors de la refonte : leur adresse, connue de Google,
 # mène définitivement à celle qui les a absorbées (D77, D95).
 {regles}
@@ -210,7 +223,7 @@ def controler(adresses):
             chemin = os.path.join(racine, nom)
             court = os.path.relpath(chemin, SORTIE)
             h = open(chemin, encoding="utf-8").read()
-            for trace in ("../../../../", "fonts.googleapis", "Maquette de refonte"):
+            for trace in ("../../../../", "fonts.googleapis", "Maquette de refonte", "/_astro/"):
                 if trace in h:
                     problemes.append(f"{court} : reste « {trace} »")
             for v in re.findall(r'\b(?:href|src|poster)="(/[^"]*)"', h):
@@ -261,6 +274,10 @@ def main():
         url = adresse(slug)
         page = open(os.path.join(SITE, nom), encoding="utf-8").read()
         page = reecrire(page, slug, a_copier)
+        for motif, en_ligne, source in ANCIENNES_IMAGES:
+            if re.search(motif, page):
+                page = re.sub(motif, RACINE + en_ligne, page)
+                a_copier[en_ligne] = os.path.join(SITE, source)
         page = entete(page, slug, url)
         if PIED_MAQUETTE in page:
             page = page.replace(PIED_MAQUETTE, PIED_EN_LIGNE)
