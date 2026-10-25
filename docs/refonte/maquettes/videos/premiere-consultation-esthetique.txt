@@ -1,0 +1,15 @@
+titre: Comment se déroule une première consultation esthétique
+court: La première consultation esthétique
+theme: Bilan esthétique
+page: bilan-esthetique-personnalise
+lien: Tout savoir sur le bilan esthétique
+chapitre: 1
+fichier: premiere-consultation-esthetique
+duree: 42
+date: 2026-10-25
+description: Le Dr Franck Moyal vous emmène dans une première consultation esthétique : l’écoute de la demande, l’examen, le bilan photographique, l’empreinte numérique et la planification du traitement avec le patient.
+---
+Par quoi commence la consultation ? | Par l’écoute : ce qui vous gêne, ce que vous souhaitez changer, pour proposer les solutions les plus justes.
+Que comprend l’examen ? | Un examen méthodique de la bouche, puis un bilan photographique complet pour documenter et étudier le cas.
+Pourquoi une empreinte numérique ? | La caméra enregistre les dents en trois dimensions : le cas se planifie ensuite sur les logiciels de planification.
+Comment le traitement est-il choisi ? | La planification se fait avec vous, pour vous proposer le traitement.

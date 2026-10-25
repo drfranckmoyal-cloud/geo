@@ -47,6 +47,11 @@ def lire(chemin):
     v["questions"] = [tuple(x.strip() for x in l.split("|", 1))
                       for l in corps.splitlines() if "|" in l]
     v["duree"] = int(v["duree"])
+    aussi, v["aussi"] = v.get("aussi", ""), []
+    for x in aussi.split(","):
+        if x.strip():
+            page, _, k = x.strip().partition(":")
+            v["aussi"].append((page.strip(), int(k) if k else 1))
     v["fichier_page"] = f"video-{v['slug']}"
     v["url"] = f"{G.RACINE_WEB}videos/{v['slug']}/"
     return v
@@ -57,6 +62,55 @@ def toutes():
         return []
     return sorted((lire(os.path.join(SOURCES, n)) for n in os.listdir(SOURCES) if n.endswith(".txt")),
                   key=lambda v: v["date"], reverse=True)
+
+
+def cibles(v):
+    """Les pages qui portent la vignette de la vidéo, chacune avec son chapitre."""
+    return [(v["page"], int(v.get("chapitre", 1)))] + v["aussi"]
+
+
+def vignette(v):
+    return (f'        <a class="vignette-video" href="{v['fichier_page']}.html">\n'
+            f'          <span class="vignette-video__image"><img src="{MEDIA}{v['fichier']}.jpg" alt="" '
+            f'loading="lazy"><span class="vignette-video__lecture" aria-hidden="true"></span></span>\n'
+            f'          <span class="vignette-video__dit"><span class="vignette-video__sur">En vidéo · '
+            f'{duree(v['duree'])}</span><span class="vignette-video__titre">{t(v.get('court', v['titre']))}</span>'
+            f'<span class="vignette-video__voir">Voir la vidéo →</span></span>\n'
+            f'        </a>\n')
+
+
+def poser_vignettes(vids):
+    """Les pages composées reçoivent leurs vignettes de composer.py. Les pages écrites à la
+    main (la page Usure dentaire, par exemple) les reçoivent ici, dans la colonne du chapitre
+    voulu ; et une vignette dont la vidéo n'existe plus est retirée."""
+    import re
+    existantes = {v["fichier_page"] for v in vids}
+    for v in vids:
+        for page, k in cibles(v):
+            chemin = os.path.join(G.SORTIE, page + ".html")
+            if not os.path.exists(chemin):
+                print(f"  ! page introuvable pour la vignette : {page}")
+                continue
+            h = open(chemin, encoding="utf-8").read()
+            if f'href="{v["fichier_page"]}.html"' in h:
+                continue
+            m = re.search(rf'<p class="numero">{k} / \d+</p>.*?(<div class="cote">\n)', h, re.S)
+            if not m:
+                print(f"  ! pas de colonne au chapitre {k} de {page}")
+                continue
+            h = h[:m.end(1)] + vignette(v) + h[m.end(1):]
+            open(chemin, "w", encoding="utf-8").write(h)
+            print(f"  vignette posée : {page}, chapitre {k}")
+    for nom in os.listdir(G.SORTIE):
+        if not nom.endswith(".html"):
+            continue
+        chemin = os.path.join(G.SORTIE, nom)
+        h = open(chemin, encoding="utf-8").read()
+        neuf = re.sub(r'        <a class="vignette-video" href="(video-[a-z0-9-]+)\.html">.*?</a>\n',
+                      lambda m: m.group(0) if m.group(1) in existantes else "", h, flags=re.S)
+        if neuf != h:
+            open(chemin, "w", encoding="utf-8").write(neuf)
+            print(f"  vignette retirée : {nom}")
 
 
 def duree(s):
@@ -263,6 +317,7 @@ def main():
         open(os.path.join(G.SORTIE, v["fichier_page"] + ".html"), "w", encoding="utf-8").write(
             page_video(v, autres))
     open(os.path.join(G.SORTIE, "videos.html"), "w", encoding="utf-8").write(page_liste(vids))
+    poser_vignettes(vids)
     print(f"vidéos : {len(vids)} page(s) de vidéo")
     for v in vids:
         print(f"  {v['date']}  {duree(v['duree']):>6}  {v['theme']:12s} {v['fichier_page']} → {v['page']}")

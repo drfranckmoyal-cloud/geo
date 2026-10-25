@@ -492,28 +492,12 @@ ILLUSTRATIONS_NUMEROTEES = {"bilan-esthetique-personnalise"}
 # cliquable qui renvoie vers la page de cette vidéo ». C'est la vidéo qui déclare
 # sa page et son chapitre (videos/<slug>.txt) : la page n'a rien à tenir à jour.
 def vignettes_video(slug):
-    dossier = os.path.join(os.path.dirname(os.path.abspath(__file__)), "videos")
+    import videos as vid
     trouvees = {}
-    if not os.path.isdir(dossier):
-        return trouvees
-    for n in sorted(os.listdir(dossier)):
-        if not n.endswith(".txt"):
-            continue
-        tete = open(os.path.join(dossier, n), encoding="utf-8").read().partition("\n---\n")[0]
-        v = {k.strip(): val.strip() for k, _, val in (l.partition(":") for l in tete.splitlines()) if val}
-        if v.get("page") != slug:
-            continue
-        d = int(v["duree"])
-        duree = f"{d} s" if d < 60 else f"{d // 60} min {d % 60:02d}"
-        trouvees.setdefault(int(v.get("chapitre", 1)), []).append(
-            f'        <a class="vignette-video" href="video-{n[:-4]}.html">\n'
-            f'          <span class="vignette-video__image"><img src="{gen.VERS_DEPOT}src/assets/videos/'
-            f'{v["fichier"]}.jpg" alt="" loading="lazy"><span class="vignette-video__lecture" aria-hidden="true">'
-            f'</span></span>\n'
-            f'          <span class="vignette-video__dit"><span class="vignette-video__sur">En vidéo · {duree}</span>'
-            f'<span class="vignette-video__titre">{e(v.get("court", v["titre"]))}</span>'
-            f'<span class="vignette-video__voir">Voir la vidéo →</span></span>\n'
-            f'        </a>\n')
+    for v in vid.toutes():
+        for cible, k in vid.cibles(v):
+            if cible == slug:
+                trouvees.setdefault(k, []).append(vid.vignette(v))
     return trouvees
 
 

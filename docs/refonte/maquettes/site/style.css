@@ -1048,3 +1048,12 @@ body.portail{min-height:100%}
 .vignette-video__sur{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
 .vignette-video__titre{font-family:var(--serif);font-weight:700;font-size:1.05rem;line-height:1.2}
 .vignette-video__voir{font-size:.78rem;font-weight:600;opacity:.85}
+/* Sur téléphone, deux vidéos par rangée : une seule remplirait tout l'écran. */
+@media (max-width:560px){
+  .videos-grille{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+  .carte-video__titre{font-size:.95rem}
+  .carte-video__pied{padding:.75rem .7rem .8rem}
+  .carte-video__lecture{width:46px;height:46px}
+  .carte-video__lecture::before{border-left-width:13px;border-top-width:8px;border-bottom-width:8px}
+  .carte-video__theme{top:.5rem;left:.5rem;font-size:.55rem;padding:.22rem .45rem}
+}

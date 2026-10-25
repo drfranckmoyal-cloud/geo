@@ -1,0 +1,16 @@
+titre: Comment traiter un sourire gingival
+court: Le sourire gingival
+theme: Sourire gingival
+page: dents-courtes-usees
+lien: Dents courtes ou usées : comprendre et traiter
+chapitre: 1
+fichier: sourire-gingival
+duree: 74
+date: 2026-10-25
+description: Le Dr Franck Moyal explique ce qu’est un sourire gingival et comment la gingivectomie, une petite intervention sous anesthésie locale, rend aux dents leur longueur sans les toucher.
+---
+Qu’est-ce qu’un sourire gingival ? | Un sourire qui montre trop de gencive et pas assez de dents : trop de rose, pas assez de blanc.
+Pourquoi les dents paraissent-elles courtes ? | Parce que la gencive en recouvre une partie : c’est elle qu’il faut corriger.
+Comment le traiter ? | Par une gingivectomie : une petite intervention qui retire l’excès de gencive et dégage les dents.
+L’intervention est-elle douloureuse ? | Elle se fait sous anesthésie locale et laisse relativement peu de douleur ; il faut soigner le brossage et l’hygiène la semaine suivante.
+Quel résultat attendre ? | Un résultat souvent impressionnant, sans toucher aux dents ni poser de facettes : la vidéo montre l’avant et l’après, deux semaines après la chirurgie.
