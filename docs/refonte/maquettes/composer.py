@@ -187,6 +187,12 @@ def e(s):
     return out
 
 
+def fr(s):
+    """Les espaces insécables de la typographie française, pour les textes écrits ici :
+       ceux qu'on reprend du site les ont déjà."""
+    return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
+
+
 def amorce(sec):
     """La phrase qui annonce une liste doit rester collée à elle."""
     for x in sec["p"]:
@@ -202,14 +208,24 @@ def renvois(p, sec):
     return f'\n          <p class="suite">{liens}</p>'
 
 
-def bloc(p, i, avec_liste, titre=None):
+def bloc(p, i, avec_liste, titre=None, sans=(), vide=False):
     """Une section devient un bloc : son titre en sous-partie, ses paragraphes,
-       ses sous-titres appariés, et sa liste si elle ne part pas en encadré."""
+       ses sous-titres appariés, et sa liste si elle ne part pas en encadré.
+       titre=False retire le sous-titre ; sans retire les paragraphes qui commencent
+       ainsi ; vide ne garde que photos, tableau et renvois — dans ces trois cas,
+       la réponse en tête du chapitre dit déjà la même chose."""
     s = p["sections"][i]
+    if vide:
+        s, titre = dict(s, titre="", p=[], h3=[], li=[]), None
+    elif sans:
+        s = dict(s, p=[x for x in s["p"] if not re.sub(r"<[^>]+>", "", x).startswith(sans)])
     # La phrase d'annonce ne suit sa liste que si celle-ci part en encadré ;
     # sinon elle reste dans le texte, sans quoi elle disparaissait purement.
     a = amorce(s) if (s["li"] and not avec_liste) else None
-    tete = f'<h3>{e(titre if titre is not None else s["titre"])}</h3>\n          ' if (titre or s["titre"]) else ""
+    if titre is False:
+        tete = ""
+    else:
+        tete = f'<h3>{e(titre if titre is not None else s["titre"])}</h3>\n          ' if (titre or s["titre"]) else ""
     morceaux = []
     if s["h3"] and len(s["h3"]) <= len(s["p"]):
         # sous-titres appariés à leurs paragraphes
@@ -255,7 +271,10 @@ def bloc(p, i, avec_liste, titre=None):
         f'<a href="{x["cible"]}.html">{e(x["titre"])}</a>'
         f'<span class="renvoi-cas__txt">{e(x["texte"])}</span></p>'
         for x in s.get("annonces", []))
-    return f'        <div class="bloc">\n          {tete}{corps}{liste}{tableau}{photos}{cas}{renvois(p, p["sections"][i])}\n        </div>'
+    contenu = f'{tete}{corps}{liste}{tableau}{photos}{cas}{renvois(p, p["sections"][i])}'
+    if not contenu.strip():
+        return ""
+    return f'        <div class="bloc">\n          {contenu}\n        </div>'
 
 
 def fiche(p, sections):
@@ -266,11 +285,25 @@ def fiche(p, sections):
             continue
         a = amorce(s)
         court = a and len(a.rstrip(" :")) <= 52
-        titre = (a.rstrip(" :") if court else s["titre"])[:52]
+        titre = a.rstrip(" :") if court else s["titre"]
+        if len(titre) > 52:  # coupé net à 52 signes, il s'arrêtait au milieu d'un mot
+            titre = re.split(r"[  ]:[  ]", titre)[0]
+            if len(titre) > 52:
+                titre = titre[:52].rsplit(" ", 1)[0] + "…"
         annonce = f'        <p style="margin:0 0 .5rem">{e(a)}</p>\n' if (a and not court) else ""
         puces = "\n            ".join(f"<li>{e(x)}</li>" for x in s["li"])
         morceaux.append(f'        <h4{" style=\"margin-top:1rem\"" if morceaux else ""}>{e(titre)}</h4>\n'
                         f'{annonce}        <ul>\n            {puces}\n        </ul>')
+    return "\n".join(morceaux)
+
+
+def fiche_libre(groupes):
+    """Un encadré écrit ici, quand la page d'origine a fondu plusieurs listes en une seule."""
+    morceaux = []
+    for titre, items in groupes:
+        puces = "\n            ".join(f"<li>{e(fr(x))}</li>" for x in items)
+        morceaux.append(f'        <h4{" style=\"margin-top:1rem\"" if morceaux else ""}>{e(fr(titre))}</h4>\n'
+                        f'        <ul>\n            {puces}\n        </ul>')
     return "\n".join(morceaux)
 
 
@@ -608,20 +641,32 @@ def composer(slug, plan):
     corps = []
     videos_page = vignettes_video(slug)
     n = len(plan["chapitres"])
+    qr = QUESTIONS.get(slug, [])
     for k, ch in enumerate(plan["chapitres"], 1):
+        question, reponse, retraits = (qr[k - 1] + ({},))[:3] if k <= len(qr) else (None, None, {})
         avec_fiche = ch.get("fiche", [])
-        blocs = "\n".join(bloc(p, i, avec_liste=i not in avec_fiche,
-                               titre=ch.get("titres", {}).get(i))
-                          for i in ch["sections"])
-        if k == 1 and resume:
+        blocs = "\n".join(b for b in (
+            bloc(p, i, avec_liste=i not in avec_fiche,
+                 titre=False if i in retraits.get("titre", ()) else ch.get("titres", {}).get(i),
+                 sans=tuple(retraits.get("phrases", ())), vide=i in retraits.get("vide", ()))
+            for i in ch["sections"]) if b)
+        if reponse:
+            # la réponse remplace le résumé du premier chapitre : elle en reprend le fond
+            blocs = (f'        <div class="bloc">\n          <p class="reponse">{e(fr(reponse))}</p>\n'
+                     f'        </div>\n' + blocs)
+        elif k == 1 and resume:
             intro = "\n          ".join(f"<p>{e(x)}</p>" for x in resume)
             blocs = f'        <div class="bloc">\n          {intro}\n        </div>\n' + blocs
         zone = ' sect--zone' if k % 2 == 0 else ""
         illus = "".join(videos_page.get(k, [])) + illustration(slug, k)
         droite = ""
+        encadre = ""
         if avec_fiche:
+            encadre = fiche_libre(retraits["fiche"]) if "fiche" in retraits else fiche(p, avec_fiche)
+        # une section sans liste laissait un encadré vert vide à côté du texte
+        if encadre.strip():
             droite = (f'      <div class="cote">\n{illus}        <div class="fiche">\n'
-                      f'{fiche(p, avec_fiche)}\n        </div>\n      </div>\n')
+                      f'{encadre}\n        </div>\n      </div>\n')
         elif illus:
             droite = f'      <div class="cote">\n{illus}      </div>\n'
         classe = "contenu chapitre" if droite else "contenu chapitre chapitre--plein"
@@ -629,7 +674,7 @@ def composer(slug, plan):
     <div class="{classe}">
       <div>
         <p class="numero">{k} / {n}</p>
-        <h2>{e(ch["titre"])}</h2>
+        <h2>{e(fr(question)) if question else e(ch["titre"])}</h2>
 {blocs}
       </div>
 {droite}    </div>
@@ -909,6 +954,312 @@ PLANS = {
     {"titre": "Pourquoi planifier, même quand c’est simple", "sections": [9, 11]},
     {"titre": "Sans engagement", "sections": [10]},
   ]},
+}
+
+
+# ── questions et réponses, chapitre par chapitre ──────────────────────────────
+# Franck, 26/10/2026 : « réécris question/réponse pour toutes les pages ». Chaque chapitre
+# prend pour titre la question que pose un patient, puis une réponse courte et directe :
+# c'est elle que Google et les IA reprennent. Les réponses ne disent rien que la page ne
+# dise déjà. Le troisième élément, facultatif, évite les redites : « titre » retire le
+# sous-titre d'une section quand la question le répète, « phrases » les paragraphes que
+# la réponse reprend, « vide » une section que la réponse dit en entier (son encadré reste).
+# Les cas cliniques gardent leurs titres : ce sont des récits, pas des réponses.
+QUESTIONS = {
+  "erosion-dentaire": [
+    ("Qu’est-ce que l’érosion dentaire ?",
+     "C’est une perte progressive de l’émail, puis de la dentine, due à des acides qui ne viennent "
+     "pas des bactéries, aidés par les frottements : ce n’est pas une carie. Elle peut évoluer "
+     "longtemps sans douleur ; la dépister tôt permet d’agir avant qu’une reconstruction importante "
+     "ne devienne nécessaire.",
+     {"phrases": ["Elle peut évoluer longtemps sans douleur"]}),
+    ("Quelles sont les causes de l’érosion dentaire ?",
+     "Des acides venus soit de l’alimentation (boissons, aliments, certains compléments ou "
+     "médicaments), soit de l’estomac (reflux, régurgitations, vomissements, certains TCA). La "
+     "salive, la fréquence des expositions et les habitudes mécaniques, comme le brossage, font "
+     "ensuite varier le risque.",
+     {"titre": [3], "phrases": ["Les facteurs salivaires"]}),
+    ("Comment dépister une érosion dentaire ?",
+     "Par un bilan ciblé : interrogatoire, examen des surfaces, photographies et scan numérique, qui "
+     "servent ensuite de point de comparaison. Un score comme le BEWE aide à graduer l’érosion, mais "
+     "sa cause ne se déduit pas d’un score : elle se cherche dans les habitudes et le contexte médical.",
+     {"titre": [5], "phrases": ["Le BEWE aide"]}),
+    ("Comment protéger ses dents de l’érosion au quotidien ?",
+     "D’abord en réduisant la fréquence des expositions acides évitables et en faisant rechercher "
+     "leur cause, un reflux par exemple. Ensuite, un brossage doux et un dentifrice fluoré adapté au "
+     "niveau de risque ; aucun produit ne remplace, à lui seul, le contrôle de la cause."),
+    ("Quand faut-il restaurer des dents abîmées par l’érosion ?",
+     "Quand l’érosion entraîne une gêne réelle (sensibilités, perte esthétique, fragilisation des "
+     "dents), et jamais sans prévention : restaurer sans contrôler les causes encore actives expose "
+     "à une nouvelle dégradation.",
+     {"titre": [10], "phrases": ["Elle doit rester associée"]}),
+  ],
+  "anorexie-erosion-dentaire-sans-vomissements": [
+    ("L’anorexie sans vomissements peut-elle abîmer les dents ?",
+     "Oui. Même sans vomissements, une salive moins abondante, un pH plus bas, une alimentation "
+     "acide, la déshydratation, certains médicaments ou des frottements peuvent favoriser une "
+     "érosion dentaire, surtout lorsqu’ils se combinent.",
+     {"titre": [1]}),
+    ("Comment une érosion peut-elle apparaître sans vomissements ?",
+     "Par quatre mécanismes qui peuvent se combiner : une salive moins protectrice, des boissons et "
+     "aliments acides souvent présents dans une alimentation « diététique », des médicaments qui "
+     "assèchent la bouche, et des frottements sur un émail déjà fragilisé."),
+    ("L’anorexie est-elle une cause directe d’érosion dentaire ?",
+     "Non, pas directement : c’est le contexte qui compte (nutrition, comportements, médicaments, "
+     "expositions acides). C’est pourquoi deux personnes souffrant d’anorexie restrictive peuvent "
+     "avoir des situations dentaires très différentes.",
+     {"titre": [7], "phrases": ["C’est pourquoi deux personnes"]}),
+    ("Pourquoi dépister tôt l’érosion dentaire en cas d’anorexie ?",
+     "Parce qu’une érosion débutante peut être discrète alors que la perte de substance est "
+     "irréversible. Le but est de protéger les dents pendant la prise en charge du TCA, et pas "
+     "seulement d’attendre la fin du parcours pour reconstruire.",
+     {"vide": [8]}),
+    ("Comment protéger les dents, et faut-il les reconstruire ?",
+     "Protéger d’abord : une prévention globale, un dentifrice fluoré adapté, une surveillance. "
+     "Reconstruire seulement si la perte de substance le justifie, en coordination avec la situation "
+     "générale ; les techniques adhésives le permettent alors, dans de nombreux cas, de façon "
+     "conservatrice."),
+  ],
+  "composite-bonding-paris": [
+    ("Qu’est-ce que le composite bonding ?",
+     "C’est l’ajout direct, sur la dent, d’une résine de teinte dentaire, sculptée pour en changer "
+     "la forme, fermer un espace ou reconstruire un bord usé, en retirant peu ou pas d’émail. La "
+     "technique reste réparable ; son rendu dépend beaucoup de la planification, de la "
+     "stratification et des finitions."),
+    ("Qu’est-ce que la stratification d’un composite ?",
+     "C’est la construction de la dent couche après couche, avec des masses de composite plus ou "
+     "moins opaques ou translucides, pour qu’elle réagisse à la lumière comme une dent naturelle, et "
+     "pas seulement qu’elle soit blanche.",
+     {"titre": [3]}),
+    ("Dans quels cas utilise-t-on le composite bonding ?",
+     "Pour modifier une forme sans passer par la céramique : fermer un petit espace, rallonger ou "
+     "réparer un bord usé ou fracturé, corriger une asymétrie, harmoniser les dents de devant ou "
+     "reconstruire des dents usées.",
+     {"vide": [4]}),
+    ("Composite bonding ou facettes, et quelle durée de vie ?",
+     "Aucun matériau n’est « meilleur » par principe : le composite est très conservateur et se "
+     "retouche facilement, les facettes permettent une transformation plus globale. Pour un "
+     "composite, je donne comme repère un ordre de grandeur de 6 à 7 ans avant une retouche, sans "
+     "que ce soit une date d’expiration.",
+     {"titre": [6]}),
+    ("Comment se déroule un traitement par composite bonding ?",
+     "Selon l’importance du projet : analyse du sourire, photographies, scan numérique, "
+     "planification des formes, éventuellement simulation, puis choix des teintes, stratification, "
+     "sculpture, finitions et polissage.",
+     {"titre": [7], "phrases": ["Selon l’importance du projet"]}),
+  ],
+  "facettes-dentaires-paris": [
+    ("Qu’est-ce qu’une facette dentaire ?",
+     "Une facette est une restauration très fine en céramique, collée principalement sur la face "
+     "visible de la dent. Elle permet de redessiner la forme, la longueur, les proportions, la teinte "
+     "et la luminosité du sourire, à partir d’un projet construit avec le patient.",
+     {"phrases": ["Une facette est une restauration très fine"]}),
+    ("Comment décide-t-on du futur sourire avant de poser des facettes ?",
+     "Tout part d’un bilan esthétique : photographies, scan et analyse du visage, puis une "
+     "planification numérique qui compare plusieurs propositions. Vous participez aux choix, du plus "
+     "naturel au plus transformé, et la simulation rend le projet visible sans être une photographie "
+     "contractuelle du résultat.",
+     {"titre": [3]}),
+    ("Pourquoi la céramique, et faut-il tailler les dents ?",
+     "La céramique permet de contrôler finement la teinte, la translucidité, la texture et les "
+     "reflets. La préparation dépend de la situation de départ : elle peut être très faible, voire "
+     "nulle dans des cas très sélectionnés, la priorité restant de préserver le maximum d’émail "
+     "compatible avec le projet.",
+     {"phrases": ["La céramique permet de contrôler"]}),
+    ("Facettes ou composite, et combien de temps durent les facettes ?",
+     "Le choix dépend du niveau de transformation recherché : les facettes pour redessiner plusieurs "
+     "dents avec précision et stabilité, le composite pour une correction ciblée, additive et "
+     "réparable. Les facettes en céramique ont des taux de survie élevés dans les études à long terme.",
+     {"titre": [7], "phrases": ["Le choix dépend donc du niveau"]}),
+    ("Quelles sont les étapes d’un traitement par facettes ?",
+     "Neuf étapes, de votre demande jusqu’au contrôle : la facette n’est pas un produit standard, "
+     "mais le dernier maillon d’une chaîne de décisions esthétiques et techniques, prises avec vous "
+     "avant toute préparation.",
+     {"vide": [9]}),
+  ],
+  "taches-dentaires-dyschromies-icon": [
+    ("Comment traiter une tache blanche sur une dent ?",
+     "Cela dépend d’abord de son origine (MIH, fluorose, déminéralisation, lésion après "
+     "orthodontie…) et de sa profondeur. Selon le diagnostic et l’âge, on choisit entre "
+     "microabrasion, infiltration de résine, éclaircissement, composite ou une combinaison : le "
+     "diagnostic précède le traitement.",
+     {"phrases": ["Le traitement dépend donc d’abord"]}),
+    ("Qu’est-ce qu’une tache de MIH ?",
+     "La MIH, ou hypominéralisation molaire-incisive, est un défaut de développement de l’émail qui "
+     "peut toucher les premières molaires et les incisives permanentes. Sur une incisive, elle se "
+     "voit comme une tache blanche, crème, jaune ou brunâtre, parfois très visible dans le sourire.",
+     {"phrases": ["La MIH"]}),
+    ("Comment fonctionne l’infiltration de résine ICON ?",
+     "Une résine très fluide pénètre dans la zone poreuse de l’émail et en modifie les propriétés "
+     "optiques : le contraste entre la tache et l’émail sain diminue, de façon minimalement invasive. "
+     "ICON est l’un des systèmes qui utilisent ce principe.",
+     {"titre": [4], "phrases": ["L’infiltration de résine consiste", "ICON est l’un des systèmes"]}),
+    ("Pourquoi associer éclaircissement et infiltration ?",
+     "Parce que le problème esthétique n’est pas toujours seulement la tache : une dent peut être "
+     "globalement trop sombre et présenter en même temps une zone blanche très contrastée.",
+     {"titre": [6], "phrases": ["Parce que le problème esthétique"]}),
+    ("Pourquoi ne pas recouvrir la tache d’un composite tout de suite ?",
+     "Parce qu’une restauration implique généralement davantage d’intervention sur la dent : le "
+     "composite vient quand les solutions plus légères ne suffisent pas.",
+     {"titre": [8], "phrases": ["Parce qu’une restauration implique"]}),
+  ],
+  "bruxisme-usure-dentaire": [
+    ("Le bruxisme explique-t-il l’usure des dents ?",
+     "Pas forcément. Le bruxisme peut contribuer à une usure, mais des dents usées ne prouvent pas, à "
+     "elles seules, qu’on bruxe : l’érosion, les contraintes mécaniques et d’autres facteurs doivent "
+     "être recherchés avant de conclure.",
+     {"titre": [1]}),
+    ("Pourquoi les dents s’usent-elles chez une personne qui bruxe ?",
+     "Les contraintes mécaniques peuvent aplatir les reliefs, user les bords des incisives, provoquer "
+     "des éclats et solliciter les restaurations. Mais l’environnement chimique joue parfois un rôle "
+     "majeur : une dent régulièrement exposée aux acides peut être plus vulnérable à l’usure mécanique.",
+     {"titre": [3], "phrases": ["Mais l’environnement chimique", "Une dent exposée régulièrement"]}),
+    ("Comment savoir si l’on bruxe ?",
+     "Le diagnostic ne repose pas sur une seule observation : selon les cas, il associe "
+     "l’interrogatoire, les symptômes, l’examen clinique, l’évaluation des muscles et parfois un "
+     "enregistrement du sommeil. L’aspect des dents participe au raisonnement, mais ne suffit pas.",
+     {"vide": [4]}),
+    ("À quoi sert une gouttière, et pourquoi chercher aussi une érosion ?",
+     "Une gouttière peut protéger les dents ou des restaurations, mais elle ne guérit pas le bruxisme "
+     "et n’est pas une prévention universelle de l’érosion. Si un acide entretient l’usure, une "
+     "stratégie mécanique seule ne peut pas le contrôler."),
+    ("Peut-on reconstruire des dents usées quand on bruxe ?",
+     "Oui, lorsque l’indication est posée : les approches adhésives minimalement invasives disposent "
+     "aujourd’hui de données cliniques favorables dans les dentitions usées.",
+     {"vide": [7]}),
+  ],
+  "dents-courtes-usees": [
+    ("Mes dents sont devenues plus petites : est-ce de l’usure ?",
+     "Souvent, oui : des incisives plus courtes ou plus plates sont l’un des premiers signes visibles "
+     "d’une usure dentaire. Le changement est discret au début, puis devient très visible quand on "
+     "compare des photographies prises des années plus tôt.",
+     {"titre": [1], "phrases": ["Ce changement peut être discret"]}),
+    ("Pourquoi des dents usées font-elles paraître le sourire plus âgé ?",
+     "Parce que les bords des incisives comptent beaucoup dans la perception du sourire : quand ils "
+     "s’usent, les dents se montrent moins et paraissent moins élancées. Restaurer des longueurs ne "
+     "revient donc pas seulement à « refaire des dents » : cela peut redonner de la structure à tout "
+     "le sourire.",
+     {"vide": [3]}),
+    ("Faut-il reconstruire toutes les dents courtes ?",
+     "Non. Une usure légère et stable peut simplement être surveillée ; une perte importante de "
+     "longueur peut justifier un véritable projet de réhabilitation.",
+     {"vide": [4]}),
+    ("Comment détermine-t-on la bonne longueur des dents ?",
+     "Pas uniquement à partir d’un chiffre : elle se déduit du visage, des lèvres et du sourire, puis "
+     "la planification esthétique permet de tester les volumes avant de les réaliser définitivement.",
+     {"vide": [6]}),
+    ("Quel résultat peut-on rechercher en rallongeant des dents usées ?",
+     "Un sourire plus harmonieux et plus présent : selon la situation, on redessine les bords, on "
+     "restaure les longueurs et les volumes, jusqu’à reconstruire une dentition sévèrement usée. Dans "
+     "les cas complexes, le projet esthétique et la réhabilitation fonctionnelle sont conçus ensemble.",
+     {"vide": [8]}),
+  ],
+  "eclaircissement-dentaire-paris": [
+    ("Qu’est-ce que l’éclaircissement dentaire, ou blanchiment ?",
+     "L’éclaircissement rend les dents plus lumineuses sans les tailler ni les recouvrir : c’est un "
+     "traitement entièrement conservateur. Dans de nombreux cas, il constitue à lui seul tout le "
+     "traitement esthétique nécessaire.",
+     {"phrases": ["Et dans de nombreux cas"]}),
+    ("Comment se passe un éclaircissement dentaire à domicile ?",
+     "Je privilégie l’éclaircissement ambulatoire supervisé : des gouttières personnalisées et un gel "
+     "au peroxyde de carbamide, portés à domicile, généralement la nuit, pendant une durée adaptée à "
+     "la teinte de départ et au résultat recherché.",
+     {"titre": [3], "phrases": ["Dans ma pratique, je privilégie", "Les gouttières sont portées"]}),
+    ("L’éclaircissement rend-il les dents sensibles ?",
+     "Une sensibilité peut apparaître pendant le traitement. Elle est transitoire et régresse après "
+     "adaptation ou interruption du protocole.",
+     {"titre": [5], "phrases": ["Une sensibilité dentaire peut apparaître", "Elle est transitoire"]}),
+    ("Faut-il arrêter le café, le thé ou le vin pendant un éclaircissement ?",
+     "Les recommandations alimentaires doivent rester raisonnables et individualisées : il n’est pas "
+     "nécessaire de transformer la période d’éclaircissement en régime très contraignant.",
+     {"vide": [6]}),
+    ("L’éclaircissement peut-il précéder des facettes ou un composite ?",
+     "Oui : avant un composite bonding ou des facettes, éclaircir les dents naturelles peut permettre "
+     "de partir d’une teinte plus lumineuse, et parfois de limiter les artifices nécessaires au "
+     "résultat final.",
+     {"titre": [7], "phrases": ["Par exemple, avant un composite"]}),
+  ],
+  "bilan-esthetique-personnalise": [
+    ("Qu’est-ce qu’un bilan esthétique dentaire ?",
+     "C’est une consultation qui transforme une demande parfois imprécise (dents trop courtes, "
+     "sourire asymétrique, teinte, envie de changement) en projet clinique compréhensible. On écoute, "
+     "on photographie et on scanne, on analyse le sourire dans le visage, puis on planifie et on "
+     "simule avant de décider ensemble du traitement.",
+     {"phrases": ["Le rôle du bilan esthétique"]}),
+    ("Comment se déroule un bilan esthétique ?",
+     "En sept étapes, de l’écoute de votre demande à la décision prise ensemble ; le traitement ne "
+     "vient qu’en dernier, et seulement lorsque son bénéfice est réel."),
+    ("Qu’est-ce que le smile design, et peut-on voir son futur sourire ?",
+     "Le smile design est une planification numérique du sourire, réalisée à partir de photographies "
+     "et de données 3D. Il permet de voir et de discuter un projet avant de commencer, sans en "
+     "garantir le résultat exact.",
+     {"titre": [7]}),
+    ("Pourquoi planifier, même quand le traitement paraît simple ?",
+     "Parce qu’une petite modification peut changer l’équilibre de l’ensemble : allonger deux "
+     "incisives ou fermer un espace peut modifier les proportions, la symétrie et la ligne du sourire. "
+     "La planification évite de traiter dent par dent sans vision globale.",
+     {"vide": [9]}),
+    ("Le bilan esthétique engage-t-il à faire un traitement ?",
+     "Non. Il peut aboutir à un traitement, à plusieurs options, à une surveillance, ou simplement à "
+     "la conclusion que rien d’important ne doit être modifié.",
+     {"vide": [10]}),
+  ],
+  "chirurgien-dentiste-paris-9": [
+    ("Où exerce le Dr Franck Moyal, et dans quels domaines ?",
+     "En pratique privée au 2 rue Hippolyte Lebas, dans le 9e arrondissement de Paris. Son activité "
+     "est orientée vers deux domaines : la dentisterie esthétique et adhésive, et le diagnostic et la "
+     "réhabilitation des usures dentaires, du simple éclaircissement aux situations complexes.",
+     {"vide": [1]}),
+    ("Pour quels motifs consulter au cabinet ?",
+     "Pour améliorer un sourire (bilan esthétique, éclaircissement, composite bonding, facettes, "
+     "taches), pour des dents qui s’usent ou raccourcissent, ou pour une érosion. Dans ces deux "
+     "derniers cas, on recherche d’abord les causes : la prévention passe avant toute reconstruction.",
+     # la page d'origine fondait ses trois listes en une, sous des sous-titres décalés
+     {"vide": [2], "fiche": [
+         ("Pour améliorer un sourire", ["bilan esthétique ;", "éclaircissement ;", "composite bonding ;",
+          "facettes ;", "taches et dyschromies ;", "infiltration de résine ;", "reconstruction esthétique."]),
+         ("Quand les dents s’usent", ["elles s’aplatissent ;", "elles raccourcissent ;",
+          "elles se fragilisent ;", "elles deviennent sensibles ;",
+          "elles changent progressivement l’apparence du sourire."]),
+         ("Une érosion peut être liée", ["à l’alimentation ;", "au reflux ;", "aux vomissements ;",
+          "au contexte salivaire ;", "à certains médicaments ;", "à des TCA ;",
+          "ou à plusieurs facteurs combinés."]),
+     ]}),
+    ("Comment se déroule une première consultation ?",
+     "Elle dépend du motif, et sert d’abord à comprendre la situation et à définir les options : elle "
+     "n’a pas pour but de produire automatiquement un devis ou de choisir tout de suite un matériau.",
+     {"vide": [3]}),
+    ("Sur quels principes repose la prise en charge ?",
+     "Sur trois principes : un résultat esthétique intégré au visage, une fonction prise en compte, et "
+     "la préservation des tissus dentaires grâce aux techniques adhésives.",
+     {"titre": [4]}),
+    ("Cabinet privé et hôpital : quelle différence ?",
+     "Ce sont deux cadres distincts. Les consultations présentées sur ce site ont lieu au cabinet "
+     "privé du 2 rue Hippolyte Lebas ; l’activité hospitalière, au service de médecine bucco-dentaire "
+     "de la Pitié-Salpêtrière et à la CMME de l’hôpital Sainte-Anne, en est séparée.",
+     {"vide": [5]}),
+  ],
+  "franck-moyal": [
+    ("Quelle est la pratique du Dr Franck Moyal ?",
+     "Le Dr Franck Moyal exerce à Paris en pratique privée, orientée vers la dentisterie esthétique et "
+     "adhésive et vers les usures dentaires, en parallèle d’une activité hospitalière et "
+     "d’enseignement."),
+    ("Quel est son lien avec les troubles des conduites alimentaires (TCA) ?",
+     "Depuis 2024, il est praticien attaché à la CMME (Clinique des Maladies Mentales et de "
+     "l’Encéphale) de l’hôpital Sainte-Anne, où il a participé, avec les chefs de service, à la mise "
+     "en place d’une consultation de dépistage bucco-dentaire des érosions liées aux troubles des "
+     "conduites alimentaires.",
+     {"titre": [4], "phrases": ["Depuis 2024"]}),
+    ("Enseignement et hôpital : quelles sont ses autres activités ?",
+     "Il a fondé Smileclub Formation, organisme destiné aux chirurgiens-dentistes, et exerce aussi "
+     "dans le service de médecine bucco-dentaire de l’hôpital Pitié-Salpêtrière, notamment dans le "
+     "cadre de la PASS bucco-dentaire.",
+     {"vide": [6]}),
+    ("Quelle est sa philosophie de soin ?",
+     "Préserver les dents sans renoncer à transformer un sourire, et toujours commencer par un "
+     "diagnostic : c’est ce qu’il appelle « traiter juste ».",
+     {"titre": [7]}),
+  ],
 }
 
 
