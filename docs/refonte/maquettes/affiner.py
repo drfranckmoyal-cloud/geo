@@ -26,6 +26,13 @@ DEPOT = os.path.abspath(os.path.join(ICI, "..", "..", ".."))
 CACHE = os.path.join(DEPOT, ".cache-images.nosync")      # ignoré d'iCloud et de git
 RACINE = "https://drfranckmoyal.fr"
 REVISION_REFONTE = "2026-10-25"                           # mise en ligne de la refonte
+# pages réécrites depuis, avec leur date (D100 : questions/réponses du 26/10/2026)
+REVISIONS = {u: "2026-10-26" for u in (
+    "/erosion-dentaire/", "/anorexie-erosion-dentaire-sans-vomissements/", "/composite-bonding-paris/",
+    "/facettes-dentaires-paris/", "/taches-dentaires-dyschromies-icon/", "/bruxisme-usure-dentaire/",
+    "/dents-courtes-usees/", "/eclaircissement-dentaire-paris/", "/bilan-esthetique-personnalise/",
+    "/chirurgien-dentiste-paris-9/", "/franck-moyal/", "/facettes-ou-composite/",
+    "/dentisterie-esthetique-paris/")}
 LARGEURS = (400, 800, 1200, 1600)
 
 # ── 1. les images ─────────────────────────────────────────────────────────
@@ -282,8 +289,11 @@ def donnees(page, url):
                 for k, v in PRATICIEN.items():
                     n.setdefault(k, v)
                 n["sameAs"] = list(dict.fromkeys((n.get("sameAs") or []) + PROFILS_EN_PLUS))
-            if types & PAGES and str(n.get("@id", "")).startswith(RACINE + url) and "dateModified" not in n:
-                n["dateModified"] = REVISION_REFONTE
+            if types & PAGES and str(n.get("@id", "")).startswith(RACINE + url):
+                if url in REVISIONS:  # le texte a changé depuis : la date suit, même si la page en portait une
+                    n["dateModified"] = REVISIONS[url]
+                else:
+                    n.setdefault("dateModified", REVISION_REFONTE)
         return json.dumps(d, ensure_ascii=False)
     return re.sub(r'(<script type="application/ld\+json">)(.*?)(</script>)',
                   lambda m: m.group(1) + enrichir(m.group(2)) + m.group(3), page, flags=re.S)
