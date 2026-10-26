@@ -169,7 +169,9 @@ def fil(url, etapes):
 
 
 def noeud_video(v):
-    return {"@type": "VideoObject", "@id": v["url"] + "#video", "name": v["titre"],
+    # la même vidéo publiée sur la chaîne YouTube (26/10/2026) : Google relie les deux
+    sur_youtube = {"sameAs": f"https://www.youtube.com/shorts/{v['youtube']}"} if v.get("youtube") else {}
+    return {**sur_youtube, "@type": "VideoObject", "@id": v["url"] + "#video", "name": v["titre"],
             "description": v["description"], "inLanguage": "fr-FR",
             # les adresses où publier.py dépose réellement la couverture et la vidéo ;
             # celles de la maquette (/videos/<fichier>.jpg) menaient à une erreur (audit du 25/10/2026)

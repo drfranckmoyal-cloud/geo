@@ -5,6 +5,7 @@ fichier: grossesse-erosion-dentaire
 duree: 44
 date: 2026-10-25
 description: Le Dr Franck Moyal explique pourquoi la grossesse expose à l’érosion dentaire — reflux, nausées, hyperémèse gravidique — et comment le chirurgien-dentiste aide à protéger l’émail.
+youtube: dnsQiOYJ0Rw
 ---
 Qu’est-ce que l’érosion dentaire ? | La dégradation de l’émail par une attaque acide : pendant la grossesse, ces acides sont plus souvent présents dans la bouche.
 Quels sont les principaux facteurs de risque ? | Les reflux et les nausées, qui exposent les dents à l’acidité de l’estomac.

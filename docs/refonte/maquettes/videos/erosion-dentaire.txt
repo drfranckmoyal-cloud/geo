@@ -9,6 +9,7 @@ fichier: erosion-dentaire
 duree: 52
 date: 2026-10-25
 description: Le Dr Franck Moyal explique ce qu’est l’érosion dentaire, ce qu’elle provoque — dents qui raccourcissent, molaires creusées, sensibilités — et comment s’en protéger en la dépistant tôt.
+youtube: PR0tkROnciU
 ---
 Qu’est-ce que l’érosion dentaire ? | La dégradation progressive de l’émail par un processus non carieux : l’émail se dissout sous l’effet de l’acidité.
 Que provoque-t-elle ? | Des dents qui raccourcissent, des difficultés à manger quand les dents ne se rencontrent plus bien, parfois des sensibilités.

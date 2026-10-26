@@ -8,6 +8,7 @@ fichier: composite-bonding
 duree: 49
 date: 2026-10-25
 description: Le Dr Franck Moyal explique le composite bonding : ce que c’est, s’il faut tailler les dents, combien de temps il dure, comment se passe la séance et quel résultat en attendre.
+youtube: TImX-UABq0A
 ---
 Qu’est-ce que le composite bonding ? | Une résine appliquée sur les dents pour en modifier la forme et la couleur, et obtenir un sourire plus harmonieux.
 Faut-il tailler les dents ? | Non, dans la plupart des cas : c’est un grand avantage par rapport aux facettes.

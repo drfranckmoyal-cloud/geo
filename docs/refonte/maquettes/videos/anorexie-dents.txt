@@ -8,6 +8,7 @@ fichier: anorexie-dents
 duree: 32
 date: 2026-10-25
 description: Le Dr Franck Moyal explique pourquoi l’anorexie, avec ou sans vomissements, expose à l’érosion dentaire, pourquoi elle passe longtemps inaperçue, et pourquoi il faut la dépister tôt.
+youtube: VfHcs9WMk6g
 ---
 L’anorexie abîme-t-elle les dents ? | Oui, avec ou sans vomissements : le risque principal est l’érosion dentaire.
 Qu’est-ce que l’érosion dentaire ? | La dégradation de l’émail, sans carie, sous l’effet de l’acidité présente dans la bouche.

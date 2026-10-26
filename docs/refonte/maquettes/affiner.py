@@ -260,7 +260,8 @@ PRATICIEN = {
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Université Paris Diderot (Paris VII)"},
     "worksFor": {"@id": RACINE + "/#practice"},
 }
-PROFILS_EN_PLUS = ["https://www.doctolib.fr/dentiste/paris/franck-moyal", "https://smileclubformations.com/"]
+PROFILS_EN_PLUS = ["https://www.doctolib.fr/dentiste/paris/franck-moyal", "https://smileclubformations.com/",
+                   "https://www.youtube.com/@drfranckmoyal"]
 PAGES = {"WebPage", "MedicalWebPage", "CollectionPage", "ProfilePage", "ContactPage", "AboutPage", "Blog"}
 
 

@@ -5,6 +5,7 @@ fichier: sourire-gingival
 duree: 74
 date: 2026-10-25
 description: Le Dr Franck Moyal explique ce qu’est un sourire gingival et comment la gingivectomie, une petite intervention sous anesthésie locale, rend aux dents leur longueur sans les toucher.
+youtube: 0g4ieKl6l0A
 ---
 Qu’est-ce qu’un sourire gingival ? | Un sourire qui montre trop de gencive et pas assez de dents : trop de rose, pas assez de blanc.
 Pourquoi les dents paraissent-elles courtes ? | Parce que la gencive en recouvre une partie : c’est elle qu’il faut corriger.
