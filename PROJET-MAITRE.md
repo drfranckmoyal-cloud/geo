@@ -706,6 +706,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 26/10/2026 | F | « Réécris question/réponse pour toutes les pages d'un coup ; ensuite, tu as mon compte YouTube ouvert : publie toutes les vidéos qu'on a mises sur le site en optimisant au maximum le texte pour GEO SEO et avec les liens vers les bonnes choses. » | D100 : 64 questions/réponses sur 13 pages, dans la maquette ; D101 : six Shorts déposés en privé avec titres, descriptions et liens ; mise en ligne du site et passage des vidéos en public au feu vert de Franck |
 | 26/10/2026 | F | « Ok, vas-y, publie tout. » | Six vidéos YouTube passées en public et vérifiées ; site mis en ligne (questions/réponses, liens YouTube, dates de révision du 26/10) ; Bing prévenu (36 adresses) ; Google : 3 pages demandées puis quota quotidien atteint, plan du site renvoyé |
 | 27/10/2026 | C | Tâche planifiée : indexation Google des 7 pages restantes. | Les 7 pages acceptées par Google (« Indexation demandée ») : dentisterie esthétique, cabinet Paris 9e, bilan, éclaircissement, bruxisme, dents courtes, taches ; aucune restante, pas de quota atteint |
+| 29/10/2026 | C | Suite de l'enquête sur le disque plein du 28/10 : chaque Chrome lancé sans fenêtre par `scripts/captures.mjs` copiait d'abord l'application dans un dossier temporaire du système (un clone APFS, 2 Go apparents chacun), retiré seulement si Chrome se referme de lui-même. | `captures.mjs` lance Chrome avec `--disable-features=MacAppCodeSignClone` ; vérifié le 29/10 avec Chrome 156 : plus aucun clone pendant le lancement |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---
@@ -783,4 +784,4 @@ remarques détaillées de Franck) sont archivés tels quels dans
 
 ---
 
-*Dernière mise à jour : 27 octobre 2026.*
+*Dernière mise à jour : 29 octobre 2026.*

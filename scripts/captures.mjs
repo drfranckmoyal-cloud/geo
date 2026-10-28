@@ -22,7 +22,12 @@ const pages = [
 const widths = ONLY ?? [1440, 1280, 1024, 768, 430, 390];
 const height = (w) => (w >= 1024 ? 900 : 932);
 
-const browser = await chromium.launch({ executablePath: CHROME, headless: true });
+// Sans l'option, chaque lancement du Chrome installé copie d'abord l'application dans un dossier
+// temporaire (un clone APFS, 2 Go apparents chacun) et ne le retire qu'en se refermant de lui-même :
+// 89 clones, 185 Go apparents le 28/10/2026. L'option coupe ce mécanisme (vérifié le 29/10/2026).
+const browser = await chromium.launch({
+  executablePath: CHROME, headless: true, args: ["--disable-features=MacAppCodeSignClone"],
+});
 
 async function open(ctx, path) {
   const page = await ctx.newPage();
