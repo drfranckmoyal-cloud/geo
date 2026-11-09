@@ -1,0 +1,320 @@
+{
+  "date": "2026-11-09",
+  "termes": {
+    "tca": {
+      "clics": 0,
+      "impressions": 20,
+      "position": 2.3
+    },
+    "dentiste tca": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "tca dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "erosion dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "érosion dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "erosion dentaire tca": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "dentiste erosion dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "erosion dentaire paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "anorexie dents": {
+      "clics": 0,
+      "impressions": 29,
+      "position": 33.4
+    },
+    "boulimie dents": {
+      "clics": 0,
+      "impressions": 10,
+      "position": 37
+    },
+    "troubles alimentaires dents": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "bruxisme": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "usure dentaire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 84.3
+    },
+    "usures dentaires": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "dentiste usure dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "bruxisme usure dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "usure dentaire paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "dents usées": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 13
+    },
+    "dents courtes": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "reconstruction dents usées": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "dimension verticale dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "specialiste bruxisme paris": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 1
+    },
+    "traitement usure dentaire": {
+      "clics": 0,
+      "impressions": 11,
+      "position": 85.5
+    },
+    "cabinet spécialiste usure dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "composite bonding": {
+      "clics": 1,
+      "impressions": 51,
+      "position": 7.4
+    },
+    "dentiste composite bonding": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "composite bonding paris": {
+      "clics": 4,
+      "impressions": 17,
+      "position": 7.8
+    },
+    "composite dentaire": {
+      "clics": 1,
+      "impressions": 59,
+      "position": 2.6
+    },
+    "composite dentaire paris": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 15
+    },
+    "composite dentaire avant apres": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "bonding dentaire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 53.3
+    },
+    "bonding dentaire paris": {
+      "clics": 0,
+      "impressions": 7,
+      "position": 7.7
+    },
+    "stratification composite": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "dentiste composite": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 3.7
+    },
+    "composite esthétique dentaire": {
+      "clics": 1,
+      "impressions": 13,
+      "position": 11.5
+    },
+    "esthétique dentaire composite": {
+      "clics": 0,
+      "impressions": 2,
+      "position": 1
+    },
+    "composite bonding in paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "composite filling in paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "facettes dentaires": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 4
+    },
+    "facettes dentaires paris": {
+      "clics": 0,
+      "impressions": 37,
+      "position": 4.5
+    },
+    "facettes ou composite": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "facettes ceramique paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "prix facettes dentaires paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "facette dentaire paris 9": {
+      "clics": 0,
+      "impressions": 13,
+      "position": 11.8
+    },
+    "facettes dentaires paris 17": {
+      "clics": 0,
+      "impressions": 1,
+      "position": 68
+    },
+    "dentiste esthetique paris": {
+      "clics": 0,
+      "impressions": 4,
+      "position": 39.3
+    },
+    "dentisterie esthetique paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "esthetique dentaire paris": {
+      "clics": 0,
+      "impressions": 60,
+      "position": 16.7
+    },
+    "esthetique du sourire paris": {
+      "clics": 0,
+      "impressions": 11,
+      "position": 4.9
+    },
+    "eclaircissement dentaire paris": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "blanchiment dentaire paris": {
+      "clics": 0,
+      "impressions": 40,
+      "position": 2.5
+    },
+    "taches blanches dents": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "mih dents": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "blanchiment dentaire professionnel paris 9": {
+      "clics": 0,
+      "impressions": 10,
+      "position": 1.9
+    },
+    "dentiste blanchiment dentaire": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "chirurgie dentaire esthétique": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    },
+    "esthetique du sourire": {
+      "clics": 0,
+      "impressions": 3,
+      "position": 3
+    },
+    "dentiste esthétique du sourire": {
+      "clics": 0,
+      "impressions": 10,
+      "position": 2.7
+    },
+    "meilleur dentiste esthétique paris": {
+      "clics": 1,
+      "impressions": 6,
+      "position": 6.7
+    },
+    "franck moyal": {
+      "clics": 14,
+      "impressions": 152,
+      "position": 2.2
+    },
+    "dr franck moyal": {
+      "clics": 14,
+      "impressions": 126,
+      "position": 5.8
+    },
+    "franck moyal dentiste": {
+      "clics": 5,
+      "impressions": 42,
+      "position": 4.8
+    },
+    "smile club formations": {
+      "clics": 0,
+      "impressions": 0,
+      "position": null
+    }
+  }
+}
