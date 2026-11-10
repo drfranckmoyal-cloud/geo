@@ -313,7 +313,8 @@ def dans_l_ordre(sec, chapo):
 # ── ce que le CV de Franck ajoute aux pages pro (10/11/2026) ─────────────────
 # Franck : « pour la page mon parcours, n'hésite pas à te servir de mon CV » ; thèses citées
 # sans le nom des étudiants (sa réponse du 10/11/2026). Un ajout se pose dans une section
-# existante — juste après un sous-titre (« apres_h3 ») ou à la fin — ou devient une section
+# existante — juste après un sous-titre (« apres_h3 »), juste avant (« avant_h3 ») ou à la fin —
+# ou devient une section
 # nouvelle, placée après la section nommée (« apres »).
 def _fr(s):
     return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
@@ -356,6 +357,15 @@ AJOUTS_PRO = {
         ]},
     ],
     "conferences-formations": [
+        # Franck, 10/11/2026 : « Alpha Omega Marseille (janvier 26) - Usures : comprendre et traiter ».
+        # La date reste celle de la source citée sur la page (AO News : soirée du 5 février 2026).
+        {"dans": "Quelques interventions documentées", "apres_h3": "Alpha Oméga Marseille — février 2026",
+         "ordre": [("p", "<strong>« Usures : comprendre et traiter »</strong>")]},
+        # Franck, 10/11/2026 : « Alpha Omega Lyon (octobre 26) : Composites - Recettes et ingrédients ».
+        {"dans": "Quelques interventions documentées", "avant_h3": "ADF 2026 — workshop GC", "ordre": [
+            ("h3", "Alpha Oméga Lyon — octobre 2026"),
+            ("p", "Conférence consacrée aux composites : <strong>« Composites : recettes et ingrédients »</strong>."),
+        ]},
         {"apres": "Quelques interventions documentées", "titre": "Les enseignements de l’année 2025", "ordre": [
             ("h3", "À l’hôpital"),
             ("liste", [("texte", x) for x in (
@@ -405,10 +415,12 @@ def ajouter(slug, sections):
                                     "ordre": propre(a["ordre"])})
             continue
         ordre = sections[i]["ordre"]
-        if "apres_h3" in a:
-            j = next((k for k, (g, v) in enumerate(ordre) if g == "h3" and v == a["apres_h3"]), None)
-            assert j is not None, f"{slug} : sous-titre « {a['apres_h3']} » introuvable"
-            ordre[j + 1:j + 1] = propre(a["ordre"])
+        repere = a.get("apres_h3") or a.get("avant_h3")
+        if repere:
+            j = next((k for k, (g, v) in enumerate(ordre) if g == "h3" and v == repere), None)
+            assert j is not None, f"{slug} : sous-titre « {repere} » introuvable"
+            j += 1 if "apres_h3" in a else 0
+            ordre[j:j] = propre(a["ordre"])
         else:
             ordre.extend(propre(a["ordre"]))
     return sections
