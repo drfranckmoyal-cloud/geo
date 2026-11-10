@@ -426,6 +426,80 @@ RETOUCHES = {
     "erosion-dentaire": [("<strong>éviter les gestes agressifs", "<strong>Éviter les gestes agressifs")],
 }
 
+# ── un chapitre écrit ici, quand la page d'origine n'en porte pas le texte ──
+# Le parcours daté du Dr Franck Moyal, tiré de son CV (Franck, 10/11/2026 : « pour la page
+# mon parcours, n'hésite pas à te servir de mon CV » ; réponses aux cinq questions : RPPS
+# publié, réserve mentionnée, thèses sans le nom des étudiants, formateur « Dr Sche »,
+# thèse soutenue à Paris VII). Jamais de date de naissance, d'âge, d'adresse ni de
+# téléphone personnels, même si le CV les donne.
+CHAPITRES_ECRITS = {
+    "parcours": [
+        ("h3", "Repères"),
+        ("liste", [
+            "<strong>2008</strong> — Diplôme d’État de docteur en chirurgie dentaire, université Paris VII. "
+            "Thèse : « Le rôle de l’odonto-stomatologiste dans le dépistage et le diagnostic des cancers de "
+            "la cavité buccale ». Début de l’exercice en pratique privée, à Paris.",
+            "<strong>2012</strong> — Praticien hospitalier au service de médecine bucco-dentaire de l’hôpital "
+            "Pitié-Salpêtrière (AP-HP), au sein de la PASS bucco-dentaire.",
+            "<strong>2014</strong> — Diplôme interuniversitaire de carcinologie buccale (UFR Paris 7).",
+            "<strong>2016</strong> — Certificat d’implantologie clinique, esthétique et fonctionnelle "
+            "(PACT Implant).",
+            "<strong>2017</strong> — Chirurgien-dentiste de réserve du Service de santé des armées.",
+            "<strong>2023</strong> — Publication de la « Front Wing Technique », fermeture de diastème au "
+            "composite en technique directe (<em>Le Fil Dentaire</em>).",
+            "<strong>2024</strong> — Praticien attaché à la CMME, hôpital Sainte-Anne : mise en place, avec "
+            "les chefs de service, d’une consultation de dépistage bucco-dentaire des érosions liées aux TCA.",
+            "<strong>2025</strong> — Responsable de la consultation des internes en dentisterie esthétique et "
+            "usures, à la Pitié-Salpêtrière. Fondateur et président de l’association DenTCA.",
+        ]),
+        ("h3", "Formation continue"),
+        ("liste", [
+            "Réhabilitation des dents usées : technique « 3 Step » de Francesca Vailati, niveaux 1 et 2 "
+            "(2019, dix jours).",
+            "Composite : <em>Daily Menu</em>, Style Italiano (2018) ; stratification des composites "
+            "antérieurs, DCO (2018) ; injection de composite fluide, G. Piskorski (2024) ; composites en "
+            "teintes naturelles et <em>bleach veneers</em>, cours pratique du Dr Sche (2026, 27 heures).",
+            "Esthétique et préparations : <em>Esthétique 2.0</em>, Dent’Arts (2022) ; Vertipreps et "
+            "reconstitutions sans tenon, D. Gerdolle (2023).",
+            "Gencive et tissus mous : Paroplastic Académie, cycles 1 et 2 (2025) ; masterclass tissus mous "
+            "de Ricardo Kern (2025).",
+            "Occlusion : <em>Occlusal Overview</em> (2026, 27 heures).",
+            "Photographie dentaire : DCO (2018).",
+            "Contentions fibrées, cycles 1 à 3, Eumeria (2017–2021) ; endodontie <em>Advanced Class</em>, "
+            "Endo Académie (2020–2021) ; implantologie, IFIP (2026).",
+            "Anatomie, dissection et imagerie de la tête et du cou, AITEC (2015) ; sédation consciente au "
+            "MEOPA (2014).",
+        ]),
+        ("h3", "Engagements"),
+        ("liste", [
+            "Président fondateur de DenTCA, association pour la promotion des soins dentaires chez les "
+            "patients atteints de troubles des conduites alimentaires (2025).",
+            "Secrétaire général de l’association des chirurgiens-dentistes de réserve de la région de "
+            "Saint-Germain-en-Laye (depuis 2017).",
+        ]),
+        ("p", "Numéro RPPS (répertoire partagé des professionnels de santé) : 10005198790."),
+    ],
+}
+
+
+def ecrit(morceaux):
+    """Les blocs d'un chapitre écrit ici : un bloc par sous-titre, les listes à puces sous lui."""
+    blocs, courant = [], []
+    for genre, val in morceaux:
+        if genre == "h3":
+            if courant:
+                blocs.append(courant)
+            courant = [f"<h3>{e(fr(val))}</h3>"]
+        elif genre == "p":
+            courant.append(f"<p>{e(fr(val))}</p>")
+        else:
+            puces = "\n            ".join(f"<li>{e(fr(x))}</li>" for x in val)
+            courant.append(f'<ul class="puces">\n            {puces}\n          </ul>')
+    if courant:
+        blocs.append(courant)
+    return "\n".join('        <div class="bloc">\n          ' + "\n          ".join(b) + "\n        </div>"
+                     for b in blocs)
+
 # ── une couverture choisie, à la place de la première photo de l'ancienne page ──
 # Franck, 19/10/2026 : « la photo de couverture ne sert à rien, c'est juste une
 # bouche sans intérêt : montre un avant/après (cas 1 par exemple) ».
@@ -689,6 +763,8 @@ def composer(slug, plan):
                  titre=False if i in retraits.get("titre", ()) else ch.get("titres", {}).get(i),
                  sans=tuple(retraits.get("phrases", ())), vide=i in retraits.get("vide", ()))
             for i in ch["sections"]) if b)
+        if ch.get("ecrit"):
+            blocs = "\n".join(x for x in (blocs, ecrit(CHAPITRES_ECRITS[ch["ecrit"]])) if x)
         if reponse:
             # la réponse remplace le résumé du premier chapitre : elle en reprend le fond
             blocs = (f'        <div class="bloc">\n          <p class="reponse">{e(fr(reponse))}</p>\n'
@@ -968,6 +1044,8 @@ PLANS = {
   ]},
   "franck-moyal": {"chapitres": [
     {"titre": "Ma pratique", "sections": [2, 3]},
+    # le parcours daté, tiré du CV (10/11/2026) : la page d'origine n'en porte pas le texte
+    {"titre": "Mon parcours", "sections": [], "ecrit": "parcours"},
     {"titre": "Érosion et troubles alimentaires", "sections": [4]},
     {"titre": "Enseigner, et l’hôpital", "sections": [5, 6]},
     # la section 8 (« Une consultation commence par un diagnostic ») est l'appel de fin de
@@ -1306,6 +1384,9 @@ QUESTIONS = {
      "Le Dr Franck Moyal exerce à Paris en pratique privée, orientée vers la dentisterie esthétique et "
      "adhésive et vers les usures dentaires, en parallèle d’une activité hospitalière et "
      "d’enseignement."),
+    ("Quel est le parcours du Dr Franck Moyal ?",
+     "Docteur en chirurgie dentaire depuis 2008, il exerce depuis en pratique privée à Paris, à "
+     "l’hôpital Pitié-Salpêtrière depuis 2012 et à la CMME de l’hôpital Sainte-Anne depuis 2024."),
     ("Quel est son lien avec les troubles des conduites alimentaires (TCA) ?",
      "Depuis 2024, il est praticien attaché à la CMME (Clinique des Maladies Mentales et de "
      "l’Encéphale) de l’hôpital Sainte-Anne, où il a participé, avec les chefs de service, à la mise "

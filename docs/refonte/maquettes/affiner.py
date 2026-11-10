@@ -37,7 +37,7 @@ REVISIONS = {u: "2026-10-26" for u in (
 REVISIONS.update({u: "2026-11-10" for u in (
     "/activite-hospitaliere/", "/conferences-formations/", "/medias-interviews/", "/publications/",
     "/anorexie-erosion-dentaire-sans-vomissements/", "/bruxisme-usure-dentaire/", "/erosion-dentaire/",
-    "/facettes-ou-composite/", "/videos/anorexie-dents/", "/videos/composite-bonding/",
+    "/facettes-ou-composite/", "/franck-moyal/", "/videos/anorexie-dents/", "/videos/composite-bonding/",
     "/videos/erosion-dentaire/", "/videos/grossesse-erosion-dentaire/",
     "/videos/premiere-consultation-esthetique/", "/videos/sourire-gingival/")})
 LARGEURS = (400, 800, 1200, 1600)
@@ -273,6 +273,19 @@ PRATICIEN = {
                                  "troubles des conduites alimentaires, fondée et présidée par le Dr Franck Moyal."}],
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Université Paris Diderot (Paris VII)"},
     "worksFor": {"@id": RACINE + "/#practice"},
+    # Franck, 10/11/2026 : le numéro RPPS se publie ; il relie le site aux annuaires officiels.
+    "identifier": {"@type": "PropertyValue", "propertyID": "RPPS", "value": "10005198790"},
+    # les diplômes de la page Parcours (CV du 10/11/2026)
+    "hasCredential": [
+        {"@type": "EducationalOccupationalCredential", "name": "Diplôme d'État de docteur en chirurgie dentaire",
+         "credentialCategory": "degree", "dateCreated": "2008",
+         "recognizedBy": {"@type": "CollegeOrUniversity", "name": "Université Paris Diderot (Paris VII)"}},
+        {"@type": "EducationalOccupationalCredential", "name": "Diplôme interuniversitaire de carcinologie buccale",
+         "credentialCategory": "degree", "dateCreated": "2014"},
+        {"@type": "EducationalOccupationalCredential",
+         "name": "Certificat d'implantologie clinique, esthétique et fonctionnelle (PACT Implant)",
+         "credentialCategory": "certificate", "dateCreated": "2016"},
+    ],
 }
 PROFILS_EN_PLUS = ["https://www.doctolib.fr/dentiste/paris/franck-moyal", "https://smileclubformations.com/",
                    "https://www.youtube.com/@drfranckmoyal"]

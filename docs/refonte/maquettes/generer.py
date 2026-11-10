@@ -310,6 +310,110 @@ def dans_l_ordre(sec, chapo):
     return ordre
 
 
+# ── ce que le CV de Franck ajoute aux pages pro (10/11/2026) ─────────────────
+# Franck : « pour la page mon parcours, n'hésite pas à te servir de mon CV » ; thèses citées
+# sans le nom des étudiants (sa réponse du 10/11/2026). Un ajout se pose dans une section
+# existante — juste après un sous-titre (« apres_h3 ») ou à la fin — ou devient une section
+# nouvelle, placée après la section nommée (« apres »).
+def _fr(s):
+    return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
+
+
+AJOUTS_PRO = {
+    "publications": [
+        {"dans": "Pathologie et chirurgie orale", "apres_h3": "La chirurgie orale",
+         "ordre": [("p", "<strong>Éditions CdP — 2010</strong>")]},
+        {"dans": "Implantologie", "apres_h3": "La première consultation en implantologie",
+         "ordre": [("p", "<strong>Le Fil Dentaire — 2010</strong>")]},
+        {"dans": "Implantologie", "ordre": [
+            ("h3", "30 questions en implantologie"),
+            ("p", "<strong>Éditions CdP, collection Espace ID — 2011</strong>"),
+            ("p", "Ouvrage collectif dont je suis co-auteur."),
+        ]},
+        {"dans": "Travaux académiques encadrés", "ordre": [
+            ("h3", "Les thèses d’exercice codirigées"),
+            # un titre de thèse se cite tel quel : le maillage n'y pose pas de lien
+            ("liste", [("cite", x) for x in (
+                "<strong>2026</strong> — « Santé bucco-dentaire et troubles du comportement alimentaire : "
+                "création d’un outil de dépistage et de sensibilisation »",
+                "<strong>2025</strong> — « Évaluation des connaissances des chirurgiens-dentistes sur les "
+                "effets bucco-dentaires des troubles du comportement alimentaire (TCA) et leur prise en "
+                "charge en réhabilitation orale »",
+                "<strong>2023</strong> — « Enquête sur l’influence des réseaux sociaux sur la pratique en "
+                "odontologie des chirurgiens-dentistes ayant validé leur TCEO1 à l’université Paris Cité "
+                "entre 2021 et 2023 »",
+                "<strong>2023</strong> — « L’intelligence artificielle en odontologie, de sa définition et "
+                "ses contraintes légales à ses applications thérapeutiques »",
+                "<strong>2023</strong> — « Élaboration d’un outil d’évaluation des centres de santé "
+                "candidats au partenariat ville-hôpital »",
+                "<strong>2022</strong> — « Le renoncement aux soins des patients en situation de précarité "
+                "dans un partenariat ville-hôpital : revue de la littérature et proposition d’un outil "
+                "d’orientation »",
+                "<strong>2022</strong> — « Évaluation de la satisfaction des patients du service de "
+                "médecine bucco-dentaire de l’HUPS : enquête de cohorte prospective comparative des "
+                "consultants en janvier 2022 »",
+            )]),
+        ]},
+    ],
+    "conferences-formations": [
+        {"apres": "Quelques interventions documentées", "titre": "Les enseignements de l’année 2025", "ordre": [
+            ("h3", "À l’hôpital"),
+            ("liste", [("texte", x) for x in (
+                "Responsable de la consultation des internes en dentisterie esthétique et usures, service "
+                "de médecine bucco-dentaire de l’hôpital Pitié-Salpêtrière.",
+                "<strong>Usures : connaître, reconnaître et traiter</strong> (cours théorique, 7 heures) — "
+                "internat de médecine bucco-dentaire, hôpital Pitié-Salpêtrière, 5 mai 2025.",
+            )]),
+            ("h3", "Formations pour les chirurgiens-dentistes"),
+            ("liste", [("texte", x) for x in (
+                "<strong>Usures : savoir réaliser un cas de A à Z</strong> (théorie et pratique, 14 heures) — "
+                "DSF Formations, 15 et 16 mai, puis 26 et 27 juin 2025.",
+                "<strong>Stratification des composites antérieurs et fermeture de diastèmes</strong> "
+                "(théorie et pratique, 7 heures) — DSF Formations, 20 janvier et 14 avril 2025 ; CEMEDIS "
+                "Formations, 17 mars 2025.",
+                "<strong>Inlays, onlays, overlays</strong> (théorie et pratique, 7 heures) — CEMEDIS "
+                "Formations, 24 février 2025 ; LBS Formation, 14 avril 2025.",
+                "<strong>Photographie dentaire et planification esthétique avec SmileCloud</strong> "
+                "(théorie et pratique) — CEMEDIS Formations, 10 mars 2025 ; DSF Formations, juillet 2025.",
+                "<strong>Pose de digues simples et complexes</strong> (théorie et pratique, 7 heures) — "
+                "CEMEDIS Formations, 24 mars 2025.",
+                "<strong>Dyschromies, éclaircissements et traitement des taches blanches par "
+                "érosion-infiltration (ICON)</strong> (cours théorique, 4 heures) — DSF Formations, "
+                "9 avril 2025.",
+            )]),
+            ("h3", "Conférence"),
+            ("liste", [("texte", "<strong>Prendre en charge les usures dentaires en 2025 : diagnostic, plan "
+                                 "de traitement et options thérapeutiques</strong> — Entretiens de Garancière, "
+                                 "19 septembre 2025.")]),
+        ]},
+    ],
+}
+
+
+def ajouter(slug, sections):
+    """Pose les ajouts de AJOUTS_PRO ; un ajout qui ne trouve pas sa place arrête la fabrication."""
+    def propre(ordre):
+        return [(g, _fr(v)) if g != "liste" else (g, [(k, _fr(x)) for k, x in v]) for g, v in ordre]
+
+    sections = [dict(s, ordre=list(s["ordre"])) if s.get("ordre") else s for s in sections]
+    for a in AJOUTS_PRO.get(slug, []):
+        nom = a.get("dans") or a["apres"]
+        i = next((k for k, s in enumerate(sections) if s["titre"] == nom), None)
+        assert i is not None, f"{slug} : section « {nom} » introuvable"
+        if "apres" in a:
+            sections.insert(i + 1, {"titre": _fr(a["titre"]), "p": ["ajout"], "li": [], "liens": [],
+                                    "ordre": propre(a["ordre"])})
+            continue
+        ordre = sections[i]["ordre"]
+        if "apres_h3" in a:
+            j = next((k for k, (g, v) in enumerate(ordre) if g == "h3" and v == a["apres_h3"]), None)
+            assert j is not None, f"{slug} : sous-titre « {a['apres_h3']} » introuvable"
+            ordre[j + 1:j + 1] = propre(a["ordre"])
+        else:
+            ordre.extend(propre(a["ordre"]))
+    return sections
+
+
 def rendre_dans_l_ordre(s):
     """Les blocs d'une section, un par sous-titre ; une liste de liens devient une ligne de
     renvois, une liste de texte reste une liste à puces sous sa phrase d'annonce."""
@@ -333,7 +437,9 @@ def rendre_dans_l_ordre(s):
             poses.update(h for _, h, _ in val)
         else:
             puces = "\n            ".join(
-                f"<li>{ancre(x[1], x[2]) if x[0] == 'lien' else e(x[1])}</li>" for x in val)
+                f"<li>{ancre(x[1], x[2])}</li>" if x[0] == "lien"
+                else f'<li class="titre-cite">{e(x[1])}</li>' if x[0] == "cite"
+                else f"<li>{e(x[1])}</li>" for x in val)
             courant.append(f'<ul class="puces">\n            {puces}\n          </ul>')
             poses.update(x[1] for x in val if x[0] == "lien")
     if courant:
@@ -492,6 +598,7 @@ def rendre(page):
     sections = page["sections"]
     if sections and not sections[0]["titre"]:
         sections = sections[1:]
+    sections = ajouter(slug, sections)
     zone = False
     for i, s in enumerate(sections):
         if not s["titre"] and not s["p"]:
@@ -936,7 +1043,7 @@ def relier_dans_le_texte(page, slug):
     dans_pli = 0
     exclus = ("ariane", "eyebrow", "sous-titre", "numero", "sig", "tuile", "prise",
               "joindre", "lieu", "reseau", "appel__", "suite", "renvoi", "lire-aussi",
-              "billet__", "carte-article", "film__", "videos__")
+              "billet__", "carte-article", "film__", "videos__", "titre-cite")
     etat = []  # pour chaque morceau de texte : (index, autorisé ?)
     for i, x in enumerate(morceaux):
         if x.startswith("<"):
