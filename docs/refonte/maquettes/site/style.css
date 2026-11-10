@@ -1097,3 +1097,9 @@ body.portail{min-height:100%}
 /* La version en ligne sert chaque image dans un <picture> (WebP et repli) : l'enveloppe
    s'efface, l'image se place exactement comme avant (audit du 25/10/2026). */
 picture{display:contents}
+
+/* Le texte d'une vidéo, sous la vidéo (10/11/2026) : une colonne de lecture,
+   pas toute la largeur de la carte. */
+.texte-video > div{max-width:46rem}
+.texte-video p{margin-bottom:.7rem}
+.texte-video .texte-video__note{font-size:.78rem;color:var(--tres-doux);margin:.9rem 0 0}

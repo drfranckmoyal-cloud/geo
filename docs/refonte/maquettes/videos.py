@@ -11,7 +11,9 @@ sur une page qui lance cette vidéo, avec des liens vers la page concernée ».
 
 La source d'une vidéo est un fichier texte dans videos/ : quelques lignes « clé: valeur »
 (titre, court, theme, page, lien, chapitre, fichier, duree, date, description), une
-ligne « --- », puis une question par ligne, « question | réponse courte ». Le fichier
+ligne « --- », puis une question par ligne, « question | réponse courte ». Après une
+ligne « --- texte --- », le texte de ce que dit la vidéo, un paragraphe par bloc (Franck,
+10/11/2026 : « écrire sous chaque vidéo le texte de ce qui y est dit »). Le fichier
 vidéo et son image de couverture sont dans src/assets/videos/<fichier>.mp4 et .jpg.
 
     python3 docs/refonte/maquettes/videos.py
@@ -39,7 +41,9 @@ def t(s):
 def lire(chemin):
     """Une source de vidéo : son en-tête, puis ses questions."""
     tete, _, corps = open(chemin, encoding="utf-8").read().partition("\n---\n")
+    corps, _, dit = corps.partition("\n--- texte ---\n")
     v = {"slug": os.path.basename(chemin)[:-4]}
+    v["texte"] = [" ".join(b.split()) for b in dit.split("\n\n") if b.strip()]
     for ligne in tete.splitlines():
         cle, _, val = ligne.partition(":")
         if val:
@@ -178,6 +182,8 @@ def noeud_video(v):
             "thumbnailUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.jpg",
             "contentUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.mp4",
             "uploadDate": v["date"], "duration": f"PT{v['duree']}S",
+            # ce que dit la vidéo, en texte : les moteurs et les IA ne regardent pas les vidéos
+            **({"transcript": " ".join(v["texte"])} if v.get("texte") else {}),
             "author": {"@id": G.RACINE_WEB + "#franck-moyal"},
             "publisher": {"@id": G.RACINE_WEB + "#franck-moyal"}}
 
@@ -185,6 +191,18 @@ def noeud_video(v):
 def page_video(v, autres):
     questions = "\n".join(f"          <li><b>{t(q)}</b><span>{t(r)}</span></li>" for q, r in v["questions"])
     libelle = G.PUBLIC.get(v["page"], ("", None, v["page"]))[2] if v.get("page") else ""
+    paroles = "\n".join(f"        <p>{t(x)}</p>" for x in v.get("texte", []))
+    transcription = (f'''
+  <section class="sect">
+    <div class="contenu chapitre chapitre--plein texte-video">
+      <div>
+        <p class="eyebrow">Transcription</p>
+        <h2>Ce que dit le Dr Franck Moyal</h2>
+{paroles}
+        <p class="texte-video__note">Texte de la vidéo, à peine retouché pour la lecture.</p>
+      </div>
+    </div>
+  </section>''' if paroles else "")
     suite = (f'''
   <section class="sect">
     <div class="contenu">
@@ -233,7 +251,7 @@ def page_video(v, autres):
       <p class="film__tout"><a href="videos.html">Toutes les vidéos</a>{suite_page}</p>
     </div>
   </div>
-{suite}
+{transcription}{suite}
 </main>
 
 {G.PIED}

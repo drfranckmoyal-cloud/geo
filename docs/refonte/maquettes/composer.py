@@ -148,6 +148,25 @@ def lire(slug):
         paras = [x for x in paras if len(x) > 18 and not any(x.lower().startswith(m) for m in MEUBLE)]
         lis = [nu(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", sec, re.S)]
         lis = [x for x in lis if 8 < len(re.sub(r"<[^>]+>", "", x)) < 240]
+        # Chaque liste garde la phrase qui l'annonce : le paragraphe qui la précède
+        # immédiatement et finit par « : ». Les listes d'une section étaient fondues en
+        # une seule, rattachée à la première de ces phrases : les autres restaient coupées
+        # dans le texte, et un encadré pouvait porter la liste sous la mauvaise annonce
+        # (relevé du 10/11/2026 : 22 phrases coupées). Une puce courte (« reflux ; »)
+        # n'est plus perdue.
+        groupes, precedent = [], None
+        hors_nav = re.sub(r"<nav\b.*?</nav>", "", sans_annonce, flags=re.S)
+        for m in re.finditer(r"<p\b[^>]*>(.*?)</p>|<(ul|ol)\b[^>]*>(.*?)</\2>", hors_nav, re.S):
+            if m.group(1) is not None:
+                precedent = nu(m.group(1))
+                continue
+            items = [nu(x) for x in re.findall(r"<li\b[^>]*>(.*?)</li>", m.group(3), re.S)]
+            items = [x for x in items if 2 < len(re.sub(r"<[^>]+>", "", x)) < 240 and x not in p["liens"]]
+            if items:
+                annonce = (precedent if precedent and precedent in paras
+                           and re.sub(r"<[^>]+>", "", precedent).rstrip().endswith(":") else None)
+                groupes.append({"amorce": annonce, "li": items})
+            precedent = None
         tbl = re.search(r"<table.*?</table>", sec, re.S)
         figures = []
         for fig in re.findall(r"<figure.*?</figure>", sec, re.S):
@@ -161,7 +180,8 @@ def lire(slug):
         p["sections"].append({
             "titre": nu(ti.group(1)) if ti else "",
             "p": paras,
-            "li": [x for x in lis if x not in p["liens"]],
+            "li": [x for g in groupes for x in g["li"]],
+            "groupes": groupes,
             "renvois": [x for x in lis if x in p["liens"]],
             "h3": [nu(x) for x in re.findall(r"<h3[^>]*>(.*?)</h3>", sec, re.S)],
             "table": tbl.group(0) if tbl else None,
@@ -169,6 +189,13 @@ def lire(slug):
             "annonces": annonces,
             "faq": "faq__item" in sec,
             "sources": "source__ref" in sec or "source__n" in sec,
+            "refs": [(nu(r.group(1)), re.findall(r'<a[^>]*href="(https?://[^"]+)"[^>]*>(.*?)</a>', r.group(2), re.S))
+                     for r in re.finditer(r'<p[^>]*class="source__ref"[^>]*>(.*?)</p>\s*'
+                                          r'(?:<p[^>]*class="source__links"[^>]*>(.*?)</p>)?', sec, re.S)
+                     if r.group(1)] if "source__ref" in sec else [],
+            "notes": [nu(x) for x in re.findall(r"<p\b[^>]*>(.*?)</p>",
+                                                re.sub(r'<li[^>]*class="source"[^>]*>.*?</li>', "", sec, flags=re.S), re.S)]
+                     if "source__ref" in sec else [],
         })
     return p
 
@@ -193,14 +220,6 @@ def fr(s):
     return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
 
 
-def amorce(sec):
-    """La phrase qui annonce une liste doit rester collée à elle."""
-    for x in sec["p"]:
-        if x.rstrip().endswith(":") and len(x) < 110:
-            return x
-    return None
-
-
 def renvois(p, sec):
     if not sec["renvois"]:
         return ""
@@ -216,35 +235,44 @@ def bloc(p, i, avec_liste, titre=None, sans=(), vide=False):
        la réponse en tête du chapitre dit déjà la même chose."""
     s = p["sections"][i]
     if vide:
-        s, titre = dict(s, titre="", p=[], h3=[], li=[]), None
+        s, titre = dict(s, titre="", p=[], h3=[], li=[], groupes=[]), None
     elif sans:
         s = dict(s, p=[x for x in s["p"] if not re.sub(r"<[^>]+>", "", x).startswith(sans)])
-    # La phrase d'annonce ne suit sa liste que si celle-ci part en encadré ;
-    # sinon elle reste dans le texte, sans quoi elle disparaissait purement.
-    a = amorce(s) if (s["li"] and not avec_liste) else None
+    groupes = s.get("groupes", [])
+    # Quand les listes partent en encadré, leurs phrases d'annonce partent avec elles ;
+    # sinon chaque liste se pose juste sous la sienne, à sa place dans le texte.
+    annonces = ({g["amorce"] for g in groupes if g["amorce"]}
+                if (s["li"] and not avec_liste) else set())
     if titre is False:
         tete = ""
     else:
         tete = f'<h3>{e(titre if titre is not None else s["titre"])}</h3>\n          ' if (titre or s["titre"]) else ""
-    morceaux = []
+    morceaux = []   # (html, paragraphe d'origine) : l'origine sert à poser chaque liste
     if s["h3"] and len(s["h3"]) <= len(s["p"]):
         # sous-titres appariés à leurs paragraphes
-        reste = [x for x in s["p"] if x != a]
+        reste = [x for x in s["p"] if x not in annonces]
         for k, t3 in enumerate(s["h3"]):
             txt = reste[k] if k < len(reste) else ""
+            origine = txt
             if txt.startswith(t3):
                 txt = txt[len(t3):].strip()
-            morceaux.append(f'<h4 style="font-family:var(--serif);font-size:.95rem;margin:.7rem 0 .25rem">{e(t3)}</h4><p>{e(txt)}</p>')
+            morceaux.append((f'<h4 style="font-family:var(--serif);font-size:.95rem;margin:.7rem 0 .25rem">{e(t3)}</h4><p>{e(txt)}</p>', origine))
         for x in reste[len(s["h3"]):]:
-            morceaux.append(f"<p>{e(x)}</p>")
+            morceaux.append((f"<p>{e(x)}</p>", x))
     else:
-        morceaux = [f"<p>{e(x)}</p>" for x in s["p"] if x != a]
-    corps = "\n          ".join(morceaux)
+        morceaux = [(f"<p>{e(x)}</p>", x) for x in s["p"] if x not in annonces]
     liste = ""
     if avec_liste and s["li"]:
-        puces = "\n              ".join(f"<li>{e(x)}</li>" for x in s["li"])
-        intro = f'<p>{e(a)}</p>\n          ' if a else ""
-        liste = f'\n          {intro}<ul class="puces">\n              {puces}\n          </ul>'
+        for g in groupes:
+            puces = "\n              ".join(f"<li>{e(x)}</li>" for x in g["li"])
+            ul = f'<ul class="puces">\n              {puces}\n          </ul>'
+            ou = next((k for k, (_, origine) in enumerate(morceaux)
+                       if g["amorce"] and origine == g["amorce"]), None)
+            if ou is None:
+                liste += f"\n          {ul}"
+            else:
+                morceaux.insert(ou + 1, (ul, None))
+    corps = "\n          ".join(html for html, _ in morceaux)
     photos = ""
     if s["figures"]:
         cartes = []
@@ -281,19 +309,23 @@ def fiche(p, sections):
     morceaux = []
     for i in sections:
         s = p["sections"][i]
-        if not s["li"]:
-            continue
-        a = amorce(s)
-        court = a and len(a.rstrip(" :")) <= 52
-        titre = a.rstrip(" :") if court else s["titre"]
-        if len(titre) > 52:  # coupé net à 52 signes, il s'arrêtait au milieu d'un mot
-            titre = re.split(r"[  ]:[  ]", titre)[0]
-            if len(titre) > 52:
-                titre = titre[:52].rsplit(" ", 1)[0] + "…"
-        annonce = f'        <p style="margin:0 0 .5rem">{e(a)}</p>\n' if (a and not court) else ""
-        puces = "\n            ".join(f"<li>{e(x)}</li>" for x in s["li"])
-        morceaux.append(f'        <h4{" style=\"margin-top:1rem\"" if morceaux else ""}>{e(titre)}</h4>\n'
-                        f'{annonce}        <ul>\n            {puces}\n        </ul>')
+        # une liste par groupe, chacune sous sa propre phrase d'annonce
+        for n, g in enumerate(s.get("groupes", [])):
+            a = g["amorce"]
+            court = bool(a) and len(re.sub(r"<[^>]+>", "", a).rstrip(" :\u00a0\u202f")) <= 52
+            titre = a.rstrip(" :\u00a0\u202f") if court else (s["titre"] if n == 0 else "")
+            if len(titre) > 52:  # coupé net à 52 signes, il s'arrêtait au milieu d'un mot
+                titre = re.split(r"[ \u00a0\u202f]:[ \u00a0\u202f]", titre)[0]
+                if len(titre) > 52:
+                    titre = titre[:52].rsplit(" ", 1)[0] + "…"
+            marge = ' style="margin-top:1rem"' if morceaux else ""
+            tete = f'        <h4{marge}>{e(titre)}</h4>\n' if titre else ""
+            annonce = ""
+            if a and not court:
+                haut = ".9rem" if (morceaux and not titre) else "0"
+                annonce = f'        <p style="margin:{haut} 0 .5rem">{e(a)}</p>\n'
+            puces = "\n            ".join(f"<li>{e(x)}</li>" for x in g["li"])
+            morceaux.append(f'{tete}{annonce}        <ul>\n            {puces}\n        </ul>')
     return "\n".join(morceaux)
 
 
@@ -386,6 +418,13 @@ SEQUENCES = {
 
 
 SANS_PHOTO_EN_TETE = {"bilan-esthetique-personnalise"}
+
+# Retouches de forme sur le texte repris, sans en changer le sens. La phrase de l'érosion
+# suivait une annonce que la V1.2 du pack a retirée (« Sur le site patient, le message doit
+# donc rester simple : ») : elle commençait par une minuscule (audit du 10/11/2026).
+RETOUCHES = {
+    "erosion-dentaire": [("<strong>éviter les gestes agressifs", "<strong>Éviter les gestes agressifs")],
+}
 
 # ── une couverture choisie, à la place de la première photo de l'ancienne page ──
 # Franck, 19/10/2026 : « la photo de couverture ne sert à rien, c'est juste une
@@ -757,17 +796,35 @@ def composer(slug, plan):
   </section>''')
 
     # sources
+    # Une référence par ligne, ses liens à la suite, comme sur les pages Usure et TCA.
+    # Le paragraphe des liens commençait par une balise et non par « DOI » : il
+    # devenait une ligne numérotée à part, « DOI » collé à « PubMed ».
     src = next((s for s in sec if s["sources"]), None)
-    if src:
-        intro, items, k = "", [], 0
-        ps = src["p"]
-        if ps and not ps[0].startswith("["):
-            intro, k = ps[0], 1
-        while k < len(ps):
-            ref = ps[k]
-            doi = ps[k + 1] if k + 1 < len(ps) and ps[k + 1].startswith("DOI") else ""
-            items.append(f"<li>{e(ref)}{(' — ' + e(doi)) if doi else ''}</li>")
-            k += 2 if doi else 1
+    if src and src["refs"]:
+        items = []
+        for ref, liens in src["refs"]:
+            suite = ""
+            for href, lib in liens:
+                lib = nu(lib, False)
+                if lib.startswith("DOI"):
+                    suite += f' — DOI : <a href="{href}" target="_blank" rel="noopener">{e(lib.split(":", 1)[1].strip())}</a>'
+                else:
+                    suite += f' — <a href="{href}" target="_blank" rel="noopener">{e(lib)}</a>'
+            items.append(f"<li>{e(re.sub(r'^\[\d+\]\s*', '', ref))}{suite}</li>")
+        intro = src["notes"][0] if src["notes"] else ""
+        notes = []
+        for x in src["notes"][1:]:
+            # « Source fonctionnelle — SmileCloud : https://… » : le nom en gras, puis un lien
+            # au nom du site, comme sur la page Dentisterie esthétique
+            lien = re.search(r'<a href="(https?://[^"]+)"[^>]*>.*?</a>|(https?://\S+)', x)
+            if lien:
+                href = lien.group(1) or lien.group(2)
+                nom = re.sub(r"[\s  :]+$", "", re.sub(r"<[^>]+>", "", x[:lien.start()]))
+                site = href.split("//")[1].split("/")[0].replace("www.", "")
+                notes.append(f'      <p style="margin-top:.6rem"><strong>{e(nom)}</strong> : '
+                             f'<a href="{href}" target="_blank" rel="noopener">{site}</a></p>')
+            else:
+                notes.append(f'      <p style="margin-top:.6rem">{e(x)}</p>')
         corps.append(f'''  <section class="sect sect--serre">
     <div class="contenu sources">
       <p class="eyebrow">Sources scientifiques</p>
@@ -775,6 +832,7 @@ def composer(slug, plan):
       <ol>
         {chr(10).join("        " + i for i in items).strip()}
       </ol>
+{chr(10).join(notes)}
     </div>
   </section>''')
 
@@ -824,6 +882,8 @@ def composer(slug, plan):
 </body>
 </html>
 '''
+    for ancien, nouveau in RETOUCHES.get(slug, []):
+        page = page.replace(ancien, nouveau)
     open(os.path.join(SORTIE, f"{slug}.html"), "w", encoding="utf-8").write(page)
     return p, page
 
@@ -910,7 +970,9 @@ PLANS = {
     {"titre": "Ma pratique", "sections": [2, 3]},
     {"titre": "Érosion et troubles alimentaires", "sections": [4]},
     {"titre": "Enseigner, et l’hôpital", "sections": [5, 6]},
-    {"titre": "Traiter juste", "sections": [7, 8]},
+    # la section 8 (« Une consultation commence par un diagnostic ») est l'appel de fin de
+    # page : reprise ici aussi, elle s'affichait deux fois de suite (audit du 10/11/2026)
+    {"titre": "Traiter juste", "sections": [7]},
   ]},
   "chirurgien-dentiste-paris-9": {"chapitres": [
     {"titre": "Une pratique orientée", "sections": [1]},

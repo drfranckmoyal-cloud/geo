@@ -262,8 +262,88 @@ def lire(slug):
                     and href.strip("/") != slug and (href, lib) not in liens):
                 liens.append((href, lib))
         if titre or paras:
-            page["sections"].append({"titre": titre, "p": paras, "li": lis, "liens": liens[:4]})
+            page["sections"].append({"titre": titre, "p": paras, "li": lis, "liens": liens[:4],
+                                     "ordre": dans_l_ordre(sec, page["chapo"])})
     return page
+
+
+def dans_l_ordre(sec, chapo):
+    """Le texte d'une section dans l'ordre de la page d'origine : sous-titres, paragraphes
+    et listes, chacune juste sous la phrase qui l'annonce. La mise en page envoyait toutes
+    les listes dans l'encadré « En bref », ne gardait que quatre paragraphes et jetait les
+    phrases courtes : « Cette pratique impose souvent de composer avec : » restait seule,
+    et des sous-titres disparaissaient (relevé du 10/11/2026)."""
+    ordre = []
+    corps = re.sub(r"<nav\b.*?</nav>|<h2\b[^>]*>.*?</h2>|<svg\b.*?</svg>", "", sec, flags=re.S)
+
+    def lien_seul(frag):
+        """Un fragment qui n'est qu'un lien : son adresse et son libellé, sinon None."""
+        a = re.fullmatch(r'\s*<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>\s*', frag, re.S)
+        if not a:
+            return None
+        lib = H.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", a.group(2)))).strip()
+        return (a.group(1), lib) if lib else None
+
+    for m in re.finditer(r"<h3\b[^>]*>(.*?)</h3>|<p\b[^>]*>(.*?)</p>|<(ul|ol)\b[^>]*>(.*?)</\3>",
+                         corps, re.S):
+        if m.group(1) is not None:
+            ordre.append(("h3", texte(m.group(1))))
+        elif m.group(2) is not None:
+            seul = lien_seul(m.group(2))
+            x = texte(m.group(2))
+            if "Dr Franck Moyal — Chirurgien" in x or x == chapo:
+                continue
+            if seul:
+                ordre.append(("liste", [("lien",) + seul]))
+            elif len(re.sub(r"<[^>]+>", "", x)) > 2:
+                ordre.append(("p", x))
+        else:
+            items = []
+            for li in re.findall(r"<li\b[^>]*>(.*?)</li>", m.group(4), re.S):
+                seul = lien_seul(li)
+                if seul:
+                    items.append(("lien",) + seul)
+                elif re.sub(r"<[^>]+>", "", texte(li)).strip():
+                    items.append(("texte", texte(li)))
+            if items:
+                ordre.append(("liste", items))
+    return ordre
+
+
+def rendre_dans_l_ordre(s):
+    """Les blocs d'une section, un par sous-titre ; une liste de liens devient une ligne de
+    renvois, une liste de texte reste une liste à puces sous sa phrase d'annonce."""
+    def ancre(href, lib):
+        if href.startswith("http"):
+            return f'<a href="{href}" target="_blank" rel="noopener">{e(lib)}</a>'
+        cible = href.strip("/").split("#")[0] or "index"
+        cible = FONDUES_VERS.get(cible, cible).replace("cas-cliniques/", "cas-")
+        return f'<a href="{cible}.html">{e(lib)}</a>'
+
+    blocs, courant, poses = [], [], set()
+    for genre, val in s["ordre"]:
+        if genre == "h3":
+            if courant:
+                blocs.append(courant)
+            courant = [f"<h3>{e(val)}</h3>"]
+        elif genre == "p":
+            courant.append(f"<p>{e(val)}</p>")
+        elif all(x[0] == "lien" for x in val):
+            courant.append('<p class="suite">' + " · ".join(ancre(h, l) for _, h, l in val) + "</p>")
+            poses.update(h for _, h, _ in val)
+        else:
+            puces = "\n            ".join(
+                f"<li>{ancre(x[1], x[2]) if x[0] == 'lien' else e(x[1])}</li>" for x in val)
+            courant.append(f'<ul class="puces">\n            {puces}\n          </ul>')
+            poses.update(x[1] for x in val if x[0] == "lien")
+    if courant:
+        blocs.append(courant)
+    # les liens qui n'étaient posés que dans une phrase : la mise en page les perd, on les garde en renvoi
+    reste = [(h, l) for h, l in s["liens"] if h not in poses]
+    if reste:
+        blocs.append(['<p class="suite">' + " · ".join(ancre(h, l) for h, l in reste) + "</p>"])
+    return "\n        ".join('<div class="bloc">\n          ' + "\n          ".join(b) + "\n        </div>"
+                             for b in blocs)
 
 
 # ── rendu ─────────────────────────────────────────────────────────────────────
@@ -419,6 +499,21 @@ def rendre(page):
         zone = not zone
         cls = "sect sect--zone" if zone else "sect"
         titre = f'<h2>{e(s["titre"])}</h2>' if s["titre"].strip() else ""
+        if s.get("ordre"):
+            img = ""
+            if photos and i % 2 == 1:
+                img = f'\n      <div class="cas">{photo(photos.pop(0), "paire-ou-solo")}</div>'
+            corps.append(f'''  <section class="{cls}">
+    <div class="contenu">
+      <div class="chapitre chapitre--plein">
+        <div>
+        {titre}
+        {rendre_dans_l_ordre(s)}
+        </div>
+      </div>{img}
+    </div>
+  </section>''')
+            continue
         paras = "\n        ".join(f"<p>{e(p)}</p>" for p in s["p"][:4])
         liens = ""
         if s["liens"]:

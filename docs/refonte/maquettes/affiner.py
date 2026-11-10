@@ -33,6 +33,13 @@ REVISIONS = {u: "2026-10-26" for u in (
     "/dents-courtes-usees/", "/eclaircissement-dentaire-paris/", "/bilan-esthetique-personnalise/",
     "/chirurgien-dentiste-paris-9/", "/franck-moyal/", "/facettes-ou-composite/",
     "/dentisterie-esthetique-paris/")}
+# 10/11/2026 : listes et sous-titres rendus aux pages qui les avaient perdus, texte des vidéos
+REVISIONS.update({u: "2026-11-10" for u in (
+    "/activite-hospitaliere/", "/conferences-formations/", "/medias-interviews/", "/publications/",
+    "/anorexie-erosion-dentaire-sans-vomissements/", "/bruxisme-usure-dentaire/", "/erosion-dentaire/",
+    "/facettes-ou-composite/", "/videos/anorexie-dents/", "/videos/composite-bonding/",
+    "/videos/erosion-dentaire/", "/videos/grossesse-erosion-dentaire/",
+    "/videos/premiere-consultation-esthetique/", "/videos/sourire-gingival/")})
 LARGEURS = (400, 800, 1200, 1600)
 
 # ── 1. les images ─────────────────────────────────────────────────────────
