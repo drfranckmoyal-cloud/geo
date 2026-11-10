@@ -317,7 +317,8 @@ def dans_l_ordre(sec, chapo):
 # ou devient une section
 # nouvelle, placée après la section nommée (« apres »).
 def _fr(s):
-    return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
+    # l'espace insécable ordinaire, comme composer.py : la fine collait les guillemets au mot
+    return re.sub(r" ([:;?!»])", " \\1", s).replace("« ", "« ")
 
 
 AJOUTS_PRO = {
