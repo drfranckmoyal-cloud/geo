@@ -24,7 +24,10 @@ import os
 import re
 import sys
 
-RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pictos import picto  # noqa: E402
+
+RACINE =os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 DIST = os.path.join(RACINE, "dist")
 SORTIE = os.path.join(RACINE, "docs", "refonte", "maquettes", "site")
 # le portrait change de fichier : on le signe pour contourner le cache
@@ -427,9 +430,84 @@ def ajouter(slug, sections):
     return sections
 
 
-def rendre_dans_l_ordre(s):
+# ── l'air et le relief des pages pro (Franck, 10/11/2026) ─────────────────────
+# « Aère plus la page et mets du relief et de l'iconographie générée ou choisie sur
+# internet. » Chaque bloc titré devient une notice : à gauche, un pictogramme (pictos.py)
+# ou, pour une intervention datée, le mois et l'année ; à droite, le texte. Une image
+# générée (Canva) ouvre la page, signalée comme illustration.
+EN_RELIEF = {"publications", "conferences-formations"}
+IMAGE_D_OUVERTURE = {
+    "publications": ("img/illustration-publications.jpg",
+                     "Livres et revues scientifiques posés sur une table, près d’une fenêtre"),
+    "conferences-formations": ("img/illustration-conferences.jpg",
+                               "Pupitre de conférence dans un amphithéâtre vide"),
+}
+# le pictogramme d'un bloc, d'après son sous-titre ; à défaut, d'après sa source
+PICTOS_PRO = {
+    "Une continuité entre enseignement, clinique et recherche": "enseigner",
+    "Les thèses d’exercice codirigées": "diplome",
+    "Formation pratique pour chirurgiens-dentistes": "atelier",
+    "Du diagnostic à la réhabilitation": "dent",
+    "ARTEMIS Education — Réhabilitation des usures complexes": "duo",
+    "À l’hôpital": "hopital",
+    "Formations pour les chirurgiens-dentistes": "enseigner",
+    "Conférence": "micro",
+}
+# une intervention dont le sous-titre ne porte pas le mois : celui que donne son texte
+DATES_PRO = {"ADF 2026 — workshop GC": ("nov.", "2026")}
+MOIS_COURTS = {"janvier": "janv.", "février": "févr.", "mars": "mars", "avril": "avr.", "mai": "mai",
+               "juin": "juin", "juillet": "juil.", "août": "août", "septembre": "sept.",
+               "octobre": "oct.", "novembre": "nov.", "décembre": "déc."}
+
+
+def marque_du_bloc(titre, corps):
+    """Ce qui se pose à gauche d'une notice : la date d'une intervention, sinon un pictogramme."""
+    m = re.search(r"—\s(\w+)\s(\d{4})$", titre)
+    date = (MOIS_COURTS[m.group(1)], m.group(2)) if m and m.group(1) in MOIS_COURTS else DATES_PRO.get(titre)
+    if date:
+        return (f'<span class="agenda"><span class="agenda__mois">{date[0]}</span>'
+                f'<span class="agenda__an">{date[1]}</span></span>')
+    nom = PICTOS_PRO.get(titre)
+    if not nom:
+        source = " ".join(corps[1:2])
+        nom = ("livre" if "Éditions" in source else "revue" if ("Fil Dentaire" in source or "Santé de l" in source)
+               else "article")
+    return f'<span class="notice__picto">{picto(nom)}</span>'
+
+
+def en_notice(bloc, slug):
+    """Un bloc titré mis en notice ; la ligne de source (publications) ou le titre de
+    l'intervention (conférences), seuls en gras sous le sous-titre, prennent leur style."""
+    if not bloc or not bloc[0].startswith("<h3>"):
+        return bloc
+    titre = H.unescape(re.sub(r"<[^>]+>", "", bloc[0]))
+    corps = list(bloc)
+    for k, x in enumerate(corps[1:], 1):
+        if re.fullmatch(r"<p><strong>[^<]*</strong></p>", x):
+            classe = "notice__citation" if "«" in x else "notice__source" if k == 1 else None
+            if classe:
+                # l'insécable devant « » » : le guillemet fermant ne part plus seul à la ligne
+                corps[k] = _fr(x.replace("<p>", f'<p class="{classe}">', 1))
+    return [f'<div class="notice__marque">{marque_du_bloc(titre, corps)}</div>',
+            '<div class="notice__corps">'] + corps + ["</div>"]
+
+
+def theses(val):
+    """Les thèses codirigées : une carte par thèse, l'année en grand, le titre cité tel quel."""
+    cartes = []
+    for _, x in val:
+        m = re.match(r"<strong>(\d{4})</strong>\s*—\s*(.*)$", x, re.S)
+        an, titre = (m.group(1), m.group(2)) if m else ("", x)
+        cartes.append(f'<li class="these titre-cite"><span class="these__an">{an}</span>'
+                      f'<span class="these__titre">{e(titre)}</span></li>')
+    return '<ol class="theses">\n            ' + "\n            ".join(cartes) + "\n          </ol>"
+
+
+def rendre_dans_l_ordre(s, slug=None):
     """Les blocs d'une section, un par sous-titre ; une liste de liens devient une ligne de
     renvois, une liste de texte reste une liste à puces sous sa phrase d'annonce."""
+    relief = slug in EN_RELIEF
+
     def ancre(href, lib):
         if href.startswith("http"):
             return f'<a href="{href}" target="_blank" rel="noopener">{e(lib)}</a>'
@@ -448,12 +526,16 @@ def rendre_dans_l_ordre(s):
         elif all(x[0] == "lien" for x in val):
             courant.append('<p class="suite">' + " · ".join(ancre(h, l) for _, h, l in val) + "</p>")
             poses.update(h for _, h, _ in val)
+        elif relief and all(x[0] == "cite" for x in val):
+            courant.append(theses(val))
         else:
             puces = "\n            ".join(
                 f"<li>{ancre(x[1], x[2])}</li>" if x[0] == "lien"
                 else f'<li class="titre-cite">{e(x[1])}</li>' if x[0] == "cite"
                 else f"<li>{e(x[1])}</li>" for x in val)
-            courant.append(f'<ul class="puces">\n            {puces}\n          </ul>')
+            # dans une notice, une liste d'enseignements : le titre en gras passe à la ligne
+            classe = "puces jalons" if relief and any("<strong>" in x[1] for x in val if x[0] == "texte") else "puces"
+            courant.append(f'<ul class="{classe}">\n            {puces}\n          </ul>')
             poses.update(x[1] for x in val if x[0] == "lien")
     if courant:
         blocs.append(courant)
@@ -461,6 +543,10 @@ def rendre_dans_l_ordre(s):
     reste = [(h, l) for h, l in s["liens"] if h not in poses]
     if reste:
         blocs.append(['<p class="suite">' + " · ".join(ancre(h, l) for h, l in reste) + "</p>"])
+    if relief:
+        return "\n        ".join(
+            ('<div class="bloc notice">\n          ' if b[0].startswith("<h3>") else '<div class="bloc">\n          ')
+            + "\n          ".join(en_notice(b, slug)) + "\n        </div>" for b in blocs)
     return "\n        ".join('<div class="bloc">\n          ' + "\n          ".join(b) + "\n        </div>"
                              for b in blocs)
 
@@ -588,6 +674,11 @@ def rendre(page):
         alt = H.escape((ouverture.get("alt") or [""])[0])
         leg = f'<figcaption>{e(ouverture["legende"])}</figcaption>' if ouverture["legende"] else ""
         fig = f'      <figure><img src="{src}" alt="{alt}">{leg}</figure>\n'
+    elif slug in IMAGE_D_OUVERTURE:
+        src, alt = IMAGE_D_OUVERTURE[slug]
+        # une image générée : elle le dit, pour ne jamais passer pour une photographie du cabinet
+        fig = (f'      <figure class="une__illustration"><img src="{src}" alt="{H.escape(alt)}">'
+               f'<figcaption>Image d’illustration</figcaption></figure>\n')
     corps.append(f'''  <div class="contenu">
     <p class="ariane">{ariane}</p>
     <div class="une">
@@ -628,7 +719,7 @@ def rendre(page):
       <div class="chapitre chapitre--plein">
         <div>
         {titre}
-        {rendre_dans_l_ordre(s)}
+        {rendre_dans_l_ordre(s, slug)}
         </div>
       </div>{img}
     </div>
@@ -756,7 +847,7 @@ def rendre(page):
 <link rel="stylesheet" href="style.css?v={VERSION}">
 {chr(10).join(page.get("jsonld") or [])}
 </head>
-<body>
+<body{' class="aere"' if slug in EN_RELIEF else ""}>
 
 {menu(slug)}
 

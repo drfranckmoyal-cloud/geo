@@ -37,6 +37,8 @@ spec = importlib.util.spec_from_file_location(
     "gen", os.path.join(os.path.dirname(os.path.abspath(__file__)), "generer.py"))
 gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pictos import picto  # noqa: E402
 
 MEUBLE = ("dr franck moyal — chirurgien", "mis à jour le", "voir les ", "dentisterie esthétique et adhésive, usures")
 
@@ -432,58 +434,71 @@ RETOUCHES = {
 # publié, réserve mentionnée, thèses sans le nom des étudiants, formateur « Dr Sche »,
 # thèse soutenue à Paris VII). Jamais de date de naissance, d'âge, d'adresse ni de
 # téléphone personnels, même si le CV les donne.
+# Franck, 10/11/2026, devant l'aperçu : « aère plus la page et mets du relief et de
+# l'iconographie ». Les repères deviennent une frise datée, la formation continue une
+# vignette par domaine, les engagements deux cartes : le texte reste celui du CV, coupé
+# en un titre et sa précision, chacun avec son pictogramme (pictos.py).
 CHAPITRES_ECRITS = {
     "parcours": [
         ("h3", "Repères"),
-        ("liste", [
-            "<strong>2008</strong> — Diplôme d’État de docteur en chirurgie dentaire, université Paris VII. "
-            "Thèse : « Le rôle de l’odonto-stomatologiste dans le dépistage et le diagnostic des cancers de "
-            "la cavité buccale ». Début de l’exercice en pratique privée, à Paris.",
-            "<strong>2012</strong> — Praticien hospitalier au service de médecine bucco-dentaire de l’hôpital "
-            "Pitié-Salpêtrière (AP-HP), au sein de la PASS bucco-dentaire.",
-            "<strong>2014</strong> — Diplôme interuniversitaire de carcinologie buccale (UFR Paris 7).",
-            "<strong>2016</strong> — Certificat d’implantologie clinique, esthétique et fonctionnelle "
-            "(PACT Implant).",
-            "<strong>2017</strong> — Chirurgien-dentiste de réserve du Service de santé des armées.",
-            "<strong>2023</strong> — Publication de la « Front Wing Technique », fermeture de diastème au "
-            "composite en technique directe (<em>Le Fil Dentaire</em>).",
-            "<strong>2024</strong> — Praticien attaché à la CMME, hôpital Sainte-Anne : mise en place, avec "
-            "les chefs de service, d’une consultation de dépistage bucco-dentaire des érosions liées aux TCA.",
-            "<strong>2025</strong> — Responsable de la consultation des internes en dentisterie esthétique et "
-            "usures, à la Pitié-Salpêtrière. Fondateur et président de l’association DenTCA.",
+        ("frise", [
+            ("2008", "diplome", "Diplôme d’État de docteur en chirurgie dentaire",
+             "Université Paris VII. Thèse : « Le rôle de l’odonto-stomatologiste dans le dépistage et le "
+             "diagnostic des cancers de la cavité buccale ». Début de l’exercice en pratique privée, à Paris."),
+            ("2012", "hopital", "Praticien hospitalier à la Pitié-Salpêtrière",
+             "Service de médecine bucco-dentaire de l’hôpital Pitié-Salpêtrière (AP-HP), au sein de la PASS "
+             "bucco-dentaire."),
+            ("2014", "diplome", "Diplôme interuniversitaire de carcinologie buccale", "UFR Paris 7."),
+            ("2016", "implant", "Certificat d’implantologie clinique, esthétique et fonctionnelle",
+             "PACT Implant."),
+            ("2017", "reserve", "Chirurgien-dentiste de réserve", "Service de santé des armées."),
+            ("2023", "article", "Publication de la « Front Wing Technique »",
+             "Fermeture de diastème au composite en technique directe (<em>Le Fil Dentaire</em>)."),
+            ("2024", "depistage", "Praticien attaché à la CMME, hôpital Sainte-Anne",
+             "Mise en place, avec les chefs de service, d’une consultation de dépistage bucco-dentaire des "
+             "érosions liées aux TCA."),
+            ("2025", "enseigner", "Responsable de la consultation des internes",
+             "En dentisterie esthétique et usures, à la Pitié-Salpêtrière."),
+            ("2025", "association", "Fondateur et président de l’association DenTCA", ""),
         ]),
         ("h3", "Formation continue"),
-        ("liste", [
-            "Réhabilitation des dents usées : technique « 3 Step » de Francesca Vailati, niveaux 1 et 2 "
-            "(2019, dix jours).",
-            "Composite : <em>Daily Menu</em>, Style Italiano (2018) ; stratification des composites "
-            "antérieurs, DCO (2018) ; injection de composite fluide, G. Piskorski (2024) ; composites en "
-            "teintes naturelles et <em>bleach veneers</em>, cours pratique du Dr Sche (2026, 27 heures).",
-            "Esthétique et préparations : <em>Esthétique 2.0</em>, Dent’Arts (2022) ; Vertipreps et "
-            "reconstitutions sans tenon, D. Gerdolle (2023).",
-            "Gencive et tissus mous : Paroplastic Académie, cycles 1 et 2 (2025) ; masterclass tissus mous "
-            "de Ricardo Kern (2025).",
-            "Occlusion : <em>Occlusal Overview</em> (2026, 27 heures).",
-            "Photographie dentaire : DCO (2018).",
-            "Contentions fibrées, cycles 1 à 3, Eumeria (2017–2021) ; endodontie <em>Advanced Class</em>, "
-            "Endo Académie (2020–2021) ; implantologie, IFIP (2026).",
-            "Anatomie, dissection et imagerie de la tête et du cou, AITEC (2015) ; sédation consciente au "
-            "MEOPA (2014).",
+        ("domaines", [
+            ("dent", "Réhabilitation des dents usées",
+             "Technique « 3 Step » de Francesca Vailati, niveaux 1 et 2 (2019, dix jours)."),
+            ("strates", "Composite",
+             "<em>Daily Menu</em>, Style Italiano (2018) ; stratification des composites antérieurs, DCO "
+             "(2018) ; injection de composite fluide, G. Piskorski (2024) ; composites en teintes naturelles "
+             "et <em>bleach veneers</em>, cours pratique du Dr Sche (2026, 27 heures)."),
+            ("eclat", "Esthétique et préparations",
+             "<em>Esthétique 2.0</em>, Dent’Arts (2022) ; Vertipreps et reconstitutions sans tenon, "
+             "D. Gerdolle (2023)."),
+            ("gencive", "Gencive et tissus mous",
+             "Paroplastic Académie, cycles 1 et 2 (2025) ; masterclass tissus mous de Ricardo Kern (2025)."),
+            ("occlusion", "Occlusion", "<em>Occlusal Overview</em> (2026, 27 heures)."),
+            ("photo", "Photographie dentaire", "DCO (2018)."),
+            ("contention", "Contentions fibrées", "Cycles 1 à 3, Eumeria (2017–2021)."),
+            ("endo", "Endodontie", "<em>Advanced Class</em>, Endo Académie (2020–2021)."),
+            ("implant", "Implantologie", "IFIP (2026)."),
+            ("anatomie", "Anatomie de la tête et du cou", "Dissection et imagerie, AITEC (2015)."),
+            ("sedation", "Sédation consciente", "MEOPA (2014)."),
         ]),
         ("h3", "Engagements"),
-        ("liste", [
-            "Président fondateur de DenTCA, association pour la promotion des soins dentaires chez les "
-            "patients atteints de troubles des conduites alimentaires (2025).",
-            "Secrétaire général de l’association des chirurgiens-dentistes de réserve de la région de "
-            "Saint-Germain-en-Laye (depuis 2017).",
+        ("engagements", [
+            ("association", "Président fondateur de DenTCA",
+             "Association pour la promotion des soins dentaires chez les patients atteints de troubles des "
+             "conduites alimentaires (2025)."),
+            ("reserve", "Secrétaire général",
+             "Association des chirurgiens-dentistes de réserve de la région de Saint-Germain-en-Laye "
+             "(depuis 2017)."),
         ]),
-        ("p", "Numéro RPPS (répertoire partagé des professionnels de santé) : 10005198790."),
+        ("rpps", "Numéro RPPS (répertoire partagé des professionnels de santé) : <strong>10005198790</strong>."),
     ],
 }
 
 
 def ecrit(morceaux):
-    """Les blocs d'un chapitre écrit ici : un bloc par sous-titre, les listes à puces sous lui."""
+    """Les blocs d'un chapitre écrit ici : un bloc par sous-titre ; sous lui, une frise datée,
+    des vignettes par domaine, des cartes ou une liste à puces."""
     blocs, courant = [], []
     for genre, val in morceaux:
         if genre == "h3":
@@ -492,6 +507,25 @@ def ecrit(morceaux):
             courant = [f"<h3>{e(fr(val))}</h3>"]
         elif genre == "p":
             courant.append(f"<p>{e(fr(val))}</p>")
+        elif genre == "rpps":
+            courant.append(f'<p class="carte-pro">{picto("carte")}<span>{e(fr(val))}</span></p>')
+        elif genre == "frise":
+            pas, avant = [], None
+            for an, nom, titre, precision in val:
+                # une seconde étape la même année : l'année ne se répète pas à l'œil
+                classe = "frise__an frise__an--meme" if an == avant else "frise__an"
+                avant = an
+                pas.append(f'<li class="frise__pas"><span class="{classe}">{an}</span>'
+                           f'<span class="frise__noeud">{picto(nom)}</span>'
+                           f'<div class="frise__dit"><p class="frise__titre">{e(fr(titre))}</p>'
+                           + (f'<p>{e(fr(precision))}</p>' if precision else "") + "</div></li>")
+            courant.append('<ol class="frise">\n            ' + "\n            ".join(pas) + "\n          </ol>")
+        elif genre in ("domaines", "engagements"):
+            cartes = "\n            ".join(
+                f'<li><span class="vignette__picto">{picto(nom)}</span>'
+                f'<p class="vignette__titre">{e(fr(titre))}</p><p>{e(fr(precision))}</p></li>'
+                for nom, titre, precision in val)
+            courant.append(f'<ul class="vignettes vignettes--{genre}">\n            {cartes}\n          </ul>')
         else:
             puces = "\n            ".join(f"<li>{e(fr(x))}</li>" for x in val)
             courant.append(f'<ul class="puces">\n            {puces}\n          </ul>')
@@ -499,6 +533,13 @@ def ecrit(morceaux):
         blocs.append(courant)
     return "\n".join('        <div class="bloc">\n          ' + "\n          ".join(b) + "\n        </div>"
                      for b in blocs)
+
+
+# Les pages qui reçoivent plus d'air et une image d'ouverture (Franck, 10/11/2026).
+AEREES = {"franck-moyal"}
+IMAGE_D_OUVERTURE = {
+    "franck-moyal": ("img/portrait-franck.jpg", "Portrait du Dr Franck Moyal, chirurgien-dentiste à Paris"),
+}
 
 # ── une couverture choisie, à la place de la première photo de l'ancienne page ──
 # Franck, 19/10/2026 : « la photo de couverture ne sert à rien, c'est juste une
@@ -750,6 +791,18 @@ def composer(slug, plan):
         src = gen.VERS_DEPOT + "src/assets/photos/cas/" + fichier
         photo = (f'      <figure><img src="{src}" alt="{H.escape(alt)}">'
                  f'<figcaption>{lier(e(leg), liens)}</figcaption></figure>\n')
+    # la page du praticien s'ouvre sur son portrait ; la signature, qui le répétait en
+    # petit à côté, s'efface alors
+    signature = f'''        <div class="signature">
+          <img src="{PORTRAIT}" alt="Dr Franck Moyal">
+          <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
+            Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
+        </div>
+'''
+    if slug in IMAGE_D_OUVERTURE:
+        src, alt = IMAGE_D_OUVERTURE[slug]
+        photo = f'      <figure class="une__portrait"><img src="{src}" alt="{H.escape(alt)}"></figure>\n'
+        signature = ""
 
     corps = []
     videos_page = vignettes_video(slug)
@@ -926,7 +979,7 @@ def composer(slug, plan):
 <link rel="stylesheet" href="style.css?v={version}">
 {chr(10).join(re.findall(r"<script type=.application/ld\+json.[^>]*>.*?</script>", p["brut"], re.S))}
 </head>
-<body>
+<body{' class="aere"' if slug in AEREES else ""}>
 
 {gen.menu(slug)}
 
@@ -939,12 +992,7 @@ def composer(slug, plan):
 {f'        <p class="eyebrow">{e(sur)}</p>{chr(10)}' if sur else ""}        <h1>{e(gen.grand_titre(slug, p["h1"])[0])}</h1>
 {gen.soustitre(gen.grand_titre(slug, p["h1"])[1])}
         <p class="une__chapo">{e(chapo)}</p>
-        <div class="signature">
-          <img src="{PORTRAIT}" alt="Dr Franck Moyal">
-          <div><b>Dr Franck Moyal</b> — chirurgien-dentiste, Paris 9<sup>e</sup><br>
-            Praticien hospitalier, Pitié-Salpêtrière · CMME, Sainte-Anne</div>
-        </div>
-      </div>
+{signature}      </div>
 {photo}    </div>
   </div>
 
