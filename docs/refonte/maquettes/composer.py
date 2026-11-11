@@ -439,6 +439,22 @@ RETOUCHES = {
 # vignette par domaine, les engagements deux cartes : le texte reste celui du CV, coupé
 # en un titre et sa précision, chacun avec son pictogramme (pictos.py).
 CHAPITRES_ECRITS = {
+    # L'edge bonding (Franck, 11/11/2026 : « terme à rajouter dans le site » — le site sortait
+    # déjà 11,6e sur « edge bonding in paris » sans que le mot y figure). Texte proposé par
+    # Claude, validé par Franck (« oui go intègre et publie »).
+    "edge-bonding": [
+        ("h3", "Edge bonding : ne traiter que le bord des dents"),
+        ("p", "L’edge bonding est la forme la plus légère du composite bonding : la résine n’est ajoutée "
+              "que sur le bord libre des dents de devant, sans recouvrir toute leur face visible. Il sert à "
+              "réparer un bord ébréché, à égaliser des bords irréguliers ou à redonner un peu de longueur à "
+              "des dents raccourcies par l’usure."),
+        ("p", "La dent n’est pas taillée : le composite est collé sur l’émail, sculpté puis poli, le plus "
+              "souvent en une séance. La difficulté est de rendre invisible la jonction entre la dent et la "
+              "résine, ce qui demande le même travail de teinte, de translucidité et de polissage qu’un "
+              "composite plus étendu."),
+        ("p", "Quand les bords sont usés, je cherche d’abord pourquoi : rallonger des dents sans avoir "
+              "compris la cause de leur usure expose à voir le composite s’ébrécher à son tour."),
+    ],
     "parcours": [
         ("h3", "Repères"),
         ("frise", [
@@ -1051,7 +1067,7 @@ PLANS = {
   "composite-bonding-paris": {"chapitres": [
     {"titre": "Une technique conservatrice, mais exigeante", "sections": [1, 2]},
     {"titre": "La stratification", "sections": [3]},
-    {"titre": "Quand on l’utilise", "sections": [4, 5], "fiche": [4]},
+    {"titre": "Quand on l’utilise", "sections": [4, 5], "fiche": [4], "ecrit": "edge-bonding"},
     {"titre": "Composite ou facettes, et pour combien de temps", "sections": [6, 8]},
     {"titre": "Le déroulement, et ce que je recherche", "sections": [7, 9]},
   ]},

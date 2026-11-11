@@ -1262,3 +1262,7 @@ picture{display:contents}
 .etiquettes li a{color:inherit}
 .etiquettes .ponct{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .notice__corps > .etiquettes:last-child{margin-bottom:0}
+
+/* 11/11/2026 — un sous-titre qui tient sur deux lignes se coupe en deux moitiés égales
+   (« Dentiste esthétique à Paris · Vue d'ensemble des actes » laissait « Vue » seul en bout de ligne). */
+.sous-titre{text-wrap:balance}

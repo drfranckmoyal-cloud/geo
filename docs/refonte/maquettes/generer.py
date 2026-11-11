@@ -1045,7 +1045,10 @@ TITRES = {
     "taches-dentaires-dyschromies-icon": ("Infiltration ICON", "Taches blanches, MIH, fluorose"),
     "bilan-esthetique-personnalise": ("Bilan esthétique", "Première consultation"),
     # pour s'y retrouver
-    "dentisterie-esthetique-paris": ("Dentisterie esthétique", "Vue d’ensemble des actes"),
+    # Franck, 11/11/2026 : « ok pour Dentiste esthétique Paris quelque part marqué, mais on garde
+    # Dentisterie esthétique » — le grand titre reste, les mots cherchés passent juste dessous.
+    "dentisterie-esthetique-paris": ("Dentisterie esthétique",
+                                     "Dentiste esthétique à Paris : vue d’ensemble des actes"),
     "facettes-ou-composite": ("Facettes ou composite ?", "Comparatif"),
     # ce que l'on traite
     "usures-dentaires": ("Usure dentaire", "Causes, signes et traitements"),
