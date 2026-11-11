@@ -1,5 +1,5 @@
 {
-  "commentaire": "Les mots sur lesquels Franck veut être vu (8 octobre 2026). Base : sa propre liste, complétée des variations et combinaisons autour des mêmes notions. Enrichie le 08/10/2026 des variantes qualifiées que Google a réellement servies au site entre le 21/09 et le 05/10 (relevé dans suivi/requetes/2026-10-08.json) : le relevé montre que le mot nu ne sort pas et que le mot qualifié sort — « bruxisme » rien contre « specialiste bruxisme paris » 3,8, « bonding dentaire » 51 contre « composite bonding paris » 6,7. Le suivi quotidien lit la position de chacun dans Search Console.",
+  "commentaire": "Les mots sur lesquels Franck veut être vu (8 octobre 2026). Base : sa propre liste, complétée des variations et combinaisons autour des mêmes notions. Enrichie le 08/10/2026 des variantes qualifiées que Google a réellement servies au site entre le 21/09 et le 05/10 (relevé dans suivi/requetes/2026-10-08.json) : le relevé montre que le mot nu ne sort pas et que le mot qualifié sort — « bruxisme » rien contre « specialiste bruxisme paris » 3,8, « bonding dentaire » 51 contre « composite bonding paris » 6,7. Le suivi quotidien lit la position de chacun dans Search Console. Revue le 11/11/2026 avec Franck, sur 30 jours de relevés et les 219 recherches réelles des 3 derniers mois : 7 termes retirés (jamais vus ni cherchés), 13 ajoutés parmi les recherches réelles, 6 ajoutés pour couvrir Paris entier et pas seulement Paris 9 sur les sujets importants (TCA, bruxisme, usure, facettes, taches blanches). Franck a choisi de garder les variantes à zéro sur ses sujets phares.",
   "site": "sc-domain:drfranckmoyal.fr",
   "familles": {
     "TCA et érosion": [
@@ -13,7 +13,8 @@
       "erosion dentaire paris",
       "anorexie dents",
       "boulimie dents",
-      "troubles alimentaires dents"
+      "troubles alimentaires dents",
+      "dentiste tca paris"
     ],
     "Usures et bruxisme": [
       "bruxisme",
@@ -24,11 +25,17 @@
       "usure dentaire paris",
       "dents usées",
       "dents courtes",
-      "reconstruction dents usées",
-      "dimension verticale dentaire",
       "specialiste bruxisme paris",
       "traitement usure dentaire",
-      "cabinet spécialiste usure dentaire"
+      "cabinet spécialiste usure dentaire",
+      "dents trop courtes",
+      "usure dentaire traitement",
+      "restauration dents usées",
+      "rehabilitation dentaire paris",
+      "occlusodontiste",
+      "bruxisme paris",
+      "dentiste bruxisme paris",
+      "dents usées paris"
     ],
     "Composite": [
       "composite bonding",
@@ -36,24 +43,23 @@
       "composite bonding paris",
       "composite dentaire",
       "composite dentaire paris",
-      "composite dentaire avant apres",
       "bonding dentaire",
       "bonding dentaire paris",
-      "stratification composite",
       "dentiste composite",
       "composite esthétique dentaire",
       "esthétique dentaire composite",
       "composite bonding in paris",
-      "composite filling in paris"
+      "composite filling in paris",
+      "edge bonding in paris"
     ],
     "Facettes": [
       "facettes dentaires",
       "facettes dentaires paris",
       "facettes ou composite",
-      "facettes ceramique paris",
-      "prix facettes dentaires paris",
       "facette dentaire paris 9",
-      "facettes dentaires paris 17"
+      "facettes dentaires paris 17",
+      "dentiste facette dentaire",
+      "facettes composite paris"
     ],
     "Esthétique générale": [
       "dentiste esthetique paris",
@@ -69,13 +75,19 @@
       "chirurgie dentaire esthétique",
       "esthetique du sourire",
       "dentiste esthétique du sourire",
-      "meilleur dentiste esthétique paris"
+      "meilleur dentiste esthétique paris",
+      "dentiste esthétique paris",
+      "dentiste esthétique paris 9",
+      "dentiste esthetique",
+      "blanchiment dentaire",
+      "meilleur dentiste paris 9",
+      "taches blanches dents paris"
     ],
     "Marque": [
       "franck moyal",
       "dr franck moyal",
       "franck moyal dentiste",
-      "smile club formations"
+      "avis sur franck moyal"
     ]
   }
 }
