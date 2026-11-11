@@ -81,6 +81,20 @@ bloc(`✕ ${sorties.length} terme(s) qui ne sortent plus`,
 const absents = Object.entries(courant.termes).filter(([, v]) => v.position == null).length;
 console.log(`${stables.length} stable(s), ${absents} terme(s) toujours absents sur ${Object.keys(courant.termes).length}.`);
 
+// Les termes prioritaires (mots-cles.json → prioritaires), en tête, avec la veille.
+const motsCles = JSON.parse(await readFile(join(ici, "mots-cles.json"), "utf8"));
+const veille = i > 0 ? (await lire(fichiers[i - 1])).termes : {};
+const pos = (v) => (v?.position == null ? "absent" : String(v.position));
+for (const [groupe, liste] of Object.entries(motsCles.prioritaires ?? {})) {
+  if (!Array.isArray(liste)) continue;
+  console.log(`\nPrioritaires — ${groupe}\n`);
+  console.log(`   impr.  clics  position  (veille)  terme`);
+  liste.forEach((m) => {
+    const v = courant.termes[m] ?? { impressions: 0, clics: 0, position: null };
+    console.log(`  ${String(v.impressions).padStart(6)} ${String(v.clics).padStart(6)}  ${pos(v).padStart(8)}  ${("(" + (veille[m] ? pos(veille[m]) : "—") + ")").padStart(8)}  ${m}`);
+  });
+}
+
 // La liste complète, du terme le plus actif au moins actif : d'abord les impressions,
 // puis les clics, puis la meilleure position. Les absents ferment la marche.
 const tous = Object.entries(courant.termes).sort(([ma, a], [mb, b]) =>

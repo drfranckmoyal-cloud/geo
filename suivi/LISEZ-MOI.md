@@ -5,7 +5,7 @@
 ## Ce que c'est
 
 Chaque matin à 8 h, un agent relève la position de **drfranckmoyal.fr** dans Google sur
-**75 mots-clés** (47 choisis par Franck, complétés, puis revus avec lui le 11/11/2026), écrit le relevé du jour, le compare à celui de la
+**77 mots-clés** (47 choisis par Franck, complétés, puis revus avec lui le 11/11/2026), écrit le relevé du jour, le compare à celui de la
 veille, et dit ce qui a bougé.
 
 La source est **Search Console** — les chiffres de Google lui-même, pas une estimation.
