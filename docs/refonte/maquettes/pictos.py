@@ -77,6 +77,24 @@ TRACES = {
     # le numéro RPPS : la carte professionnelle
     "carte": ["M3.5 5.5h17v13h-17z", "M8.6 9a2 2 0 1 1 0 4 2 2 0 0 1 0-4z",
               "M5.6 16c.5-1.4 1.6-2.1 3-2.1s2.5.7 3 2.1", "M14.2 10h3.6M14.2 13h3.6"],
+    # ── ajoutés le 11/11/2026 pour Activité hospitalière et Médias et interviews ──
+    # la PASS, l'accès aux soins : la main qui tend un cœur
+    "acces": ["M12 10.6c-2.2-1.5-3.7-2.9-3.7-4.6 0-1.2.9-2.1 2-2.1.7 0 1.3.4 1.7.9.4-.5 1-.9 1.7-.9 "
+              "1.1 0 2 .9 2 2.1 0 1.7-1.5 3.1-3.7 4.6z",
+              "M3 13.6v6.9", "M3 14.6h2.7c.6 0 1.1.1 1.6.4l2.1 1.1h3.1a1.3 1.3 0 0 1 0 2.6H9.2",
+              "M3 19.6h3.4l2.2.9h4.6c.7 0 1.3-.2 1.8-.6l5.1-4a1.3 1.3 0 0 0-1.6-2.1l-3.6 2.6"],
+    # diagnostiquer avant de proposer : la loupe
+    "loupe": ["M10.6 4a6.2 6.2 0 1 1 0 12.4 6.2 6.2 0 0 1 0-12.4z", "M15.1 15.1l5.4 5.4",
+              "M7.6 9.4a3.2 3.2 0 0 1 2.4-2.4"],
+    # adapter le soin à la personne
+    "personne": ["M12 3.8a3.3 3.3 0 1 1 0 6.6 3.3 3.3 0 0 1 0-6.6z", "M5 20.5c0-3.9 3.1-7 7-7s7 3.1 7 7"],
+    # un entretien : deux bulles qui se répondent
+    "entretien": ["M4.5 4.5h9a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H8.4l-3.1 2.6v-2.6h-.8a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z",
+                  "M17.2 9.3h2.3a1 1 0 0 1 1 1v5.6a1 1 0 0 1-1 1h-.8v2.6l-3.1-2.6h-4.1a1 1 0 0 1-1-1v-1.2",
+                  "M7 7.8h5M7 10.2h3.2"],
+    # une formation en ligne : l'ordinateur et sa vidéo
+    "ecran": ["M5 5h14a.8.8 0 0 1 .8.8V15H4.2V5.8A.8.8 0 0 1 5 5z", "M4.2 15l-1.6 3.6h18.8L19.8 15",
+              "M10.6 7.7v4.6l3.8-2.3z"],
 }
 
 

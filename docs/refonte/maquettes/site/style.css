@@ -1138,6 +1138,8 @@ picture{display:contents}
 .aere .une figure img{flex:1 1 0;min-height:15rem;height:100%;aspect-ratio:auto;object-fit:cover;
   border:1px solid var(--trait)}
 .une__portrait img{object-position:50% 22%}
+/* le sous-titre prend la largeur de sa carte : « Sainte-Anne » ne se coupe plus au trait d'union */
+.aere .sous-titre{max-width:none;text-wrap:balance}
 .une__illustration figcaption{margin-top:.4rem;font-size:.7rem;letter-spacing:.04em}
 @media (max-width:860px){
   .aere .une figure img{flex:none;height:auto;min-height:0;aspect-ratio:4/3}
@@ -1248,3 +1250,15 @@ picture{display:contents}
 .these__an{font-family:var(--serif);font-weight:700;font-size:1.55rem;line-height:1;letter-spacing:-.02em;
   padding-bottom:.55rem;border-bottom:1px solid var(--trait)}
 .these__titre{font-family:var(--serif);font-style:italic;font-size:.95rem;line-height:1.45;color:var(--fg)}
+
+/* ── les étiquettes — 11/11/2026, Activité hospitalière et Médias et interviews ──
+   Une énumération de quelques mots par élément (« esthétique ; fonction ; usures… »)
+   se range en étiquettes, comme les lignes de métro de la page contact. Le texte ne
+   change pas : la ponctuation de fin reste dans la page, masquée à l'œil seulement. */
+.etiquettes{list-style:none;margin:.6rem 0 1.15rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem;
+  max-width:62ch}
+.etiquettes li{margin:0;padding:.34rem .85rem .36rem;border:1px solid var(--trait);border-radius:999px;
+  background:var(--tuile,var(--carte));box-shadow:var(--relief);font-size:.86rem;line-height:1.3;color:var(--fg)}
+.etiquettes li a{color:inherit}
+.etiquettes .ponct{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.notice__corps > .etiquettes:last-child{margin-bottom:0}

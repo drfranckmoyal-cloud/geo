@@ -435,12 +435,18 @@ def ajouter(slug, sections):
 # internet. » Chaque bloc titré devient une notice : à gauche, un pictogramme (pictos.py)
 # ou, pour une intervention datée, le mois et l'année ; à droite, le texte. Une image
 # générée (Canva) ouvre la page, signalée comme illustration.
-EN_RELIEF = {"publications", "conferences-formations"}
+# Le 11/11/2026, Franck : « oui, applique aux deux autres pages pro » — Activité
+# hospitalière et Médias et interviews reçoivent la même mise en page.
+EN_RELIEF = {"publications", "conferences-formations", "activite-hospitaliere", "medias-interviews"}
 IMAGE_D_OUVERTURE = {
     "publications": ("img/illustration-publications.jpg",
                      "Livres et revues scientifiques posés sur une table, près d’une fenêtre"),
     "conferences-formations": ("img/illustration-conferences.jpg",
                                "Pupitre de conférence dans un amphithéâtre vide"),
+    "activite-hospitaliere": ("img/illustration-hopital.jpg",
+                              "Couloir d’hôpital vide baigné de lumière naturelle"),
+    "medias-interviews": ("img/illustration-medias.jpg",
+                          "Magazine ouvert et micro de table posés sur une table en bois"),
 }
 # le pictogramme d'un bloc, d'après son sous-titre ; à défaut, d'après sa source
 PICTOS_PRO = {
@@ -452,22 +458,48 @@ PICTOS_PRO = {
     "À l’hôpital": "hopital",
     "Formations pour les chirurgiens-dentistes": "enseigner",
     "Conférence": "micro",
+    # Activité hospitalière
+    "Service de Médecine Bucco-dentaire": "hopital",
+    "PASS bucco-dentaire": "acces",
+    "Troubles des conduites alimentaires et santé bucco-dentaire": "depistage",
+    "Diagnostiquer avant de proposer": "loupe",
+    "Adapter le soin à la personne": "personne",
+    "Travailler avec d’autres disciplines": "association",
+    # Médias et interviews
+    "« Rencontre avec Franck Moyal »": "entretien",
+    "ARTEMIS Education": "duo",
+}
+# une section sans sous-titre, faite d'un seul bloc : sa notice prend le pictogramme de son titre
+PICTOS_SECTIONS = {
+    "Usures dentaires — Blendi": "ecran",
+    "Usures dentaires — Eugenol": "ecran",
 }
 # une intervention dont le sous-titre ne porte pas le mois : celui que donne son texte
-DATES_PRO = {"ADF 2026 — workshop GC": ("nov.", "2026")}
+DATES_PRO = {"ADF 2026 — workshop GC": ("nov.", "2026"),
+             "ADF 2026 — GC": ("nov.", "2026"),
+             "Alpha Oméga Marseille": ("févr.", "2026")}
+# une liste dont chaque élément tient en quelques mots devient une rangée d'étiquettes
+# (les deux pages du 11/11/2026, faites de ces courtes énumérations)
+AVEC_ETIQUETTES = {"activite-hospitaliere", "medias-interviews"}
+ETIQUETTE_MAX = 36
 MOIS_COURTS = {"janvier": "janv.", "février": "févr.", "mars": "mars", "avril": "avr.", "mai": "mai",
                "juin": "juin", "juillet": "juil.", "août": "août", "septembre": "sept.",
                "octobre": "oct.", "novembre": "nov.", "décembre": "déc."}
 
 
-def marque_du_bloc(titre, corps):
+def sans_insecables(s):
+    return s.replace(" ", " ").replace(" ", " ")
+
+
+def marque_du_bloc(titre, corps, nom=None):
     """Ce qui se pose à gauche d'une notice : la date d'une intervention, sinon un pictogramme."""
+    titre = sans_insecables(titre)
     m = re.search(r"—\s(\w+)\s(\d{4})$", titre)
     date = (MOIS_COURTS[m.group(1)], m.group(2)) if m and m.group(1) in MOIS_COURTS else DATES_PRO.get(titre)
     if date:
         return (f'<span class="agenda"><span class="agenda__mois">{date[0]}</span>'
                 f'<span class="agenda__an">{date[1]}</span></span>')
-    nom = PICTOS_PRO.get(titre)
+    nom = nom or PICTOS_PRO.get(titre)
     if not nom:
         source = " ".join(corps[1:2])
         nom = ("livre" if "Éditions" in source else "revue" if ("Fil Dentaire" in source or "Santé de l" in source)
@@ -475,21 +507,49 @@ def marque_du_bloc(titre, corps):
     return f'<span class="notice__picto">{picto(nom)}</span>'
 
 
-def en_notice(bloc, slug):
+def en_notice(bloc, slug, section=""):
     """Un bloc titré mis en notice ; la ligne de source (publications) ou le titre de
-    l'intervention (conférences), seuls en gras sous le sous-titre, prennent leur style."""
-    if not bloc or not bloc[0].startswith("<h3>"):
+    l'intervention (conférences), seuls en gras sous le sous-titre, prennent leur style.
+    Une phrase seule en gras plus bas dans le bloc est mise en exergue, comme une citation.
+    Un bloc sans sous-titre ne devient notice que si sa section a son pictogramme."""
+    if not bloc:
         return bloc
+    if not bloc[0].startswith("<h3>"):
+        nom = PICTOS_SECTIONS.get(sans_insecables(H.unescape(section)))
+        if not nom:
+            return bloc
+        return [f'<div class="notice__marque">{marque_du_bloc("", bloc, nom)}</div>',
+                '<div class="notice__corps">'] + list(bloc) + ["</div>"]
     titre = H.unescape(re.sub(r"<[^>]+>", "", bloc[0]))
     corps = list(bloc)
     for k, x in enumerate(corps[1:], 1):
         if re.fullmatch(r"<p><strong>[^<]*</strong></p>", x):
-            classe = "notice__citation" if "«" in x else "notice__source" if k == 1 else None
-            if classe:
-                # l'insécable devant « » » : le guillemet fermant ne part plus seul à la ligne
-                corps[k] = _fr(x.replace("<p>", f'<p class="{classe}">', 1))
+            classe = "notice__citation" if ("«" in x or k > 1) else "notice__source"
+            # l'insécable devant « » » : le guillemet fermant ne part plus seul à la ligne
+            corps[k] = _fr(x.replace("<p>", f'<p class="{classe}">', 1))
     return [f'<div class="notice__marque">{marque_du_bloc(titre, corps)}</div>',
             '<div class="notice__corps">'] + corps + ["</div>"]
+
+
+def etiquettes(val):
+    """Une liste de quelques mots par élément : une rangée d'étiquettes. Le texte ne change
+    pas ; la ponctuation de fin d'élément reste dans la page, seulement masquée à l'œil."""
+    lignes = []
+    for _, x in val:
+        m = re.match(r"(.*?)([\s  ]*[;.,])?\s*$", x, re.S)
+        mots, ponct = m.group(1), m.group(2) or ""
+        lignes.append(f'<li>{e(mots)}<span class="ponct">{ponct}</span></li>' if ponct else f"<li>{e(mots)}</li>")
+    return '<ul class="etiquettes">\n            ' + "\n            ".join(lignes) + "\n          </ul>"
+
+
+def en_etiquettes(val):
+    if len(val) < 3 or any(k != "texte" for k, _ in val):
+        return False
+    for _, x in val:
+        vu = H.unescape(re.sub(r"<[^>]+>", "", x)).strip().rstrip(";.,   ")
+        if x.lstrip().startswith("<strong>") or len(vu) > ETIQUETTE_MAX:
+            return False
+    return True
 
 
 def theses(val):
@@ -528,13 +588,17 @@ def rendre_dans_l_ordre(s, slug=None):
             poses.update(h for _, h, _ in val)
         elif relief and all(x[0] == "cite" for x in val):
             courant.append(theses(val))
+        elif relief and slug in AVEC_ETIQUETTES and en_etiquettes(val):
+            courant.append(etiquettes(val))
         else:
             puces = "\n            ".join(
                 f"<li>{ancre(x[1], x[2])}</li>" if x[0] == "lien"
                 else f'<li class="titre-cite">{e(x[1])}</li>' if x[0] == "cite"
                 else f"<li>{e(x[1])}</li>" for x in val)
-            # dans une notice, une liste d'enseignements : le titre en gras passe à la ligne
-            classe = "puces jalons" if relief and any("<strong>" in x[1] for x in val if x[0] == "texte") else "puces"
+            # dans une notice, une liste d'enseignements : le titre en gras, qui ouvre
+            # chaque élément, passe à la ligne
+            classe = ("puces jalons" if relief and any(x[1].lstrip().startswith("<strong>")
+                                                       for x in val if x[0] == "texte") else "puces")
             courant.append(f'<ul class="{classe}">\n            {puces}\n          </ul>')
             poses.update(x[1] for x in val if x[0] == "lien")
     if courant:
@@ -544,9 +608,12 @@ def rendre_dans_l_ordre(s, slug=None):
     if reste:
         blocs.append(['<p class="suite">' + " · ".join(ancre(h, l) for h, l in reste) + "</p>"])
     if relief:
-        return "\n        ".join(
-            ('<div class="bloc notice">\n          ' if b[0].startswith("<h3>") else '<div class="bloc">\n          ')
-            + "\n          ".join(en_notice(b, slug)) + "\n        </div>" for b in blocs)
+        rendus = []
+        for b in blocs:
+            n = en_notice(b, slug, s["titre"])
+            tete = '<div class="bloc notice">\n          ' if n is not b else '<div class="bloc">\n          '
+            rendus.append(tete + "\n          ".join(n) + "\n        </div>")
+        return "\n        ".join(rendus)
     return "\n        ".join('<div class="bloc">\n          ' + "\n          ".join(b) + "\n        </div>"
                              for b in blocs)
 
