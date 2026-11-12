@@ -18,8 +18,9 @@ ou de corriger, le lien.
 | **Eugenol** | la page de la formation « Les usures dentaires » | https://drfranckmoyal.fr/usures-dentaires/ |
 | **ARTEMIS Formations** | la fiche du conférencier | https://drfranckmoyal.fr/usures-dentaires/ |
 
-DenTCA est le plus simple et le plus utile : c'est l'association de Franck, et son sujet est exactement
-celui de la page TCA.
+DenTCA est le plus simple et le plus utile : c'est le réseau fondé par Franck, et son sujet est
+exactement celui de la page TCA. Le site DenTCA va être refait (projet DENTCA, lancé le 12/11/2026) :
+les liens y seront posés à la construction.
 
 ## Le message, à adapter
 
@@ -37,7 +38,7 @@ celui de la page TCA.
 
 ## Pour DenTCA
 
-> Sur la page de présentation de l'association, ajouter sous le nom du président : « Chirurgien-dentiste à
+> Sur la page de présentation du réseau, ajouter sous le nom du fondateur : « Chirurgien-dentiste à
 > Paris 9e — sa page sur les TCA et les dents : https://drfranckmoyal.fr/tca-dents/ ».
 >
 > Dans les ressources pour les patients, ajouter les deux articles :
