@@ -426,6 +426,12 @@ SANS_PHOTO_EN_TETE = {"bilan-esthetique-personnalise"}
 # donc rester simple : ») : elle commençait par une minuscule (audit du 10/11/2026).
 RETOUCHES = {
     "erosion-dentaire": [("<strong>éviter les gestes agressifs", "<strong>Éviter les gestes agressifs")],
+    # « dents trop courtes », terme à pousser choisi par Franck le 11/11/2026 : l'expression entre dans
+    # le titre Google et la description (et dans les données structurées, qui les reprennent)
+    "dents-courtes-usees": [
+        ("Dents courtes ou usées à Paris | Dr Franck Moyal", "Dents trop courtes ou usées à Paris | Dr Franck Moyal"),
+        ("Dents courtes, bords incisifs usés et sourire modifié", "Dents trop courtes, bords incisifs usés et sourire modifié"),
+    ],
 }
 
 # ── un chapitre écrit ici, quand la page d'origine n'en porte pas le texte ──
@@ -1085,13 +1091,8 @@ PLANS = {
     {"titre": "Associer les approches", "sections": [6, 7]},
     {"titre": "Pourquoi ne pas poser un composite d’emblée", "sections": [8]},
   ]},
-  "bruxisme-usure-dentaire": {"chapitres": [
-    {"titre": "Une usure ne prouve pas un bruxisme", "sections": [1, 2], "fiche": [2]},
-    {"titre": "Pourquoi les dents s’usent chez un bruxeur", "sections": [3], "fiche": [3]},
-    {"titre": "Comment sait-on si l’on bruxe ?", "sections": [4], "fiche": [4]},
-    {"titre": "La gouttière, et la part de l’érosion", "sections": [5, 6], "fiche": [6]},
-    {"titre": "Reconstruire, et la question des douleurs", "sections": [7, 8], "fiche": [7]},
-  ]},
+  # « bruxisme-usure-dentaire » n'est plus composée ici : la page est écrite par
+  # ecrire-bruxisme.py depuis le 12/11/2026, sur le modèle des pages Usure et TCA.
   "dents-courtes-usees": {"chapitres": [
     {"titre": "« Mes dents sont devenues plus petites »", "sections": [1, 2], "fiche": [1]},
     {"titre": "Pourquoi le sourire paraît plus âgé", "sections": [3], "fiche": [3]},
@@ -1307,33 +1308,9 @@ QUESTIONS = {
      "composite vient quand les solutions plus légères ne suffisent pas.",
      {"titre": [8], "phrases": ["Parce qu’une restauration implique"]}),
   ],
-  "bruxisme-usure-dentaire": [
-    ("Le bruxisme explique-t-il l’usure des dents ?",
-     "Pas forcément. Le bruxisme peut contribuer à une usure, mais des dents usées ne prouvent pas, à "
-     "elles seules, qu’on bruxe : l’érosion, les contraintes mécaniques et d’autres facteurs doivent "
-     "être recherchés avant de conclure.",
-     {"titre": [1]}),
-    ("Pourquoi les dents s’usent-elles chez une personne qui bruxe ?",
-     "Les contraintes mécaniques peuvent aplatir les reliefs, user les bords des incisives, provoquer "
-     "des éclats et solliciter les restaurations. Mais l’environnement chimique joue parfois un rôle "
-     "majeur : une dent régulièrement exposée aux acides peut être plus vulnérable à l’usure mécanique.",
-     {"titre": [3], "phrases": ["Mais l’environnement chimique", "Une dent exposée régulièrement"]}),
-    ("Comment savoir si l’on bruxe ?",
-     "Le diagnostic ne repose pas sur une seule observation : selon les cas, il associe "
-     "l’interrogatoire, les symptômes, l’examen clinique, l’évaluation des muscles et parfois un "
-     "enregistrement du sommeil. L’aspect des dents participe au raisonnement, mais ne suffit pas.",
-     {"vide": [4]}),
-    ("À quoi sert une gouttière, et pourquoi chercher aussi une érosion ?",
-     "Une gouttière peut protéger les dents ou des restaurations, mais elle ne guérit pas le bruxisme "
-     "et n’est pas une prévention universelle de l’érosion. Si un acide entretient l’usure, une "
-     "stratégie mécanique seule ne peut pas le contrôler."),
-    ("Peut-on reconstruire des dents usées quand on bruxe ?",
-     "Oui, lorsque l’indication est posée : les approches adhésives minimalement invasives disposent "
-     "aujourd’hui de données cliniques favorables dans les dentitions usées.",
-     {"vide": [7]}),
-  ],
   "dents-courtes-usees": [
-    ("Mes dents sont devenues plus petites : est-ce de l’usure ?",
+    # « trop courtes » : l'expression que tapent les patients (Franck, 11/11/2026)
+    ("Mes dents sont trop courtes ou devenues plus petites : est-ce de l’usure ?",
      "Souvent, oui : des incisives plus courtes ou plus plates sont l’un des premiers signes visibles "
      "d’une usure dentaire. Le changement est discret au début, puis devient très visible quand on "
      "compare des photographies prises des années plus tôt.",

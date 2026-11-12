@@ -124,6 +124,11 @@ Q : Peut-on réparer des dents érodées ?
 R : Oui, par les techniques adhésives, en composite ou en céramique collée, une fois la cause contrôlée. Restaurer sans traiter la cause expose à une nouvelle dégradation.
 
 == bruxisme-usure-dentaire ==
+# deux questions ajoutées le 12/11/2026, avec la réécriture de la page
+Q : Comment savoir si je grince des dents la nuit ?
+R : Souvent, c’est l’entourage qui l’entend. Sinon, une mâchoire tendue ou fatiguée au réveil, des bords de dents qui s’ébrèchent ou des restaurations qui cassent peuvent y faire penser. Le diagnostic repose sur l’entretien et l’examen, parfois sur un enregistrement du sommeil.
+Q : Le bruxisme se soigne-t-il ?
+R : Une gouttière ne le fait pas disparaître. On en limite les conséquences : elle protège les dents quand le frottement est en cause, on recherche une érosion associée, et l’on reconstruit les dents usées si c’est nécessaire.
 Q : Mes dents sont plates : est-ce forcément du bruxisme ?
 R : Non. Des dents plates ou raccourcies ne prouvent pas un bruxisme : une érosion acide ou plusieurs facteurs combinés sont souvent en cause. Le diagnostic repose sur l’interrogatoire, les symptômes, l’examen et parfois un enregistrement du sommeil, pas sur l’aspect des dents seul.
 Q : Peut-on avoir du bruxisme sans grincer des dents ?
@@ -137,6 +142,9 @@ Q : Faut-il une gouttière après une reconstruction des dents usées ?
 R : Souvent, oui, pour protéger les restaurations la nuit. Le projet tient compte des contraintes, du choix des matériaux et de leur réparabilité.
 
 == dents-courtes-usees ==
+# ajoutée le 12/11/2026 : « dents trop courtes », terme à pousser choisi par Franck
+Q : Mes dents sont trop courtes : que peut-on faire ?
+R : D’abord comprendre pourquoi. Des dents trop courtes ont le plus souvent raccourci par usure : on traite alors la cause, puis on leur rend leur longueur en ajoutant du composite ou de la céramique collée, sans les tailler ou presque. Une usure légère et stable peut simplement être surveillée.
 Q : Peut-on rallonger seulement les deux incisives ?
 R : Oui, dans certaines situations, si le diagnostic et les proportions le permettent. Allonger deux dents modifie souvent l’équilibre des voisines : la planification le vérifie avant de commencer.
 Q : Composite ou céramique pour rallonger les dents ?

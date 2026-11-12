@@ -113,7 +113,9 @@ def _pages_composees():
 # réécrite à la main le 25/10/2026 sur le plan validé par Franck.
 A_LA_MAIN = {"usures-dentaires", "facettes-ou-composite",
              "dentisterie-esthetique-paris", "index",
-             "contact", "tca-dents"} | _pages_composees()
+             "contact", "tca-dents",
+             # réécrite le 12/11/2026 par ecrire-bruxisme.py (Franck : pousser TCA, usure, bruxisme)
+             "bruxisme-usure-dentaire"} | _pages_composees()
 # le diagnostic est fondu dans les usures (D77) : plus de page à lui,
 # et tout lien qui le visait mène désormais à celle qui l'a absorbé
 # … et la réhabilitation des dents usées aussi, le 25/10/2026 (D95).
@@ -941,9 +943,12 @@ NOUVELLES = {
     "index": {
         "type": "WebPage",
         "chemin": "",
-        "nom": "Dr Franck Moyal | Dentisterie esthétique et adhésive à Paris 9e",
-        "desc": "Chirurgien-dentiste à Paris 9e, exercice exclusif en dentisterie "
-                "esthétique et adhésive. Espace patients et espace professionnel.",
+        # Franck, 11/11/2026 : « je veux beaucoup plus pousser TCA et Usure dentaire et Bruxisme » —
+        # l'accueil les nomme, dans son titre comme dans son texte.
+        "nom": "Dr Franck Moyal | Dentisterie esthétique, usure dentaire, TCA | Paris 9e",
+        "desc": "Chirurgien-dentiste à Paris 9e : dentisterie esthétique et adhésive, usure dentaire, "
+                "bruxisme, érosion et dents abîmées par les troubles des conduites alimentaires (TCA). "
+                "Espace patients et espace professionnel.",
         "fil": [],
     },
     "espace-patients": {

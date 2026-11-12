@@ -1,0 +1,49 @@
+titre: Bruxisme : la gouttière suffit-elle à protéger les dents ?
+court: Bruxisme : la gouttière suffit-elle ?
+date: 2026-11-12
+public: patients
+genre: Article
+voir: bruxisme-usure-dentaire, usures-dentaires, erosion-dentaire
+---
+Pas toujours. Une gouttière protège les dents du frottement, mais elle ne guérit pas le bruxisme et ne protège pas de l’acide. Or l’acide est souvent en cause quand les dents s’usent : c’est pourquoi je ne prescris pas une gouttière avant d’avoir compris ce qui use.
+
+## « Dents usées, donc bruxisme, donc gouttière »
+
+C’est le raisonnement le plus courant, et il saute deux étapes. Des dents plates ou raccourcies ne prouvent pas qu’on bruxe : une revue de la littérature publiée en 2024 conclut que la présence d’une usure ne permet pas, à elle seule, d’affirmer un bruxisme.
+
+Et même quand le bruxisme est réel, il n’est pas forcément la cause principale de l’usure.
+
+## Ce que la gouttière fait bien
+
+Elle s’interpose entre les dents : ce ne sont plus elles qui frottent l’une contre l’autre. Elle protège ainsi l’émail, le bord des incisives et les restaurations.
+
+Elle est souvent prévue après la reconstruction de dents usées chez une personne qui bruxe, pour protéger les restaurations la nuit.
+
+## Ce qu’elle ne fait pas
+
+- Elle ne fait pas disparaître le bruxisme
+- Elle ne protège pas de l’acide : boissons acides, reflux, vomissements
+- Elle ne rend pas ce que l’usure a déjà enlevé
+
+Une dent régulièrement exposée aux acides est ramollie en surface et s’use beaucoup plus vite au moindre frottement. Si un reflux, des boissons acides ou des vomissements entretiennent l’usure, une protection mécanique seule ne peut pas la contrôler.
+
+## Les questions à se poser avant
+
+- Mes dents s’usent-elles encore, et à quelle vitesse ?
+- Est-ce le frottement, l’acide, ou les deux ?
+- Est-ce que je bruxe vraiment, la nuit ou le jour ?
+- Qu’est-ce qui mérite d’être protégé, surveillé ou reconstruit ?
+
+C’est l’objet du bilan d’usure : un entretien sur l’alimentation, les reflux, les médicaments et les habitudes ; un examen des dents, dont la forme et la place des lésions orientent vers l’acide ou le frottement ; des photographies et une empreinte numérique, qui serviront de point de comparaison.
+
+## En pratique
+
+La gouttière a toute sa place quand le frottement est en cause, et après une reconstruction. Elle ne remplace ni la recherche d’une érosion, ni la surveillance, ni, quand il le faut, la reconstruction des dents usées.
+
+La bonne question n’est pas « faut-il une gouttière ? », mais « qu’est-ce qui use mes dents ? ».
+
+## Sources
+
+- Bronkhorst H, Kalaykova S, Huysmans MC, Loomans B, Pereira-Cenci T. Tooth wear and bruxism: A scoping review. J Dent. 2024;145:104983. DOI : 10.1016/j.jdent.2024.104983
+- Lobbezoo F, Ahlberg J, Raphael KG, et al. International consensus on the assessment of bruxism: Report of a work in progress. J Oral Rehabil. 2018;45(11):837–844. DOI : 10.1111/joor.12663
+- Carvalho TS, Colon P, Ganss C, et al. Consensus report of the European Federation of Conservative Dentistry: erosive tooth wear—diagnosis and management. Clin Oral Investig. 2015;19(7):1557–1561. DOI : 10.1007/s00784-015-1511-7

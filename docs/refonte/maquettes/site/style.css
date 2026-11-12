@@ -835,12 +835,16 @@ body.portail{min-height:100%}
   letter-spacing:.14em;text-transform:uppercase;color:var(--fg);transition:color .3s ease}
 .portail__qui p{margin:0 0 .55rem;font-size:.84rem;line-height:1.5;max-width:none}
 .portail__qui p.portail__adresse{margin:0;font-size:.74rem}
+.portail__qui p + h2{margin-top:.85rem}
 .portail__qui a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
 .espaces:has(.espace--clair:hover) .portail__qui h2,
 .espaces:has(.espace--clair:focus-visible) .portail__qui h2{color:#f3f2ee}
 /* écran étroit ou bas, encore en deux moitiés : le bloc passe sous la porte, en entier,
    plutôt que de se tasser contre le portrait */
-@media (max-width:1359px), (max-height:739px){
+/* 12/11/2026 : le bloc nomme aussi l'usure, le bruxisme et les TCA ; plus haut, il lui faut
+   un écran d'au moins 1 440 × 880 px pour tenir sous la porte ouverte (1 360 × 740 auparavant) :
+   28 px d'écart mesurés à cette taille, la porte ouverte. */
+@media (max-width:1439px), (max-height:879px){
   .portail__pied{position:static;grid-column:1/-1;background:var(--carte);
     border-top:1px solid var(--trait);pointer-events:auto}
   .portail__qui{max-width:40rem}
@@ -1092,7 +1096,7 @@ body.portail{min-height:100%}
    rester accessibles d'un clic depuis l'accueil (Franck, 25/10/2026). */
 .portail__legal{pointer-events:auto;margin:0;align-self:flex-end;font-size:.72rem}
 .portail__legal a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
-@media (max-width:1359px), (max-height:739px){.portail__pied .portail__legal{color:var(--doux)}}
+@media (max-width:1439px), (max-height:879px){.portail__pied .portail__legal{color:var(--doux)}}
 
 /* La version en ligne sert chaque image dans un <picture> (WebP et repli) : l'enveloppe
    s'efface, l'image se place exactement comme avant (audit du 25/10/2026). */

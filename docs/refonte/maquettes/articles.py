@@ -15,6 +15,11 @@ La source d'un article est un fichier texte dans articles/ : quelques lignes
 « > » une citation, « - » une liste. Le premier paragraphe sert de chapô.
 Le texte est celui de Franck, tel quel : on ne réécrit rien.
 
+Exception, le 12/11/2026 : pour pousser TCA, usure et bruxisme, Franck a demandé quatre articles
+répondant chacun à une question de patient (boulimie-dents, se-brosser-les-dents-apres-avoir-vomi,
+bruxisme-gouttiere-suffit-elle, dents-usees-quand-consulter). Claude les a écrits à partir des pages
+Usure dentaire, TCA et Bruxisme déjà validées ; Franck les relit avant la mise en ligne.
+
     python3 docs/refonte/maquettes/articles.py
 """
 import html as H

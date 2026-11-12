@@ -1,0 +1,50 @@
+titre: Faut-il se brosser les dents après avoir vomi ?
+court: Se brosser les dents après avoir vomi
+date: 2026-11-12
+public: patients
+genre: Article
+voir: tca-dents, erosion-dentaire, usures-dentaires
+---
+Non, pas tout de suite. Juste après un vomissement, l’émail est ramolli par l’acide de l’estomac : le brosser à ce moment-là, c’est l’user davantage. Il faut attendre entre trente minutes et une heure, et protéger ses dents autrement en attendant.
+
+## Pourquoi il ne faut pas brosser aussitôt
+
+Le contenu de l’estomac est très acide. Quand il baigne les dents, il dissout la surface de l’émail et la ramollit pendant un moment. Une surface ramollie s’use beaucoup plus vite au moindre frottement : la brosse à dents, à cet instant, emporte une couche d’émail qui ne repoussera pas.
+
+La salive répare ces premières attaques : elle neutralise l’acide et durcit à nouveau la surface. Il faut simplement lui en laisser le temps.
+
+## Que faire juste après
+
+- Ne pas se brosser les dents
+- Se rincer la bouche, si possible avec un bain de bouche fluoré
+- Boire de l’eau
+- Attendre entre trente minutes et une heure avant le brossage
+
+## Et ensuite, au quotidien
+
+Quand les vomissements se répètent, c’est tout le brossage qui doit devenir plus doux.
+
+- Une brosse à dents très souple, à petite tête, changée tous les un à deux mois
+- Un dentifrice fluoré, jamais « blanchissant » : au charbon ou « émail diamant », ces dentifrices sont très abrasifs
+- Deux à trois brossages par jour au plus, de deux minutes
+- Des mouvements de rouleau, de la gencive vers le bord de la dent, sans appuyer
+
+Le soir, après le dernier brossage, des produits qui aident à reminéraliser l’émail peuvent être prescrits. Au cabinet, un vernis fluoré ou une fine couche de résine collée protègent les zones déjà sensibles.
+
+## Trouble alimentaire, reflux, grossesse : le même acide
+
+Que les vomissements viennent d’une boulimie, d’une anorexie avec vomissements, d’un reflux ou des nausées d’une grossesse, c’est le même acide et le même émail : les mêmes gestes s’appliquent.
+
+Ce qui change, c’est la durée. Ce sont les vomissements répétés, pendant des mois, qui finissent par amincir les dents, d’abord sur leur face interne, là où on ne le voit pas.
+
+## Quand consulter
+
+Dès que les vomissements se répètent, sans attendre de voir des dégâts : un premier bilan sert de référence et permet de protéger l’émail avant que l’érosion ne s’installe. Et sans hésiter si vos dents deviennent sensibles au froid, si leurs bords s’ébrèchent ou si elles vous paraissent plus courtes.
+
+J’ai rédigé pour les patients de la CMME de l’hôpital Sainte-Anne un guide de conseils, « TCA : attention à vos dents ». Il se télécharge sur la page de ce site consacrée aux troubles des conduites alimentaires.
+
+## Sources
+
+- Haute Autorité de santé. Boulimie et hyperphagie boulimique : repérage et éléments généraux de prise en charge. Fiche outil « Repérage et prise en charge de l’état dentaire par le chirurgien-dentiste ». Recommandation de bonne pratique, juin 2019.
+- Carvalho TS, Colon P, Ganss C, et al. Consensus report of the European Federation of Conservative Dentistry: erosive tooth wear—diagnosis and management. Clin Oral Investig. 2015;19(7):1557–1561. DOI : 10.1007/s00784-015-1511-7
+- Kisely S, Baghaie H, Lalloo R, Johnson NW. Association between poor oral health and eating disorders: systematic review and meta-analysis. Br J Psychiatry. 2015;207(4):299–305. DOI : 10.1192/bjp.bp.114.156323
