@@ -23,9 +23,9 @@ import re
 ICI = os.path.dirname(os.path.abspath(__file__))
 PAGE = os.path.join(ICI, "site", "bruxisme-usure-dentaire.html")
 
-TITRE = "Bruxisme : signes, gouttière, dents usées | Dentiste à Paris 9e"
-DESCRIPTION = ("Bruxisme : comment savoir si l’on serre ou grince des dents, ce que cela fait aux dents, "
-               "à quoi sert une gouttière et quand reconstruire. Dr Franck Moyal, Paris 9e.")
+TITRE = "Bruxisme : signes, gouttière, usure | Dentiste à Paris 9e"
+DESCRIPTION = ("Serrer ou grincer des dents : comment le savoir, ce que cela fait aux dents, à quoi sert une "
+               "gouttière, quand reconstruire. Dr Franck Moyal, Paris 9e.")
 CHAPO = ("Serrer ou grincer des dents n’est pas une maladie en soi, et des dents plates ne prouvent pas "
          "qu’on bruxe. Avant de proposer une gouttière, il faut établir si le bruxisme est réel, ce qui "
          "use vraiment les dents — le frottement, l’acide, souvent les deux — et ce qui mérite d’être "

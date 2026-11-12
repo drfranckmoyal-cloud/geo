@@ -945,10 +945,10 @@ NOUVELLES = {
         "chemin": "",
         # Franck, 11/11/2026 : « je veux beaucoup plus pousser TCA et Usure dentaire et Bruxisme » —
         # l'accueil les nomme, dans son titre comme dans son texte.
-        "nom": "Dr Franck Moyal | Dentisterie esthétique, usure dentaire, TCA | Paris 9e",
+        # ~60 signes au plus : au-delà, le moteur coupe le titre et « Paris 9e » disparaissait
+        "nom": "Dr Franck Moyal | Esthétique dentaire, usure, TCA | Paris 9e",
         "desc": "Chirurgien-dentiste à Paris 9e : dentisterie esthétique et adhésive, usure dentaire, "
-                "bruxisme, érosion et dents abîmées par les troubles des conduites alimentaires (TCA). "
-                "Espace patients et espace professionnel.",
+                "bruxisme, érosion et dents abîmées par les TCA (anorexie, boulimie).",
         "fil": [],
     },
     "espace-patients": {

@@ -61,18 +61,16 @@ def page_bruxisme():
 COURTS = """
 <h2>Les textes courts</h2>
 <h3>Accueil</h3>
-<p><b>Titre affiché par Google :</b> Dr Franck Moyal | Dentisterie esthétique, usure dentaire, TCA | Paris 9e</p>
-<p><b>Description :</b> Dr Franck Moyal, chirurgien-dentiste à Paris 9e : dentisterie esthétique et adhésive (facettes,
-composite bonding, éclaircissement), usure dentaire, bruxisme, érosion et dents abîmées par les troubles des conduites
-alimentaires (TCA). Espace patients et espace professionnel.</p>
+<p><b>Titre affiché par Google :</b> Dr Franck Moyal | Esthétique dentaire, usure, TCA | Paris 9e</p>
+<p><b>Description :</b> Chirurgien-dentiste à Paris 9e : dentisterie esthétique et adhésive, usure dentaire, bruxisme, érosion et dents abîmées par les TCA (anorexie, boulimie).</p>
 <p><b>Nouveau bloc, sous « Dentisterie esthétique à Paris » — titre :</b> Usure dentaire, bruxisme et TCA</p>
 <p><b>Texte :</b> Il prend aussi en charge l’usure dentaire, l’érosion, le bruxisme et les dents abîmées par les troubles
 des conduites alimentaires (TCA).</p>
 <p><b>Porte « Espace Patients », trois entrées ajoutées à la liste :</b> Usure dentaire · Bruxisme · TCA et dents</p>
 <h3>Titres affichés par Google</h3>
 <ul>
-<li>Usure dentaire : causes, signes, traitements | Dentiste à Paris 9e</li>
-<li>TCA et dents : anorexie, boulimie, vomissements | Dentiste à Paris 9e</li>
+<li>Usure dentaire : causes et traitements | Dentiste à Paris 9e</li>
+<li>TCA et dents : anorexie, boulimie | Dentiste à Paris 9e</li>
 <li>Dents trop courtes ou usées à Paris | Dr Franck Moyal</li>
 </ul>
 <h3>Page Dents courtes ou usées</h3>
