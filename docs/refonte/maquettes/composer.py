@@ -481,7 +481,9 @@ CHAPITRES_ECRITS = {
              "érosions liées aux TCA."),
             ("2025", "enseigner", "Responsable de la consultation des internes",
              "En dentisterie esthétique et usures, à la Pitié-Salpêtrière."),
-            ("2025", "association", "Fondateur et président de l’association DenTCA", ""),
+            # DenTCA n'a pas le statut associatif (Franck, 12/11/2026) : « fondateur », « réseau »
+            ("2025", "association", "Fondateur de DenTCA",
+             "Réseau de chirurgiens-dentistes formés aux troubles des conduites alimentaires."),
         ]),
         ("h3", "Formation continue"),
         ("domaines", [
@@ -506,9 +508,9 @@ CHAPITRES_ECRITS = {
         ]),
         ("h3", "Engagements"),
         ("engagements", [
-            ("association", "Président fondateur de DenTCA",
-             "Association pour la promotion des soins dentaires chez les patients atteints de troubles des "
-             "conduites alimentaires (2025)."),
+            ("association", "Fondateur de DenTCA",
+             "Réseau de chirurgiens-dentistes formés aux troubles des conduites alimentaires, pour la prévention "
+             "et les soins dentaires des patients (2025)."),
             ("reserve", "Secrétaire général",
              "Association des chirurgiens-dentistes de réserve de la région de Saint-Germain-en-Laye "
              "(depuis 2017)."),

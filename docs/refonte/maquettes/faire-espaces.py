@@ -361,7 +361,7 @@ PRO_PRATICIEN = '''      <div class="tuiles tuiles--praticien">
             <h3 class="tuile__titre">Dr Franck Moyal</h3>
             <p class="tuile__quoi">Chirurgien-dentiste à Paris 9<sup>e</sup>, exercice exclusif en
               dentisterie esthétique et adhésive. Praticien hospitalier, Pitié-Salpêtrière et
-              CMME de Sainte-Anne. Président de DenTCA.</p>
+              CMME de Sainte-Anne. Fondateur de DenTCA.</p>
             <span class="tuile__fleche">Son parcours <span>→</span></span>
           </span>
         </a>
