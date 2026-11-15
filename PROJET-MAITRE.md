@@ -734,6 +734,7 @@ remarques détaillées de Franck) sont archivés tels quels dans
 | 12/11/2026 | F | « non montre moi sous forme de maquettes d'abord », puis, devant les 22 captures : « oui go publie ». | Titres Google raccourcis à 60 signes (l'aperçu les montrait coupés) ; D108 en ligne, sauvegarde `public_html-202611120612`, dix pages vérifiées, IndexNow 200. |
 | 12/11/2026 | F | « oui demande l'indexation à Google ». | Search Console, Chrome de Franck : indexation demandée et acceptée pour les quatre articles, Bruxisme, l'accueil, TCA, Usure et Dents courtes (9 pages ; « Indexation demandée » ne prouve pas la relecture, seule la date de dernière exploration le dira). |
 | 12/11/2026 | F | « Oui, fondateur de DenTCA, c'est assez bien. » | Pages TCA, Parcours et Espace pro corrigées (plus d'« association » ni de « président » pour DenTCA), publiées, vérifiées en ligne, IndexNow 200. |
+| 15/11/2026 | F | « Le bandeau de texte que tu as mis dans la première page coupe ma photo sur le bas, c'est pas joli. » | Cause : sur les écrans de moins de 1 440 × 880 px, le bloc de texte passe sous les portes et agrandit la grille ; le portrait, calé sur le bas de la grille, descendait derrière le bloc qui le recouvrait. Le portrait est désormais posé sur le bas des portes (`style.css`, règle du 15/11/2026) : il s'arrête au ras du bloc, épaules comprises. Contrôlé de 1 024 × 768 à 1 920 × 1 080 et sur téléphone (inchangé au-delà de 1 440 × 880 et sous 721 px) ; publié par `npm run publier` (sauvegarde `public_html-202611151641`), 984 fichiers identiques en ligne. |
 | 08/10/2026 | C | Liste rendue, vérifiée page par page. Puis premier relevé de visibilité dans les IA : cité une fois sur quatre, et la citation vient de sites tiers, jamais du sien. | D70 |
 
 ---
@@ -811,4 +812,4 @@ remarques détaillées de Franck) sont archivés tels quels dans
 
 ---
 
-*Dernière mise à jour : 12 novembre 2026.*
+*Dernière mise à jour : 15 novembre 2026.*

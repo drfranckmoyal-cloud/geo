@@ -851,6 +851,17 @@ body.portail{min-height:100%}
   .espaces:has(.espace--clair:hover) .portail__pied .g{color:#5e6360}
   .espaces:has(.espace--clair:hover) .portail__qui h2{color:var(--fg)}
 }
+/* 15/11/2026 — Franck : « le bandeau de texte coupe ma photo sur le bas, c'est pas joli ».
+   Le bloc passé sous la porte agrandissait la grille ; le portrait, calé sur le bas de la grille,
+   descendait derrière le bloc, qui le recouvrait (un élément de grille respecte son z-index).
+   Le portrait se pose désormais sur le bas des portes, pas sur celui de la page : il s'arrête
+   au ras du bloc, épaules comprises. */
+@media (min-width:721px) and (max-width:1439px), (min-width:721px) and (max-height:879px){
+  .portail .espace--clair{grid-row:1;grid-column:1}
+  .portail .espace--encre{grid-row:1;grid-column:2}
+  .portail .espaces__portrait{position:relative;left:auto;bottom:auto;transform:none;
+    grid-row:1;grid-column:1/-1;justify-self:center;align-self:end}
+}
 @media (max-width:720px){
   .portail .espaces{min-height:0}
   .portail .espace{min-height:0;padding-block:1.6rem}
