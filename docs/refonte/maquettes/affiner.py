@@ -40,6 +40,9 @@ REVISIONS.update({u: "2026-11-10" for u in (
     "/facettes-ou-composite/", "/franck-moyal/", "/videos/anorexie-dents/", "/videos/composite-bonding/",
     "/videos/erosion-dentaire/", "/videos/grossesse-erosion-dentaire/",
     "/videos/premiere-consultation-esthetique/", "/videos/sourire-gingival/")})
+# 17/11/2026 : DenTCA, réseau en ligne sur tca-dents.fr, relié par des liens et par les données (stratégie SEO/GEO)
+REVISIONS_DENTCA = ("/tca-dents/", "/franck-moyal/", "/publications/", "/conferences-formations/")
+REVISIONS.update({u: "2026-11-17" for u in REVISIONS_DENTCA})
 LARGEURS = (400, 800, 1200, 1600)
 
 # ── 1. les images ─────────────────────────────────────────────────────────
@@ -268,9 +271,13 @@ PRATICIEN = {
         {"@type": "Hospital", "name": "CMME, hôpital Sainte-Anne (GHU Paris psychiatrie & neurosciences)",
          "url": "https://www.ghu-paris.fr/"},
     ],
-    "memberOf": [{"@type": "Organization", "name": "DenTCA", "url": "https://dentca-asso.com/",
-                  "description": "Association pour la prévention et les soins des troubles dentaires liés aux "
-                                 "troubles des conduites alimentaires, fondée et présidée par le Dr Franck Moyal."}],
+    # 17/11/2026 : DenTCA est un réseau, pas une association (Franck, 12/11/2026), et son site est tca-dents.fr depuis
+    # le 17/11/2026 ; même identifiant (@id) que dans les données de tca-dents.fr, qui désignent Franck comme fondateur.
+    "memberOf": [{"@type": "Organization", "@id": "https://tca-dents.fr/#dentca", "name": "DenTCA",
+                  "url": "https://tca-dents.fr/",
+                  "description": "Réseau de chirurgiens-dentistes formés aux troubles des conduites alimentaires, "
+                                 "fondé par le Dr Franck Moyal.",
+                  "founder": {"@id": RACINE + "/#franck-moyal"}}],
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Université Paris Diderot (Paris VII)"},
     "worksFor": {"@id": RACINE + "/#practice"},
     # Franck, 10/11/2026 : le numéro RPPS se publie ; il relie le site aux annuaires officiels.

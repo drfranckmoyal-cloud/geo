@@ -510,7 +510,8 @@ CHAPITRES_ECRITS = {
         ("engagements", [
             ("association", "Fondateur de DenTCA",
              "Réseau de chirurgiens-dentistes formés aux troubles des conduites alimentaires, pour la prévention "
-             "et les soins dentaires des patients (2025)."),
+             "et les soins dentaires des patients (2025) : "
+             '<a href="https://tca-dents.fr/" target="_blank" rel="noopener">tca-dents.fr</a>.'),
             ("reserve", "Secrétaire général",
              "Association des chirurgiens-dentistes de réserve de la région de Saint-Germain-en-Laye "
              "(depuis 2017)."),

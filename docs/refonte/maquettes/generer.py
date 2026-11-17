@@ -1455,10 +1455,25 @@ def reharmoniser():
             if bloc:
                 page = page.replace("</head>", bloc + "\n</head>", 1)
         page = synchroniser_faqpage(page, slug)
+        for _avant, _apres in VERS_DENTCA.get(slug, ()):
+            page = page.replace(_avant, _apres)
         if page != avant:
             open(chemin, "w", encoding="utf-8").write(page)
             reprises.append(nom)
     return reprises
+
+
+# 17/11/2026 (stratégie SEO/GEO, D109) : DenTCA a son site, tca-dents.fr. Son nom s'écrit « DenTCA » (audit A4) ; les
+# deux pages tirées du pack qui le citent mènent à son site. Le remplacement ne joue qu'une fois : la phrase d'origine
+# disparaît avec lui.
+_VERS = 'target="_blank" rel="noopener"'
+VERS_DENTCA = {
+    "publications": [("de la création de DentCA.</p>",
+                      f'de la création de <a href="https://tca-dents.fr/" {_VERS}>DenTCA</a>.</p>')],
+    "conferences-formations": [("au cœur du projet DentCA.</p>",
+                                f'au cœur de <a href="https://tca-dents.fr/espace-pro/" {_VERS}>DenTCA</a>, le réseau que j’ai '
+                                'fondé.</p>')],
+}
 
 
 def main():
