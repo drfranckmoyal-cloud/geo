@@ -1,0 +1,31 @@
+{
+  "commentaire": "Le relevé IA allégé (aperçu IA de Google, sans compte, dans le navigateur de Claude ; jamais le Chrome de Franck). 18 questions de l'audit du 10/11/2026 (résultats dans livrables/audit-2026-11-10/AUDIT-COMPLET.md, § 5.1), plus 6 questions DenTCA ajoutées le 17/11/2026 (D109 ; point de départ dans DENTCA/suivi/releve-ia-2026-11-17.md). Prochain relevé vers le 10/12/2026. Lire le texte à partir de « Aperçu IA » dans document.body.innerText, 5 à 6 s d'attente par page.",
+  "audit-2026-11-10": [
+    "dentiste tca paris",
+    "dentiste spécialiste de l'usure dentaire à Paris",
+    "meilleur dentiste pour un composite bonding à Paris",
+    "dentiste spécialisé usure dentaire paris",
+    "dentiste spécialiste des troubles alimentaires à Paris",
+    "quel dentiste consulter pour une érosion liée à l'anorexie ou à la boulimie",
+    "l'anorexie sans vomissements peut-elle abîmer les dents",
+    "usure dentaire : causes et traitement",
+    "anorexie dents",
+    "érosion dentaire",
+    "usure dentaire traitement",
+    "reconstruire des dents usées sans couronnes",
+    "meilleur dentiste esthétique à Paris",
+    "dentiste esthétique paris",
+    "facettes dentaires paris",
+    "facettes ou composite comment choisir",
+    "taches blanches sur les dents : comment les enlever",
+    "qui est le Dr Franck Moyal"
+  ],
+  "dentca-2026-11-17": [
+    "qu'est-ce que DenTCA",
+    "réseau de dentistes formés aux troubles des conduites alimentaires",
+    "dentiste spécialisé TCA Lyon",
+    "que faire après avoir vomi pour protéger ses dents",
+    "boulimie premiers signes sur les dents",
+    "mon enfant a une anorexie faut-il consulter un dentiste"
+  ]
+}
