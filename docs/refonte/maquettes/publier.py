@@ -206,6 +206,32 @@ AddType font/woff2 .woff2
 """
 
 
+def plan_des_videos(adresses):
+    """Le plan du site des vidéos (18/11/2026) : pour chaque page vidéo publiée, sa vidéo, son image, son titre, sa durée.
+    Google y apprend où sont les vidéos sans attendre d'explorer les pages, qu'il ne connaissait pas encore."""
+    import videos as V
+    def x(s):
+        return H.escape(s, quote=False)
+    urls = []
+    for v in V.toutes():
+        page = f"/videos/{v['slug']}/"
+        if page not in adresses:
+            continue
+        urls.append(
+            f"<url><loc>{RACINE}{page}</loc><video:video>"
+            f"<video:thumbnail_loc>{RACINE}/assets/videos/{v['fichier']}.jpg</video:thumbnail_loc>"
+            f"<video:title>{x(v['titre'])}</video:title><video:description>{x(v['description'])}</video:description>"
+            f"<video:content_loc>{RACINE}/assets/videos/{v['fichier']}.mp4</video:content_loc>"
+            f"<video:duration>{v['duree']}</video:duration>"
+            f"<video:publication_date>{V.date_heure(v['date'])}</video:publication_date>"
+            "<video:family_friendly>yes</video:family_friendly>"
+            f'<video:uploader info="{RACINE}/franck-moyal/">Dr Franck Moyal</video:uploader>'
+            "</video:video></url>")
+    return ('<?xml version="1.0" encoding="UTF-8"?>'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+            'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">' + "".join(urls) + "</urlset>\n")
+
+
 def plan_du_site(adresses):
     jour = datetime.date.today().isoformat()
     urls = "".join(f"<url><loc>{RACINE}{u}</loc><lastmod>{jour}</lastmod></url>" for u in adresses)
@@ -213,7 +239,8 @@ def plan_du_site(adresses):
             f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     index = ('<?xml version="1.0" encoding="UTF-8"?>'
              '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-             f'<sitemap><loc>{RACINE}/sitemap-0.xml</loc><lastmod>{jour}</lastmod></sitemap></sitemapindex>\n')
+             f'<sitemap><loc>{RACINE}/sitemap-0.xml</loc><lastmod>{jour}</lastmod></sitemap>'
+             f'<sitemap><loc>{RACINE}/sitemap-videos.xml</loc><lastmod>{jour}</lastmod></sitemap></sitemapindex>\n')
     return plan, index
 
 
@@ -333,7 +360,8 @@ def main():
             shutil.copy2(os.path.join(PUBLIC, nom), os.path.join(SORTIE, nom))
     open(os.path.join(SORTIE, ".htaccess"), "w", encoding="utf-8").write(htaccess())
     plan, index = plan_du_site(adresses)
-    for nom, contenu in (("sitemap-0.xml", plan), ("sitemap.xml", plan), ("sitemap-index.xml", index)):
+    for nom, contenu in (("sitemap-0.xml", plan), ("sitemap.xml", plan), ("sitemap-index.xml", index),
+                         ("sitemap-videos.xml", plan_des_videos(adresses))):
         open(os.path.join(SORTIE, nom), "w", encoding="utf-8").write(contenu)
 
     # Tout lisible par le serveur web : un fichier réglé « moi seul » sur le Mac y garderait

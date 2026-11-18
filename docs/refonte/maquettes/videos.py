@@ -18,9 +18,11 @@ vidéo et son image de couverture sont dans src/assets/videos/<fichier>.mp4 et .
 
     python3 docs/refonte/maquettes/videos.py
 """
+import datetime
 import html as H
 import json
 import os
+from zoneinfo import ZoneInfo
 
 import generer as G
 
@@ -172,6 +174,13 @@ def fil(url, etapes):
     return {"@type": "BreadcrumbList", "@id": url + "#fil", "itemListElement": elements}
 
 
+def date_heure(jour):
+    """Une date de mise en ligne avec son heure et son fuseau (Paris) : Google refuse une date seule pour uploadDate
+    (« il manque le fuseau horaire », test en direct de Search Console du 18/11/2026)."""
+    a, m, j = (int(x) for x in jour.split("-"))
+    return datetime.datetime(a, m, j, 12, 0, tzinfo=ZoneInfo("Europe/Paris")).isoformat()
+
+
 def noeud_video(v):
     # la même vidéo publiée sur la chaîne YouTube (26/10/2026) : Google relie les deux
     sur_youtube = {"sameAs": f"https://www.youtube.com/shorts/{v['youtube']}"} if v.get("youtube") else {}
@@ -181,7 +190,7 @@ def noeud_video(v):
             # celles de la maquette (/videos/<fichier>.jpg) menaient à une erreur (audit du 25/10/2026)
             "thumbnailUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.jpg",
             "contentUrl": f"{G.RACINE_WEB}assets/videos/{v['fichier']}.mp4",
-            "uploadDate": v["date"], "duration": f"PT{v['duree']}S",
+            "uploadDate": date_heure(v["date"]), "duration": f"PT{v['duree']}S",
             # ce que dit la vidéo, en texte : les moteurs et les IA ne regardent pas les vidéos
             **({"transcript": " ".join(v["texte"])} if v.get("texte") else {}),
             "author": {"@id": G.RACINE_WEB + "#franck-moyal"},

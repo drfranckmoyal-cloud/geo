@@ -4,6 +4,7 @@ theme: TCA
 page: tca-dents
 lien: Les TCA et la santé des dents
 chapitre: 1
+aussi: erosion-dentaire:2
 fichier: anorexie-dents
 duree: 32
 date: 2026-10-25

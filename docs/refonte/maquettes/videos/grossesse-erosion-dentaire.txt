@@ -1,4 +1,7 @@
 titre: Grossesse et érosion dentaire : protéger ses dents
+page: erosion-dentaire
+lien: Tout savoir sur l’érosion dentaire
+chapitre: 4
 court: Grossesse et érosion dentaire
 theme: Grossesse
 fichier: grossesse-erosion-dentaire
