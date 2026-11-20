@@ -1,0 +1,381 @@
+<title>Plan d'attaque drfranckmoyal.fr</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap">
+<style>
+/* Mise en page : une colonne de lecture, comme une note de cabinet ; tableaux défilants sur téléphone. */
+:root{
+  --paper:#fbfbf9; --ink:#1b1d1c; --muted:#5d625f; --line:#e2e4df; --soft:#f2f3ef;
+  --accent:#1d4e6b; --accent-soft:#e6eef3;
+  --ok:#2c7653; --ok-soft:#e3f2ea; --warn:#9a5a12; --warn-soft:#f8ecdb; --bad:#9e3434; --bad-soft:#f7e3e3;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#141716; --ink:#e8eae7; --muted:#a3a9a5; --line:#2c312f; --soft:#1c201f;
+  --accent:#8cbbd8; --accent-soft:#1b2c37;
+  --ok:#8fd4b0; --ok-soft:#173326; --warn:#f0c27f; --warn-soft:#3a2b14; --bad:#f1a1a1; --bad-soft:#3c1c1c;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#141716; --ink:#e8eae7; --muted:#a3a9a5; --line:#2c312f; --soft:#1c201f;
+  --accent:#8cbbd8; --accent-soft:#1b2c37;
+  --ok:#8fd4b0; --ok-soft:#173326; --warn:#f0c27f; --warn-soft:#3a2b14; --bad:#f1a1a1; --bad-soft:#3c1c1c;
+  color-scheme:dark; }
+body{background:var(--paper);color:var(--ink);font:15.5px/1.6 var(--sans);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 64px}
+.page{max-width:880px;margin:0 auto}
+header{padding-block:48px 28px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.sur{font:600 12px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+h1{font:700 clamp(30px,5vw,42px)/1.12 var(--serif);margin:0 0 14px;text-wrap:balance}
+.chapeau{font:400 18px/1.55 var(--serif);color:var(--ink);max-width:62ch;margin:0}
+.meta{margin-top:16px;font-size:13px;color:var(--muted)}
+h2{font:650 26px/1.2 var(--serif);margin:52px 0 6px;text-wrap:balance;scroll-margin-top:16px}
+h2 .n{color:var(--accent);margin-right:.35em}
+.intro{color:var(--muted);margin:0 0 18px;max-width:68ch}
+h3{font:600 19px/1.3 var(--serif);margin:30px 0 8px;text-wrap:balance}
+p{max-width:68ch}
+ul{padding-left:1.2em;max-width:68ch} li{margin:4px 0}
+strong{font-weight:600}
+a{color:var(--accent)}
+nav.som{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;margin:18px 0 0}
+nav.som a{text-decoration:none;border-bottom:1px solid var(--line)}
+nav.som a:hover,nav.som a:focus-visible{border-color:var(--accent)}
+.etat{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0 6px}
+.etat div{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--paper)}
+.etat b{display:block;font:700 26px/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.etat span{font-size:13px;color:var(--muted)}
+.cle{background:var(--accent-soft);border-left:3px solid var(--accent);padding:16px 18px;border-radius:0 10px 10px 0;margin:20px 0;max-width:72ch}
+.cle p{margin:0} .cle p+p{margin-top:8px}
+.tw{overflow-x:auto;margin:10px 0 6px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:600 12px/1.3 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td:first-child{font-weight:500}
+.ref{font:600 12px var(--sans);color:var(--accent);white-space:nowrap}
+.pill{display:inline-block;font:600 11.5px/1.5 var(--sans);padding:1px 8px;border-radius:20px;white-space:nowrap}
+.claude{background:var(--accent-soft);color:var(--accent)}
+.vous{background:var(--warn-soft);color:var(--warn)}
+.dec{background:var(--bad-soft);color:var(--bad)}
+.fort{background:var(--ok-soft);color:var(--ok)}
+.moy{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.faible{background:var(--soft);color:var(--muted)}
+.leviers{display:grid;gap:10px;margin:14px 0}
+.lev{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.lev .rang{font:700 26px/1 var(--serif);color:var(--accent)}
+.lev h4{margin:0 0 4px;font:600 16px/1.35 var(--sans)}
+.lev p{margin:0;color:var(--muted);font-size:14.5px}
+.phase{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.phase .quand{font:600 12px/1.4 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.phase h3{margin:4px 0 6px}
+.phase .but{margin:0 0 10px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.cols > div{min-width:0}
+.cols h5{font:600 13px var(--sans);margin:0 0 4px}
+.cols ul{margin:0;font-size:14.5px}
+.non li{margin:6px 0}
+.fait{columns:2 260px;column-gap:28px;font-size:14.5px;padding-left:1.1em}
+.fait li{break-inside:avoid}
+.legende{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--muted);margin:6px 0 4px;align-items:center}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media (max-width:520px){ .lev{grid-template-columns:30px 1fr} h2{font-size:23px} }
+</style>
+
+<div class="page">
+<header>
+  <p class="sur">drfranckmoyal.fr · Google et IA · 20 novembre 2026</p>
+  <h1>Plan d'attaque pour la visibilité du site</h1>
+  <p class="chapeau">Le site est techniquement excellent et bien écrit. Ce qui manque maintenant se joue surtout hors du site : votre identité sur le web, votre fiche Google, et les autres sites qui parlent de vous. Voici tout ce qui peut être amélioré, classé, et l'ordre dans lequel le faire.</p>
+  <p class="meta">Sources : Search Console (trois mois, et relevé quotidien de 77 recherches au 20/11), audit complet du 10/11, état de la fiche Google, inventaire des liens, contrôle du site en ligne. Désormais, tout se fait ici : je rédige et j'exécute, vous validez.</p>
+  <nav class="som" aria-label="Sommaire">
+    <a href="#etat">1. Où en est le site</a><a href="#leviers">2. Le diagnostic</a><a href="#fait">3. Déjà fait</a>
+    <a href="#tout">4. Toutes les améliorations</a><a href="#plan">5. Le plan d'attaque</a><a href="#gestes">6. Vos gestes</a>
+    <a href="#decisions">7. Vos décisions</a><a href="#mesure">8. Mesurer</a><a href="#non">9. Ce qu'on ne fera pas</a>
+  </nav>
+</header>
+
+<h2 id="etat"><span class="n">1</span>Où en est le site</h2>
+<p class="intro">Deux mois en ligne (refonte le 25/10). Les chiffres de Google lui-même.</p>
+<div class="etat">
+  <div><b>255</b><span>clics depuis Google en trois mois, pour 5 100 apparitions</span></div>
+  <div><b>94 %</b><span>des clics viennent de France ; l'étranger est marginal</span></div>
+  <div><b>77 %</b><span>des clics dont Google montre la recherche portent sur votre nom ; 19 % sur le composite</span></div>
+  <div><b>38 / 43</b><span>pages dans l'index de Google ; 5 attendent</span></div>
+  <div><b>3 / 17</b><span>questions de patients où l'IA de Google vous cite (10/11)</span></div>
+</div>
+
+<h3>Ce que disent les positions (relevé du 20/11)</h3>
+<p class="intro">Sous 10 : première page de Google. De 11 à 20 : deuxième page. Au-delà, on est invisible.</p>
+<div class="tw"><table>
+<thead><tr><th>Sujet</th><th>Où vous êtes</th><th>Lecture</th></tr></thead>
+<tbody>
+<tr><td>Votre nom</td><td class="num">1,6 à 4,9</td><td>Sain. Mais sur « qui est le Dr Franck Moyal », l'IA de Google donne deux anciennes adresses (Flandre, Balard).</td></tr>
+<tr><td>Composite bonding</td><td class="num">6,7 · 7,1 · 7,3</td><td>Votre meilleur sujet : 10 clics sur « composite bonding paris », le seul terme hors nom qui amène du monde.</td></tr>
+<tr><td>Esthétique, blanchiment</td><td class="num">2,3 · 3,8</td><td>En haut, mais <strong>zéro clic</strong> sur 136 apparitions. Ces positions viennent surtout de la carte Google, où le patient appelle sans passer par le site. C'est la fiche Google qui joue.</td></tr>
+<tr><td>Facettes</td><td class="num">11 à 21,9</td><td>Deuxième ou troisième page sur « facettes dentaires paris ».</td></tr>
+<tr><td>Usure, dents usées, bruxisme</td><td class="num">28 à 67, ou absent</td><td><strong>Votre pilier est le moins visible.</strong> « Usure dentaire » 59e, « traitement usure dentaire » 67e, « bruxisme » absent.</td></tr>
+<tr><td>TCA, érosion</td><td class="num">2,9 · 24 · 32 · 99</td><td>« TCA » bien placé ; « anorexie dents » et « boulimie dents » en troisième page ; « érosion dentaire » 99e.</td></tr>
+<tr><td>Recherches en anglais</td><td class="num">≈ 75 apparitions</td><td>Zéro clic en trois mois : pas une priorité.</td></tr>
+</tbody></table></div>
+
+<h2 id="leviers"><span class="n">2</span>Le diagnostic</h2>
+<div class="cle">
+  <p><strong>Le contenu n'est plus le problème.</strong> Vos pages Usure et TCA sont au niveau des meilleures sources françaises, et quand Google les lit, il les cite mot pour mot. Ce qui bloque : le site est jeune et presque aucun autre site ne renvoie vers lui. Pour Google comme pour les IA, c'est la confiance qui vient de l'extérieur qui fait monter une page.</p>
+</div>
+<p class="intro">Les leviers, du plus décisif au moins décisif aujourd'hui :</p>
+<div class="leviers">
+  <div class="lev"><div class="rang">1</div><div><h4>Les liens et citations venant d'autres sites</h4><p>Dix pages vous citent nommément (Le Fil Dentaire, AO News, Blendi, Eugenol, Artemis…) sans un seul lien vers le site. Les demandes sont écrites depuis le 12/11 mais ne sont pas parties.</p></div></div>
+  <div class="lev"><div class="rang">2</div><div><h4>Une identité cohérente partout</h4><p>Ordre et répertoire RPPS, annuaires, Santé.fr (Saint-Maur), Doctolib (trois adresses) : les IA recopient ces sources et vous situent à Flandre et Balard. Tant que ce n'est pas corrigé à la source, chaque réponse sur votre nom peut être fausse.</p></div></div>
+  <div class="lev"><div class="rang">3</div><div><h4>La fiche Google</h4><p>4,9 étoiles sur plus de 110 avis, mais aucune réponse aux avis, un nom chargé de mots-clés (risque de suspension), une seule catégorie, et elle ne sort que sur votre nom. C'est elle qui capte « blanchiment » et « esthétique dentaire » près du cabinet.</p></div></div>
+  <div class="lev"><div class="rang">4</div><div><h4>Le contenu</h4><p>Quelques trous à combler (grossesse, sourire gingival, edge bonding, prix), des questions réelles de patients sans réponse dédiée, et plus de cas cliniques d'usure.</p></div></div>
+  <div class="lev"><div class="rang">5</div><div><h4>La technique</h4><p>Presque parfaite : vitesse 99-100, données structurées complètes. Restent des finitions (vidéos à faire indexer, titres trop longs, fichier pour les IA).</p></div></div>
+</div>
+
+<h2 id="fait"><span class="n">3</span>Déjà fait depuis l'audit du 10/11</h2>
+<ul class="fait">
+  <li>Les 22 phrases coupées réparées, les blocs de sources refaits.</li>
+  <li>Le texte de chaque vidéo écrit sous la vidéo.</li>
+  <li>« Mon parcours » daté : RPPS, diplômes, thèse 2008, thèses codirigées.</li>
+  <li>Pages pro aérées et illustrées (Parcours, Publications, Conférences, Hôpital, Médias).</li>
+  <li>Edge bonding ajouté à la page Composite.</li>
+  <li>« Dentiste esthétique à Paris » en sous-titre de la page pilier.</li>
+  <li>Accueil : usure, bruxisme et TCA nommés et reliés.</li>
+  <li>Titres Google avec « dentiste » sur Usure, TCA, Bruxisme.</li>
+  <li>Page Bruxisme réécrite en questions-réponses.</li>
+  <li>Quatre articles : boulimie, brossage après vomissement, gouttière, dents usées.</li>
+  <li>« Dents trop courtes » dans la page Dents courtes.</li>
+  <li>DenTCA (tca-dents.fr) relié au site : même identité, liens dans le texte de 25 pages.</li>
+</ul>
+
+<h2 id="tout"><span class="n">4</span>Toutes les améliorations possibles</h2>
+<p class="intro">Le catalogue complet, par domaine. Pour chaque ligne : qui la fait, et ce qu'elle peut rapporter.</p>
+<div class="legende">
+  <span class="pill claude">Claude seul</span> je le fais sans vous
+  <span class="pill vous">Votre geste</span> je prépare tout, vous cliquez ou signez
+  <span class="pill dec">Votre décision</span> un choix à trancher
+</div>
+
+<h3>A. Votre identité sur le web</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">A1</span> Déclarer vos lieux d'exercice actuels à l'Ordre (retirer Flandre et Balard)</td><td>Source du répertoire RPPS, que recopient Santé.fr et les annuaires, que lisent les IA.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">A2</span> Corriger les annuaires : annuairedentaire, maquestionmedicale, lemedecin, doctoome, agenda.direct, keskeces</td><td>Ce sont eux que l'IA cite sur votre nom, avant votre site.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">A3</span> Doctolib : une seule adresse active, une présentation qui nomme esthétique, usure, TCA, et le lien vers le site</td><td>Doctolib est la première source sur « Dr Franck Moyal ».</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">A4</span> Une même présentation courte partout (LinkedIn, Instagram, YouTube, Blendi, AP-HP si possible)</td><td>Les IA croisent les sources : la même phrase partout devient « la » description.</td><td><span class="pill claude">Claude seul</span> + <span class="pill vous">Votre geste</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">A5</span> Nommer le lieu (« Centre médical et dentaire Saint-Georges ») une fois sur le site, s'il s'appelle ainsi</td><td>Doctolib l'appelle ainsi, le site non : les IA ne font pas le lien.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">A6</span> Confirmer votre titre exact à la Pitié-Salpêtrière (praticien hospitalier ou attaché)</td><td>Les IA reprennent ce titre mot pour mot.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill moy">Moyen</span></td></tr>
+</tbody></table></div>
+
+<h3>B. La fiche Google</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">B1</span> Nom de la fiche : « Dr Franck Moyal » au lieu de « Docteur Franck Moyal - Esthétique du sourire / Usures dentaires et TCA »</td><td>Règle de Google : nom réel. Un nom chargé de mots-clés expose à une suspension de la fiche.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">B2</span> Répondre aux avis déjà reçus, puis à chaque nouvel avis (réponses rédigées par moi, sans aucun détail médical)</td><td>Signal suivi par Google pour la carte, et lu par les patients. Aucun avis n'a de réponse aujourd'hui.</td><td><span class="pill claude">Claude seul</span> + <span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">B3</span> Catégorie secondaire (dentisterie esthétique) et description de chacun des 7 services, avec lien vers la page du site</td><td>La fiche ne sort que sur votre nom ; les services décrits l'ouvrent à « facettes », « composite », « usure ».</td><td><span class="pill claude">Claude seul</span> + <span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">B4</span> Une publication par mois sur la fiche (un sujet, une photo, un lien vers la page)</td><td>Montre une fiche vivante ; chaque publication pointe vers le site.</td><td><span class="pill claude">Claude seul</span> + <span class="pill vous">Votre geste</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">B5</span> Photos : l'entrée de l'immeuble, la salle de soins, vous au travail</td><td>Google les réclame (« photo de l'extérieur »).</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill faible">Faible</span></td></tr>
+<tr><td><span class="ref">B6</span> Continuer les demandes d'avis par Avisio, sans jamais suggérer le contenu de l'avis</td><td>Les avis qui citent naturellement « facettes » ou « usure » aident la carte sur ces mots.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill moy">Moyen</span></td></tr>
+</tbody></table></div>
+
+<h3>C. Les liens et citations venant d'autres sites</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">C1</span> Demander le lien aux 10 pages qui vous citent déjà (Fil Dentaire, AO News, Blendi ×2, Artemis, Eugenol, Endo-académie, AP-HP, doctoome…)</td><td>Le travail est fait, il ne manque que le lien. Je mets les messages en brouillon dans votre Gmail : vous n'avez qu'à envoyer.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">C2</span> Votre site Smile Club Formations : un lien dans le texte de la présentation du formateur et des pages Usures, Masterclass composite et Esthétique 360</td><td>Liens que vous contrôlez, depuis des pages qui parlent des mêmes sujets.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">C3</span> CMME et GHU Paris : une ligne « consultation bucco-dentaire, Dr Franck Moyal » sur la page du centre TCA</td><td>L'IA de Google cite déjà ce centre à côté de vous ; un lien de là vaut plus que dix pages du site.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">C4</span> FFAB (fédération anorexie boulimie) : adhésion à 15 € par an, sur parrainage, et entrée dans l'annuaire ; puis le Réseau TCA Francilien</td><td>Les IA renvoient les familles vers ces annuaires. Aucun chirurgien-dentiste n'y figure.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">C5</span> Les thèses codirigées sur DUMAS : vérifier que votre nom de directeur y est</td><td>Les thèses sont la source la plus citée sur TCA et usure.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">C6</span> Un article signé dans une revue (Le Fil Dentaire, L'Information Dentaire, Réalités Cliniques) sur les usures ou TCA et dents, avec votre site dans la notice d'auteur</td><td>Votre seul article en ligne date de 2023 et porte sur le composite.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous signez</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">C7</span> Proposer le sujet « le dentiste, premier à repérer un TCA » à la presse santé (Allodocteurs, Pourquoi Docteur, Santé Mentale)</td><td>Ils ont déjà traité le sujet, sans dentiste.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Votre geste</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">C8</span> Profils scientifiques : ORCID et Google Scholar, avec le lien du site</td><td>Gratuits, sous votre contrôle, lus par les IA pour vérifier un auteur.</td><td><span class="pill vous">Votre geste</span> (création du compte)</td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">C9</span> Congrès : ADF 2026 (atelier GC le 25/11), Entretiens de Garancière, Alpha Omega — demander le lien sur la page orateur</td><td>Pages fortes, très lues par les moteurs.</td><td><span class="pill vous">Votre geste</span></td><td><span class="pill moy">Moyen</span></td></tr>
+</tbody></table></div>
+
+<h3>D. Le contenu du site</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">D1</span> Page « Grossesse et dents » : nausées, reflux, hyperémèse, érosion</td><td>Sujet peu traité en français, lié à votre expertise : un site jeune peut y être cité vite. La vidéo existe déjà.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous validez</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">D2</span> Page « Sourire gingival »</td><td>La vidéo existe, la page non.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous validez</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D3</span> Page dédiée « Edge bonding à Paris »</td><td>Terme que vous avez choisi ; il n'existe aujourd'hui qu'en section, et le site ne sort pas dessus.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous validez</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D4</span> Deux articles par mois, chacun répondant à une vraie question tapée dans Google</td><td>Exemples relevés : « dent qui se creuse de l'intérieur », « envie de vomir quand je me brosse les dents », « MIH ou fluorose », « érosion dentaire avant après », « gouttière bruxisme danger », « combien dure un composite bonding ».</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous validez</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">D5</span> Deux ou trois cas cliniques d'usure ou d'érosion de plus, avec vos photos (consentements recueillis)</td><td>La preuve par l'exemple est ce qui distingue un expert d'une page d'information. Usure et érosion en manquent.</td><td><span class="pill vous">Vous choisissez</span> + <span class="pill claude">Claude rédige</span></td><td><span class="pill fort">Fort</span></td></tr>
+<tr><td><span class="ref">D6</span> Expliquer ce qui fait le prix (sans montant) : bilan, nombre de dents, technique, laboratoire, ce que l'Assurance maladie ne rembourse pas</td><td>Trois recherches suivies portent sur le prix ; aujourd'hui le site n'en dit rien (décision D84).</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D7</span> Grands titres de page explicites : « Facettes dentaires » au lieu de « Facettes », « Taches blanches et MIH » au lieu de « Infiltration ICON »</td><td>Google lit ce titre comme le sujet de la page ; « ICON » est un nom de marque que personne ne cherche.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D8</span> Corrections de fond restées ouvertes : durée du composite (6-7 ou 6-10 ans), brossage après acide, émail et blanchiment, règle des 6 % et des 18 ans, stabilité de la résine ICON</td><td>Les IA écartent un passage contredit par une autre page, ou le citent de travers.</td><td><span class="pill claude">Claude rédige</span> + <span class="pill vous">Vous validez</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D9</span> Déontologie : la note Google affichée sur la page Contact, « spécialisé dans », « une référence en France »</td><td>Article R. 4127-215-1 : pas de témoignages de tiers, pas d'annonce de spécialité. Je propose des formulations sans risque.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">D10</span> Une adresse contact@drfranckmoyal.fr à la place du Gmail pour recevoir les documents médicaux</td><td>Plus crédible, plus prudent pour des données de santé.</td><td><span class="pill dec">Votre décision</span></td><td><span class="pill faible">Faible</span></td></tr>
+<tr><td><span class="ref">D11</span> Mettre au passé l'ADF 2026 après le 25/11 ; tenir à jour conférences et médias</td><td>Une date future dépassée fait négligé, et les IA la reprennent.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill faible">Faible</span></td></tr>
+<tr><td><span class="ref">D12</span> Une page en anglais (composite bonding, facettes)</td><td>Environ 75 apparitions en trois mois, aucun clic. À revoir en mai.</td><td><span class="pill dec">Plus tard</span></td><td><span class="pill faible">Faible</span></td></tr>
+</tbody></table></div>
+
+<h3>E. La vidéo</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">E1</span> Faire entrer les pages vidéo dans Google : date corrigée (fuseau horaire), plan du site des vidéos, liens directs depuis les pages de soins, nouvelle demande</td><td>Seule la vidéo Composite bonding est indexée ; Érosion et Anorexie n'ont jamais été explorées.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">E2</span> Vérifier que les six vidéos YouTube sont publiques, et non plus privées</td><td>YouTube est la première source des IA ; une vidéo privée n'existe pas pour elles.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">E3</span> Trois vidéos de 3 à 5 minutes : érosion dentaire, dents usées, TCA et dents ; texte complet en description</td><td>Le format long est celui que les IA et Google citent le plus.</td><td><span class="pill vous">Vous tournez</span> + <span class="pill claude">Claude écrit le plan et publie</span></td><td><span class="pill fort">Fort</span></td></tr>
+</tbody></table></div>
+
+<h3>F. La technique et les IA</h3>
+<div class="tw"><table>
+<thead><tr><th>Action</th><th>Pourquoi</th><th>Qui</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">F1</span> Raccourcir les 16 titres et 13 descriptions coupés par Google</td><td>Le texte affiché dans les résultats est ce qui donne envie de cliquer.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">F2</span> Fichier « llms.txt » : un sommaire du site écrit pour les IA</td><td>Gratuit, une heure ; effet non démontré, aucun moteur ne s'est engagé à le lire.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill faible">Faible</span></td></tr>
+<tr><td><span class="ref">F3</span> Faire indexer les 5 pages en attente (récents articles et vidéos) et relier les pages qui ne reçoivent qu'un lien</td><td>Une page qui n'est pas dans l'index ne sort sur rien.</td><td><span class="pill claude">Claude seul</span></td><td><span class="pill moy">Moyen</span></td></tr>
+<tr><td><span class="ref">F4</span> Relever chaque mois ce que répondent les IA (24 questions), et y ajouter Gemini, Perplexity et Copilot</td><td>Le relevé quotidien des IA s'est arrêté le 22/10. Pour ajouter les trois moteurs, il vous suffit d'accepter leurs conditions une fois dans Chrome.</td><td><span class="pill claude">Claude seul</span> + <span class="pill vous">5 minutes</span></td><td><span class="pill moy">Moyen</span></td></tr>
+</tbody></table></div>
+
+<h2 id="plan"><span class="n">5</span>Le plan d'attaque</h2>
+<p class="intro">Cinq étapes. Les deux premières sont les plus rentables et ne demandent presque rien au site lui-même.</p>
+
+<div class="phase">
+  <p class="quand">Semaine 1 · du 24 au 30 novembre</p>
+  <h3>Remettre l'identité d'aplomb, et les finitions techniques</h3>
+  <p class="but">Objectif : que les sources que lisent Google et les IA disent toutes la même chose de vous.</p>
+  <div class="cols">
+    <div><h5>Je fais</h5><ul>
+      <li>Toutes les finitions techniques : F1, F2, F3, E1, E2, D11.</li>
+      <li>Les courriers à l'Ordre et aux six annuaires, et le message à Doctolib (A1 à A3), en brouillon dans votre Gmail.</li>
+      <li>Les textes de la fiche Google : nom, services, catégorie, première publication (B1, B3, B4).</li>
+      <li>Les réponses aux avis déjà reçus, par lots (B2).</li>
+      <li>La présentation courte commune à tous vos profils (A4).</li>
+    </ul></div>
+    <div><h5>Vous faites</h5><ul>
+      <li>Envoyer les brouillons : un clic chacun.</li>
+      <li>Déclarer vos lieux d'exercice dans votre espace de l'Ordre.</li>
+      <li>Trancher B1, A5, A6.</li>
+      <li>Publier les réponses aux avis, ou me dire de le faire dans votre Chrome.</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="phase">
+  <p class="quand">Semaines 2 à 4 · décembre</p>
+  <h3>Obtenir les premiers liens</h3>
+  <p class="but">Objectif : 10 demandes envoyées et 5 liens obtenus d'ici fin décembre, depuis des sites dentaires ou de santé.</p>
+  <div class="cols">
+    <div><h5>Je fais</h5><ul>
+      <li>Les dix demandes de liens (C1), en brouillon dans votre Gmail, puis les relances à quinze jours.</li>
+      <li>Les liens depuis le site Smile Club Formations (C2).</li>
+      <li>La vérification des thèses sur DUMAS (C5).</li>
+      <li>Le dossier FFAB : CV orienté TCA et lettre de motivation (C4).</li>
+      <li>Le message pour la CMME (C3).</li>
+    </ul></div>
+    <div><h5>Vous faites</h5><ul>
+      <li>Envoyer les messages ; trouver un parrain FFAB à la CMME.</li>
+      <li>Créer les comptes ORCID et Google Scholar ; je les remplis ensuite (C8).</li>
+      <li>Accepter une fois les conditions de Gemini et Copilot, et vous connecter à Perplexity (F4).</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="phase">
+  <p class="quand">Décembre à janvier</p>
+  <h3>Combler les trous du contenu</h3>
+  <p class="but">Objectif : que chaque question réelle d'un patient sur vos trois sujets trouve sa réponse sur le site.</p>
+  <div class="cols">
+    <div><h5>Je fais</h5><ul>
+      <li>Les pages Grossesse, Sourire gingival et Edge bonding (D1 à D3).</li>
+      <li>Deux articles par mois, tirés des recherches réelles (D4).</li>
+      <li>Les corrections de fond (D8) et les formulations déontologiques (D9), soumises en un seul lot.</li>
+      <li>Les textes des cas cliniques d'usure, à partir de vos photos (D5).</li>
+    </ul></div>
+    <div><h5>Vous faites</h5><ul>
+      <li>Valider chaque texte avant publication : la véracité clinique reste la vôtre.</li>
+      <li>Choisir deux ou trois cas d'usure ou d'érosion, consentements à l'appui.</li>
+      <li>Trancher D6, D7, D10.</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="phase">
+  <p class="quand">Janvier à mars</p>
+  <h3>Faire rayonner l'expertise</h3>
+  <p class="but">Objectif : être cité par d'autres que vous-même sur l'usure et les TCA.</p>
+  <div class="cols">
+    <div><h5>Je fais</h5><ul>
+      <li>Le premier jet de l'article de revue, à partir de vos pages et de vos cas (C6).</li>
+      <li>La proposition aux médias santé (C7).</li>
+      <li>Le plan des trois vidéos longues ; leur publication et leur texte sur YouTube et sur le site (E3).</li>
+    </ul></div>
+    <div><h5>Vous faites</h5><ul>
+      <li>Relire et signer l'article ; le proposer à la revue.</li>
+      <li>Tourner les trois vidéos.</li>
+      <li>Demander le lien sur les pages des congrès où vous intervenez (C9).</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="phase">
+  <p class="quand">Avril à mai</p>
+  <h3>Faire le point, et décider de la suite</h3>
+  <p class="but">Bilan chiffré à six mois de la refonte. Selon les signaux : une page en anglais (D12), d'autres sujets à ouvrir, d'autres revues à viser.</p>
+</div>
+
+<h2 id="gestes"><span class="n">6</span>Vos gestes, et le temps qu'ils prennent</h2>
+<p class="intro">Tout le reste, je le fais. Seuls ces gestes demandent votre identité ou votre signature.</p>
+<div class="tw"><table>
+<thead><tr><th>Geste</th><th>Temps</th><th>Quand</th></tr></thead>
+<tbody>
+<tr><td>Déclarer vos lieux d'exercice à l'Ordre</td><td class="num">15 min</td><td>Semaine 1</td></tr>
+<tr><td>Envoyer les brouillons Gmail préparés : annuaires, Doctolib, demandes de liens</td><td class="num">15 min</td><td>Semaines 1 à 3</td></tr>
+<tr><td>Fiche Google : valider le nom, la catégorie, les services ; publier les réponses aux avis (ou me laisser le faire dans votre Chrome)</td><td class="num">20 min</td><td>Semaine 1</td></tr>
+<tr><td>Trouver un parrain FFAB à la CMME, envoyer le dossier préparé</td><td class="num">10 min</td><td>Décembre</td></tr>
+<tr><td>Créer les comptes ORCID et Google Scholar</td><td class="num">10 min</td><td>Décembre</td></tr>
+<tr><td>Accepter les conditions de Gemini et Copilot, vous connecter à Perplexity</td><td class="num">5 min</td><td>Décembre</td></tr>
+<tr><td>Choisir 2-3 cas cliniques d'usure (photos, consentements)</td><td class="num">30 min</td><td>Décembre</td></tr>
+<tr><td>Relire et valider les textes, par lots</td><td class="num">30 min par mois</td><td>En continu</td></tr>
+<tr><td>Tourner trois vidéos de 3 à 5 minutes</td><td class="num">2 h</td><td>Janvier-février</td></tr>
+<tr><td>Signer et proposer l'article de revue</td><td class="num">1 h</td><td>Février</td></tr>
+</tbody></table></div>
+
+<h2 id="decisions"><span class="n">7</span>Vos décisions, avec ma recommandation</h2>
+<div class="tw"><table>
+<thead><tr><th>Question</th><th>Ma recommandation</th></tr></thead>
+<tbody>
+<tr><td><span class="ref">B1</span> Nom de la fiche Google</td><td>« Dr Franck Moyal ». Les sujets passent par les services et la description, sans risque de suspension.</td></tr>
+<tr><td><span class="ref">A5</span> Nommer le lieu sur le site</td><td>Oui, une fois, si « Centre médical et dentaire Saint-Georges » est bien son nom officiel.</td></tr>
+<tr><td><span class="ref">A6</span> Votre titre à la Pitié</td><td>Écrire exactement votre statut. Si c'est « praticien attaché », le mettre partout à la place de « praticien hospitalier ».</td></tr>
+<tr><td><span class="ref">D6</span> Parler du prix</td><td>Oui, sans montant : ce qui fait le prix, ce qui n'est pas remboursé, le devis remis après le bilan. Cela reste dans votre règle.</td></tr>
+<tr><td><span class="ref">D7</span> Grands titres de page</td><td>Oui pour des titres explicites (« Facettes dentaires », « Taches blanches et MIH »), en gardant la maquette.</td></tr>
+<tr><td><span class="ref">D9</span> Formulations déontologiques</td><td>Retirer la note chiffrée (garder le lien vers la fiche), écrire « dont l'activité est consacrée aux usures », remplacer « une référence en France » par des faits (CMME, DenTCA, enseignement).</td></tr>
+<tr><td><span class="ref">D10</span> Adresse de courriel</td><td>contact@drfranckmoyal.fr, redirigée vers votre boîte habituelle.</td></tr>
+<tr><td><span class="ref">D12</span> Page en anglais</td><td>Pas avant mai. Les chiffres ne la justifient pas aujourd'hui.</td></tr>
+</tbody></table></div>
+
+<h2 id="mesure"><span class="n">8</span>Mesurer</h2>
+<ul>
+  <li><strong>Chaque matin :</strong> le relevé des 77 recherches continue.</li>
+  <li><strong>Le 10 de chaque mois :</strong> le relevé de ce que répondent les IA (24 questions), premier le 10/12.</li>
+  <li><strong>Chaque mois :</strong> les chiffres de la fiche Google (vues, appels, itinéraires, clics vers le site) et la liste des liens obtenus.</li>
+  <li><strong>Points d'étape :</strong> mi-janvier et mi-mars, avec un tableau avant/après.</li>
+</ul>
+<h3>Objectifs réalistes</h3>
+<div class="tw"><table>
+<thead><tr><th>Échéance</th><th>Ce qu'on vise</th></tr></thead>
+<tbody>
+<tr><td>Fin décembre</td><td>Identité corrigée dans les annuaires et chez Doctolib ; fiche Google conforme, avis répondus ; 10 demandes de liens envoyées ; les 5 pages en attente et les vidéos dans l'index.</td></tr>
+<tr><td>Fin février</td><td>5 à 10 liens obtenus de sites dentaires ou de santé ; « dents usées », « dents trop courtes », « usure dentaire traitement », « anorexie dents » en deuxième page ou mieux ; cité par l'IA de Google sur 6 des 24 questions (contre 3 sur 17) ; la fiche Google qui sort sur « dentiste esthétique paris 9 ».</td></tr>
+<tr><td>Fin mai</td><td>Au moins trois recherches d'usure ou de TCA en première page ; plus de clics venant des sujets que de votre nom.</td></tr>
+</tbody></table></div>
+<p class="intro">Ce sont des objectifs, pas des promesses : Google et les IA ne publient pas leurs règles, et les liens dépendent de la réponse des autres sites.</p>
+
+<h2 id="non"><span class="n">9</span>Ce qu'on ne fera pas</h2>
+<ul class="non">
+  <li><strong>Acheter des liens</strong> ou s'inscrire dans des annuaires de masse : Google les repère et peut pénaliser le site.</li>
+  <li><strong>Copier une page par arrondissement</strong> (« dentiste esthétique Paris 8, Paris 16… ») : pages jugées trompeuses par Google.</li>
+  <li><strong>Traduire automatiquement</strong> le site : déclassé par Google, risqué en santé.</li>
+  <li><strong>Orienter les avis</strong> des patients ou en offrir une contrepartie : interdit par Google et par la déontologie.</li>
+  <li><strong>Publier un texte médical sans votre validation.</strong></li>
+</ul>
+
+<footer>Préparé le 20 novembre 2026 à partir de Search Console, de l'audit du 10/11, de la fiche Google, de l'inventaire des liens et du site en ligne. Ce plan remplace la section « Plan d'action » de l'audit du 10/11, en y ajoutant ce qui a été fait depuis.</footer>
+</div>
