@@ -272,3 +272,41 @@ R : Le prix est établi de manière personnalisée, selon votre situation et le 
 # la règle des prix ne dit rien du remboursement : question gardée, non publiée
 Q : Les soins sont-ils remboursés ?
 R : [À compléter par Franck : conventionnement, carte Vitale, mutuelles.]
+
+== gingivectomie-paris ==
+# page écrite le 22/11/2026 (ecrire-actes.py) ; questions proposées par Claude, à valider par Franck avant la mise en ligne
+Q : La gingivectomie est-elle douloureuse ?
+R : L’intervention se fait sous anesthésie locale. Les suites sont le plus souvent modérées, et des antalgiques simples suffisent en général ; il faut surtout soigner le brossage et l’hygiène pendant la semaine qui suit.
+Q : Quelle est la différence entre gingivectomie et élongation coronaire ?
+R : La gingivectomie ne retire que de la gencive. L’élongation coronaire y ajoute un léger remodelage de l’os autour de la dent, nécessaire quand l’os est trop proche du futur bord de la gencive.
+Q : La gencive peut-elle repousser après une gingivectomie ?
+R : Un léger retour est possible dans les premiers mois, surtout si l’os est proche du bord de la gencive. C’est pourquoi la position de l’os est mesurée avant l’intervention : quand il est trop près, on le remodèle.
+Q : Combien de temps dure la cicatrisation ?
+R : Environ deux semaines après une gingivectomie simple. Après une élongation coronaire, la gencive continue d’évoluer pendant les premiers mois ; on attend qu’elle soit stable avant de poser des facettes ou des composites.
+Q : Un sourire gingival se corrige-t-il toujours par une gingivectomie ?
+R : Non. Elle est indiquée quand la gencive recouvre trop les dents. Si le sourire gingival vient de la lèvre supérieure ou de la mâchoire, d’autres traitements sont à envisager : le diagnostic précède toujours le geste.
+Q : Faut-il poser des facettes après une gingivectomie ?
+R : Pas forcément. Si les dents découvertes ont une forme et une teinte satisfaisantes, la gingivectomie suffit. Sinon, elle prépare le terrain pour un éclaircissement, des composites ou des facettes.
+Q : À quoi sert le guide de gingivectomie ?
+R : C’est une gouttière imprimée en 3D qui reporte en bouche le tracé décidé sur l’ordinateur. Le contour des gencives est ainsi celui du projet validé ensemble, et non un tracé à main levée.
+Q : Combien coûte une gingivectomie ?
+R : Le prix est établi de manière personnalisée, selon le nombre de dents et la nécessité ou non d’un remodelage osseux, et vous est remis après le bilan esthétique.
+
+== edge-bonding-paris ==
+# page écrite le 22/11/2026 (ecrire-actes.py) ; questions proposées par Claude, à valider par Franck avant la mise en ligne
+Q : Quelle est la différence entre edge bonding et composite bonding ?
+R : L’edge bonding est un composite bonding limité au bord des dents : il modifie leur longueur, leurs angles et la ligne du sourire. Un composite bonding étendu recouvre toute la face visible de la dent et peut en changer aussi la teinte et le volume.
+Q : L’edge bonding est-il fragile ?
+R : Plus qu’un composite étendu, oui : un petit ajout collé sur le bord de la dent reçoit directement les contraintes. C’est pourquoi je ne le propose que lorsque les contacts entre les dents le permettent, avec une gouttière de nuit en cas de bruxisme.
+Q : Combien de temps dure un edge bonding ?
+R : Plusieurs années quand il est bien indiqué, mais c’est le composite le plus exposé aux éclats, puisqu’il se trouve sur le bord des dents. Il se retouche facilement : il faut le voir comme un traitement qui s’entretient.
+Q : L’edge bonding abîme-t-il les dents ?
+R : Non : le composite est collé sur l’émail sans tailler la dent, et il peut être retouché ou retiré. Parler de réversibilité absolue serait excessif ; c’est une approche très conservatrice et modifiable.
+Q : Est-ce douloureux ?
+R : Non. Le composite est simplement ajouté sur la dent : il n’y a le plus souvent pas besoin d’anesthésie.
+Q : Peut-on éclaircir ses dents après un edge bonding ?
+R : Mieux vaut le faire avant : le composite ne s’éclaircit pas. La teinte de la résine est choisie sur la dent déjà éclaircie.
+Q : Edge bonding ou facettes ?
+R : L’edge bonding corrige le contour d’une dent saine, dont la teinte convient. Les facettes permettent une transformation plus globale de la forme et de la couleur. Le choix dépend de ce que vous voulez changer.
+Q : Combien coûte un edge bonding ?
+R : Le prix est établi de manière personnalisée, selon le nombre de dents concernées, et vous est remis après le bilan esthétique.

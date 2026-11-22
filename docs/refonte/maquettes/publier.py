@@ -44,6 +44,9 @@ RACINE = "https://drfranckmoyal.fr"
 
 # pages de travail de la maquette, jamais publiées
 INTERNES = {"sommaire", "polices"}
+# pages écrites mais pas encore validées par Franck : elles restent dans la maquette, rien ne part en ligne,
+# et le contrôle des liens morts refuserait qu'une page publique mène à elles (22/11/2026, ecrire-actes.py)
+EN_ATTENTE = {"gingivectomie-paris", "edge-bonding-paris"}
 # pages fondues dans une autre (D77, D95) : leur adresse redirige
 FONDUES = {"diagnostic-usures-dentaires": "usures-dentaires",
            "rehabilitation-dents-usees": "usures-dentaires"}
@@ -303,12 +306,15 @@ def main():
     if os.path.exists(SORTIE):
         shutil.rmtree(SORTIE)
     os.makedirs(SORTIE)
-    a_copier, adresses, modele = {}, [], None
+    a_copier, adresses, modele, retenues = {}, [], None, []
     for nom in sorted(os.listdir(SITE)):
         if not nom.endswith(".html"):
             continue
         slug = nom[:-5]
         if slug in INTERNES or slug in FONDUES:
+            continue
+        if slug in EN_ATTENTE:
+            retenues.append(slug)
             continue
         url = adresse(slug)
         page = open(os.path.join(SITE, nom), encoding="utf-8").read()
@@ -378,6 +384,8 @@ def main():
           f"{len(a_copier)} ressources ({poids / 1e6:.1f} Mo), {total / 1e6:.1f} Mo en tout")
     print(f"  plan du site : {len(adresses)} adresses ; redirections : "
           + ", ".join(f"/{a}/ → /{b}/" for a, b in sorted(FONDUES.items())))
+    if retenues:
+        print("  retenues, pas en ligne (en attente de validation) : " + ", ".join(retenues))
     if problemes:
         print(f"\n{len(problemes)} problème(s) :")
         for p in problemes[:60]:

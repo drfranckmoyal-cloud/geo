@@ -79,6 +79,10 @@ for lib, slug in SUJETS:
 PUBLIC["dentisterie-esthetique-paris"] = ("Pour choisir", "Patient", "Dentisterie esthétique")
 PUBLIC["facettes-ou-composite"] = ("Pour choisir", "Patient", "Facettes ou composite ?")
 PUBLIC["bilan-esthetique-personnalise"] = ("La consultation", "Patient", "Bilan esthétique")
+# deux actes écrits le 22/11/2026 par ecrire-actes.py (plan du 20/11, D2 et D3) : ils entreront dans le menu
+# (ACTES) le jour où Franck aura validé leur texte et fourni les photographies
+PUBLIC["gingivectomie-paris"] = ("L’acte", "Patient", "Gingivectomie")
+PUBLIC["edge-bonding-paris"] = ("L’acte", "Patient", "Edge bonding")
 for _slug, _lib in (
         ("cas-usures-dentaires-facettes-minimalement-invasives", "Usures et facettes"),
         ("cas-planification-rehabilitation-facettes", "Réhabilitation par facettes"),

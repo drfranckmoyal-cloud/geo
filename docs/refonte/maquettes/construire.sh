@@ -5,6 +5,7 @@
 #   2. composer.py regroupe en chapitres celles qui ont un plan
 #   2 bis. articles.py fabrique la liste des articles et une page par article
 #   2 ter. videos.py fabrique la page Vidéos et une page par vidéo
+#   2 quater. ecrire-actes.py écrit les pages Gingivectomie et Edge bonding (22/11/2026)
 #   3. generer.py  repasse pour aligner en-tête, pied et signature du style
 #      sur TOUTES les pages, y compris celles écrites à la main.
 set -e
@@ -14,6 +15,7 @@ python3 generer.py  | tail -3
 python3 composer.py | tail -3
 python3 articles.py
 python3 videos.py
+python3 ecrire-actes.py
 python3 generer.py  | tail -3
 echo
 python3 verifier.py

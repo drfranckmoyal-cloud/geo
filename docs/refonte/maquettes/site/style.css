@@ -1281,3 +1281,19 @@ picture{display:contents}
 /* 11/11/2026 — un sous-titre qui tient sur deux lignes se coupe en deux moitiés égales
    (« Dentiste esthétique à Paris · Vue d'ensemble des actes » laissait « Vue » seul en bout de ligne). */
 .sous-titre{text-wrap:balance}
+
+/* ── un emplacement réservé pour une photographie clinique à venir — 22/11/2026, pages Gingivectomie
+   et Edge bonding (verrou V2 : ce qui manque est signalé, jamais inventé). Même langage que
+   l'emplacement de la page contact (.lieu__photo) : pointillé et hachures, aux proportions de la
+   photographie attendue. Ces pages ne partent pas en ligne tant qu'il en reste un. */
+.reserve{margin:0;border:1px dashed var(--doux);border-radius:var(--rayon);box-shadow:none;background:var(--carte);
+  overflow:hidden}
+.reserve__zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;
+  text-align:center;aspect-ratio:16/10;padding:1rem;color:var(--doux);
+  background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(26,28,25,.045) 10px 12px)}
+.reserve__zone b{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--fg)}
+.reserve__zone span{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.reserve figcaption{margin:0;padding:.7rem .85rem .85rem;font-size:.8rem;line-height:1.45;color:var(--doux)}
+.une .reserve .reserve__zone{aspect-ratio:1}
+.parcours--large .reserve .reserve__zone{aspect-ratio:3/1}
+@media (max-width:700px){.parcours--large .reserve .reserve__zone{aspect-ratio:16/10}}
