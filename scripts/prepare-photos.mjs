@@ -12,7 +12,7 @@ import { homedir } from "node:os";
 
 const SOURCE = `${homedir()}/Desktop/icono GEO`;
 // Depuis le 19/10/2026, Franck dépose aussi des photographies par thème de carte :
-const SOURCE_THEMES = `${homedir()}/Desktop/PHOTOS SITE - par theme`;
+const SOURCE_THEMES = `${homedir()}/Desktop/PHOTOS/PHOTOS SITE - par theme`;
 const CIBLE = "src/assets/photos/cas";
 const LARGEUR_MAX = 2000;
 

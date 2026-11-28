@@ -345,7 +345,7 @@ def fiche_libre(groupes):
 # ── parcours en images ────────────────────────────────────────────────────
 # Une suite de photographies légendées, posée entre deux chapitres. Les légendes
 # sont celles que Franck a écrites dans les noms de fichiers (orthographe reprise),
-# les photographies celles du dossier « PHOTOS SITE - par theme » (19/10/2026).
+# les photographies celles du dossier « PHOTOS › PHOTOS SITE - par theme » (19/10/2026).
 SEQUENCES = {
     # Trois cas d'éclaircissement, en montages avant/après pleine largeur.
     "eclaircissement-dentaire-paris": {
